@@ -1,0 +1,129 @@
+/*Distributed*/
+
+ul.messages li {
+	color: green;
+	font-weight: bold;
+}
+
+.overdue {
+	color: #9A2441;
+	font-weight: bold;
+}
+
+/* Lighter font for completed items */
+#completed li {
+	color: gray;
+}
+
+a.todo {
+	text-decoration: none;
+	color: #474747;
+}
+
+a.showlink {
+	text-decoration: underline;
+}
+
+
+label {
+	display: block;
+	font-weight: bold;
+}
+
+input {
+	color: #3A3A3A;
+	font-family: Verdana;
+	font-size: 14px;
+}
+
+input[type='text'] {
+	width: 300px;
+}
+
+input#id_priority {
+	width: 30px;
+}
+
+
+.todo-break {
+	margin-top: 30px;
+	border-top: 1px dotted gray;
+}
+
+table.nocolor, table.nocolor tr, table.nocolor td {
+	background-color: transparent;
+}
+
+
+.minor {
+	font-style: italic;
+	font-size: 0.8em;
+}
+
+.task_note, .task_comments {
+	width: 70%;
+	overflow: visible;
+}
+
+legend {
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 300;
+    font-size: 30px;
+    padding: 50px 10px 11px;
+    /* height: 100px; */
+    background-image: url(../img/home/centech_event.png);
+    background-position: right bottom;
+    background-size: 200px 100px;
+    background-repeat: no-repeat;
+    content:"";
+}
+
+/* Let the default size, or contain in the max-area */
+.logo{
+    max-width: 70%;
+    max-height: 250px;
+    width: auto;
+    height: auto;
+}
+
+/* Let the default size, or contain in the max-area */
+.avatar{
+    max-width: 200px;
+    max-height: 200px;
+    width: auto;
+    height: auto;
+}
+
+.md-editor{
+    width: 100%;
+}
+
+button[type=submit]{
+    margin-top: 20px;
+    height: 30px;
+    padding: 30px;
+    padding-top: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-bold: bold;
+    color: white;
+    background-color: #293846;
+    border: 2px solid lightgrey;
+}
+
+button[type=submit]:hover{
+    color: orange;
+}
+
+.control-label{
+    margin-top: 20px;
+}
+
+/* I DON'T KNOW WHAT'S THE DIFFERENCE BUT IT RULES DIFFERENTLY...*/
+a :hover{
+    color: orange;
+}
+
+a:hover{
+    color: orange;
+}

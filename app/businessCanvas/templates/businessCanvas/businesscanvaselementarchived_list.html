@@ -1,0 +1,230 @@
+{% extends "dashboard.html" %}
+<!-- Load internationalisation utils-->
+{% load i18n %}
+{% load staticfiles %}
+{% block extrahead %}
+<script type="text/javascript"
+ src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js">
+</script>
+<!--TODO insert the JS file and remove the hardcode-->
+<script type="text/javascript">
+// GET for show details of an element
+function getDetail(id){
+    var myRegexp = /([0-9]+)/g;
+    var match = myRegexp.exec(id); //match[1] is the id of element
+    var div = document.getElementById(match[1]);
+    var p = div.getElementsByTagName("p")[0];
+    if(p.style.visibility == "hidden"){
+       var lien = "/businessCanvas/getDetail/"+div.id;
+        var id = div.id;
+
+        $.ajax({
+          type: 'GET',
+          url: lien,
+
+          success: function(data, status) {
+                p.textContent = data.comment;
+                p.style.visibility = "visible";
+                p.style.display = "block";
+            },
+
+          error: function(resultat, status, erreur) {
+            alert(erreur); }
+        });
+    }
+    else{
+        p.style.visibility = "hidden";
+        p.style.display = "none";
+    }
+}
+</script>
+<!--TODO insert the CSS file and remove the hardcode-->
+<style>
+#main_table {
+    width:100%;
+}
+#main_table tr td{
+	border:2px dotted #666;
+    vertical-align: top;
+    height: 150px;
+}
+
+#main_table tr td.border-right-none {
+    border-right: none;
+}
+#main_table tr td.border-bottom-none {
+    border-bottom: none;
+}
+#main_table tr td.border-left-none {
+    border-left: none;
+}
+#main_table tr td.border-top-none {
+    border-top: none;
+}
+
+#main_table thead td {
+    text-align: center;
+}
+
+h6{
+    text-align: center;
+}
+
+.element{
+    padding-left: 10px;
+    font-size: 15px;
+    color: #428bca;
+}
+
+.element p{
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 12px;
+    color: black;
+    text-align: justify;
+}
+</style>
+{% endblock %}
+{% block title %}Business Model Canvas{% endblock %}
+{% block content %}
+<!--TODO check for autogenerate the table-->
+<div class="row">
+    <div class="col-sm-12" align="center">
+        <h1>{% trans "Business Model Canvas of " %}{{currentArchive.date}}</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12" align="center">
+        <table class="canvas_container_table" id="main_table" cellpadding="5" cellspacing="0">
+            <tr>
+                <td rowspan="2" class="border-right-none border-bottom-none" width="20%">
+                    <h6>Key Partners</h6>
+                    <div id="divKeyPartner">
+                        {% for elem in listKeyPartners %}
+                            <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
+                                <span class="KeyPartner{{elem.id}}" onclick="getDetail(this.className);">{{elem.title}}</span>
+                                <p style="visibility: hidden; display: none;"></p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </td>
+                <td class="border-right-none border-bottom-none" width="20%">
+                    <h6>Key Activities</h6>
+                    <div id="divKeyActivitie">
+                    {% for elem in listKeyActivities %}
+                            <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
+                                <span class="KeyActivitie{{elem.id}}" onclick="getDetail(this.className)">{{elem.title}}</span>
+                                <p style="visibility: hidden; display: none;"></p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </td>
+                <td rowspan="2" colspan="2" class="border-right-none border-bottom-none" width="20%">
+                    <h6>Value Proposition</h6>
+                    <div id="divValueProposition">
+                        {% for elem in listValuePropositions %}
+                            <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
+                                <span class="ValueProposition{{elem.id}}" onclick="getDetail(this.className)">{{elem.title}}</span>
+                                <p style="visibility: hidden; display: none;"></p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </td>
+                <td class="border-right-none border-bottom-none" width="20%">
+                    <h6>Customer Relationships</h6>
+                    <div id="divCustomerRelationship">
+                        {% for elem in listCustomerRelationships %}
+                            <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
+                                <span class="CustomerRelationship{{elem.id}}" onclick="getDetail(this.className)">{{elem.title}}</span>
+                                <p style="visibility: hidden; display: none;"></p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </td>
+                <td rowspan="2" class="border-bottom-none" width="20%">
+                    <h6>Customer Segments</h6>
+                    <div id="divCustomerSegment">
+                        {% for elem in listCustomerSegments %}
+                            <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
+                                <span class="CustomerSegment{{elem.id}}" onclick="getDetail(this.className)">{{elem.title}}</span>
+                                <p style="visibility: hidden; display: none;"></p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="border-bottom-none border-right-none">
+                    <h6>Key Resources</h6>
+                    <div id="divKeyResource">
+                        {% for elem in listKeyResources %}
+                            <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
+                                <span class="KeyResource{{elem.id}}" onclick="getDetail(this.className)">{{elem.title}}</span>
+                                <p style="visibility: hidden; display: none;"></p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </td>
+                <td class="border-bottom-none border-right-none">
+                    <h6>Channels</h6>
+                    <div id="divChannel">
+                        {% for elem in listChannels %}
+                            <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
+                                <span class="Channel{{elem.id}}" onclick="getDetail(this.className)">{{elem.title}}</span>
+                                <p style="visibility: hidden; display: none;"></p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </td>
+            </tr>
+            <tr class="fix_width_section">
+                <td colspan="3" class="border-right-none">
+                    <h6>Cost Structure</h6>
+                    <div id="divCostStructure">
+                        {% for elem in listCostStructures %}
+                            <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
+                                <span class="CostStructure{{elem.id}}" onclick="getDetail(this.className)">{{elem.title}}</span>
+                                <p style="visibility: hidden; display: none;"></p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </td>
+                <td colspan="3">
+                    <h6>Revenue Streams</h6>
+                    <div id="divRevenueStream">
+                        {% for elem in listRevenueStreams %}
+                            <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
+                                <span class="RevenueStream{{elem.id}}" onclick="getDetail(this.className)">{{elem.title}}</span>
+                                <p style="visibility: hidden; display: none;"></p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="6" style="height: 50px; border: none;">
+                 </td>
+            </tr>
+            <tr id="brain_storming_section">
+                <td colspan="5">
+                    <h6>Brainstorming Space</h6>
+                    <div id="divBrainstormingSpace">
+                        {% for elem in listBrainstormingSpaces %}
+                            <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
+                                <span class="BrainstormingSpace{{elem.id}}" onclick="getDetail(this.className)">{{elem.title}}</span>
+                                <p style="visibility: hidden; display: none;"></p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </td>
+                <td colspan="1">
+                    <h6>Archive</h6>
+                        {% for archive in archives %}
+                            <div style="border-bottom: 1px dashed black; padding-left: 10px;"><a href="{% url "businessCanvasElementArchived_list" archive.id %}">{{archive}}</a></div>
+                        {% endfor %}
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+{% endblock %}

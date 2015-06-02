@@ -1,0 +1,12 @@
+{% extends "dashboard.html" %}
+<!-- Load internationalisation utils-->
+{% load i18n %}
+{% load staticfiles %}
+{% block title %}{% trans "Stock exchanges" %}{% endblock %}
+{% block content %}
+    <h1>{% trans "Stock exchanges" %}</h1>
+    <form method="post">{% csrf_token%}
+        {{ form.as_p }}
+        <button type="submit">{% trans "Save" %}</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,101 @@
+{% extends "dashboard.html" %}
+
+{% load embed_video_tags %}
+{% load staticfiles %}
+<!-- Load internationalisation utils-->
+{% load i18n %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-12" align="center">
+            <br>
+            {% if company.logo != "" %}
+                <img class="logo" src="/media/{{ company.logo }}" /><br>
+            {% else %}
+                <img class="logo" src="/media/logo/default.jpg" /><br>
+            {% endif %}
+            <h1><strong>{{ company.name }}</strong></h1><br><b>
+            {% trans "Incubation phase:" %}</b> {{ company.companyStatus }}<br><br>
+            {% if company.url != "" %}
+            {% trans "Web site:" %}</b> <a href="{{ company.url }}">{{ company.url }}</a><br><br>
+            {% endif %}
+        </div>
+    </div>
+    <div class="well well-lg" style="background-color: #87cefa">
+     <div class="row">
+        <div class="col-sm-12" align="center" style="text-align: justify;">
+            <h2 align="center"><strong>{% trans "About" %}</strong></h2>
+                <!--TODO Add a markdown system-->
+                <p>{{ company.description }}</p>
+        </div>
+         </div>
+    </div>
+    {% if company.video != "" %}
+    <div class="well well-lg" style="background-color: gold">
+     <div class="row">
+        <div class="col-sm-12" align="center">
+            <h2 align="center"><strong>{% trans "Video pitch" %}</strong></h2>
+                {% video company.video as my_video %}
+                    {{ my_video|embed:'medium' }}
+                {% endvideo %}
+        </div>
+         </div>
+    </div>
+    {% endif %}
+    <div class="well well-lg" style="background-color: lightgreen">
+        <h2 align="center"><strong>{% trans "Founders" %}</strong></h2>
+        {% if company.founders.all %}
+            <div class="row">
+            {% for founder in company.founders.all %}
+            <div class="col-md-4" style="height: 150px; margin-bottom: 30px;">
+                <a href="{% url 'founder:detail' founder.pk %}">
+                    {% if founder.picture != "" %}
+                        <img class="avatar" src="/media/{{ founder.picture }}" style="height:100%; max-width: 100%;"/><br>
+                    {% else %}
+                        <img class="avatar" src="/media/user_profile/default.jpg" style="height:100%; max-width: 100%;"/><br>
+                    {% endif %}
+
+                    {{ founder.user.first_name }} {{ founder.user.last_name }}
+                </a>
+                <br>
+            </div>
+            {% if forloop.counter|divisibleby:3 %}
+                <div class="row" style="margin-bottom: 50px;">
+                </div>
+            {% endif %}
+            {% endfor %}
+            </div>
+
+        {% else %}
+            <p>{% trans "No founders exist." %}</p>
+        {% endif %}
+    </div>
+    <div class="well well-lg" style="background-color: #87cefa">
+        <h2 align="center"><strong>{% trans "Mentors" %}</strong></h2>
+        {% if company.mentors.all %}
+        <div class="row">
+            {% for mentor in company.mentors.all %}
+
+            <div class="col-md-4" style="height: 150px; margin-bottom: 30px;">
+                <a href="{% url 'mentor:detail' mentor.pk %}">
+                    {% if mentor.picture != "" %}
+                        <img class="avatar" src="/media/{{ mentor.picture }}" style="height:100%; max-width: 100%;" /><br>
+                    {% else %}
+                        <img class="avatar" src="/media/user_profile/default.jpg" style="height:100%; max-width: 100%;" /><br>
+                    {% endif %}
+                    {{ mentor.user.first_name }} {{ mentor.user.last_name }}
+                </a>
+                <br>
+            </div>
+            {% if forloop.counter|divisibleby:3 %}
+            <div class="row" style="margin-bottom: 50px;">
+                </div>
+            {% endif %}
+            {% endfor %}
+            </div>
+            {% else %}
+            <p>{% trans "No mentors exist." %}</p>
+        {% endif %}
+    </div>
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+{% endblock %}

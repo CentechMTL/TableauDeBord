@@ -1,0 +1,288 @@
+{% extends "dashboard.html" %}
+<!-- Load internationalisation utils-->
+{% load i18n %}
+{% load staticfiles %}
+{% block extrahead %}
+
+<!-- JS for use JQUERY --->
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+
+<!-- JS for Value Proposition Canvas --->
+<script type="text/javascript" src="{% static 'valuePropositionCanvas/js/deleteElement.js' %}"></script>
+<script type="text/javascript" src="{% static 'valuePropositionCanvas/js/editElement.js' %}"></script>
+<script type="text/javascript" src="{% static 'valuePropositionCanvas/js/getDetail.js' %}"></script>
+<script type="text/javascript" src="{% static 'valuePropositionCanvas/js/updateDisplayForm.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/tokenCSRF.js' %}"></script>
+
+<!-- Main CSS --->
+<link rel="stylesheet" href="{% static 'valuePropositionCanvas/css/style.css' %}">
+
+
+<!-- Initialisation form and submit-form --->
+<script type="text/javascript">
+//AJAX requete
+	$(document).ready(function(){
+	    //For hide all form at the begin
+        updateDisplayForm();
+
+        // Form to add an element with type POST in AJAX
+        $(".form").submit( function() {
+            var donnees = $(this).serialize();
+            $.ajax({
+                type: this.method,
+                url: '{% url "addElement" %}',
+                data: donnees + '&type=' + this.id + '&company=' + {{companyId}},
+
+                success: function(data) {
+                    //Delete content of the form
+                    form = document.getElementById(data.type);
+                    form.reset();
+
+                    //We create the new div for the new element
+                    if(data.updated == "False"){
+
+                        //<div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
+                        //  <span class="Channel{{elem.id}}" onclick='getDetail(this.className, "{% url "getDetail" 1 %}")'>{{elem.title}}</span>
+                        //  <span style="float: right;" class="Channel{{elem.id}}" onclick='deleteElement(this.className, "{% url "deleteElement" 1 %}");'><i class="fa fa-trash"></i></span>
+                        //  <span style="float: right;" class="Channel{{elem.id}}" onclick='editElement(this.className, "{% url "getDetail" 1 %}");'><i class="fa fa-pencil-square-o"></i></span>
+                        //  <p style="visibility: hidden; display: none;"></p>
+                        //</div>
+
+                        //The div of the element
+                        var div = document.createElement('div');
+                        div.id = data.id;
+                        div.className = 'element';
+                        div.style.borderBottom = "1px dashed black";
+
+                        //The span of the title
+                        var spanTitle = document.createElement('span');
+                        spanTitle.className = data.type+data.id;
+                        spanTitle.setAttribute('onclick','getDetail(this.className, "{% url "getDetail" 1 %}")')
+                        spanTitle.innerHTML = data.title;
+
+                        //The span of delete
+                        var spanDelete = document.createElement('span');
+                        spanDelete.className = data.type+data.id;
+                        spanDelete.setAttribute('onclick','deleteElement(this.className, "{% url "deleteElement" 1 %}");')
+                        spanDelete.innerHTML = "<i class=\"fa fa-trash\"></i>";
+                        spanDelete.style.float = "right";
+
+                        //The span of edit
+                        var spanEdit = document.createElement('span');
+                        spanEdit.className = data.type+data.id;
+                        spanEdit.setAttribute('onclick','editElement(this.className, "{% url "getDetail" 1 %}");')
+                        spanEdit.innerHTML = "<i class=\"fa fa-pencil-square-o\"></i>";
+                        spanEdit.style.float = "right";
+
+                        //The paragraph of comment
+                        var p = document.createElement('p');
+                        p.style.visibility  = "hidden";
+                        p.style.display = "none";
+
+                        div.appendChild(spanTitle);
+                        div.appendChild(spanDelete);
+                        div.appendChild(spanEdit);
+                        div.appendChild(p);
+                        document.getElementById('div'+ data.type).appendChild(div);
+
+                        updateDisplayForm();
+                    }
+                    //We update the div of the updated element
+                    else{
+                        var div = document.getElementById(data.id);
+                        var spanTitle = div.getElementsByTagName('span')[0];
+                        spanTitle.innerHTML = data.title;
+
+                        var p = div.getElementsByTagName('p')[0];
+                        p.style.visibility  = "hidden";
+                        p.style.display = "none";
+
+                        updateDisplayForm();
+                    }
+                },
+                error: function(resultat, status, erreur) {
+                    alert(erreur);
+                }
+            });
+            return false;
+        });
+	});
+</script>
+
+{% endblock %}
+{% block title %}Value Proposition Canvas{% endblock %}
+{% block content %}
+<!--TODO check for autogenerate the table-->
+<div class="row">
+    <div class="col-sm-12" align="center">
+        <h1>{% trans "Value Proposition Canvas" %}</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12" align="center">
+        <table class="canvas_container_table" id="main_table" cellpadding="5" cellspacing="0">
+            <tr>
+                <th colspan="2" width=20px" height="20px">Value Proposition</th>
+                <th colspan="2" width=20px" height="20px"></th>
+                <th colspan="2" width=20px" height="20px">Customer Segment</th>
+            </tr>
+            <tr>
+                <td rowspan="2" class="border-right-none" width="20%">
+                    <h6>{% trans "Products & Services" %}
+                        {%if isFounder %}
+                            <span class="ProductAndService" style="color: #428bca;" onclick="updateDisplayForm(this.getAttribute('class'))"><i class="fa fa-plus-square"></i></span>
+                        {% endif %}
+                    </h6>
+                    <div id="divProductAndService">
+                        <form class="form" id="ProductAndService" action="" method="post">{% csrf_token %}
+                            {% trans "Title" %} : <input type="text" name="title" value=""/><br/>
+                            {% trans "Comment" %} : <input type="text" name="comment" value=""/><br/>
+                            <input type="hidden" name="update" class="hiddenInput" value="False"/>
+                            <input type="submit" value="Envoyer"/>
+                        </form>
+                        {% for elem in listProductAndServices %}
+                            <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
+                                <span class="ProductAndService{{elem.id}}" onclick='getDetail(this.className, "{% url "getDetail" 1 %}");'>{{elem.title}}</span>
+                                {%if isFounder %}
+                                <span style="float: right;" class="ProductAndService{{elem.id}}" onclick='deleteElement(this.className, "{% url "deleteElement" 1 %}");'><i class="fa fa-trash"></i></span>
+                                <span style="float: right;" class="ProductAndService{{elem.id}}" onclick='editElement(this.className, "{% url "getDetail" 1 %}");'><i class="fa fa-pencil-square-o"></i></span>
+                                {% endif %}
+                                <p style="visibility: hidden; display: none;"></p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </td>
+                <td class="border-bottom-none" width="20%">
+                    <h6>{% trans "Gain Creators" %}
+                        {%if isFounder %}
+                            <span class="GainCreator" style="color: #428bca;" onclick="updateDisplayForm(this.getAttribute('class'))"><i class="fa fa-plus-square"></i></span>
+                        {% endif %}
+                    </h6>
+                    <div id="divGainCreator">
+                    <form class="form" id="GainCreator" action="" method="post">{% csrf_token %}
+                        {% trans "Title" %} : <input type="text" name="title" value=""/><br/>
+                        {% trans "Comment" %} : <input type="text" name="comment" value=""/><br/>
+                        <input type="hidden" name="update" class="hiddenInput" value="False"/>
+                        <input type="submit" value="Envoyer"/>
+                    </form>
+                    {% for elem in listGainCreators %}
+                            <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
+                                <span class="GainCreator{{elem.id}}" onclick='getDetail(this.className, "{% url "getDetail" 1 %}")'>{{elem.title}}</span>
+                                {%if isFounder %}
+                                <span style="float: right;" class="GainCreator{{elem.id}}" onclick='deleteElement(this.className, "{% url "deleteElement" 1 %}");'><i class="fa fa-trash"></i></span>
+                                <span style="float: right;" class="GainCreator{{elem.id}}" onclick='editElement(this.className, "{% url "getDetail" 1 %}");'><i class="fa fa-pencil-square-o"></i></span>
+                                {% endif %}
+                                <p style="visibility: hidden; display: none;"></p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </td>
+                <td rowspan="2" colspan="2" class="border-right-none border-left-none border-bottom-none border-top-none" width="20%">
+                </td>
+                <td class="border-right-none border-bottom-none" width="20%">
+                    <h6>{% trans "Gains" %}
+                        {%if isFounder %}
+                            <span class="Gain" style="color: #428bca;" onclick="updateDisplayForm(this.getAttribute('class'))"><i class="fa fa-plus-square"></i></span>
+                        {% endif %}
+                    </h6>
+                    <div id="divGain">
+                    <form class="form" id="Gain" action="" method="post">{% csrf_token %}
+                        {% trans "Title" %} : <input type="text" name="title" value=""/><br/>
+                        {% trans "Comment" %} : <input type="text" name="comment" value=""/><br/>
+                        <input type="hidden" name="update" class="hiddenInput" value="False"/>
+                        <input type="submit" value="Envoyer"/>
+                    </form>
+                        {% for elem in listGains %}
+                            <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
+                                <span class="Gain{{elem.id}}" onclick='getDetail(this.className, "{% url "getDetail" 1 %}")'>{{elem.title}}</span>
+                                {%if isFounder %}
+                                <span style="float: right;" class="Gain{{elem.id}}" onclick='deleteElement(this.className, "{% url "deleteElement" 1 %}");'><i class="fa fa-trash"></i></span>
+                                <span style="float: right;" class="Gain{{elem.id}}" onclick='editElement(this.className, "{% url "getDetail" 1 %}");'><i class="fa fa-pencil-square-o"></i></span>
+                                {% endif %}
+                                <p style="visibility: hidden; display: none;"></p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </td>
+                <td rowspan="2" width="20%">
+                    <h6>{% trans "Customer Job(s)" %}
+                        {%if isFounder %}
+                            <span class="CustomerJob" style="color: #428bca;" onclick="updateDisplayForm(this.getAttribute('class'))"><i class="fa fa-plus-square"></i></span>
+                        {% endif %}
+                    </h6>
+                    <div id="divCustomerJob">
+                    <form class="form" id="CustomerJob" action="" method="post">{% csrf_token %}
+                        {% trans "Title" %} : <input type="text" name="title" value=""/><br/>
+                        {% trans "Comment" %} : <input type="text" name="comment" value=""/><br/>
+                        <input type="hidden" name="update" class="hiddenInput" value="False"/>
+                        <input type="submit" value="Envoyer"/>
+                    </form>
+                        {% for elem in listCustomerJobs %}
+                            <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
+                                <span class="CustomerJob{{elem.id}}" onclick='getDetail(this.className, "{% url "getDetail" 1 %}")'>{{elem.title}}</span>
+                                {%if isFounder %}
+                                <span style="float: right;" class="CustomerJob{{elem.id}}" onclick='deleteElement(this.className, "{% url "deleteElement" 1 %}");'><i class="fa fa-trash"></i></span>
+                                <span style="float: right;" class="CustomerJob{{elem.id}}" onclick='editElement(this.className, "{% url "getDetail" 1 %}");'><i class="fa fa-pencil-square-o"></i></span>
+                                {% endif %}
+                                <p style="visibility: hidden; display: none;"></p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h6>{% trans "Pain Relievers" %}
+                        {%if isFounder %}
+                            <span class="PainReliever" style="color: #428bca;" onclick="updateDisplayForm(this.getAttribute('class'))"><i class="fa fa-plus-square"></i></span>
+                        {% endif %}
+                    </h6>
+                    <div id="divPainReliever">
+                    <form class="form" id="PainReliever" action="" method="post">{% csrf_token %}
+                        {% trans "Title" %} : <input type="text" name="title" value=""/><br/>
+                        {% trans "Comment" %} : <input type="text" name="comment" value=""/><br/>
+                        <input type="hidden" name="update" class="hiddenInput" value="False"/>
+                        <input type="submit" value="Envoyer"/>
+                    </form>
+                        {% for elem in listPainRelievers %}
+                            <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
+                                <span class="PainReliever{{elem.id}}" onclick='getDetail(this.className, "{% url "getDetail" 1 %}")'>{{elem.title}}</span>
+                                {%if isFounder %}
+                                <span style="float: right;" class="PainReliever{{elem.id}}" onclick='deleteElement(this.className, "{% url "deleteElement" 1 %}");'><i class="fa fa-trash"></i></span>
+                                <span style="float: right;" class="PainReliever{{elem.id}}" onclick='editElement(this.className, "{% url "getDetail" 1 %}");'><i class="fa fa-pencil-square-o"></i></span>
+                                {% endif %}
+                                <p style="visibility: hidden; display: none;"></p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </td>
+                <td class="border-right-none">
+                    <h6>{% trans "Pains" %}
+                        {%if isFounder %}
+                            <span class="Pain" style="color: #428bca;" onclick="updateDisplayForm(this.getAttribute('class'))"><i class="fa fa-plus-square"></i></span>
+                        {% endif %}
+                    </h6>
+                    <div id="divPain">
+                    <form class="form" id="Pain" action="" method="post">{% csrf_token %}
+                        {% trans "Title" %} : <input type="text" name="title" value=""/><br/>
+                        {% trans "Comment" %} : <input type="text" name="comment" value=""/><br/>
+                        <input type="hidden" name="update" class="hiddenInput" value="False"/>
+                        <input type="submit" value="Envoyer"/>
+                    </form>
+                        {% for elem in listPains %}
+                            <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
+                                <span class="Pain{{elem.id}}" onclick='getDetail(this.className, "{% url "getDetail" 1 %}")'>{{elem.title}}</span>
+                                {%if isFounder %}
+                                <span style="float: right;" class="Pain{{elem.id}}" onclick='deleteElement(this.className, "{% url "deleteElement" 1 %}");'><i class="fa fa-trash"></i></span>
+                                <span style="float: right;" class="Pain{{elem.id}}" onclick='editElement(this.className, "{% url "getDetail" 1 %}");'><i class="fa fa-pencil-square-o"></i></span>
+                                {% endif %}
+                                <p style="visibility: hidden; display: none;"></p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+{% endblock %}

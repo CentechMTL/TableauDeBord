@@ -1,0 +1,49 @@
+{% extends "dashboard.html" %}
+<!-- Load internationalisation utils-->
+{% load i18n %}
+{% block content %}
+    <div class="row">
+        <div class="col-sm-12" align="center">
+            <br>
+            {% if founder.picture != "" %}
+                <img class="avatar" src="/media/{{ founder.picture }}" /><br>
+            {% else %}
+                <img class="avatar" src="/media/user_profile/default.jpg" /><br>
+            {% endif %}
+            <h1><strong>{{ founder.user.first_name }} {{ founder.user.last_name }}</strong></h1>
+            {% if founder.phone != "" %}
+                <br><b>{% trans "Phone:" %}</b> {{ founder.phone }}<br>
+            {% endif %}
+            {% if founder.website != "" %}
+                <br><b>{% trans "Web site:" %}</b> <a href="{{ founder.website }}">{{ founder.website }}</a><br>
+            {% endif %}
+            <br><br>
+        </div>
+    </div>
+    {%if founder.about != "" %}
+    <div class="well well-lg" style="background-color: #87cefa">
+        <div class="row">
+            <div class="col-sm-12" align="center" style="text-align: justify;">
+                <h2 align="center"><strong>{% trans "About" %}</strong></h2>
+                <!--TODO Insert a markdown system-->
+                {{ founder.about }}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {%if founder.expertise.all%}
+    <div class="well well-lg" style="background-color: gold">
+     <div class="row">
+        <div class="col-sm-12" align="center">
+            <h2 align="center"><strong>{% trans "Areas of expertise" %}</strong></h2>
+            <ul>
+                {% for expertise in founder.expertise.all %}
+                    <li>{{ expertise.expertise }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+         </div>
+    </div>
+    {% endif %}
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+{% endblock %}

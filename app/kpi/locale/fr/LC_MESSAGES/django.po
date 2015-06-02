@@ -1,0 +1,188 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-05-25 16:38-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: .\app\kpi\templates\index.html:8
+msgid "Centech Companies"
+msgstr "Compagnies du Centech"
+
+#: .\app\kpi\templates\index.html:19
+msgid "incubation phase:"
+msgstr "phase d'incubation:"
+
+#: .\app\kpi\templates\index.html:32
+msgid "No companies exist."
+msgstr "Aucune compagnies."
+
+#: .\app\kpi\templates\index.html:44 .\app\kpi\templates\kpi\irl.html:64
+#: .\app\kpi\templates\kpi\trl.html:65
+msgid "Name"
+msgstr "Nom"
+
+#: .\app\kpi\templates\index.html:45
+msgid "Value"
+msgstr "Valeur"
+
+#: .\app\kpi\templates\kpi\irl.html:25
+msgid "Basic principles observed and reported"
+msgstr ""
+
+#: .\app\kpi\templates\kpi\irl.html:26
+msgid "Technology concept and/or application formulated"
+msgstr ""
+
+#: .\app\kpi\templates\kpi\irl.html:27
+msgid ""
+"Analytical and experimental critical function and/or characteristic proof-of-"
+"concept"
+msgstr ""
+
+#: .\app\kpi\templates\kpi\irl.html:28
+msgid "Component and/or breadboard validation in laboratory environment"
+msgstr ""
+
+#: .\app\kpi\templates\kpi\irl.html:29
+msgid "Component and/or breadboard validation in relevant environment"
+msgstr ""
+
+#: .\app\kpi\templates\kpi\irl.html:30
+msgid ""
+"System/subsystem model or prototype demonstration in a relevant environment "
+"(Ground or Space)"
+msgstr ""
+
+#: .\app\kpi\templates\kpi\irl.html:31
+msgid "System prototype demonstration in a space environment"
+msgstr ""
+
+#: .\app\kpi\templates\kpi\irl.html:32
+msgid ""
+"Actual system completed and flight qualified through test and demonstration "
+"(Ground or Flight)"
+msgstr ""
+
+#: .\app\kpi\templates\kpi\irl.html:33
+msgid "Actual system flight proven trhough successful mission operations"
+msgstr ""
+
+#: .\app\kpi\templates\kpi\irl.html:46
+msgid "IRL of"
+msgstr "IRL de"
+
+#: .\app\kpi\templates\kpi\irl.html:65 .\app\kpi\templates\kpi\irl.html:114
+#: .\app\kpi\templates\kpi\trl.html:66 .\app\kpi\templates\kpi\trl.html:115
+msgid "Level"
+msgstr "Niveau"
+
+#: .\app\kpi\templates\kpi\irl.html:95
+msgid "IRL"
+msgstr "IRL"
+
+#: .\app\kpi\templates\kpi\irl.html:101 .\app\kpi\templates\kpi\irl.html:113
+#: .\app\kpi\templates\kpi\trl.html:102 .\app\kpi\templates\kpi\trl.html:114
+msgid "Date"
+msgstr "Date"
+
+#: .\app\kpi\templates\kpi\irl.html:115 .\app\kpi\templates\kpi\trl.html:116
+msgid "Comment"
+msgstr "Commentaire"
+
+#: .\app\kpi\templates\kpi\irl.html:131
+#, fuzzy
+#| msgid "IRL"
+msgid "New IRL"
+msgstr "IRL"
+
+#: .\app\kpi\templates\kpi\irl_form.html:5
+#: .\app\kpi\templates\kpi\trl_form.html:5
+msgid "Experiment"
+msgstr "Experimentation"
+
+#: .\app\kpi\templates\kpi\irl_form.html:8
+msgid "New IRL for"
+msgstr "Nouveau IRL pour"
+
+#: .\app\kpi\templates\kpi\trl.html:25
+msgid "Observation and recording of concept basics"
+msgstr "Observation et consignation des principes de base du concept"
+
+#: .\app\kpi\templates\kpi\trl.html:26
+msgid "Technology concept or implementation determined"
+msgstr "Concept technologique ou application determines"
+
+#: .\app\kpi\templates\kpi\trl.html:27
+msgid "Critical and analytical function or proof of concept"
+msgstr "Fonction critique et analytique ou validation de principe"
+
+#: .\app\kpi\templates\kpi\trl.html:28
+msgid "Validation of the elements or of a model in laboratory test conditions"
+msgstr ""
+"Validation des elements ou d'une maquette dans des conditions d'essai en "
+"laboratoire"
+
+#: .\app\kpi\templates\kpi\trl.html:29
+msgid "Validation of the elements of a model in a simulated environment"
+msgstr "Validation des elements d'une maquette dans un environnement simule"
+
+#: .\app\kpi\templates\kpi\trl.html:30
+msgid ""
+"Demonstration of a model or a prototype of the system or subsystem in a "
+"simulated environment"
+msgstr ""
+"Demonstration d'un modele ou d'un prototype du systeme ou du sous-systeme "
+"dans un environnement simule"
+
+#: .\app\kpi\templates\kpi\trl.html:31
+msgid ""
+"Prototype ready for demonstration in an operational environment appropriates"
+msgstr ""
+"Prototype pret pour la demonstration dans un environnement operationnel "
+"approprie"
+
+#: .\app\kpi\templates\kpi\trl.html:32
+msgid ""
+"Current technology developed and qualified through tests and demonstrations"
+msgstr ""
+"Technologie actuelle mise au point et qualifiee par des essais et des "
+"demonstrations"
+
+#: .\app\kpi\templates\kpi\trl.html:33
+msgid ""
+"Validation of the actual technology by the deployment succeeded in an "
+"operational context"
+msgstr ""
+"Validation de la technologie reelle par le deploiement reussi dans un "
+"contexte operationnel"
+
+#: .\app\kpi\templates\kpi\trl.html:46
+msgid "TRL of"
+msgstr "TRL de"
+
+#: .\app\kpi\templates\kpi\trl.html:96
+msgid "TRL"
+msgstr "TRL"
+
+#: .\app\kpi\templates\kpi\trl.html:132
+#, fuzzy
+#| msgid "TRL"
+msgid "New TRL"
+msgstr "TRL"
+
+#: .\app\kpi\templates\kpi\trl_form.html:8
+msgid "New TRL for"
+msgstr "Nouveau TRL pour"

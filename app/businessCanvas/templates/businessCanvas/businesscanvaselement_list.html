@@ -1,0 +1,411 @@
+{% extends "dashboard.html" %}
+<!-- Load internationalisation utils-->
+{% load i18n %}
+{% load staticfiles %}
+{% block extrahead %}
+
+<!-- JS for use JQUERY --->
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+
+<!-- JS for Business Model Canvas --->
+<script type="text/javascript" src="{% static 'businessCanvas/js/deleteElement.js' %}"></script>
+<script type="text/javascript" src="{% static 'businessCanvas/js/editElement.js' %}"></script>
+<script type="text/javascript" src="{% static 'businessCanvas/js/getDetail.js' %}"></script>
+<script type="text/javascript" src="{% static 'businessCanvas/js/deleteArchive.js' %}"></script>
+<script type="text/javascript" src="{% static 'businessCanvas/js/archiver.js' %}"></script>
+<script type="text/javascript" src="{% static 'businessCanvas/js/updateDisplayForm.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/tokenCSRF.js' %}"></script>
+
+<!-- Main CSS --->
+<link rel="stylesheet" href="{% static 'businessCanvas/css/style.css' %}">
+
+<!-- Initialisation form and submit-form --->
+<script type="text/javascript">
+//AJAX requete
+	$(document).ready(function(){
+	    //For hide all form at the begin
+        updateDisplayForm();
+
+        // Form to add an element with type POST in AJAX
+        $(".form").submit( function() {
+            var donnees = $(this).serialize();
+            $.ajax({
+                type: this.method,
+                url: '{% url "businessCanvasAddElement" %}',
+                data: donnees + '&type=' + this.id + '&company=' + {{companyId}},
+
+                success: function(data) {
+                    //Delete content of the form
+                    form = document.getElementById(data.type);
+                    form.reset();
+
+                    //We create the new div for the new element
+                    if(data.updated == "False"){
+
+                        //<div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
+                        //  <span class="Channel{{elem.id}}" onclick='getDetail(this.className, "{% url "businessCanvasGetDetail" 1 %}")'>{{elem.title}}</span>
+                        //  <span style="float: right;" class="Channel{{elem.id}}" onclick='deleteElement(this.className, "{% url "businessCanvasDeleteElement" 1 %}");'><i class="fa fa-trash"></i></span>
+                        //  <span style="float: right;" class="Channel{{elem.id}}" onclick='editElement(this.className, "{% url "businessCanvasGetDetail" 1 %}");'><i class="fa fa-pencil-square-o"></i></span>
+                        //  <p style="visibility: hidden; display: none;"></p>
+                        //</div>
+
+                        //The div of the element
+                        var div = document.createElement('div');
+                        div.id = data.id;
+                        div.className = 'element';
+                        div.style.borderBottom = "1px dashed black";
+
+                        //The span of the title
+                        var spanTitle = document.createElement('span');
+                        spanTitle.className = data.type+data.id;
+                        spanTitle.setAttribute('onclick','getDetail(this.className, "{% url "businessCanvasGetDetail" 1 %}")')
+                        spanTitle.innerHTML = data.title;
+
+                        //The span of delete
+                        var spanDelete = document.createElement('span');
+                        spanDelete.className = data.type+data.id;
+                        spanDelete.setAttribute('onclick','deleteElement(this.className, "{% url "businessCanvasDeleteElement" 1 %}");')
+                        spanDelete.innerHTML = "<i class=\"fa fa-trash\"></i>";
+                        spanDelete.style.float = "right";
+
+                        //The span of edit
+                        var spanEdit = document.createElement('span');
+                        spanEdit.className = data.type+data.id;
+                        spanEdit.setAttribute('onclick','editElement(this.className, "{% url "businessCanvasGetDetail" 1 %}");')
+                        spanEdit.innerHTML = "<i class=\"fa fa-pencil-square-o\"></i>";
+                        spanEdit.style.float = "right";
+
+                        //The paragraph of comment
+                        var p = document.createElement('p');
+                        p.style.visibility  = "hidden";
+                        p.style.display = "none";
+
+                        div.appendChild(spanTitle);
+                        div.appendChild(spanDelete);
+                        div.appendChild(spanEdit);
+                        div.appendChild(p);
+                        document.getElementById('div'+ data.type).appendChild(div);
+
+                        updateDisplayForm();
+                    }
+                    //We update the div of the updated element
+                    else{
+                        var div = document.getElementById(data.id);
+                        var spanTitle = div.getElementsByTagName('span')[0];
+                        spanTitle.innerHTML = data.title;
+
+                        var p = div.getElementsByTagName('p')[0];
+                        p.style.visibility  = "hidden";
+                        p.style.display = "none";
+
+                        updateDisplayForm();
+                    }
+                },
+                error: function(resultat, status, erreur) {
+                    alert(erreur);
+                }
+            });
+            return false;
+        });
+	});
+</script>
+
+{% endblock %}
+{% block title %}Business Model Canvas{% endblock %}
+{% block content %}
+<!--TODO Check for autogenerate the table-->
+<div class="row">
+    <div class="col-sm-12" align="center">
+        <h1>{% trans "Business Model Canvas" %}</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12" align="center">
+        {%if isFounder %}
+        <div style="border: 1px solid black; padding: 2px; margin-bottom: 20px; margin-top: 10px; background-color: #428bca; color: white; font-size: 20px;" onclick='archiver("{% url "businessCanvasArchiver" 1 %}", {{companyId}}, "{% url "businessCanvasElementArchived_list" 1 %}", "{% url "businessCanvasDeleteArchive" 1 %}");'>Archiver</div>
+        {% endif %}
+        <table class="canvas_container_table" id="main_table" cellpadding="5" cellspacing="0">
+            <tr>
+                <td rowspan="2" class="border-right-none border-bottom-none" width="20%">
+                    <h6>{% trans "Key Partners" %}
+                        {%if isFounder %}
+                            <span class="KeyPartner" style="color: #428bca;" onclick="updateDisplayForm(this.getAttribute('class'))"><i class="fa fa-plus-square"></i></span>
+                        {% endif %}
+                    </h6>
+                    <div id="divKeyPartner">
+                        <form class="form" id="KeyPartner" action="" method="post">{% csrf_token %}
+                            {% trans "Title" %} : <input type="text" name="title" value=""/><br/>
+                            {% trans "Comment" %} : <input type="text" name="comment" value=""/><br/>
+                            <input type="hidden" name="update" class="hiddenInput" value="False"/>
+                            <input type="submit" value="Envoyer"/>
+                        </form>
+                        {% for elem in listKeyPartners %}
+                            <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
+                                <span class="KeyPartner{{elem.id}}" onclick='getDetail(this.className, "{% url "businessCanvasGetDetail" 1 %}");'>{{elem.title}}</span>
+                                {%if isFounder %}
+                                <span style="float: right;" class="KeyPartner{{elem.id}}" onclick='deleteElement(this.className, "{% url "businessCanvasDeleteElement" 1 %}");'><i class="fa fa-trash"></i></span>
+                                <span style="float: right;" class="KeyPartner{{elem.id}}" onclick='editElement(this.className, "{% url "businessCanvasGetDetail" 1 %}");'><i class="fa fa-pencil-square-o"></i></span>
+                                {% endif %}
+                                <p style="visibility: hidden; display: none;"></p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </td>
+                <td class="border-right-none border-bottom-none" width="20%">
+                    <h6>{% trans "Key Activities" %}
+                        {%if isFounder %}
+                            <span class="KeyActivitie" style="color: #428bca;" onclick="updateDisplayForm(this.getAttribute('class'))"><i class="fa fa-plus-square"></i></span>
+                        {% endif %}
+                    </h6>
+                    <div id="divKeyActivitie">
+                    <form class="form" id="KeyActivitie" action="" method="post">{% csrf_token %}
+                        {% trans "Title" %} : <input type="text" name="title" value=""/><br/>
+                        {% trans "Comment" %} : <input type="text" name="comment" value=""/><br/>
+                        <input type="hidden" name="update" class="hiddenInput" value="False"/>
+                        <input type="submit" value="Envoyer"/>
+                    </form>
+                    {% for elem in listKeyActivities %}
+                            <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
+                                <span class="KeyActivitie{{elem.id}}" onclick='getDetail(this.className, "{% url "businessCanvasGetDetail" 1 %}")'>{{elem.title}}</span>
+                                {%if isFounder %}
+                                <span style="float: right;" class="KeyActivitie{{elem.id}}" onclick='deleteElement(this.className, "{% url "businessCanvasDeleteElement" 1 %}");'><i class="fa fa-trash"></i></span>
+                                <span style="float: right;" class="KeyActivitie{{elem.id}}" onclick='editElement(this.className, "{% url "businessCanvasGetDetail" 1 %}");'><i class="fa fa-pencil-square-o"></i></span>
+                                {% endif %}
+                                <p style="visibility: hidden; display: none;"></p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </td>
+                <td rowspan="2" colspan="2" class="border-right-none border-bottom-none" width="20%">
+                    <h6>{% trans "Value Proposition" %}
+                        {%if isFounder %}
+                            <span class="ValueProposition" style="color: #428bca;" onclick="updateDisplayForm(this.getAttribute('class'))"><i class="fa fa-plus-square"></i></span>
+                        {% endif %}
+                    </h6>
+                    <div id="divValueProposition">
+                    <form class="form" id="ValueProposition" action="" method="post">{% csrf_token %}
+                        {% trans "Title" %} : <input type="text" name="title" value=""/><br/>
+                        {% trans "Comment" %} : <input type="text" name="comment" value=""/><br/>
+                        <input type="hidden" name="update" class="hiddenInput" value="False"/>
+                        <input type="submit" value="Envoyer"/>
+                    </form>
+
+                        {% for elem in listValuePropositions %}
+                            <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
+                                <span class="ValueProposition{{elem.id}}" onclick='getDetail(this.className, "{% url "businessCanvasGetDetail" 1 %}")'>{{elem.title}}</span>
+                                {%if isFounder %}
+                                <span style="float: right;" class="ValueProposition{{elem.id}}" onclick='deleteElement(this.className, "{% url "businessCanvasDeleteElement" 1 %}");'><i class="fa fa-trash"></i></span>
+                                <span style="float: right;" class="ValueProposition{{elem.id}}" onclick='editElement(this.className, "{% url "businessCanvasGetDetail" 1 %}");'><i class="fa fa-pencil-square-o"></i></span>
+                                {% endif %}
+                                <p style="visibility: hidden; display: none;"></p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </td>
+                <td class="border-right-none border-bottom-none" width="20%">
+                    <h6>{% trans "Customer Relationships" %}
+                        {%if isFounder %}
+                            <span class="CustomerRelationship" style="color: #428bca;" onclick="updateDisplayForm(this.getAttribute('class'))"><i class="fa fa-plus-square"></i></span>
+                        {% endif %}
+                    </h6>
+                    <div id="divCustomerRelationship">
+                    <form class="form" id="CustomerRelationship" action="" method="post">{% csrf_token %}
+                        {% trans "Title" %} : <input type="text" name="title" value=""/><br/>
+                        {% trans "Comment" %} : <input type="text" name="comment" value=""/><br/>
+                        <input type="hidden" name="update" class="hiddenInput" value="False"/>
+                        <input type="submit" value="Envoyer"/>
+                    </form>
+                        {% for elem in listCustomerRelationships %}
+                            <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
+                                <span class="CustomerRelationship{{elem.id}}" onclick='getDetail(this.className, "{% url "businessCanvasGetDetail" 1 %}")'>{{elem.title}}</span>
+                                {%if isFounder %}
+                                <span style="float: right;" class="CustomerRelationship{{elem.id}}" onclick='deleteElement(this.className, "{% url "businessCanvasDeleteElement" 1 %}");'><i class="fa fa-trash"></i></span>
+                                <span style="float: right;" class="CustomerRelationship{{elem.id}}" onclick='editElement(this.className, "{% url "businessCanvasGetDetail" 1 %}");'><i class="fa fa-pencil-square-o"></i></span>
+                                {% endif %}
+                                <p style="visibility: hidden; display: none;"></p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </td>
+                <td rowspan="2" class="border-bottom-none" width="20%">
+                    <h6>{% trans "Customer Segments" %}
+                        {%if isFounder %}
+                            <span class="CustomerSegment" style="color: #428bca;" onclick="updateDisplayForm(this.getAttribute('class'))"><i class="fa fa-plus-square"></i></span>
+                        {% endif %}
+                    </h6>
+                    <div id="divCustomerSegment">
+                    <form class="form" id="CustomerSegment" action="" method="post">{% csrf_token %}
+                        {% trans "Title" %} : <input type="text" name="title" value=""/><br/>
+                        {% trans "Comment" %} : <input type="text" name="comment" value=""/><br/>
+                        <input type="hidden" name="update" class="hiddenInput" value="False"/>
+                        <input type="submit" value="Envoyer"/>
+                    </form>
+                        {% for elem in listCustomerSegments %}
+                            <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
+                                <span class="CustomerSegment{{elem.id}}" onclick='getDetail(this.className, "{% url "businessCanvasGetDetail" 1 %}")'>{{elem.title}}</span>
+                                {%if isFounder %}
+                                <span style="float: right;" class="CustomerSegment{{elem.id}}" onclick='deleteElement(this.className, "{% url "businessCanvasDeleteElement" 1 %}");'><i class="fa fa-trash"></i></span>
+                                <span style="float: right;" class="CustomerSegment{{elem.id}}" onclick='editElement(this.className, "{% url "businessCanvasGetDetail" 1 %}");'><i class="fa fa-pencil-square-o"></i></span>
+                                {% endif %}
+                                <p style="visibility: hidden; display: none;"></p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="border-bottom-none border-right-none">
+                    <h6>{% trans "Key Resources" %}
+                        {%if isFounder %}
+                            <span class="KeyResource" style="color: #428bca;" onclick="updateDisplayForm(this.getAttribute('class'))"><i class="fa fa-plus-square"></i></span>
+                        {% endif %}
+                    </h6>
+                    <div id="divKeyResource">
+                    <form class="form" id="KeyResource" action="" method="post">{% csrf_token %}
+                        {% trans "Title" %} : <input type="text" name="title" value=""/><br/>
+                        {% trans "Comment" %} : <input type="text" name="comment" value=""/><br/>
+                        <input type="hidden" name="update" class="hiddenInput" value="False"/>
+                        <input type="submit" value="Envoyer"/>
+                    </form>
+                        {% for elem in listKeyResources %}
+                            <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
+                                <span class="KeyResource{{elem.id}}" onclick='getDetail(this.className, "{% url "businessCanvasGetDetail" 1 %}")'>{{elem.title}}</span>
+                                {%if isFounder %}
+                                <span style="float: right;" class="KeyResource{{elem.id}}" onclick='deleteElement(this.className, "{% url "businessCanvasDeleteElement" 1 %}");'><i class="fa fa-trash"></i></span>
+                                <span style="float: right;" class="KeyResource{{elem.id}}" onclick='editElement(this.className, "{% url "businessCanvasGetDetail" 1 %}");'><i class="fa fa-pencil-square-o"></i></span>
+                                {% endif %}
+                                <p style="visibility: hidden; display: none;"></p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </td>
+                <td class="border-bottom-none border-right-none">
+                    <h6>{% trans "Channels" %}
+                        {%if isFounder %}
+                            <span class="Channel" style="color: #428bca;" onclick="updateDisplayForm(this.getAttribute('class'))"><i class="fa fa-plus-square"></i></span>
+                        {% endif %}
+                    </h6>
+                    <div id="divChannel">
+                    <form class="form" id="Channel" action="" method="post">{% csrf_token %}
+                        {% trans "Title" %} : <input type="text" name="title" value=""/><br/>
+                        {% trans "Comment" %} : <input type="text" name="comment" value=""/><br/>
+                        <input type="hidden" name="update" class="hiddenInput" value="False"/>
+                        <input type="submit" value="Envoyer"/>
+                    </form>
+                        {% for elem in listChannels %}
+                            <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
+                                <span class="Channel{{elem.id}}" onclick='getDetail(this.className, "{% url "businessCanvasGetDetail" 1 %}")'>{{elem.title}}</span>
+                                {%if isFounder %}
+                                <span style="float: right;" class="Channel{{elem.id}}" onclick='deleteElement(this.className, "{% url "businessCanvasDeleteElement" 1 %}");'><i class="fa fa-trash"></i></span>
+                                <span style="float: right;" class="Channel{{elem.id}}" onclick='editElement(this.className, "{% url "businessCanvasGetDetail" 1 %}");'><i class="fa fa-pencil-square-o"></i></span>
+                                {% endif %}
+                                <p style="visibility: hidden; display: none;"></p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </td>
+            </tr>
+            <tr class="fix_width_section">
+                <td colspan="3" class="border-right-none">
+                    <h6>{% trans "Cost Structure" %}
+                        {%if isFounder %}
+                            <span class="CostStructure" style="color: #428bca;" onclick="updateDisplayForm(this.getAttribute('class'))"><i class="fa fa-plus-square"></i></span>
+                        {% endif %}
+                    </h6>
+                    <div id="divCostStructure">
+                    <form class="form" id="CostStructure" action="" method="post">{% csrf_token %}
+                        {% trans "Title" %} : <input type="text" name="title" value=""/><br/>
+                        {% trans "Comment" %} : <input type="text" name="comment" value=""/><br/>
+                        <input type="hidden" name="update" class="hiddenInput" value="False"/>
+                        <input type="submit" value="Envoyer"/>
+                    </form>
+                        {% for elem in listCostStructures %}
+                            <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
+                                <span class="CostStructure{{elem.id}}" onclick='getDetail(this.className, "{% url "businessCanvasGetDetail" 1 %}")'>{{elem.title}}</span>
+                                {%if isFounder %}
+                                <span style="float: right;" class="CostStructure{{elem.id}}" onclick='deleteElement(this.className, "{% url "businessCanvasDeleteElement" 1 %}");'><i class="fa fa-trash"></i></span>
+                                <span style="float: right;" class="CostStructure{{elem.id}}" onclick='editElement(this.className, "{% url "businessCanvasGetDetail" 1 %}");'><i class="fa fa-pencil-square-o"></i></span>
+                                {% endif %}
+                                <p style="visibility: hidden; display: none;"></p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </td>
+                <td colspan="3">
+                    <h6>{% trans "Revenue Streams" %}
+                        {%if isFounder %}
+                            <span class="RevenueStream" style="color: #428bca;" onclick="updateDisplayForm(this.getAttribute('class'))"><i class="fa fa-plus-square"></i></span>
+                        {% endif %}
+                    </h6>
+                    <div id="divRevenueStream">
+                    <form class="form" id="RevenueStream" action="" method="post">{% csrf_token %}
+                        {% trans "Title" %} : <input type="text" name="title" value=""/><br/>
+                        {% trans "Comment" %} : <input type="text" name="comment" value=""/><br/>
+                        <input type="hidden" name="update" class="hiddenInput" value="False"/>
+                        <input type="submit" value="Envoyer"/>
+                    </form>
+                        {% for elem in listRevenueStreams %}
+                            <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
+                                <span class="RevenueStream{{elem.id}}" onclick='getDetail(this.className, "{% url "businessCanvasGetDetail" 1 %}")'>{{elem.title}}</span>
+                                {%if isFounder %}
+                                <span style="float: right;" class="RevenueStream{{elem.id}}" onclick='deleteElement(this.className, "{% url "businessCanvasDeleteElement" 1 %}");'><i class="fa fa-trash"></i></span>
+                                <span style="float: right;" class="RevenueStream{{elem.id}}" onclick='editElement(this.className, "{% url "businessCanvasGetDetail" 1 %}");'><i class="fa fa-pencil-square-o"></i></span>
+                                {% endif %}
+                                <p style="visibility: hidden; display: none;"></p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="6" style="height: 50px; border: none;">
+                 </td>
+            </tr>
+            <tr id="brain_storming_section">
+                <td colspan="5">
+                    <h6>{% trans "Brainstorming Space" %}
+                        {%if isFounder %}
+                            <span class="BrainstormingSpace" style="color: #428bca;" onclick="updateDisplayForm(this.getAttribute('class'))"><i class="fa fa-plus-square"></i></span>
+                        {% endif %}
+                    </h6>
+                    <div id="divBrainstormingSpace">
+                    <form class="form" id="BrainstormingSpace" action="" method="post">{% csrf_token %}
+                        {% trans "Title" %} : <input type="text" name="title" value=""/><br/>
+                        {% trans "Comment" %} : <input type="text" name="comment" value=""/><br/>
+                        <input type="hidden" name="update" class="hiddenInput" value="False"/>
+                        <input type="submit" value="Envoyer"/>
+                    </form>
+                        {% for elem in listBrainstormingSpaces %}
+                            <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
+                                <span class="BrainstormingSpace{{elem.id}}" onclick='getDetail(this.className, "{% url "businessCanvasGetDetail" 1 %}")'>{{elem.title}}</span>
+                                {%if isFounder %}
+                                <span style="float: right;" class="BrainstormingSpace{{elem.id}}" onclick='deleteElement(this.className, "{% url "businessCanvasDeleteElement" 1 %}");'><i class="fa fa-trash"></i></span>
+                                <span style="float: right;" class="BrainstormingSpace{{elem.id}}" onclick='editElement(this.className, "{% url "businessCanvasGetDetail" 1 %}");'><i class="fa fa-pencil-square-o"></i></span>
+                                {% endif %}
+                                <p style="visibility: hidden; display: none;"></p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </td>
+                <td colspan="1">
+                    <h6>{% trans "Archive" %}</h6>
+                        <div id="divArchive">
+                            {% for archive in archives %}
+                                <div id="archive{{archive.id}}" style="border-bottom: 1px dashed black; padding-left: 10px;">
+                                    <a href="{% url "businessCanvasElementArchived_list" archive.id %}">
+                                        {{archive}}
+                                    </a>
+                                    {%if isFounder %}
+                                    <span style="float: right; color: #428bca;" class="archive{{archive.id}}" onclick='deleteArchive(this.className, "{% url "businessCanvasDeleteArchive" 1 %}");'>
+                                        <i class="fa fa-trash"></i>
+                                    </span>
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+{% endblock %}

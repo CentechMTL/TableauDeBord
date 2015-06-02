@@ -1,0 +1,471 @@
+{% extends "dashboard.html" %}
+<!-- Load internationalisation utils-->
+{% load i18n %}
+{% load embed_video_tags %}
+{% load staticfiles %}
+<!-- Load internationalisation utils-->
+{% load i18n %}
+
+{% block extrahead %}
+    <script src="{% static 'graph/dist/jquery.min.js" type="text/javascript"></script>
+    <script src="{% static 'graph/dist/jsgraph.min.js" type="text/javascript"></script>
+{% endblock %}
+
+{% block content %}
+    <!--TODO Check for autogenerate the page-->
+    <div class="row">
+        <div class="col-sm-12" align="center">
+            <br>
+            <h1>{% trans "Finance of" %} {{ company.name }}</h1>
+        </div>
+    </div>
+
+    <h2 id="menu-sommaire">{% trans "Summary" %}</h2>
+    <ul>
+    <li><a href="#menu-general">{% trans "Overview" %}</a><br></li>
+    <li><a href="#menu-bourses">{% trans "Stock exchanges" %}</a><br></li>
+    <li><a href="#menu-subventions">{% trans "Subsidies" %}</a><br></li>
+    <li><a href="#menu-investissements">{% trans "Investments" %}</a><br></li>
+    <li><a href="#menu-prets">{% trans "Loans" %}</a><br></li>
+    <li><a href="#menu-ventes">{% trans "Sales" %}</a><br></li>
+    </ul>
+
+    <!--- VUE GENERALE --->
+    <h2 id="menu-general">{% trans "Overview" %}</h2>
+    <div class="row">
+        <div class="col-sm-12" align="center">
+            <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+            <div id="columnchart_material" style="height: 300px;"></div>
+            <script type="text/javascript">
+                google.load("visualization", "1.1", {packages:["bar"]});
+                google.setOnLoadCallback(drawChart);
+                function drawChart() {
+                var data = google.visualization.arrayToDataTable([
+                  ['Type de financement', 'En attente', 'Reçu'],
+                  ['Bourses', {{totalBoursesSoumises}}, {{totalBoursesRecues}}],
+                  ['Subventions', {{totalSubventionsSoumises}}, {{totalSubventionsRecues}}],
+                  ['Investissements', {{totalInvestissementsSoumis}}, {{totalInvestissementsRecus}}],
+                  ['Prêts', {{totalPretsSoumis}}, {{totalPretsRecus}}],
+                  ['Ventes', {{totalVentesSoumises}}, {{totalVentesRecues}}]
+                ]);
+
+                var options = {
+                  chart: {
+                    title: 'Etude financière de la compagnie',
+                    subtitle: '{{company.name}}',
+                  }
+                };
+
+                var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+
+                chart.draw(data, options);
+                }
+            </script>
+        </div>
+    </div>
+    <a href="#menu-sommaire">{% trans "Return to the top of the page" %}</a>
+
+    <!-- BOURSES --->
+    <h2 id="menu-bourses" style="margin-top: 50px;">{% trans "Stock exchanges" %}</h2>
+    <div class="row" style="margin-top: 20px;">
+        <div class="col-sm-3" align="center">
+            <div id="bourses" style="height: 300px;"></div>
+            <script type="text/javascript">
+                google.load("visualization", "1.1", {
+                    packages: ["bar"]
+                });
+                google.setOnLoadCallback(drawChart);
+
+                function drawChart() {
+                    var data = google.visualization.arrayToDataTable([
+                        ['', 'En attente', 'Reçu'],
+                        ['Bourses', {{totalBoursesSoumises}}, {{totalBoursesRecues}}], ]);
+                    var options = {
+                        chart: {
+                            title: 'Etude des bourses de la compagnie',
+                            subtitle: '{{company.name}}',
+                        }
+                    };
+
+                    var chart = new google.charts.Bar(document.getElementById('bourses'));
+
+                    chart.draw(data, options);
+                }
+            </script>
+        </div>
+        <div class="col-sm-9" align="center">
+            <table cellpadding="0" cellspacing="0" class="table table-bordered">
+        <tr>
+            <th>{% trans "Name" %}</th>
+            <th>{% trans "Date of submission" %}</th>
+            <th>{% trans "Amount requested" %}</th>
+            <th>{% trans "Date of reception" %}</th>
+            <th>{% trans "Amount received" %}</th>
+            {% if isFounder == True %}
+            <th>{% trans "Modify" %}</th>
+            <th>{% trans "Delete" %}</th>
+            {% endif %}
+
+        </tr>
+        {% for bourse in bourses %}
+            <tr>
+                <td>{{ bourse.name }}</td>
+                <td>{{ bourse.dateSoumission }}</td>
+                <td>{{ bourse.sommeSoumission }} $</td>
+                {% if bourse.dateReception == None %}
+                <td>{% trans "In waiting" %}</td>
+                {% else %}
+                <td>{{ bourse.dateReception }}</td>
+                {% endif %}
+                {% if bourse.sommeReception == None %}
+                <td>{% trans "In waiting" %}</td>
+                {% else %}
+                <td>{{ bourse.sommeReception }} $</td>
+                {% endif %}
+                {% if isFounder == True %}
+                <td><a href="{% url 'bourse_update' bourse.id %}">{% trans "Modify" %}</a></td>
+                <td><a href="{% url 'bourse_delete' bourse.id %}">{% trans "Delete" %}</a></td>
+                {% endif %}
+            </tr>
+            {% if bourse.description != None %}
+                {% if bourse.description != "" %}
+                <tr>
+                    <td colspan="7">
+                        <i class="fa fa-arrow-circle-o-down"></i> {{bourse.description}}
+                    </td>
+                </tr>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    </table>
+    {% if isFounder == True %}
+    <a href="{% url 'bourse_add' company.id %}">{% trans "New stock exchange" %}</a>
+    {% endif %}
+        </div>
+    </div>
+    <a href="#menu-sommaire">{% trans "Return to the top of the page" %}</a>
+
+    <!-- SUBVENTIONS -->
+    <h2 id="menu-subventions" style="margin-top: 50px;">{% trans "Subsidies" %}</h2>
+    <div class="row" style="margin-top: 20px;">
+        <div class="col-sm-3" align="center">
+            <div id="subventions" style="height: 300px;"></div>
+            <script type="text/javascript">
+                google.load("visualization", "1.1", {
+                    packages: ["bar"]
+                });
+                google.setOnLoadCallback(drawChart);
+
+                function drawChart() {
+                    var data = google.visualization.arrayToDataTable([
+                        ['', 'En attente', 'Reçu'],
+                        ['Subventions', {{totalSubventionsSoumises}}, {{totalSubventionsRecues}}], ]);
+                    var options = {
+                        chart: {
+                            title: 'Etude des subventions de la compagnie',
+                            subtitle: '{{company.name}}',
+                        }
+                    };
+
+                    var chart = new google.charts.Bar(document.getElementById('subventions'));
+
+                    chart.draw(data, options);
+                }
+            </script>
+        </div>
+        <div class="col-sm-9" align="center">
+            <table cellpadding="0" cellspacing="0" class="table table-bordered">
+        <tr>
+            <th>{% trans "Name" %}</th>
+            <th>{% trans "Date of submission" %}</th>
+            <th>{% trans "Amount requested" %}</th>
+            <th>{% trans "Date of reception" %}</th>
+            <th>{% trans "Amount received" %}</th>
+            {% if isFounder == True %}
+            <th>{% trans "Modify" %}</th>
+            <th>{% trans "Delete" %}</th>
+            {% endif %}
+
+        </tr>
+        {% for subvention in subventions %}
+            <tr>
+                <td>{{ subvention.name }}</td>
+                <td>{{ subvention.dateSoumission }}</td>
+                <td>{{ subvention.sommeSoumission }} $</td>
+                {% if subvention.dateReception == None %}
+                <td>{% trans "In waiting" %}</td>
+                {% else %}
+                <td>{{ subvention.dateReception }}</td>
+                {% endif %}
+                {% if subvention.sommeReception == None %}
+                <td>{% trans "In waiting" %}</td>
+                {% else %}
+                <td>{{ subvention.sommeReception }} $</td>
+                {% endif %}
+                {% if isFounder == True %}
+                <td><a href="{% url 'subvention_update' subvention.id %}">{% trans "Modify" %}</a></td>
+                <td><a href="{% url 'subvention_delete' subvention.id %}">{% trans "Delete" %}</a></td>
+                {% endif %}
+            </tr>
+            {% if subvention.description != None %}
+                {% if subvention.description != "" %}
+                <tr>
+                    <td colspan="7">
+                        <i class="fa fa-arrow-circle-o-down"></i> {{subvention.description}}
+                    </td>
+                </tr>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    </table>
+    {% if isFounder == True %}
+    <a href="{% url 'subvention_add' company.id %}">{% trans "New subsidy" %}</a>
+    {% endif %}
+        </div>
+    </div>
+    <a href="#menu-sommaire">{% trans "Return to the top of the page" %}</a>
+
+    <!--- INVESTISSEMENTS -->
+    <h2 id="menu-investissements" style="margin-top: 50px;">{% trans "Investments" %}</h2>
+    <div class="row" style="margin-top: 20px;">
+        <div class="col-sm-3" align="center">
+            <div id="investissements" style="height: 300px;"></div>
+            <script type="text/javascript">
+                google.load("visualization", "1.1", {
+                    packages: ["bar"]
+                });
+                google.setOnLoadCallback(drawChart);
+
+                function drawChart() {
+                    var data = google.visualization.arrayToDataTable([
+                        ['', 'En attente', 'Reçu'],
+                        ['Investissements', {{totalInvestissementsSoumis}}, {{totalInvestissementsRecus}}], ]);
+                    var options = {
+                        chart: {
+                            title: 'Etude des investissement de la compagnie',
+                            subtitle: '{{company.name}}',
+                        }
+                    };
+
+                    var chart = new google.charts.Bar(document.getElementById('investissements'));
+
+                    chart.draw(data, options);
+                }
+            </script>
+        </div>
+        <div class="col-sm-9" align="center">
+            <table cellpadding="0" cellspacing="0" class="table table-bordered">
+        <tr>
+            <th>{% trans "Name" %}</th>
+            <th>{% trans "Date of submission" %}</th>
+            <th>{% trans "Amount requested" %}</th>
+            <th>{% trans "Date of reception" %}</th>
+            <th>{% trans "Amount received" %}</th>
+            {% if isFounder == True %}
+            <th>{% trans "Modify" %}</th>
+            <th>{% trans "Delete" %}</th>
+            {% endif %}
+
+        </tr>
+        {% for investissement in investissements %}
+            <tr>
+                <td>{{ investissement.name }}</td>
+                <td>{{ investissement.dateSoumission }}</td>
+                <td>{{ investissement.sommeSoumission }} $</td>
+                {% if investissement.dateReception == None %}
+                <td>{% trans "In waiting" %}</td>
+                {% else %}
+                <td>{{ investissement.dateReception }}</td>
+                {% endif %}
+                {% if investissement.sommeReception == None %}
+                <td>{% trans "In waiting" %}</td>
+                {% else %}
+                <td>{{ investissement.sommeReception }} $</td>
+                {% endif %}
+                {% if isFounder == True %}
+                <td><a href="{% url 'investissement_update' investissement.id %}">{% trans "Modify" %}</a></td>
+                <td><a href="{% url 'investissement_delete' investissement.id %}">{% trans "Delete" %}</a></td>
+                {% endif %}
+            </tr>
+            {% if investissement.description != None %}
+                {% if investissement.description != "" %}
+                <tr>
+                    <td colspan="7">
+                        <i class="fa fa-arrow-circle-o-down"></i> {{investissement.description}}
+                    </td>
+                </tr>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    </table>
+    {% if isFounder == True %}
+    <a href="{% url 'investissement_add' company.id %}">{% trans "New investment" %}</a>
+    {% endif %}
+        </div>
+    </div>
+    <a href="#menu-sommaire">{% trans "Return to the top of the page" %}</a>
+
+
+    <!-- PRETS -->
+    <h2 id="menu-prets" style="margin-top: 50px;">{% trans "Loans" %}</h2>
+    <div class="row" style="margin-top: 20px;">
+        <div class="col-sm-3" align="center">
+            <div id="prets" style="height: 300px;"></div>
+            <script type="text/javascript">
+                google.load("visualization", "1.1", {
+                    packages: ["bar"]
+                });
+                google.setOnLoadCallback(drawChart);
+
+                function drawChart() {
+                    var data = google.visualization.arrayToDataTable([
+                        ['', 'En attente', 'Reçu'],
+                        ['Prets', {{totalPretsSoumis}}, {{totalPretsRecus}}], ]);
+                    var options = {
+                        chart: {
+                            title: 'Etude des prets de la compagnie',
+                            subtitle: '{{company.name}}',
+                        }
+                    };
+
+                    var chart = new google.charts.Bar(document.getElementById('prets'));
+
+                    chart.draw(data, options);
+                }
+            </script>
+        </div>
+        <div class="col-sm-9" align="center">
+            <table cellpadding="0" cellspacing="0" class="table table-bordered">
+        <tr>
+            <th>{% trans "Name" %}</th>
+            <th>{% trans "Date of submission" %}</th>
+            <th>{% trans "Amount requested" %}</th>
+            <th>{% trans "Date of reception" %}</th>
+            <th>{% trans "Amount received" %}</th>
+            {% if isFounder == True %}
+            <th>{% trans "Modify" %}</th>
+            <th>{% trans "Delete" %}</th>
+            {% endif %}
+
+        </tr>
+        {% for pret in prets %}
+            <tr>
+                <td>{{ pret.name }}</td>
+                <td>{{ pret.dateSoumission }}</td>
+                <td>{{ pret.sommeSoumission }} $</td>
+                {% if pret.dateReception == None %}
+                <td>{% trans "In waiting" %}</td>
+                {% else %}
+                <td>{{ pret.dateReception }}</td>
+                {% endif %}
+                {% if pret.sommeReception == None %}
+                <td>{% trans "In waiting" %}</td>
+                {% else %}
+                <td>{{ pret.sommeReception }} $</td>
+                {% endif %}
+                {% if isFounder == True %}
+                <td><a href="{% url 'pret_update' pret.id %}">{% trans "Modify" %}</a></td>
+                <td><a href="{% url 'pret_delete' pret.id %}">{% trans "Delete" %}</a></td>
+                {% endif %}
+            </tr>
+            {% if pret.description != None %}
+                {% if pret.description != "" %}
+                <tr>
+                    <td colspan="7">
+                        <i class="fa fa-arrow-circle-o-down"></i> {{pret.description}}
+                    </td>
+                </tr>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    </table>
+    {% if isFounder == True %}
+    <a href="{% url 'pret_add' company.id %}">{% trans "New loan" %}</a>
+    {% endif %}
+        </div>
+    </div>
+    <a href="#menu-sommaire">{% trans "Return to the top of the page" %}</a>
+
+
+    <!-- VENTES -->
+    <h2 id="menu-ventes" style="margin-top: 50px;">{% trans "Sales" %}</h2>
+    <div class="row" style="margin-top: 20px;">
+        <div class="col-sm-3" align="center">
+            <div id="ventes" style="height: 300px; margin-bottom: 50px;"></div>
+            <script type="text/javascript">
+                google.load("visualization", "1.1", {
+                    packages: ["bar"]
+                });
+                google.setOnLoadCallback(drawChart);
+
+                function drawChart() {
+                    var data = google.visualization.arrayToDataTable([
+                        ['', 'ODS', 'Reçu'],
+                        ['Ventes', {{totalVentesSoumises}}, {{totalVentesRecues}}], ]);
+                    var options = {
+                        chart: {
+                            title: 'Etude des ventes de la compagnie',
+                            subtitle: '{{company.name}}',
+                        }
+                    };
+
+                    var chart = new google.charts.Bar(document.getElementById('ventes'));
+
+                    chart.draw(data, options);
+                }
+            </script>
+        </div>
+        <div class="col-sm-9" align="center">
+            <table cellpadding="0" cellspacing="0" class="table table-bordered">
+        <tr>
+            <th>{% trans "Name" %}</th>
+            <th>{% trans "Date ODS" %}</th>
+            <th>{% trans "Amount ODS" %}</th>
+            <th>{% trans "Date of reception" %}</th>
+            <th>{% trans "Amount received" %}</th>
+            {% if isFounder == True %}
+            <th>{% trans "Modify" %}</th>
+            <th>{% trans "Delete" %}</th>
+            {% endif %}
+
+        </tr>
+        {% for vente in ventes %}
+            <tr>
+                <td>{{ vente.name }}</td>
+                <td>{{ vente.dateSoumission }}</td>
+                <td>{{ vente.sommeSoumission }} $</td>
+                {% if vente.dateReception == None %}
+                <td>{% trans "In waiting" %}</td>
+                {% else %}
+                <td>{{ vente.dateReception }}</td>
+                {% endif %}
+                {% if vente.sommeReception == None %}
+                <td>{% trans "In waiting" %}</td>
+                {% else %}
+                <td>{{ vente.sommeReception }} $</td>
+                {% endif %}
+                {% if isFounder == True %}
+                <td><a href="{% url 'vente_update' vente.id %}">{% trans "Modify" %}</a></td>
+                <td><a href="{% url 'vente_delete' vente.id %}">{% trans "Delete" %}</a></td>
+                {% endif %}
+            </tr>
+            {% if vente.description != None %}
+                {% if vente.description != "" %}
+                <tr>
+                    <td colspan="7">
+                        <i class="fa fa-arrow-circle-o-down"></i> {{vente.description}}
+                    </td>
+                </tr>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    </table>
+    {% if isFounder == True %}
+    <a href="{% url 'vente_add' company.id %}">{% trans "New sale" %}</a>
+    {% endif %}
+        </div>
+    </div>
+    <a href="#menu-sommaire">{% trans "Return to the top of the page" %}</a>
+
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+{% endblock %}

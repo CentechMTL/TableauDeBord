@@ -1,0 +1,54 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-05-25 16:38-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: .\app\home\models.py:14
+msgid "Education"
+msgstr "Niveau d'étude"
+
+#: .\app\home\models.py:23
+msgid "Expertise"
+msgstr "Expertise"
+
+#: .\app\home\models.py:35
+#, fuzzy
+#| msgid "telephone"
+msgid "phone"
+msgstr "téléphone"
+
+#: .\app\home\models.py:36
+msgid "web site"
+msgstr "site web"
+
+#: .\app\home\models.py:37
+msgid "personal photograph"
+msgstr "photographie"
+
+#: .\app\home\templates\home\index.html:12
+msgid "Tableau de Bord"
+msgstr "Tableau de bord"
+
+#: .\app\home\templates\registration\login.html:10
+msgid "Your username and password didn't match. Please try again."
+msgstr ""
+"Votre nom d'utilisateur et votre mot de passe ne correspondent pas. Veuillez "
+"recommencer."
+
+#: .\app\home\templates\tablebord\results.html:11
+msgid "Vote again?"
+msgstr "Voter encore?"

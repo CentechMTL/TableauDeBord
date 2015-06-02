@@ -1,0 +1,76 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-05-25 16:38-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: .\app\valuePropositionCanvas\models.py:9
+msgid "Value proposition canvas type"
+msgstr "Type d'élément du modèle de proposition de valeur"
+
+#: .\app\valuePropositionCanvas\models.py:18
+msgid "Value proposition canvas element"
+msgstr "Element du modèle de proposition de valeur"
+
+#: .\app\valuePropositionCanvas\models.py:23
+msgid "Type"
+msgstr "Type"
+
+#: .\app\valuePropositionCanvas\templates\valuePropositionCanvas\valuepropositioncanvaselement_list.html:117
+msgid "Value Proposition Canvas"
+msgstr "Modèle de proposition de valeur"
+
+#: .\app\valuePropositionCanvas\templates\valuePropositionCanvas\valuepropositioncanvaselement_list.html:130
+msgid "Products & Services"
+msgstr "Produits & Services"
+
+#: .\app\valuePropositionCanvas\templates\valuePropositionCanvas\valuepropositioncanvaselement_list.html:137
+#: .\app\valuePropositionCanvas\templates\valuePropositionCanvas\valuepropositioncanvaselement_list.html:162
+#: .\app\valuePropositionCanvas\templates\valuePropositionCanvas\valuepropositioncanvaselement_list.html:189
+#: .\app\valuePropositionCanvas\templates\valuePropositionCanvas\valuepropositioncanvaselement_list.html:214
+#: .\app\valuePropositionCanvas\templates\valuePropositionCanvas\valuepropositioncanvaselement_list.html:241
+#: .\app\valuePropositionCanvas\templates\valuePropositionCanvas\valuepropositioncanvaselement_list.html:266
+msgid "Title"
+msgstr "Titre"
+
+#: .\app\valuePropositionCanvas\templates\valuePropositionCanvas\valuepropositioncanvaselement_list.html:138
+#: .\app\valuePropositionCanvas\templates\valuePropositionCanvas\valuepropositioncanvaselement_list.html:163
+#: .\app\valuePropositionCanvas\templates\valuePropositionCanvas\valuepropositioncanvaselement_list.html:190
+#: .\app\valuePropositionCanvas\templates\valuePropositionCanvas\valuepropositioncanvaselement_list.html:215
+#: .\app\valuePropositionCanvas\templates\valuePropositionCanvas\valuepropositioncanvaselement_list.html:242
+#: .\app\valuePropositionCanvas\templates\valuePropositionCanvas\valuepropositioncanvaselement_list.html:267
+msgid "Comment"
+msgstr "Commentaire"
+
+#: .\app\valuePropositionCanvas\templates\valuePropositionCanvas\valuepropositioncanvaselement_list.html:155
+msgid "Gain Creators"
+msgstr "Créateur de gain"
+
+#: .\app\valuePropositionCanvas\templates\valuePropositionCanvas\valuepropositioncanvaselement_list.html:182
+msgid "Gains"
+msgstr "Gains"
+
+#: .\app\valuePropositionCanvas\templates\valuePropositionCanvas\valuepropositioncanvaselement_list.html:207
+msgid "Customer Job(s)"
+msgstr "Tâches à effectuer"
+
+#: .\app\valuePropositionCanvas\templates\valuePropositionCanvas\valuepropositioncanvaselement_list.html:234
+msgid "Pain Relievers"
+msgstr "Soulageur de peine"
+
+#: .\app\valuePropositionCanvas\templates\valuePropositionCanvas\valuepropositioncanvaselement_list.html:259
+msgid "Pains"
+msgstr "Peines"

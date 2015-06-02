@@ -1,0 +1,22 @@
+{% extends "dashboard.html" %}
+<!-- Load internationalisation utils-->
+{% load i18n %}
+{% load staticfiles %}
+{% block title %}{% trans "Presence" %}{% endblock %}
+{% block content %}
+    <h1>{% trans "Presence" %}</h1>
+    <h1>{% trans "Are you sure you want to delete this presence ?" %}</h1>
+
+    <p>{% trans "Date:"%} {{ presence.date }} <br>
+        {% trans "Company" %}:
+        {% if presence.company.all %}
+            {% for company in presence.company.all %}
+                {{company.name}},
+            {% endfor %}
+        {% endif %}
+    </p>
+    <form method="post" action="">
+       {% csrf_token %}
+       <button type="submit">{% trans "Delete" %}</button> - <a href="{% url 'company:presence_list' %}">{% trans "Annuler" %}</a>
+    </form>
+{% endblock %}

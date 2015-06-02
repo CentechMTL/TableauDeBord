@@ -1,0 +1,16 @@
+{% extends "dashboard.html" %}
+<!-- Load internationalisation utils-->
+{% load i18n %}
+{% load staticfiles %}
+{% block title %}{% trans "Presence" %}{% endblock %}
+{% block content %}
+{% if isCentech %}
+    <h1>{% trans "New presence" %}</h1>
+    <form method="post">{% csrf_token%}
+        <!--TODO add a datepicker-->
+        {{ form.as_p }}
+        Format de la date: jj/mm/aaaa HH:MM <br><br>
+        <button type="submit">{% trans "Save" %}</button>
+    </form>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "dashboard.html" %}
+<!-- Load internationalisation utils-->
+{% load i18n %}
+{% block title %}Centech Founders{% endblock %}
+{% load extras %}
+
+{% block content %}
+    <h1>{% trans "Centech Founders" %}</h1>
+    <div class="panel panel-default">
+        <div class="panel-body well">
+            <form action="" method="get">
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-3">
+                        {{ filter.form.as_p }}
+                    </div>
+                    <div class="col-md-1">
+                        <input type="submit" value="filter" class="btn btn-primary"/>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+        {% if filter %}
+        <div class="row" style="margin-bottom: 50px;">
+        {% for founder in filter %}
+                <div class="col-md-4" style="height: 150px; margin-bottom: 30px;">
+                    <a href="{% url 'founder:detail' founder.pk %}">
+                    {% if founder.picture != "" %}
+                    <img src="/media/{{ founder.picture }}" style="height:100%; max-width: 100%;"/><br>
+                    {% else %}
+                    <img src="/media/user_profile/default.jpg" style="height:100%; max-width: 100%;"/><br>
+                    {% endif %}
+                    <strong>{{ founder.user.first_name }} {{ founder.user.last_name }}</strong>
+                    </a>
+                    <br>
+                </div>
+                {% if forloop.counter|divisibleby:3 %}
+                </div>
+                <div class="row" style="margin-bottom: 50px;">
+                {%endif%}
+        {% endfor %}
+        </div>
+    {% else %}
+        <p>{% trans "No founders exist." %}</p>
+    {% endif %}
+{% endblock %}

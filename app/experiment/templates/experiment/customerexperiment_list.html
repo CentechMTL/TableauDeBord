@@ -1,0 +1,39 @@
+{% extends "dashboard.html" %}
+<!-- Load internationalisation utils-->
+{% load i18n %}
+{% load staticfiles %}
+{% block title %}Customer Experiments{% endblock %}
+{% block content %}
+    <h1>{% trans "Customer Experiments" %}</h1>
+    <img style="margin: 20px;" src="{% static 'img/experiment.png' %}" width=100%>
+<br><br>
+    <!--TODO Change the table for display all information of the experiment-->
+    <table cellpadding="0" cellspacing="0" class="table table-bordered">
+        <tr>
+            <th>{% trans "Hypothesis" %}</th>
+            <th>{% trans "Start" %}</th>
+            <th>{% trans "End" %}</th>
+            <th>{% trans "Validated" %}</th>
+            {% if isFounder == True %}
+            <th>{% trans "Modify" %}</th>
+            <th>{% trans "Delete" %}</th>
+            {% endif %}
+
+        </tr>
+        {% for experiment in customerexperiment_list %}
+            <tr>
+                <td>{{ experiment.hypothesis }}</td>
+                <td>{{ experiment.dateStart }}</td>
+                <td>{{ experiment.dateFinish }}</td>
+                <td>{{ experiment.validated }}</td>
+                {% if isFounder == True %}
+                <td><a href="{% url "experiment_update" experiment.id %}">{% trans "Modify" %}</a></td>
+                <td><a href="{% url "experiment_delete" experiment.id %}">{% trans "Delete" %}</a></td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+    </table>
+{% if isFounder == True %}
+   <a href="{% url "experiment_add" companyId %}">{% trans "New Experiment" %}</a>
+{% endif %}
+{% endblock %}

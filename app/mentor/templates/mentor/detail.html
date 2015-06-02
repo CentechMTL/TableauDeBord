@@ -1,0 +1,47 @@
+{% extends "dashboard.html" %}
+<!-- Load internationalisation utils-->
+{% load i18n %}
+{% block content %}
+    <div class="row">
+        <div class="col-sm-12" align="center">
+            <br>
+            {% if mentor.picture != "" %}
+                <img class="avatar" src="/media/{{ mentor.picture }}" /><br>
+            {% else %}
+                <img class="avatar" src="/media/user_profile/default.jpg" /><br>
+            {% endif %}
+            <h1><strong>{{ mentor.user.first_name }} {{ mentor.user.last_name }}</strong></h1>
+            {% if mentor.phone != "" %}
+                <br><b>{% trans "Phone:" %}</b> {{ mentor.phone }}<br>
+            {% endif %}
+            {% if mentor.website != "" %}
+                <br><b>{% trans "Web site:" %}</b> <a href="http://{{ mentor.website }}">{{ mentor.website }}</a><br>
+            {% endif %}
+            <br><br>
+        </div>
+    </div>
+    {%if mentor.about != "" %}
+    <div class="well well-lg" style="background-color: #87cefa">
+        <div class="row">
+            <div class="col-sm-12" align="center" style="text-align: justify;">
+                <h2 align="center"><strong>{% trans "About" %}</strong></h2>
+                <!--TODO Set a Mardown system-->
+                {{ mentor.about }}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    <div class="well well-lg" style="background-color: gold">
+     <div class="row">
+        <div class="col-sm-12" align="center">
+            <h2 align="center" ><strong>{% trans "Areas of expertise" %}</strong></h2>
+            <ul>
+                {% for expertise in mentor.expertise.all %}
+                    <li>{{ expertise.expertise }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+         </div>
+    </div>
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+{% endblock %}

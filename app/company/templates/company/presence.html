@@ -1,0 +1,48 @@
+{% extends "dashboard.html" %}
+<!-- Load internationalisation utils-->
+{% load i18n %}
+{% block title %}{% trans "Presence" %}{% endblock %}
+{% load extras %}
+
+{% block content %}
+    <h1>{% trans "Presence in Centech" %}</h1>
+    <!--TODO Check for implement a calendar-->
+    <div class="row">
+        <div class="col-sm-12" align="center">
+            <table cellpadding="0" cellspacing="0" class="table table-bordered">
+                <tr>
+                    <th>{% trans "Date" %}</th>
+                    {% for company in companies %}
+                        <th>{{company.name}}</th>
+                    {% endfor %}
+                    {% if isCentech == True %}
+                    <th>{% trans "Modify" %}</th>
+                    <th>{% trans "Delete" %}</th>
+                    {% endif %}
+
+                </tr>
+                {% for presence in presence_list %}
+                    <tr>
+                        <td>{{ presence.date }}</td>
+                        {% if presence.company.all %}
+                            {% for company in companies %}
+                            <td style="text-align: center;">
+                                {% if company in presence.company.all%}
+                                X
+                                {% endif %}
+                            </td>
+                            {% endfor %}
+                        {% endif %}
+                        {% if isCentech == True %}
+                        <td><a href="{% url 'company:presence_update' presence.id %}">{% trans "Modify" %}</a></td>
+                        <td><a href="{% url 'company:presence_delete' presence.id %}">{% trans "Delete" %}</a></td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        {% if isCentech == True %}
+           <a href="{% url 'company:presence_add' %}">{% trans "New Presence" %}</a>
+        {% endif %}
+    </div>
+{% endblock %}

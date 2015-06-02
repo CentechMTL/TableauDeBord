@@ -1,0 +1,50 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-05-25 16:38-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: .\app\founder\models.py:7
+msgid "Education level"
+msgstr "Niveau d'étude:"
+
+#: .\app\founder\models.py:8 .\app\founder\templates\founder\detail.html:37
+msgid "Areas of expertise"
+msgstr "Aires d'expertise"
+
+#: .\app\founder\models.py:10
+msgid "about"
+msgstr "a propos"
+
+#: .\app\founder\templates\founder\detail.html:15
+msgid "Phone:"
+msgstr "Téléphone"
+
+#: .\app\founder\templates\founder\detail.html:18
+msgid "Web site:"
+msgstr "Site web"
+
+#: .\app\founder\templates\founder\detail.html:27
+msgid "About"
+msgstr "A propos"
+
+#: .\app\founder\templates\founder\index.html:8
+msgid "Centech Founders"
+msgstr "Fondateur du Centech"
+
+#: .\app\founder\templates\founder\index.html:45
+msgid "No founders exist."
+msgstr "Aucun fondateur"

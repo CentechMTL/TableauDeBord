@@ -1,0 +1,41 @@
+{% extends "landing_base.html" %}
+<!-- Load internationalisation utils-->
+{% load i18n %}
+{% block title %}{{app.site.entreprise.name}}{% endblock %}
+{% block content %}
+    <div class="intro-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>{{app.site.entreprise.name}}</h1>
+                    <h2>{% trans "Tableau de Bord" %}</h2>
+                    <hr class="intro-divider" style="margin-bottom: 50px;">
+                    <h2>{% trans "Follow us" %}</h2>
+                    <ul class="list-inline intro-social-buttons">
+                        <li>
+                        <a href="{{app.site.social.twitter}}" class="btn btn-default btn-lg">
+                            <i class="fa fa-twitter fa-fw"></i>
+                            <span class="network-name">Twitter</span>
+                        </a>
+                        </li>
+                        <li>
+                            <a href="{{app.site.social.facebook}}"
+                               class="btn btn-default btn-lg"><i
+                                    class="fa fa-facebook fa-fw"></i> <span class="network-name">Facebook</span></a>
+                        </li>
+                        <li>
+                            <a href="{{app.site.social.linkedin}}"
+                               class="btn btn-default btn-lg"><i
+                                    class="fa fa-linkedin fa-fw"></i> <span class="network-name">Linkedin</span></a>
+                        </li>
+                        <li>
+                            <a href="{{app.site.social.youtube}}"
+                               class="btn btn-default btn-lg"><i
+                                    class="fa fa-youtube fa-fw"></i> <span class="network-name">Youtube</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

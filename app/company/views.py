@@ -52,7 +52,10 @@ class CompanyUpdate(generic.UpdateView):
         object.name = form.data['name']
         object.url = form.data['url']
         object.description = form.data['about']
-        object.logo = self.request.FILES['logo']
+        try:
+            object.logo = self.request.FILES['logo']
+        except:
+            pass
         object.video = form.data['video']
 
     def get_success_url(self):

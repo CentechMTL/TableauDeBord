@@ -41,8 +41,7 @@ class CompanyUpdate(generic.UpdateView):
 
     def post(self, request, *args, **kwargs):
         object = self.get_object()
-        form = self.form_class(object, request.POST)
-
+        form = self.form_class(object, request.POST, request.FILES)
         if form.is_valid():
             self.update_company(object, form)
             return self.form_valid(form)
@@ -53,7 +52,7 @@ class CompanyUpdate(generic.UpdateView):
         object.name = form.data['name']
         object.url = form.data['url']
         object.description = form.data['about']
-        object.logo = form.data['logo']
+        object.logo = self.request.FILES['logo']
         object.video = form.data['video']
 
     def get_success_url(self):

@@ -36,6 +36,7 @@ class CompanyUpdateForm(forms.Form):
     video = forms.URLField(
         label=('Vidéo'),
         required=False,
+
     )
 
     url = forms.URLField(

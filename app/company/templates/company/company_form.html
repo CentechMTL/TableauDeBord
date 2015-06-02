@@ -6,7 +6,7 @@
 {% block title %}{% trans "Company" %}{% endblock %}
 {% block content %}
     <h1>{% trans "My company" %} {{founder.user.last_name}}</h1>
-    <form method="post">{% csrf_token%}
+    <form enctype="multipart/form-data" method="post">{% csrf_token%}
         {% crispy form %}
     </form>
 {% endblock %}

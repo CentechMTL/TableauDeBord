@@ -18,7 +18,7 @@ class KPI(models.Model):
     company = models.ForeignKey(Company)
     phase = models.ForeignKey(CompanyStatus)
     type = models.ForeignKey(KpiType)
-    level = models.IntegerField(choices=((1, 1),(2, 2),(3, 3),(4, 4),(5, 5),(6, 6),(7, 7),(8, 8),(9, 9)))
+    level = models.IntegerField(choices=((0, 0),(1, 1),(2, 2),(3, 3),(4, 4),(5, 5),(6, 6),(7, 7),(8, 8),(9, 9)))
     period_start = models.DateField(auto_now_add=True, auto_now=False,)
     comment = models.TextField(blank=True, default="")
 

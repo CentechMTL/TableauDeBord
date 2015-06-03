@@ -19,7 +19,8 @@ from embed_video.fields import EmbedVideoField
 class CompanyFilter(django_filters.FilterSet):
     class Meta:
         model = Company
-        fields = ['companyStatus']
+        fields = {'companyStatus' : ['exact'], 'name': ['icontains']}
+
 
 class CompanyCreateForm(forms.Form):
 

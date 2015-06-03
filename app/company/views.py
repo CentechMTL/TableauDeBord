@@ -9,6 +9,10 @@ from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponseRedirect
 
 
+def filter(request):
+    f = CompanyFilter(request.GET, queryset=Company.objects.filter(name__icontains= request.GET['name']))
+    return render_to_response('company/filter.html', {'filter': f})
+
 #List all companies in the Centech
 class CompanyIndex(generic.ListView):
     template_name = 'company/index.html'
@@ -22,9 +26,11 @@ class CompanyIndex(generic.ListView):
         return Company.objects.all()
 
     def get_context_data(self, **kwargs):
-        cf = CompanyFilter(self.request.GET, queryset=Company.objects.all())
+        cf = CompanyFilter(self.request.GET, queryset=Company.objects.order_by('name'))
         context = super(CompanyIndex, self).get_context_data(**kwargs)
         context['filter'] = cf
+
+
         return context
 
 #Display detail of the company
@@ -154,10 +160,6 @@ class CompanyUpdate(generic.UpdateView):
     def get_success_url(self):
         return reverse_lazy("company:detail", kwargs={'pk': int(self.kwargs["pk"])})
 
-
-def filter(request):
-    f = CompanyFilter(request.GET, queryset=Company.objects.all())
-    return render_to_response('company/filter.html', {'filter': f})
 
 #Display all presence
 class PresenceList(generic.ListView):

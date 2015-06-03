@@ -1,3 +1,5 @@
+# coding: utf-8
+
 """
 WSGI config for centech2 project.
 

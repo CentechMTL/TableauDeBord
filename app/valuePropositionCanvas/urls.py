@@ -1,3 +1,5 @@
+# coding: utf-8
+
 from django.conf.urls import patterns, url
 from app.valuePropositionCanvas import views
 

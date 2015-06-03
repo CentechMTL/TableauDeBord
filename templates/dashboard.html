@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html >
 <!-- Load internationalisation utils-->
 {% load i18n %}
 <html>
@@ -192,6 +192,13 @@
                                 </li>
                             {% elif isCentech %}
                                 <li>
+                                    <a href="/company/status/add/" style="text-decoration: none; color: black; font-size: 14px;">
+                                        <div class="dropdown-messages-box">
+                                            <i class="fa fa-tags"></i>{% trans "Add new status" %}
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
                                     <a href="/company/add/" style="text-decoration: none; color: black; font-size: 14px;">
                                         <div class="dropdown-messages-box">
                                             <i class="fa fa-university"></i> {% trans "Add new company" %}
@@ -224,6 +231,25 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div id="content">
+                        {% if messages %}
+                            <div class="panel-body well" style="background-color: lightgrey; margin-top: 50px; margin-bottom: 50px; padding: 10px 0 5px 0; font-weight: bold;">
+                                <ul id="message" style="list-style-type: none; ">
+                                    {% for message in messages %}
+                                        {% if message.tags == 'error' %}
+                                            <li style="color: #d60910;">{{ message }}</li>
+                                        {% elif message.tags == 'success'%}
+                                            <li style="color: #339900;">{{ message }}</li>
+                                        {% elif message.tags == 'info'%}
+                                            <li style="color: #3366cc;">{{ message }}</li>
+                                        {% elif message.tags == 'warning'%}
+                                            <li style="color: orange;">{{ message }}</li>
+                                        {% else %}
+                                            <li>{{ message }}</li>
+                                        {% endif %}
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endif %}
                         {% block content %}{% endblock %}
                     </div>
                 </div>

@@ -1,3 +1,5 @@
+# coding: utf-8
+
 from django.shortcuts import render, redirect
 from django.views import generic
 from django.utils.decorators import method_decorator

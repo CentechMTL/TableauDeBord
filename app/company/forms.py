@@ -21,6 +21,32 @@ class CompanyFilter(django_filters.FilterSet):
         model = Company
         fields = {'companyStatus' : ['exact'], 'name': ['icontains']}
 
+class CompanyStatusCreateForm(forms.Form):
+
+    name = forms.CharField(
+        label=('Name'),
+        required=True,
+    )
+    name.widget.attrs.update({'placeholder': (u'Name of the new status')})
+
+    def __init__(self, *args, **kwargs):
+        super(CompanyStatusCreateForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_class = 'content-wrapper'
+        self.helper.form_method = 'post'
+
+        self.helper.layout = Layout(
+            HTML("<h1>New status</h1>"),
+            Field('name'),
+            StrictButton('Enregistrer', type="submit")
+        )
+
+    def is_valid(self, form):
+        try:
+            status = CompanyStatus.objects.get(status = form.data['name'])
+            return False
+        except:
+            return True
 
 class CompanyCreateForm(forms.Form):
 
@@ -38,7 +64,6 @@ class CompanyCreateForm(forms.Form):
     video = forms.URLField(
         label=('Vidéo'),
         required=False,
-
     )
     video.widget.attrs.update({'placeholder': (u'https://urlvideo.com/')})
 
@@ -90,6 +115,7 @@ class CompanyCreateForm(forms.Form):
         self.helper.form_method = 'post'
 
         self.helper.layout = Layout(
+            HTML('<h1>New company</h1>'),
             Field('name'),
             Field('status'),
             Field('logo'),
@@ -117,8 +143,8 @@ class CompanyUpdateForm(forms.Form):
     video = forms.URLField(
         label=('Vidéo'),
         required=False,
-
     )
+    video.widget.attrs.update({'placeholder': (u'https://urlvideo.com/')})
 
     url = forms.URLField(
         label=('Web site'),
@@ -150,6 +176,7 @@ class CompanyUpdateForm(forms.Form):
         self.fields['video'].initial = company.video
 
         self.helper.layout = Layout(
+            HTML('<h1>Update company {{company.name}}</h1>'),
             Field('name'),
             Field('logo'),
             Field('video'),

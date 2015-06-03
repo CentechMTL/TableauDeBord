@@ -1,3 +1,5 @@
+# coding: utf-8
+
 from django.conf.urls import patterns, url,include
 from app.kpi.views import trl, irl
 from app.kpi import views

@@ -1,3 +1,5 @@
+# coding: utf-8
+
 from django.shortcuts import render, render_to_response, get_object_or_404
 from django.views import generic
 from app.founder.models import Founder
@@ -88,7 +90,7 @@ class FounderIndex(generic.ListView):
         return obj
 
     def get_context_data(self, **kwargs):
-        ff = FounderFilter(self.request.GET, queryset=Founder.objects.all())
+        ff = FounderFilter(self.request.GET, queryset=self.get_queryset())
         context = super(FounderIndex, self).get_context_data(**kwargs)
         context['filter'] = ff
         return context

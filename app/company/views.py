@@ -1,12 +1,15 @@
+# coding: utf-8
+
 from django.shortcuts import render_to_response, get_object_or_404, render
 from app.company.models import Company, Presence, CompanyStatus
 from app.founder.models import Founder
-from app.company.forms import CompanyFilter, CompanyUpdateForm, CompanyCreateForm
+from app.company.forms import CompanyFilter, CompanyUpdateForm, CompanyCreateForm, CompanyStatusCreateForm
 from django.views import generic
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponseRedirect
+from django.contrib import messages
 
 
 def filter(request):
@@ -42,6 +45,54 @@ class CompanyView(generic.DetailView):
     def dispatch(self, *args, **kwargs):
         return super(CompanyView, self).dispatch(*args, **kwargs)
 
+class CompanyStatusCreate(generic.CreateView):
+    model = CompanyStatus
+    template_name = 'company/company_form.html'
+    form_class = CompanyStatusCreateForm
+
+    #You need to be connected, and you need to have access as centech only
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        #For know if the user is in the group "Centech"
+        groups = self.request.user.groups.values()
+        for group in groups:
+            if group['name'] == 'Centech':
+                return super(CompanyStatusCreate, self).dispatch(*args, **kwargs)
+
+        #The visitor can't see this page!
+        return HttpResponseRedirect("/user/noAccessPermissions")
+
+    def get_form(self, form_class):
+        form = form_class()
+        return form
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST, request.FILES)
+        if form.is_valid(form):
+            self.create_status(form)
+            messages.success(self.request, self.get_success_message())
+            return self.form_valid(form)
+        else:
+            messages.error(self.request, self.get_error_message())
+            return render(request, self.template_name, {'form': form})
+
+    def form_valid(self, form):
+        return HttpResponseRedirect(self.get_success_url())
+
+    def create_status(self, form):
+        name = form.data['name']
+        newStatus = CompanyStatus(status=name)
+        newStatus.save()
+
+    def get_success_url(self):
+        return reverse_lazy("company:index")
+
+    def get_error_message(self):
+        return (u'Ce nom existe déjà.')
+
+    def get_success_message(self):
+        return (u'Le status a bien été ajouté.')
+
 class CompanyCreate(generic.CreateView):
     model = Company
     template_name = 'company/company_form.html'
@@ -68,6 +119,7 @@ class CompanyCreate(generic.CreateView):
         form = self.form_class(request.POST, request.FILES)
         if form.is_valid():
             self.create_company(form)
+            messages.success(self.request, self.get_success_message())
             return self.form_valid(form)
 
         return render(request, self.template_name, {'form': form})
@@ -101,6 +153,8 @@ class CompanyCreate(generic.CreateView):
     def get_success_url(self):
         return reverse_lazy("company:index")
 
+    def get_success_message(self):
+        return (u'La compagnie a bien été ajouté.')
 #Update form
 class CompanyUpdate(generic.UpdateView):
     model = Company
@@ -160,7 +214,6 @@ class CompanyUpdate(generic.UpdateView):
     def get_success_url(self):
         return reverse_lazy("company:detail", kwargs={'pk': int(self.kwargs["pk"])})
 
-
 #Display all presence
 class PresenceList(generic.ListView):
     template_name = 'company/presence.html'
@@ -183,8 +236,9 @@ class PresenceList(generic.ListView):
 
     def get_context_data(self, **kwargs):
         context = super(PresenceList, self).get_context_data(**kwargs)
-        emergence = CompanyStatus.objects.filter(status = "Emergence")
-        companies = Company.objects.filter(companyStatus = emergence[0])
+        #TODO Revoir le système d'affichage des présences
+        emergence = CompanyStatus.objects.get(status = "Emergence Mai 2015")
+        companies = Company.objects.filter(companyStatus = emergence)
         context['companies'] = companies
         presences = Presence.objects.all()
         context['presence_list'] = presences

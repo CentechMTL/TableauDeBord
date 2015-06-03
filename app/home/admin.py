@@ -1,4 +1,5 @@
-# Register your models here.
+# coding: utf-8
+
 from django.contrib import admin
 from django.contrib.auth.models import User
 from app.home.models import UserProfile,Education,Expertise

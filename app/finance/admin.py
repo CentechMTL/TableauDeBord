@@ -1,3 +1,5 @@
+# coding: utf-8
+
 from django.contrib import admin
 from app.finance.models import Bourse, Subvention, Investissement, Pret, Vente
 

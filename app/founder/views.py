@@ -7,6 +7,7 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
 from django.core.urlresolvers import reverse_lazy, reverse
+from django.http import HttpResponseRedirect
 
 #Update form
 class FounderUpdate(generic.UpdateView):
@@ -14,9 +15,24 @@ class FounderUpdate(generic.UpdateView):
     form_class = FounderUpdateForm
     template_name = "founder/founder_form.html"
 
+    #You need to be connected, and you need to have access as founder or centech
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(FounderUpdate, self).dispatch(*args, **kwargs)
+        #For know the company of the user if is a founder
+        if self.request.user.is_active:
+            try:
+                if(int(self.request.user.profile.userProfile_id) == int(self.kwargs['pk'])):
+                    return super(FounderUpdate, self).dispatch(*args, **kwargs)
+            except:
+                pass
+
+        #For know if the user is in the group "Centech"
+        groups = self.request.user.groups.values()
+        for group in groups:
+            if group['name'] == 'Centech':
+                return super(FounderUpdate, self).dispatch(*args, **kwargs)
+        #The visitor can't see this page!
+        return HttpResponseRedirect("/user/noAccessPermissions")
 
     def get_form(self, form_class):
         founder = self.get_object()
@@ -25,7 +41,7 @@ class FounderUpdate(generic.UpdateView):
         return form
 
     def get_object(self, queryset=None):
-        return get_object_or_404(Founder, user=self.request.user)
+        return get_object_or_404(Founder, userProfile_id=self.kwargs['pk'])
 
     def post(self, request, *args, **kwargs):
         object = self.get_object()
@@ -56,7 +72,7 @@ class FounderUpdate(generic.UpdateView):
 
 
     def get_success_url(self):
-        return reverse_lazy("founder:detail", kwargs={'pk': int(self.request.user.profile.userProfile_id)})
+        return reverse_lazy("founder:detail", kwargs={'pk': self.kwargs['pk']})
 
 #List of founders
 class FounderIndex(generic.ListView):

@@ -9,6 +9,7 @@ urlpatterns = patterns('',
     url(r'^(?P<pk>\d+)/$', views.CompanyView.as_view(), name='detail'),
    #Form for update the profile
     url(r'^update/(?P<pk>\d+)$', views.CompanyUpdate.as_view(), name='update'),
+    url(r'^add/$', views.CompanyCreate.as_view(), name='create'),
 
     url(r'^filter$', views.filter, name='filter'),
 

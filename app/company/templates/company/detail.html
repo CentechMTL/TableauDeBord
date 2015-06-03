@@ -6,19 +6,29 @@
 {% load i18n %}
 
 {% block content %}
+    {% if isCentech %}
+    <div class="row" style="margin-bottom: 20px;">
+        <a href="{% url 'company:update' company.id %}" style="color: white;">
+            <div class="col-sm-12" align="center" style="border: 1px solid lightgrey; border-top: none; background-color: #293846;">
+                Modifier cette companie
+            </div>
+        </a>
+    </div>
+    {% endif %}
     <div class="row">
         <div class="col-sm-12" align="center">
-            <br>
-            {% if company.logo != "" %}
-                <img class="logo" src="/media/{{ company.logo }}" /><br>
-            {% else %}
-                <img class="logo" src="/media/logo/default.jpg" /><br>
-            {% endif %}
-            <h1><strong>{{ company.name }}</strong></h1><br><b>
-            {% trans "Incubation phase:" %}</b> {{ company.companyStatus }}<br><br>
-            {% if company.url != "" %}
-            {% trans "Web site:" %}</b> <a href="{{ company.url }}">{{ company.url }}</a><br><br>
-            {% endif %}
+            <div>
+                {% if company.logo != "" %}
+                    <img class="logo" src="/media/{{ company.logo }}" /><br>
+                {% else %}
+                    <img class="logo" src="/media/logo/default.jpg" /><br>
+                {% endif %}
+                <h1><strong>{{ company.name }}</strong></h1><br><b>
+                {% trans "Incubation phase:" %}</b> {{ company.companyStatus }}<br><br>
+                {% if company.url != "" %}
+                {% trans "Web site:" %} <a href="{{ company.url }}">{{ company.url }}</a><br><br>
+                {% endif %}
+            </div>
         </div>
     </div>
     <div class="well well-lg" style="background-color: #87cefa">

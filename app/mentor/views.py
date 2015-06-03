@@ -1,6 +1,6 @@
 # coding: utf-8
 
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, render_to_response, get_object_or_404
 from django.http import JsonResponse
 from django.views import generic
@@ -16,9 +16,24 @@ class MentorUpdate(generic.UpdateView):
     model = Mentor
     form_class = MentorUpdateForm
 
+    #You need to be connected, and you need to have access as founder or centech
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(MentorUpdate, self).dispatch(*args, **kwargs)
+        #For know the company of the user if is a founder
+        if self.request.user.is_active:
+            try:
+                if(int(self.request.user.profile.userProfile_id) == int(self.kwargs['pk'])):
+                    return super(MentorUpdate, self).dispatch(*args, **kwargs)
+            except:
+                pass
+
+        #For know if the user is in the group "Centech"
+        groups = self.request.user.groups.values()
+        for group in groups:
+            if group['name'] == 'Centech':
+                return super(MentorUpdate, self).dispatch(*args, **kwargs)
+        #The visitor can't see this page!
+        return HttpResponseRedirect("/user/noAccessPermissions")
 
     def get_form(self, form_class):
         mentor = self.get_object()
@@ -27,7 +42,7 @@ class MentorUpdate(generic.UpdateView):
         return form
 
     def get_object(self, queryset=None):
-        return get_object_or_404(Mentor, user=self.request.user)
+        return get_object_or_404(Mentor, userProfile_id=self.kwargs['pk'])
 
     def post(self, request, *args, **kwargs):
         object = self.get_object()
@@ -52,7 +67,7 @@ class MentorUpdate(generic.UpdateView):
                 object.expertise.add(expertise)
 
     def get_success_url(self):
-        return reverse_lazy("mentor:detail", kwargs={'pk': int(self.request.user.profile.userProfile_id)})
+        return reverse_lazy("mentor:detail", kwargs={'pk': self.kwargs['pk']})
 
 #List of all mentors
 class MentorIndex(generic.ListView):

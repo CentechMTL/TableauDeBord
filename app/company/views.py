@@ -1,12 +1,99 @@
 from django.shortcuts import render_to_response, get_object_or_404, render
 from app.company.models import Company, Presence, CompanyStatus
 from app.founder.models import Founder
-from app.company.forms import CompanyFilter, CompanyUpdateForm
+from app.company.forms import CompanyFilter, CompanyUpdateForm, CompanyCreateForm
 from django.views import generic
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponseRedirect
+
+
+#List all companies in the Centech
+class CompanyIndex(generic.ListView):
+    template_name = 'company/index.html'
+    context_object_name = 'company'
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(CompanyIndex, self).dispatch(*args, **kwargs)
+
+    def get_queryset(self):
+        return Company.objects.all()
+
+    def get_context_data(self, **kwargs):
+        cf = CompanyFilter(self.request.GET, queryset=Company.objects.all())
+        context = super(CompanyIndex, self).get_context_data(**kwargs)
+        context['filter'] = cf
+        return context
+
+#Display detail of the company
+class CompanyView(generic.DetailView):
+    model = Company
+    template_name = 'company/detail.html'
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(CompanyView, self).dispatch(*args, **kwargs)
+
+class CompanyCreate(generic.CreateView):
+    model = Company
+    template_name = 'company/company_form.html'
+    form_class = CompanyCreateForm
+
+    #You need to be connected, and you need to have access as centech only
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        #For know if the user is in the group "Centech"
+        groups = self.request.user.groups.values()
+        for group in groups:
+            if group['name'] == 'Centech':
+                return super(CompanyCreate, self).dispatch(*args, **kwargs)
+
+        #The visitor can't see this page!
+        return HttpResponseRedirect("/user/noAccessPermissions")
+
+    def get_form(self, form_class):
+        form = form_class()
+
+        return form
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST, request.FILES)
+        if form.is_valid():
+            self.create_company(form)
+            return self.form_valid(form)
+
+        return render(request, self.template_name, {'form': form})
+
+    def form_valid(self, form):
+        return HttpResponseRedirect(self.get_success_url())
+
+    def create_company(self, form):
+        name = form.data['name']
+        status = CompanyStatus.objects.get(id = form.data['status'])
+        video = form.data['video']
+        url = form.data['url']
+        description = form.data['about']
+
+        newCompany = Company(name=name, companyStatus=status, video=video, url=url, description=description)
+        newCompany.save()
+
+        try:
+            newCompany.logo = self.request.FILES['logo']
+        except:
+            pass
+
+        for founder in form.cleaned_data["founders"]:
+                newCompany.founders.add(founder)
+
+        for mentor in form.cleaned_data["mentors"]:
+                newCompany.mentors.add(mentor)
+
+        newCompany.save()
+
+    def get_success_url(self):
+        return reverse_lazy("company:index")
 
 #Update form
 class CompanyUpdate(generic.UpdateView):
@@ -14,7 +101,7 @@ class CompanyUpdate(generic.UpdateView):
     form_class = CompanyUpdateForm
     template_name = "company/company_form.html"
 
-    #You need to be connected, and you need to have access as founder only
+    #You need to be connected, and you need to have access as founder or centech
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         #For know the company of the user if is a founder
@@ -26,6 +113,12 @@ class CompanyUpdate(generic.UpdateView):
                     return super(CompanyUpdate, self).dispatch(*args, **kwargs)
             except:
                 pass
+
+        #For know if the user is in the group "Centech"
+        groups = self.request.user.groups.values()
+        for group in groups:
+            if group['name'] == 'Centech':
+                return super(CompanyUpdate, self).dispatch(*args, **kwargs)
         #The visitor can't see this page!
         return HttpResponseRedirect("/user/noAccessPermissions")
 
@@ -61,33 +154,6 @@ class CompanyUpdate(generic.UpdateView):
     def get_success_url(self):
         return reverse_lazy("company:detail", kwargs={'pk': int(self.kwargs["pk"])})
 
-
-#List all companies in the Centech
-class CompanyIndex(generic.ListView):
-    template_name = 'company/index.html'
-    context_object_name = 'company'
-
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super(CompanyIndex, self).dispatch(*args, **kwargs)
-
-    def get_queryset(self):
-        return Company.objects.all()
-
-    def get_context_data(self, **kwargs):
-        cf = CompanyFilter(self.request.GET, queryset=Company.objects.all())
-        context = super(CompanyIndex, self).get_context_data(**kwargs)
-        context['filter'] = cf
-        return context
-
-#Display detail of the company
-class CompanyView(generic.DetailView):
-    model = Company
-    template_name = 'company/detail.html'
-
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super(CompanyView, self).dispatch(*args, **kwargs)
 
 def filter(request):
     f = CompanyFilter(request.GET, queryset=Company.objects.all())

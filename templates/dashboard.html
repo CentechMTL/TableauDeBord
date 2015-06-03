@@ -190,6 +190,14 @@
                                         </div>
                                     </a>
                                 </li>
+                            {% elif isCentech %}
+                                <li>
+                                    <a href="/company/add/" style="text-decoration: none; color: black; font-size: 14px;">
+                                        <div class="dropdown-messages-box">
+                                            <i class="fa fa-university"></i> {% trans "Add new company" %}
+                                        </div>
+                                    </a>
+                                </li>
                         {% endif %}
                                 <li>
                                     <a href="/user/password/{{ user.id }}" style="text-decoration: none; color: black; font-size: 14px;">

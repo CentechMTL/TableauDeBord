@@ -2,6 +2,15 @@
 <!-- Load internationalisation utils-->
 {% load i18n %}
 {% block content %}
+    {% if isCentech %}
+    <div class="row" style="margin-bottom: 20px;">
+        <a href="{% url 'founder:update' founder.userProfile_id %}" style="color: white;">
+            <div class="col-sm-12" align="center" style="border: 1px solid lightgrey; border-top: none; background-color: #293846;">
+                Modifier ce fondateur
+            </div>
+        </a>
+    </div>
+    {% endif %}
     <div class="row">
         <div class="col-sm-12" align="center">
             <br>

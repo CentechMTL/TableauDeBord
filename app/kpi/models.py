@@ -6,6 +6,12 @@ from django.utils.translation import ugettext_lazy as _
 from django.core.urlresolvers import reverse
 from django.core.urlresolvers import reverse_lazy
 
+#TODO delete foreign key
+KPI_TYPE_CHOICES = (
+    ('TRL', 'TRL'),
+    ('IRL', 'IRL'),
+)
+
 #Type of kpi (ex: IRL)
 class KpiType(models.Model):
     name = models.CharField(max_length=50)

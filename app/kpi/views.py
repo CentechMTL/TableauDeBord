@@ -10,13 +10,12 @@ from app.mentor.models import Mentor
 from django.views.generic import TemplateView
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.core.urlresolvers import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
 
 #Display TRL of a company
 class trl(TemplateView):
-
     template_name = 'kpi/trl.html'
 
     #You need to be connected, and you need to have access as founder, mentor or Centech
@@ -68,7 +67,6 @@ class trl(TemplateView):
 
 #Display IRL of a company
 class irl(TemplateView):
-
     template_name = 'kpi/irl.html'
 
    #You need to be connected, and you need to have access as founder, mentor or Centech
@@ -179,3 +177,101 @@ class TrlCreate(CreateView):
         context = super(TrlCreate, self).get_context_data(**kwargs)
         context['company'] = company
         return context
+
+#Update an experiment
+class IrlUpdate(UpdateView):
+    model = KPI
+    template_name = 'kpi/irl_form.html'
+    fields = ['level','comment']
+
+    #You need to be connected, and you need to have access as centech only
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        #For know if the user is in the group "Centech"
+        groups = self.request.user.groups.values()
+        for group in groups:
+            if group['name'] == 'Centech':
+                return super(IrlUpdate, self).dispatch(*args, **kwargs)
+
+        #The visitor can't see this page!
+        return HttpResponseRedirect("/user/noAccessPermissions")
+
+#Delete an experiment
+class IrlDelete(DeleteView):
+    model = KPI
+    template_name = 'kpi/irl_confirm_delete.html'
+
+    #You need to be connected, and you need to have access as centech only
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        #For know if the user is in the group "Centech"
+        groups = self.request.user.groups.values()
+        for group in groups:
+            if group['name'] == 'Centech':
+                return super(IrlDelete, self).dispatch(*args, **kwargs)
+
+        #The visitor can't see this page!
+        return HttpResponseRedirect("/user/noAccessPermissions")
+
+    def get_context_data(self, **kwargs):
+        context = super(IrlDelete, self).get_context_data(**kwargs)
+        context['companyId'] = kwargs['object'].company.id
+        context['irl'] = kwargs['object']
+        return context
+
+    #rewrite delete() function to redirect to the good page
+    @method_decorator(login_required)
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        company_id = self.object.company.id
+        self.object.delete()
+        return redirect(reverse_lazy('irl_filter', args = {company_id}))
+
+#Update an experiment
+class TrlUpdate(UpdateView):
+    model = KPI
+    template_name = 'kpi/trl_form.html'
+    fields = ['level','comment']
+
+    #You need to be connected, and you need to have access as centech only
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        #For know if the user is in the group "Centech"
+        groups = self.request.user.groups.values()
+        for group in groups:
+            if group['name'] == 'Centech':
+                return super(TrlUpdate, self).dispatch(*args, **kwargs)
+
+        #The visitor can't see this page!
+        return HttpResponseRedirect("/user/noAccessPermissions")
+
+#Delete an experiment
+class TrlDelete(DeleteView):
+    model = KPI
+    template_name = 'kpi/trl_confirm_delete.html'
+
+    #You need to be connected, and you need to have access as centech only
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        #For know if the user is in the group "Centech"
+        groups = self.request.user.groups.values()
+        for group in groups:
+            if group['name'] == 'Centech':
+                return super(TrlDelete, self).dispatch(*args, **kwargs)
+
+        #The visitor can't see this page!
+        return HttpResponseRedirect("/user/noAccessPermissions")
+
+    def get_context_data(self, **kwargs):
+        context = super(TrlDelete, self).get_context_data(**kwargs)
+        context['companyId'] = kwargs['object'].company.id
+        context['trl'] = kwargs['object']
+        return context
+
+    #rewrite delete() function to redirect to the good page
+    @method_decorator(login_required)
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        company_id = self.object.company.id
+        self.object.delete()
+        return redirect(reverse_lazy('trl_filter', args = {company_id}))

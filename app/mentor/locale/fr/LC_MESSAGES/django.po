@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-25 16:38-0400\n"
+"POT-Creation-Date: 2015-06-04 09:51-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,19 +17,19 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: .\app\mentor\models.py:10 .\app\mentor\templates\mentor\detail.html:36
+#: .\app\mentor\models.py:12 .\app\mentor\templates\mentor\detail.html:46
 msgid "Areas of expertise"
 msgstr "Aires d'expertise"
 
-#: .\app\mentor\models.py:11 .\app\mentor\templates\mentor\detail.html:27
+#: .\app\mentor\models.py:13 .\app\mentor\templates\mentor\detail.html:36
 msgid "About"
 msgstr "A propos"
 
-#: .\app\mentor\templates\mentor\detail.html:15
+#: .\app\mentor\templates\mentor\detail.html:24
 msgid "Phone:"
 msgstr "Téléphone"
 
-#: .\app\mentor\templates\mentor\detail.html:18
+#: .\app\mentor\templates\mentor\detail.html:27
 msgid "Web site:"
 msgstr "Site web"
 
@@ -41,3 +41,11 @@ msgstr "Mentors du Centech"
 #: .\app\mentor\templates\mentor\index.html:45
 msgid "No mentors exist."
 msgstr "Aucun mentors."
+
+#: .\app\mentor\templates\mentor\mentor_form.html:6
+msgid "Profile"
+msgstr ""
+
+#: .\app\mentor\templates\mentor\mentor_form.html:8
+msgid "My profile"
+msgstr ""

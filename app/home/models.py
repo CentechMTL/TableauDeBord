@@ -10,6 +10,13 @@ from embed_video.admin import AdminVideoMixin
 from embed_video.fields import EmbedVideoField
 from django.utils import timezone
 
+#TODO delete foreign key
+EDUCATION_CHOICES = (
+    ('Doctorat', 'Doctorat'),
+    ('Maitrise', 'Maitrise'),
+    ('Baccalaureat', 'Baccalaureat'),
+)
+
 #Education level
 class Education(models.Model):
     class Meta:

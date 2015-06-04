@@ -114,12 +114,16 @@
             <th width="150px">{% trans "Date" %}</th>
             <th width="50px">{% trans "Level" %}</th>
             <th>{% trans "Comment" %}</th>
+            <th>{% trans "Modify" %}</th>
+            <th>{% trans "Delete" %}</th>
         </tr>
         {% for irl in irls %}
             <tr>
                 <td>{{ irl.period_start }}</td>
                 <td>{{ irl.level }}</td>
                 <td>{{ irl.comment }}</td>
+                <td><a href="{% url 'irl_update' irl.id %}">{% trans "Modify" %}</a></td>
+                <td><a href="{% url 'irl_delete' irl.id %}">{% trans "Delete" %}</a></td>
             </tr>
         {% endfor %}
         </table>

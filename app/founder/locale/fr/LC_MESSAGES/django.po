@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-25 16:38-0400\n"
+"POT-Creation-Date: 2015-06-04 09:51-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,29 +17,37 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: .\app\founder\models.py:7
+#: .\app\founder\models.py:10
 msgid "Education level"
 msgstr "Niveau d'étude:"
 
-#: .\app\founder\models.py:8 .\app\founder\templates\founder\detail.html:37
+#: .\app\founder\models.py:11 .\app\founder\templates\founder\detail.html:47
 msgid "Areas of expertise"
 msgstr "Aires d'expertise"
 
-#: .\app\founder\models.py:10
+#: .\app\founder\models.py:13
 msgid "about"
 msgstr "a propos"
 
-#: .\app\founder\templates\founder\detail.html:15
+#: .\app\founder\templates\founder\detail.html:24
 msgid "Phone:"
 msgstr "Téléphone"
 
-#: .\app\founder\templates\founder\detail.html:18
+#: .\app\founder\templates\founder\detail.html:27
 msgid "Web site:"
 msgstr "Site web"
 
-#: .\app\founder\templates\founder\detail.html:27
+#: .\app\founder\templates\founder\detail.html:36
 msgid "About"
 msgstr "A propos"
+
+#: .\app\founder\templates\founder\founder_form.html:6
+msgid "Profile"
+msgstr ""
+
+#: .\app\founder\templates\founder\founder_form.html:8
+msgid "My profile"
+msgstr ""
 
 #: .\app\founder\templates\founder\index.html:8
 msgid "Centech Founders"

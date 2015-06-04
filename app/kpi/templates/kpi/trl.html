@@ -115,12 +115,16 @@
             <th width="150px">{% trans "Date" %}</th>
             <th width="50px">{% trans "Level" %}</th>
             <th>{% trans "Comment" %}</th>
+            <th>{% trans "Modify" %}</th>
+            <th>{% trans "Delete" %}</th>
         </tr>
         {% for trl in trls %}
             <tr>
                 <td>{{ trl.period_start }}</td>
                 <td>{{ trl.level }}</td>
                 <td>{{ trl.comment }}</td>
+                <td><a href="{% url 'trl_update' trl.id %}">{% trans "Modify" %}</a></td>
+                <td><a href="{% url 'trl_delete' trl.id %}">{% trans "Delete" %}</a></td>
             </tr>
         {% endfor %}
         </table>

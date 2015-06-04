@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-25 16:38-0400\n"
+"POT-Creation-Date: 2015-06-04 09:51-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,38 +17,67 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: .\app\home\models.py:14
+#: .\app\home\models.py:23
 msgid "Education"
 msgstr "Niveau d'étude"
 
-#: .\app\home\models.py:23
+#: .\app\home\models.py:32
 msgid "Expertise"
 msgstr "Expertise"
 
-#: .\app\home\models.py:35
+#: .\app\home\models.py:47
 #, fuzzy
 #| msgid "telephone"
 msgid "phone"
 msgstr "téléphone"
 
-#: .\app\home\models.py:36
+#: .\app\home\models.py:48
 msgid "web site"
 msgstr "site web"
 
-#: .\app\home\models.py:37
+#: .\app\home\models.py:49
 msgid "personal photograph"
 msgstr "photographie"
 
-#: .\app\home\templates\home\index.html:12
+#: .\app\home\templates\home\index.html:11
 msgid "Tableau de Bord"
 msgstr "Tableau de bord"
 
-#: .\app\home\templates\registration\login.html:10
+#: .\app\home\templates\home\index.html:13
+msgid "Follow us"
+msgstr ""
+
+#: .\app\home\templates\home\noAccessPermissions.html:7
+msgid "Sorry! But you don't have the permissions to access this pag"
+msgstr ""
+
+#: .\app\home\templates\home\noAccessPermissions.html:9
+msgid ""
+"If it's an error, you can contact the administrator for have access on this "
+"page"
+msgstr ""
+
+#: .\app\home\templates\home\noAccessPermissions.html:11
+msgid "Sorry for inconvenience"
+msgstr ""
+
+#: .\app\home\templates\home\password_update_form.html:6
+msgid "Profile"
+msgstr ""
+
+#: .\app\home\templates\home\password_update_form.html:8
+msgid "My profile"
+msgstr ""
+
+#: .\app\home\templates\registration\login.html:11
 msgid "Your username and password didn't match. Please try again."
 msgstr ""
 "Votre nom d'utilisateur et votre mot de passe ne correspondent pas. Veuillez "
 "recommencer."
 
-#: .\app\home\templates\tablebord\results.html:11
-msgid "Vote again?"
-msgstr "Voter encore?"
+#: .\app\home\templates\registration\login.html:12
+msgid "If it's an error, please contact the administrator"
+msgstr ""
+
+#~ msgid "Vote again?"
+#~ msgstr "Voter encore?"

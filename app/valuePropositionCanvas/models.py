@@ -6,6 +6,16 @@ from django.core.urlresolvers import reverse_lazy
 from app.company.models import Company
 from django.utils import timezone
 
+#TODO Delete foreign key
+VALUE_PROPOSITION_CANVAS_TYPE_CHOICES = (
+    ('Gain', 'Gain'),
+    ('Pain', 'Pain'),
+    ('customerJob', 'customerJob'),
+    ('GainCreator', 'GainCreator'),
+    ('PainReliever', 'PainReliever'),
+    ('ProductAndService', 'ProductAndService'),
+)
+
 #Type (ex:pains, gains)
 class ValuePropositionCanvasType(models.Model):
     class Meta:

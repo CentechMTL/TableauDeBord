@@ -8,16 +8,16 @@ from django.utils import timezone
 
 #TODO delete foreign key
 BUSINESS_CANVAS_TYPE_CHOICES = (
-    ('KeyPartner', 'KeyPartner'),
-    ('KeyActivitie', 'KeyActivitie'),
-    ('ValueProposition', 'ValueProposition'),
-    ('CustomerRelationship', 'CustomerRelationship'),
-    ('KeyResource', 'KeyResource'),
-    ('Channel', 'Channel'),
-    ('CustomerSegment', 'CustomerSegment'),
-    ('CostStructure', 'CostStructure'),
-    ('RevenueStream', 'RevenueStream'),
-    ('BrainstormingSpace', 'BrainstormingSpace'),
+    ('KeyPartner', 1),
+    ('KeyActivitie', 2),
+    ('ValueProposition', 3),
+    ('CustomerRelationship', 4),
+    ('KeyResource', 5),
+    ('Channel', 6),
+    ('CustomerSegment', 7),
+    ('CostStructure', 8),
+    ('RevenueStream', 9),
+    ('BrainstormingSpace', 10),
 )
 
 #The type of element in the business canvas
@@ -40,7 +40,7 @@ class BusinessCanvasElement(models.Model):
     comment = models.TextField(blank=True,max_length=2000)
     #Created on
     date = models.DateTimeField(auto_now_add=True, auto_now=False,)
-    type = models.ForeignKey(BusinessCanvasType,verbose_name=_('Type'))
+    type = models.CharField(max_length=20, choices=BUSINESS_CANVAS_TYPE_CHOICES, null=True)
     company = models.ForeignKey(Company)
     #True -> Archived | False -> Current use
     disactivated = models.BooleanField(default=False, verbose_name=_('Disactivated'))

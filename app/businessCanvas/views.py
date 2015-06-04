@@ -83,7 +83,7 @@ def getDetail(request, element_id):
             element = BusinessCanvasElement.objects.get(id=element_id)
             message['title'] = element.title
             message['comment'] = element.comment
-            message['type'] = element.type.name
+            message['type'] = element.type
         except:
             null
 
@@ -115,7 +115,7 @@ def addElement(request):
 
             if error == False:
                 if(request.POST.get('update', '') == "False"):
-                    type = BusinessCanvasType.objects.get(name = typeName)
+                    type = typeName
                     company = Company.objects.get(id = companyId)
                     element = BusinessCanvasElement(title = title, comment = comment, type = type, company= company)
                     element.save()

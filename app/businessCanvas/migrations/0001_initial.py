@@ -29,7 +29,6 @@ class Migration(migrations.Migration):
                 ('title', models.CharField(max_length=200)),
                 ('comment', models.TextField(max_length=2000, blank=True)),
                 ('date', models.DateTimeField(auto_now_add=True)),
-                ('type', models.CharField(db_index=True, max_length=20, verbose_name='Type', choices=[(b'KeyPartner', b'KeyPartner'), (b'KeyActivitie', b'KeyActivitie'), (b'ValueProposition', b'ValueProposition'), (b'CustomerRelationship', b'CustomerRelationship'), (b'KeyResource', b'KeyResource'), (b'Channel', b'Channel'), (b'CustomerSegment', b'CustomerSegment'), (b'CostStructure', b'CostStructure'), (b'RevenueStream', b'RevenueStream'), (b'BrainstormingSpace', b'BrainstormingSpace')])),
                 ('disactivated', models.BooleanField(default=False, verbose_name='Disactivated')),
                 ('company', models.ForeignKey(to='company.Company')),
             ],
@@ -46,6 +45,11 @@ class Migration(migrations.Migration):
             options={
                 'verbose_name': 'Business canvas type',
             },
+        ),
+        migrations.AddField(
+            model_name='businesscanvaselement',
+            name='type',
+            field=models.ForeignKey(verbose_name='Type', to='businessCanvas.BusinessCanvasType'),
         ),
         migrations.AddField(
             model_name='archive',

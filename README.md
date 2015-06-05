@@ -2,16 +2,18 @@
 
 Site internet codé à l'aide du framework [Django](https://www.djangoproject.com/) 1.8 et de [Python](https://www.python.org/) 2.7.
 
-[Voir l'instance en ligne](http://kpi.etsmtl.ca).
+Ce site est destiné aux incubateurs de société, il permet l'intégration et le suivi des compagnies incubé ainsi que de leurs différents intervenants. Le but étant de pouvoir faire leurs promotions, suivre leurs avancé au travers d'indicateur et regarder leurs modèles économiques et financier en tout temps.
 
+[Voir l'instance en ligne](http://kpi.etsmtl.ca).
 
 ## Fonctionnalités implémentées
 
 - Compagnies
 - Mentors
 - Fondateurs
-- IRLs
-- TRLs
+- KPI
+ - IRLs
+ - TRLs
 - Expérimentations
 - Finances
 - Modèle d'affaire

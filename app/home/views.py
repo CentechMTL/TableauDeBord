@@ -9,6 +9,103 @@ from django.views import generic
 from django.utils import timezone
 import json
 from django.contrib.auth.models import User
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
+from app.company.models import Company
+from app.founder.models import Founder
+from app.mentor.models import Mentor
+from app.kpi.models import KPI, KpiType
+from app.finance.models import Bourse, Subvention, Pret, Investissement, Vente
+from django.db.models import Avg
+
+#General view
+class Summary(generic.TemplateView):
+    template_name = 'home/summary.html'
+
+    #You need to be connected, and you need to have access as centech only
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        #For know if the user is in the group "Centech"
+        groups = self.request.user.groups.values()
+        for group in groups:
+            if group['name'] == 'Centech':
+                return super(Summary, self).dispatch(*args, **kwargs)
+
+        #The visitor can't see this page!
+        return HttpResponseRedirect("/user/noAccessPermissions")
+
+    def get_context_data(self, **kwargs):
+        companies = Company.objects.all()
+        founders = Founder.objects.all()
+        mentors = Mentor.objects.all()
+
+        typeIRL = KpiType.objects.filter(name = "IRL")
+        IRLs = KPI.objects.filter(type=typeIRL)
+        moyIRL = IRLs.aggregate(Avg('level'))
+
+        typeTRL = KpiType.objects.filter(name = "TRL")
+        TRLs = KPI.objects.filter(type=typeTRL)
+        moyTRL = TRLs.aggregate(Avg('level'))
+
+        bourses = Bourse.objects.all()
+        totalBourseDemandees = 0
+        totalBourseRecues = 0
+        for bourse in bourses:
+            totalBourseDemandees += bourse.sommeSoumission
+            totalBourseRecues += bourse.sommeReception
+
+        subventions = Subvention.objects.all()
+        totalSubventionDemandees = 0
+        totalSubventionRecues = 0
+        for subvention in subventions:
+            totalSubventionDemandees += subvention.sommeSoumission
+            totalSubventionRecues += subvention.sommeReception
+
+        prets = Pret.objects.all()
+        totalPretDemandees = 0
+        totalPretRecues = 0
+        for pret in prets:
+            totalPretDemandees += pret.sommeSoumission
+            totalPretRecues += pret.sommeReception
+
+        investissements = Investissement.objects.all()
+        totalInvestissementDemandees = 0
+        totalInvestissementRecues = 0
+        for investissement in investissements:
+            totalInvestissementDemandees += investissement.sommeReception
+            totalInvestissementRecues += investissement.sommeReception
+
+        ventes = Vente.objects.all()
+        totalVenteDemandees = 0
+        totalVenteRecues = 0
+        for vente in ventes:
+            totalVenteDemandees += vente.sommeSoumission
+            totalVenteRecues += vente.sommeReception
+
+        context = super(Summary, self).get_context_data(**kwargs)
+        context['companies'] = companies
+        context['founders'] = founders
+        context['mentors'] = mentors
+        context['IRLs'] = IRLs
+        context['moyIRL'] = moyIRL['level__avg']
+        context['TRLs'] = TRLs
+        context['moyTRL'] = moyTRL['level__avg']
+        context['bourses'] = bourses
+        context['totalBourseRecues'] = totalBourseRecues
+        context['totalBourseDemandees'] = totalBourseDemandees
+        context['subventions'] = subventions
+        context['totalSubventionRecues'] = totalSubventionRecues
+        context['totalSubventionDemandees'] = totalSubventionDemandees
+        context['investissements'] = investissements
+        context['totalInvestissementRecues'] = totalInvestissementRecues
+        context['totalInvestissementDemandees'] = totalInvestissementDemandees
+        context['prets'] = prets
+        context['totalPretRecues'] = totalPretRecues
+        context['totalPretDemandees'] = totalPretDemandees
+        context['ventes'] = ventes
+        context['totalVenteRecues'] = totalVenteRecues
+        context['totalVenteDemandees'] = totalVenteDemandees
+        return context
 
 #Form for update password
 class PasswordUpdate(generic.UpdateView):

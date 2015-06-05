@@ -1,0 +1,58 @@
+{% extends "dashboard.html" %}
+<!-- Load internationalisation utils-->
+{% load i18n %}
+{% load embed_video_tags %}
+{% load staticfiles %}
+<!-- Load internationalisation utils-->
+{% load i18n %}
+
+{% block content %}
+    <h1>Sommaire du Centech</h1><br>
+    <div class="row" align="center">
+        <div class="col-sm-4" style="border: 1px solid black;"><strong>Nombre de compagnies</strong> <br>{{companies.count}}</div>
+        <div class="col-sm-4" style="border: 1px solid black;"><strong>Nombre de fondateurs</strong> <br>{{founders.count}}</div>
+        <div class="col-sm-4" style="border: 1px solid black;"><strong>Nombre de mentors</strong> <br>{{mentors.count}}</div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <br><br>
+            <h3>Indicateurs de performance :</h3>
+            <p>
+                <strong>Nombre d'IRL noté par nos services : {{IRLs.count}}</strong> <br>
+                <strong>Moyenne des IRL : {{moyIRL}}</strong><br>
+            </p>
+            <p>
+                <strong>Nombre de TRL noté par nos services : {{TRLs.count}}</strong> <br>
+                <strong>Moyenne des TRL : {{moyTRL}}</strong><br>
+            </p>
+            <br><br>
+            <h3>Finance :</h3>
+            <p>
+                <strong>Nombre de bourses demandées : {{bourses.count}}</strong><br>
+                <strong>Valeurs des bourses demandées : {{totalBourseDemandees}}</strong> <br>
+                <strong>Valeurs des bourses reçues : {{totalBourseRecues}}</strong><br>
+            </p>
+            <p>
+                <strong>Nombre de subventions demandées : {{subventions.count}}</strong><br>
+                <strong>Valeurs des subventions demandées : {{totalSubventionDemandees}}</strong> <br>
+                <strong>Valeurs des subventions reçues : {{totalSubventionRecues}}</strong><br>
+            </p>
+            <p>
+                <strong>Nombre d'investissements demandées : {{investissements.count}}</strong><br>
+                <strong>Valeurs des investissements demandées : {{totalInvestissementDemandees}}</strong> <br>
+                <strong>Valeurs des investissements reçues : {{totalInvestissementRecues}}</strong><br>
+            </p>
+            <p>
+                <strong>Nombre de prets demandées : {{prets.count}}</strong><br>
+                <strong>Valeurs des prets demandées : {{totalPretDemandees}}</strong> <br>
+                <strong>Valeurs des prets reçues : {{totalPretRecues}}</strong><br>
+            </p>
+            <p>
+                <strong>Nombre de ventes demandées : {{ventes.count}}</strong><br>
+                <strong>Valeurs des ventes demandées : {{totalVenteDemandees}}</strong> <br>
+                <strong>Valeurs des ventes reçues : {{totalVenteRecues}}</strong><br>
+            </p>
+        </div>
+    </div>
+
+{% endblock %}

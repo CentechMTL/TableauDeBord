@@ -7,6 +7,9 @@ urlpatterns = patterns('',
     #Display the home page
     url(r'^$', views.index, name='index'),
 
+    #Display the summary page
+    url(r'^summary/$', views.Summary.as_view(), name='summary'),
+
     #Connection
     url(r'^logout$',views.logout_view,name='logout'),
     url(r'^login/$', 'django.contrib.auth.views.login'),

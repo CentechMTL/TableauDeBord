@@ -20,8 +20,21 @@
     <!--TODO Check for create a .js-->
 <script type="text/javascript">
     function updateMenu(value){
-    var Class = ["menuIrl", "menuTrl", "menuExperiment", "menuBusinessCanvas", "menuFinance", "menuValuePropositionCanvas"];
-    var Link = ["/kpi/irl/", "/kpi/trl/", "/experiment/", "/businessCanvas/", "/finance/", "/valuePropositionCanvas/"];
+
+        // GET for set the session variable
+
+        var lien = "/setCompanyInSession/"+value;
+        $.ajax({
+            type: 'GET',
+            url: lien,
+
+            error: function(resultat, status, erreur) {
+                alert("erreur setSessionVariable -> " + resultat + status + erreur);
+            }
+        });
+
+        var Class = ["menuIrl", "menuTrl", "menuExperiment", "menuBusinessCanvas", "menuFinance", "menuValuePropositionCanvas"];
+        var Link = ["/kpi/irl/", "/kpi/trl/", "/experiment/", "/businessCanvas/", "/finance/", "/valuePropositionCanvas/"];
         for (var i = 0; i < Class.length; i++) {
             //Reference of the link
             var lien = document.getElementsByClassName(Class[i])[0];
@@ -34,17 +47,6 @@
                 lien.style.visibility= 'visible';
             }
         }
-        // GET for set the session variable
-
-        var lien = "/setCompanyInSession/"+value;
-        $.ajax({
-          type: 'GET',
-          url: lien,
-
-          error: function(resultat, status, erreur) {
-                alert("erreur setSessionVariable -> " + resultat + status + erreur);
-            }
-        });
     }
 </script>
 
@@ -86,7 +88,9 @@
                             <a class="menuTrl" href="/kpi/trl/{{request.session.companySelected}}"><div><i class="fa fa-bar-chart"></i> <span class="nav-label">{% trans "TRL" %}</span></div></a>
                             <a class="menuExperiment" href="/experiment/{{request.session.companySelected}}"><div><i class="fa fa-flask"></i> <span class="nav-label">{% trans "Experiments" %}</span></div></a>
                             <a class="menuBusinessCanvas" href="/businessCanvas/{{request.session.companySelected}}"><div><i class="fa fa-table"></i> <span class="nav-label">{% trans "Business Model Canvas" %}</span></div></a>
+                            {% comment %}
                             <a class="menuValuePropositionCanvas" href="/valuePropositionCanvas/{{request.session.companySelected}}"><div><i class="fa fa-table"></i> <span class="nav-label">{% trans "Value Proposition Canvas" %}</span></div></a>
+                            {% endcomment %}
                             <a class="menuFinance" href="/finance/{{request.session.companySelected}}"><div><i class="fa fa-usd"></i> <span class="nav-label">{% trans "Finance" %}</span></div></a>
 
                         {% else %}
@@ -94,7 +98,9 @@
                             <a class="menuTrl" style="visibility: hidden;" href="/kpi/trl"><div><i class="fa fa-bar-chart"></i> <span class="nav-label">{% trans "TRL" %}</span></div></a>
                             <a class="menuExperiment" style="visibility: hidden;" href="/experiment"><div><i class="fa fa-flask"></i> <span class="nav-label">{% trans "Experiments" %}</span></div></a>
                             <a class="menuBusinessCanvas" style="visibility: hidden;" href="/businessCanvas"><div><i class="fa fa-table"></i> <span class="nav-label">{% trans "Business Model Canvas" %}</span></div></a>
+                            {% comment %}
                             <a class="menuValuePropositionCanvas" style="visibility: hidden;" href="/valuePropositionCanvas"><div><i class="fa fa-table"></i> <span class="nav-label">{% trans "Value Proposition Canvas" %}</span></div></a>
+                            {% endcomment %}
                             <a class="menuFinance" style="visibility: hidden;" href="/finance"><div><i class="fa fa-usd"></i> <span class="nav-label">{% trans "Finance" %}</span></div></a>
 
                         {% endif %}
@@ -114,14 +120,18 @@
                             <a class="menuTrl" href="/kpi/trl/{{request.session.companySelected}}"><div><i class="fa fa-bar-chart"></i> <span class="nav-label">{% trans "TRL" %}</span></div></a>
                             <a class="menuExperiment" href="/experiment/{{request.session.companySelected}}"><div><i class="fa fa-flask"></i> <span class="nav-label">{% trans "Experiments" %}</span></div></a>
                             <a class="menuBusinessCanvas" href="/businessCanvas/{{request.session.companySelected}}"><div><i class="fa fa-table"></i> <span class="nav-label">{% trans "Business Model Canvas" %}</span></div></a>
+                            {% comment %}
                             <a class="menuValuePropositionCanvas" href="/valuePropositionCanvas/{{request.session.companySelected}}"><div><i class="fa fa-table"></i> <span class="nav-label">{% trans "Value Proposition Canvas" %}</span></div></a>
+                            {% endcomment %}
                             <a class="menuFinance" href="/finance/{{request.session.companySelected}}"><div><i class="fa fa-usd"></i> <span class="nav-label">{% trans "Finance" %}</span></div></a>
                         {% else %}
                             <a class="menuIrl" style="visibility: hidden;" href="/kpi/irl"><div><i class="fa fa-bar-chart"></i> <span class="nav-label">{% trans "IRL" %}</span></div></a>
                             <a class="menuTrl" style="visibility: hidden;" href="/kpi/trl"><div><i class="fa fa-bar-chart"></i> <span class="nav-label">{% trans "TRL" %}</span></div></a>
                             <a class="menuExperiment" style="visibility: hidden;" href="/experiment"><div><i class="fa fa-flask"></i> <span class="nav-label">{% trans "Experiments" %}</span></div></a>
                             <a class="menuBusinessCanvas" style="visibility: hidden;" href="/businessCanvas"><div><i class="fa fa-table"></i> <span class="nav-label">{% trans "Business Model Canvas" %}</span></div></a>
+                            {% comment %}
                             <a class="menuValuePropositionCanvas" style="visibility: hidden;" href="/valuePropositionCanvas"><div><i class="fa fa-table"></i> <span class="nav-label">{% trans "Value Proposition Canvas" %}</span></div></a>
+                            {% endcomment %}
                             <a class="menuFinance" style="visibility: hidden;" href="/finance"><div><i class="fa fa-usd"></i> <span class="nav-label">{% trans "Finance" %}</span></div></a>
                         {% endif %}
                     {% else %} <!-- Not a Centech or Mentor -->
@@ -129,7 +139,9 @@
                         <a class="menuTrl" href="/kpi/trl/{{userCompanyId}}"><div><i class="fa fa-bar-chart"></i> <span class="nav-label">{% trans "TRL" %}</span></div></a>
                         <a class="menuExperiment" href="/experiment/{{userCompanyId}}"><div><i class="fa fa-flask"></i> <span class="nav-label">{% trans "Experiments" %}</span></div></a>
                         <a class="menuBusinessCanvas" href="/businessCanvas/{{userCompanyId}}"><div><i class="fa fa-table"></i> <span class="nav-label">{% trans "Business Model Canvas" %}</span></div></a>
+                        {% comment %}
                         <a class="menuValuePropositionCanvas" href="/valuePropositionCanvas/{{userCompanyId}}"><div><i class="fa fa-table"></i> <span class="nav-label">{% trans "Value Proposition Canvas" %}</span></div></a>
+                        {% endcomment %}
                         <a class="menuFinance" href="/finance/{{userCompanyId}}"><div><i class="fa fa-usd"></i> <span class="nav-label">{% trans "Finance" %}</span></div></a>
                     {% endif %}
                 </li>

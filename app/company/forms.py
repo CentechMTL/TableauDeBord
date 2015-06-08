@@ -115,7 +115,6 @@ class CompanyCreateForm(forms.Form):
         self.helper.form_method = 'post'
 
         self.helper.layout = Layout(
-            HTML('<h1>New company</h1>'),
             Field('name'),
             Field('status'),
             Field('logo'),
@@ -176,7 +175,6 @@ class CompanyUpdateForm(forms.Form):
         self.fields['video'].initial = company.video
 
         self.helper.layout = Layout(
-            HTML('<h1>Update company {{company.name}}</h1>'),
             Field('name'),
             Field('logo'),
             Field('video'),

@@ -2,9 +2,13 @@
 
 from django.shortcuts import render, render_to_response, get_object_or_404
 from django.views import generic
+
 from app.founder.models import Founder
 from app.home.models import Expertise, Education
+from app.company.models import Company
+
 from app.founder.forms import FounderFilter, FounderUpdateForm
+
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
@@ -103,3 +107,10 @@ class FounderView(generic.DetailView):
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(FounderView, self).dispatch(*args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        founder = Founder.objects.get(userProfile_id = self.kwargs['pk'])
+        companies = Company.objects.filter(founders = founder)
+        context = super(FounderView, self).get_context_data(**kwargs)
+        context['companies'] = companies
+        return context

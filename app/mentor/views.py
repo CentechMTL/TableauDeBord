@@ -6,6 +6,7 @@ from django.http import JsonResponse
 from django.views import generic
 from app.mentor.models import Mentor
 from app.home.models import Education, Expertise
+from app.company.models import Company
 from app.mentor.forms import MentorFilter, MentorUpdateForm
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
@@ -97,3 +98,9 @@ class MentorView(generic.DetailView):
     def dispatch(self, *args, **kwargs):
         return super(MentorView, self).dispatch(*args, **kwargs)
 
+    def get_context_data(self, **kwargs):
+        mentor = Mentor.objects.get(userProfile_id = self.kwargs['pk'])
+        companies = Company.objects.filter(mentors = mentor)
+        context = super(MentorView, self).get_context_data(**kwargs)
+        context['companies'] = companies
+        return context

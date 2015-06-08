@@ -52,5 +52,33 @@
         </div>
          </div>
     </div>
+    <div class="well well-lg" style="background-color: lightgreen">
+        <h2 align="center"><strong>{% trans "Companies" %}</strong></h2>
+        {% if companies %}
+            <div class="row">
+            {% for company in companies %}
+            <div class="col-md-4" style="height: 150px; margin-bottom: 30px;">
+                <a href="{% url 'company:detail' company.pk %}">
+                    {% if company.logo != "" %}
+                        <img class="avatar" src="/media/{{ company.logo }}" style="height:100%; max-width: 100%;"/><br>
+                    {% else %}
+                        <img class="avatar" src="/media/logo/default.jpg" style="height:100%; max-width: 100%;"/><br>
+                    {% endif %}
+
+                    {{ company.name }}
+                </a>
+                <br>
+            </div>
+            {% if forloop.counter|divisibleby:3 %}
+                <div class="row" style="margin-bottom: 50px;">
+                </div>
+            {% endif %}
+            {% endfor %}
+            </div>
+
+        {% else %}
+            <p>{% trans "No companies exist." %}</p>
+        {% endif %}
+    </div>
     {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 {% endblock %}

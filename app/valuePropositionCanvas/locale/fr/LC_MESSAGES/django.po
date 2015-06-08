@@ -19,11 +19,11 @@ msgstr ""
 
 #: .\app\valuePropositionCanvas\models.py:22
 msgid "Value proposition canvas type"
-msgstr "Type d'élément du modèle de proposition de valeur"
+msgstr "Type d'élément du canevas de modèle de proposition de valeur"
 
 #: .\app\valuePropositionCanvas\models.py:32
 msgid "Value proposition canvas element"
-msgstr "Element du modèle de proposition de valeur"
+msgstr "Element du canevas de modèle de proposition de valeur"
 
 #: .\app\valuePropositionCanvas\models.py:37
 msgid "Type"
@@ -31,7 +31,7 @@ msgstr "Type"
 
 #: .\app\valuePropositionCanvas\templates\valuePropositionCanvas\valuepropositioncanvaselement_list.html:118
 msgid "Value Proposition Canvas"
-msgstr "Modèle de proposition de valeur"
+msgstr "Canevas de modèle de proposition de valeur"
 
 #: .\app\valuePropositionCanvas\templates\valuePropositionCanvas\valuepropositioncanvaselement_list.html:131
 msgid "Products & Services"

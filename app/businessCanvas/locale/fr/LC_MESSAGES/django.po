@@ -19,11 +19,11 @@ msgstr ""
 
 #: .\app\businessCanvas\models.py:26
 msgid "Business canvas type"
-msgstr "Type d'élément du modèle d'affaire"
+msgstr "Type d'élément du canevas de modèle d'affaire"
 
 #: .\app\businessCanvas\models.py:37
 msgid "Business canvas element"
-msgstr "Element du modèle d'affaire"
+msgstr "Element du canevas modèle d'affaire"
 
 #: .\app\businessCanvas\models.py:43
 msgid "Type"
@@ -40,7 +40,7 @@ msgstr "Archive"
 
 #: .\app\businessCanvas\templates\businessCanvas\businesscanvaselement_list.html:119
 msgid "Business Model Canvas"
-msgstr "Modèle d'affaire"
+msgstr "Canevas de modèle d'affaire"
 
 #: .\app\businessCanvas\templates\businessCanvas\businesscanvaselement_list.html:130
 msgid "Key Partners"
@@ -110,7 +110,7 @@ msgstr "Espace de réflexion"
 
 #: .\app\businessCanvas\templates\businessCanvas\businesscanvaselementarchived_list.html:93
 msgid "Business Model Canvas of "
-msgstr "Patron de modèle d'affaire du "
+msgstr "Canevas de modèle d'affaire du "
 
 #~ msgid "New Experiment"
 #~ msgstr "Nouvelle expérimentation"

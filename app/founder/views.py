@@ -51,7 +51,7 @@ class FounderUpdate(generic.UpdateView):
 
     def post(self, request, *args, **kwargs):
         object = self.get_object()
-        form = self.form_class(object, request.POST)
+        form = self.form_class(object, request.POST, request.FILES)
 
         if form.is_valid():
             self.update_user(object, form)
@@ -66,6 +66,11 @@ class FounderUpdate(generic.UpdateView):
         object.phone = form.data['phone']
         object.website = form.data['website']
         object.about = form.data['about']
+
+        try:
+            object.picture = self.request.FILES['picture']
+        except:
+            pass
 
         try:
             object.education = Education.objects.get(id = form.data['education'])

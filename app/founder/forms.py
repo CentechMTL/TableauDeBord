@@ -70,6 +70,12 @@ class FounderUpdateForm(forms.Form):
             }
         )
     )
+
+    picture = forms.ImageField(
+        label=(u'Photo'),
+        required=False,
+    )
+
     def __init__(self, founder, *args, **kwargs):
         super(FounderUpdateForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
@@ -88,6 +94,7 @@ class FounderUpdateForm(forms.Form):
         self.helper.layout = Layout(
             Field('firstname'),
             Field('lastname'),
+            Field('picture'),
             Field('phone'),
             Field('website'),
             Field('education'),

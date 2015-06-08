@@ -47,7 +47,7 @@ class MentorUpdate(generic.UpdateView):
 
     def post(self, request, *args, **kwargs):
         object = self.get_object()
-        form = self.form_class(object, request.POST)
+        form = self.form_class(object, request.POST, request.FILES)
 
         if form.is_valid():
             self.update_user(object, form)
@@ -62,6 +62,11 @@ class MentorUpdate(generic.UpdateView):
         object.phone = form.data['phone']
         object.website = form.data['website']
         object.about = form.data['about']
+
+        try:
+            object.picture = self.request.FILES['picture']
+        except:
+            pass
 
         object.expertise.clear()
         for expertise in form.cleaned_data["expertise"]:

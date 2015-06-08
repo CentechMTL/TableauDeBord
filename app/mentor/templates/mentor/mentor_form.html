@@ -6,7 +6,7 @@
 {% block title %}{% trans "Profile" %}{% endblock %}
 {% block content %}
     <h1>{% trans "Edit my profile" %}</h1>
-    <form method="post">{% csrf_token%}
+    <form enctype="multipart/form-data" method="post">{% csrf_token%}
         {% crispy form %}
     </form>
 {% endblock %}

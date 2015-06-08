@@ -65,6 +65,11 @@ class MentorUpdateForm(forms.Form):
         )
     )
 
+    picture = forms.ImageField(
+        label=('Photo'),
+        required=False,
+    )
+
     def __init__(self, mentor, *args, **kwargs):
         super(MentorUpdateForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
@@ -82,6 +87,7 @@ class MentorUpdateForm(forms.Form):
         self.helper.layout = Layout(
             Field('firstname'),
             Field('lastname'),
+            Field('picture'),
             Field('phone'),
             Field('website'),
             Field('expertise'),

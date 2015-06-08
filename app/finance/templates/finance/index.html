@@ -101,7 +101,7 @@
             <th>{% trans "Amount requested" %}</th>
             <th>{% trans "Date of reception" %}</th>
             <th>{% trans "Amount received" %}</th>
-            {% if isFounder == True %}
+            {% if isFounder or isCentech %}
             <th>{% trans "Modify" %}</th>
             <th>{% trans "Delete" %}</th>
             {% endif %}
@@ -122,7 +122,7 @@
                 {% else %}
                 <td>{{ bourse.sommeReception }} $</td>
                 {% endif %}
-                {% if isFounder == True %}
+                {% if isFounder or isCentech %}
                 <td><a href="{% url 'bourse_update' bourse.id %}">{% trans "Modify" %}</a></td>
                 <td><a href="{% url 'bourse_delete' bourse.id %}">{% trans "Delete" %}</a></td>
                 {% endif %}
@@ -138,7 +138,7 @@
             {% endif %}
         {% endfor %}
     </table>
-    {% if isFounder == True %}
+    {% if isFounder or isCentech %}
     <a href="{% url 'bourse_add' company.id %}">{% trans "New stock exchange" %}</a>
     {% endif %}
         </div>
@@ -181,7 +181,7 @@
             <th>{% trans "Amount requested" %}</th>
             <th>{% trans "Date of reception" %}</th>
             <th>{% trans "Amount received" %}</th>
-            {% if isFounder == True %}
+            {% if isFounder or isCentech %}
             <th>{% trans "Modify" %}</th>
             <th>{% trans "Delete" %}</th>
             {% endif %}
@@ -202,7 +202,7 @@
                 {% else %}
                 <td>{{ subvention.sommeReception }} $</td>
                 {% endif %}
-                {% if isFounder == True %}
+                {% if isFounder or isCentech %}
                 <td><a href="{% url 'subvention_update' subvention.id %}">{% trans "Modify" %}</a></td>
                 <td><a href="{% url 'subvention_delete' subvention.id %}">{% trans "Delete" %}</a></td>
                 {% endif %}
@@ -218,7 +218,7 @@
             {% endif %}
         {% endfor %}
     </table>
-    {% if isFounder == True %}
+    {% if isFounder or isCentech %}
     <a href="{% url 'subvention_add' company.id %}">{% trans "New subsidy" %}</a>
     {% endif %}
         </div>
@@ -261,7 +261,7 @@
             <th>{% trans "Amount requested" %}</th>
             <th>{% trans "Date of reception" %}</th>
             <th>{% trans "Amount received" %}</th>
-            {% if isFounder == True %}
+            {% if isFounder or isCentech %}
             <th>{% trans "Modify" %}</th>
             <th>{% trans "Delete" %}</th>
             {% endif %}
@@ -282,7 +282,7 @@
                 {% else %}
                 <td>{{ investissement.sommeReception }} $</td>
                 {% endif %}
-                {% if isFounder == True %}
+                {% if isFounder or isCentech %}
                 <td><a href="{% url 'investissement_update' investissement.id %}">{% trans "Modify" %}</a></td>
                 <td><a href="{% url 'investissement_delete' investissement.id %}">{% trans "Delete" %}</a></td>
                 {% endif %}
@@ -298,7 +298,7 @@
             {% endif %}
         {% endfor %}
     </table>
-    {% if isFounder == True %}
+    {% if isFounder or isCentech %}
     <a href="{% url 'investissement_add' company.id %}">{% trans "New investment" %}</a>
     {% endif %}
         </div>
@@ -342,7 +342,7 @@
             <th>{% trans "Amount requested" %}</th>
             <th>{% trans "Date of reception" %}</th>
             <th>{% trans "Amount received" %}</th>
-            {% if isFounder == True %}
+            {% if isFounder or isCentech %}
             <th>{% trans "Modify" %}</th>
             <th>{% trans "Delete" %}</th>
             {% endif %}
@@ -363,7 +363,7 @@
                 {% else %}
                 <td>{{ pret.sommeReception }} $</td>
                 {% endif %}
-                {% if isFounder == True %}
+                {% if isFounder or isCentech %}
                 <td><a href="{% url 'pret_update' pret.id %}">{% trans "Modify" %}</a></td>
                 <td><a href="{% url 'pret_delete' pret.id %}">{% trans "Delete" %}</a></td>
                 {% endif %}
@@ -379,7 +379,7 @@
             {% endif %}
         {% endfor %}
     </table>
-    {% if isFounder == True %}
+    {% if isFounder or isCentech %}
     <a href="{% url 'pret_add' company.id %}">{% trans "New loan" %}</a>
     {% endif %}
         </div>
@@ -423,7 +423,7 @@
             <th>{% trans "Amount ODS" %}</th>
             <th>{% trans "Date of reception" %}</th>
             <th>{% trans "Amount received" %}</th>
-            {% if isFounder == True %}
+            {% if isFounder or isCentech %}
             <th>{% trans "Modify" %}</th>
             <th>{% trans "Delete" %}</th>
             {% endif %}
@@ -444,7 +444,7 @@
                 {% else %}
                 <td>{{ vente.sommeReception }} $</td>
                 {% endif %}
-                {% if isFounder == True %}
+                {% if isFounder or isCentech %}
                 <td><a href="{% url 'vente_update' vente.id %}">{% trans "Modify" %}</a></td>
                 <td><a href="{% url 'vente_delete' vente.id %}">{% trans "Delete" %}</a></td>
                 {% endif %}
@@ -460,7 +460,7 @@
             {% endif %}
         {% endfor %}
     </table>
-    {% if isFounder == True %}
+    {% if isFounder or isCentech %}
     <a href="{% url 'vente_add' company.id %}">{% trans "New sale" %}</a>
     {% endif %}
         </div>

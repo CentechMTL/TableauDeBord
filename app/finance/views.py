@@ -162,9 +162,19 @@ class BourseCreate(generic.CreateView):
     fields = ['name','dateSoumission','sommeSoumission','dateReception',
               'sommeReception','description']
 
-    #You need to be connected, and you need to have access as founder only
+    #You need to be connected, and you need to have access as founder or Centech
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
+        #For know if the user is in the group "Centech"
+        groups = self.request.user.groups.values()
+        for group in groups:
+            if group['name'] == 'Centech':
+                try:
+                    company = Company.objects.get(id = int(self.args[0])) #If the company exist, else we go to except
+                    return super(BourseCreate, self).dispatch(*args, **kwargs)
+                except:
+                    pass
+
         #For know the company of the user if is a founder
         if self.request.user.is_active:
             try:
@@ -174,6 +184,7 @@ class BourseCreate(generic.CreateView):
                     return super(BourseCreate, self).dispatch(*args, **kwargs)
             except:
                 pass
+
         #The visitor can't see this page!
         return HttpResponseRedirect("/user/noAccessPermissions")
 
@@ -191,10 +202,19 @@ class BourseUpdate(generic.UpdateView):
     def get_url(self):
         return reverse_lazy('detail_finance', kwargs = {'companyId' : self.args[0], })
 
-    #You need to be connected, and you need to have access as founder only
+    #You need to be connected, and you need to have access as founder or Centech
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        #For know the company of the user if is a founder
+        #For know if the user is in the group "Centech"
+        groups = self.request.user.groups.values()
+        for group in groups:
+            if group['name'] == 'Centech':
+                try:
+                    company = Company.objects.get(id = int(self.args[0])) #If the company exist, else we go to except
+                    return super(BourseUpdate, self).dispatch(*args, **kwargs)
+                except:
+                    pass
+
         if self.request.user.is_active:
             try:
                 founder = Founder.objects.filter(user = self.request.user.id)
@@ -204,8 +224,7 @@ class BourseUpdate(generic.UpdateView):
                 if(int(company_id) == int(company.id)):
                     return super(BourseUpdate, self).dispatch(*args, **kwargs)
             except:
-                #The visitor can't see this page!
-                return HttpResponseRedirect("/user/noAccessPermissions")
+                pass
         #The visitor can't see this page!
         return HttpResponseRedirect("/user/noAccessPermissions")
 
@@ -213,9 +232,19 @@ class BourseUpdate(generic.UpdateView):
 class BourseDelete(generic.DeleteView):
     model = Bourse
 
-    #You need to be connected, and you need to have access as founder only
+    #You need to be connected, and you need to have access as founder or Centech
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
+        #For know if the user is in the group "Centech"
+        groups = self.request.user.groups.values()
+        for group in groups:
+            if group['name'] == 'Centech':
+                try:
+                    company = Company.objects.get(id = int(self.args[0])) #If the company exist, else we go to except
+                    return super(BourseDelete, self).dispatch(*args, **kwargs)
+                except:
+                    pass
+
         #For know the company of the user if is a founder
         if self.request.user.is_active:
              try:
@@ -253,9 +282,19 @@ class SubventionCreate(generic.CreateView):
     fields = ['name','dateSoumission','sommeSoumission','dateReception',
               'sommeReception','description']
 
-    #You need to be connected, and you need to have access as founder only
+    #You need to be connected, and you need to have access as founder or Centech
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
+        #For know if the user is in the group "Centech"
+        groups = self.request.user.groups.values()
+        for group in groups:
+            if group['name'] == 'Centech':
+                try:
+                    company = Company.objects.get(id = int(self.args[0])) #If the company exist, else we go to except
+                    return super(SubventionCreate, self).dispatch(*args, **kwargs)
+                except:
+                    pass
+
         #For know the company of the user if is a founder
         if self.request.user.is_active:
             try:
@@ -264,8 +303,8 @@ class SubventionCreate(generic.CreateView):
                 if(int(self.args[0]) == int(company.id)):
                     return super(SubventionCreate, self).dispatch(*args, **kwargs)
             except:
-                #The visitor can't see this page!
-                return HttpResponseRedirect("/user/noAccessPermissions")
+                pass
+
         #The visitor can't see this page!
         return HttpResponseRedirect("/user/noAccessPermissions")
 
@@ -283,10 +322,19 @@ class SubventionUpdate(generic.UpdateView):
     def get_url(self):
         return reverse_lazy('detail_finance', kwargs = {'companyId' : self.args[0], })
 
-    #You need to be connected, and you need to have access as founder only
+    #You need to be connected, and you need to have access as founder or Centech
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        #For know the company of the user if is a founder
+        #For know if the user is in the group "Centech"
+        groups = self.request.user.groups.values()
+        for group in groups:
+            if group['name'] == 'Centech':
+                try:
+                    company = Company.objects.get(id = int(self.args[0])) #If the company exist, else we go to except
+                    return super(SubventionUpdate, self).dispatch(*args, **kwargs)
+                except:
+                    pass
+
         if self.request.user.is_active:
             try:
                 founder = Founder.objects.filter(user = self.request.user.id)
@@ -296,8 +344,7 @@ class SubventionUpdate(generic.UpdateView):
                 if(int(company_id) == int(company.id)):
                     return super(SubventionUpdate, self).dispatch(*args, **kwargs)
             except:
-                #The visitor can't see this page!
-                return HttpResponseRedirect("/user/noAccessPermissions")
+                pass
         #The visitor can't see this page!
         return HttpResponseRedirect("/user/noAccessPermissions")
 
@@ -305,9 +352,19 @@ class SubventionUpdate(generic.UpdateView):
 class SubventionDelete(generic.DeleteView):
     model = Subvention
 
-    #You need to be connected, and you need to have access as founder only
+    #You need to be connected, and you need to have access as founder or Centech
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
+        #For know if the user is in the group "Centech"
+        groups = self.request.user.groups.values()
+        for group in groups:
+            if group['name'] == 'Centech':
+                try:
+                    company = Company.objects.get(id = int(self.args[0])) #If the company exist, else we go to except
+                    return super(SubventionDelete, self).dispatch(*args, **kwargs)
+                except:
+                    pass
+
         #For know the company of the user if is a founder
         if self.request.user.is_active:
              try:
@@ -320,8 +377,7 @@ class SubventionDelete(generic.DeleteView):
                 if(int(company_id) == int(company.id)):
                     return super(SubventionDelete, self).dispatch(*args, **kwargs)
              except:
-                #The visitor can't see this page!
-                return HttpResponseRedirect("/user/noAccessPermissions")
+                pass
         #The visitor can't see this page!
         return HttpResponseRedirect("/user/noAccessPermissions")
 
@@ -345,9 +401,19 @@ class InvestissementCreate(generic.CreateView):
     fields = ['name','dateSoumission','sommeSoumission','dateReception',
               'sommeReception','description']
 
-    #You need to be connected, and you need to have access as founder only
+    #You need to be connected, and you need to have access as founder or Centech
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
+        #For know if the user is in the group "Centech"
+        groups = self.request.user.groups.values()
+        for group in groups:
+            if group['name'] == 'Centech':
+                try:
+                    company = Company.objects.get(id = int(self.args[0])) #If the company exist, else we go to except
+                    return super(InvestissementCreate, self).dispatch(*args, **kwargs)
+                except:
+                    pass
+
         #For know the company of the user if is a founder
         if self.request.user.is_active:
             try:
@@ -356,8 +422,8 @@ class InvestissementCreate(generic.CreateView):
                 if(int(self.args[0]) == int(company.id)):
                     return super(InvestissementCreate, self).dispatch(*args, **kwargs)
             except:
-                #The visitor can't see this page!
-                return HttpResponseRedirect("/user/noAccessPermissions")
+                pass
+
         #The visitor can't see this page!
         return HttpResponseRedirect("/user/noAccessPermissions")
 
@@ -375,10 +441,19 @@ class InvestissementUpdate(generic.UpdateView):
     def get_url(self):
         return reverse_lazy('detail_finance', kwargs = {'companyId' : self.args[0], })
 
-    #You need to be connected, and you need to have access as founder only
+    #You need to be connected, and you need to have access as founder or Centech
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        #For know the company of the user if is a founder
+        #For know if the user is in the group "Centech"
+        groups = self.request.user.groups.values()
+        for group in groups:
+            if group['name'] == 'Centech':
+                try:
+                    company = Company.objects.get(id = int(self.args[0])) #If the company exist, else we go to except
+                    return super(InvestissementUpdate, self).dispatch(*args, **kwargs)
+                except:
+                    pass
+
         if self.request.user.is_active:
             try:
                 founder = Founder.objects.filter(user = self.request.user.id)
@@ -388,8 +463,7 @@ class InvestissementUpdate(generic.UpdateView):
                 if(int(company_id) == int(company.id)):
                     return super(InvestissementUpdate, self).dispatch(*args, **kwargs)
             except:
-                #The visitor can't see this page!
-                return HttpResponseRedirect("/user/noAccessPermissions")
+                pass
         #The visitor can't see this page!
         return HttpResponseRedirect("/user/noAccessPermissions")
 
@@ -397,9 +471,19 @@ class InvestissementUpdate(generic.UpdateView):
 class InvestissementDelete(generic.DeleteView):
     model = Investissement
 
-    #You need to be connected, and you need to have access as founder only
+    #You need to be connected, and you need to have access as founder or Centech
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
+        #For know if the user is in the group "Centech"
+        groups = self.request.user.groups.values()
+        for group in groups:
+            if group['name'] == 'Centech':
+                try:
+                    company = Company.objects.get(id = int(self.args[0])) #If the company exist, else we go to except
+                    return super(InvestissementDelete, self).dispatch(*args, **kwargs)
+                except:
+                    pass
+
         #For know the company of the user if is a founder
         if self.request.user.is_active:
              try:
@@ -412,8 +496,7 @@ class InvestissementDelete(generic.DeleteView):
                 if(int(company_id) == int(company.id)):
                     return super(InvestissementDelete, self).dispatch(*args, **kwargs)
              except:
-                #The visitor can't see this page!
-                return HttpResponseRedirect("/user/noAccessPermissions")
+                pass
         #The visitor can't see this page!
         return HttpResponseRedirect("/user/noAccessPermissions")
 
@@ -437,9 +520,19 @@ class PretCreate(generic.CreateView):
     fields = ['name','dateSoumission','sommeSoumission','dateReception',
               'sommeReception','description']
 
-    #You need to be connected, and you need to have access as founder only
+    #You need to be connected, and you need to have access as founder or Centech
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
+        #For know if the user is in the group "Centech"
+        groups = self.request.user.groups.values()
+        for group in groups:
+            if group['name'] == 'Centech':
+                try:
+                    company = Company.objects.get(id = int(self.args[0])) #If the company exist, else we go to except
+                    return super(PretCreate, self).dispatch(*args, **kwargs)
+                except:
+                    pass
+
         #For know the company of the user if is a founder
         if self.request.user.is_active:
             try:
@@ -448,8 +541,8 @@ class PretCreate(generic.CreateView):
                 if(int(self.args[0]) == int(company.id)):
                     return super(PretCreate, self).dispatch(*args, **kwargs)
             except:
-                #The visitor can't see this page!
-                return HttpResponseRedirect("/user/noAccessPermissions")
+                pass
+
         #The visitor can't see this page!
         return HttpResponseRedirect("/user/noAccessPermissions")
 
@@ -467,10 +560,19 @@ class PretUpdate(generic.UpdateView):
     def get_url(self):
         return reverse_lazy('detail_finance', kwargs = {'companyId' : self.args[0], })
 
-    #You need to be connected, and you need to have access as founder only
+    #You need to be connected, and you need to have access as founder or Centech
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        #For know the company of the user if is a founder
+        #For know if the user is in the group "Centech"
+        groups = self.request.user.groups.values()
+        for group in groups:
+            if group['name'] == 'Centech':
+                try:
+                    company = Company.objects.get(id = int(self.args[0])) #If the company exist, else we go to except
+                    return super(PretUpdate, self).dispatch(*args, **kwargs)
+                except:
+                    pass
+
         if self.request.user.is_active:
             try:
                 founder = Founder.objects.filter(user = self.request.user.id)
@@ -480,19 +582,27 @@ class PretUpdate(generic.UpdateView):
                 if(int(company_id) == int(company.id)):
                     return super(PretUpdate, self).dispatch(*args, **kwargs)
             except:
-                #The visitor can't see this page!
-                return HttpResponseRedirect("/user/noAccessPermissions")
+                pass
         #The visitor can't see this page!
         return HttpResponseRedirect("/user/noAccessPermissions")
-
 
 #For delete a Loans
 class PretDelete(generic.DeleteView):
     model = Pret
 
-    #You need to be connected, and you need to have access as founder only
+    #You need to be connected, and you need to have access as founder or Centech
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
+        #For know if the user is in the group "Centech"
+        groups = self.request.user.groups.values()
+        for group in groups:
+            if group['name'] == 'Centech':
+                try:
+                    company = Company.objects.get(id = int(self.args[0])) #If the company exist, else we go to except
+                    return super(PretDelete, self).dispatch(*args, **kwargs)
+                except:
+                    pass
+
         #For know the company of the user if is a founder
         if self.request.user.is_active:
              try:
@@ -505,8 +615,7 @@ class PretDelete(generic.DeleteView):
                 if(int(company_id) == int(company.id)):
                     return super(PretDelete, self).dispatch(*args, **kwargs)
              except:
-                #The visitor can't see this page!
-                return HttpResponseRedirect("/user/noAccessPermissions")
+                pass
         #The visitor can't see this page!
         return HttpResponseRedirect("/user/noAccessPermissions")
 
@@ -530,9 +639,19 @@ class VenteCreate(generic.CreateView):
     fields = ['name','dateSoumission','sommeSoumission','dateReception',
               'sommeReception','description']
 
-    #You need to be connected, and you need to have access as founder only
+    #You need to be connected, and you need to have access as founder or Centech
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
+        #For know if the user is in the group "Centech"
+        groups = self.request.user.groups.values()
+        for group in groups:
+            if group['name'] == 'Centech':
+                try:
+                    company = Company.objects.get(id = int(self.args[0])) #If the company exist, else we go to except
+                    return super(VenteCreate, self).dispatch(*args, **kwargs)
+                except:
+                    pass
+
         #For know the company of the user if is a founder
         if self.request.user.is_active:
             try:
@@ -541,8 +660,8 @@ class VenteCreate(generic.CreateView):
                 if(int(self.args[0]) == int(company.id)):
                     return super(VenteCreate, self).dispatch(*args, **kwargs)
             except:
-                #The visitor can't see this page!
-                return HttpResponseRedirect("/user/noAccessPermissions")
+                pass
+
         #The visitor can't see this page!
         return HttpResponseRedirect("/user/noAccessPermissions")
 
@@ -560,10 +679,19 @@ class VenteUpdate(generic.UpdateView):
     def get_url(self):
         return reverse_lazy('detail_finance', kwargs = {'companyId' : self.args[0], })
 
-    #You need to be connected, and you need to have access as founder only
+    #You need to be connected, and you need to have access as founder or Centech
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        #For know the company of the user if is a founder
+        #For know if the user is in the group "Centech"
+        groups = self.request.user.groups.values()
+        for group in groups:
+            if group['name'] == 'Centech':
+                try:
+                    company = Company.objects.get(id = int(self.args[0])) #If the company exist, else we go to except
+                    return super(VenteUpdate, self).dispatch(*args, **kwargs)
+                except:
+                    pass
+
         if self.request.user.is_active:
             try:
                 founder = Founder.objects.filter(user = self.request.user.id)
@@ -573,8 +701,7 @@ class VenteUpdate(generic.UpdateView):
                 if(int(company_id) == int(company.id)):
                     return super(VenteUpdate, self).dispatch(*args, **kwargs)
             except:
-                #The visitor can't see this page!
-                return HttpResponseRedirect("/user/noAccessPermissions")
+                pass
         #The visitor can't see this page!
         return HttpResponseRedirect("/user/noAccessPermissions")
 
@@ -582,9 +709,19 @@ class VenteUpdate(generic.UpdateView):
 class VenteDelete(generic.DeleteView):
     model = Vente
 
-    #You need to be connected, and you need to have access as founder only
+    #You need to be connected, and you need to have access as founder or Centech
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
+        #For know if the user is in the group "Centech"
+        groups = self.request.user.groups.values()
+        for group in groups:
+            if group['name'] == 'Centech':
+                try:
+                    company = Company.objects.get(id = int(self.args[0])) #If the company exist, else we go to except
+                    return super(VenteDelete, self).dispatch(*args, **kwargs)
+                except:
+                    pass
+
         #For know the company of the user if is a founder
         if self.request.user.is_active:
              try:
@@ -597,8 +734,7 @@ class VenteDelete(generic.DeleteView):
                 if(int(company_id) == int(company.id)):
                     return super(VenteDelete, self).dispatch(*args, **kwargs)
              except:
-                #The visitor can't see this page!
-                return HttpResponseRedirect("/user/noAccessPermissions")
+                pass
         #The visitor can't see this page!
         return HttpResponseRedirect("/user/noAccessPermissions")
 

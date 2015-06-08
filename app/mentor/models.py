@@ -18,11 +18,11 @@ class Mentor(UserProfile):
     def get_queryset(self):
         return Mentor.objects.all()
 
-    def save(self):
+    def save(self, *args, **kwargs):
         if not self.pk:
             self.created = timezone.now()
         self.updated = timezone.now()
-        super(Mentor, self).save()
+        super(Mentor, self).save(*args, **kwargs)
 
     def image_thumb(self):
         return '<img src="/media/%s" width="100" height="100" />' % (self.picture)

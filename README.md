@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/MaisonLogicielLibre/TableauDeBord.svg?branch=dev)](https://travis-ci.org/zestedesavoir/zds-site)
+[![Licence GPL](http://img.shields.io/badge/license-GPL-green.svg)](http://www.gnu.org/licenses/quick-guide-gplv3.fr.html)
+
 # Tableau de bord
 
 Site internet codé à l'aide du framework [Django](https://www.djangoproject.com/) 1.8 et de [Python](https://www.python.org/) 2.7.

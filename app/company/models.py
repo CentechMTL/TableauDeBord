@@ -44,17 +44,24 @@ class Company(models.Model):
     def __str__(self):
         return self.name
 
-    def save(self):
+    def save(self, *args, **kwarg):
         if not self.id:
             self.created = timezone.now()
         self.updated = timezone.now()
-        super(Company, self).save()
+        super(Company, self).save(*args, **kwarg)
 
-    def getMentors(self):
-        return self.mentors
+    def get_users(self):
+        users = []
 
-    def getFounders(self):
-        return self.founders
+        founders =  self.founders.all()
+        for founder in founders:
+            users.append(founder.user)
+
+        mentors = self.mentors.all()
+        for mentor in mentors:
+            users.append(mentor.user)
+
+        return users
 
     def image_thumb(self):
         return '<img src="/media/%s" width="100" height="100" />' % (self.logo)

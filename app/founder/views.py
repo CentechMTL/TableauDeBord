@@ -113,9 +113,11 @@ class FounderView(generic.DetailView):
     def dispatch(self, *args, **kwargs):
         return super(FounderView, self).dispatch(*args, **kwargs)
 
+
     def get_context_data(self, **kwargs):
         founder = Founder.objects.get(userProfile_id = self.kwargs['pk'])
-        companies = Company.objects.filter(founders = founder)
+        companies = founder.get_companies()
+            #Company.objects.filter(founders = founder)
         context = super(FounderView, self).get_context_data(**kwargs)
         context['companies'] = companies
         return context

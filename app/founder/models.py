@@ -14,3 +14,7 @@ class Founder(UserProfile):
 
     def __str__(self):
         return self.user.username
+
+    def get_companies(self):
+        from app.company.models import Company
+        return Company.objects.filter(founders = self)

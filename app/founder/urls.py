@@ -8,6 +8,13 @@ urlpatterns = patterns('',
     url(r'^$', views.FounderIndex.as_view(), name='index'),
     #Detail of a founder
     url(r'^(?P<pk>\d+)$', views.FounderView.as_view(), name='detail'),
-    #Form for update the profile
+
+    #Forms
+    url(r'^profile/add$', views.FounderCreate.as_view(), name='add'),
     url(r'^profile/(?P<pk>\d+)$', views.FounderUpdate.as_view(), name='update'),
+
+
+
+
+    url(r'^toto/$', views.toto, name='toto'),
 )

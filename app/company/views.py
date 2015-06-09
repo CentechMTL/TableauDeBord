@@ -205,11 +205,20 @@ class CompanyUpdate(generic.UpdateView):
         object.name = form.data['name']
         object.url = form.data['url']
         object.description = form.data['about']
+
         try:
             object.logo = self.request.FILES['logo']
         except:
             pass
         object.video = form.data['video']
+
+        object.founders.clear()
+        for founder in form.cleaned_data["founders"]:
+                object.founders.add(founder)
+
+        object.mentors.clear()
+        for mentor in form.cleaned_data["mentors"]:
+                object.mentors.add(mentor)
 
     def get_success_url(self):
         return reverse_lazy("company:detail", kwargs={'pk': int(self.kwargs["pk"])})

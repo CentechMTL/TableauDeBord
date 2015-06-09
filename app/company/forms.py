@@ -93,7 +93,7 @@ class CompanyCreateForm(forms.Form):
     founders = forms.ModelMultipleChoiceField(
         label=(u"Fondateurs"),
         queryset=Founder.objects.all(),
-        required=True,
+        required=False,
         widget=forms.SelectMultiple(
             attrs={
                 'required': 'required',
@@ -162,6 +162,24 @@ class CompanyUpdateForm(forms.Form):
         )
     )
 
+    founders = forms.ModelMultipleChoiceField(
+        label=(u"Fondateurs"),
+        queryset=Founder.objects.all(),
+        required=False,
+        widget=forms.SelectMultiple(
+            attrs={
+                'required': 'required',
+            }
+        )
+    )
+
+    mentors = forms.ModelMultipleChoiceField(
+        label=(u"Mentors"),
+        queryset=Mentor.objects.all(),
+        required=False,
+        widget=forms.SelectMultiple()
+    )
+
     def __init__(self, company, *args, **kwargs):
         super(CompanyUpdateForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
@@ -173,12 +191,16 @@ class CompanyUpdateForm(forms.Form):
         self.fields['name'].initial = company.name
         self.fields['url'].initial = company.url
         self.fields['video'].initial = company.video
+        self.fields['founders'].initial = company.founders.all
+        self.fields['mentors'].initial = company.mentors.all
 
         self.helper.layout = Layout(
             Field('name'),
             Field('logo'),
             Field('video'),
             Field('url'),
+            Field('founders'),
+            Field('mentors'),
             Field('about'),
             StrictButton('Enregistrer', type="submit")
         )

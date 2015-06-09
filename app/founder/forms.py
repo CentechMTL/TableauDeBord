@@ -15,6 +15,100 @@ class FounderFilter(django_filters.FilterSet):
         model = Founder
         fields = ['expertise']
 
+class FounderCreateForm(forms.Form):
+
+    firstname = forms.CharField(
+        label=('First name'),
+        required=True,
+    )
+    firstname.widget.attrs.update({'placeholder': (u'First name')})
+
+    lastname = forms.CharField(
+        label="Last name",
+        required=True,
+    )
+    lastname.widget.attrs.update({'placeholder': (u'Last name')})
+
+    username = forms.CharField(
+        label="Username",
+        required=True,
+    )
+    username.widget.attrs.update({'placeholder': (u'Username')})
+
+    email = forms.CharField(
+        label="Email",
+        required=True,
+    )
+    email.widget.attrs.update({'placeholder': (u'Email')})
+
+    phone = forms.CharField(
+        label=('Phone number'),
+        required=False,
+        max_length=10
+    )
+    phone.widget.attrs.update({'placeholder': (u'Phone number')})
+
+    website = forms.URLField(
+        label=('Web site'),
+        required=False,
+    )
+    website.widget.attrs.update({'placeholder': (u'https://example.com')})
+
+    about = forms.CharField(
+        label=('Description'),
+        required=False,
+        widget=forms.Textarea(
+            attrs={
+                'placeholder': (u'Rentrez ici un bref résumé de vos compétences et de votre parcours.'),
+                'class': 'md-editor'
+            }
+        )
+    )
+
+    education = forms.ModelChoiceField(
+        label=(u"Education"),
+        queryset=Education.objects.all(),
+        required=False,
+        empty_label=None
+    )
+
+    expertise = forms.ModelMultipleChoiceField(
+        label=(u"Aire d'expertise"),
+        queryset=Expertise.objects.all(),
+        required=False,
+        widget=forms.SelectMultiple(
+            attrs={
+                'required': 'required',
+            }
+        )
+    )
+
+    picture = forms.ImageField(
+        label=(u'Photo'),
+        required=False,
+    )
+
+    def __init__(self, *args, **kwargs):
+        super(FounderCreateForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_class = 'content-wrapper'
+        self.helper.form_method = 'post'
+
+        self.helper.layout = Layout(
+            Field('firstname'),
+            Field('lastname'),
+            Field('username'),
+            Field('email'),
+            Field('picture'),
+            Field('phone'),
+            Field('website'),
+            Field('education'),
+            Field('expertise'),
+            HTML(u"""Utilisez la touche ctrl de votre clavier pour en sélectionner plusieurs. <br>Si il manque un domaine que vous aimeriez voir ajouter à cette liste, n'hésiter pas a en parler a l'équipe du Centech"""),
+            Field('about'),
+            StrictButton('Enregistrer', type="submit")
+        )
+
 class FounderUpdateForm(forms.Form):
 
     firstname = forms.CharField(

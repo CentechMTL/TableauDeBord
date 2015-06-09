@@ -175,6 +175,7 @@
                                 <i class="fa fa-cog fa-2x"></i>
                             </a>
                             <ul class="dropdown-menu dropdown-messages">
+                                <li>OPTIONS</li>
                             {% if isMentor %}
                                 <li>
                                     {% with profile=user.profile %}
@@ -212,6 +213,13 @@
                                     </a>
                                 </li>
                                 <li>
+                                    <a href="/mentor/profile/add" style="text-decoration: none; color: black; font-size: 14px;">
+                                        <div class="dropdown-messages-box">
+                                            <i class="fa fa-graduation-cap"></i> {% trans "Add new mentor" %}
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
                                     <a href="/company/status/add/" style="text-decoration: none; color: black; font-size: 14px;">
                                         <div class="dropdown-messages-box">
                                             <i class="fa fa-tags"></i> {% trans "Add new status" %}
@@ -226,6 +234,8 @@
                                     </a>
                                 </li>
                         {% endif %}
+                                <hr>
+                                <li>MY ACCOUNT</li>
                                 <li>
                                     <a href="/user/password/{{ user.id }}" style="text-decoration: none; color: black; font-size: 14px;">
                                         <div class="dropdown-messages-box">

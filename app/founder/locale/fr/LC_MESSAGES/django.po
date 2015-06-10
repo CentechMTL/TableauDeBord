@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-10 11:39-0400\n"
+"POT-Creation-Date: 2015-06-10 13:42-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,49 +17,111 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: .\app\founder\models.py:10
-msgid "Education level"
-msgstr "Niveau d'étude:"
+#: .\app\founder\forms.py:23 .\app\founder\forms.py:26
+#: .\app\founder\forms.py:117 .\app\founder\forms.py:120
+msgid "First name"
+msgstr "Prénom "
 
+#: .\app\founder\forms.py:29 .\app\founder\forms.py:32
+#: .\app\founder\forms.py:123 .\app\founder\forms.py:126
+msgid "Last name"
+msgstr "Nom de famille"
+
+#: .\app\founder\forms.py:35 .\app\founder\forms.py:38
+msgid "Username"
+msgstr "Pseudo"
+
+#: .\app\founder\forms.py:41 .\app\founder\forms.py:44
+msgid "Email"
+msgstr "Email"
+
+#: .\app\founder\forms.py:47 .\app\founder\forms.py:51
+#: .\app\founder\forms.py:129 .\app\founder\forms.py:133
+msgid "Phone number"
+msgstr "Numéro de téléphone"
+
+#: .\app\founder\forms.py:54 .\app\founder\forms.py:136
+#: .\app\founder\templates\founder\detail.html:27
+msgid "Web site"
+msgstr "Site web"
+
+#: .\app\founder\forms.py:57 .\app\founder\forms.py:139
+msgid "https://example.com"
+msgstr "https://exemple.com"
+
+#: .\app\founder\forms.py:60 .\app\founder\forms.py:142
+msgid "Description"
+msgstr "Description"
+
+#: .\app\founder\forms.py:64 .\app\founder\forms.py:146
+msgid "Write here a brief summary of your skills and your career."
+msgstr "Ecrivez ici un bref résumé de vos compétences et de votre parcours."
+
+#: .\app\founder\forms.py:71 .\app\founder\forms.py:153
+msgid "Education"
+msgstr "Niveau d'étude"
+
+#: .\app\founder\forms.py:78 .\app\founder\forms.py:160
 #: .\app\founder\models.py:11 .\app\founder\templates\founder\detail.html:47
 msgid "Areas of expertise"
 msgstr "Aires d'expertise"
 
-#: .\app\founder\models.py:13
-msgid "about"
-msgstr "a propos"
+#: .\app\founder\forms.py:89 .\app\founder\forms.py:171
+msgid "Picture"
+msgstr "Photo"
 
-#: .\app\founder\templates\founder\detail.html:24
-msgid "Phone:"
-msgstr "Téléphone"
+#: .\app\founder\forms.py:109 .\app\founder\forms.py:198
+msgid ""
+"Use the Ctrl key on your keyboard to select multiple. <br> If it lacks a "
+"domain that you would like to add to this list, do not hesitate to talk to "
+"the team Centech"
+msgstr ""
+"Utilisez la touche ctrl de votre clavier pour en sélectionner plusieurs. "
+"<br>Si il manque un domaine que vous aimeriez voir ajouter à cette liste, "
+"n'hésiter pas a en parler a l'équipe du Centech"
 
-#: .\app\founder\templates\founder\detail.html:27
-msgid "Web site:"
-msgstr "Site web"
+#: .\app\founder\forms.py:111 .\app\founder\forms.py:200
+msgid "Save"
+msgstr "Enregistrer"
 
-#: .\app\founder\templates\founder\detail.html:36
+#: .\app\founder\models.py:10
+msgid "Education level"
+msgstr "Niveau d'étude"
+
+#: .\app\founder\models.py:12
+msgid "Equity"
+msgstr "Equité"
+
+#: .\app\founder\models.py:13 .\app\founder\templates\founder\detail.html:36
 msgid "About"
 msgstr "A propos"
 
+#: .\app\founder\templates\founder\detail.html:9
+msgid "Modify this founder"
+msgstr "Modifier ce fondateur"
+
+#: .\app\founder\templates\founder\detail.html:24
+msgid "Phone"
+msgstr "Téléphone"
+
 #: .\app\founder\templates\founder\detail.html:58
 msgid "Companies"
-msgstr ""
+msgstr "Compagnies"
 
 #: .\app\founder\templates\founder\detail.html:82
-#, fuzzy
-#| msgid "No founders exist."
 msgid "No companies exist."
-msgstr "Aucun fondateur"
+msgstr "Aucune compagnies."
 
 #: .\app\founder\templates\founder\founder_form.html:6
 #: .\app\founder\templates\founder\founder_form.html:9
 msgid "Profile"
-msgstr ""
+msgstr "Profil"
 
 #: .\app\founder\templates\founder\founder_form.html:11
 msgid "Edit my profile"
-msgstr ""
+msgstr "Modifier mon profil"
 
+#: .\app\founder\templates\founder\index.html:4
 #: .\app\founder\templates\founder\index.html:8
 msgid "Centech Founders"
 msgstr "Fondateur du Centech"

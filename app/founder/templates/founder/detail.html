@@ -6,7 +6,7 @@
     <div class="row" style="margin-bottom: 20px;">
         <a href="{% url 'founder:update' founder.userProfile_id %}" style="color: white;">
             <div class="col-sm-12" align="center" style="border: 1px solid lightgrey; border-top: none; background-color: #293846;">
-                Modifier ce fondateur
+                {% trans "Modify this founder" %}
             </div>
         </a>
     </div>
@@ -21,10 +21,10 @@
             {% endif %}
             <h1><strong>{{ founder.user.first_name }} {{ founder.user.last_name }}</strong></h1>
             {% if founder.phone != "" %}
-                <br><b>{% trans "Phone:" %}</b> {{ founder.phone }}<br>
+                <br><b>{% trans "Phone" %} : </b> {{ founder.phone }}<br>
             {% endif %}
             {% if founder.website != "" %}
-                <br><b>{% trans "Web site:" %}</b> <a href="{{ founder.website }}">{{ founder.website }}</a><br>
+                <br><b>{% trans "Web site" %} : </b> <a href="{{ founder.website }}">{{ founder.website }}</a><br>
             {% endif %}
             <br><br>
         </div>

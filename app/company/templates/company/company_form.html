@@ -5,7 +5,6 @@
 {% load staticfiles %}
 {% block title %}{% trans "Company" %}{% endblock %}
 {% block content %}
-    <h1>{% trans "Company" %}</h1>
     <form enctype="multipart/form-data" method="post">{% csrf_token%}
         {% crispy form %}
     </form>

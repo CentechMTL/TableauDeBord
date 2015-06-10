@@ -10,6 +10,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import HTML, Layout, \
     Submit, Field, ButtonHolder, Hidden, Div
 
+from django.utils.translation import ugettext_lazy as _
 
 class MentorFilter(django_filters.FilterSet):
     class Meta:
@@ -19,55 +20,55 @@ class MentorFilter(django_filters.FilterSet):
 class MentorCreateForm(forms.Form):
 
     firstname = forms.CharField(
-        label=('First name'),
+        label=_('First name'),
         required=False,
     )
-    firstname.widget.attrs.update({'placeholder': (u'First name')})
+    firstname.widget.attrs.update({'placeholder': _(u'First name')})
 
     lastname = forms.CharField(
-        label="Last name",
+        label=_('Last name'),
         required=False,
     )
-    lastname.widget.attrs.update({'placeholder': (u'Last name')})
+    lastname.widget.attrs.update({'placeholder': _(u'Last name')})
 
     username = forms.CharField(
-        label="Username",
+        label=_('Username'),
         required=True,
     )
-    username.widget.attrs.update({'placeholder': (u'Username')})
+    username.widget.attrs.update({'placeholder': _(u'Username')})
 
     email = forms.CharField(
-        label="Email",
+        label=_('Email'),
         required=True,
     )
-    email.widget.attrs.update({'placeholder': (u'Email')})
+    email.widget.attrs.update({'placeholder': _(u'Email')})
 
     phone = forms.CharField(
-        label=('Phone number'),
+        label=_('Phone number'),
         required=False,
         max_length=10
     )
-    phone.widget.attrs.update({'placeholder': (u'Phone number')})
+    phone.widget.attrs.update({'placeholder': _(u'Phone number')})
 
     website = forms.URLField(
-        label=('Web site'),
+        label=_('Web site'),
         required=False,
     )
-    website.widget.attrs.update({'placeholder': (u'https://example.com')})
+    website.widget.attrs.update({'placeholder': _(u'https://example.com')})
 
     about = forms.CharField(
-        label=('Description'),
+        label=_('Description'),
         required=False,
         widget=forms.Textarea(
             attrs={
-                'placeholder': (u'Rentrez ici un bref résumé de vos compétences et de votre parcours.'),
+                'placeholder': _(u'Write here a brief summary of your skills and your career.'),
                 'class': 'md-editor'
             }
         )
     )
 
     expertise = forms.ModelMultipleChoiceField(
-        label=(u"Aire d'expertise"),
+        label=_(u"Areas of expertise"),
         queryset=Expertise.objects.all(),
         required=False,
         widget=forms.SelectMultiple(
@@ -78,7 +79,7 @@ class MentorCreateForm(forms.Form):
     )
 
     picture = forms.ImageField(
-        label=('Photo'),
+        label=_('Picture'),
         required=False,
     )
 
@@ -97,52 +98,51 @@ class MentorCreateForm(forms.Form):
             Field('phone'),
             Field('website'),
             Field('expertise'),
-            HTML(u"""Vos domaines d'expertise.<br>
-            Si il manque un domaine que vous aimeriez voir ajouter à cette liste, n'hésiter pas a en parler à l'équipe du Centech"""),
+            HTML(_(u"""Use the Ctrl key on your keyboard to select multiple. <br> If it lacks a domain that you would like to add to this list, do not hesitate to talk to the team Centech""")),
             Field('about'),
-            StrictButton('Enregistrer', type="submit")
+            StrictButton(_('Save'), type="submit")
         )
 
 class MentorUpdateForm(forms.Form):
 
     firstname = forms.CharField(
-        label=('First name'),
+        label=_('First name'),
         required=False,
     )
-    firstname.widget.attrs.update({'placeholder': (u'First name')})
+    firstname.widget.attrs.update({'placeholder': _(u'First name')})
 
     lastname = forms.CharField(
-        label="Last name",
+        label=_('Last name'),
         required=False,
     )
-    lastname.widget.attrs.update({'placeholder': (u'Last name')})
+    lastname.widget.attrs.update({'placeholder': _(u'Last name')})
 
     phone = forms.CharField(
-        label=('Phone number'),
+        label=_('Phone number'),
         required=False,
         max_length=10
     )
-    phone.widget.attrs.update({'placeholder': (u'Phone number')})
+    phone.widget.attrs.update({'placeholder': _(u'Phone number')})
 
     website = forms.URLField(
-        label=('Web site'),
+        label=_('Web site'),
         required=False,
     )
-    website.widget.attrs.update({'placeholder': (u'https://example.com')})
+    website.widget.attrs.update({'placeholder': _(u'https://example.com')})
 
     about = forms.CharField(
-        label=('Description'),
+        label=_('Description'),
         required=False,
         widget=forms.Textarea(
             attrs={
-                'placeholder': (u'Rentrez ici un bref résumé de vos compétences et de votre parcours.'),
+                'placeholder': _(u'Write here a brief summary of your skills and your career.'),
                 'class': 'md-editor'
             }
         )
     )
 
     expertise = forms.ModelMultipleChoiceField(
-        label=(u"Aire d'expertise"),
+        label=_(u"Areas of expertise"),
         queryset=Expertise.objects.all(),
         required=False,
         widget=forms.SelectMultiple(
@@ -153,7 +153,7 @@ class MentorUpdateForm(forms.Form):
     )
 
     picture = forms.ImageField(
-        label=('Photo'),
+        label=_('Picture'),
         required=False,
     )
 
@@ -178,10 +178,9 @@ class MentorUpdateForm(forms.Form):
             Field('phone'),
             Field('website'),
             Field('expertise'),
-            HTML(u"""Vos domaines d'expertise.<br>
-            Si il manque un domaine que vous aimeriez voir ajouter à cette liste, n'hésiter pas a en parler à l'équipe du Centech"""),
+            HTML(_(u"""Use the Ctrl key on your keyboard to select multiple. <br> If it lacks a domain that you would like to add to this list, do not hesitate to talk to the team Centech""")),
             Field('about'),
-            StrictButton('Enregistrer', type="submit")
+            StrictButton(_('Save'), type="submit")
         )
 
     def save(self):

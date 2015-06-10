@@ -9,8 +9,8 @@ from app.founder.models import Founder
 
 #Mentors
 class Mentor(UserProfile):
-    expertise = models.ManyToManyField(Expertise,verbose_name=_('Areas of expertise'), blank=True)
-    about = models.CharField(max_length=2000,blank=True,verbose_name=_('About'));
+    expertise = models.ManyToManyField(Expertise, verbose_name=_('Areas of expertise'), blank=True)
+    about = models.CharField(max_length=2000,blank=True, verbose_name=_('About'))
 
     def __str__(self):
         return self.user.username

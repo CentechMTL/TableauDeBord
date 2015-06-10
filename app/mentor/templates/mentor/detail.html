@@ -6,7 +6,7 @@
     <div class="row" style="margin-bottom: 20px;">
         <a href="{% url 'mentor:update' mentor.userProfile_id %}" style="color: white;">
             <div class="col-sm-12" align="center" style="border: 1px solid lightgrey; border-top: none; background-color: #293846;">
-                Modifier ce mentor
+                {% trans "Modify this mentor" %}
             </div>
         </a>
     </div>
@@ -21,10 +21,10 @@
             {% endif %}
             <h1><strong>{{ mentor.user.first_name }} {{ mentor.user.last_name }}</strong></h1>
             {% if mentor.phone != "" %}
-                <br><b>{% trans "Phone:" %}</b> {{ mentor.phone }}<br>
+                <br><b>{% trans "Phone" %} : </b> {{ mentor.phone }}<br>
             {% endif %}
             {% if mentor.website != "" %}
-                <br><b>{% trans "Web site:" %}</b> <a href="http://{{ mentor.website }}">{{ mentor.website }}</a><br>
+                <br><b>{% trans "Web site" %} : </b> <a href="http://{{ mentor.website }}">{{ mentor.website }}</a><br>
             {% endif %}
             <br><br>
         </div>

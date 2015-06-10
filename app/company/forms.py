@@ -37,7 +37,9 @@ class CompanyStatusCreateForm(forms.Form):
         self.helper.form_method = 'post'
 
         self.helper.layout = Layout(
-            HTML("<h1>New status</h1>"),
+            HTML("<h1>"),
+            HTML(_("New status")),
+            HTML("</h1>"),
             Field('name'),
             StrictButton(_('Save'), type="submit")
         )

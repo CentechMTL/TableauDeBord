@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-10 13:51-0400\n"
+"POT-Creation-Date: 2015-06-10 14:12-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,31 +17,88 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
+#: .\app\mentor\forms.py:23 .\app\mentor\forms.py:26 .\app\mentor\forms.py:109
+#: .\app\mentor\forms.py:112
+msgid "First name"
+msgstr "Prénom"
+
+#: .\app\mentor\forms.py:29 .\app\mentor\forms.py:32 .\app\mentor\forms.py:115
+#: .\app\mentor\forms.py:118
+msgid "Last name"
+msgstr "Nom de famille"
+
+#: .\app\mentor\forms.py:35 .\app\mentor\forms.py:38
+msgid "Username"
+msgstr "Pseudo"
+
+#: .\app\mentor\forms.py:41 .\app\mentor\forms.py:44
+msgid "Email"
+msgstr "Email"
+
+#: .\app\mentor\forms.py:47 .\app\mentor\forms.py:51 .\app\mentor\forms.py:121
+#: .\app\mentor\forms.py:125
+msgid "Phone number"
+msgstr "Numéro de téléphone"
+
+#: .\app\mentor\forms.py:54 .\app\mentor\forms.py:128
+#: .\app\mentor\templates\mentor\detail.html:27
+msgid "Web site"
+msgstr "Site web"
+
+#: .\app\mentor\forms.py:57 .\app\mentor\forms.py:131
+msgid "https://example.com"
+msgstr "https://exemple.com"
+
+#: .\app\mentor\forms.py:60 .\app\mentor\forms.py:134
+msgid "Description"
+msgstr "Description"
+
+#: .\app\mentor\forms.py:64 .\app\mentor\forms.py:138
+msgid "Write here a brief summary of your skills and your career."
+msgstr "Ecrivez ici un bref résumé de vos compétences et de votre parcours."
+
+#: .\app\mentor\forms.py:71 .\app\mentor\forms.py:145
 #: .\app\mentor\models.py:12 .\app\mentor\templates\mentor\detail.html:46
 msgid "Areas of expertise"
 msgstr "Aires d'expertise"
+
+#: .\app\mentor\forms.py:82 .\app\mentor\forms.py:156
+msgid "Picture"
+msgstr "Photo"
+
+#: .\app\mentor\forms.py:101 .\app\mentor\forms.py:181
+msgid ""
+"Use the Ctrl key on your keyboard to select multiple. <br> If it lacks a "
+"domain that you would like to add to this list, do not hesitate to talk to "
+"the team Centech"
+msgstr ""
+"Utilisez la touche ctrl de votre clavier pour en sélectionner plusieurs. "
+"<br>Si il manque un domaine que vous aimeriez voir ajouter à cette liste, "
+"n'hésiter pas a en parler a l'équipe du Centech"
+
+#: .\app\mentor\forms.py:103 .\app\mentor\forms.py:183
+msgid "Save"
+msgstr "Enregistrer"
 
 #: .\app\mentor\models.py:13 .\app\mentor\templates\mentor\detail.html:36
 msgid "About"
 msgstr "A propos"
 
-#: .\app\mentor\templates\mentor\detail.html:24
-msgid "Phone:"
-msgstr "Téléphone"
+#: .\app\mentor\templates\mentor\detail.html:9
+msgid "Modify this mentor"
+msgstr "Modifier ce mentor"
 
-#: .\app\mentor\templates\mentor\detail.html:27
-msgid "Web site:"
-msgstr "Site web"
+#: .\app\mentor\templates\mentor\detail.html:24
+msgid "Phone"
+msgstr "Téléphone"
 
 #: .\app\mentor\templates\mentor\detail.html:56
 msgid "Companies"
-msgstr ""
+msgstr "Compagnies"
 
 #: .\app\mentor\templates\mentor\detail.html:80
-#, fuzzy
-#| msgid "No mentors exist."
 msgid "No companies exist."
-msgstr "Aucun mentors."
+msgstr "Aucune compagnies."
 
 #: .\app\mentor\templates\mentor\index.html:4
 #: .\app\mentor\templates\mentor\index.html:6
@@ -55,8 +112,8 @@ msgstr "Aucun mentors."
 #: .\app\mentor\templates\mentor\mentor_form.html:6
 #: .\app\mentor\templates\mentor\mentor_form.html:9
 msgid "Profile"
-msgstr ""
+msgstr "Profil"
 
 #: .\app\mentor\templates\mentor\mentor_form.html:11
 msgid "Edit my profile"
-msgstr ""
+msgstr "Modifier mon profil"

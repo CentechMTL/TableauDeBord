@@ -39,7 +39,8 @@ class BusinessCanvasElement(models.Model):
     title = models.CharField(max_length=200, verbose_name=_('Title'))
     comment = models.TextField(blank=True,max_length=2000, verbose_name=_('Comment'))
     #Created on
-    date = models.DateTimeField(auto_now_add=True, auto_now=False, verbose_name=_('Date'))
+    date = models.DateTimeField(auto_now_add=True, auto_now=False, verbose_name=_('Date of creation'))
+    updated = models.DateTimeField(auto_now=True, verbose_name=_('Date of updated'))
     type = models.CharField(max_length=20, choices=BUSINESS_CANVAS_TYPE_CHOICES, null=True, verbose_name=_('Type'))
     company = models.ForeignKey(Company, verbose_name=_('Company'))
     #True -> Archived | False -> Current use
@@ -55,7 +56,7 @@ class Archive(models.Model):
         verbose_name = _('Archive')
 
     #Created on
-    date = models.DateField(auto_now_add=True, auto_now=False, verbose_name=_('Date'))
+    date = models.DateTimeField(auto_now_add=True, auto_now=False, verbose_name=_('Date'))
     company = models.ForeignKey(Company, verbose_name=_('Company'))
     #List of elements in the archive
     elements = models.ManyToManyField(BusinessCanvasElement,blank=True, verbose_name=_('Elements of the archive'))

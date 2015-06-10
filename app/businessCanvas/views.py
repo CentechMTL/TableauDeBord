@@ -180,12 +180,17 @@ class BusinessCanvasElementList(generic.ListView):
         for founder in listFounder:
             if founder.user.id == self.request.user.id:
                 isFounder = True
+
+
         context['companyId'] = self.args[0]
         context['isFounder'] = isFounder
 
         company = Company.objects.get(id = self.args[0])
-        archives = Archive.objects.filter(company = company)
+        archives = Archive.objects.filter(company = company).order_by('date')
         context['archives'] = archives
+
+        for archive in archives:
+            context['last_archive'] = archive
 
         keyPartner = BusinessCanvasType.objects.get(name="KeyPartner")
         listKeyPartners = BusinessCanvasElement.objects.filter(type = keyPartner, disactivated=False, company = company)

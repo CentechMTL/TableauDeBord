@@ -1,4 +1,3 @@
-// Change the form for update element
 function archiver(baseLien, companyId, baseLienArchive, baseLienDeleteArchive){
     var pos = baseLien.lastIndexOf('/'); // position du dernier "/"
     baseLien = baseLien.substr(0, pos+1);
@@ -12,6 +11,7 @@ function archiver(baseLien, companyId, baseLienArchive, baseLienDeleteArchive){
         url: lien,
 
         success: function(data, status) {
+            //Create the new archive
             div = document.getElementById("divArchive");
             newArchive = document.createElement('div');
             newArchive.id = "archive" + data.id;
@@ -29,6 +29,13 @@ function archiver(baseLien, companyId, baseLienArchive, baseLienDeleteArchive){
             newArchive.appendChild(newLink);
             newArchive.appendChild(spanDelete);
             div.appendChild(newArchive);
+
+            //Update color of all element in the page
+            listSpanColor = document.getElementsByClassName("colorElement");
+            for(var elem in listSpanColor)
+            {
+                listSpanColor[elem].style.color = "#428bca"
+            }
         },
 
         error: function(resultat, status, erreur) {

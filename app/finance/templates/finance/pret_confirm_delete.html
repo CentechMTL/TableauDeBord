@@ -9,16 +9,16 @@
 
     <!--TODO Faire une vrai description conditionné-->
    <p>
-        <span style="font-weight: bold; margin-right: 10px;">{% trans "Name:"%}</span> {{ pret.name }} <br>
-        <span style="font-weight: bold; margin-right: 10px;">{% trans "Date of submission" %}:</span> {{ pret.dateSoumission}}<br>
-        <span style="font-weight: bold; margin-right: 10px;">{% trans "Amount requested" %}:</span> {{ pret.sommeSoumission}}<br>
+        <span style="font-weight: bold; margin-right: 10px;">{% trans "Name"%} : </span> {{ pret.name }} <br>
+        <span style="font-weight: bold; margin-right: 10px;">{% trans "Date of submission" %} : </span> {{ pret.dateSoumission}}<br>
+        <span style="font-weight: bold; margin-right: 10px;">{% trans "Amount requested" %} : </span> {{ pret.sommeSoumission}}<br>
 
         {% if pret.dateReception %}
-        <span style="font-weight: bold; margin-right: 10px;">{% trans "Date of reception" %}:</span> {{ pret.dateReception}}<br>
+        <span style="font-weight: bold; margin-right: 10px;">{% trans "Date of reception" %} : </span> {{ pret.dateReception}}<br>
         {% endif %}
 
         {% if pret.sommeReception %}
-        <span style="font-weight: bold; margin-right: 10px;">{% trans "Amount received" %}:</span> {{ pret.sommeReception}}<br>
+        <span style="font-weight: bold; margin-right: 10px;">{% trans "Amount received" %} : </span> {{ pret.sommeReception}}<br>
         {% endif %}
     </p>
     <form method="post" action="">

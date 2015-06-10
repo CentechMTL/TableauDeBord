@@ -97,6 +97,9 @@ class FounderCreateForm(forms.Form):
         self.helper.form_method = 'post'
 
         self.helper.layout = Layout(
+            HTML("<h1>"),
+            HTML(_("New founder")),
+            HTML("</h1>"),
             Field('firstname'),
             Field('lastname'),
             Field('username'),
@@ -188,6 +191,9 @@ class FounderUpdateForm(forms.Form):
         self.fields['phone'].initial = founder.phone
 
         self.helper.layout = Layout(
+            HTML("<h1>"),
+            HTML(_("Update this founder")),
+            HTML("</h1>"),
             Field('firstname'),
             Field('lastname'),
             Field('picture'),

@@ -8,6 +8,8 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import HTML, Layout, \
     Submit, Field, ButtonHolder, Hidden, Div
 
+from django.utils.translation import ugettext_lazy as _
+
 # Max password length for the user.
 # Unlike other fields, this is not the length of DB field
 MAX_PASSWORD_LENGTH = 76
@@ -38,19 +40,19 @@ class UserProfileForm(forms.ModelForm):
 class UpdatePasswordForm(forms.Form):
 
     password_new = forms.CharField(
-        label=(u'Nouveau mot de passe'),
+        label=_(u'New password'),
         max_length=MAX_PASSWORD_LENGTH,
         min_length=MIN_PASSWORD_LENGTH,
         widget=forms.PasswordInput,
     )
 
     password_old = forms.CharField(
-        label=(u'Mot de passe actuel'),
+        label=_(u'Actual password'),
         widget=forms.PasswordInput,
     )
 
     password_confirm = forms.CharField(
-        label=(u'Confirmer le nouveau mot de passe'),
+        label=_(u'New password again'),
         max_length=MAX_PASSWORD_LENGTH,
         min_length=MIN_PASSWORD_LENGTH,
         widget=forms.PasswordInput,
@@ -66,17 +68,17 @@ class UpdatePasswordForm(forms.Form):
 
         self.helper.layout = Layout(
             Field('password_old'),
-            HTML(u"""<br>
-                <p>Votre nouveau mot de passe:
-                 <ul>
-                 <li>doit contenir au moins 6 caractères</li>
-                 <li>ne doit pas dépasser les 76 caractères</li>
-                    </ul>
-                    </p>
-            """),
+            HTML(_(u"""<br>
+                <p>Your new password:
+                <ul>
+                    <li>must contain at least 6 characters</li>
+                    <li>must not be more than 76 characters</li>
+                </ul>
+                </p>
+            """)),
             Field('password_new'),
             Field('password_confirm'),
-            StrictButton('Enregistrer', type="submit")
+            StrictButton(_('Save'), type="submit")
         )
 
     def save(self):

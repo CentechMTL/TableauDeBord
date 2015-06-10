@@ -90,6 +90,9 @@ class MentorCreateForm(forms.Form):
         self.helper.form_method = 'post'
 
         self.helper.layout = Layout(
+            HTML("<h1>"),
+            HTML(_("New mentor")),
+            HTML("</h1>"),
             Field('firstname'),
             Field('lastname'),
             Field('username'),
@@ -172,6 +175,9 @@ class MentorUpdateForm(forms.Form):
         self.fields['website'].initial = mentor.website
 
         self.helper.layout = Layout(
+            HTML("<h1>"),
+            HTML(_("Update this mentor")),
+            HTML("</h1>"),
             Field('firstname'),
             Field('lastname'),
             Field('picture'),

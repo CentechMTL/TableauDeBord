@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-10 14:12-0400\n"
+"POT-Creation-Date: 2015-06-10 14:44-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,12 +18,12 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: .\app\founder\forms.py:23 .\app\founder\forms.py:26
-#: .\app\founder\forms.py:117 .\app\founder\forms.py:120
+#: .\app\founder\forms.py:120 .\app\founder\forms.py:123
 msgid "First name"
 msgstr "Prénom "
 
 #: .\app\founder\forms.py:29 .\app\founder\forms.py:32
-#: .\app\founder\forms.py:123 .\app\founder\forms.py:126
+#: .\app\founder\forms.py:126 .\app\founder\forms.py:129
 msgid "Last name"
 msgstr "Nom de famille"
 
@@ -36,41 +36,45 @@ msgid "Email"
 msgstr "Email"
 
 #: .\app\founder\forms.py:47 .\app\founder\forms.py:51
-#: .\app\founder\forms.py:129 .\app\founder\forms.py:133
+#: .\app\founder\forms.py:132 .\app\founder\forms.py:136
 msgid "Phone number"
 msgstr "Numéro de téléphone"
 
-#: .\app\founder\forms.py:54 .\app\founder\forms.py:136
+#: .\app\founder\forms.py:54 .\app\founder\forms.py:139
 #: .\app\founder\templates\founder\detail.html:27
 msgid "Web site"
 msgstr "Site web"
 
-#: .\app\founder\forms.py:57 .\app\founder\forms.py:139
+#: .\app\founder\forms.py:57 .\app\founder\forms.py:142
 msgid "https://example.com"
 msgstr "https://exemple.com"
 
-#: .\app\founder\forms.py:60 .\app\founder\forms.py:142
+#: .\app\founder\forms.py:60 .\app\founder\forms.py:145
 msgid "Description"
 msgstr "Description"
 
-#: .\app\founder\forms.py:64 .\app\founder\forms.py:146
+#: .\app\founder\forms.py:64 .\app\founder\forms.py:149
 msgid "Write here a brief summary of your skills and your career."
 msgstr "Ecrivez ici un bref résumé de vos compétences et de votre parcours."
 
-#: .\app\founder\forms.py:71 .\app\founder\forms.py:153
+#: .\app\founder\forms.py:71 .\app\founder\forms.py:156
 msgid "Education"
 msgstr "Niveau d'étude"
 
-#: .\app\founder\forms.py:78 .\app\founder\forms.py:160
+#: .\app\founder\forms.py:78 .\app\founder\forms.py:163
 #: .\app\founder\models.py:11 .\app\founder\templates\founder\detail.html:47
 msgid "Areas of expertise"
 msgstr "Aires d'expertise"
 
-#: .\app\founder\forms.py:89 .\app\founder\forms.py:171
+#: .\app\founder\forms.py:89 .\app\founder\forms.py:174
 msgid "Picture"
 msgstr "Photo"
 
-#: .\app\founder\forms.py:109 .\app\founder\forms.py:198
+#: .\app\founder\forms.py:101
+msgid "New founder"
+msgstr "Nouveau fondateur"
+
+#: .\app\founder\forms.py:112 .\app\founder\forms.py:204
 msgid ""
 "Use the Ctrl key on your keyboard to select multiple. <br> If it lacks a "
 "domain that you would like to add to this list, do not hesitate to talk to "
@@ -80,9 +84,13 @@ msgstr ""
 "<br>Si il manque un domaine que vous aimeriez voir ajouter à cette liste, "
 "n'hésiter pas a en parler a l'équipe du Centech"
 
-#: .\app\founder\forms.py:111 .\app\founder\forms.py:200
+#: .\app\founder\forms.py:114 .\app\founder\forms.py:206
 msgid "Save"
 msgstr "Enregistrer"
+
+#: .\app\founder\forms.py:195
+msgid "Update this founder"
+msgstr "Modifier ce fondateur"
 
 #: .\app\founder\models.py:10
 msgid "Education level"
@@ -113,13 +121,8 @@ msgid "No companies exist."
 msgstr "Aucune compagnies."
 
 #: .\app\founder\templates\founder\founder_form.html:6
-#: .\app\founder\templates\founder\founder_form.html:9
 msgid "Profile"
 msgstr "Profil"
-
-#: .\app\founder\templates\founder\founder_form.html:11
-msgid "Edit my profile"
-msgstr "Modifier mon profil"
 
 #: .\app\founder\templates\founder\index.html:4
 #: .\app\founder\templates\founder\index.html:8
@@ -129,3 +132,6 @@ msgstr "Fondateur du Centech"
 #: .\app\founder\templates\founder\index.html:45
 msgid "No founders exist."
 msgstr "Aucun fondateur"
+
+#~ msgid "Edit my profile"
+#~ msgstr "Modifier mon profil"

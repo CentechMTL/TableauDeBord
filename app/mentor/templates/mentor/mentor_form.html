@@ -5,11 +5,6 @@
 {% load staticfiles %}
 {% block title %}{% trans "Profile" %}{% endblock %}
 {% block content %}
-    {% if isCentech %}
-        <h1>{% trans "Profile" %}</h1>
-    {% else %}
-        <h1>{% trans "Edit my profile" %}</h1>
-    {% endif %}
     <form enctype="multipart/form-data" method="post">{% csrf_token%}
         {% crispy form %}
     </form>

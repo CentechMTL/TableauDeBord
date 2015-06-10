@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-10 14:12-0400\n"
+"POT-Creation-Date: 2015-06-10 14:44-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,67 +17,224 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
+#: .\app\home\forms.py:43
+msgid "New password"
+msgstr "Nouveau mot de passe"
+
+#: .\app\home\forms.py:50
+msgid "Actual password"
+msgstr "Mot de passe actuel"
+
+#: .\app\home\forms.py:55
+msgid "New password again"
+msgstr "Nouveau mot de passe encore"
+
+#: .\app\home\forms.py:71
+msgid ""
+"<br>\n"
+"                <p>Your new password:\n"
+"                <ul>\n"
+"                    <li>must contain at least 6 characters</li>\n"
+"                    <li>must not be more than 76 characters</li>\n"
+"                </ul>\n"
+"                </p>\n"
+"            "
+msgstr ""
+
+#: .\app\home\forms.py:81
+msgid "Save"
+msgstr "Enregistrer"
+
 #: .\app\home\models.py:23
 msgid "Education"
+msgstr "Niveau d'étude"
+
+#: .\app\home\models.py:25
+msgid "Education level"
 msgstr "Niveau d'étude"
 
 #: .\app\home\models.py:32
 msgid "Expertise"
 msgstr "Expertise"
 
+#: .\app\home\models.py:34
+msgid "Area of expertise"
+msgstr "Aires d'expertise"
+
+#: .\app\home\models.py:43
+msgid "User"
+msgstr "Utilisateur"
+
+#: .\app\home\models.py:44
+msgid "Identifiant"
+msgstr "Identifiant"
+
 #: .\app\home\models.py:47
-#, fuzzy
-#| msgid "telephone"
-msgid "phone"
+msgid "Phone"
 msgstr "téléphone"
 
 #: .\app\home\models.py:48
-msgid "web site"
+msgid "Web site"
 msgstr "site web"
 
 #: .\app\home\models.py:49
-msgid "personal photograph"
-msgstr "photographie"
+msgid "Picture"
+msgstr "Photo"
 
 #: .\app\home\templates\home\index.html:11
-msgid "Tableau de Bord"
-msgstr "Tableau de bord"
+msgid "Dashboard"
+msgstr "Tableau de Bord"
 
 #: .\app\home\templates\home\index.html:13
 msgid "Follow us on"
+msgstr "Suivez nous sur"
+
+#: .\app\home\templates\home\index.html:42
+msgid ""
+"Cette plateforme est une plateforme privée appartenant au Centech, "
+"incubateur de société technologique de l'Ecole de Technologie Supérieur de "
+"Montréal."
 msgstr ""
+
+#: .\app\home\templates\home\index.html:43
+msgid ""
+"Si vous voulez disposer d'un compte d'accès ou avoir plus de renseignement "
+"sur notre plateforme, merci de contacter nos services via l'adresse"
+msgstr ""
+
+#: .\app\home\templates\home\noAccessPermissions.html:4
+msgid "No Access"
+msgstr "Pas d'autorisation"
 
 #: .\app\home\templates\home\noAccessPermissions.html:7
 msgid "Sorry! But you don't have the permissions to access this pag"
-msgstr ""
+msgstr "Désolé! Mais vous n'avez pas la permissions d'accéder a cette page"
 
 #: .\app\home\templates\home\noAccessPermissions.html:9
 msgid ""
 "If it's an error, you can contact the administrator for have access on this "
 "page"
-msgstr ""
+msgstr "Si c'est une erreur, vous pouvez contacter l'administrateur pour avoir "
+"l'accès a cette page"
 
 #: .\app\home\templates\home\noAccessPermissions.html:11
 msgid "Sorry for inconvenience"
-msgstr ""
+msgstr "Désolé pour le dérangement"
 
 #: .\app\home\templates\home\password_update_form.html:6
-msgid "Profile"
-msgstr ""
+msgid "Account"
+msgstr "Compte"
 
 #: .\app\home\templates\home\password_update_form.html:8
-msgid "My profile"
-msgstr ""
+msgid "My account"
+msgstr "Mon compte"
+
+#: .\app\home\templates\home\summary.html:10
+msgid "Summary of the Centech"
+msgstr "Sommaire du Centech"
+
+#: .\app\home\templates\home\summary.html:12
+msgid "Number of companies"
+msgstr "Nombre de compagnies"
+
+#: .\app\home\templates\home\summary.html:13
+msgid "Number of founders"
+msgstr "Nombre de fondateurs"
+
+#: .\app\home\templates\home\summary.html:14
+msgid "Number of mentors"
+msgstr "Nombre de mentors"
+
+#: .\app\home\templates\home\summary.html:22
+msgid "Indicators of performance"
+msgstr "Indicateurs de performance"
+
+#: .\app\home\templates\home\summary.html:24
+msgid "Number of IRL noted by the Centech"
+msgstr "Nombre d'IRL noté par le Centech"
+
+#: .\app\home\templates\home\summary.html:25
+msgid "Average of IRL"
+msgstr "Moyenne des IRL"
+
+#: .\app\home\templates\home\summary.html:28
+msgid "Number of TRL noted by the Centech"
+msgstr "Nombre de TRL noté par le Centech"
+
+#: .\app\home\templates\home\summary.html:29
+msgid "Average of TRL"
+msgstr "Moyenne des TRL"
+
+#: .\app\home\templates\home\summary.html:32
+msgid "Finance"
+msgstr "Finance"
+
+#: .\app\home\templates\home\summary.html:34
+msgid "Number of stock exchange ask"
+msgstr "Nombre de bourse demandée"
+
+#: .\app\home\templates\home\summary.html:35
+msgid "Amount of stock exchange ask"
+msgstr "Montant des bourses demandées"
+
+#: .\app\home\templates\home\summary.html:36
+msgid "Amount of stock exchange received"
+msgstr "Montant des bourses reçues"
+
+#: .\app\home\templates\home\summary.html:39
+msgid "Number of subsidies ask"
+msgstr "Nombre de subvention demandée"
+
+#: .\app\home\templates\home\summary.html:40
+msgid "Amount of subsidies ask"
+msgstr "Montant des subventions demandées"
+
+#: .\app\home\templates\home\summary.html:41
+msgid "Amount of subsidies received"
+msgstr "Montant des subventions reçues"
+
+#: .\app\home\templates\home\summary.html:44
+msgid "Number of investments ask"
+msgstr "Nombre d'investissement demandé"
+
+#: .\app\home\templates\home\summary.html:45
+msgid "Amount of investments ask"
+msgstr "Montant des investissements demandés"
+
+#: .\app\home\templates\home\summary.html:46
+msgid "Amount of investments received"
+msgstr "Montant des investissements reçus"
+
+#: .\app\home\templates\home\summary.html:49
+msgid "Number of loans ask"
+msgstr "Nombre de prêt demandé"
+
+#: .\app\home\templates\home\summary.html:50
+msgid "Amount of loans ask"
+msgstr "Montant des prêts demandé"
+
+#: .\app\home\templates\home\summary.html:51
+msgid "Amount of loans received"
+msgstr "Montant des prêts reçus"
+
+#: .\app\home\templates\home\summary.html:54
+msgid "Number of sales ask"
+msgstr "Nombre de vente demandée"
+
+#: .\app\home\templates\home\summary.html:55
+msgid "Amount of sales ask"
+msgstr "Montant des ventes demandées"
+
+#: .\app\home\templates\home\summary.html:56
+msgid "Amount of sales received"
+msgstr "Montant des ventes reçues"
 
 #: .\app\home\templates\registration\login.html:11
 msgid "Your username and password didn't match. Please try again."
 msgstr ""
-"Votre nom d'utilisateur et votre mot de passe ne correspondent pas. Veuillez "
-"recommencer."
+"Votre nom d'utilisateur et votre mot de passe ne correspondent "
+"pas. Veuillez recommencer."
 
 #: .\app\home\templates\registration\login.html:12
 msgid "If it's an error, please contact the administrator"
-msgstr ""
-
-#~ msgid "Vote again?"
-#~ msgstr "Voter encore?"
+msgstr "Si c'est une erreur, merci de contact l'administrateur"

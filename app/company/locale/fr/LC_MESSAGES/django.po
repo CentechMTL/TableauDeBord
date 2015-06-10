@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-10 14:12-0400\n"
+"POT-Creation-Date: 2015-06-10 14:44-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,8 +17,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: .\app\company\forms.py:28 .\app\company\forms.py:55
-#: .\app\company\forms.py:133 .\app\company\models.py:18
+#: .\app\company\forms.py:28 .\app\company\forms.py:57
+#: .\app\company\forms.py:138 .\app\company\models.py:18
 #: .\app\company\models.py:29
 msgid "Name"
 msgstr "Nom"
@@ -27,69 +27,77 @@ msgstr "Nom"
 msgid "Name of the new status"
 msgstr "Nom du nouveau status"
 
-#: .\app\company\forms.py:40
+#: .\app\company\forms.py:41
 msgid "New status"
 msgstr "Nouveau status"
 
-#: .\app\company\forms.py:42 .\app\company\forms.py:127
-#: .\app\company\forms.py:206
+#: .\app\company\forms.py:44 .\app\company\forms.py:132
+#: .\app\company\forms.py:214
 #: .\app\company\templates\company\presence_form.html:13
 msgid "Save"
 msgstr "Enregistrer"
 
-#: .\app\company\forms.py:58 .\app\company\forms.py:136
+#: .\app\company\forms.py:60 .\app\company\forms.py:141
 msgid "Name of the company"
 msgstr "Nom de la compagnie"
 
-#: .\app\company\forms.py:61 .\app\company\forms.py:139
+#: .\app\company\forms.py:63 .\app\company\forms.py:144
 #: .\app\company\models.py:30
 msgid "Logo"
 msgstr "Logo"
 
-#: .\app\company\forms.py:66 .\app\company\forms.py:144
+#: .\app\company\forms.py:68 .\app\company\forms.py:149
 #: .\app\company\models.py:32
 msgid "Video"
 msgstr "Vidéo"
 
-#: .\app\company\forms.py:69 .\app\company\forms.py:147
+#: .\app\company\forms.py:71 .\app\company\forms.py:152
 msgid "https://urlvideo.com/"
 msgstr "https://urlvideo.com/"
 
-#: .\app\company\forms.py:72 .\app\company\forms.py:150
+#: .\app\company\forms.py:74 .\app\company\forms.py:155
 #: .\app\company\templates\company\detail.html:29
 msgid "Web site"
 msgstr "Site web"
 
-#: .\app\company\forms.py:75 .\app\company\forms.py:153
+#: .\app\company\forms.py:77 .\app\company\forms.py:158
 msgid "https://example.com"
 msgstr "https://exemple.com"
 
-#: .\app\company\forms.py:78 .\app\company\forms.py:156
+#: .\app\company\forms.py:80 .\app\company\forms.py:161
 #: .\app\company\models.py:33
 msgid "Description"
 msgstr "Description"
 
-#: .\app\company\forms.py:82 .\app\company\forms.py:160
+#: .\app\company\forms.py:84 .\app\company\forms.py:165
 msgid "Write here a brief summary of your business."
 msgstr "Ecrivez ici un bref résumé de votre entreprise."
 
-#: .\app\company\forms.py:89 .\app\company\templates\company\detail.html:27
+#: .\app\company\forms.py:91 .\app\company\templates\company\detail.html:27
 #: .\app\company\templates\company\filter.html:24
 #: .\app\company\templates\company\index.html:36
 msgid "Incubation phase"
 msgstr "Phase d'incubation"
 
-#: .\app\company\forms.py:95 .\app\company\forms.py:167
+#: .\app\company\forms.py:97 .\app\company\forms.py:172
 #: .\app\company\models.py:37 .\app\company\templates\company\detail.html:56
 #: .\templates\dashboard.html:72
 msgid "Founders"
 msgstr "Fondateurs"
 
-#: .\app\company\forms.py:106 .\app\company\forms.py:178
+#: .\app\company\forms.py:108 .\app\company\forms.py:183
 #: .\app\company\models.py:39 .\app\company\templates\company\detail.html:84
 #: .\templates\dashboard.html:71
 msgid "Mentors"
 msgstr "Mentors"
+
+#: .\app\company\forms.py:122
+msgid "New company"
+msgstr "Nouvelle compagnie"
+
+#: .\app\company\forms.py:205 .\templates\dashboard.html:208
+msgid "Update company"
+msgstr "Modifier cette compagnie"
 
 #: .\app\company\models.py:16
 msgid "Company Status"
@@ -249,10 +257,6 @@ msgstr "Bienvenue sur le tableau de bord du Centech"
 #: .\templates\dashboard.html:189 .\templates\dashboard.html.py:200
 msgid "Update profile"
 msgstr "Modifier profil"
-
-#: .\templates\dashboard.html:208
-msgid "Update company"
-msgstr "Modifier cette compagnie"
 
 #: .\templates\dashboard.html:216
 msgid "Add new founder"

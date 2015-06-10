@@ -22,7 +22,7 @@ class Education(models.Model):
     class Meta:
         verbose_name_plural = _('Education')
 
-    education = models.CharField(max_length=200)
+    education = models.CharField(max_length=200, verbose_name=_('Education level'))
     def __str__(self):
         return self.education
 
@@ -31,7 +31,7 @@ class Expertise(models.Model):
     class Meta:
         verbose_name_plural = _('Expertise')
 
-    expertise = models.CharField(max_length=200)
+    expertise = models.CharField(max_length=200, verbose_name=_('Area of expertise'))
 
     def __str__(self):
         return self.expertise
@@ -40,13 +40,13 @@ class Expertise(models.Model):
 class UserProfile(models.Model):
 
     # This line is required. Links UserProfile to a User model instance.
-    user = models.OneToOneField(User, related_name="profile")
-    userProfile_id = models.AutoField(primary_key=True)
+    user = models.OneToOneField(User, related_name="profile", verbose_name=_('User'))
+    userProfile_id = models.AutoField(primary_key=True, verbose_name=_('Identifiant'))
 
     # The additional attributes we wish to include.
-    phone = models.CharField(max_length=10,verbose_name=_('phone'),blank=True)
-    website = models.URLField(blank=True,verbose_name=_('web site'))
-    picture = models.ImageField(upload_to='user_profile', blank=True,verbose_name=_('personal photograph'))
+    phone = models.CharField(max_length=10,verbose_name=_('Phone'),blank=True)
+    website = models.URLField(blank=True,verbose_name=_('Web site'))
+    picture = models.ImageField(upload_to='user_profile', blank=True,verbose_name=_('Picture'))
 
     def __str__(self):
         return self.user.username

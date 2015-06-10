@@ -7,54 +7,53 @@
 {% load i18n %}
 
 {% block content %}
-    <h1>Sommaire du Centech</h1><br>
+    <h1>{% trans "Summary of the Centech" %}</h1><br>
     <div class="row" align="center">
-        <div class="col-sm-4" style="border: 1px solid black;"><strong>Nombre de compagnies</strong> <br>{{companies.count}}</div>
-        <div class="col-sm-4" style="border: 1px solid black;"><strong>Nombre de fondateurs</strong> <br>{{founders.count}}</div>
-        <div class="col-sm-4" style="border: 1px solid black;"><strong>Nombre de mentors</strong> <br>{{mentors.count}}</div>
+        <div class="col-sm-4" style="border: 1px solid black;"><strong>{% trans "Number of companies" %}</strong> <br>{{companies.count}}</div>
+        <div class="col-sm-4" style="border: 1px solid black;"><strong>{% trans "Number of founders" %}</strong> <br>{{founders.count}}</div>
+        <div class="col-sm-4" style="border: 1px solid black;"><strong>{% trans "Number of mentors" %}</strong> <br>{{mentors.count}}</div>
         {% for titi in cIRL %}
-
             {{titi.level}}
         {%endfor%}
     </div>
     <div class="row">
         <div class="col-sm-12">
             <br><br>
-            <h3>Indicateurs de performance :</h3>
+            <h3>{% trans "Indicators of performance" %} :</h3>
             <p>
-                <strong>Nombre d'IRL noté par nos services : {{IRLs.count}}</strong> <br>
-                <strong>Moyenne des IRL : {{moyIRL}}</strong><br>
+                <strong>{% trans "Number of IRL noted by the Centech" %} : {{IRLs.count}}</strong> <br>
+                <strong>{% trans "Average of IRL" %} : {{moyIRL}}</strong><br>
             </p>
             <p>
-                <strong>Nombre de TRL noté par nos services : {{TRLs.count}}</strong> <br>
-                <strong>Moyenne des TRL : {{moyTRL}}</strong><br>
+                <strong>{% trans "Number of TRL noted by the Centech" %} : {{TRLs.count}}</strong> <br>
+                <strong>{% trans "Average of TRL" %} : {{moyTRL}}</strong><br>
             </p>
             <br><br>
-            <h3>Finance :</h3>
+            <h3>{% trans "Finance" %} :</h3>
             <p>
-                <strong>Nombre de bourses demandées : {{bourses.count}}</strong><br>
-                <strong>Valeurs des bourses demandées : {{totalBourseDemandees}}</strong> <br>
-                <strong>Valeurs des bourses reçues : {{totalBourseRecues}}</strong><br>
+                <strong>{% trans "Number of stock exchange ask" %} : {{bourses.count}}</strong><br>
+                <strong>{% trans "Amount of stock exchange ask" %} : {{totalBourseDemandees}}</strong> <br>
+                <strong>{% trans "Amount of stock exchange received" %} : {{totalBourseRecues}}</strong><br>
             </p>
             <p>
-                <strong>Nombre de subventions demandées : {{subventions.count}}</strong><br>
-                <strong>Valeurs des subventions demandées : {{totalSubventionDemandees}}</strong> <br>
-                <strong>Valeurs des subventions reçues : {{totalSubventionRecues}}</strong><br>
+                <strong>{% trans "Number of subsidies ask" %} : {{subventions.count}}</strong><br>
+                <strong>{% trans "Amount of subsidies ask" %} : {{totalSubventionDemandees}}</strong> <br>
+                <strong>{% trans "Amount of subsidies received" %} : {{totalSubventionRecues}}</strong><br>
             </p>
             <p>
-                <strong>Nombre d'investissements demandées : {{investissements.count}}</strong><br>
-                <strong>Valeurs des investissements demandées : {{totalInvestissementDemandees}}</strong> <br>
-                <strong>Valeurs des investissements reçues : {{totalInvestissementRecues}}</strong><br>
+                <strong>{% trans "Number of investments ask" %} : {{investissements.count}}</strong><br>
+                <strong>{% trans "Amount of investments ask" %} : {{totalInvestissementDemandees}}</strong> <br>
+                <strong>{% trans "Amount of investments received" %} : {{totalInvestissementRecues}}</strong><br>
             </p>
             <p>
-                <strong>Nombre de prets demandées : {{prets.count}}</strong><br>
-                <strong>Valeurs des prets demandées : {{totalPretDemandees}}</strong> <br>
-                <strong>Valeurs des prets reçues : {{totalPretRecues}}</strong><br>
+                <strong>{% trans "Number of loans ask" %} : {{prets.count}}</strong><br>
+                <strong>{% trans "Amount of loans ask" %} : {{totalPretDemandees}}</strong> <br>
+                <strong>{% trans "Amount of loans received" %} : {{totalPretRecues}}</strong><br>
             </p>
             <p>
-                <strong>Nombre de ventes demandées : {{ventes.count}}</strong><br>
-                <strong>Valeurs des ventes demandées : {{totalVenteDemandees}}</strong> <br>
-                <strong>Valeurs des ventes reçues : {{totalVenteRecues}}</strong><br>
+                <strong>{% trans "Number of sales ask" %} : {{ventes.count}}</strong><br>
+                <strong>{% trans "Amount of sales ask" %} : {{totalVenteDemandees}}</strong> <br>
+                <strong>{% trans "Amount of sales received" %} : {{totalVenteRecues}}</strong><br>
             </p>
         </div>
     </div>

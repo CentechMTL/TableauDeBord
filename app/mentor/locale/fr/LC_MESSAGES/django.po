@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-04 09:51-0400\n"
+"POT-Creation-Date: 2015-06-10 11:05-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,6 +33,16 @@ msgstr "Téléphone"
 msgid "Web site:"
 msgstr "Site web"
 
+#: .\app\mentor\templates\mentor\detail.html:56
+msgid "Companies"
+msgstr ""
+
+#: .\app\mentor\templates\mentor\detail.html:80
+#, fuzzy
+#| msgid "No mentors exist."
+msgid "No companies exist."
+msgstr "Aucun mentors."
+
 #: .\app\mentor\templates\mentor\index.html:4
 #: .\app\mentor\templates\mentor\index.html:6
 msgid "Centech Mentors"
@@ -43,9 +53,10 @@ msgid "No mentors exist."
 msgstr "Aucun mentors."
 
 #: .\app\mentor\templates\mentor\mentor_form.html:6
+#: .\app\mentor\templates\mentor\mentor_form.html:9
 msgid "Profile"
 msgstr ""
 
-#: .\app\mentor\templates\mentor\mentor_form.html:8
-msgid "My profile"
+#: .\app\mentor\templates\mentor\mentor_form.html:11
+msgid "Edit my profile"
 msgstr ""

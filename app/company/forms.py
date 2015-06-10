@@ -14,6 +14,7 @@ from crispy_forms.layout import HTML, Layout, \
     Submit, Field, ButtonHolder, Hidden, Div
 
 from embed_video.fields import EmbedVideoField
+from django.utils.translation import ugettext_lazy as _
 
 #http://django-filter.readthedocs.org/en/latest/usage.html
 class CompanyFilter(django_filters.FilterSet):
@@ -24,10 +25,10 @@ class CompanyFilter(django_filters.FilterSet):
 class CompanyStatusCreateForm(forms.Form):
 
     name = forms.CharField(
-        label=('Name'),
+        label=_('Name'),
         required=True,
     )
-    name.widget.attrs.update({'placeholder': (u'Name of the new status')})
+    name.widget.attrs.update({'placeholder': _(u'Name of the new status')})
 
     def __init__(self, *args, **kwargs):
         super(CompanyStatusCreateForm, self).__init__(*args, **kwargs)
@@ -38,7 +39,7 @@ class CompanyStatusCreateForm(forms.Form):
         self.helper.layout = Layout(
             HTML("<h1>New status</h1>"),
             Field('name'),
-            StrictButton('Enregistrer', type="submit")
+            StrictButton(_('Save'), type="submit")
         )
 
     def is_valid(self, form):
@@ -51,47 +52,47 @@ class CompanyStatusCreateForm(forms.Form):
 class CompanyCreateForm(forms.Form):
 
     name = forms.CharField(
-        label=('Name'),
+        label=_('Name'),
         required=True,
     )
-    name.widget.attrs.update({'placeholder': (u'Name of the company')})
+    name.widget.attrs.update({'placeholder': _(u'Name of the company')})
 
     logo = forms.ImageField(
-        label=('Logo'),
+        label=_('Logo'),
         required=False,
     )
 
     video = forms.URLField(
-        label=('Vidéo'),
+        label=_('Video'),
         required=False,
     )
-    video.widget.attrs.update({'placeholder': (u'https://urlvideo.com/')})
+    video.widget.attrs.update({'placeholder': _(u'https://urlvideo.com/')})
 
     url = forms.URLField(
-        label=('Web site'),
+        label=_('Web site'),
         required=False,
     )
-    url.widget.attrs.update({'placeholder': (u'https://example.com')})
+    url.widget.attrs.update({'placeholder': _(u'https://example.com')})
 
     about = forms.CharField(
-        label=('Description'),
+        label=_('Description'),
         required=False,
         widget=forms.Textarea(
             attrs={
-                'placeholder': (u'Rentrez ici un bref résumé de votre entreprise.'),
+                'placeholder': _(u'Write here a brief summary of your business.'),
                 'class': 'md-editor'
             }
         )
     )
 
     status = forms.ModelChoiceField(
-        label=(u"Phase d'incubation"),
+        label=_(u"Incubation phase"),
         queryset=CompanyStatus.objects.all(),
         required=True,
     )
 
     founders = forms.ModelMultipleChoiceField(
-        label=(u"Fondateurs"),
+        label=_(u"Founders"),
         queryset=Founder.objects.all(),
         required=False,
         widget=forms.SelectMultiple(
@@ -102,7 +103,7 @@ class CompanyCreateForm(forms.Form):
     )
 
     mentors = forms.ModelMultipleChoiceField(
-        label=(u"Mentors"),
+        label=_(u"Mentors"),
         queryset=Mentor.objects.all(),
         required=False,
         widget=forms.SelectMultiple()
@@ -123,47 +124,47 @@ class CompanyCreateForm(forms.Form):
             Field('about'),
             Field('founders'),
             Field('mentors'),
-            StrictButton('Enregistrer', type="submit")
+            StrictButton(_('Save'), type="submit")
         )
 
 class CompanyUpdateForm(forms.Form):
 
     name = forms.CharField(
-        label=('Name'),
+        label=_('Name'),
         required=True,
     )
-    name.widget.attrs.update({'placeholder': (u'Name of the company')})
+    name.widget.attrs.update({'placeholder': _(u'Name of the company')})
 
     logo = forms.ImageField(
-        label=('Logo'),
+        label=_('Logo'),
         required=False,
     )
 
     video = forms.URLField(
-        label=('Vidéo'),
+        label=_('Video'),
         required=False,
     )
-    video.widget.attrs.update({'placeholder': (u'https://urlvideo.com/')})
+    video.widget.attrs.update({'placeholder': _(u'https://urlvideo.com/')})
 
     url = forms.URLField(
-        label=('Web site'),
+        label=_('Web site'),
         required=False,
     )
-    url.widget.attrs.update({'placeholder': (u'https://example.com')})
+    url.widget.attrs.update({'placeholder': _(u'https://example.com')})
 
     about = forms.CharField(
-        label=('Description'),
+        label=_('Description'),
         required=False,
         widget=forms.Textarea(
             attrs={
-                'placeholder': (u'Rentrez ici un bref résumé de votre entreprise.'),
+                'placeholder': _(u'Write here a brief summary of your business.'),
                 'class': 'md-editor'
             }
         )
     )
 
     founders = forms.ModelMultipleChoiceField(
-        label=(u"Fondateurs"),
+        label=_(u"Founders"),
         queryset=Founder.objects.all(),
         required=False,
         widget=forms.SelectMultiple(
@@ -174,7 +175,7 @@ class CompanyUpdateForm(forms.Form):
     )
 
     mentors = forms.ModelMultipleChoiceField(
-        label=(u"Mentors"),
+        label=_(u"Mentors"),
         queryset=Mentor.objects.all(),
         required=False,
         widget=forms.SelectMultiple()
@@ -202,7 +203,7 @@ class CompanyUpdateForm(forms.Form):
             Field('founders'),
             Field('mentors'),
             Field('about'),
-            StrictButton('Enregistrer', type="submit")
+            StrictButton(_('Save'), type="submit")
         )
 
     def save(self):

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-04 09:51-0400\n"
+"POT-Creation-Date: 2015-06-10 11:05-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -44,7 +44,7 @@ msgid "Tableau de Bord"
 msgstr "Tableau de bord"
 
 #: .\app\home\templates\home\index.html:13
-msgid "Follow us"
+msgid "Follow us on"
 msgstr ""
 
 #: .\app\home\templates\home\noAccessPermissions.html:7

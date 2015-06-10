@@ -21,7 +21,7 @@
                 <img src="/media/{{ company.logo }}"  height=70%/><br>
                 {{ company.name }}
             </a>
-        <br>{% trans "incubation phase:" %} {{ company.companyStatus }}<br>
+        <br>{% trans "Incubation phase" %} : {{ company.companyStatus }}<br>
         </div>
         {% if forloop.counter|divisibleby:4 %}
             </div>

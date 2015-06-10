@@ -9,7 +9,7 @@
     <form method="post">{% csrf_token%}
         <!--TODO add a datepicker-->
         {{ form.as_p }}
-        Format de la date: jj/mm/aaaa HH:MM <br><br>
+        {% trans"Format of the date: dd/mm/yyyy HH:MM" %} <br><br>
         <button type="submit">{% trans "Save" %}</button>
     </form>
 {% endif %}

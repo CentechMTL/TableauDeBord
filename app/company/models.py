@@ -15,7 +15,7 @@ class CompanyStatus(models.Model):
     class Meta:
         verbose_name_plural = _('Company Status')
 
-    status = models.CharField(max_length=50)
+    status = models.CharField(max_length=50, verbose_name=_('Name'))
 
     def __str__(self):
         return self.status
@@ -26,17 +26,17 @@ class Company(models.Model):
         verbose_name_plural = _('Companies')
 
     #General information
-    name = models.CharField(max_length=200)
-    logo = models.ImageField(upload_to='logo',blank=True)
-    url = models.URLField(blank=True)
-    video = EmbedVideoField(blank=True)
-    description = models.TextField(blank=True,max_length=2000)
-    companyStatus = models.ForeignKey(CompanyStatus,verbose_name=_('Phase'))
+    name = models.CharField(max_length=200, verbose_name=_('Name'))
+    logo = models.ImageField(upload_to='logo',blank=True, verbose_name=_('Logo'))
+    url = models.URLField(blank=True, verbose_name=_('URL'))
+    video = EmbedVideoField(blank=True, verbose_name=_('Video'))
+    description = models.TextField(blank=True,max_length=2000, verbose_name=_('Description'))
+    companyStatus = models.ForeignKey(CompanyStatus,verbose_name=_('Status'))
 
     #List of founders
-    founders = models.ManyToManyField(Founder,blank=True)
+    founders = models.ManyToManyField(Founder,blank=True, verbose_name=_('Founders'))
     #List of mentors
-    mentors = models.ManyToManyField(Mentor,blank=True)
+    mentors = models.ManyToManyField(Mentor,blank=True, verbose_name=_('Mentors'))
 
     created = models.DateTimeField(blank=True)
     updated = models.DateTimeField(blank=True)
@@ -73,9 +73,9 @@ class Presence(models.Model):
         verbose_name_plural = _('Presences')
 
     #List of company
-    company = models.ManyToManyField(Company,blank=True)
+    company = models.ManyToManyField(Company,blank=True, verbose_name=_('Companies'))
     #Date of the meeting
-    date = models.DateTimeField(blank=True)
+    date = models.DateTimeField(blank=True, verbose_name=_('Date'))
 
     def __str__(self):
         return str(self.date)

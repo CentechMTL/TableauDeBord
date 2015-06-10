@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-04 09:51-0400\n"
+"POT-Creation-Date: 2015-06-10 11:05-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -93,25 +93,25 @@ msgstr "Date"
 msgid "Comment"
 msgstr "Commentaire"
 
-#: .\app\kpi\templates\kpi\irl.html:117 .\app\kpi\templates\kpi\irl.html:125
-#: .\app\kpi\templates\kpi\trl.html:118 .\app\kpi\templates\kpi\trl.html:126
+#: .\app\kpi\templates\kpi\irl.html:118 .\app\kpi\templates\kpi\irl.html:128
+#: .\app\kpi\templates\kpi\trl.html:119 .\app\kpi\templates\kpi\trl.html:129
 msgid "Modify"
 msgstr "Modifier"
 
-#: .\app\kpi\templates\kpi\irl.html:118 .\app\kpi\templates\kpi\irl.html:126
+#: .\app\kpi\templates\kpi\irl.html:119 .\app\kpi\templates\kpi\irl.html:129
 #: .\app\kpi\templates\kpi\irl_confirm_delete.html:17
-#: .\app\kpi\templates\kpi\trl.html:119 .\app\kpi\templates\kpi\trl.html:127
+#: .\app\kpi\templates\kpi\trl.html:120 .\app\kpi\templates\kpi\trl.html:130
 #: .\app\kpi\templates\kpi\trl_confirm_delete.html:17
 #, fuzzy
 #| msgid "Date"
 msgid "Delete"
 msgstr "Supprimer"
 
-#: .\app\kpi\templates\kpi\irl.html:133
+#: .\app\kpi\templates\kpi\irl.html:137
 msgid "No one IRL for the moment."
 msgstr "Aucun IRL"
 
-#: .\app\kpi\templates\kpi\irl.html:136
+#: .\app\kpi\templates\kpi\irl.html:140
 msgid "New IRL"
 msgstr "Nouvel IRL"
 
@@ -201,11 +201,11 @@ msgstr "TRL de"
 msgid "TRL"
 msgstr "TRL"
 
-#: .\app\kpi\templates\kpi\trl.html:134
+#: .\app\kpi\templates\kpi\trl.html:138
 msgid "No one TRL for the moment."
 msgstr "Aucun TRL."
 
-#: .\app\kpi\templates\kpi\trl.html:137
+#: .\app\kpi\templates\kpi\trl.html:141
 msgid "New TRL"
 msgstr "Nouveau TRL"
 

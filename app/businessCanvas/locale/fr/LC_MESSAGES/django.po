@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-04 09:50-0400\n"
+"POT-Creation-Date: 2015-06-10 11:05-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,10 +24,6 @@ msgstr "Type d'élément du canevas de modèle d'affaire"
 #: .\app\businessCanvas\models.py:37
 msgid "Business canvas element"
 msgstr "Element du canevas modèle d'affaire"
-
-#: .\app\businessCanvas\models.py:43
-msgid "Type"
-msgstr "Type"
 
 #: .\app\businessCanvas\models.py:46
 msgid "Disactivated"
@@ -111,6 +107,9 @@ msgstr "Espace de réflexion"
 #: .\app\businessCanvas\templates\businessCanvas\businesscanvaselementarchived_list.html:93
 msgid "Business Model Canvas of "
 msgstr "Canevas de modèle d'affaire du "
+
+#~ msgid "Type"
+#~ msgstr "Type"
 
 #~ msgid "New Experiment"
 #~ msgstr "Nouvelle expérimentation"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-04 09:51-0400\n"
+"POT-Creation-Date: 2015-06-10 11:05-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -41,12 +41,23 @@ msgstr "Site web"
 msgid "About"
 msgstr "A propos"
 
+#: .\app\founder\templates\founder\detail.html:58
+msgid "Companies"
+msgstr ""
+
+#: .\app\founder\templates\founder\detail.html:82
+#, fuzzy
+#| msgid "No founders exist."
+msgid "No companies exist."
+msgstr "Aucun fondateur"
+
 #: .\app\founder\templates\founder\founder_form.html:6
+#: .\app\founder\templates\founder\founder_form.html:9
 msgid "Profile"
 msgstr ""
 
-#: .\app\founder\templates\founder\founder_form.html:8
-msgid "My profile"
+#: .\app\founder\templates\founder\founder_form.html:11
+msgid "Edit my profile"
 msgstr ""
 
 #: .\app\founder\templates\founder\index.html:8

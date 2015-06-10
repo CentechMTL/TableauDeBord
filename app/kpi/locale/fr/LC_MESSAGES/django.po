@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-10 13:43-0400\n"
+"POT-Creation-Date: 2015-06-10 13:51-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,52 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: .\app\kpi\models.py:18
+msgid "Types of KPI"
+msgstr "Types de KPI"
+
+#: .\app\kpi\models.py:20 .\app\kpi\templates\kpi\irl.html:64
+#: .\app\kpi\templates\kpi\trl.html:65
+msgid "Name"
+msgstr "Nom"
+
+#: .\app\kpi\models.py:28
+msgid "KPIs"
+msgstr "KPIs"
+
+#: .\app\kpi\models.py:30
+msgid "Companies"
+msgstr "Compagnies"
+
+#: .\app\kpi\models.py:31
+msgid "Status"
+msgstr "Status"
+
+#: .\app\kpi\models.py:32
+msgid "Type of KPI"
+msgstr "Type de KPI"
+
+#: .\app\kpi\models.py:33 .\app\kpi\templates\kpi\irl.html:65
+#: .\app\kpi\templates\kpi\irl.html:115
+#: .\app\kpi\templates\kpi\irl_confirm_delete.html:11
+#: .\app\kpi\templates\kpi\trl.html:66 .\app\kpi\templates\kpi\trl.html:116
+#: .\app\kpi\templates\kpi\trl_confirm_delete.html:11
+msgid "Level"
+msgstr "Niveau"
+
+#: .\app\kpi\models.py:34 .\app\kpi\templates\kpi\irl.html:101
+#: .\app\kpi\templates\kpi\irl.html:114 .\app\kpi\templates\kpi\trl.html:102
+#: .\app\kpi\templates\kpi\trl.html:115
+msgid "Date"
+msgstr "Date"
+
+#: .\app\kpi\models.py:35 .\app\kpi\templates\kpi\irl.html:116
+#: .\app\kpi\templates\kpi\irl_confirm_delete.html:13
+#: .\app\kpi\templates\kpi\trl.html:117
+#: .\app\kpi\templates\kpi\trl_confirm_delete.html:13
+msgid "Comment"
+msgstr "Commentaire"
 
 #: .\app\kpi\templates\kpi\irl.html:25
 msgid "Basic principles observed and reported"
@@ -63,35 +109,12 @@ msgstr ""
 msgid "IRL of"
 msgstr "IRL de"
 
-#: .\app\kpi\templates\kpi\irl.html:64 .\app\kpi\templates\kpi\trl.html:65
-msgid "Name"
-msgstr "Nom"
-
-#: .\app\kpi\templates\kpi\irl.html:65 .\app\kpi\templates\kpi\irl.html:115
-#: .\app\kpi\templates\kpi\irl_confirm_delete.html:11
-#: .\app\kpi\templates\kpi\trl.html:66 .\app\kpi\templates\kpi\trl.html:116
-#: .\app\kpi\templates\kpi\trl_confirm_delete.html:11
-msgid "Level"
-msgstr "Niveau"
-
 #: .\app\kpi\templates\kpi\irl.html:95
 #: .\app\kpi\templates\kpi\irl_confirm_delete.html:6
 #: .\app\kpi\templates\kpi\irl_confirm_delete.html:8
 #: .\app\kpi\templates\kpi\irl_form.html:5
 msgid "IRL"
 msgstr "IRL"
-
-#: .\app\kpi\templates\kpi\irl.html:101 .\app\kpi\templates\kpi\irl.html:114
-#: .\app\kpi\templates\kpi\trl.html:102 .\app\kpi\templates\kpi\trl.html:115
-msgid "Date"
-msgstr "Date"
-
-#: .\app\kpi\templates\kpi\irl.html:116
-#: .\app\kpi\templates\kpi\irl_confirm_delete.html:13
-#: .\app\kpi\templates\kpi\trl.html:117
-#: .\app\kpi\templates\kpi\trl_confirm_delete.html:13
-msgid "Comment"
-msgstr "Commentaire"
 
 #: .\app\kpi\templates\kpi\irl.html:118 .\app\kpi\templates\kpi\irl.html:128
 #: .\app\kpi\templates\kpi\trl.html:119 .\app\kpi\templates\kpi\trl.html:129
@@ -217,17 +240,3 @@ msgstr "Etes-vous sûr de vouloir supprimer ce TRL"
 msgid "New TRL for"
 msgstr "Nouveau TRL pour"
 
-#~ msgid "Centech Companies"
-#~ msgstr "Compagnies du Centech"
-
-#~ msgid "incubation phase:"
-#~ msgstr "phase d'incubation:"
-
-#~ msgid "No companies exist."
-#~ msgstr "Aucune compagnies."
-
-#~ msgid "Value"
-#~ msgstr "Valeur"
-
-#~ msgid "Experiment"
-#~ msgstr "Experimentation"

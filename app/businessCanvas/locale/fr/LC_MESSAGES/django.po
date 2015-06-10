@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-10 11:05-0400\n"
+"POT-Creation-Date: 2015-06-10 11:21-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,23 +25,7 @@ msgstr "Type d'élément du canevas de modèle d'affaire"
 msgid "Business canvas element"
 msgstr "Element du canevas modèle d'affaire"
 
-#: .\app\businessCanvas\models.py:46
-msgid "Disactivated"
-msgstr "Désactiver"
-
-#: .\app\businessCanvas\models.py:55
-#: .\app\businessCanvas\templates\businessCanvas\businesscanvaselement_list.html:391
-msgid "Archive"
-msgstr "Archive"
-
-#: .\app\businessCanvas\templates\businessCanvas\businesscanvaselement_list.html:119
-msgid "Business Model Canvas"
-msgstr "Canevas de modèle d'affaire"
-
-#: .\app\businessCanvas\templates\businessCanvas\businesscanvaselement_list.html:130
-msgid "Key Partners"
-msgstr "Partenaires clés"
-
+#: .\app\businessCanvas\models.py:39
 #: .\app\businessCanvas\templates\businessCanvas\businesscanvaselement_list.html:137
 #: .\app\businessCanvas\templates\businessCanvas\businesscanvaselement_list.html:162
 #: .\app\businessCanvas\templates\businessCanvas\businesscanvaselement_list.html:187
@@ -55,6 +39,7 @@ msgstr "Partenaires clés"
 msgid "Title"
 msgstr "Titre"
 
+#: .\app\businessCanvas\models.py:40
 #: .\app\businessCanvas\templates\businessCanvas\businesscanvaselement_list.html:138
 #: .\app\businessCanvas\templates\businessCanvas\businesscanvaselement_list.html:163
 #: .\app\businessCanvas\templates\businessCanvas\businesscanvaselement_list.html:188
@@ -68,48 +53,86 @@ msgstr "Titre"
 msgid "Comment"
 msgstr "Commentaire"
 
+#: .\app\businessCanvas\models.py:42 .\app\businessCanvas\models.py:58
+msgid "Date"
+msgstr "Date"
+
+#: .\app\businessCanvas\models.py:43
+msgid "Type"
+msgstr "Type"
+
+#: .\app\businessCanvas\models.py:44 .\app\businessCanvas\models.py:59
+msgid "Company"
+msgstr "Compagnie"
+
+#: .\app\businessCanvas\models.py:46
+msgid "Disactivated"
+msgstr "Désactiver"
+
+#: .\app\businessCanvas\models.py:55
+#: .\app\businessCanvas\templates\businessCanvas\businesscanvaselement_list.html:391
+#: .\app\businessCanvas\templates\businessCanvas\businesscanvaselementarchived_list.html:221
+msgid "Archive"
+msgstr "Archive"
+
+#: .\app\businessCanvas\models.py:61
+msgid "Elements of the archive"
+msgstr "Elements de l'archive"
+
+#: .\app\businessCanvas\templates\businessCanvas\businesscanvaselement_list.html:119
+msgid "Business Model Canvas"
+msgstr "Canevas de modèle d'affaire"
+
+#: .\app\businessCanvas\templates\businessCanvas\businesscanvaselement_list.html:130
+#: .\app\businessCanvas\templates\businessCanvas\businesscanvaselementarchived_list.html:101
+msgid "Key Partners"
+msgstr "Partenaires clés"
+
 #: .\app\businessCanvas\templates\businessCanvas\businesscanvaselement_list.html:155
+#: .\app\businessCanvas\templates\businessCanvas\businesscanvaselementarchived_list.html:112
 msgid "Key Activities"
 msgstr "Activités clés"
 
 #: .\app\businessCanvas\templates\businessCanvas\businesscanvaselement_list.html:180
+#: .\app\businessCanvas\templates\businessCanvas\businesscanvaselementarchived_list.html:123
 msgid "Value Proposition"
 msgstr "Proposition de valeur"
 
 #: .\app\businessCanvas\templates\businessCanvas\businesscanvaselement_list.html:206
+#: .\app\businessCanvas\templates\businessCanvas\businesscanvaselementarchived_list.html:134
 msgid "Customer Relationships"
 msgstr "Relations clients"
 
 #: .\app\businessCanvas\templates\businessCanvas\businesscanvaselement_list.html:231
+#: .\app\businessCanvas\templates\businessCanvas\businesscanvaselementarchived_list.html:145
 msgid "Customer Segments"
 msgstr "Segments de clients"
 
 #: .\app\businessCanvas\templates\businessCanvas\businesscanvaselement_list.html:258
+#: .\app\businessCanvas\templates\businessCanvas\businesscanvaselementarchived_list.html:158
 msgid "Key Resources"
 msgstr "Ressources clés"
 
 #: .\app\businessCanvas\templates\businessCanvas\businesscanvaselement_list.html:283
+#: .\app\businessCanvas\templates\businessCanvas\businesscanvaselementarchived_list.html:169
 msgid "Channels"
 msgstr "Filières"
 
 #: .\app\businessCanvas\templates\businessCanvas\businesscanvaselement_list.html:310
+#: .\app\businessCanvas\templates\businessCanvas\businesscanvaselementarchived_list.html:182
 msgid "Cost Structure"
 msgstr "Coûts"
 
 #: .\app\businessCanvas\templates\businessCanvas\businesscanvaselement_list.html:335
+#: .\app\businessCanvas\templates\businessCanvas\businesscanvaselementarchived_list.html:193
 msgid "Revenue Streams"
 msgstr "Sources de revenus"
 
 #: .\app\businessCanvas\templates\businessCanvas\businesscanvaselement_list.html:366
+#: .\app\businessCanvas\templates\businessCanvas\businesscanvaselementarchived_list.html:210
 msgid "Brainstorming Space"
 msgstr "Espace de réflexion"
 
 #: .\app\businessCanvas\templates\businessCanvas\businesscanvaselementarchived_list.html:93
 msgid "Business Model Canvas of "
 msgstr "Canevas de modèle d'affaire du "
-
-#~ msgid "Type"
-#~ msgstr "Type"
-
-#~ msgid "New Experiment"
-#~ msgstr "Nouvelle expérimentation"

@@ -2,10 +2,22 @@
 {% load i18n %}
 {% load staticfiles %}
 {% block title %}{% trans "Sales" %}{% endblock %}
+
+{% block extrahead %}
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/redmond/jquery-ui.css" />
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+{% endblock %}
+
 {% block content %}
     <h1>{% trans "Sales" %}</h1>
     <form method="post">{% csrf_token%}
         {{ form.as_p }}
         <button type="submit">{% trans "Save" %}</button>
     </form>
+
+    <script>
+        $( "#id_dateSoumission" ).datepicker({ dateFormat: 'dd/mm/yy' });
+        $( "#id_dateReception" ).datepicker({ dateFormat: 'dd/mm/yy' });
+    </script>
 {% endblock %}

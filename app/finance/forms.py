@@ -9,11 +9,61 @@ from app.finance.models import Bourse, Subvention, Investissement, Pret, Vente
 class BourseForm(forms.ModelForm):
     class Meta:
         model = Bourse
-        fields = ['name','dateSoumission','sommeSoumission','dateReception',
-              'sommeReception']
+        fields = ['dateSoumission', 'dateReception']
+        widgets = {
+            'dateSoumission' : forms.DateInput(attrs={'type':'date', 'class':'datepicker'}),
+            'dateReception' : forms.DateInput(attrs={'type':'date', 'class':'datepicker'})
+        }
 
-    def __init__(self, *args, **kwargs):
-        super(BourseForm, self).__init__(*args, **kwargs)
-        self.fields['dateSoumission'].widget = AdminDateWidget()
+    dateSoumission = forms.DateField()
+    dateReception = forms.DateField()
+
+class SubventionForm(forms.ModelForm):
+    class Meta:
+        model = Subvention
+        fields = ['dateSoumission', 'dateReception']
+        widgets = {
+            'dateSoumission' : forms.DateInput(attrs={'type':'date', 'class':'datepicker'}),
+            'dateReception' : forms.DateInput(attrs={'type':'date', 'class':'datepicker'})
+        }
+
+    dateSoumission = forms.DateField()
+    dateReception = forms.DateField()
+
+class InvestissementForm(forms.ModelForm):
+    class Meta:
+        model = Investissement
+        fields = ['dateSoumission', 'dateReception']
+        widgets = {
+            'dateSoumission' : forms.DateInput(attrs={'type':'date', 'class':'datepicker'}),
+            'dateReception' : forms.DateInput(attrs={'type':'date', 'class':'datepicker'})
+        }
+
+    dateSoumission = forms.DateField()
+    dateReception = forms.DateField()
+
+class PretForm(forms.ModelForm):
+    class Meta:
+        model = Pret
+        fields = ['dateSoumission', 'dateReception']
+        widgets = {
+            'dateSoumission' : forms.DateInput(attrs={'type':'date', 'class':'datepicker'}),
+            'dateReception' : forms.DateInput(attrs={'type':'date', 'class':'datepicker'})
+        }
+
+    dateSoumission = forms.DateField()
+    dateReception = forms.DateField()
+
+class VenteForm(forms.ModelForm):
+    class Meta:
+        model = Vente
+        fields = ['dateSoumission', 'dateReception']
+        widgets = {
+            'dateSoumission' : forms.DateInput(attrs={'type':'date', 'class':'datepicker'}),
+            'dateReception' : forms.DateInput(attrs={'type':'date', 'class':'datepicker'})
+        }
+
+    dateSoumission = forms.DateField()
+    dateReception = forms.DateField()
 
 #TODO Check for create a form who work for all type of finance

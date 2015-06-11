@@ -200,7 +200,8 @@ class BourseUpdate(generic.UpdateView):
               'sommeReception','description']
 
     def get_url(self):
-        return reverse_lazy('detail_finance', kwargs = {'companyId' : self.args[0], })
+        self.object = self.get_object()
+        return reverse_lazy('detail_finance', kwargs = {'companyId' : self.object.company.id, })
 
     #You need to be connected, and you need to have access as founder or Centech
     @method_decorator(login_required)
@@ -210,7 +211,8 @@ class BourseUpdate(generic.UpdateView):
         for group in groups:
             if group['name'] == 'Centech':
                 try:
-                    company = Company.objects.get(id = int(self.args[0])) #If the company exist, else we go to except
+                    self.object = self.get_object()
+                    company = Company.objects.get(id = self.object.company.id) #If the company exist, else we go to except
                     return super(BourseUpdate, self).dispatch(*args, **kwargs)
                 except:
                     pass
@@ -240,10 +242,12 @@ class BourseDelete(generic.DeleteView):
         for group in groups:
             if group['name'] == 'Centech':
                 try:
-                    company = Company.objects.get(id = int(self.args[0])) #If the company exist, else we go to except
+                    self.object = self.get_object()
+                    company = Company.objects.get(id = self.object.company.id) #If the company exist, else we go to except
                     return super(BourseDelete, self).dispatch(*args, **kwargs)
                 except:
                     pass
+
 
         #For know the company of the user if is a founder
         if self.request.user.is_active:
@@ -320,7 +324,8 @@ class SubventionUpdate(generic.UpdateView):
               'sommeReception','description']
 
     def get_url(self):
-        return reverse_lazy('detail_finance', kwargs = {'companyId' : self.args[0], })
+        self.object = self.get_object()
+        return reverse_lazy('detail_finance', kwargs = {'companyId' : self.object.company.id, })
 
     #You need to be connected, and you need to have access as founder or Centech
     @method_decorator(login_required)
@@ -330,7 +335,8 @@ class SubventionUpdate(generic.UpdateView):
         for group in groups:
             if group['name'] == 'Centech':
                 try:
-                    company = Company.objects.get(id = int(self.args[0])) #If the company exist, else we go to except
+                    self.object = self.get_object()
+                    company = Company.objects.get(id = self.object.company.id) #If the company exist, else we go to except
                     return super(SubventionUpdate, self).dispatch(*args, **kwargs)
                 except:
                     pass
@@ -360,10 +366,12 @@ class SubventionDelete(generic.DeleteView):
         for group in groups:
             if group['name'] == 'Centech':
                 try:
-                    company = Company.objects.get(id = int(self.args[0])) #If the company exist, else we go to except
+                    self.object = self.get_object()
+                    company = Company.objects.get(id = self.object.company.id) #If the company exist, else we go to except
                     return super(SubventionDelete, self).dispatch(*args, **kwargs)
                 except:
                     pass
+
 
         #For know the company of the user if is a founder
         if self.request.user.is_active:
@@ -449,10 +457,12 @@ class InvestissementUpdate(generic.UpdateView):
         for group in groups:
             if group['name'] == 'Centech':
                 try:
-                    company = Company.objects.get(id = int(self.args[0])) #If the company exist, else we go to except
+                    self.object = self.get_object()
+                    company = Company.objects.get(id = self.object.company.id) #If the company exist, else we go to except
                     return super(InvestissementUpdate, self).dispatch(*args, **kwargs)
                 except:
                     pass
+
 
         if self.request.user.is_active:
             try:
@@ -479,10 +489,12 @@ class InvestissementDelete(generic.DeleteView):
         for group in groups:
             if group['name'] == 'Centech':
                 try:
-                    company = Company.objects.get(id = int(self.args[0])) #If the company exist, else we go to except
+                    self.object = self.get_object()
+                    company = Company.objects.get(id = self.object.company.id) #If the company exist, else we go to except
                     return super(InvestissementDelete, self).dispatch(*args, **kwargs)
                 except:
                     pass
+
 
         #For know the company of the user if is a founder
         if self.request.user.is_active:
@@ -568,10 +580,12 @@ class PretUpdate(generic.UpdateView):
         for group in groups:
             if group['name'] == 'Centech':
                 try:
-                    company = Company.objects.get(id = int(self.args[0])) #If the company exist, else we go to except
+                    self.object = self.get_object()
+                    company = Company.objects.get(id = self.object.company.id) #If the company exist, else we go to except
                     return super(PretUpdate, self).dispatch(*args, **kwargs)
                 except:
                     pass
+
 
         if self.request.user.is_active:
             try:
@@ -598,10 +612,12 @@ class PretDelete(generic.DeleteView):
         for group in groups:
             if group['name'] == 'Centech':
                 try:
-                    company = Company.objects.get(id = int(self.args[0])) #If the company exist, else we go to except
+                    self.object = self.get_object()
+                    company = Company.objects.get(id = self.object.company.id) #If the company exist, else we go to except
                     return super(PretDelete, self).dispatch(*args, **kwargs)
                 except:
                     pass
+
 
         #For know the company of the user if is a founder
         if self.request.user.is_active:
@@ -687,10 +703,12 @@ class VenteUpdate(generic.UpdateView):
         for group in groups:
             if group['name'] == 'Centech':
                 try:
-                    company = Company.objects.get(id = int(self.args[0])) #If the company exist, else we go to except
+                    self.object = self.get_object()
+                    company = Company.objects.get(id = self.object.company.id) #If the company exist, else we go to except
                     return super(VenteUpdate, self).dispatch(*args, **kwargs)
                 except:
                     pass
+
 
         if self.request.user.is_active:
             try:
@@ -717,10 +735,12 @@ class VenteDelete(generic.DeleteView):
         for group in groups:
             if group['name'] == 'Centech':
                 try:
-                    company = Company.objects.get(id = int(self.args[0])) #If the company exist, else we go to except
+                    self.object = self.get_object()
+                    company = Company.objects.get(id = self.object.company.id) #If the company exist, else we go to except
                     return super(VenteDelete, self).dispatch(*args, **kwargs)
                 except:
                     pass
+
 
         #For know the company of the user if is a founder
         if self.request.user.is_active:

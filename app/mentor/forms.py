@@ -21,13 +21,13 @@ class MentorCreateForm(forms.Form):
 
     firstname = forms.CharField(
         label=_('First name'),
-        required=False,
+        required=True,
     )
     firstname.widget.attrs.update({'placeholder': _(u'First name')})
 
     lastname = forms.CharField(
         label=_('Last name'),
-        required=False,
+        required=True,
     )
     lastname.widget.attrs.update({'placeholder': _(u'Last name')})
 
@@ -71,11 +71,7 @@ class MentorCreateForm(forms.Form):
         label=_(u"Areas of expertise"),
         queryset=Expertise.objects.all(),
         required=False,
-        widget=forms.SelectMultiple(
-            attrs={
-                'required': 'required',
-            }
-        )
+        widget=forms.SelectMultiple()
     )
 
     picture = forms.ImageField(

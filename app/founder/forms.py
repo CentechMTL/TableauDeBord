@@ -78,11 +78,7 @@ class FounderCreateForm(forms.Form):
         label=_(u"Areas of expertise"),
         queryset=Expertise.objects.all(),
         required=False,
-        widget=forms.SelectMultiple(
-            attrs={
-                'required': 'required',
-            }
-        )
+        widget=forms.SelectMultiple()
     )
 
     picture = forms.ImageField(

@@ -25,11 +25,11 @@ msgstr "Nom"
 
 #: .\app\company\forms.py:31
 msgid "Name of the new status"
-msgstr "Nom du nouveau status"
+msgstr "Nom du nouveau statut"
 
 #: .\app\company\forms.py:41
 msgid "New status"
-msgstr "Nouveau status"
+msgstr "Nouveau statut"
 
 #: .\app\company\forms.py:44 .\app\company\forms.py:132
 #: .\app\company\forms.py:214
@@ -101,7 +101,7 @@ msgstr "Modifier cette compagnie"
 
 #: .\app\company\models.py:16
 msgid "Company Status"
-msgstr "Status de la compagnie"
+msgstr "Statut de la compagnie"
 
 #: .\app\company\models.py:26 .\app\company\models.py:76
 #: .\templates\dashboard.html:70
@@ -114,7 +114,7 @@ msgstr "URL"
 
 #: .\app\company\models.py:34
 msgid "Status"
-msgstr "Status de la compagnie"
+msgstr "Statut"
 
 #: .\app\company\models.py:73
 msgid "Presences"
@@ -268,7 +268,7 @@ msgstr "Ajouter un nouveau mentor"
 
 #: .\templates\dashboard.html:230
 msgid "Add new status"
-msgstr "Ajouter un nouveau status"
+msgstr "Ajouter un nouveau statut"
 
 #: .\templates\dashboard.html:237
 msgid "Add new company"

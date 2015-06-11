@@ -97,11 +97,7 @@ class CompanyCreateForm(forms.Form):
         label=_(u"Founders"),
         queryset=Founder.objects.all(),
         required=False,
-        widget=forms.SelectMultiple(
-            attrs={
-                'required': 'required',
-            }
-        )
+        widget=forms.SelectMultiple()
     )
 
     mentors = forms.ModelMultipleChoiceField(
@@ -172,11 +168,7 @@ class CompanyUpdateForm(forms.Form):
         label=_(u"Founders"),
         queryset=Founder.objects.all(),
         required=False,
-        widget=forms.SelectMultiple(
-            attrs={
-                'required': 'required',
-            }
-        )
+        widget=forms.SelectMultiple()
     )
 
     mentors = forms.ModelMultipleChoiceField(

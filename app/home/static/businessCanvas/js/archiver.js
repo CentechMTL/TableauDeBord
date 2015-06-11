@@ -13,21 +13,30 @@ function archiver(baseLien, companyId, baseLienArchive, baseLienDeleteArchive){
         success: function(data, status) {
             //Create the new archive
             div = document.getElementById("divArchive");
+
             newArchive = document.createElement('div');
             newArchive.id = "archive" + data.id;
             newArchive.style.borderBottom = "1px dashed black";
             newArchive.style.paddingLeft = "10px";
+
             newLink = document.createElement('a');
             newLink.href = baseLienArchive + data.id;
             newLink.innerHTML = data.date;
+
             spanDelete = document.createElement('span');
             spanDelete.innerHTML = "<i class=\"fa fa-trash\"></i>";
             spanDelete.className = "archive"+ data.id;
-            spanDelete.setAttribute('onclick','deleteArchive(this.className,"'+baseLienDeleteArchive+data.id+'")');
             spanDelete.style.float = "right";
             spanDelete.style.color = "#428bca";
+
+            newLinkSpanDelete = document.createElement('a');
+            newLinkSpanDelete.href = baseLienDeleteArchive+data.id
+
+            newLinkSpanDelete.appendChild(spanDelete);
+
             newArchive.appendChild(newLink);
-            newArchive.appendChild(spanDelete);
+            newArchive.appendChild(newLinkSpanDelete);
+
             div.appendChild(newArchive);
 
             //Update color of all element in the page

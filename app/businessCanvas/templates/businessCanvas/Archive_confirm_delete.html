@@ -1,0 +1,17 @@
+#https://rayed.com/wordpress/?p=1266
+{% extends "dashboard.html" %}
+<!-- Load internationalisation utils-->
+{% load i18n %}
+{% load staticfiles %}
+{% block title %}{% trans "Experiment" %}{% endblock %}
+{% block content %}
+    <h1>{% trans "Archive" %}</h1>
+    <h1>{% trans "Are you sure you want to delete this archive ?" %}</h1>
+
+    <p>{% trans "create on" %} : {{ archive.date}}</p>
+
+    <form method="post" action="">
+       {% csrf_token %}
+       <button type="submit">{% trans "Delete" %}</button> - <a href="{% url 'businessCanvasElement_list' companyId %}">{% trans "Cancel" %}</a>
+    </form>
+{% endblock %}

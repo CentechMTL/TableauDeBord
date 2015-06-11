@@ -58,6 +58,25 @@ def deleteElement(request, element_id):
     return HttpResponseRedirect("/user/noAccessPermissions")
 
 #Delete an archive
+class ArchiveDelete(generic.DeleteView):
+    model = Archive
+    template_name = 'businessCanvas/archive_confirm_delete.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ArchiveDelete, self).get_context_data(**kwargs)
+        context['companyId'] = kwargs['object'].company.id
+        context['archive'] = kwargs['object']
+        return context
+
+    #rewrite delete() function to redirect to the good page
+    @method_decorator(login_required)
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        company_id = self.object.company.id
+        self.object.delete()
+        return redirect(reverse_lazy('businessCanvasElement_list', args = {company_id}))
+"""
+#Delete an archive
 def deleteArchive(request, archive_id):
     message= {}
 
@@ -73,7 +92,7 @@ def deleteArchive(request, archive_id):
         return HttpResponse(data, content_type='application/json')
     #The visitor can't see this page!
     return HttpResponseRedirect("/user/noAccessPermissions")
-
+"""
 #Return detail of an element
 def getDetail(request, element_id):
     message = {}

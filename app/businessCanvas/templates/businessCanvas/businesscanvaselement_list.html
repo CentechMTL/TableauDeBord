@@ -189,12 +189,16 @@
                     </form>
                     {% for elem in listKeyActivities %}
                             <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
-                                {% if elem.date > last_archive.date %}
-                                    <span class="colorElement" style="color: green;">
-                                {% elif elem.updated > last_archive.date %}
-                                    <span class="colorElement" style="color: orange;">
+                                {% if last_archive %}
+                                    {% if elem.date > last_archive.date %}
+                                        <span class="colorElement" style="color: green;">
+                                    {% elif elem.updated > last_archive.date %}
+                                        <span class="colorElement" style="color: orange;">
+                                    {% else %}
+                                        <span class="colorElement">
+                                    {% endif %}
                                 {% else %}
-                                    <span class="colorElement">
+                                    <span class="colorElement" style="color: green;">
                                 {% endif %}
                                 <span class="KeyActivitie{{elem.id}}" onclick='getDetail(this.className, "{% url "businessCanvasGetDetail" 1 %}")'>{{elem.title}}</span>
                                 </span>
@@ -223,12 +227,16 @@
 
                         {% for elem in listValuePropositions %}
                             <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
-                                {% if elem.date > last_archive.date %}
-                                    <span class="colorElement" style="color: green;">
-                                {% elif elem.updated > last_archive.date %}
-                                    <span class="colorElement" style="color: orange;">
+                                {% if last_archive %}
+                                    {% if elem.date > last_archive.date %}
+                                        <span class="colorElement" style="color: green;">
+                                    {% elif elem.updated > last_archive.date %}
+                                        <span class="colorElement" style="color: orange;">
+                                    {% else %}
+                                        <span class="colorElement">
+                                    {% endif %}
                                 {% else %}
-                                    <span class="colorElement">
+                                    <span class="colorElement" style="color: green;">
                                 {% endif %}
                                 <span class="ValueProposition{{elem.id}}" onclick='getDetail(this.className, "{% url "businessCanvasGetDetail" 1 %}")'>{{elem.title}}</span>
                                 </span>
@@ -256,12 +264,16 @@
                     </form>
                         {% for elem in listCustomerRelationships %}
                             <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
-                                {% if elem.date > last_archive.date %}
-                                    <span class="colorElement" style="color: green;">
-                                {% elif elem.updated > last_archive.date %}
-                                    <span class="colorElement" style="color: orange;">
+                                {% if last_archive %}
+                                    {% if elem.date > last_archive.date %}
+                                        <span class="colorElement" style="color: green;">
+                                    {% elif elem.updated > last_archive.date %}
+                                        <span class="colorElement" style="color: orange;">
+                                    {% else %}
+                                        <span class="colorElement">
+                                    {% endif %}
                                 {% else %}
-                                    <span class="colorElement">
+                                    <span class="colorElement" style="color: green;">
                                 {% endif %}
                                 <span class="CustomerRelationship{{elem.id}}" onclick='getDetail(this.className, "{% url "businessCanvasGetDetail" 1 %}")'>{{elem.title}}</span>
                                 </span>
@@ -289,12 +301,16 @@
                     </form>
                         {% for elem in listCustomerSegments %}
                             <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
-                                {% if elem.date > last_archive.date %}
-                                    <span class="colorElement" style="color: green;">
-                                {% elif elem.updated > last_archive.date %}
-                                    <span class="colorElement" style="color: orange;">
+                                {% if last_archive %}
+                                    {% if elem.date > last_archive.date %}
+                                        <span class="colorElement" style="color: green;">
+                                    {% elif elem.updated > last_archive.date %}
+                                        <span class="colorElement" style="color: orange;">
+                                    {% else %}
+                                        <span class="colorElement">
+                                    {% endif %}
                                 {% else %}
-                                    <span class="colorElement">
+                                    <span class="colorElement" style="color: green;">
                                 {% endif %}
                                 <span class="CustomerSegment{{elem.id}}" onclick='getDetail(this.className, "{% url "businessCanvasGetDetail" 1 %}")'>{{elem.title}}</span>
                                 </span>
@@ -324,12 +340,16 @@
                     </form>
                         {% for elem in listKeyResources %}
                             <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
-                                {% if elem.date > last_archive.date %}
-                                    <span class="colorElement" style="color: green;">
-                                {% elif elem.updated > last_archive.date %}
-                                    <span class="colorElement" style="color: orange;">
+                                {% if last_archive %}
+                                    {% if elem.date > last_archive.date %}
+                                        <span class="colorElement" style="color: green;">
+                                    {% elif elem.updated > last_archive.date %}
+                                        <span class="colorElement" style="color: orange;">
+                                    {% else %}
+                                        <span class="colorElement">
+                                    {% endif %}
                                 {% else %}
-                                    <span class="colorElement">
+                                    <span class="colorElement" style="color: green;">
                                 {% endif %}
                                 <span class="KeyResource{{elem.id}}" onclick='getDetail(this.className, "{% url "businessCanvasGetDetail" 1 %}")'>{{elem.title}}</span>
                                 </span>
@@ -357,12 +377,16 @@
                     </form>
                         {% for elem in listChannels %}
                             <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
-                                {% if elem.date > last_archive.date %}
-                                    <span class="colorElement" style="color: green;">
-                                {% elif elem.updated > last_archive.date %}
-                                    <span class="colorElement" style="color: orange;">
+                                {% if last_archive %}
+                                    {% if elem.date > last_archive.date %}
+                                        <span class="colorElement" style="color: green;">
+                                    {% elif elem.updated > last_archive.date %}
+                                        <span class="colorElement" style="color: orange;">
+                                    {% else %}
+                                        <span class="colorElement">
+                                    {% endif %}
                                 {% else %}
-                                    <span class="colorElement">
+                                    <span class="colorElement" style="color: green;">
                                 {% endif %}
                                 <span class="Channel{{elem.id}}" onclick='getDetail(this.className, "{% url "businessCanvasGetDetail" 1 %}")'>{{elem.title}}</span>
                                 </span>
@@ -392,12 +416,16 @@
                     </form>
                         {% for elem in listCostStructures %}
                             <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
-                                {% if elem.date > last_archive.date %}
-                                    <span class="colorElement" style="color: green;">
-                                {% elif elem.updated > last_archive.date %}
-                                    <span class="colorElement" style="color: orange;">
+                                {% if last_archive %}
+                                    {% if elem.date > last_archive.date %}
+                                        <span class="colorElement" style="color: green;">
+                                    {% elif elem.updated > last_archive.date %}
+                                        <span class="colorElement" style="color: orange;">
+                                    {% else %}
+                                        <span class="colorElement">
+                                    {% endif %}
                                 {% else %}
-                                    <span class="colorElement">
+                                    <span class="colorElement" style="color: green;">
                                 {% endif %}
                                 <span class="CostStructure{{elem.id}}" onclick='getDetail(this.className, "{% url "businessCanvasGetDetail" 1 %}")'>{{elem.title}}</span>
                                 </span>
@@ -425,12 +453,16 @@
                     </form>
                         {% for elem in listRevenueStreams %}
                             <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
-                                {% if elem.date > last_archive.date %}
-                                    <span class="colorElement" style="color: green;">
-                                {% elif elem.updated > last_archive.date %}
-                                    <span class="colorElement" style="color: orange;">
+                                {% if last_archive %}
+                                    {% if elem.date > last_archive.date %}
+                                        <span class="colorElement" style="color: green;">
+                                    {% elif elem.updated > last_archive.date %}
+                                        <span class="colorElement" style="color: orange;">
+                                    {% else %}
+                                        <span class="colorElement">
+                                    {% endif %}
                                 {% else %}
-                                    <span class="colorElement">
+                                    <span class="colorElement" style="color: green;">
                                 {% endif %}
                                 <span class="RevenueStream{{elem.id}}" onclick='getDetail(this.className, "{% url "businessCanvasGetDetail" 1 %}")'>{{elem.title}}</span>
                                 </span>
@@ -464,12 +496,16 @@
                     </form>
                         {% for elem in listBrainstormingSpaces %}
                             <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
-                                {% if elem.date > last_archive.date %}
-                                    <span class="colorElement" style="color: green;">
-                                {% elif elem.updated > last_archive.date %}
-                                    <span class="colorElement" style="color: orange;">
+                                {% if last_archive %}
+                                    {% if elem.date > last_archive.date %}
+                                        <span class="colorElement" style="color: green;">
+                                    {% elif elem.updated > last_archive.date %}
+                                        <span class="colorElement" style="color: orange;">
+                                    {% else %}
+                                        <span class="colorElement">
+                                    {% endif %}
                                 {% else %}
-                                    <span class="colorElement">
+                                    <span class="colorElement" style="color: green;">
                                 {% endif %}
                                 <span class="BrainstormingSpace{{elem.id}}" onclick='getDetail(this.className, "{% url "businessCanvasGetDetail" 1 %}")'>{{elem.title}}</span>
                                 </span>
@@ -491,9 +527,11 @@
                                         {{archive}}
                                     </a>
                                     {%if isFounder %}
-                                    <span style="float: right; color: #428bca;" class="archive{{archive.id}}" onclick='deleteArchive(this.className, "{% url "businessCanvasDeleteArchive" 1 %}");'>
-                                        <i class="fa fa-trash"></i>
-                                    </span>
+                                    <a href="{% url 'businessCanvasDeleteArchive' archive.id %}">
+                                        <span style="float: right; color: #428bca;" class="archive{{archive.id}}">
+                                            <i class="fa fa-trash"></i>
+                                        </span>
+                                    </a>
                                     {% endif %}
                                 </div>
                             {% endfor %}

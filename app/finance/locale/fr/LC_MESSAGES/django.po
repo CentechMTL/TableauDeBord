@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-10 14:44-0400\n"
+"POT-Creation-Date: 2015-06-12 09:43-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -100,7 +100,7 @@ msgstr "Compagnie"
 #: .\app\finance\templates\finance\bourse_confirm_delete.html:5
 #: .\app\finance\templates\finance\bourse_confirm_delete.html:7
 #: .\app\finance\templates\finance\bourse_form.html:5
-#: .\app\finance\templates\finance\bourse_form.html:7
+#: .\app\finance\templates\finance\bourse_form.html:14
 #: .\app\finance\templates\finance\index.html:26
 #: .\app\finance\templates\finance\index.html:70
 msgid "Stock exchanges"
@@ -149,14 +149,6 @@ msgstr "Supprimer"
 msgid "Cancel"
 msgstr "Annuler"
 
-#: .\app\finance\templates\finance\bourse_form.html:10
-#: .\app\finance\templates\finance\investissement_form.html:9
-#: .\app\finance\templates\finance\pret_form.html:9
-#: .\app\finance\templates\finance\subvention_form.html:9
-#: .\app\finance\templates\finance\vente_form.html:9
-msgid "Save"
-msgstr "Enregistrer"
-
 #: .\app\finance\templates\finance\index.html:19
 msgid "Finance of"
 msgstr "Finance de"
@@ -175,7 +167,7 @@ msgstr "Vue générale"
 #: .\app\finance\templates\finance\subvention_confirm_delete.html:5
 #: .\app\finance\templates\finance\subvention_confirm_delete.html:7
 #: .\app\finance\templates\finance\subvention_form.html:4
-#: .\app\finance\templates\finance\subvention_form.html:6
+#: .\app\finance\templates\finance\subvention_form.html:13
 msgid "Subsidies"
 msgstr "Subventions"
 
@@ -184,7 +176,7 @@ msgstr "Subventions"
 #: .\app\finance\templates\finance\investissement_confirm_delete.html:5
 #: .\app\finance\templates\finance\investissement_confirm_delete.html:7
 #: .\app\finance\templates\finance\investissement_form.html:4
-#: .\app\finance\templates\finance\investissement_form.html:6
+#: .\app\finance\templates\finance\investissement_form.html:13
 msgid "Investments"
 msgstr "Investissements"
 
@@ -193,7 +185,7 @@ msgstr "Investissements"
 #: .\app\finance\templates\finance\pret_confirm_delete.html:5
 #: .\app\finance\templates\finance\pret_confirm_delete.html:7
 #: .\app\finance\templates\finance\pret_form.html:4
-#: .\app\finance\templates\finance\pret_form.html:6
+#: .\app\finance\templates\finance\pret_form.html:13
 msgid "Loans"
 msgstr "Prêts"
 
@@ -202,7 +194,7 @@ msgstr "Prêts"
 #: .\app\finance\templates\finance\vente_confirm_delete.html:5
 #: .\app\finance\templates\finance\vente_confirm_delete.html:7
 #: .\app\finance\templates\finance\vente_form.html:4
-#: .\app\finance\templates\finance\vente_form.html:6
+#: .\app\finance\templates\finance\vente_form.html:13
 msgid "Sales"
 msgstr "Ventes"
 
@@ -272,6 +264,13 @@ msgstr "Nouvelle vente"
 #: .\app\finance\templates\finance\investissement_confirm_delete.html:8
 msgid "Are you sure you want to delete this investments ?"
 msgstr "Êtes vous sûr de vouloir supprimer cet investissement ?"
+
+#: .\app\finance\templates\finance\investissement_form.html:16
+#: .\app\finance\templates\finance\pret_form.html:16
+#: .\app\finance\templates\finance\subvention_form.html:16
+#: .\app\finance\templates\finance\vente_form.html:16
+msgid "Save"
+msgstr "Enregistrer"
 
 #: .\app\finance\templates\finance\pret_confirm_delete.html:8
 msgid "Are you sure you want to delete this loan ?"

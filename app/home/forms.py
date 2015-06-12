@@ -68,14 +68,15 @@ class UpdatePasswordForm(forms.Form):
 
         self.helper.layout = Layout(
             Field('password_old'),
-            HTML(_(u"""<br>
-                <p>Your new password:
-                <ul>
-                    <li>must contain at least 6 characters</li>
-                    <li>must not be more than 76 characters</li>
-                </ul>
-                </p>
-            """)),
+
+            HTML(u"""<br><p>"""),
+            HTML(_(u"""Your new password :""")),
+            HTML(u"""<ul><li>"""),
+            HTML(_(u"""must contain at least 6 characters""")),
+            HTML(u"""</li><li>"""),
+            HTML(_(u"""must not be more than 76 characters""")),
+            HTML(u"""</li></ul></p>"""),
+
             Field('password_new'),
             Field('password_confirm'),
             StrictButton(_('Save'), type="submit")

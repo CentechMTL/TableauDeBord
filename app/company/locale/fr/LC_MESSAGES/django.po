@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-10 14:44-0400\n"
+"POT-Creation-Date: 2015-06-12 09:43-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,85 +17,85 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: .\app\company\forms.py:28 .\app\company\forms.py:57
-#: .\app\company\forms.py:138 .\app\company\models.py:18
+#: .\app\company\forms.py:40 .\app\company\forms.py:69
+#: .\app\company\forms.py:146 .\app\company\models.py:18
 #: .\app\company\models.py:29
 msgid "Name"
 msgstr "Nom"
 
-#: .\app\company\forms.py:31
+#: .\app\company\forms.py:43
 msgid "Name of the new status"
 msgstr "Nom du nouveau statut"
 
-#: .\app\company\forms.py:41
+#: .\app\company\forms.py:53
 msgid "New status"
 msgstr "Nouveau statut"
 
-#: .\app\company\forms.py:44 .\app\company\forms.py:132
-#: .\app\company\forms.py:214
-#: .\app\company\templates\company\presence_form.html:13
+#: .\app\company\forms.py:56 .\app\company\forms.py:140
+#: .\app\company\forms.py:218
+#: .\app\company\templates\company\presence_form.html:20
 msgid "Save"
 msgstr "Enregistrer"
 
-#: .\app\company\forms.py:60 .\app\company\forms.py:141
+#: .\app\company\forms.py:72 .\app\company\forms.py:149
 msgid "Name of the company"
 msgstr "Nom de la compagnie"
 
-#: .\app\company\forms.py:63 .\app\company\forms.py:144
+#: .\app\company\forms.py:75 .\app\company\forms.py:152
 #: .\app\company\models.py:30
 msgid "Logo"
 msgstr "Logo"
 
-#: .\app\company\forms.py:68 .\app\company\forms.py:149
+#: .\app\company\forms.py:80 .\app\company\forms.py:157
 #: .\app\company\models.py:32
 msgid "Video"
 msgstr "Vidéo"
 
-#: .\app\company\forms.py:71 .\app\company\forms.py:152
+#: .\app\company\forms.py:83 .\app\company\forms.py:160
 msgid "https://urlvideo.com/"
 msgstr "https://urlvideo.com/"
 
-#: .\app\company\forms.py:74 .\app\company\forms.py:155
+#: .\app\company\forms.py:86 .\app\company\forms.py:163
 #: .\app\company\templates\company\detail.html:29
 msgid "Web site"
 msgstr "Site web"
 
-#: .\app\company\forms.py:77 .\app\company\forms.py:158
+#: .\app\company\forms.py:89 .\app\company\forms.py:166
 msgid "https://example.com"
 msgstr "https://exemple.com"
 
-#: .\app\company\forms.py:80 .\app\company\forms.py:161
+#: .\app\company\forms.py:92 .\app\company\forms.py:169
 #: .\app\company\models.py:33
 msgid "Description"
 msgstr "Description"
 
-#: .\app\company\forms.py:84 .\app\company\forms.py:165
+#: .\app\company\forms.py:96 .\app\company\forms.py:173
 msgid "Write here a brief summary of your business."
 msgstr "Ecrivez ici un bref résumé de votre entreprise."
 
-#: .\app\company\forms.py:91 .\app\company\templates\company\detail.html:27
+#: .\app\company\forms.py:103 .\app\company\templates\company\detail.html:27
 #: .\app\company\templates\company\filter.html:24
 #: .\app\company\templates\company\index.html:36
 msgid "Incubation phase"
 msgstr "Phase d'incubation"
 
-#: .\app\company\forms.py:97 .\app\company\forms.py:172
+#: .\app\company\forms.py:109 .\app\company\forms.py:180
 #: .\app\company\models.py:37 .\app\company\templates\company\detail.html:56
 #: .\templates\dashboard.html:72
 msgid "Founders"
 msgstr "Fondateurs"
 
-#: .\app\company\forms.py:108 .\app\company\forms.py:183
+#: .\app\company\forms.py:116 .\app\company\forms.py:187
 #: .\app\company\models.py:39 .\app\company\templates\company\detail.html:84
 #: .\templates\dashboard.html:71
 msgid "Mentors"
 msgstr "Mentors"
 
-#: .\app\company\forms.py:122
+#: .\app\company\forms.py:130
 msgid "New company"
 msgstr "Nouvelle compagnie"
 
-#: .\app\company\forms.py:205 .\templates\dashboard.html:208
+#: .\app\company\forms.py:209 .\templates\dashboard.html:208
 msgid "Update company"
 msgstr "Modifier cette compagnie"
 
@@ -196,15 +196,15 @@ msgstr "Êtes-vous sûr de vouloir supprimer cette présence ?"
 msgid "Cancel"
 msgstr "Annuler"
 
-#: .\app\company\templates\company\presence_form.html:8
+#: .\app\company\templates\company\presence_form.html:16
 msgid "New presence"
 msgstr "Nouvelle présence"
 
-#: .\centech2\settings.py:180
+#: .\centech2\settings.py:179
 msgid "French"
 msgstr "Français"
 
-#: .\centech2\settings.py:181
+#: .\centech2\settings.py:180
 msgid "English"
 msgstr "Anglais"
 

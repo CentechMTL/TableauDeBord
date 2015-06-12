@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-10 14:44-0400\n"
+"POT-Creation-Date: 2015-06-12 09:43-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,19 +29,19 @@ msgstr "Mot de passe actuel"
 msgid "New password again"
 msgstr "Nouveau mot de passe encore"
 
-#: .\app\home\forms.py:71
-msgid ""
-"<br>\n"
-"                <p>Your new password:\n"
-"                <ul>\n"
-"                    <li>must contain at least 6 characters</li>\n"
-"                    <li>must not be more than 76 characters</li>\n"
-"                </ul>\n"
-"                </p>\n"
-"            "
-msgstr ""
+#: .\app\home\forms.py:73
+msgid "Your new password :"
+msgstr "Votre nouveau mot de passe :"
 
-#: .\app\home\forms.py:81
+#: .\app\home\forms.py:75
+msgid "must contain at least 6 characters"
+msgstr "Doit contenir au moins 6 caractères"
+
+#: .\app\home\forms.py:77
+msgid "must not be more than 76 characters"
+msgstr "Ne doit pas contenir plus de 76 caractères"
+
+#: .\app\home\forms.py:82
 msgid "Save"
 msgstr "Enregistrer"
 
@@ -107,14 +107,17 @@ msgid "No Access"
 msgstr "Pas d'autorisation"
 
 #: .\app\home\templates\home\noAccessPermissions.html:7
-msgid "Sorry! But you don't have the permissions to access this pag"
+#, fuzzy
+#| msgid "Sorry! But you don't have the permissions to access this pag"
+msgid "Sorry! But you don't have the permissions to access this page"
 msgstr "Désolé! Mais vous n'avez pas la permissions d'accéder a cette page"
 
 #: .\app\home\templates\home\noAccessPermissions.html:9
 msgid ""
 "If it's an error, you can contact the administrator for have access on this "
 "page"
-msgstr "Si c'est une erreur, vous pouvez contacter l'administrateur pour avoir "
+msgstr ""
+"Si c'est une erreur, vous pouvez contacter l'administrateur pour avoir "
 "l'accès a cette page"
 
 #: .\app\home\templates\home\noAccessPermissions.html:11
@@ -232,8 +235,8 @@ msgstr "Montant des ventes reçues"
 #: .\app\home\templates\registration\login.html:11
 msgid "Your username and password didn't match. Please try again."
 msgstr ""
-"Votre nom d'utilisateur et votre mot de passe ne correspondent "
-"pas. Veuillez recommencer."
+"Votre nom d'utilisateur et votre mot de passe ne correspondent pas. Veuillez "
+"recommencer."
 
 #: .\app\home\templates\registration\login.html:12
 msgid "If it's an error, please contact the administrator"

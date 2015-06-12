@@ -15,7 +15,7 @@ def app_settings(request):
 #Make a list of company to insert in the main menu
 def company_select(request):
     #For the list of company
-    list_company = Company.objects.all()
+    list_company = Company.objects.all().order_by('name')
 
     #For know if the user is in the group "Centech"
     isCentech = False
@@ -47,7 +47,7 @@ def company_select(request):
     if request.user.is_active:
         try:
             mentor = Mentor.objects.get(user = request.user.id)
-            listCompanyMentor = Company.objects.filter(mentors = mentor)
+            listCompanyMentor = Company.objects.filter(mentors = mentor).order_by('name')
         except:
             pass
 

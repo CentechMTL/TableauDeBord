@@ -3,14 +3,25 @@
 {% load i18n %}
 {% load staticfiles %}
 {% block title %}{% trans "Presence" %}{% endblock %}
+
+{% block extrahead %}
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/redmond/jquery-ui.css" />
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+{% endblock %}
+
+
 {% block content %}
 {% if isCentech %}
     <h1>{% trans "New presence" %}</h1>
     <form method="post">{% csrf_token%}
         <!--TODO add a datepicker-->
         {{ form.as_p }}
-        {% trans"Format of the date: dd/mm/yyyy HH:MM" %} <br><br>
         <button type="submit">{% trans "Save" %}</button>
     </form>
+
+    <script>
+            $( "#id_date" ).datepicker({ dateFormat: 'dd/mm/yy' });
+    </script>
 {% endif %}
 {% endblock %}

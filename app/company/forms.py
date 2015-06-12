@@ -2,7 +2,7 @@
 
 from django import forms
 import django_filters
-from app.company.models import Company, CompanyStatus
+from app.company.models import Company, CompanyStatus, Presence
 from app.founder.models import Founder
 from app.mentor.models import Mentor
 from django.contrib.admin.widgets import AdminDateWidget
@@ -15,12 +15,24 @@ from crispy_forms.layout import HTML, Layout, \
 
 from embed_video.fields import EmbedVideoField
 from django.utils.translation import ugettext_lazy as _
+from django.forms import widgets
 
 #http://django-filter.readthedocs.org/en/latest/usage.html
 class CompanyFilter(django_filters.FilterSet):
     class Meta:
         model = Company
         fields = {'companyStatus' : ['exact'], 'name': ['icontains']}
+
+
+class PresenceForm(forms.ModelForm):
+    class Meta:
+        model = Presence
+        fields = ['date']
+        widgets = {
+            'date' : forms.DateInput(attrs={'type':'date', 'class':'datepicker'})
+        }
+
+    date = forms.DateField()
 
 class CompanyStatusCreateForm(forms.Form):
 

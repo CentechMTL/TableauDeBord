@@ -19,6 +19,7 @@ urlpatterns = patterns('',
     url(r'^businessCanvas/', include('app.businessCanvas.urls')),
     url(r'^finance/', include('app.finance.urls')),
     url(r'^valuePropositionCanvas/', include('app.valuePropositionCanvas.urls')),
+    url(r'^kanboard/', include('app.kanboard.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^i18n/', include('django.conf.urls.i18n')),

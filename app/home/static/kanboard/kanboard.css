@@ -1,0 +1,50 @@
+h2 {
+  font-size: 1.3em;
+  font-weight: bold;
+  margin: 2px;
+}
+
+.column {
+  width: 200px;
+  float: left;
+  
+}
+
+#top {
+	margin:0;
+	padding:1em;
+}
+
+#bottom {
+	clear:both;
+	margin:0;
+	padding:.25em 0;
+	background:#f4f4f4;
+	height:3em;
+	overflow:auto;
+}
+
+#board {
+	overflow:auto;
+}
+
+#board h2 {
+	padding:0;
+	margin:0;
+}
+
+#board ul {
+  padding-left: 0;
+  background: #eeeeee;
+  min-height: 3em;
+  margin:0;
+  padding:1px;
+}
+
+#board li {
+  border: 1px black solid;
+  background: white;
+  padding: 3px;
+  margin: 10px 5px;
+  list-style: none;
+}

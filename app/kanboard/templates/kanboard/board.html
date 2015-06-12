@@ -1,0 +1,36 @@
+{% extends 'dashboard.html' %}
+{% load staticfiles %}
+{% block extrahead %}
+    <link rel="stylesheet" href="{% static 'kanboard/kanboard.css' %}" type="text/css" media="all" />
+    <script type="text/javascript" src="{% static 'kanboard/js/jquery-1.3.2.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'kanboard/js/jquery-ui-1.7.2.custom.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'kanboard/js/main.js' %}"></script>
+
+    <script type="text/javascript" src="{% static 'js/tokenCSRF.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<h1>Kanboard</h1>
+
+<div id="board">
+    {% for phase in board.phases.all %}
+    <div class="column">
+        <h2>{{ phase.title }}</h2>
+        <ul class="sortable phase" id='phase-{{ phase.id }}'>
+            {% for card in phase.cards.all %}
+            <li class="card" id='card-{{ card.id }}'>
+                <h3>{{ card.title }}</h3>
+                <p>{{ card.description }}</p>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endfor %}
+</div>
+
+<div id="bottom">
+    <ul id="messages" style="clear:left;">
+    </ul>
+</div>
+
+{% endblock %}

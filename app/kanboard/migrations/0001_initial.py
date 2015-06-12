@@ -1,124 +1,82 @@
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 
-from south.db import db
-from django.db import models
-from kanboard.models import *
+from django.db import models, migrations
+import datetime
+from django.conf import settings
 
-class Migration:
-    
-    def forwards(self, orm):
-        
-        # Adding model 'PhaseLog'
-        db.create_table('kanboard_phaselog', (
-            ('id', orm['kanboard.PhaseLog:id']),
-            ('phase', orm['kanboard.PhaseLog:phase']),
-            ('count', orm['kanboard.PhaseLog:count']),
-            ('date', orm['kanboard.PhaseLog:date']),
-        ))
-        db.send_create_signal('kanboard', ['PhaseLog'])
-        
-        # Adding model 'Board'
-        db.create_table('kanboard_board', (
-            ('id', orm['kanboard.Board:id']),
-            ('title', orm['kanboard.Board:title']),
-            ('slug', orm['kanboard.Board:slug']),
-            ('description', orm['kanboard.Board:description']),
-        ))
-        db.send_create_signal('kanboard', ['Board'])
-        
-        # Adding model 'Card'
-        db.create_table('kanboard_card', (
-            ('id', orm['kanboard.Card:id']),
-            ('title', orm['kanboard.Card:title']),
-            ('board', orm['kanboard.Card:board']),
-            ('phase', orm['kanboard.Card:phase']),
-            ('order', orm['kanboard.Card:order']),
-            ('backlogged_at', orm['kanboard.Card:backlogged_at']),
-            ('started_at', orm['kanboard.Card:started_at']),
-            ('done_at', orm['kanboard.Card:done_at']),
-            ('description', orm['kanboard.Card:description']),
-            ('size', orm['kanboard.Card:size']),
-            ('color', orm['kanboard.Card:color']),
-            ('ready', orm['kanboard.Card:ready']),
-            ('blocked', orm['kanboard.Card:blocked']),
-            ('blocked_because', orm['kanboard.Card:blocked_because']),
-        ))
-        db.send_create_signal('kanboard', ['Card'])
-        
-        # Adding model 'Phase'
-        db.create_table('kanboard_phase', (
-            ('id', orm['kanboard.Phase:id']),
-            ('title', orm['kanboard.Phase:title']),
-            ('board', orm['kanboard.Phase:board']),
-            ('order', orm['kanboard.Phase:order']),
-            ('type', orm['kanboard.Phase:type']),
-            ('description', orm['kanboard.Phase:description']),
-            ('limit', orm['kanboard.Phase:limit']),
-        ))
-        db.send_create_signal('kanboard', ['Phase'])
-        
-        # Creating unique_together for [phase, date] on PhaseLog.
-        db.create_unique('kanboard_phaselog', ['phase_id', 'date'])
-        
-    
-    
-    def backwards(self, orm):
-        
-        # Deleting unique_together for [phase, date] on PhaseLog.
-        db.delete_unique('kanboard_phaselog', ['phase_id', 'date'])
-        
-        # Deleting model 'PhaseLog'
-        db.delete_table('kanboard_phaselog')
-        
-        # Deleting model 'Board'
-        db.delete_table('kanboard_board')
-        
-        # Deleting model 'Card'
-        db.delete_table('kanboard_card')
-        
-        # Deleting model 'Phase'
-        db.delete_table('kanboard_phase')
-        
-    
-    
-    models = {
-        'kanboard.board': {
-            'description': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'slug': ('django.db.models.fields.SlugField', [], {'max_length': '50', 'db_index': 'True'}),
-            'title': ('django.db.models.fields.CharField', [], {'max_length': '80'})
-        },
-        'kanboard.card': {
-            'backlogged_at': ('django.db.models.fields.DateTimeField', [], {}),
-            'blocked': ('django.db.models.fields.BooleanField', [], {'default': 'False', 'blank': 'True'}),
-            'blocked_because': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'board': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'cards'", 'to': "orm['kanboard.Board']"}),
-            'color': ('django.db.models.fields.CharField', [], {'max_length': '7', 'blank': 'True'}),
-            'description': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'done_at': ('django.db.models.fields.DateTimeField', [], {'null': 'True', 'blank': 'True'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'order': ('django.db.models.fields.SmallIntegerField', [], {}),
-            'phase': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'cards'", 'to': "orm['kanboard.Phase']"}),
-            'ready': ('django.db.models.fields.BooleanField', [], {'default': 'False', 'blank': 'True'}),
-            'size': ('django.db.models.fields.CharField', [], {'max_length': '80', 'blank': 'True'}),
-            'started_at': ('django.db.models.fields.DateTimeField', [], {'null': 'True', 'blank': 'True'}),
-            'title': ('django.db.models.fields.CharField', [], {'max_length': '80'})
-        },
-        'kanboard.phase': {
-            'board': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'phases'", 'to': "orm['kanboard.Board']"}),
-            'description': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'limit': ('django.db.models.fields.SmallIntegerField', [], {'null': 'True', 'blank': 'True'}),
-            'order': ('django.db.models.fields.SmallIntegerField', [], {}),
-            'title': ('django.db.models.fields.CharField', [], {'max_length': '80'}),
-            'type': ('django.db.models.fields.CharField', [], {'default': "'progress'", 'max_length': '25'})
-        },
-        'kanboard.phaselog': {
-            'Meta': {'unique_together': "(('phase', 'date'),)"},
-            'count': ('django.db.models.fields.SmallIntegerField', [], {'default': '0'}),
-            'date': ('django.db.models.fields.DateField', [], {}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'phase': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'logs'", 'to': "orm['kanboard.Phase']"})
-        }
-    }
-    
-    complete_apps = ['kanboard']
+
+class Migration(migrations.Migration):
+
+    dependencies = [
+        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
+        ('company', '0002_auto_20150610_1511'),
+    ]
+
+    operations = [
+        migrations.CreateModel(
+            name='Board',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('title', models.CharField(max_length=80)),
+                ('slug', models.SlugField()),
+                ('description', models.TextField(blank=True)),
+                ('company', models.ForeignKey(related_name='board', verbose_name=b'company', to='company.Company')),
+            ],
+        ),
+        migrations.CreateModel(
+            name='Card',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('title', models.CharField(max_length=80)),
+                ('order', models.SmallIntegerField()),
+                ('backlogged_at', models.DateTimeField(default=datetime.datetime.now)),
+                ('started_at', models.DateTimeField(null=True, blank=True)),
+                ('done_at', models.DateTimeField(null=True, blank=True)),
+                ('description', models.TextField(blank=True)),
+                ('size', models.CharField(max_length=80, blank=True)),
+                ('color', models.CharField(max_length=7, blank=True)),
+                ('ready', models.BooleanField()),
+                ('blocked', models.BooleanField()),
+                ('blocked_because', models.TextField(blank=True)),
+                ('board', models.ForeignKey(related_name='cards', to='kanboard.Board')),
+                ('created_by', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
+            ],
+            options={
+                'ordering': ['order'],
+            },
+        ),
+        migrations.CreateModel(
+            name='Phase',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('title', models.CharField(max_length=80)),
+                ('order', models.SmallIntegerField()),
+                ('status', models.CharField(default=b'progress', max_length=25, choices=[(b'upcoming', b'Upcoming'), (b'progress', b'In progress'), (b'finished', b'Finished')])),
+                ('description', models.TextField(blank=True)),
+                ('limit', models.SmallIntegerField(null=True, blank=True)),
+                ('board', models.ForeignKey(related_name='phases', to='kanboard.Board')),
+            ],
+            options={
+                'ordering': ['order'],
+            },
+        ),
+        migrations.CreateModel(
+            name='PhaseLog',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('count', models.SmallIntegerField(default=0)),
+                ('date', models.DateField()),
+                ('phase', models.ForeignKey(related_name='logs', to='kanboard.Phase')),
+            ],
+        ),
+        migrations.AddField(
+            model_name='card',
+            name='phase',
+            field=models.ForeignKey(related_name='cards', to='kanboard.Phase'),
+        ),
+        migrations.AlterUniqueTogether(
+            name='phaselog',
+            unique_together=set([('phase', 'date')]),
+        ),
+    ]

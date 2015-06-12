@@ -6,7 +6,7 @@ class PhaseInline(admin.StackedInline):
 
 
 class BoardAdmin(admin.ModelAdmin):
-    list_display = ('title', 'description',)
+    list_display = ('title', 'description', 'company_id')
     search_fields = ('title', 'description')
     inlines = [PhaseInline]
 

@@ -3,6 +3,7 @@ import datetime
 from django.db import models
 
 from app.kanboard import signals
+from app.company.models import Company
 
 class Card(models.Model):
     """
@@ -68,6 +69,7 @@ models.signals.pre_save.connect(signals.card_order, sender=Card)
 
 
 class Board(models.Model):
+    company = models.ForeignKey(Company, related_name="board")
     title = models.CharField(max_length=80)
     slug = models.SlugField()
 

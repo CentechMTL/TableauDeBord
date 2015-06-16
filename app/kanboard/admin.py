@@ -1,15 +1,5 @@
 from django.contrib import admin
-from app.kanboard import models
-
-class PhaseInline(admin.StackedInline):
-    model = models.Phase
-
-
-class BoardAdmin(admin.ModelAdmin):
-    list_display = ('title', 'description', 'company_id')
-    search_fields = ('title', 'description')
-    inlines = [PhaseInline]
-
+from app.kanboard.models import Phase, Card
 
 class CardAdmin(admin.ModelAdmin):
     def save_model(self, request, obj, form, change):
@@ -17,6 +7,6 @@ class CardAdmin(admin.ModelAdmin):
         obj.save()
 
 
-admin.site.register(models.Board, BoardAdmin)
-admin.site.register(models.Card, CardAdmin)
+admin.site.register(Card, CardAdmin)
+admin.site.register(Phase)
 

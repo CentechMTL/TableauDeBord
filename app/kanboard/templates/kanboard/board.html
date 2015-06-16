@@ -8,30 +8,245 @@
     <script type="text/javascript" src="{% static 'kanboard/js/main.js' %}"></script>
 
     <script type="text/javascript" src="{% static 'js/tokenCSRF.js' %}"></script>
+
+    <!--DATEPICKER-->
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/redmond/jquery-ui.css" />
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
+<script>
+    $(function() {
+    var dialog, form,
+
+    dialog = $( "#dialog-form" ).dialog({
+      autoOpen: false,
+      height: 450,
+      width: 350,
+      modal: true,
+      buttons: {
+        "Create": function() {
+          addCard('{% url "kanboard" 1 %}');
+          dialog.dialog( "close" );
+        },
+        Cancel: function() {
+          dialog.dialog( "close" );
+        }
+      },
+      close: function() {
+        form[ 0 ].reset();
+      }
+    });
+
+    form = dialog.find( "form" );
+
+    $( "#create-card" ).click(function() {
+      dialog.dialog( "open" );
+    });
+  });
+  </script>
+
+
+
+<script>
+function addCard(baseLien){
+    //DATA
+    var phase = document.getElementById("phase").value;
+    var title = document.getElementById("title").value;
+    var comment = document.getElementById("comment").value;
+    var deadline = document.getElementById("deadline").value;
+    var update = document.getElementById("update").value;
+
+    baseLien = baseLien.replace(/([0-9]+)/, phase);
+
+    var newUl = document.getElementById('phase-'+ phase);
+    order = newUl.getElementsByTagName('li').length + 1;
+
+    //Link to add a card
+    lien = baseLien + "add/";
+
+     $.ajax({
+          type: 'POST',
+          url: lien,
+          data: '&title=' + title + '&comment=' + comment + '&deadline=' + deadline + '&order=' + order + '&update=' + update,
+
+          success: function(data, status) {
+                if(!data.updated){
+                    //Update display - Add the new li
+                    var ul = document.getElementById("phase-"+phase);
+                    var li = document.createElement('li');
+                    li.className = "card ui-sortable-handle";
+                    li.id = "card-"+data.id;
+
+                    var titre = document.createElement('h3');
+                    titre.innerHTML = data.title;
+
+                    var spanDelete = document.createElement('span');
+                    spanDelete.className = data.id;
+                    spanDelete.setAttribute('onclick','deleteCard(this.className, "{% url "kanboardDeleteCard" 1 %}");');
+                    spanDelete.innerHTML = "<i class='fa fa-trash'></i>";
+                    spanDelete.style.float = "right";
+
+                    var spanEdit = document.createElement('span');
+                    spanEdit.className = data.id;
+                    spanEdit.setAttribute('onclick','editCard(this.className,  "{% url "kanboardGetDetailCard" 1 %}");');
+                    spanEdit.innerHTML = "<i class='fa fa-pencil-square-o'></i>";
+                    spanEdit.style.float = "right";
+
+                    var linkDelete = document.createElement('a');
+                    var linkEdit = document.createElement('a');
+
+                    var p = document.createElement('p');
+                    p.innerHTML = data.comment;
+
+                    linkDelete.appendChild(spanDelete);
+                    linkEdit.appendChild(spanEdit);
+                    titre.appendChild(linkDelete);
+                    titre.appendChild(linkEdit);
+                    li.appendChild(titre);
+                    li.appendChild(p);
+                    ul.appendChild(li);
+                }
+                else{
+                    //Init the form
+                    document.getElementById('update').value = "False";
+
+                    var li = document.getElementById("card-"+data.id);
+
+                    var spanDelete = document.createElement('span');
+                    spanDelete.className = data.id;
+                    spanDelete.setAttribute('onclick','deleteCard(this.className, "{% url "kanboardDeleteCard" 1 %}");');
+                    spanDelete.innerHTML = "<i class='fa fa-trash'></i>";
+                    spanDelete.style.float = "right";
+
+                    var spanEdit = document.createElement('span');
+                    spanEdit.className = data.id;
+                    spanEdit.setAttribute('onclick','editCard(this.className,  "{% url "kanboardGetDetailCard" 1 %}");');
+                    spanEdit.innerHTML = "<i class='fa fa-pencil-square-o'></i>";
+                    spanEdit.style.float = "right";
+
+                    var linkDelete = document.createElement('a');
+                    var linkEdit = document.createElement('a');
+
+                    li.getElementsByTagName('h3')[0].innerHTML = data.title;
+                    linkDelete.appendChild(spanDelete);
+                    linkEdit.appendChild(spanEdit);
+                    li.getElementsByTagName('h3')[0].appendChild(linkDelete);
+                    li.getElementsByTagName('h3')[0].appendChild(linkEdit);
+                    li.getElementsByTagName('p')[0].innerHTML = data.comment;
+
+
+                    //Change column for go in the new phase
+                    var ul = li.parentElement;
+
+                    if(ul!=newUl){
+                        ul.removeChild(li);
+                        newUl.appendChild(li);
+                    }
+
+                }
+            },
+
+          error: function(resultat, status, erreur) {
+                //Init the form
+                document.getElementById('update').value = "False";
+            }
+     });
+}
+</script>
+
+<script>
+function deleteCard(id, baseLien){
+    var myRegexp = /([0-9]+)/g;
+    var match = myRegexp.exec(baseLien); //match[1] is the id of the archive
+    if(match[1]){
+        var pos = baseLien.lastIndexOf('/'); // position du dernier "/"
+        baseLien = baseLien.substr(0, pos+1);
+        var lien = baseLien+id;
+    }
+    var li = document.getElementById("card-"+id);
+
+    $.ajax({
+          type: 'GET',
+          url: lien,
+
+          success: function(data, status) {
+                li.remove();
+            },
+
+          error: function(resultat, status, erreur) {
+                alert(erreur);
+            }
+        });
+}
+</script>
+
+<script>
+function editCard(id, baseLien){
+    var myRegexp = /([0-9]+)/g;
+    var match = myRegexp.exec(baseLien); //match[1] is the id of the archive
+    if(match[1]){
+        var pos = baseLien.lastIndexOf('/'); // position du dernier "/"
+        baseLien = baseLien.substr(0, pos+1);
+        var lien = baseLien+id;
+
+        $.ajax({
+            type: 'GET',
+            url: lien,
+
+            success: function(data, status) {
+                var form = document.getElementById('form');
+                document.getElementById('phase').value = data.phase;
+                document.getElementById('title').value = data.title;
+                document.getElementById('comment').value = data.comment;
+                document.getElementById('update').value = data.id;
+                document.getElementById('deadline').value = data.deadline;
+
+                document.getElementById('create-card').click();
+            },
+
+            error: function(resultat, status, erreur) {
+                alert(erreur);
+            }
+        });
+    }
+}
+</script>
 {% endblock %}
 
 {% block content %}
 <h1>Kanboard de {{company.name}}</h1>
 <br><br>
+<div id="dialog-form" title="Create new task">
+  <form id="form">{% csrf_token %}
+    <fieldset>
+      {{ form.as_p }}
+      <input type="hidden" name="update" value="False" id="update" >
+      <!-- Allow form submission with keyboard without duplicating the dialog button -->
+      <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+    </fieldset>
+  </form>
+</div>
+<button id="create-card">Create new task</button><br><br>
 <div id="board">
-    {% for phase in board.phases.all %}
+    {% for phase in company.phases.all %}
     <div class="column">
         <h2>{{ phase.title }}</h2>
         <ul class="sortable phase" id='phase-{{ phase.id }}'>
             {% for card in phase.cards.all %}
             <li class="card" id='card-{{ card.id }}'>
-                <h3>{{ card.title }}</h3>
-                <p>{{ card.description }}</p>
+                <h3>
+                    {{ card.title }}
+                    <a><span class="{{card.id}}" style="float: right;" onclick='deleteCard(this.className, "{% url "kanboardDeleteCard" 1 %}");' class="{{card.id}}"><i class="fa fa-trash"></i></span></a>
+                    <a><span class="{{card.id}}" style="float: right;" onclick='editCard(this.className,  "{% url "kanboardGetDetailCard" 1 %}");' class="{{card.id}}"><i class="fa fa-pencil-square-o"></i></span></a>
+                </h3>
+                <p>{{ card.comment }}</p>
             </li>
             {% endfor %}
         </ul>
     </div>
     {% endfor %}
 </div>
-
-<div id="bottom">
-    <ul id="messages" style="clear:left;">
-    </ul>
-</div>
-
+<script>
+        $( "#deadline" ).datepicker({ dateFormat: 'yy-mm-dd' });
+</script>
 {% endblock %}

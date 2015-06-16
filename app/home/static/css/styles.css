@@ -98,7 +98,7 @@ legend {
     width: 100%;
 }
 
-button[type=submit]{
+button{
     margin-top: 20px;
     height: 30px;
     padding: 30px;
@@ -111,7 +111,7 @@ button[type=submit]{
     border: 2px solid lightgrey;
 }
 
-button[type=submit]:hover{
+button:hover{
     color: orange;
 }
 

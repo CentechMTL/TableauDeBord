@@ -7,13 +7,13 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('kanboard', '0001_initial'),
+        ('kanboard', '0004_card_datelimit'),
     ]
 
     operations = [
-        migrations.AlterField(
-            model_name='board',
-            name='company',
-            field=models.ForeignKey(related_name='board', to='company.Company'),
+        migrations.RenameField(
+            model_name='card',
+            old_name='dateLimit',
+            new_name='deadline',
         ),
     ]

@@ -38,6 +38,8 @@ class Expertise(models.Model):
 
 #User, we can't extends auth_user without auxiliar conflits
 class UserProfile(models.Model):
+    class Meta:
+        ordering = ['user__last_name']
 
     # This line is required. Links UserProfile to a User model instance.
     user = models.OneToOneField(User, related_name="profile", verbose_name=_('User'))

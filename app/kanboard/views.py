@@ -98,6 +98,42 @@ def deleteCard(request, card_id):
 class BoardIndex(TemplateView):
     template_name = 'kanboard/board.html'
 
+    #You need to be connected, and you need to have access as founder, mentor or Centech
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        #For know if the user is in the group "Centech"
+        groups = self.request.user.groups.values()
+        for group in groups:
+            if group['name'] == 'Centech':
+                try:
+                    company = Company.objects.get(id = int(kwargs['pk'])) #If the company exist, else we go to except
+                    return super(BoardIndex, self).dispatch(*args, **kwargs)
+                except:
+                    pass
+
+        #For know the company of the user if is a founder
+        if self.request.user.is_active:
+            try:
+                founder = Founder.objects.filter(user = self.request.user.id)
+                company = Company.objects.get(founders = founder)
+                if(int(kwargs['pk']) == int(company.id)):
+                    return super(BoardIndex, self).dispatch(*args, **kwargs)
+            except:
+                pass
+
+        #For know the company of the user if is a mentor
+        if self.request.user.is_active:
+            try:
+                mentor = Mentor.objects.filter(user = self.request.user.id)
+                company = Company.objects.get(mentors = mentor)
+                if(int(kwargs['pk']) == int(company.id)):
+                    return super(BoardIndex, self).dispatch(*args, **kwargs)
+            except:
+                pass
+
+        #The visitor can't see this page!
+        return HttpResponseRedirect("/user/noAccessPermissions")
+
     def get_context_data(self, **kwargs):
         company = Company.objects.get(id = int(kwargs['pk']))
         context = super(BoardIndex, self).get_context_data(**kwargs)

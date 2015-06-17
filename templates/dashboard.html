@@ -33,8 +33,8 @@
             }
         });
 
-        var Class = ["menuIrl", "menuTrl", "menuExperiment", "menuBusinessCanvas", "menuFinance", "menuValuePropositionCanvas", "menuKanboard"];
-        var Link = ["/kpi/irl/", "/kpi/trl/", "/experiment/", "/businessCanvas/", "/finance/", "/valuePropositionCanvas/", "/kanboard"];
+        var Class = ["menuIrl", "menuTrl", "menuExperiment", "menuBusinessCanvas", "menuFinance", "menuKanboard"];
+        var Link = ["/kpi/irl/", "/kpi/trl/", "/experiment/", "/businessCanvas/", "/finance/", "/kanboard/"];
         for (var i = 0; i < Class.length; i++) {
             //Reference of the link
             var lien = document.getElementsByClassName(Class[i])[0];
@@ -125,6 +125,7 @@
                             <a class="menuValuePropositionCanvas" href="/valuePropositionCanvas/{{request.session.companySelected}}"><div><i class="fa fa-table"></i> <span class="nav-label">{% trans "Value Proposition Canvas" %}</span></div></a>
                             {% endcomment %}
                             <a class="menuFinance" href="/finance/{{request.session.companySelected}}"><div><i class="fa fa-usd"></i> <span class="nav-label">{% trans "Finance" %}</span></div></a>
+                            <a class="menuKanboard" href="/kanboard/{{request.session.companySelected}}"><div><i class="fa fa-usd"></i> <span class="nav-label">{% trans "Kanboard" %}</span></div></a>
                         {% else %}
                             <a class="menuIrl" style="visibility: hidden;" href="/kpi/irl"><div><i class="fa fa-bar-chart"></i> <span class="nav-label">{% trans "IRL" %}</span></div></a>
                             <a class="menuTrl" style="visibility: hidden;" href="/kpi/trl"><div><i class="fa fa-bar-chart"></i> <span class="nav-label">{% trans "TRL" %}</span></div></a>

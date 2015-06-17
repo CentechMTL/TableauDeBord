@@ -75,7 +75,8 @@ class ArchiveDelete(generic.DeleteView):
         company_id = self.object.company.id
         self.object.delete()
         return redirect(reverse_lazy('businessCanvasElement_list', args = {company_id}))
-"""
+
+
 #Delete an archive
 def deleteArchive(request, archive_id):
     message= {}
@@ -92,7 +93,8 @@ def deleteArchive(request, archive_id):
         return HttpResponse(data, content_type='application/json')
     #The visitor can't see this page!
     return HttpResponseRedirect("/user/noAccessPermissions")
-"""
+
+
 #Return detail of an element
 def getDetail(request, element_id):
     message = {}
@@ -104,7 +106,7 @@ def getDetail(request, element_id):
             message['comment'] = element.comment
             message['type'] = element.type
         except:
-            null
+            pass
 
         data = json.dumps(message)
         return HttpResponse(data, content_type='application/json')

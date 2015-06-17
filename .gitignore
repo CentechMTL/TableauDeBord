@@ -1,3 +1,4 @@
 media/logo/*
 media/user_profile/*
 .idea/workspace.xml
+*.pyc

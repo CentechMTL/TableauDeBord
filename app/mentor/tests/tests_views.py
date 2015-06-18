@@ -9,7 +9,7 @@ from app.founder.factories import FounderFactory
 from app.mentor.factories import MentorFactory
 from app.home.factories import UserFactory, StaffUserFactory
 
-class FounderTests(TestCase):
+class MentorTests(TestCase):
 
     def setUp(self):
         settings.EMAIL_BACKEND = \
@@ -20,7 +20,7 @@ class FounderTests(TestCase):
 
     def test_index(self):
         """
-        To test the listing of the founders.
+        To test the listing of the mentors.
         """
 
         """
@@ -31,15 +31,16 @@ class FounderTests(TestCase):
         self.client.logout()
         self.client.login(username=self.mentor.user.username, password="Toto1234!#")
 
-        # list of founders.
+        # list of mentors.
         result = self.client.get(
-            reverse('founder:index'),
+            reverse('mentor:index'),
             follow=False
         )
         self.assertEqual(result.status_code, 200)
-        self.assertEqual(1, len(result.context['filter']))
+        self.assertEqual(1, len(result.context['mentorFilter']))
 
-        nb_founder = len(result.context['filter'])
+        nb_mentor = len(result.context['mentorFilter'])
+
         """
         No Access
 
@@ -47,9 +48,9 @@ class FounderTests(TestCase):
         """
         self.client.logout()
 
-        # list of founders.
+        # list of mentors.
         result = self.client.get(
-            reverse('founder:index'),
+            reverse('mentor:index'),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
@@ -57,27 +58,27 @@ class FounderTests(TestCase):
         """
         Context data
 
-        Check filter, who contains all founders.
+        Check filter, who contains all mentors.
         """
         self.client.logout()
         self.client.login(username=self.mentor.user.username, password="Toto1234!#")
 
-        # create strange founder
-        founderWeird = FounderFactory()
-        founderWeird.user.username = u"ïtrema718"
-        founderWeird.save()
+        # create strange mentor
+        mentorWeird = MentorFactory()
+        mentorWeird.user.username = u"ïtrema718"
+        mentorWeird.save()
 
-        # list of founders.
+        # list of mentors.
         result = self.client.get(
-            reverse('founder:index'),
+            reverse('mentor:index'),
             follow=False
         )
         self.assertEqual(result.status_code, 200)
-        self.assertEqual(nb_founder+1, len(result.context['filter']))
+        self.assertEqual(nb_mentor+1, len(result.context['mentorFilter']))
 
     def test_detail(self):
         """
-        To test the detail of a founder.
+        To test the detail of a mentor.
         """
 
         """
@@ -87,7 +88,7 @@ class FounderTests(TestCase):
         self.client.login(username=self.mentor.user.username, password="Toto1234!#")
 
         result = self.client.get(
-            reverse('founder:detail', kwargs={'pk': self.founder.userProfile_id}),
+            reverse('mentor:detail', kwargs={'pk': self.mentor.userProfile_id}),
             follow=False
         )
         self.assertEqual(result.status_code, 200)
@@ -98,27 +99,27 @@ class FounderTests(TestCase):
         self.client.logout()
 
         result = self.client.get(
-            reverse('founder:detail', kwargs={'pk': self.founder.userProfile_id}),
+            reverse('mentor:detail', kwargs={'pk': self.mentor.userProfile_id}),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
 
 
         """
-        Access of an inexistant founder
+        Access of an inexistant mentor
         """
         self.client.logout()
         self.client.login(username=self.mentor.user.username, password="Toto1234!#")
 
         result = self.client.get(
-            reverse('founder:detail', kwargs={'pk': 999999}),
+            reverse('mentor:detail', kwargs={'pk': 999999}),
             follow=False
         )
         self.assertEqual(result.status_code, 404)
 
     def test_create(self):
         """
-        To test the creation of a founder.
+        To test the creation of a mentor.
         """
 
         """
@@ -130,7 +131,7 @@ class FounderTests(TestCase):
         )
 
         result = self.client.get(
-            reverse('founder:add'),
+            reverse('mentor:create'),
             follow=False
         )
         self.assertEqual(result.status_code, 200)
@@ -143,7 +144,7 @@ class FounderTests(TestCase):
         self.client.login(username=self.founder.user.username, password="Toto1234!#")
 
         result = self.client.get(
-            reverse('founder:add'),
+            reverse('mentor:create'),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
@@ -153,7 +154,7 @@ class FounderTests(TestCase):
         self.client.login(username=self.mentor.user.username, password="Toto1234!#")
 
         result = self.client.get(
-            reverse('founder:add'),
+            reverse('mentor:create'),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
@@ -164,17 +165,17 @@ class FounderTests(TestCase):
         self.client.logout()
 
         result = self.client.get(
-            reverse('founder:add'),
+            reverse('mentor:create'),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
 
     def test_update(self):
         """
-        To test update a founder.
+        To test update a mentor.
         """
 
-        founderTest = FounderFactory()
+        mentorTest = MentorFactory()
 
         """
         Access : Staff
@@ -185,20 +186,20 @@ class FounderTests(TestCase):
         )
 
         result = self.client.get(
-            reverse('founder:update', kwargs={'pk': founderTest.userProfile_id}),
+            reverse('mentor:update', kwargs={'pk': mentorTest.userProfile_id}),
             follow=False
         )
         self.assertEqual(result.status_code, 200)
 
         """
-        Access : Founder on personnal account
+        Access : Mentor on personnal account
         """
-        #A founder
+        #A mentor
         self.client.logout()
-        self.client.login(username=self.founder.user.username, password="Toto1234!#")
+        self.client.login(username=self.mentor.user.username, password="Toto1234!#")
 
         result = self.client.get(
-            reverse('founder:update', kwargs={'pk': self.founder.userProfile_id}),
+            reverse('mentor:update', kwargs={'pk': self.mentor.userProfile_id}),
             follow=False
         )
         self.assertEqual(result.status_code, 200)
@@ -212,7 +213,7 @@ class FounderTests(TestCase):
         self.client.login(username=self.founder.user.username, password="Toto1234!#")
 
         result = self.client.get(
-            reverse('founder:update', kwargs={'pk': founderTest.userProfile_id}),
+            reverse('mentor:update', kwargs={'pk': mentorTest.userProfile_id}),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
@@ -222,7 +223,7 @@ class FounderTests(TestCase):
         self.client.login(username=self.mentor.user.username, password="Toto1234!#")
 
         result = self.client.get(
-            reverse('founder:update', kwargs={'pk': founderTest.userProfile_id}),
+            reverse('mentor:update', kwargs={'pk': mentorTest.userProfile_id}),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
@@ -233,20 +234,20 @@ class FounderTests(TestCase):
         self.client.logout()
 
         result = self.client.get(
-            reverse('founder:update', kwargs={'pk': founderTest.userProfile_id}),
+            reverse('mentor:update', kwargs={'pk': mentorTest.userProfile_id}),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
 
 
         """
-        Access of an inexistant founder
+        Access of an inexistant mentor
         """
         self.client.logout()
         self.client.login(username=self.staff.username, password="Toto1234!#")
 
         result = self.client.get(
-            reverse('founder:update', kwargs={'pk': 999999}),
+            reverse('mentor:update', kwargs={'pk': 999999}),
             follow=False
         )
         self.assertEqual(result.status_code, 404)

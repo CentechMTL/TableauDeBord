@@ -19,8 +19,10 @@ class CompanyFactory(factory.DjangoModelFactory):
 
     @classmethod
     def __init__(self, **kwargs):
-        company = super(CompanyFactory, self).__init__(self, **kwargs)
         companyStatus = kwargs.pop('companyStatus', None)
-        if status:
-            company.companyStatus = companyStatus
-            company.save()
+        company = super(CompanyFactory, self).__init__(self, **kwargs)
+        if companyStatus is None:
+            companyStatus = CompanyStatusFactory()
+
+        company.companyStatus = companyStatus
+        company.save()

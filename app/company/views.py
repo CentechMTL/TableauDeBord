@@ -155,6 +155,7 @@ class CompanyCreate(generic.CreateView):
 
     def get_success_message(self):
         return (u'La compagnie a bien été ajouté.')
+
 #Update form
 class CompanyUpdate(generic.UpdateView):
     model = Company
@@ -179,6 +180,7 @@ class CompanyUpdate(generic.UpdateView):
         for group in groups:
             if group['name'] == 'Centech':
                 return super(CompanyUpdate, self).dispatch(*args, **kwargs)
+
         #The visitor can't see this page!
         return HttpResponseRedirect("/user/noAccessPermissions")
 

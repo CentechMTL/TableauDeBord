@@ -8,9 +8,8 @@ from django.test import TestCase
 from app.founder.factories import FounderFactory
 from app.mentor.factories import MentorFactory
 from app.home.factories import UserFactory, StaffUserFactory
-from app.company.factories import CompanyFactory, CompanyStatusFactory
 
-class CompanyTests(TestCase):
+class FounderTests(TestCase):
 
     def setUp(self):
         settings.EMAIL_BACKEND = \
@@ -19,12 +18,9 @@ class CompanyTests(TestCase):
         self.mentor = MentorFactory()
         self.staff = StaffUserFactory()
 
-        self.status = CompanyStatusFactory()
-        self.company = CompanyFactory(companyStatus = self.status)
-
     def test_index(self):
         """
-        To test the listing of the companies.
+        To test the listing of the founders.
         """
 
         """
@@ -35,15 +31,15 @@ class CompanyTests(TestCase):
         self.client.logout()
         self.client.login(username=self.mentor.user.username, password="Toto1234!#")
 
-        # list of companies.
+        # list of founders.
         result = self.client.get(
-            reverse('company:index'),
+            reverse('founder:index'),
             follow=False
         )
         self.assertEqual(result.status_code, 200)
         self.assertEqual(1, len(result.context['filter']))
 
-        nb_company = len(result.context['filter'])
+        nb_founder = len(result.context['filter'])
         """
         No Access
 
@@ -51,9 +47,9 @@ class CompanyTests(TestCase):
         """
         self.client.logout()
 
-        # list of companies.
+        # list of founders.
         result = self.client.get(
-            reverse('company:index'),
+            reverse('founder:index'),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
@@ -61,27 +57,27 @@ class CompanyTests(TestCase):
         """
         Context data
 
-        Check filter, who contains all companies
+        Check filter, who contains all founders.
         """
         self.client.logout()
         self.client.login(username=self.mentor.user.username, password="Toto1234!#")
 
-        # create strange company
-        companyWeird = CompanyFactory(companyStatus = self.status)
-        companyWeird.name = u"Company ïtrema718"
-        companyWeird.save()
+        # create strange founder
+        founderWeird = FounderFactory()
+        founderWeird.user.username = u"ïtrema718"
+        founderWeird.save()
 
-        # list of companies.
+        # list of founders.
         result = self.client.get(
-            reverse('company:index'),
+            reverse('founder:index'),
             follow=False
         )
         self.assertEqual(result.status_code, 200)
-        self.assertEqual(nb_company+1, len(result.context['filter']))
+        self.assertEqual(nb_founder+1, len(result.context['filter']))
 
     def test_detail(self):
         """
-        To test the detail of a company.
+        To test the detail of a founder.
         """
 
         """
@@ -91,7 +87,7 @@ class CompanyTests(TestCase):
         self.client.login(username=self.mentor.user.username, password="Toto1234!#")
 
         result = self.client.get(
-            reverse('company:detail', kwargs={'pk': self.company.id}),
+            reverse('founder:detail', kwargs={'pk': self.founder.userProfile_id}),
             follow=False
         )
         self.assertEqual(result.status_code, 200)
@@ -102,27 +98,27 @@ class CompanyTests(TestCase):
         self.client.logout()
 
         result = self.client.get(
-            reverse('company:detail', kwargs={'pk': self.company.id}),
+            reverse('founder:detail', kwargs={'pk': self.founder.userProfile_id}),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
 
 
         """
-        Access of an inexistant company
+        Access of an inexistant founder
         """
         self.client.logout()
         self.client.login(username=self.mentor.user.username, password="Toto1234!#")
 
         result = self.client.get(
-            reverse('company:detail', kwargs={'pk': 999999}),
+            reverse('founder:detail', kwargs={'pk': 999999}),
             follow=False
         )
         self.assertEqual(result.status_code, 404)
 
     def test_create(self):
         """
-        To test the creation of a company.
+        To test the creation of a founder.
         """
 
         """
@@ -134,7 +130,7 @@ class CompanyTests(TestCase):
         )
 
         result = self.client.get(
-            reverse('company:create'),
+            reverse('founder:add'),
             follow=False
         )
         self.assertEqual(result.status_code, 200)
@@ -147,7 +143,7 @@ class CompanyTests(TestCase):
         self.client.login(username=self.founder.user.username, password="Toto1234!#")
 
         result = self.client.get(
-            reverse('company:create'),
+            reverse('founder:add'),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
@@ -157,7 +153,7 @@ class CompanyTests(TestCase):
         self.client.login(username=self.mentor.user.username, password="Toto1234!#")
 
         result = self.client.get(
-            reverse('company:create'),
+            reverse('founder:add'),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
@@ -168,19 +164,20 @@ class CompanyTests(TestCase):
         self.client.logout()
 
         result = self.client.get(
-            reverse('company:create'),
+            reverse('founder:add'),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
-
 
     def test_update(self):
         """
-        To test update a company.
+        To test update a founder.
         """
 
+        founderTest = FounderFactory()
+
         """
-        Access : Staff only
+        Access : Staff
         """
         self.client.logout()
         self.assertTrue(
@@ -188,27 +185,24 @@ class CompanyTests(TestCase):
         )
 
         result = self.client.get(
-            reverse('company:update', kwargs={'pk': self.company.id}),
+            reverse('founder:update', kwargs={'pk': founderTest.userProfile_id}),
             follow=False
         )
         self.assertEqual(result.status_code, 200)
 
         """
-        Access : Founder on personnal company
+        Access : Founder on personnal account
         """
-        companyTest = CompanyFactory(companyStatus = self.status)
-        founderTest = FounderFactory()
-        companyTest.founders.add(founderTest)
-        companyTest.save()
-
+        #A founder
         self.client.logout()
-        self.client.login(username=founderTest.user.username, password="Toto1234!#")
+        self.client.login(username=self.founder.user.username, password="Toto1234!#")
 
         result = self.client.get(
-            reverse('company:update', kwargs={'pk': companyTest.id}),
+            reverse('founder:update', kwargs={'pk': self.founder.userProfile_id}),
             follow=False
         )
         self.assertEqual(result.status_code, 200)
+
 
         """
         No Access : Not in the staff
@@ -218,7 +212,7 @@ class CompanyTests(TestCase):
         self.client.login(username=self.founder.user.username, password="Toto1234!#")
 
         result = self.client.get(
-            reverse('company:update', kwargs={'pk': self.company.id}),
+            reverse('founder:update', kwargs={'pk': founderTest.userProfile_id}),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
@@ -228,7 +222,7 @@ class CompanyTests(TestCase):
         self.client.login(username=self.mentor.user.username, password="Toto1234!#")
 
         result = self.client.get(
-            reverse('company:update', kwargs={'pk': self.company.id}),
+            reverse('founder:update', kwargs={'pk': founderTest.userProfile_id}),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
@@ -239,73 +233,20 @@ class CompanyTests(TestCase):
         self.client.logout()
 
         result = self.client.get(
-            reverse('company:update', kwargs={'pk': self.company.id}),
+            reverse('founder:update', kwargs={'pk': founderTest.userProfile_id}),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
 
 
         """
-        Access of an inexistant company
+        Access of an inexistant founder
         """
         self.client.logout()
         self.client.login(username=self.staff.username, password="Toto1234!#")
 
         result = self.client.get(
-            reverse('company:update', kwargs={'pk': 999999}),
+            reverse('founder:update', kwargs={'pk': 999999}),
             follow=False
         )
         self.assertEqual(result.status_code, 404)
-
-    def test_create_status(self):
-        """
-        To test create a status.
-        """
-
-        """
-        Access : Staff only
-        """
-        self.client.logout()
-        self.assertTrue(
-        self.client.login(username=self.staff.username, password="Toto1234!#")
-        )
-
-        result = self.client.get(
-            reverse('company:status_create'),
-            follow=False
-        )
-        self.assertEqual(result.status_code, 200)
-
-        """
-        No Access : Not in the staff
-        """
-        #A founder
-        self.client.logout()
-        self.client.login(username=self.founder.user.username, password="Toto1234!#")
-
-        result = self.client.get(
-            reverse('company:status_create'),
-            follow=False
-        )
-        self.assertEqual(result.status_code, 302)
-
-        #A mentor
-        self.client.logout()
-        self.client.login(username=self.mentor.user.username, password="Toto1234!#")
-
-        result = self.client.get(
-            reverse('company:status_create'),
-            follow=False
-        )
-        self.assertEqual(result.status_code, 302)
-
-        """
-        No Access : Not logged
-        """
-        self.client.logout()
-
-        result = self.client.get(
-            reverse('company:status_create'),
-            follow=False
-        )
-        self.assertEqual(result.status_code, 302)

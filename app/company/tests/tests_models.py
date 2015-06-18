@@ -8,7 +8,7 @@ class CompanyModelsTest(TestCase):
 
     def setUp(self):
         self.status1 = CompanyStatusFactory()
-        self.company1 = CompanyFactory()
+        self.company1 = CompanyFactory(companyStatus = self.status1)
 
     def test_get_users(self):
         self.assertEqual(0, len(self.company1.get_users()))

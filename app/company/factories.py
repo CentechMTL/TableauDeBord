@@ -15,5 +15,12 @@ class CompanyFactory(factory.DjangoModelFactory):
     class Meta:
         model = Company
 
-    name = factory.Sequence('Company No{0}'.format)
-    companyStatus = factory.SubFactory(CompanyStatusFactory)
+    name = factory.Sequence('Company ïtrema755 N°{0}'.format)
+
+    @classmethod
+    def __init__(self, **kwargs):
+        company = super(CompanyFactory, self).__init__(self, **kwargs)
+        companyStatus = kwargs.pop('companyStatus', None)
+        if status:
+            company.companyStatus = companyStatus
+            company.save()

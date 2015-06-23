@@ -5,6 +5,7 @@ from django.forms import widgets
 from django import forms
 
 from app.kanboard.models import Card, Phase
+from app.founder.models import Founder
 
 from django.utils.translation import ugettext_lazy as _
 from crispy_forms.helper import FormHelper
@@ -30,7 +31,7 @@ class CardForm(forms.ModelForm):
     phase.widget.attrs.update({'id':'phase'})
 
     title = forms.CharField(
-        label = _('Title'),
+        label = _('Title*'),
         required = True,
     )
     title.widget.attrs.update({'placeholder': _(u'Titre'), 'id':'title'})
@@ -50,6 +51,14 @@ class CardForm(forms.ModelForm):
     deadline = forms.DateField()
     deadline.widget.attrs.update({'id':'deadline'})
 
+    assigned = forms.ModelChoiceField(
+        label = _(u"Assign to"),
+        queryset = Founder.objects.all(),
+        required = True,
+        empty_label = "None"
+    )
+    assigned.widget.attrs.update({'id':'assigned'})
+
     def __init__(self, company, *args, **kwargs):
         super(CardForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
@@ -57,3 +66,4 @@ class CardForm(forms.ModelForm):
         self.helper.form_method = 'post'
 
         self.fields['phase'].queryset = Phase.objects.filter(company = company)
+        self.fields['assigned'].queryset = Founder.objects.filter(company = company)

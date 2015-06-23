@@ -5,6 +5,7 @@ from django.db import models
 
 from app.kanboard import signals
 from app.company.models import Company
+from app.founder.models import Founder
 
 class Phase(models.Model):
     UPCOMING = 'upcoming'
@@ -46,8 +47,9 @@ class Card(models.Model):
     deadline = models.DateField(blank=True, null=True)
 
     phase = models.ForeignKey(Phase, related_name="cards")
-
     order = models.SmallIntegerField()
+
+    assigned = models.ForeignKey(Founder, related_name="cards", blank=True, null=True)
 
     created = models.DateTimeField(blank=True)
     updated = models.DateTimeField(blank=True)

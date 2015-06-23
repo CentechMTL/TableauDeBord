@@ -31,6 +31,7 @@ def getDetailCard(request, card_id):
             message['phase'] = card.phase.id
             message['id'] = card.id
             message['deadline'] = card.deadline.strftime('%Y-%m-%d')
+            message['assigned'] = card.assigned.userProfile_id
         except:
             pass
         data = json.dumps(message)
@@ -54,29 +55,45 @@ def addCard(request, id):
                 comment = ""
 
             deadline = request.POST.get('deadline', '')
-            if deadline == None:
-                deadline = ""
-
+            assigned = request.POST.get('assigned', '')
             order = request.POST.get('order', '')
             update = request.POST.get('update', '')
+            print update
 
             if error == False:
                 if(update == 'False'):
+                    pictureAssigned = False
                     phase = Phase.objects.get(id = id)
-                    card = Card(title = title, comment = comment, phase = phase, order = order, deadline = deadline)
+                    card = Card(title = title, comment = comment, phase = phase, order = order)
+                    if deadline != "":
+                        card.deadline = deadline
+                    if assigned != "":
+                        founder = Founder.objects.get(userProfile_id = assigned)
+                        card.assigned = founder
+                        pictureAssigned = str(founder.picture)
+                    else:
+                        card.assigned = None
                     card.save()
                     id = card.id
-                    return JsonResponse({'phase': phase.id, 'id': id, 'title': title, 'comment': comment, 'updated': False})
+                    return JsonResponse({'phase': phase.id, 'id': id, 'title': title, 'comment': comment, 'updated': False, 'picture': pictureAssigned, 'assigned': assigned})
                 else:
+                    pictureAssigned = False
                     phase = Phase.objects.get(id = id)
                     card = Card.objects.get(id = update)
                     card.title = title
                     card.comment = comment
                     card.phase = phase
-                    card.deadline = deadline
+                    if deadline != "":
+                        card.deadline = deadline
+                    if assigned != "":
+                        founder = Founder.objects.get(userProfile_id = assigned)
+                        card.assigned = founder
+                        pictureAssigned = str(founder.picture)
+                    else:
+                        card.assigned = None
                     card.order = order
                     card.save()
-                    return JsonResponse({'phase': phase.id, 'id': update, 'title': title, 'comment': comment, 'updated': True})
+                    return JsonResponse({'phase': phase.id, 'id': update, 'title': title, 'comment': comment, 'updated': True, 'picture': pictureAssigned, 'assigned': assigned})
 
     #The visitor can't see this page!
     return HttpResponseRedirect("/user/noAccessPermissions")

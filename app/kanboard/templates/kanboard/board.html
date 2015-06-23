@@ -25,8 +25,14 @@
       modal: true,
       buttons: {
         "Create": function() {
-          addCard('{% url "kanboard" 1 %}');
-          dialog.dialog( "close" );
+          var result = addCard('{% url "kanboard:kanboard" 1 %}');
+          if(result){
+            dialog.dialog( "close" );
+            document.getElementById("title").style.border = "none";
+          }
+          else{
+            document.getElementById("title").style.border = "1px solid red";
+          }
         },
         Cancel: function() {
           dialog.dialog( "close" );
@@ -45,15 +51,15 @@
   });
   </script>
 
-
-
 <script>
 function addCard(baseLien){
     //DATA
+    var result = false;
     var phase = document.getElementById("phase").value;
     var title = document.getElementById("title").value;
     var comment = document.getElementById("comment").value;
     var deadline = document.getElementById("deadline").value;
+    var assigned = document.getElementById("assigned").value;
     var update = document.getElementById("update").value;
 
     baseLien = baseLien.replace(/([0-9]+)/, phase);
@@ -64,13 +70,16 @@ function addCard(baseLien){
     //Link to add a card
     lien = baseLien + "add/";
 
-     $.ajax({
-          type: 'POST',
-          url: lien,
-          data: '&title=' + title + '&comment=' + comment + '&deadline=' + deadline + '&order=' + order + '&update=' + update,
+    $.ajax({
+        type: 'POST',
+        url: lien,
+        async: false,
+        data: '&title=' + title + '&comment=' + comment + '&deadline=' + deadline + '&assigned=' + assigned + '&order=' + order + '&update=' + update,
 
-          success: function(data, status) {
-                if(!data.updated){
+        success: function(data, status) {
+            //It's a new card
+            if(!data.updated){
+                if(data.title){
                     //Update display - Add the new li
                     var ul = document.getElementById("phase-"+phase);
                     var li = document.createElement('li');
@@ -82,13 +91,13 @@ function addCard(baseLien){
 
                     var spanDelete = document.createElement('span');
                     spanDelete.className = data.id;
-                    spanDelete.setAttribute('onclick','deleteCard(this.className, "{% url "kanboardDeleteCard" 1 %}");');
+                    spanDelete.setAttribute('onclick','deleteCard(this.className, "{% url "kanboard:kanboardDeleteCard" 1 %}");');
                     spanDelete.innerHTML = "<i class='fa fa-trash'></i>";
                     spanDelete.style.float = "right";
 
                     var spanEdit = document.createElement('span');
                     spanEdit.className = data.id;
-                    spanEdit.setAttribute('onclick','editCard(this.className,  "{% url "kanboardGetDetailCard" 1 %}");');
+                    spanEdit.setAttribute('onclick','editCard(this.className,  "{% url "kanboard:kanboardGetDetailCard" 1 %}");');
                     spanEdit.innerHTML = "<i class='fa fa-pencil-square-o'></i>";
                     spanEdit.style.float = "right";
 
@@ -98,59 +107,99 @@ function addCard(baseLien){
                     var p = document.createElement('p');
                     p.innerHTML = data.comment;
 
+                    if(data.picture != false){
+                        var linkAssigned = document.createElement('a');
+
+                        baseLien = "{% url 'founder:detail' 1 %}";
+                        var pos = baseLien.lastIndexOf('/'); // position du dernier "/"
+                        baseLien = baseLien.substr(0, pos+1);
+                        var lien = baseLien+data.assigned;
+                        linkAssigned.href = lien;
+                        linkAssigned.className = "assigned";
+
+                        var imgAssigned = document.createElement('img');
+                        imgAssigned.className = "avatar";
+                        imgAssigned.src = "/media/" + data.picture;
+                        imgAssigned.style.width = "40px";
+
+                        linkAssigned.appendChild(imgAssigned);
+                    }
+
                     linkDelete.appendChild(spanDelete);
                     linkEdit.appendChild(spanEdit);
                     titre.appendChild(linkDelete);
                     titre.appendChild(linkEdit);
                     li.appendChild(titre);
                     li.appendChild(p);
-                    ul.appendChild(li);
-                }
-                else{
-                    //Init the form
-                    document.getElementById('update').value = "False";
-
-                    var li = document.getElementById("card-"+data.id);
-
-                    var spanDelete = document.createElement('span');
-                    spanDelete.className = data.id;
-                    spanDelete.setAttribute('onclick','deleteCard(this.className, "{% url "kanboardDeleteCard" 1 %}");');
-                    spanDelete.innerHTML = "<i class='fa fa-trash'></i>";
-                    spanDelete.style.float = "right";
-
-                    var spanEdit = document.createElement('span');
-                    spanEdit.className = data.id;
-                    spanEdit.setAttribute('onclick','editCard(this.className,  "{% url "kanboardGetDetailCard" 1 %}");');
-                    spanEdit.innerHTML = "<i class='fa fa-pencil-square-o'></i>";
-                    spanEdit.style.float = "right";
-
-                    var linkDelete = document.createElement('a');
-                    var linkEdit = document.createElement('a');
-
-                    li.getElementsByTagName('h3')[0].innerHTML = data.title;
-                    linkDelete.appendChild(spanDelete);
-                    linkEdit.appendChild(spanEdit);
-                    li.getElementsByTagName('h3')[0].appendChild(linkDelete);
-                    li.getElementsByTagName('h3')[0].appendChild(linkEdit);
-                    li.getElementsByTagName('p')[0].innerHTML = data.comment;
-
-
-                    //Change column for go in the new phase
-                    var ul = li.parentElement;
-
-                    if(ul!=newUl){
-                        ul.removeChild(li);
-                        newUl.appendChild(li);
+                    if(data.picture != false){
+                        li.appendChild(linkAssigned);
                     }
+                    ul.appendChild(li);
 
+                    result  = true;
                 }
-            },
-
-          error: function(resultat, status, erreur) {
+            }
+            //It's an update of a card
+            else{
                 //Init the form
                 document.getElementById('update').value = "False";
+
+                var li = document.getElementById("card-"+data.id);
+
+                var spanDelete = document.createElement('span');
+                spanDelete.className = data.id;
+                spanDelete.setAttribute('onclick','deleteCard(this.className, "{% url "kanboard:kanboardDeleteCard" 1 %}");');
+                spanDelete.innerHTML = "<i class='fa fa-trash'></i>";
+                spanDelete.style.float = "right";
+
+                var spanEdit = document.createElement('span');
+                spanEdit.className = data.id;
+                spanEdit.setAttribute('onclick','editCard(this.className,  "{% url "kanboard:kanboardGetDetailCard" 1 %}");');
+                spanEdit.innerHTML = "<i class='fa fa-pencil-square-o'></i>";
+                spanEdit.style.float = "right";
+
+                var linkDelete = document.createElement('a');
+                var linkEdit = document.createElement('a');
+
+                li.getElementsByTagName('h3')[0].innerHTML = data.title;
+                linkDelete.appendChild(spanDelete);
+                linkEdit.appendChild(spanEdit);
+                li.getElementsByTagName('h3')[0].appendChild(linkDelete);
+                li.getElementsByTagName('h3')[0].appendChild(linkEdit);
+                li.getElementsByTagName('p')[0].innerHTML = data.comment;
+
+                if(data.picture != false){
+                    var linkAssigned = li.getElementsByClassName('assigned')[0];
+
+                    baseLien = "{% url 'founder:detail' 1 %}";
+                    var pos = baseLien.lastIndexOf('/'); // position du dernier "/"
+                    baseLien = baseLien.substr(0, pos+1);
+                    var lien = baseLien+data.assigned;
+                    linkAssigned.href = lien;
+
+                    var imgAssigned = linkAssigned.getElementsByTagName('img')[0];
+                    imgAssigned.src = "/media/" + data.picture;
+                }
+
+                //Change column for go in the new phase
+                var ul = li.parentElement;
+
+                if(ul!=newUl){
+                    ul.removeChild(li);
+                    newUl.appendChild(li);
+                }
+
+                result  = true;
             }
-     });
+        },
+
+        error: function(resultat, status, erreur) {
+            //Init the form
+            document.getElementById('update').value = "False";
+        }
+    });
+
+    return result;
 }
 </script>
 
@@ -200,6 +249,7 @@ function editCard(id, baseLien){
                 document.getElementById('comment').value = data.comment;
                 document.getElementById('update').value = data.id;
                 document.getElementById('deadline').value = data.deadline;
+                document.getElementById('assigned').value = data.assigned;
 
                 document.getElementById('create-card').click();
             },
@@ -236,10 +286,13 @@ function editCard(id, baseLien){
             <li class="card" id='card-{{ card.id }}'>
                 <h3>
                     {{ card.title }}
-                    <a><span class="{{card.id}}" style="float: right;" onclick='deleteCard(this.className, "{% url "kanboardDeleteCard" 1 %}");' class="{{card.id}}"><i class="fa fa-trash"></i></span></a>
-                    <a><span class="{{card.id}}" style="float: right;" onclick='editCard(this.className,  "{% url "kanboardGetDetailCard" 1 %}");' class="{{card.id}}"><i class="fa fa-pencil-square-o"></i></span></a>
+                    <a><span class="{{card.id}}" style="float: right;" onclick='deleteCard(this.className, "{% url "kanboard:kanboardDeleteCard" 1 %}");' class="{{card.id}}"><i class="fa fa-trash"></i></span></a>
+                    <a><span class="{{card.id}}" style="float: right;" onclick='editCard(this.className,  "{% url "kanboard:kanboardGetDetailCard" 1 %}");' class="{{card.id}}"><i class="fa fa-pencil-square-o"></i></span></a>
                 </h3>
                 <p>{{ card.comment }}</p>
+                {% if card.assigned %}
+                    <a class="assigned" href="{% url 'founder:detail' card.assigned.pk %}"><img class="avatar" src="/media/{{ card.assigned.picture }}" style="width:40px;"/></a>
+                {% endif %}
             </li>
             {% endfor %}
         </ul>

@@ -92,7 +92,7 @@
                             <a class="menuValuePropositionCanvas" href="/valuePropositionCanvas/{{request.session.companySelected}}"><div><i class="fa fa-table"></i> <span class="nav-label">{% trans "Value Proposition Canvas" %}</span></div></a>
                             {% endcomment %}
                             <a class="menuFinance" href="/finance/{{request.session.companySelected}}"><div><i class="fa fa-usd"></i> <span class="nav-label">{% trans "Finance" %}</span></div></a>
-                            <a class="menuKanboard" href="/kanboard/{{request.session.companySelected}}"><div><i class="fa list-ul"></i> <span class="nav-label">{% trans "KanBoard" %}</span></div></a>
+                            <a class="menuKanboard" href="/kanboard/{{request.session.companySelected}}"><div><i class="fa fa-list-ul"></i> <span class="nav-label">{% trans "KanBoard" %}</span></div></a>
                         {% else %}
                             <a class="menuIrl" style="visibility: hidden;" href="/kpi/irl"><div><i class="fa fa-bar-chart"></i> <span class="nav-label">{% trans "IRL" %}</span></div></a>
                             <a class="menuTrl" style="visibility: hidden;" href="/kpi/trl"><div><i class="fa fa-bar-chart"></i> <span class="nav-label">{% trans "TRL" %}</span></div></a>
@@ -102,7 +102,7 @@
                             <a class="menuValuePropositionCanvas" style="visibility: hidden;" href="/valuePropositionCanvas"><div><i class="fa fa-table"></i> <span class="nav-label">{% trans "Value Proposition Canvas" %}</span></div></a>
                             {% endcomment %}
                             <a class="menuFinance" style="visibility: hidden;" href="/finance"><div><i class="fa fa-usd"></i> <span class="nav-label">{% trans "Finance" %}</span></div></a>
-                            <a class="menuKanboard" style="visibility: hidden;" href="/kanboard"><div><i class="fa list-ul"></i> <span class="nav-label">{% trans "KanBoard" %}</span></div></a>
+                            <a class="menuKanboard" style="visibility: hidden;" href="/kanboard"><div><i class="fa fa-list-ul"></i> <span class="nav-label">{% trans "KanBoard" %}</span></div></a>
 
                         {% endif %}
                     {% elif isMentor %} <!-- Is not a Centech but a Mentor -->
@@ -125,7 +125,7 @@
                             <a class="menuValuePropositionCanvas" href="/valuePropositionCanvas/{{request.session.companySelected}}"><div><i class="fa fa-table"></i> <span class="nav-label">{% trans "Value Proposition Canvas" %}</span></div></a>
                             {% endcomment %}
                             <a class="menuFinance" href="/finance/{{request.session.companySelected}}"><div><i class="fa fa-usd"></i> <span class="nav-label">{% trans "Finance" %}</span></div></a>
-                            <a class="menuKanboard" href="/kanboard/{{request.session.companySelected}}"><div><i class="fa list-ul"></i> <span class="nav-label">{% trans "Kanboard" %}</span></div></a>
+                            <a class="menuKanboard" href="/kanboard/{{request.session.companySelected}}"><div><i class="fa fa-list-ul"></i> <span class="nav-label">{% trans "Kanboard" %}</span></div></a>
                         {% else %}
                             <a class="menuIrl" style="visibility: hidden;" href="/kpi/irl"><div><i class="fa fa-bar-chart"></i> <span class="nav-label">{% trans "IRL" %}</span></div></a>
                             <a class="menuTrl" style="visibility: hidden;" href="/kpi/trl"><div><i class="fa fa-bar-chart"></i> <span class="nav-label">{% trans "TRL" %}</span></div></a>
@@ -135,7 +135,7 @@
                             <a class="menuValuePropositionCanvas" style="visibility: hidden;" href="/valuePropositionCanvas"><div><i class="fa fa-table"></i> <span class="nav-label">{% trans "Value Proposition Canvas" %}</span></div></a>
                             {% endcomment %}
                             <a class="menuFinance" style="visibility: hidden;" href="/finance"><div><i class="fa fa-usd"></i> <span class="nav-label">{% trans "Finance" %}</span></div></a>
-                            <a class="menuKanboard" style="visibility: hidden;" href="/kanboard"><div><i class="fa list-ul"></i> <span class="nav-label">{% trans "KanBoard" %}</span></div></a>
+                            <a class="menuKanboard" style="visibility: hidden;" href="/kanboard"><div><i class="fa fa-list-ul"></i> <span class="nav-label">{% trans "KanBoard" %}</span></div></a>
                         {% endif %}
                     {% else %} <!-- Not a Centech or Mentor -->
                         <a class="menuIrl" href="/kpi/irl/{{userCompanyId}}"><div><i class="fa fa-bar-chart"></i> <span class="nav-label">{% trans "IRL" %}</span></div></a>
@@ -146,7 +146,7 @@
                         <a class="menuValuePropositionCanvas" href="/valuePropositionCanvas/{{userCompanyId}}"><div><i class="fa fa-table"></i> <span class="nav-label">{% trans "Value Proposition Canvas" %}</span></div></a>
                         {% endcomment %}
                         <a class="menuFinance" href="/finance/{{userCompanyId}}"><div><i class="fa fa-usd"></i> <span class="nav-label">{% trans "Finance" %}</span></div></a>
-                        <a class="menuKanboard" href="/kanboard/{{userCompanyId}}"><div><i class="fa list-ul"></i> <span class="nav-label">{% trans "KanBoard" %}</span></div></a>
+                        <a class="menuKanboard" href="/kanboard/{{userCompanyId}}"><div><i class="fa fa-list-ul"></i> <span class="nav-label">{% trans "KanBoard" %}</span></div></a>
                     {% endif %}
                 </li>
                 <li>

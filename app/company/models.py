@@ -34,9 +34,9 @@ class Company(models.Model):
     companyStatus = models.ForeignKey(CompanyStatus,verbose_name=_('Status'))
 
     #List of founders
-    founders = models.ManyToManyField(Founder,blank=True, verbose_name=_('Founders'))
+    founders = models.ManyToManyField(Founder,blank=True, verbose_name=_('Founders'), related_name = "company")
     #List of mentors
-    mentors = models.ManyToManyField(Mentor,blank=True, verbose_name=_('Mentors'))
+    mentors = models.ManyToManyField(Mentor,blank=True, verbose_name=_('Mentors'), related_name = "company")
 
     created = models.DateTimeField(blank=True)
     updated = models.DateTimeField(blank=True)

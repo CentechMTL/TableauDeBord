@@ -6,6 +6,7 @@ from django.db import models
 from app.kanboard import signals
 from app.company.models import Company
 from app.founder.models import Founder
+from django.contrib.auth.models import User
 
 class Phase(models.Model):
     UPCOMING = 'upcoming'
@@ -50,6 +51,7 @@ class Card(models.Model):
     order = models.SmallIntegerField()
 
     assigned = models.ForeignKey(Founder, related_name="cards", blank=True, null=True)
+    creator = models.ForeignKey(User, blank=True, null=True)
 
     created = models.DateTimeField(blank=True)
     updated = models.DateTimeField(blank=True)
@@ -73,6 +75,11 @@ class Card(models.Model):
 
         signals.phase_change.send(sender=self, from_phase=from_phase,
                                   to_phase=new_phase, changed_at=change_at)
+
+    def is_past_due(self):
+        if datetime.date.today() > self.deadline:
+            return True
+        return False
 
 #SIGNALS CONNECTED
 models.signals.pre_save.connect(signals.card_order, sender=Card)

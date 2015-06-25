@@ -32,6 +32,7 @@ def getDetailCard(request, card_id):
             message['id'] = card.id
             message['deadline'] = card.deadline.strftime('%Y-%m-%d')
             message['assigned'] = card.assigned.userProfile_id
+            message['picture'] = str(card.assigned.picture)
         except:
             pass
         data = json.dumps(message)

@@ -25,8 +25,8 @@
       modal: true,
       buttons: {
         "Create": function() {
-          var result = addCard('{% url "kanboard:kanboard" 1 %}');
-          if(result){
+          if(document.getElementById("title").value != ""){
+            addCard('{% url "kanboard:kanboard" 1 %}');
             dialog.dialog( "close" );
             document.getElementById("title").style.border = "none";
           }
@@ -40,6 +40,7 @@
       },
       close: function() {
         form[ 0 ].reset();
+        document.getElementById('update').value = "False";
       }
     });
 
@@ -52,9 +53,91 @@
   </script>
 
 <script>
+function createCard(id, baseLien){
+    var myRegexp = /([0-9]+)/g;
+    var match = myRegexp.exec(baseLien); //match[1] is the id of the archive
+    if(match[1]){
+        var pos = baseLien.lastIndexOf('/'); // position du dernier "/"
+        var lien = baseLien.substr(0, pos+1);
+        lien = lien+id;
+
+        $.ajax({
+            type: 'GET',
+            url: lien,
+            async: false,
+
+            success: function(data, status) {
+                var ul = document.getElementById("phase-"+data.phase);
+
+                var li = document.createElement('li');
+                li.className = "card ui-sortable-handle";
+                li.id = "card-"+data.id;
+
+                var titre = document.createElement('h3');
+                titre.innerHTML = data.title;
+
+                var spanDelete = document.createElement('span');
+                spanDelete.className = data.id;
+                spanDelete.setAttribute('onclick','deleteCard(this.className, "{% url "kanboard:kanboardDeleteCard" 1 %}");');
+                spanDelete.innerHTML = "<i class='fa fa-trash'></i>";
+                spanDelete.style.float = "right";
+
+                var spanEdit = document.createElement('span');
+                spanEdit.className = data.id;
+                spanEdit.setAttribute('onclick','editCard(this.className,  "{% url "kanboard:kanboardGetDetailCard" 1 %}");');
+                spanEdit.innerHTML = "<i class='fa fa-pencil-square-o'></i>";
+                spanEdit.style.float = "right";
+
+                var linkDelete = document.createElement('a');
+                var linkEdit = document.createElement('a');
+
+                var p = document.createElement('p');
+                p.innerHTML = data.comment;
+
+                if(data.picture != false){
+                    var linkAssigned = document.createElement('a');
+
+                    lien = "{% url 'founder:detail' 1 %}";
+                    var pos = lien.lastIndexOf('/'); // position du dernier "/"
+                    lien = lien.substr(0, pos+1);
+                    var lien = lien+data.assigned;
+                    linkAssigned.href = lien;
+                    linkAssigned.className = "assigned";
+
+                    var imgAssigned = document.createElement('img');
+                    imgAssigned.className = "avatar";
+                    imgAssigned.src = "/media/" + data.picture;
+                    imgAssigned.style.width = "40px";
+
+                    linkAssigned.appendChild(imgAssigned);
+                }
+
+                linkDelete.appendChild(spanDelete);
+                linkEdit.appendChild(spanEdit);
+                titre.appendChild(linkDelete);
+                titre.appendChild(linkEdit);
+                li.appendChild(titre);
+                li.appendChild(p);
+                if(data.picture != false){
+                    li.appendChild(linkAssigned);
+                }
+
+                ul.appendChild(li);
+
+                refreshCard(id, baseLien);
+            },
+
+            error: function(resultat, status, erreur) {
+                alert(erreur);
+            }
+        });
+    }
+}
+</script>
+
+<script>
 function addCard(baseLien){
-    //DATA
-    var result = false;
+    //DATA of the form
     var phase = document.getElementById("phase").value;
     var title = document.getElementById("title").value;
     var comment = document.getElementById("comment").value;
@@ -62,6 +145,7 @@ function addCard(baseLien){
     var assigned = document.getElementById("assigned").value;
     var update = document.getElementById("update").value;
 
+    //Prepare the link
     baseLien = baseLien.replace(/([0-9]+)/, phase);
 
     var newUl = document.getElementById('phase-'+ phase);
@@ -73,78 +157,55 @@ function addCard(baseLien){
     $.ajax({
         type: 'POST',
         url: lien,
-        async: false,
         data: '&title=' + title + '&comment=' + comment + '&deadline=' + deadline + '&assigned=' + assigned + '&order=' + order + '&update=' + update,
 
         success: function(data, status) {
             //It's a new card
             if(!data.updated){
                 if(data.title){
-                    //Update display - Add the new li
-                    var ul = document.getElementById("phase-"+phase);
-                    var li = document.createElement('li');
-                    li.className = "card ui-sortable-handle";
-                    li.id = "card-"+data.id;
-
-                    var titre = document.createElement('h3');
-                    titre.innerHTML = data.title;
-
-                    var spanDelete = document.createElement('span');
-                    spanDelete.className = data.id;
-                    spanDelete.setAttribute('onclick','deleteCard(this.className, "{% url "kanboard:kanboardDeleteCard" 1 %}");');
-                    spanDelete.innerHTML = "<i class='fa fa-trash'></i>";
-                    spanDelete.style.float = "right";
-
-                    var spanEdit = document.createElement('span');
-                    spanEdit.className = data.id;
-                    spanEdit.setAttribute('onclick','editCard(this.className,  "{% url "kanboard:kanboardGetDetailCard" 1 %}");');
-                    spanEdit.innerHTML = "<i class='fa fa-pencil-square-o'></i>";
-                    spanEdit.style.float = "right";
-
-                    var linkDelete = document.createElement('a');
-                    var linkEdit = document.createElement('a');
-
-                    var p = document.createElement('p');
-                    p.innerHTML = data.comment;
-
-                    if(data.picture != false){
-                        var linkAssigned = document.createElement('a');
-
-                        baseLien = "{% url 'founder:detail' 1 %}";
-                        var pos = baseLien.lastIndexOf('/'); // position du dernier "/"
-                        baseLien = baseLien.substr(0, pos+1);
-                        var lien = baseLien+data.assigned;
-                        linkAssigned.href = lien;
-                        linkAssigned.className = "assigned";
-
-                        var imgAssigned = document.createElement('img');
-                        imgAssigned.className = "avatar";
-                        imgAssigned.src = "/media/" + data.picture;
-                        imgAssigned.style.width = "40px";
-
-                        linkAssigned.appendChild(imgAssigned);
-                    }
-
-                    linkDelete.appendChild(spanDelete);
-                    linkEdit.appendChild(spanEdit);
-                    titre.appendChild(linkDelete);
-                    titre.appendChild(linkEdit);
-                    li.appendChild(titre);
-                    li.appendChild(p);
-                    if(data.picture != false){
-                        li.appendChild(linkAssigned);
-                    }
-                    ul.appendChild(li);
-
-                    result  = true;
+                    createCard(data.id, "{% url "kanboard:kanboardGetDetailCard" 1 %}");
                 }
             }
+
             //It's an update of a card
             else{
                 //Init the form
                 document.getElementById('update').value = "False";
+                refreshCard(data.id, "{% url "kanboard:kanboardGetDetailCard" 1 %}");
+            }
+        },
 
+        error: function(resultat, status, erreur) {
+            //Init the form
+            document.getElementById('update').value = "False";
+        }
+    });
+}
+</script>
+
+<script>
+function refreshCard(id, baseLien){
+    var myRegexp = /([0-9]+)/g;
+    var match = myRegexp.exec(baseLien); //match[1] is the id of the archive
+    if(match[1]){
+        var pos = baseLien.lastIndexOf('/'); // position du dernier "/"
+        baseLien = baseLien.substr(0, pos+1);
+        var lien = baseLien+id;
+
+        $.ajax({
+            type: 'GET',
+            url: lien,
+            async: false,
+
+            success: function(data, status) {
                 var li = document.getElementById("card-"+data.id);
+                if(new Date() > new Date(data.deadline)){
+                    li.style.backgroundColor = '#eedada';
+                }
+                else
+                {
+                   li.style.backgroundColor = '#ffffff';
+                }
 
                 var spanDelete = document.createElement('span');
                 spanDelete.className = data.id;
@@ -183,23 +244,19 @@ function addCard(baseLien){
 
                 //Change column for go in the new phase
                 var ul = li.parentElement;
+                var newUl = document.getElementById('phase-'+ data.phase);
 
-                if(ul!=newUl){
+                if(ul != newUl){
                     ul.removeChild(li);
                     newUl.appendChild(li);
                 }
+            },
 
-                result  = true;
+            error: function(resultat, status, erreur) {
+                alert(erreur);
             }
-        },
-
-        error: function(resultat, status, erreur) {
-            //Init the form
-            document.getElementById('update').value = "False";
-        }
-    });
-
-    return result;
+        });
+    }
 }
 </script>
 
@@ -241,6 +298,7 @@ function editCard(id, baseLien){
         $.ajax({
             type: 'GET',
             url: lien,
+            async: false,
 
             success: function(data, status) {
                 var form = document.getElementById('form');
@@ -283,8 +341,13 @@ function editCard(id, baseLien){
         <h2>{{ phase.title }}</h2>
         <ul class="sortable phase" id='phase-{{ phase.id }}'>
             {% for card in phase.cards.all %}
-            <li class="card" id='card-{{ card.id }}'>
+            {% if card.is_past_due %}
+                <li class="card" id='card-{{ card.id }}' style="background-color: #eedada;">
+            {% else %}
+                <li class="card" id='card-{{ card.id }}'>
+            {% endif %}
                 <h3>
+                    {{card.deadline.is_past_due}}
                     {{ card.title }}
                     <a><span class="{{card.id}}" style="float: right;" onclick='deleteCard(this.className, "{% url "kanboard:kanboardDeleteCard" 1 %}");' class="{{card.id}}"><i class="fa fa-trash"></i></span></a>
                     <a><span class="{{card.id}}" style="float: right;" onclick='editCard(this.className,  "{% url "kanboard:kanboardGetDetailCard" 1 %}");' class="{{card.id}}"><i class="fa fa-pencil-square-o"></i></span></a>

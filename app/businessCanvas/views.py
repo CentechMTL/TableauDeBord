@@ -74,7 +74,7 @@ class ArchiveDelete(generic.DeleteView):
         self.object = self.get_object()
         company_id = self.object.company.id
         self.object.delete()
-        return redirect(reverse_lazy('businessCanvasElement_list', args = {company_id}))
+        return redirect(reverse_lazy('businessCanvas:businessCanvasElement_list', args = {company_id}))
 
 
 #Delete an archive

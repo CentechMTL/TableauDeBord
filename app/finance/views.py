@@ -201,7 +201,7 @@ class BourseUpdate(generic.UpdateView):
 
     def get_url(self):
         self.object = self.get_object()
-        return reverse_lazy('detail_finance', kwargs = {'companyId' : self.object.company.id, })
+        return reverse_lazy('finance:detail_finance', kwargs = {'companyId' : self.object.company.id, })
 
     #You need to be connected, and you need to have access as founder or Centech
     @method_decorator(login_required)
@@ -278,7 +278,7 @@ class BourseDelete(generic.DeleteView):
         self.object = self.get_object()
         company_id = self.object.company.id
         self.object.delete()
-        return redirect(reverse_lazy('detail_finance', args = {company_id}))
+        return redirect(reverse_lazy('finance:detail_finance', args = {company_id}))
 
 #For create a new Subsidy
 class SubventionCreate(generic.CreateView):
@@ -325,7 +325,7 @@ class SubventionUpdate(generic.UpdateView):
 
     def get_url(self):
         self.object = self.get_object()
-        return reverse_lazy('detail_finance', kwargs = {'companyId' : self.object.company.id, })
+        return reverse_lazy('finance:detail_finance', kwargs = {'companyId' : self.object.company.id, })
 
     #You need to be connected, and you need to have access as founder or Centech
     @method_decorator(login_required)
@@ -401,7 +401,7 @@ class SubventionDelete(generic.DeleteView):
         self.object = self.get_object()
         company_id = self.object.company.id
         self.object.delete()
-        return redirect(reverse_lazy('detail_finance', args = {company_id}))
+        return redirect(reverse_lazy('finance:detail_finance', args = {company_id}))
 
 #For create a new Investment
 class InvestissementCreate(generic.CreateView):
@@ -447,7 +447,7 @@ class InvestissementUpdate(generic.UpdateView):
               'sommeReception','description']
 
     def get_url(self):
-        return reverse_lazy('detail_finance', kwargs = {'companyId' : self.args[0], })
+        return reverse_lazy('finance:detail_finance', kwargs = {'companyId' : self.args[0], })
 
     #You need to be connected, and you need to have access as founder or Centech
     @method_decorator(login_required)
@@ -524,7 +524,7 @@ class InvestissementDelete(generic.DeleteView):
         self.object = self.get_object()
         company_id = self.object.company.id
         self.object.delete()
-        return redirect(reverse_lazy('detail_finance', args = {company_id}))
+        return redirect(reverse_lazy('finance:detail_finance', args = {company_id}))
 
 #For create a new Loans
 class PretCreate(generic.CreateView):
@@ -570,7 +570,7 @@ class PretUpdate(generic.UpdateView):
               'sommeReception','description']
 
     def get_url(self):
-        return reverse_lazy('detail_finance', kwargs = {'companyId' : self.args[0], })
+        return reverse_lazy('finance:detail_finance', kwargs = {'companyId' : self.args[0], })
 
     #You need to be connected, and you need to have access as founder or Centech
     @method_decorator(login_required)
@@ -647,7 +647,7 @@ class PretDelete(generic.DeleteView):
         self.object = self.get_object()
         company_id = self.object.company.id
         self.object.delete()
-        return redirect(reverse_lazy('detail_finance', args = {company_id}))
+        return redirect(reverse_lazy('finance:detail_finance', args = {company_id}))
 
 #For create a new Sale
 class VenteCreate(generic.CreateView):
@@ -693,7 +693,7 @@ class VenteUpdate(generic.UpdateView):
               'sommeReception','description']
 
     def get_url(self):
-        return reverse_lazy('detail_finance', kwargs = {'companyId' : self.args[0], })
+        return reverse_lazy('finance:detail_finance', kwargs = {'companyId' : self.args[0], })
 
     #You need to be connected, and you need to have access as founder or Centech
     @method_decorator(login_required)
@@ -770,4 +770,4 @@ class VenteDelete(generic.DeleteView):
         self.object = self.get_object()
         company_id = self.object.company.id
         self.object.delete()
-        return redirect(reverse_lazy('detail_finance', args = {company_id}))
+        return redirect(reverse_lazy('finance:detail_finance', args = {company_id}))

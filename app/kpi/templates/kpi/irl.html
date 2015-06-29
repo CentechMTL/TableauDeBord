@@ -125,8 +125,8 @@
                 <td>{{ irl.level }}</td>
                 <td>{{ irl.comment }}</td>
                 {% if isCentech %}
-                <td><a href="{% url 'irl_update' irl.id %}">{% trans "Modify" %}</a></td>
-                <td><a href="{% url 'irl_delete' irl.id %}">{% trans "Delete" %}</a></td>
+                <td><a href="{% url 'kpi:irl_update' irl.id %}">{% trans "Modify" %}</a></td>
+                <td><a href="{% url 'kpi:irl_delete' irl.id %}">{% trans "Delete" %}</a></td>
                 {% endif %}
             </tr>
         {% endfor %}
@@ -137,7 +137,7 @@
         <p>{% trans "No one IRL for the moment." %}</p>
     {% endif %}
     {% if isCentech %}
-    <a href="{% url 'irl_add' company.id %}">{% trans "New IRL" %}</a>
+    <a href="{% url 'kpi:irl_add' company.id %}">{% trans "New IRL" %}</a>
     {% endif %}
     {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 {% endblock %}

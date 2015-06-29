@@ -104,7 +104,7 @@ class CustomerExperimentUpdate(UpdateView):
               'test_subject_description','conclusions']
 
     def get_url(self):
-        return reverse_lazy('experiment_list', kwargs = {'companyId' : self.args[0], })
+        return reverse_lazy('experiment:experiment_list', kwargs = {'companyId' : self.args[0], })
 
     #You need to be connected, and you need to have access as founder only
     @method_decorator(login_required)
@@ -160,4 +160,4 @@ class CustomerExperimentDelete(DeleteView):
         self.object = self.get_object()
         company_id = self.object.company.id
         self.object.delete()
-        return redirect(reverse_lazy('experiment_list', args = {company_id}))
+        return redirect(reverse_lazy('experiment:experiment_list', args = {company_id}))

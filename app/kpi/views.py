@@ -225,7 +225,7 @@ class IrlDelete(DeleteView):
         self.object = self.get_object()
         company_id = self.object.company.id
         self.object.delete()
-        return redirect(reverse_lazy('irl_filter', args = {company_id}))
+        return redirect(reverse_lazy('kpi:irl_filter', args = {company_id}))
 
 #Update an experiment
 class TrlUpdate(UpdateView):
@@ -274,4 +274,4 @@ class TrlDelete(DeleteView):
         self.object = self.get_object()
         company_id = self.object.company.id
         self.object.delete()
-        return redirect(reverse_lazy('trl_filter', args = {company_id}))
+        return redirect(reverse_lazy('kpi:trl_filter', args = {company_id}))

@@ -39,6 +39,6 @@ class KPI(models.Model):
 
     def get_absolute_url(self):
         if(self.type == KpiType.objects.get(name ="IRL")):
-            return reverse_lazy('irl_filter', args={self.company.id})
+            return reverse_lazy('kpi:irl_filter', args={self.company.id})
         else:
-            return reverse_lazy('trl_filter', args={self.company.id})
+            return reverse_lazy('kpi:trl_filter', args={self.company.id})

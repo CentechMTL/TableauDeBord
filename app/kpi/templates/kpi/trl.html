@@ -126,8 +126,8 @@
                 <td>{{ trl.level }}</td>
                 <td>{{ trl.comment }}</td>
                 {% if isCentech %}
-                <td><a href="{% url 'trl_update' trl.id %}">{% trans "Modify" %}</a></td>
-                <td><a href="{% url 'trl_delete' trl.id %}">{% trans "Delete" %}</a></td>
+                <td><a href="{% url 'kpi:trl_update' trl.id %}">{% trans "Modify" %}</a></td>
+                <td><a href="{% url 'kpi:trl_delete' trl.id %}">{% trans "Delete" %}</a></td>
                 {% endif %}
             </tr>
         {% endfor %}
@@ -138,7 +138,7 @@
     <p>{% trans "No one TRL for the moment." %}</p>
     {% endif %}
     {% if isCentech %}
-    <a href="{% url 'trl_add' company.id %}">{% trans "New TRL" %}</a>
+    <a href="{% url 'kpi:trl_add' company.id %}">{% trans "New TRL" %}</a>
     {% endif %}
     {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 {% endblock %}

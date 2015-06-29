@@ -14,13 +14,13 @@ class Bourse(models.Model):
     dateReception = models.DateField(blank=True, null=True, verbose_name=_('Received date'))
     sommeReception = models.PositiveIntegerField(blank=True, null=True, verbose_name=_('Amount received'))
     description = models.CharField(blank=True, max_length=512, verbose_name=_('Description'))
-    company = models.ForeignKey(Company, verbose_name=_('Company'))
+    company = models.ForeignKey(Company, verbose_name=_('Company'), related_name="grants")
 
     def __str__(self):
         return self.name
 
     def get_absolute_url(self):
-        return reverse_lazy('detail_finance', args={self.company.id})
+        return reverse_lazy('finance:detail_finance', args={self.company.id})
 
 #Subsidies
 class Subvention(models.Model):
@@ -30,13 +30,13 @@ class Subvention(models.Model):
     dateReception = models.DateField(blank=True, null=True, verbose_name=_('Received date'))
     sommeReception = models.PositiveIntegerField(blank=True, null=True, verbose_name=_('Amount received'))
     description = models.CharField(blank=True, max_length=512, verbose_name=_('Description'))
-    company = models.ForeignKey(Company, verbose_name=_('Company'))
+    company = models.ForeignKey(Company, verbose_name=_('Company'), related_name="subsidies")
 
     def __str__(self):
         return self.name
 
     def get_absolute_url(self):
-        return reverse_lazy('detail_finance', args={self.company.id})
+        return reverse_lazy('finance:detail_finance', args={self.company.id})
 
 #Investments
 class Investissement(models.Model):
@@ -46,13 +46,13 @@ class Investissement(models.Model):
     dateReception = models.DateField(blank=True, null=True, verbose_name=_('Received date'))
     sommeReception = models.PositiveIntegerField(blank=True, null=True, verbose_name=_('Amount received'))
     description = models.CharField(blank=True, max_length=512, verbose_name=_('Description'))
-    company = models.ForeignKey(Company, verbose_name=_('Company'))
+    company = models.ForeignKey(Company, verbose_name=_('Company'), related_name="investments")
 
     def __str__(self):
         return self.name
 
     def get_absolute_url(self):
-        return reverse_lazy('detail_finance', args={self.company.id})
+        return reverse_lazy('finance:detail_finance', args={self.company.id})
 
 #Loans
 class Pret(models.Model):
@@ -62,13 +62,13 @@ class Pret(models.Model):
     dateReception = models.DateField(blank=True, null=True, verbose_name=_('Received date'))
     sommeReception = models.PositiveIntegerField(blank=True, null=True, verbose_name=_('Amount received'))
     description = models.CharField(blank=True, max_length=512, verbose_name=_('Description'))
-    company = models.ForeignKey(Company, verbose_name=_('Company'))
+    company = models.ForeignKey(Company, verbose_name=_('Company'), related_name="loans")
 
     def __str__(self):
         return self.name
 
     def get_absolute_url(self):
-        return reverse_lazy('detail_finance', args={self.company.id})
+        return reverse_lazy('finance:detail_finance', args={self.company.id})
 
 #Sales
 class Vente(models.Model):
@@ -78,10 +78,10 @@ class Vente(models.Model):
     dateReception = models.DateField(blank=True, null=True, verbose_name=_('Received date'))
     sommeReception = models.PositiveIntegerField(blank=True, null=True, verbose_name=_('Amount received'))
     description = models.CharField(blank=True, max_length=512, verbose_name=_('Description'))
-    company = models.ForeignKey(Company, verbose_name=_('Company'))
+    company = models.ForeignKey(Company, verbose_name=_('Company'), related_name="sales")
 
     def __str__(self):
         return self.name
 
     def get_absolute_url(self):
-        return reverse_lazy('detail_finance', args={self.company.id})
+        return reverse_lazy('finance:detail_finance', args={self.company.id})

@@ -28,4 +28,4 @@ class CustomerExperiment(models.Model):
         return self.hypothesis
 
     def get_absolute_url(self):
-        return reverse_lazy('experiment_list', args={self.company.id})
+        return reverse_lazy('experiment:experiment_list', args={self.company.id})

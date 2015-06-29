@@ -31,7 +31,7 @@
             var donnees = $(this).serialize();
             $.ajax({
                 type: this.method,
-                url: '{% url "businessCanvasAddElement" %}',
+                url: '{% url "businessCanvas:businessCanvasAddElement" %}',
                 data: donnees + '&type=' + this.id + '&company=' + {{companyId}},
 
                 success: function(data) {
@@ -43,9 +43,9 @@
                     if(data.updated == "False"){
 
                         //<div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
-                        //  <span class="Channel{{elem.id}}" onclick='getDetail(this.className, "{% url "businessCanvasGetDetail" 1 %}")'>{{elem.title}}</span>
-                        //  <span style="float: right;" class="Channel{{elem.id}}" onclick='deleteElement(this.className, "{% url "businessCanvasDeleteElement" 1 %}");'><i class="fa fa-trash"></i></span>
-                        //  <span style="float: right;" class="Channel{{elem.id}}" onclick='editElement(this.className, "{% url "businessCanvasGetDetail" 1 %}");'><i class="fa fa-pencil-square-o"></i></span>
+                        //  <span class="Channel{{elem.id}}" onclick='getDetail(this.className, "{% url "businessCanvas:businessCanvasGetDetail" 1 %}")'>{{elem.title}}</span>
+                        //  <span style="float: right;" class="Channel{{elem.id}}" onclick='deleteElement(this.className, "{% url "businessCanvas:businessCanvasDeleteElement" 1 %}");'><i class="fa fa-trash"></i></span>
+                        //  <span style="float: right;" class="Channel{{elem.id}}" onclick='editElement(this.className, "{% url "businessCanvas:businessCanvasGetDetail" 1 %}");'><i class="fa fa-pencil-square-o"></i></span>
                         //  <p style="visibility: hidden; display: none;"></p>
                         //</div>
 
@@ -63,20 +63,20 @@
                         //The span of the title
                         var spanTitle = document.createElement('span');
                         spanTitle.className = data.type+data.id;
-                        spanTitle.setAttribute('onclick','getDetail(this.className, "{% url "businessCanvasGetDetail" 1 %}")')
+                        spanTitle.setAttribute('onclick','getDetail(this.className, "{% url "businessCanvas:businessCanvasGetDetail" 1 %}")')
                         spanTitle.innerHTML = data.title;
 
                         //The span of delete
                         var spanDelete = document.createElement('span');
                         spanDelete.className = data.type+data.id;
-                        spanDelete.setAttribute('onclick','deleteElement(this.className, "{% url "businessCanvasDeleteElement" 1 %}");')
+                        spanDelete.setAttribute('onclick','deleteElement(this.className, "{% url "businessCanvas:businessCanvasDeleteElement" 1 %}");')
                         spanDelete.innerHTML = "<i class=\"fa fa-trash\"></i>";
                         spanDelete.style.float = "right";
 
                         //The span of edit
                         var spanEdit = document.createElement('span');
                         spanEdit.className = data.type+data.id;
-                        spanEdit.setAttribute('onclick','editElement(this.className, "{% url "businessCanvasGetDetail" 1 %}");')
+                        spanEdit.setAttribute('onclick','editElement(this.className, "{% url "businessCanvas:businessCanvasGetDetail" 1 %}");')
                         spanEdit.innerHTML = "<i class=\"fa fa-pencil-square-o\"></i>";
                         spanEdit.style.float = "right";
 
@@ -134,7 +134,7 @@
 <div class="row">
     <div class="col-sm-12" align="center">
         {%if isFounder %}
-        <div style="border: 1px solid black; padding: 2px; margin-bottom: 20px; margin-top: 10px; background-color: #428bca; color: white; font-size: 20px;" onclick='archiver("{% url "businessCanvasArchiver" 1 %}", {{companyId}}, "{% url "businessCanvasElementArchived_list" 1 %}", "{% url "businessCanvasDeleteArchive" 1 %}");'>Archiver</div>
+        <div style="border: 1px solid black; padding: 2px; margin-bottom: 20px; margin-top: 10px; background-color: #428bca; color: white; font-size: 20px;" onclick='archiver("{% url "businessCanvas:businessCanvasArchiver" 1 %}", {{companyId}}, "{% url "businessCanvas:businessCanvasElementArchived_list" 1 %}", "{% url "businessCanvas:businessCanvasDeleteArchive" 1 %}");'>Archiver</div>
         {% endif %}
         <table class="canvas_container_table" id="main_table" cellpadding="5" cellspacing="0">
             <tr>
@@ -164,10 +164,10 @@
                                 {% else %}
                                     <span class="colorElement" style="color: green;">
                                 {% endif %}
-                                <span class="KeyPartner{{elem.id}}" onclick='getDetail(this.className, "{% url "businessCanvasGetDetail" 1 %}");'>{{elem.title}}</span>{%if isFounder %}
+                                <span class="KeyPartner{{elem.id}}" onclick='getDetail(this.className, "{% url "businessCanvas:businessCanvasGetDetail" 1 %}");'>{{elem.title}}</span>{%if isFounder %}
                                 </span>
-                                <span style="float: right;" class="KeyPartner{{elem.id}}" onclick='deleteElement(this.className, "{% url "businessCanvasDeleteElement" 1 %}");'><i class="fa fa-trash"></i></span>
-                                <span style="float: right;" class="KeyPartner{{elem.id}}" onclick='editElement(this.className, "{% url "businessCanvasGetDetail" 1 %}");'><i class="fa fa-pencil-square-o"></i></span>
+                                <span style="float: right;" class="KeyPartner{{elem.id}}" onclick='deleteElement(this.className, "{% url "businessCanvas:businessCanvasDeleteElement" 1 %}");'><i class="fa fa-trash"></i></span>
+                                <span style="float: right;" class="KeyPartner{{elem.id}}" onclick='editElement(this.className, "{% url "businessCanvas:businessCanvasGetDetail" 1 %}");'><i class="fa fa-pencil-square-o"></i></span>
                                 {% endif %}
                                 <p style="visibility: hidden; display: none;"></p>
                             </div>
@@ -200,11 +200,11 @@
                                 {% else %}
                                     <span class="colorElement" style="color: green;">
                                 {% endif %}
-                                <span class="KeyActivitie{{elem.id}}" onclick='getDetail(this.className, "{% url "businessCanvasGetDetail" 1 %}")'>{{elem.title}}</span>
+                                <span class="KeyActivitie{{elem.id}}" onclick='getDetail(this.className, "{% url "businessCanvas:businessCanvasGetDetail" 1 %}")'>{{elem.title}}</span>
                                 </span>
                                 {%if isFounder %}
-                                <span style="float: right;" class="KeyActivitie{{elem.id}}" onclick='deleteElement(this.className, "{% url "businessCanvasDeleteElement" 1 %}");'><i class="fa fa-trash"></i></span>
-                                <span style="float: right;" class="KeyActivitie{{elem.id}}" onclick='editElement(this.className, "{% url "businessCanvasGetDetail" 1 %}");'><i class="fa fa-pencil-square-o"></i></span>
+                                <span style="float: right;" class="KeyActivitie{{elem.id}}" onclick='deleteElement(this.className, "{% url "businessCanvas:businessCanvasDeleteElement" 1 %}");'><i class="fa fa-trash"></i></span>
+                                <span style="float: right;" class="KeyActivitie{{elem.id}}" onclick='editElement(this.className, "{% url "businessCanvas:businessCanvasGetDetail" 1 %}");'><i class="fa fa-pencil-square-o"></i></span>
                                 {% endif %}
                                 <p style="visibility: hidden; display: none;"></p>
                             </div>
@@ -238,11 +238,11 @@
                                 {% else %}
                                     <span class="colorElement" style="color: green;">
                                 {% endif %}
-                                <span class="ValueProposition{{elem.id}}" onclick='getDetail(this.className, "{% url "businessCanvasGetDetail" 1 %}")'>{{elem.title}}</span>
+                                <span class="ValueProposition{{elem.id}}" onclick='getDetail(this.className, "{% url "businessCanvas:businessCanvasGetDetail" 1 %}")'>{{elem.title}}</span>
                                 </span>
                                 {%if isFounder %}
-                                <span style="float: right;" class="ValueProposition{{elem.id}}" onclick='deleteElement(this.className, "{% url "businessCanvasDeleteElement" 1 %}");'><i class="fa fa-trash"></i></span>
-                                <span style="float: right;" class="ValueProposition{{elem.id}}" onclick='editElement(this.className, "{% url "businessCanvasGetDetail" 1 %}");'><i class="fa fa-pencil-square-o"></i></span>
+                                <span style="float: right;" class="ValueProposition{{elem.id}}" onclick='deleteElement(this.className, "{% url "businessCanvas:businessCanvasDeleteElement" 1 %}");'><i class="fa fa-trash"></i></span>
+                                <span style="float: right;" class="ValueProposition{{elem.id}}" onclick='editElement(this.className, "{% url "businessCanvas:businessCanvasGetDetail" 1 %}");'><i class="fa fa-pencil-square-o"></i></span>
                                 {% endif %}
                                 <p style="visibility: hidden; display: none;"></p>
                             </div>
@@ -275,11 +275,11 @@
                                 {% else %}
                                     <span class="colorElement" style="color: green;">
                                 {% endif %}
-                                <span class="CustomerRelationship{{elem.id}}" onclick='getDetail(this.className, "{% url "businessCanvasGetDetail" 1 %}")'>{{elem.title}}</span>
+                                <span class="CustomerRelationship{{elem.id}}" onclick='getDetail(this.className, "{% url "businessCanvas:businessCanvasGetDetail" 1 %}")'>{{elem.title}}</span>
                                 </span>
                                 {%if isFounder %}
-                                <span style="float: right;" class="CustomerRelationship{{elem.id}}" onclick='deleteElement(this.className, "{% url "businessCanvasDeleteElement" 1 %}");'><i class="fa fa-trash"></i></span>
-                                <span style="float: right;" class="CustomerRelationship{{elem.id}}" onclick='editElement(this.className, "{% url "businessCanvasGetDetail" 1 %}");'><i class="fa fa-pencil-square-o"></i></span>
+                                <span style="float: right;" class="CustomerRelationship{{elem.id}}" onclick='deleteElement(this.className, "{% url "businessCanvas:businessCanvasDeleteElement" 1 %}");'><i class="fa fa-trash"></i></span>
+                                <span style="float: right;" class="CustomerRelationship{{elem.id}}" onclick='editElement(this.className, "{% url "businessCanvas:businessCanvasGetDetail" 1 %}");'><i class="fa fa-pencil-square-o"></i></span>
                                 {% endif %}
                                 <p style="visibility: hidden; display: none;"></p>
                             </div>
@@ -312,11 +312,11 @@
                                 {% else %}
                                     <span class="colorElement" style="color: green;">
                                 {% endif %}
-                                <span class="CustomerSegment{{elem.id}}" onclick='getDetail(this.className, "{% url "businessCanvasGetDetail" 1 %}")'>{{elem.title}}</span>
+                                <span class="CustomerSegment{{elem.id}}" onclick='getDetail(this.className, "{% url "businessCanvas:businessCanvasGetDetail" 1 %}")'>{{elem.title}}</span>
                                 </span>
                                 {%if isFounder %}
-                                <span style="float: right;" class="CustomerSegment{{elem.id}}" onclick='deleteElement(this.className, "{% url "businessCanvasDeleteElement" 1 %}");'><i class="fa fa-trash"></i></span>
-                                <span style="float: right;" class="CustomerSegment{{elem.id}}" onclick='editElement(this.className, "{% url "businessCanvasGetDetail" 1 %}");'><i class="fa fa-pencil-square-o"></i></span>
+                                <span style="float: right;" class="CustomerSegment{{elem.id}}" onclick='deleteElement(this.className, "{% url "businessCanvas:businessCanvasDeleteElement" 1 %}");'><i class="fa fa-trash"></i></span>
+                                <span style="float: right;" class="CustomerSegment{{elem.id}}" onclick='editElement(this.className, "{% url "businessCanvas:businessCanvasGetDetail" 1 %}");'><i class="fa fa-pencil-square-o"></i></span>
                                 {% endif %}
                                 <p style="visibility: hidden; display: none;"></p>
                             </div>
@@ -351,11 +351,11 @@
                                 {% else %}
                                     <span class="colorElement" style="color: green;">
                                 {% endif %}
-                                <span class="KeyResource{{elem.id}}" onclick='getDetail(this.className, "{% url "businessCanvasGetDetail" 1 %}")'>{{elem.title}}</span>
+                                <span class="KeyResource{{elem.id}}" onclick='getDetail(this.className, "{% url "businessCanvas:businessCanvasGetDetail" 1 %}")'>{{elem.title}}</span>
                                 </span>
                                 {%if isFounder %}
-                                <span style="float: right;" class="KeyResource{{elem.id}}" onclick='deleteElement(this.className, "{% url "businessCanvasDeleteElement" 1 %}");'><i class="fa fa-trash"></i></span>
-                                <span style="float: right;" class="KeyResource{{elem.id}}" onclick='editElement(this.className, "{% url "businessCanvasGetDetail" 1 %}");'><i class="fa fa-pencil-square-o"></i></span>
+                                <span style="float: right;" class="KeyResource{{elem.id}}" onclick='deleteElement(this.className, "{% url "businessCanvas:businessCanvasDeleteElement" 1 %}");'><i class="fa fa-trash"></i></span>
+                                <span style="float: right;" class="KeyResource{{elem.id}}" onclick='editElement(this.className, "{% url "businessCanvas:businessCanvasGetDetail" 1 %}");'><i class="fa fa-pencil-square-o"></i></span>
                                 {% endif %}
                                 <p style="visibility: hidden; display: none;"></p>
                             </div>
@@ -388,11 +388,11 @@
                                 {% else %}
                                     <span class="colorElement" style="color: green;">
                                 {% endif %}
-                                <span class="Channel{{elem.id}}" onclick='getDetail(this.className, "{% url "businessCanvasGetDetail" 1 %}")'>{{elem.title}}</span>
+                                <span class="Channel{{elem.id}}" onclick='getDetail(this.className, "{% url "businessCanvas:businessCanvasGetDetail" 1 %}")'>{{elem.title}}</span>
                                 </span>
                                 {%if isFounder %}
-                                <span style="float: right;" class="Channel{{elem.id}}" onclick='deleteElement(this.className, "{% url "businessCanvasDeleteElement" 1 %}");'><i class="fa fa-trash"></i></span>
-                                <span style="float: right;" class="Channel{{elem.id}}" onclick='editElement(this.className, "{% url "businessCanvasGetDetail" 1 %}");'><i class="fa fa-pencil-square-o"></i></span>
+                                <span style="float: right;" class="Channel{{elem.id}}" onclick='deleteElement(this.className, "{% url "businessCanvas:businessCanvasDeleteElement" 1 %}");'><i class="fa fa-trash"></i></span>
+                                <span style="float: right;" class="Channel{{elem.id}}" onclick='editElement(this.className, "{% url "businessCanvas:businessCanvasGetDetail" 1 %}");'><i class="fa fa-pencil-square-o"></i></span>
                                 {% endif %}
                                 <p style="visibility: hidden; display: none;"></p>
                             </div>
@@ -427,11 +427,11 @@
                                 {% else %}
                                     <span class="colorElement" style="color: green;">
                                 {% endif %}
-                                <span class="CostStructure{{elem.id}}" onclick='getDetail(this.className, "{% url "businessCanvasGetDetail" 1 %}")'>{{elem.title}}</span>
+                                <span class="CostStructure{{elem.id}}" onclick='getDetail(this.className, "{% url "businessCanvas:businessCanvasGetDetail" 1 %}")'>{{elem.title}}</span>
                                 </span>
                                 {%if isFounder %}
-                                <span style="float: right;" class="CostStructure{{elem.id}}" onclick='deleteElement(this.className, "{% url "businessCanvasDeleteElement" 1 %}");'><i class="fa fa-trash"></i></span>
-                                <span style="float: right;" class="CostStructure{{elem.id}}" onclick='editElement(this.className, "{% url "businessCanvasGetDetail" 1 %}");'><i class="fa fa-pencil-square-o"></i></span>
+                                <span style="float: right;" class="CostStructure{{elem.id}}" onclick='deleteElement(this.className, "{% url "businessCanvas:businessCanvasDeleteElement" 1 %}");'><i class="fa fa-trash"></i></span>
+                                <span style="float: right;" class="CostStructure{{elem.id}}" onclick='editElement(this.className, "{% url "businessCanvas:businessCanvasGetDetail" 1 %}");'><i class="fa fa-pencil-square-o"></i></span>
                                 {% endif %}
                                 <p style="visibility: hidden; display: none;"></p>
                             </div>
@@ -464,11 +464,11 @@
                                 {% else %}
                                     <span class="colorElement" style="color: green;">
                                 {% endif %}
-                                <span class="RevenueStream{{elem.id}}" onclick='getDetail(this.className, "{% url "businessCanvasGetDetail" 1 %}")'>{{elem.title}}</span>
+                                <span class="RevenueStream{{elem.id}}" onclick='getDetail(this.className, "{% url "businessCanvas:businessCanvasGetDetail" 1 %}")'>{{elem.title}}</span>
                                 </span>
                                 {%if isFounder %}
-                                <span style="float: right;" class="RevenueStream{{elem.id}}" onclick='deleteElement(this.className, "{% url "businessCanvasDeleteElement" 1 %}");'><i class="fa fa-trash"></i></span>
-                                <span style="float: right;" class="RevenueStream{{elem.id}}" onclick='editElement(this.className, "{% url "businessCanvasGetDetail" 1 %}");'><i class="fa fa-pencil-square-o"></i></span>
+                                <span style="float: right;" class="RevenueStream{{elem.id}}" onclick='deleteElement(this.className, "{% url "businessCanvas:businessCanvasDeleteElement" 1 %}");'><i class="fa fa-trash"></i></span>
+                                <span style="float: right;" class="RevenueStream{{elem.id}}" onclick='editElement(this.className, "{% url "businessCanvas:businessCanvasGetDetail" 1 %}");'><i class="fa fa-pencil-square-o"></i></span>
                                 {% endif %}
                                 <p style="visibility: hidden; display: none;"></p>
                             </div>
@@ -507,11 +507,11 @@
                                 {% else %}
                                     <span class="colorElement" style="color: green;">
                                 {% endif %}
-                                <span class="BrainstormingSpace{{elem.id}}" onclick='getDetail(this.className, "{% url "businessCanvasGetDetail" 1 %}")'>{{elem.title}}</span>
+                                <span class="BrainstormingSpace{{elem.id}}" onclick='getDetail(this.className, "{% url "businessCanvas:businessCanvasGetDetail" 1 %}")'>{{elem.title}}</span>
                                 </span>
                                 {%if isFounder %}
-                                <span style="float: right;" class="BrainstormingSpace{{elem.id}}" onclick='deleteElement(this.className, "{% url "businessCanvasDeleteElement" 1 %}");'><i class="fa fa-trash"></i></span>
-                                <span style="float: right;" class="BrainstormingSpace{{elem.id}}" onclick='editElement(this.className, "{% url "businessCanvasGetDetail" 1 %}");'><i class="fa fa-pencil-square-o"></i></span>
+                                <span style="float: right;" class="BrainstormingSpace{{elem.id}}" onclick='deleteElement(this.className, "{% url "businessCanvas:businessCanvasDeleteElement" 1 %}");'><i class="fa fa-trash"></i></span>
+                                <span style="float: right;" class="BrainstormingSpace{{elem.id}}" onclick='editElement(this.className, "{% url "businessCanvas:businessCanvasGetDetail" 1 %}");'><i class="fa fa-pencil-square-o"></i></span>
                                 {% endif %}
                                 <p style="visibility: hidden; display: none;"></p>
                             </div>
@@ -523,11 +523,11 @@
                         <div id="divArchive">
                             {% for archive in archives %}
                                 <div id="archive{{archive.id}}" style="border-bottom: 1px dashed black; padding-left: 10px;">
-                                    <a href="{% url 'businessCanvasElementArchived_list' archive.id %}">
+                                    <a href="{% url 'businessCanvas:businessCanvasElementArchived_list' archive.id %}">
                                         {{archive}}
                                     </a>
                                     {%if isFounder %}
-                                    <a href="{% url 'businessCanvasDeleteArchive' archive.id %}">
+                                    <a href="{% url 'businessCanvas:businessCanvasDeleteArchive' archive.id %}">
                                         <span style="float: right; color: #428bca;" class="archive{{archive.id}}">
                                             <i class="fa fa-trash"></i>
                                         </span>

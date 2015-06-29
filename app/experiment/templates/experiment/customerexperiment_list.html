@@ -27,13 +27,13 @@
                 <td>{{ experiment.dateFinish }}</td>
                 <td>{{ experiment.validated }}</td>
                 {% if isFounder == True %}
-                <td><a href="{% url "experiment_update" experiment.id %}">{% trans "Modify" %}</a></td>
-                <td><a href="{% url "experiment_delete" experiment.id %}">{% trans "Delete" %}</a></td>
+                <td><a href="{% url 'experiment:experiment_update' experiment.id %}">{% trans "Modify" %}</a></td>
+                <td><a href="{% url 'experiment:experiment_delete' experiment.id %}">{% trans "Delete" %}</a></td>
                 {% endif %}
             </tr>
         {% endfor %}
     </table>
 {% if isFounder == True %}
-   <a href="{% url "experiment_add" companyId %}">{% trans "New Experiment" %}</a>
+   <a href="{% url 'experiment:experiment_add' companyId %}">{% trans "New Experiment" %}</a>
 {% endif %}
 {% endblock %}

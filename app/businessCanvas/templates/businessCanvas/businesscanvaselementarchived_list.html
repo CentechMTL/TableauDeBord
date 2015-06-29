@@ -178,7 +178,7 @@ function getDetail(id){
                 <td colspan="1">
                     <h6>{% trans "Archive" %}</h6>
                         {% for archive in archives %}
-                            <div style="border-bottom: 1px dashed black; padding-left: 10px;"><a href="{% url "businessCanvasElementArchived_list" archive.id %}">{{archive}}</a></div>
+                            <div style="border-bottom: 1px dashed black; padding-left: 10px;"><a href="{% url 'businessCanvas:businessCanvasElementArchived_list' archive.id %}">{{archive}}</a></div>
                         {% endfor %}
                 </td>
             </tr>

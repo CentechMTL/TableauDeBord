@@ -23,6 +23,6 @@
     </p>
     <form method="post" action="">
        {% csrf_token %}
-       <button type="submit">{% trans "Delete" %}</button> - <a href="{% url 'detail_finance' companyId %}">{% trans "Cancel" %}</a>
+       <button type="submit">{% trans "Delete" %}</button> - <a href="{% url 'finance:detail_finance' companyId %}">{% trans "Cancel" %}</a>
     </form>
 {% endblock %}

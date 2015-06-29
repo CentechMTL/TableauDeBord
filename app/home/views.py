@@ -35,76 +35,63 @@ class Summary(generic.TemplateView):
         return HttpResponseRedirect("/user/noAccessPermissions")
 
     def get_context_data(self, **kwargs):
-        companies = Company.objects.all()
+        companies = Company.objects.all().order_by('incubated_on')
         founders = Founder.objects.all()
         mentors = Mentor.objects.all()
 
-        typeIRL = KpiType.objects.filter(name = "IRL")
-        IRLs = KPI.objects.filter(type=typeIRL)
-        moyIRL = IRLs.aggregate(Avg('level'))
+        grants = []
+        for company in companies:
+            totalGrants = 0
+            for grant in company.grants.all():
+                if grant.sommeReception:
+                    totalGrants += grant.sommeReception
+            grants.append((company, totalGrants))
 
-        typeTRL = KpiType.objects.filter(name = "TRL")
-        TRLs = KPI.objects.filter(type=typeTRL)
-        moyTRL = TRLs.aggregate(Avg('level'))
+        subsidies = []
+        for company in companies:
+            totalSubsidies = 0
+            for subsidy in company.subsidies.all():
+                if subsidy.sommeReception:
+                    totalSubsidies += subsidy.sommeReception
+            subsidies.append((company, totalSubsidies))
 
-        bourses = Bourse.objects.all()
-        totalBourseDemandees = 0
-        totalBourseRecues = 0
-        for bourse in bourses:
-            totalBourseDemandees += bourse.sommeSoumission
-            totalBourseRecues += bourse.sommeReception
+        investments = []
+        for company in companies:
+            totalInvestments = 0
+            for investment in company.investments.all():
+                if investment.sommeReception:
+                    totalInvestments += investment.sommeReception
+            investments.append((company, totalInvestments))
 
-        subventions = Subvention.objects.all()
-        totalSubventionDemandees = 0
-        totalSubventionRecues = 0
-        for subvention in subventions:
-            totalSubventionDemandees += subvention.sommeSoumission
-            totalSubventionRecues += subvention.sommeReception
+        sales = []
+        for company in companies:
+            totalSales = 0
+            for sale in company.sales.all():
+                if sale.sommeReception:
+                    totalSales += sale.sommeReception
+            sales.append((company, totalSales))
 
-        prets = Pret.objects.all()
-        totalPretDemandees = 0
-        totalPretRecues = 0
-        for pret in prets:
-            totalPretDemandees += pret.sommeSoumission
-            totalPretRecues += pret.sommeReception
+        loans = []
+        for company in companies:
+            totalLoans = 0
+            for loan in company.loans.all():
+                if loan.sommeReception:
+                    totalLoans += loan.sommeReception
+            loans.append((company, totalLoans))
 
-        investissements = Investissement.objects.all()
-        totalInvestissementDemandees = 0
-        totalInvestissementRecues = 0
-        for investissement in investissements:
-            totalInvestissementDemandees += investissement.sommeReception
-            totalInvestissementRecues += investissement.sommeReception
 
-        ventes = Vente.objects.all()
-        totalVenteDemandees = 0
-        totalVenteRecues = 0
-        for vente in ventes:
-            totalVenteDemandees += vente.sommeSoumission
-            totalVenteRecues += vente.sommeReception
+        finances = {}
+        finances['grants'] = grants
+        finances['subsidies'] = subsidies
+        finances['investments'] = investments
+        finances['sales'] = sales
+        finances['loans'] = loans
 
         context = super(Summary, self).get_context_data(**kwargs)
         context['companies'] = companies
         context['founders'] = founders
         context['mentors'] = mentors
-        context['IRLs'] = IRLs
-        context['moyIRL'] = moyIRL['level__avg']
-        context['TRLs'] = TRLs
-        context['moyTRL'] = moyTRL['level__avg']
-        context['bourses'] = bourses
-        context['totalBourseRecues'] = totalBourseRecues
-        context['totalBourseDemandees'] = totalBourseDemandees
-        context['subventions'] = subventions
-        context['totalSubventionRecues'] = totalSubventionRecues
-        context['totalSubventionDemandees'] = totalSubventionDemandees
-        context['investissements'] = investissements
-        context['totalInvestissementRecues'] = totalInvestissementRecues
-        context['totalInvestissementDemandees'] = totalInvestissementDemandees
-        context['prets'] = prets
-        context['totalPretRecues'] = totalPretRecues
-        context['totalPretDemandees'] = totalPretDemandees
-        context['ventes'] = ventes
-        context['totalVenteRecues'] = totalVenteRecues
-        context['totalVenteDemandees'] = totalVenteDemandees
+        context['finances'] = finances
         return context
 
 #Form for update password

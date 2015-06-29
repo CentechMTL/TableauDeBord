@@ -4,8 +4,19 @@
 {% load i18n %}
 {% load staticfiles %}
 {% block title %}{% trans "Company" %}{% endblock %}
+
+{% block extrahead %}
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/redmond/jquery-ui.css" />
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+{% endblock %}
+
 {% block content %}
     <form enctype="multipart/form-data" method="post">{% csrf_token%}
         {% crispy form %}
     </form>
+
+    <script>
+        $( "#id_incubated_on" ).datepicker({ dateFormat: 'yy-mm-dd' });
+    </script>
 {% endblock %}

@@ -38,6 +38,7 @@ class Company(models.Model):
     #List of mentors
     mentors = models.ManyToManyField(Mentor,blank=True, verbose_name=_('Mentors'), related_name = "company")
 
+    incubated_on = models.DateField(blank=True, null=True)
     created = models.DateTimeField(blank=True)
     updated = models.DateTimeField(blank=True)
 

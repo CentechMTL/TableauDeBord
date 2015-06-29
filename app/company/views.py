@@ -138,6 +138,12 @@ class CompanyCreate(generic.CreateView):
         newCompany.save()
 
         try:
+            if(form.data['incubated_on'] != ""):
+                newCompany.incubated_on = form.data['incubated_on']
+        except:
+            pass
+
+        try:
             newCompany.logo = self.request.FILES['logo']
         except:
             pass
@@ -207,6 +213,7 @@ class CompanyUpdate(generic.UpdateView):
         object.name = form.data['name']
         object.url = form.data['url']
         object.description = form.data['about']
+        object.incubated_on = form.data['incubated_on']
 
         try:
             object.logo = self.request.FILES['logo']

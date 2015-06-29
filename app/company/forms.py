@@ -65,6 +65,13 @@ class CompanyStatusCreateForm(forms.Form):
 
 class CompanyCreateForm(forms.Form):
 
+    incubated_on = forms.DateField(
+        label=_('incubated on'),
+        required = False,
+        input_formats=('%Y-%m-%d',),
+    )
+    incubated_on.widget.attrs.update({'type': 'date', 'class': 'datepicker'})
+
     name = forms.CharField(
         label=_('Name'),
         required=True,
@@ -131,6 +138,7 @@ class CompanyCreateForm(forms.Form):
             HTML("</h1>"),
             Field('name'),
             Field('status'),
+            Field('incubated_on'),
             Field('logo'),
             Field('video'),
             Field('url'),
@@ -141,6 +149,13 @@ class CompanyCreateForm(forms.Form):
         )
 
 class CompanyUpdateForm(forms.Form):
+
+    incubated_on = forms.DateField(
+        label=_('incubated on'),
+        required = False,
+        input_formats=('%Y-%m-%d',),
+    )
+    incubated_on.widget.attrs.update({'type': 'date', 'class': 'datepicker'})
 
     name = forms.CharField(
         label=_('Name'),
@@ -203,6 +218,7 @@ class CompanyUpdateForm(forms.Form):
         self.fields['video'].initial = company.video
         self.fields['founders'].initial = company.founders.all
         self.fields['mentors'].initial = company.mentors.all
+        self.fields['incubated_on'].initial = company.incubated_on
 
         self.helper.layout = Layout(
             HTML("<h1>"),
@@ -214,6 +230,7 @@ class CompanyUpdateForm(forms.Form):
             Field('url'),
             Field('founders'),
             Field('mentors'),
+            Field('incubated_on'),
             Field('about'),
             StrictButton(_('Save'), type="submit")
         )

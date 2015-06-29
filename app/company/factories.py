@@ -21,8 +21,5 @@ class CompanyFactory(factory.DjangoModelFactory):
     def __init__(self, **kwargs):
         companyStatus = kwargs.pop('companyStatus', None)
         company = super(CompanyFactory, self).__init__(self, **kwargs)
-        if companyStatus is None:
-            companyStatus = CompanyStatusFactory()
 
-        company.companyStatus = companyStatus
         company.save()

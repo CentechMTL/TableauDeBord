@@ -62,6 +62,23 @@ class ArchiveDelete(generic.DeleteView):
     model = Archive
     template_name = 'businessCanvas/archive_confirm_delete.html'
 
+    #You need to be connected, and you need to have access as founder, mentor or Centech
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        #For know the company of the user if is a founder
+        archive = Archive.objects.get(id=self.kwargs['pk'])
+        if self.request.user.is_active:
+            try:
+                founder = Founder.objects.filter(user = self.request.user.id)
+                company = Company.objects.get(founders = founder)
+                if(int(archive.company.id) == int(company.id)):
+                    return super(ArchiveDelete, self).dispatch(*args, **kwargs)
+            except:
+                pass
+
+        #The visitor can't see this page!
+        return HttpResponseRedirect("/user/noAccessPermissions")
+
     def get_context_data(self, **kwargs):
         context = super(ArchiveDelete, self).get_context_data(**kwargs)
         context['companyId'] = kwargs['object'].company.id

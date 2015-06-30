@@ -12,16 +12,6 @@ KPI_TYPE_CHOICES = (
     ('TRL', 2),
 )
 
-#Type of kpi (ex: IRL)
-class KpiType(models.Model):
-    class Meta:
-        verbose_name_plural = _('Types of KPI')
-
-    name = models.CharField(max_length=50, verbose_name=_('Name'))
-
-    def __str__(self):
-        return self.name
-
 #KPIs
 class KPI(models.Model):
     class Meta:

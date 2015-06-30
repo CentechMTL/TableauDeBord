@@ -14,7 +14,7 @@ from django.contrib.auth.decorators import login_required
 from app.company.models import Company
 from app.founder.models import Founder
 from app.mentor.models import Mentor
-from app.kpi.models import KPI, KpiType
+from app.kpi.models import KPI
 from app.finance.models import Bourse, Subvention, Pret, Investissement, Vente
 from django.db.models import Avg
 

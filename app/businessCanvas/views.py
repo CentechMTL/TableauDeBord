@@ -14,7 +14,7 @@ from django.contrib.auth.decorators import login_required
 from app.company.models import Company
 from app.founder.models import Founder
 from app.mentor.models import Mentor
-from app.businessCanvas.models import BusinessCanvasElement, BusinessCanvasType, Archive
+from app.businessCanvas.models import BusinessCanvasElement, Archive, BUSINESS_CANVAS_TYPE_CHOICES
 from django.http import HttpResponseRedirect
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -213,43 +213,43 @@ class BusinessCanvasElementList(generic.ListView):
         for archive in archives:
             context['last_archive'] = archive
 
-        keyPartner = BusinessCanvasType.objects.get(name="KeyPartner")
+        keyPartner = BUSINESS_CANVAS_TYPE_CHOICES[0][0]
         listKeyPartners = BusinessCanvasElement.objects.filter(type = keyPartner, disactivated=False, company = company)
         context['listKeyPartners'] = listKeyPartners
 
-        keyActivitie = BusinessCanvasType.objects.get(name="KeyActivitie")
+        keyActivitie = BUSINESS_CANVAS_TYPE_CHOICES[1][0]
         listKeyActivities = BusinessCanvasElement.objects.filter(type = keyActivitie, disactivated=False, company = company)
         context['listKeyActivities'] = listKeyActivities
 
-        valueProposition = BusinessCanvasType.objects.get(name="ValueProposition")
+        valueProposition = BUSINESS_CANVAS_TYPE_CHOICES[2][0]
         listValuePropositions = BusinessCanvasElement.objects.filter(type = valueProposition, disactivated=False, company = company)
         context['listValuePropositions'] = listValuePropositions
 
-        customerRelationship = BusinessCanvasType.objects.get(name="CustomerRelationship")
+        customerRelationship = BUSINESS_CANVAS_TYPE_CHOICES[3][0]
         listCustomerRelationships = BusinessCanvasElement.objects.filter(type = customerRelationship, disactivated=False, company = company)
         context['listCustomerRelationships'] = listCustomerRelationships
 
-        keyResource = BusinessCanvasType.objects.get(name="KeyResource")
+        keyResource = BUSINESS_CANVAS_TYPE_CHOICES[4][0]
         listKeyResources = BusinessCanvasElement.objects.filter(type = keyResource, disactivated=False, company = company)
         context['listKeyResources'] = listKeyResources
 
-        channel = BusinessCanvasType.objects.get(name="Channel")
+        channel = BUSINESS_CANVAS_TYPE_CHOICES[5][0]
         listChannels = BusinessCanvasElement.objects.filter(type = channel, disactivated=False, company = company)
         context['listChannels'] = listChannels
 
-        customerSegment = BusinessCanvasType.objects.get(name="CustomerSegment")
+        customerSegment = BUSINESS_CANVAS_TYPE_CHOICES[6][0]
         listCustomerSegments = BusinessCanvasElement.objects.filter(type = customerSegment, disactivated=False, company = company)
         context['listCustomerSegments'] = listCustomerSegments
 
-        costStructure = BusinessCanvasType.objects.get(name="CostStructure")
+        costStructure = BUSINESS_CANVAS_TYPE_CHOICES[7][0]
         listCostStructures = BusinessCanvasElement.objects.filter(type = costStructure, disactivated=False, company = company)
         context['listCostStructures'] = listCostStructures
 
-        revenueStream = BusinessCanvasType.objects.get(name="RevenueStream")
+        revenueStream = BUSINESS_CANVAS_TYPE_CHOICES[8][0]
         listRevenueStreams = BusinessCanvasElement.objects.filter(type = revenueStream, disactivated=False, company = company)
         context['listRevenueStreams'] = listRevenueStreams
 
-        brainstormingSpace = BusinessCanvasType.objects.get(name="BrainstormingSpace")
+        brainstormingSpace = BUSINESS_CANVAS_TYPE_CHOICES[9][0]
         listBrainstormingSpaces = BusinessCanvasElement.objects.filter(type = brainstormingSpace, disactivated=False, company = company)
         context['listBrainstormingSpaces'] = listBrainstormingSpaces
 
@@ -310,43 +310,43 @@ class BusinessCanvasElementArchivedList(generic.ListView):
         archives = Archive.objects.filter(company = company)
         context['archives'] = archives
 
-        keyPartner = BusinessCanvasType.objects.get(name="KeyPartner")
+        keyPartner = BUSINESS_CANVAS_TYPE_CHOICES[0][0]
         listKeyPartners = archive.elements.filter(type = keyPartner, company = company)
         context['listKeyPartners'] = listKeyPartners
 
-        keyActivitie = BusinessCanvasType.objects.get(name="KeyActivitie")
+        keyActivitie = BUSINESS_CANVAS_TYPE_CHOICES[1][0]
         listKeyActivities = archive.elements.filter(type = keyActivitie, company = company)
         context['listKeyActivities'] = listKeyActivities
 
-        valueProposition = BusinessCanvasType.objects.get(name="ValueProposition")
+        valueProposition = BUSINESS_CANVAS_TYPE_CHOICES[2][0]
         listValuePropositions = archive.elements.filter(type = valueProposition, company = company)
         context['listValuePropositions'] = listValuePropositions
 
-        customerRelationship = BusinessCanvasType.objects.get(name="CustomerRelationship")
+        customerRelationship = BUSINESS_CANVAS_TYPE_CHOICES[3][0]
         listCustomerRelationships = archive.elements.filter(type = customerRelationship, company = company)
         context['listCustomerRelationships'] = listCustomerRelationships
 
-        keyResource = BusinessCanvasType.objects.get(name="KeyResource")
+        keyResource = BUSINESS_CANVAS_TYPE_CHOICES[4][0]
         listKeyResources = archive.elements.filter(type = keyResource, company = company)
         context['listKeyResources'] = listKeyResources
 
-        channel = BusinessCanvasType.objects.get(name="Channel")
+        channel = BUSINESS_CANVAS_TYPE_CHOICES[5][0]
         listChannels = archive.elements.filter(type = channel, company = company)
         context['listChannels'] = listChannels
 
-        customerSegment = BusinessCanvasType.objects.get(name="CustomerSegment")
+        customerSegment = BUSINESS_CANVAS_TYPE_CHOICES[6][0]
         listCustomerSegments = archive.elements.filter(type = customerSegment, company = company)
         context['listCustomerSegments'] = listCustomerSegments
 
-        costStructure = BusinessCanvasType.objects.get(name="CostStructure")
+        costStructure = BUSINESS_CANVAS_TYPE_CHOICES[7][0]
         listCostStructures = archive.elements.filter(type = costStructure, company = company)
         context['listCostStructures'] = listCostStructures
 
-        revenueStream = BusinessCanvasType.objects.get(name="RevenueStream")
+        revenueStream = BUSINESS_CANVAS_TYPE_CHOICES[8][0]
         listRevenueStreams = archive.elements.filter(type = revenueStream, company = company)
         context['listRevenueStreams'] = listRevenueStreams
 
-        brainstormingSpace = BusinessCanvasType.objects.get(name="BrainstormingSpace")
+        brainstormingSpace = BUSINESS_CANVAS_TYPE_CHOICES[9][0]
         listBrainstormingSpaces = archive.elements.filter(type = brainstormingSpace, company = company)
         context['listBrainstormingSpaces'] = listBrainstormingSpaces
 

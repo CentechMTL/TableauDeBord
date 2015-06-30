@@ -6,7 +6,6 @@ from django.core.urlresolvers import reverse_lazy
 from app.company.models import Company
 from django.utils import timezone
 
-#TODO delete foreign key
 BUSINESS_CANVAS_TYPE_CHOICES = (
     ('KeyPartner', 1),
     ('KeyActivitie', 2),
@@ -19,16 +18,6 @@ BUSINESS_CANVAS_TYPE_CHOICES = (
     ('RevenueStream', 9),
     ('BrainstormingSpace', 10),
 )
-
-#The type of element in the business canvas
-class BusinessCanvasType(models.Model):
-    class Meta:
-        verbose_name = _('Business canvas type')
-
-    name = models.CharField(max_length=50)
-
-    def __str__(self):
-        return self.name
 
 #Element of the business canvas
 #Can be disactivated if it's archived

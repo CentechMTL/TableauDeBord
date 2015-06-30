@@ -524,7 +524,7 @@
                             {% for archive in archives %}
                                 <div id="archive{{archive.id}}" style="border-bottom: 1px dashed black; padding-left: 10px;">
                                     <a href="{% url 'businessCanvas:businessCanvasElementArchived_list' archive.id %}">
-                                        {{archive}}
+                                        {{archive|truncatechars:20}}
                                     </a>
                                     {%if isFounder %}
                                     <a href="{% url 'businessCanvas:businessCanvasDeleteArchive' archive.id %}">

@@ -77,8 +77,9 @@ class Card(models.Model):
                                   to_phase=new_phase, changed_at=change_at)
 
     def is_past_due(self):
-        if datetime.date.today() > self.deadline:
-            return True
+        if(self.deadline):
+            if datetime.date.today() > self.deadline:
+                return True
         return False
 
 #SIGNALS CONNECTED

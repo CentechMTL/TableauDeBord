@@ -3,7 +3,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render_to_response, redirect
 from django.contrib.auth.decorators import login_required
-from app.kpi.models import KPI, KpiType
+from app.kpi.models import KPI, KPI_TYPE_CHOICES
 from app.company.models import Company
 from app.founder.models import Founder
 from app.mentor.models import Mentor
@@ -56,7 +56,7 @@ class trl(TemplateView):
 
     def get_context_data(self, **kwargs):
         company = Company.objects.get(id = self.args[0])
-        idType = KpiType.objects.get(name = 'TRL')
+        idType = KPI_TYPE_CHOICES[1][0]
         trls = KPI.objects.filter(company = self.args[0], type=idType).order_by('period_start')
         nbTrl = trls.count
         context = super(trl, self).get_context_data(**kwargs)
@@ -107,7 +107,7 @@ class irl(TemplateView):
 
     def get_context_data(self, **kwargs):
         company = Company.objects.get(id = self.args[0])
-        idType = KpiType.objects.get(name = 'IRL')
+        idType = KPI_TYPE_CHOICES[0][0]
         irls = KPI.objects.filter(company = self.args[0], type=idType).order_by('period_start')
         nbIrl = irls.count
         context = super(irl, self).get_context_data(**kwargs)
@@ -135,7 +135,7 @@ class IrlCreate(CreateView):
 
     def form_valid(self, form):
          company = Company.objects.get(id = self.args[0])
-         type = KpiType.objects.get(name = "IRL")
+         type = KPI_TYPE_CHOICES[0][0]
          form.instance.company = company
          form.instance.phase = company.companyStatus
          form.instance.type = type
@@ -166,7 +166,7 @@ class TrlCreate(CreateView):
 
     def form_valid(self, form):
          company = Company.objects.get(id = self.args[0])
-         type = KpiType.objects.get(name = "TRL")
+         type = KPI_TYPE_CHOICES[1][0]
          form.instance.company = company
          form.instance.phase = company.companyStatus
          form.instance.type = type
@@ -191,6 +191,7 @@ class IrlUpdate(UpdateView):
         groups = self.request.user.groups.values()
         for group in groups:
             if group['name'] == 'Centech':
+                print('toto')
                 return super(IrlUpdate, self).dispatch(*args, **kwargs)
 
         #The visitor can't see this page!

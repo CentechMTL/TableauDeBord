@@ -6,7 +6,6 @@ from django.utils.translation import ugettext_lazy as _
 from django.core.urlresolvers import reverse
 from django.core.urlresolvers import reverse_lazy
 
-#TODO delete foreign key
 KPI_TYPE_CHOICES = (
     ('IRL', 1),
     ('TRL', 2),

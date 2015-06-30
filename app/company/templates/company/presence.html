@@ -26,11 +26,12 @@
                         <td>{{ presence.date }}</td>
                         {% if presence.company.all %}
                             {% for company in companies %}
-                            <td style="text-align: center;">
                                 {% if company in presence.company.all%}
-                                X
+                                <td style="background-color: #00baba;">
+                                {% else %}
+                                <td style="background-color: #ff9966;">
                                 {% endif %}
-                            </td>
+                                </td>
                             {% endfor %}
                         {% endif %}
                         {% if isCentech == True %}

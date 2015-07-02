@@ -33,8 +33,8 @@
             }
         });
 
-        var Class = ["menuIrl", "menuTrl", "menuExperiment", "menuBusinessCanvas", "menuFinance", "menuKanboard"];
-        var Link = ["/kpi/irl/", "/kpi/trl/", "/experiment/", "/businessCanvas/", "/finance/", "/kanboard/"];
+        var Class = ["menuCompany", "menuIrl", "menuTrl", "menuExperiment", "menuBusinessCanvas", "menuFinance", "menuKanboard"];
+        var Link = ["/company/", "/kpi/irl/", "/kpi/trl/", "/experiment/", "/businessCanvas/", "/finance/", "/kanboard/"];
         for (var i = 0; i < Class.length; i++) {
             //Reference of the link
             var lien = document.getElementsByClassName(Class[i])[0];
@@ -84,6 +84,7 @@
                             {% endfor %}
                         </select>
                         {% if request.session.companySelected %}
+                            <a class="menuCompany" href="/company/{{request.session.companySelected}}"><div><i class="fa fa-info-circle"></i> <span class="nav-label">{% trans "Presentation" %}</span></div></a>
                             <a class="menuIrl" href="/kpi/irl/{{request.session.companySelected}}"><div><i class="fa fa-bar-chart"></i> <span class="nav-label">{% trans "IRL" %}</span></div></a>
                             <a class="menuTrl" href="/kpi/trl/{{request.session.companySelected}}"><div><i class="fa fa-bar-chart"></i> <span class="nav-label">{% trans "TRL" %}</span></div></a>
                             <a class="menuExperiment" href="/experiment/{{request.session.companySelected}}"><div><i class="fa fa-flask"></i> <span class="nav-label">{% trans "Experiments" %}</span></div></a>
@@ -94,6 +95,7 @@
                             <a class="menuFinance" href="/finance/{{request.session.companySelected}}"><div><i class="fa fa-usd"></i> <span class="nav-label">{% trans "Finance" %}</span></div></a>
                             <a class="menuKanboard" href="/kanboard/{{request.session.companySelected}}"><div><i class="fa fa-list-ul"></i> <span class="nav-label">{% trans "KanBoard" %}</span></div></a>
                         {% else %}
+                            <a class="menuCompany" style="visibility: hidden;" href="/company"><div><i class="fa fa-info-circle"></i> <span class="nav-label">{% trans "Presentation" %}</span></div></a>
                             <a class="menuIrl" style="visibility: hidden;" href="/kpi/irl"><div><i class="fa fa-bar-chart"></i> <span class="nav-label">{% trans "IRL" %}</span></div></a>
                             <a class="menuTrl" style="visibility: hidden;" href="/kpi/trl"><div><i class="fa fa-bar-chart"></i> <span class="nav-label">{% trans "TRL" %}</span></div></a>
                             <a class="menuExperiment" style="visibility: hidden;" href="/experiment"><div><i class="fa fa-flask"></i> <span class="nav-label">{% trans "Experiments" %}</span></div></a>
@@ -117,6 +119,7 @@
                             {% endfor %}
                         </select>
                         {% if request.session.companySelected %}
+                            <a class="menuCompany" href="/company/{{request.session.companySelected}}"><div><i class="fa fa-info-circle"></i> <span class="nav-label">{% trans "Presentation" %}</span></div></a>
                             <a class="menuIrl" href="/kpi/irl/{{request.session.companySelected}}"><div><i class="fa fa-bar-chart"></i> <span class="nav-label">{% trans "IRL" %}</span></div></a>
                             <a class="menuTrl" href="/kpi/trl/{{request.session.companySelected}}"><div><i class="fa fa-bar-chart"></i> <span class="nav-label">{% trans "TRL" %}</span></div></a>
                             <a class="menuExperiment" href="/experiment/{{request.session.companySelected}}"><div><i class="fa fa-flask"></i> <span class="nav-label">{% trans "Experiments" %}</span></div></a>
@@ -127,6 +130,7 @@
                             <a class="menuFinance" href="/finance/{{request.session.companySelected}}"><div><i class="fa fa-usd"></i> <span class="nav-label">{% trans "Finance" %}</span></div></a>
                             <a class="menuKanboard" href="/kanboard/{{request.session.companySelected}}"><div><i class="fa fa-list-ul"></i> <span class="nav-label">{% trans "Kanboard" %}</span></div></a>
                         {% else %}
+                            <a class="menuCompany" style="visibility: hidden;" href="/company"><div><i class="fa fa-info-circle"></i> <span class="nav-label">{% trans "Presentation" %}</span></div></a>
                             <a class="menuIrl" style="visibility: hidden;" href="/kpi/irl"><div><i class="fa fa-bar-chart"></i> <span class="nav-label">{% trans "IRL" %}</span></div></a>
                             <a class="menuTrl" style="visibility: hidden;" href="/kpi/trl"><div><i class="fa fa-bar-chart"></i> <span class="nav-label">{% trans "TRL" %}</span></div></a>
                             <a class="menuExperiment" style="visibility: hidden;" href="/experiment"><div><i class="fa fa-flask"></i> <span class="nav-label">{% trans "Experiments" %}</span></div></a>
@@ -138,6 +142,7 @@
                             <a class="menuKanboard" style="visibility: hidden;" href="/kanboard"><div><i class="fa fa-list-ul"></i> <span class="nav-label">{% trans "KanBoard" %}</span></div></a>
                         {% endif %}
                     {% else %} <!-- Not a Centech or Mentor -->
+                        <a class="menuCompany" href="/company/{{userCompanyId}}"><div><i class="fa fa-info-circle"></i> <span class="nav-label">{% trans "Presentation" %}</span></div></a>
                         <a class="menuIrl" href="/kpi/irl/{{userCompanyId}}"><div><i class="fa fa-bar-chart"></i> <span class="nav-label">{% trans "IRL" %}</span></div></a>
                         <a class="menuTrl" href="/kpi/trl/{{userCompanyId}}"><div><i class="fa fa-bar-chart"></i> <span class="nav-label">{% trans "TRL" %}</span></div></a>
                         <a class="menuExperiment" href="/experiment/{{userCompanyId}}"><div><i class="fa fa-flask"></i> <span class="nav-label">{% trans "Experiments" %}</span></div></a>

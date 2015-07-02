@@ -220,7 +220,7 @@ class FounderView(generic.DetailView):
 
     def get_context_data(self, **kwargs):
         founder = Founder.objects.get(userProfile_id = self.kwargs['pk'])
-        companies = founder.get_companies()
+        companies = founder.company.all
             #Company.objects.filter(founders = founder)
         context = super(FounderView, self).get_context_data(**kwargs)
         context['companies'] = companies

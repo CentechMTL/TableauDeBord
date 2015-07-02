@@ -11,6 +11,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 
+from app.home.views import setCompanyInSession
 
 def filter(request):
     f = CompanyFilter(request.GET, queryset=Company.objects.filter(name__icontains= request.GET['name']))
@@ -43,7 +44,9 @@ class CompanyView(generic.DetailView):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
+        setCompanyInSession(self.request, self.kwargs['pk'])
         return super(CompanyView, self).dispatch(*args, **kwargs)
+
 
 class CompanyStatusCreate(generic.CreateView):
     model = CompanyStatus

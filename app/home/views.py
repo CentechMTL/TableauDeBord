@@ -132,15 +132,33 @@ def noAccessPermissions(request):
 def setCompanyInSession(request, company_id):
     message= {}
 
-    if request.is_ajax():
+    auth = False
+
+    try:
+        #The user is admin
+        groups = request.user.groups.values()
+        for group in groups:
+            if group['name'] == 'Centech':
+                auth = True
+
+        #The user is mentor for this company
+        mentor = Mentor.objects.get(user = request.user.id)
+        print(request.user.id)
+        companies = Company.objects.filter(mentors = mentor)
+        for company in companies:
+            if(int(company_id) == int(company.id)):
+                auth = True
+        else:
+            pass
+    except:
+        auth = True
+
+    if auth:
         request.session['companySelected'] = int(company_id)
         message['create'] = "True"
 
         data = json.dumps(message)
         return HttpResponse(data, content_type='application/json')
-
-    #The visitor can't see this page!
-    return HttpResponseRedirect("/user/noAccessPermissions")
 
 
 #Register

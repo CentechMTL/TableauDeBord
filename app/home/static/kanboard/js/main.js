@@ -34,7 +34,8 @@ $(function() {
             success: function(data) {
             },
             error: function(resultat, status, erreur) {
-                alert(erreur);
+                alert('une erreur de base!!!')
+                alert(resultat + " - " + status + " - " + erreur);
             }
         });
 	}

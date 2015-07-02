@@ -1,5 +1,5 @@
 from django.contrib import admin
-from app.kanboard.models import Phase, Card
+from app.kanboard.models import Card
 
 class CardAdmin(admin.ModelAdmin):
     def save_model(self, request, obj, form, change):
@@ -8,5 +8,4 @@ class CardAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Card, CardAdmin)
-admin.site.register(Phase)
 

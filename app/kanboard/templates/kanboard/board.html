@@ -28,7 +28,7 @@
           if(document.getElementById("title").value != ""){
             addCard('{% url "kanboard:kanboard" 1 %}');
             dialog.dialog( "close" );
-            document.getElementById("title").style.border = "none";
+            document.getElementById("title").style.border = "1px solid #a9a9a9";
           }
           else{
             document.getElementById("title").style.border = "1px solid red";
@@ -60,7 +60,6 @@ function createCard(id, baseLien){
         var pos = baseLien.lastIndexOf('/'); // position du dernier "/"
         var lien = baseLien.substr(0, pos+1);
         lien = lien+id;
-
         $.ajax({
             type: 'GET',
             url: lien,
@@ -108,7 +107,14 @@ function addCard(baseLien){
     $.ajax({
         type: 'POST',
         url: lien,
-        data: '&title=' + title + '&comment=' + comment + '&deadline=' + deadline + '&assigned=' + assigned + '&order=' + order + '&update=' + update,
+        data: '&title=' + title
+            + '&comment=' + comment
+            + '&deadline=' + deadline
+            + '&assigned=' + assigned
+            + '&order=' + order
+            + '&phase=' + phase
+            + '&company=' + {{company.id}}
+            + '&update=' + update,
 
         success: function(data, status) {
             //It's a new card
@@ -186,7 +192,7 @@ function refreshCard(id, baseLien){
                 p.innerHTML = data.comment;
 
                 //Picture of assigned
-                if(data.picture != false){
+                if(data.picture){
                     var linkAssigned = document.createElement('a');
 
                     lien = "{% url 'founder:detail' 1 %}";
@@ -277,8 +283,12 @@ function editCard(id, baseLien){
                 document.getElementById('title').value = data.title;
                 document.getElementById('comment').value = data.comment;
                 document.getElementById('update').value = data.id;
-                document.getElementById('deadline').value = data.deadline;
-                document.getElementById('assigned').value = data.assigned;
+                if(data.deadline){
+                    document.getElementById('deadline').value = data.deadline;
+                }
+                if(data.assigned){
+                    document.getElementById('assigned').value = data.assigned;
+                }
 
                 document.getElementById('create-card').click();
             },
@@ -307,27 +317,29 @@ function editCard(id, baseLien){
 </div>
 <button id="create-card">Create new task</button><br><br>
 <div id="board">
-    {% for phase in company.phases.all %}
+    {% for phase in phases %}
     <div class="column">
-        <h2>{{ phase.title }}</h2>
-        <ul class="sortable phase" id='phase-{{ phase.id }}'>
-            {% for card in phase.cards.all %}
-            {% if card.is_past_due %}
-                <li class="card" id='card-{{ card.id }}' style="background-color: #eedada;">
-            {% else %}
-                <li class="card" id='card-{{ card.id }}'>
-            {% endif %}
-                <h3>
-                    {{card.deadline.is_past_due}}
-                    {{ card.title }}
-                    <a><span class="{{card.id}}" style="float: right;" onclick='deleteCard(this.className, "{% url "kanboard:kanboardDeleteCard" 1 %}");' class="{{card.id}}"><i class="fa fa-trash"></i></span></a>
-                    <a><span class="{{card.id}}" style="float: right;" onclick='editCard(this.className,  "{% url "kanboard:kanboardGetDetailCard" 1 %}");' class="{{card.id}}"><i class="fa fa-pencil-square-o"></i></span></a>
-                </h3>
-                <p>{{ card.comment }}</p>
-                {% if card.assigned %}
-                    <a class="assigned" href="{% url 'founder:detail' card.assigned.pk %}"><img class="avatar" src="/media/{{ card.assigned.picture }}" style="width:40px;"/></a>
+        <h2>{{ phase.1 }}</h2>
+        <ul class="sortable phase" id='phase-{{ phase.0 }}'>
+            {% for card in company.cards.all %}
+            {% if card.phase == phase.1 %}
+                {% if card.is_past_due %}
+                    <li class="card" id='card-{{ card.id }}' style="background-color: #eedada;">
+                {% else %}
+                    <li class="card" id='card-{{ card.id }}'>
                 {% endif %}
-            </li>
+                    <h3>
+                        {{card.deadline.is_past_due}}
+                        {{ card.title }}
+                        <a><span class="{{card.id}}" style="float: right;" onclick='deleteCard(this.className, "{% url "kanboard:kanboardDeleteCard" 1 %}");' class="{{card.id}}"><i class="fa fa-trash"></i></span></a>
+                        <a><span class="{{card.id}}" style="float: right;" onclick='editCard(this.className,  "{% url "kanboard:kanboardGetDetailCard" 1 %}");' class="{{card.id}}"><i class="fa fa-pencil-square-o"></i></span></a>
+                    </h3>
+                    <p>{{ card.comment }}</p>
+                    {% if card.assigned %}
+                        <a class="assigned" href="{% url 'founder:detail' card.assigned.pk %}"><img class="avatar" src="/media/{{ card.assigned.picture }}" style="width:40px;"/></a>
+                    {% endif %}
+                </li>
+            {% endif %}
             {% endfor %}
         </ul>
     </div>

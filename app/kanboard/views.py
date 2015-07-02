@@ -3,7 +3,7 @@ from django import http
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 
-from app.kanboard.models import Card, Phase
+from app.kanboard.models import Card, PHASE_CHOICES
 from app.company.models import Company
 from app.founder.models import Founder
 from app.mentor.models import Mentor
@@ -26,13 +26,20 @@ def getDetailCard(request, card_id):
     if request.is_ajax():
         try:
             card = Card.objects.get(id=card_id)
+
             message['title'] = card.title
             message['comment'] = card.comment
-            message['phase'] = card.phase.id
+
+
+            for phase in PHASE_CHOICES:
+                if phase[1] == card.phase:
+                    message['phase'] = phase[0]
+
             message['id'] = card.id
             message['deadline'] = card.deadline.strftime('%Y-%m-%d')
             message['assigned'] = card.assigned.userProfile_id
-            message['picture'] = str(card.assigned.picture)
+            if card.assigned:
+                message['picture'] = str(card.assigned.picture)
         except:
             pass
         data = json.dumps(message)
@@ -59,13 +66,16 @@ def addCard(request, id):
             assigned = request.POST.get('assigned', '')
             order = request.POST.get('order', '')
             update = request.POST.get('update', '')
-            print update
+            phase = request.POST.get('phase', '')
+            company = request.POST.get('company', '')
 
             if error == False:
                 if(update == 'False'):
                     pictureAssigned = False
-                    phase = Phase.objects.get(id = id)
-                    card = Card(title = title, comment = comment, phase = phase, order = order)
+                    phase = PHASE_CHOICES[int(phase)-1]
+                    company = Company.objects.get(id = company)
+
+                    card = Card(title = title, company = company, comment = comment, phase = phase[1], order = order)
                     if deadline != "":
                         card.deadline = deadline
                     if assigned != "":
@@ -76,14 +86,17 @@ def addCard(request, id):
                         card.assigned = None
                     card.save()
                     id = card.id
-                    return JsonResponse({'phase': phase.id, 'id': id, 'title': title, 'comment': comment, 'updated': False, 'picture': pictureAssigned, 'assigned': assigned})
+                    return JsonResponse({'phase': phase[0], 'company': company.id, 'id': id, 'title': title, 'comment': comment, 'updated': False, 'picture': pictureAssigned, 'assigned': assigned})
                 else:
                     pictureAssigned = False
-                    phase = Phase.objects.get(id = id)
+                    phase = PHASE_CHOICES[int(phase)-1]
+                    company = Company.objects.get(id = company)
+
                     card = Card.objects.get(id = update)
                     card.title = title
                     card.comment = comment
-                    card.phase = phase
+                    card.phase = phase[1]
+                    card.company = company
                     if deadline != "":
                         card.deadline = deadline
                     if assigned != "":
@@ -94,7 +107,7 @@ def addCard(request, id):
                         card.assigned = None
                     card.order = order
                     card.save()
-                    return JsonResponse({'phase': phase.id, 'id': update, 'title': title, 'comment': comment, 'updated': True, 'picture': pictureAssigned, 'assigned': assigned})
+                    return JsonResponse({'phase': phase[0], 'company': company.id, 'id': update, 'title': title, 'comment': comment, 'updated': True, 'picture': pictureAssigned, 'assigned': assigned})
 
     #The visitor can't see this page!
     return HttpResponseRedirect("/user/noAccessPermissions")
@@ -154,8 +167,10 @@ class BoardIndex(TemplateView):
 
     def get_context_data(self, **kwargs):
         company = Company.objects.get(id = int(kwargs['pk']))
+
         context = super(BoardIndex, self).get_context_data(**kwargs)
         context['company'] = company
+        context['phases'] = PHASE_CHOICES
 
         context['form'] = CardForm(company)
         return context
@@ -163,6 +178,7 @@ class BoardIndex(TemplateView):
 
 #Update the kanboard
 def update(request, id):
+    print('update')
     updates = []
     if request.is_ajax():
         try:
@@ -174,7 +190,7 @@ def update(request, id):
                 phase_match = PHASE_RE.match(phase_name) #Regex to verify data
                 if not phase_match:
                     raise Exception("Malformed phase_name: <%s>" % phase_name)
-                phase = get_object_or_404(Phase, pk=int(phase_match.group(1)))
+                phase = PHASE_CHOICES[int(phase_match.group(1))-1]
 
                 #Listing of cards in the phase
                 for card_name in card_names:
@@ -183,8 +199,7 @@ def update(request, id):
                         raise Exception("Malformed card_name: <%s>" % card_name)
                     card = get_object_or_404(Card, pk=int(card_match.group(1)))
                     cards.append(card)
-                updates.append((phase, cards))
-                updates.sort(cmp=lambda x,y: cmp(x[0].order, y[0].order))
+                updates.append((phase[1], cards))
 
                 #Update phase of cards
                 for phase, cards in updates:

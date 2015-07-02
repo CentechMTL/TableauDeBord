@@ -4,7 +4,7 @@ from django.contrib.admin.widgets import AdminDateWidget
 from django.forms import widgets
 from django import forms
 
-from app.kanboard.models import Card, Phase
+from app.kanboard.models import Card, PHASE_CHOICES
 from app.founder.models import Founder
 
 from django.utils.translation import ugettext_lazy as _
@@ -22,11 +22,8 @@ class CardForm(forms.ModelForm):
             'deadline' : forms.DateInput(attrs={'type':'date'})
         }
 
-    phase = forms.ModelChoiceField(
-        label = _(u"Phase"),
-        queryset = Phase.objects.all(),
-        required = True,
-        empty_label = None
+    phase = forms.ChoiceField(
+        choices = PHASE_CHOICES,
     )
     phase.widget.attrs.update({'id':'phase'})
 
@@ -65,5 +62,4 @@ class CardForm(forms.ModelForm):
         self.helper.form_class = 'content-wrapper'
         self.helper.form_method = 'post'
 
-        self.fields['phase'].queryset = Phase.objects.filter(company = company)
         self.fields['assigned'].queryset = Founder.objects.filter(company = company)

@@ -8,35 +8,13 @@ from app.company.models import Company
 from app.founder.models import Founder
 from django.contrib.auth.models import User
 
-class Phase(models.Model):
-    UPCOMING = 'upcoming'
-    PROGRESS = 'progress'
-    FINISHED = 'finished'
-    STATUSES = (
-        (UPCOMING, 'Upcoming'),
-        (PROGRESS, 'In progress'),
-        (FINISHED, 'Finished'),
-    )
+from django.utils.translation import ugettext_lazy as _
 
-    title = models.CharField(max_length=80)
-    company = models.ForeignKey(Company, related_name="phases")
-    # Order of the phase within the board:
-    order = models.SmallIntegerField()
-    # The status is used to determine whether the phase is WIP or not (for
-    # stats calculation):
-    status = models.CharField(max_length=25, choices=STATUSES,
-                              default=PROGRESS)
-
-    #Optional fields
-    description = models.TextField(blank=True)
-    limit = models.SmallIntegerField(blank=True, null=True)
-
-    class Meta:
-        ordering = ['order']
-
-    def __unicode__(self):
-        return u"%s - %s (%s)" % (self.company.name, self.title, self.order)
-
+PHASE_CHOICES = (
+    (1, u'Finance'),
+    (2, u'R&D'),
+    (3, u'Centech'),
+)
 
 class Card(models.Model):
     """
@@ -46,8 +24,8 @@ class Card(models.Model):
     title = models.CharField(max_length=80)
     comment = models.TextField(blank=True)
     deadline = models.DateField(blank=True, null=True)
-
-    phase = models.ForeignKey(Phase, related_name="cards")
+    company = models.ForeignKey(Company, related_name="cards")
+    phase = models.CharField(max_length=50, choices=PHASE_CHOICES, verbose_name=_('Phase'))
     order = models.SmallIntegerField()
 
     assigned = models.ForeignKey(Founder, related_name="cards", blank=True, null=True)
@@ -60,7 +38,7 @@ class Card(models.Model):
         ordering = ['order', ]
 
     def __unicode__(self):
-        return "%s - %s (%s) -- %s" % (self.id, self.title, self.order, self.phase.title)
+        return "%s -- %s" % (self.title, self.company)
 
     def save(self, *args, **kwarg):
         if not self.id:

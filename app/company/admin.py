@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 from django.contrib import admin
-from app.company.models import Company, CompanyStatus, Presence
+from app.company.models import Company, CompanyStatus
 
 class CompanyAdmin(admin.ModelAdmin):
 
@@ -32,4 +32,3 @@ class CompanyAdmin(admin.ModelAdmin):
 
 admin.site.register(Company, CompanyAdmin)
 admin.site.register(CompanyStatus)
-admin.site.register(Presence)

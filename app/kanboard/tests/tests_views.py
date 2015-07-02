@@ -11,9 +11,9 @@ from app.founder.factories import FounderFactory
 from app.mentor.factories import MentorFactory
 from app.home.factories import UserFactory, StaffUserFactory
 from app.company.factories import CompanyStatusFactory, CompanyFactory
-from app.kanboard.factories import PhaseFactory, CardFactory
+from app.kanboard.factories import CardFactory
 
-from app.businessCanvas.models import BUSINESS_CANVAS_TYPE_CHOICES
+from app.kanboard.models import PHASE_CHOICES
 
 class KanboardTests(TestCase):
 
@@ -33,13 +33,13 @@ class KanboardTests(TestCase):
         self.company.mentors.add(self.mentorCompany)
         self.company.save()
 
-        self.phase = PhaseFactory(company = self.company,
-                                  order = 1)
+        self.card = CardFactory(phase = PHASE_CHOICES[0][1],
+                                order = 1,
+                                company = self.company)
 
-        self.card = CardFactory(phase = self.phase,
-                                order = 1)
-        self.card2 = CardFactory(phase = self.phase,
-                                 order = 2)
+        self.card2 = CardFactory(phase = PHASE_CHOICES[0][1],
+                                 order = 2,
+                                 company = self.company)
 
     def test_kanboard(self):
         """

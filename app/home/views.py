@@ -11,12 +11,15 @@ import json
 from django.contrib.auth.models import User
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
+from django.db.models import Avg
+
 from app.company.models import Company
 from app.founder.models import Founder
 from app.mentor.models import Mentor
-from app.kpi.models import KPI
+from app.kpi.models import KPI, KPI_TYPE_CHOICES
 from app.finance.models import Bourse, Subvention, Pret, Investissement, Vente
-from django.db.models import Avg
+
+
 
 #General view
 class Summary(generic.TemplateView):
@@ -79,7 +82,6 @@ class Summary(generic.TemplateView):
                     totalLoans += loan.sommeReception
             loans.append((company, totalLoans))
 
-
         finances = {}
         finances['grants'] = grants
         finances['subsidies'] = subsidies
@@ -92,6 +94,9 @@ class Summary(generic.TemplateView):
         context['founders'] = founders
         context['mentors'] = mentors
         context['finances'] = finances
+        context['averageIRL'] = round(KPI.objects.filter(type=KPI_TYPE_CHOICES[0][0]).aggregate(Avg('level')).values()[0], 2)
+        context['averageTRL'] = round(KPI.objects.filter(type=KPI_TYPE_CHOICES[1][0]).aggregate(Avg('level')).values()[0], 2)
+
         return context
 
 #Form for update password

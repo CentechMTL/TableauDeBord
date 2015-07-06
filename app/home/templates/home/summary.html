@@ -17,6 +17,7 @@
         </div>
     </div>
 
+<h1>Finances</h1>
 <div id="accordion" style="margin-top: 50px;">
     {% for type, data in finances.items %}
     <h3 id="elem-{{type}}">{{type|capfirst}}</h3>
@@ -63,6 +64,16 @@
     {% endfor %}
 </div>
 
+<h1>Indices de performances</h1>
+
+<div class="row" style="margin-top: 50px;">
+    <div class="col-sm-12" align="center">
+        <div class="row" align="center">
+            <div class="col-sm-6" style="border-right: 1px solid grey;"><strong>{% trans "Average IRLs" %}</strong> <br><span style="font-size: 70px;">{{averageIRL}}</span></div>
+            <div class="col-sm-6" ><strong>{% trans "Average TRLs" %}</strong> <br><span style="font-size: 70px;">{{averageTRL}}</span></div>
+        </div>
+    </div>
+</div>
 
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>

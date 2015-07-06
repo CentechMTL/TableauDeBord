@@ -29,6 +29,12 @@ class MentorCreateForm(forms.Form):
         choices = MENTOR_TYPE_CHOICES,
     )
 
+    url = forms.URLField(
+        label=_('Directory of ETS'),
+        required=False,
+    )
+    url.widget.attrs.update({'placeholder': _(u'https://example.com')})
+
     firstname = forms.CharField(
         label=_('First name'),
         required=True,
@@ -106,6 +112,7 @@ class MentorCreateForm(forms.Form):
             Field('picture'),
             Field('phone'),
             Field('website'),
+            Field('url'),
             Field('type'),
             Field('expertise'),
             HTML(_(u"""Use the Ctrl key on your keyboard to select multiple. <br> If it lacks a domain that you would like to add to this list, do not hesitate to talk to the team Centech""")),
@@ -118,6 +125,12 @@ class MentorUpdateForm(forms.Form):
     type = forms.ChoiceField(
         choices = MENTOR_TYPE_CHOICES,
     )
+
+    url = forms.URLField(
+        label=_('Directory of ETS'),
+        required=False,
+    )
+    url.widget.attrs.update({'placeholder': _(u'https://example.com')})
 
     firstname = forms.CharField(
         label=_('First name'),
@@ -185,6 +198,7 @@ class MentorUpdateForm(forms.Form):
         self.fields['phone'].initial = mentor.phone
         self.fields['website'].initial = mentor.website
         self.fields['type'].initial = mentor.type
+        self.fields['url'].initial = mentor.url
 
         self.helper.layout = Layout(
             HTML("<h1>"),
@@ -195,6 +209,7 @@ class MentorUpdateForm(forms.Form):
             Field('picture'),
             Field('phone'),
             Field('website'),
+            Field('url'),
             Field('type'),
             Field('expertise'),
             HTML(_(u"""Use the Ctrl key on your keyboard to select multiple. <br> If it lacks a domain that you would like to add to this list, do not hesitate to talk to the team Centech""")),

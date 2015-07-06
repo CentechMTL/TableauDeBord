@@ -17,6 +17,7 @@ class Mentor(UserProfile):
     expertise = models.ManyToManyField(Expertise, verbose_name=_('Areas of expertise'), blank=True)
     about = models.CharField(max_length=2000,blank=True, verbose_name=_('About'))
     type = models.CharField(max_length=20, choices=MENTOR_TYPE_CHOICES, null=True, blank=True, verbose_name=_('Type'))
+    url = models.URLField(blank=True, null=True, verbose_name=_('URL'))
 
     def __str__(self):
         return self.user.username

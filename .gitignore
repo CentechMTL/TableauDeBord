@@ -1,4 +1,8 @@
 media/logo/*
+!media/logo/default.jpg
+
 media/user_profile/*
+!media/user_profile/default.jpg
+
 .idea/workspace.xml
 *.pyc

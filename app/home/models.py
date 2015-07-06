@@ -50,6 +50,11 @@ class UserProfile(models.Model):
     website = models.URLField(blank=True,verbose_name=_('Web site'))
     picture = models.ImageField(upload_to='user_profile', blank=True,verbose_name=_('Picture'))
 
+    facebook = models.URLField(blank=True, null=True, verbose_name=_('Facebook'))
+    twitter = models.URLField(blank=True, null=True, verbose_name=_('Twitter'))
+    googlePlus = models.URLField(blank=True, null=True, verbose_name=_('Google+'))
+    linkedIn = models.URLField(blank=True, null=True, verbose_name=_('linkedIn'))
+
     def __str__(self):
         return self.user.username
 

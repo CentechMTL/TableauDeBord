@@ -38,6 +38,11 @@ class Company(models.Model):
     #List of mentors
     mentors = models.ManyToManyField(Mentor,blank=True, verbose_name=_('Mentors'), related_name = "company")
 
+    facebook = models.URLField(blank=True, null=True, verbose_name=_('Facebook'))
+    twitter = models.URLField(blank=True, null=True, verbose_name=_('Twitter'))
+    googlePlus = models.URLField(blank=True, null=True, verbose_name=_('Google+'))
+    linkedIn = models.URLField(blank=True, null=True, verbose_name=_('linkedIn'))
+
     incubated_on = models.DateField(blank=True, null=True)
     created = models.DateTimeField(blank=True)
     updated = models.DateTimeField(blank=True)

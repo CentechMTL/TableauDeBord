@@ -88,6 +88,30 @@ class CompanyCreateForm(forms.Form):
     )
     url.widget.attrs.update({'placeholder': _(u'https://example.com')})
 
+    facebook = forms.URLField(
+        label=_('Facebook'),
+        required=False,
+    )
+    facebook.widget.attrs.update({'placeholder': _(u'https://www.facebook.com/lastname.firstname')})
+
+    twitter = forms.URLField(
+        label=_('Twitter'),
+        required=False,
+    )
+    twitter.widget.attrs.update({'placeholder': _(u'https://twitter.com/username')})
+
+    googlePlus = forms.URLField(
+        label=_('Google+'),
+        required=False,
+    )
+    googlePlus.widget.attrs.update({'placeholder': _(u'https://plus.google.com/id')})
+
+    linkedIn = forms.URLField(
+        label=_('linkedIn'),
+        required=False,
+    )
+    linkedIn.widget.attrs.update({'placeholder': _(u'https://ca.linkedin.com/in/username')})
+
     about = forms.CharField(
         label=_('Description'),
         required=False,
@@ -135,6 +159,10 @@ class CompanyCreateForm(forms.Form):
             Field('logo'),
             Field('video'),
             Field('url'),
+            Field('facebook'),
+            Field('twitter'),
+            Field('googlePlus'),
+            Field('linkedIn'),
             Field('about'),
             Field('founders'),
             Field('mentors'),
@@ -172,6 +200,30 @@ class CompanyUpdateForm(forms.Form):
         required=False,
     )
     url.widget.attrs.update({'placeholder': _(u'https://example.com')})
+
+    facebook = forms.URLField(
+        label=_('Facebook'),
+        required=False,
+    )
+    facebook.widget.attrs.update({'placeholder': _(u'https://www.facebook.com/lastname.firstname')})
+
+    twitter = forms.URLField(
+        label=_('Twitter'),
+        required=False,
+    )
+    twitter.widget.attrs.update({'placeholder': _(u'https://twitter.com/username')})
+
+    googlePlus = forms.URLField(
+        label=_('Google+'),
+        required=False,
+    )
+    googlePlus.widget.attrs.update({'placeholder': _(u'https://plus.google.com/id')})
+
+    linkedIn = forms.URLField(
+        label=_('linkedIn'),
+        required=False,
+    )
+    linkedIn.widget.attrs.update({'placeholder': _(u'https://ca.linkedin.com/in/username')})
 
     about = forms.CharField(
         label=_('Description'),
@@ -211,7 +263,13 @@ class CompanyUpdateForm(forms.Form):
         self.fields['video'].initial = company.video
         self.fields['founders'].initial = company.founders.all
         self.fields['mentors'].initial = company.mentors.all
-        self.fields['incubated_on'].initial = company.incubated_on
+        if company.incubated_on :
+            self.fields['incubated_on'].initial = company.incubated_on.isoformat()
+
+        self.fields['facebook'].initial = company.facebook
+        self.fields['twitter'].initial = company.twitter
+        self.fields['googlePlus'].initial = company.googlePlus
+        self.fields['linkedIn'].initial = company.linkedIn
 
         self.helper.layout = Layout(
             HTML("<h1>"),
@@ -221,6 +279,10 @@ class CompanyUpdateForm(forms.Form):
             Field('logo'),
             Field('video'),
             Field('url'),
+            Field('facebook'),
+            Field('twitter'),
+            Field('googlePlus'),
+            Field('linkedIn'),
             Field('founders'),
             Field('mentors'),
             Field('incubated_on'),

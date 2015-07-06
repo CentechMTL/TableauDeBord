@@ -56,6 +56,30 @@ class FounderCreateForm(forms.Form):
     )
     website.widget.attrs.update({'placeholder': _(u'https://example.com')})
 
+    facebook = forms.URLField(
+        label=_('Facebook'),
+        required=False,
+    )
+    facebook.widget.attrs.update({'placeholder': _(u'https://www.facebook.com/lastname.firstname')})
+
+    twitter = forms.URLField(
+        label=_('Twitter'),
+        required=False,
+    )
+    twitter.widget.attrs.update({'placeholder': _(u'https://twitter.com/username')})
+
+    googlePlus = forms.URLField(
+        label=_('Google+'),
+        required=False,
+    )
+    googlePlus.widget.attrs.update({'placeholder': _(u'https://plus.google.com/id')})
+
+    linkedIn = forms.URLField(
+        label=_('linkedIn'),
+        required=False,
+    )
+    linkedIn.widget.attrs.update({'placeholder': _(u'https://ca.linkedin.com/in/username')})
+
     about = forms.CharField(
         label=_('Description'),
         required=False,
@@ -103,6 +127,10 @@ class FounderCreateForm(forms.Form):
             Field('picture'),
             Field('phone'),
             Field('website'),
+            Field('facebook'),
+            Field('twitter'),
+            Field('googlePlus'),
+            Field('linkedIn'),
             Field('education'),
             Field('expertise'),
             HTML(_(u"""Use the Ctrl key on your keyboard to select multiple. <br> If it lacks a domain that you would like to add to this list, do not hesitate to talk to the team Centech""")),
@@ -136,6 +164,30 @@ class FounderUpdateForm(forms.Form):
         required=False,
     )
     website.widget.attrs.update({'placeholder': _(u'https://example.com')})
+
+    facebook = forms.URLField(
+        label=_('Facebook'),
+        required=False,
+    )
+    facebook.widget.attrs.update({'placeholder': _(u'https://www.facebook.com/lastname.firstname')})
+
+    twitter = forms.URLField(
+        label=_('Twitter'),
+        required=False,
+    )
+    twitter.widget.attrs.update({'placeholder': _(u'https://twitter.com/username')})
+
+    googlePlus = forms.URLField(
+        label=_('Google+'),
+        required=False,
+    )
+    googlePlus.widget.attrs.update({'placeholder': _(u'https://plus.google.com/id')})
+
+    linkedIn = forms.URLField(
+        label=_('linkedIn'),
+        required=False,
+    )
+    linkedIn.widget.attrs.update({'placeholder': _(u'https://ca.linkedin.com/in/username')})
 
     about = forms.CharField(
         label=_('Description'),
@@ -180,6 +232,10 @@ class FounderUpdateForm(forms.Form):
         self.fields['firstname'].initial = founder.user.first_name
         self.fields['lastname'].initial = founder.user.last_name
         self.fields['website'].initial = founder.website
+        self.fields['facebook'].initial = founder.facebook
+        self.fields['twitter'].initial = founder.twitter
+        self.fields['googlePlus'].initial = founder.googlePlus
+        self.fields['linkedIn'].initial = founder.linkedIn
         self.fields['phone'].initial = founder.phone
 
         self.helper.layout = Layout(
@@ -191,6 +247,10 @@ class FounderUpdateForm(forms.Form):
             Field('picture'),
             Field('phone'),
             Field('website'),
+            Field('facebook'),
+            Field('twitter'),
+            Field('googlePlus'),
+            Field('linkedIn'),
             Field('education'),
             Field('expertise'),
             HTML(_(u"""Use the Ctrl key on your keyboard to select multiple. <br> If it lacks a domain that you would like to add to this list, do not hesitate to talk to the team Centech""")),

@@ -78,6 +78,10 @@ class MentorCreate(generic.CreateView):
         self.mentorCreate= newMentor
         newMentor.phone = form.data['phone']
         newMentor.website = form.data['website']
+        newMentor.facebook = form.data['facebook']
+        newMentor.twitter = form.data['twitter']
+        newMentor.googlePlus = form.data['googlePlus']
+        newMentor.linkedIn = form.data['linkedIn']
         newMentor.about = form.data['about']
         newMentor.type = form.data['type']
         newMentor.url = form.data['url']
@@ -164,6 +168,10 @@ class MentorUpdate(generic.UpdateView):
 
         object.phone = form.data['phone']
         object.website = form.data['website']
+        object.facebook = form.data['facebook']
+        object.twitter = form.data['twitter']
+        object.googlePlus = form.data['googlePlus']
+        object.linkedIn = form.data['linkedIn']
         object.about = form.data['about']
         object.type = form.data['type']
         object.url = form.data['url']

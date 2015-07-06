@@ -135,9 +135,21 @@ class CompanyCreate(generic.CreateView):
         status = CompanyStatus.objects.get(id = form.data['status'])
         video = form.data['video']
         url = form.data['url']
+        facebook = form.data['facebook']
+        twitter = form.data['twitter']
+        googlePlus = form.data['googlePlus']
+        linkedIn = form.data['linkedIn']
         description = form.data['about']
 
-        newCompany = Company(name=name, companyStatus=status, video=video, url=url, description=description)
+        newCompany = Company(name=name,
+                             companyStatus=status,
+                             video=video,
+                             url=url,
+                             description=description,
+                             facebook=facebook,
+                             twitter=twitter,
+                             googlePlus=googlePlus,
+                             linkedIn=linkedIn)
         newCompany.save()
 
         try:
@@ -215,14 +227,26 @@ class CompanyUpdate(generic.UpdateView):
     def update_company(self, object, form):
         object.name = form.data['name']
         object.url = form.data['url']
+        object.facebook = form.data['facebook']
+        object.twitter = form.data['twitter']
+        object.googlePlus = form.data['googlePlus']
+        object.linkedIn = form.data['linkedIn']
         object.description = form.data['about']
-        object.incubated_on = form.data['incubated_on']
+        object.video = form.data['video']
+
+        print('date incubation -> '+form.data['incubated_on'])
+        try:
+            if form.data['incubated_on'] != "":
+                object.incubated_on = form.data['incubated_on']
+            else:
+                object.incubated_on = None
+        except:
+            print('toto')
 
         try:
             object.logo = self.request.FILES['logo']
         except:
             pass
-        object.video = form.data['video']
 
         object.founders.clear()
         for founder in form.cleaned_data["founders"]:

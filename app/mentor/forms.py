@@ -35,6 +35,30 @@ class MentorCreateForm(forms.Form):
     )
     url.widget.attrs.update({'placeholder': _(u'https://example.com')})
 
+    facebook = forms.URLField(
+        label=_('Facebook'),
+        required=False,
+    )
+    facebook.widget.attrs.update({'placeholder': _(u'https://www.facebook.com/lastname.firstname')})
+
+    twitter = forms.URLField(
+        label=_('Twitter'),
+        required=False,
+    )
+    twitter.widget.attrs.update({'placeholder': _(u'https://twitter.com/username')})
+
+    googlePlus = forms.URLField(
+        label=_('Google+'),
+        required=False,
+    )
+    googlePlus.widget.attrs.update({'placeholder': _(u'https://plus.google.com/id')})
+
+    linkedIn = forms.URLField(
+        label=_('linkedIn'),
+        required=False,
+    )
+    linkedIn.widget.attrs.update({'placeholder': _(u'https://ca.linkedin.com/in/username')})
+
     firstname = forms.CharField(
         label=_('First name'),
         required=True,
@@ -113,6 +137,10 @@ class MentorCreateForm(forms.Form):
             Field('phone'),
             Field('website'),
             Field('url'),
+            Field('facebook'),
+            Field('twitter'),
+            Field('googlePlus'),
+            Field('linkedIn'),
             Field('type'),
             Field('expertise'),
             HTML(_(u"""Use the Ctrl key on your keyboard to select multiple. <br> If it lacks a domain that you would like to add to this list, do not hesitate to talk to the team Centech""")),
@@ -131,6 +159,30 @@ class MentorUpdateForm(forms.Form):
         required=False,
     )
     url.widget.attrs.update({'placeholder': _(u'https://example.com')})
+
+    facebook = forms.URLField(
+        label=_('Facebook'),
+        required=False,
+    )
+    facebook.widget.attrs.update({'placeholder': _(u'https://www.facebook.com/lastname.firstname')})
+
+    twitter = forms.URLField(
+        label=_('Twitter'),
+        required=False,
+    )
+    twitter.widget.attrs.update({'placeholder': _(u'https://twitter.com/username')})
+
+    googlePlus = forms.URLField(
+        label=_('Google+'),
+        required=False,
+    )
+    googlePlus.widget.attrs.update({'placeholder': _(u'https://plus.google.com/id')})
+
+    linkedIn = forms.URLField(
+        label=_('linkedIn'),
+        required=False,
+    )
+    linkedIn.widget.attrs.update({'placeholder': _(u'https://ca.linkedin.com/in/username')})
 
     firstname = forms.CharField(
         label=_('First name'),
@@ -197,6 +249,10 @@ class MentorUpdateForm(forms.Form):
         self.fields['lastname'].initial = mentor.user.last_name
         self.fields['phone'].initial = mentor.phone
         self.fields['website'].initial = mentor.website
+        self.fields['facebook'].initial = mentor.facebook
+        self.fields['twitter'].initial = mentor.twitter
+        self.fields['googlePlus'].initial = mentor.googlePlus
+        self.fields['linkedIn'].initial = mentor.linkedIn
         self.fields['type'].initial = mentor.type
         self.fields['url'].initial = mentor.url
 
@@ -209,6 +265,10 @@ class MentorUpdateForm(forms.Form):
             Field('picture'),
             Field('phone'),
             Field('website'),
+            Field('facebook'),
+            Field('twitter'),
+            Field('googlePlus'),
+            Field('linkedIn'),
             Field('url'),
             Field('type'),
             Field('expertise'),

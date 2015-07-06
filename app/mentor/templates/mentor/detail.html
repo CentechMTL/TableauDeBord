@@ -20,6 +20,20 @@
                 <img class="avatar" src="/media/user_profile/default.jpg" /><br>
             {% endif %}
             <h1><strong>{{ mentor.user.first_name }} {{ mentor.user.last_name }}</strong></h1>
+            {% if mentor.facebook %}
+                <a href="{{mentor.facebook}}"><i class="fa fa-facebook-square fa-3x"></i></a>
+            {% endif %}
+            {% if mentor.twitter %}
+                <a href="{{mentor.twitter}}"><i class="fa fa-twitter-square fa-3x"></i></a>
+            {% endif %}
+            {% if mentor.googlePlus %}
+                <a href="{{mentor.googlePlus}}"><i class="fa fa-google-plus-square fa-3x"></i></a>
+            {% endif %}
+            {% if mentor.linkedIn %}
+                <a href="{{mentor.linkedIn}}"><i class="fa fa-linkedin-square fa-3x"></i></a>
+            {% endif %}
+            <br><br>
+
             {% if mentor.phone != "" %}
                 <br><b>{% trans "Phone" %} : </b> {{ mentor.phone }}<br>
             {% endif %}

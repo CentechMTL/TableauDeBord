@@ -20,6 +20,20 @@
                 <img class="avatar" src="/media/user_profile/default.jpg" /><br>
             {% endif %}
             <h1><strong>{{ founder.user.first_name }} {{ founder.user.last_name }}</strong></h1>
+            {% if founder.facebook %}
+                <a href="{{founder.facebook}}"><i class="fa fa-facebook-square fa-3x"></i></a>
+            {% endif %}
+            {% if founder.twitter %}
+                <a href="{{founder.twitter}}"><i class="fa fa-twitter-square fa-3x"></i></a>
+            {% endif %}
+            {% if founder.googlePlus %}
+                <a href="{{founder.googlePlus}}"><i class="fa fa-google-plus-square fa-3x"></i></a>
+            {% endif %}
+            {% if founder.linkedIn %}
+                <a href="{{founder.linkedIn}}"><i class="fa fa-linkedin-square fa-3x"></i></a>
+            {% endif %}
+            <br><br>
+
             {% if founder.phone != "" %}
                 <br><b>{% trans "Phone" %} : </b> {{ founder.phone }}<br>
             {% endif %}

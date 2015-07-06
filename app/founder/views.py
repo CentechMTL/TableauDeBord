@@ -78,6 +78,12 @@ class FounderCreate(generic.CreateView):
         self.founderCreate= newFounder
         newFounder.phone = form.data['phone']
         newFounder.website = form.data['website']
+
+        newFounder.facebook = form.data['facebook']
+        newFounder.twitter = form.data['twitter']
+        newFounder.googlePlus = form.data['googlePlus']
+        newFounder.linkedIn = form.data['linkedIn']
+
         newFounder.about = form.data['about']
 
         try:
@@ -169,6 +175,10 @@ class FounderUpdate(generic.UpdateView):
 
         object.phone = form.data['phone']
         object.website = form.data['website']
+        object.facebook = form.data['facebook']
+        object.twitter = form.data['twitter']
+        object.googlePlus = form.data['googlePlus']
+        object.linkedIn = form.data['linkedIn']
         object.about = form.data['about']
 
         try:

@@ -56,13 +56,6 @@ class CompanyStatusCreateForm(forms.Form):
             StrictButton(_('Save'), type="submit")
         )
 
-    def is_valid(self, form):
-        try:
-            status = CompanyStatus.objects.get(status = form.data['name'])
-            return False
-        except:
-            return True
-
 class CompanyCreateForm(forms.Form):
 
     incubated_on = forms.DateField(

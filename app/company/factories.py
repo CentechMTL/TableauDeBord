@@ -2,7 +2,6 @@
 
 import factory
 from app.company.models import Company, CompanyStatus
-from app.founder.factories import FounderFactory
 
 class CompanyStatusFactory(factory.django.DjangoModelFactory):
     class Meta:

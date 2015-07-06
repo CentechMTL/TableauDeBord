@@ -71,7 +71,7 @@ class CompanyStatusCreate(generic.CreateView):
 
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST, request.FILES)
-        if form.is_valid(form):
+        if form.is_valid():
             self.create_status(form)
             messages.success(self.request, self.get_success_message())
             return self.form_valid(form)
@@ -91,7 +91,7 @@ class CompanyStatusCreate(generic.CreateView):
         return reverse_lazy("company:index")
 
     def get_error_message(self):
-        return (u'Ce nom existe déjà.')
+        return (u'Ce nom existe déjà ou est invalide.')
 
     def get_success_message(self):
         return (u'Le status a bien été ajouté.')

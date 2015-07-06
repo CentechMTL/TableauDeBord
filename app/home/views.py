@@ -83,11 +83,11 @@ class Summary(generic.TemplateView):
             loans.append((company, totalLoans))
 
         finances = {}
-        finances['grants'] = grants
-        finances['subsidies'] = subsidies
-        finances['investments'] = investments
-        finances['sales'] = sales
-        finances['loans'] = loans
+        finances['bourses'] = grants
+        finances['subventions'] = subsidies
+        finances['investissements'] = investments
+        finances['ventes'] = sales
+        finances['prêts'] = loans
 
         context = super(Summary, self).get_context_data(**kwargs)
         context['companies'] = companies

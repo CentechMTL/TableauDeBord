@@ -17,7 +17,7 @@
         </div>
     </div>
 
-<h1>Finances</h1>
+<h1>{% trans "Finances" %}</h1>
 <div id="accordion" style="margin-top: 50px;">
     {% for type, data in finances.items %}
     <h3 id="elem-{{type}}">{{type|capfirst}}</h3>
@@ -39,7 +39,7 @@
                 var options = {
                     height: data.getNumberOfRows() * 30,
                     hAxis: {
-                        title: 'Ammount - {{type}}',
+                        title: '{% trans "Amount" %} - {{type}}',
                         minValue: 0
                     },
                     bars: 'horizontal',
@@ -64,7 +64,7 @@
     {% endfor %}
 </div>
 
-<h1>Indices de performances</h1>
+<h1>{% trans "Indicators of performances" %}</h1>
 
 <div class="row" style="margin-top: 50px;">
     <div class="col-sm-12" align="center">

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-06 12:47-0400\n"
+"POT-Creation-Date: 2015-07-06 17:54-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -81,6 +81,22 @@ msgstr "site web"
 msgid "Picture"
 msgstr "Photo"
 
+#: .\app\home\models.py:53
+msgid "Facebook"
+msgstr "Facebook"
+
+#: .\app\home\models.py:54
+msgid "Twitter"
+msgstr "Twitter"
+
+#: .\app\home\models.py:55
+msgid "Google+"
+msgstr "Google+"
+
+#: .\app\home\models.py:56
+msgid "linkedIn"
+msgstr "linkedIn"
+
 #: .\app\home\templates\home\index.html:11
 msgid "Dashboard"
 msgstr "Tableau de Bord"
@@ -144,13 +160,22 @@ msgstr "Nombre de fondateurs"
 msgid "Number of mentors"
 msgstr "Nombre de mentors"
 
+#: .\app\home\templates\home\summary.html:20
+msgid "Finances"
+msgstr "Finances"
+
 #: .\app\home\templates\home\summary.html:33
 msgid "Companies"
 msgstr "Compagnies"
 
 #: .\app\home\templates\home\summary.html:33
+#: .\app\home\templates\home\summary.html:42
 msgid "Amount"
 msgstr "Somme"
+
+#: .\app\home\templates\home\summary.html:67
+msgid "Indicators of performances"
+msgstr "Indicateurs de performances"
 
 #: .\app\home\templates\home\summary.html:72
 msgid "Average IRLs"

@@ -7,10 +7,16 @@ from datetime import datetime
 from app.home.models import UserProfile,Expertise
 from app.founder.models import Founder
 
+MENTOR_TYPE_CHOICES = (
+    (u'1', 'Finance'),
+    (u'2', 'Technologie'),
+)
+
 #Mentors
 class Mentor(UserProfile):
     expertise = models.ManyToManyField(Expertise, verbose_name=_('Areas of expertise'), blank=True)
     about = models.CharField(max_length=2000,blank=True, verbose_name=_('About'))
+    type = models.CharField(max_length=20, choices=MENTOR_TYPE_CHOICES, null=True, blank=True, verbose_name=_('Type'))
 
     def __str__(self):
         return self.user.username

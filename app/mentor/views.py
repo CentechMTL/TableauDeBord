@@ -79,6 +79,7 @@ class MentorCreate(generic.CreateView):
         newMentor.phone = form.data['phone']
         newMentor.website = form.data['website']
         newMentor.about = form.data['about']
+        newMentor.type = form.data['type']
 
         try:
             newMentor.picture = self.request.FILES['picture']
@@ -163,6 +164,7 @@ class MentorUpdate(generic.UpdateView):
         object.phone = form.data['phone']
         object.website = form.data['website']
         object.about = form.data['about']
+        object.type = form.data['type']
 
         try:
             object.picture = self.request.FILES['picture']

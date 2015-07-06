@@ -2,7 +2,7 @@
 
 from django import forms
 import django_filters
-from app.mentor.models import Mentor
+from app.mentor.models import Mentor, MENTOR_TYPE_CHOICES
 from app.home.models import Expertise, Education
 
 from crispy_forms.bootstrap import StrictButton
@@ -12,12 +12,22 @@ from crispy_forms.layout import HTML, Layout, \
 
 from django.utils.translation import ugettext_lazy as _
 
+FILTER_MENTOR_CHOICES = list(MENTOR_TYPE_CHOICES)
+FILTER_MENTOR_CHOICES.insert(0, ('','---------') )
+
 class MentorFilter(django_filters.FilterSet):
+    type = django_filters.ChoiceFilter(choices= FILTER_MENTOR_CHOICES )
     class Meta:
         model = Mentor
-        fields = ['expertise']
+        fields = {'expertise' : ['exact'], 'type': ['exact']}
+
+
 
 class MentorCreateForm(forms.Form):
+
+    type = forms.ChoiceField(
+        choices = MENTOR_TYPE_CHOICES,
+    )
 
     firstname = forms.CharField(
         label=_('First name'),
@@ -96,6 +106,7 @@ class MentorCreateForm(forms.Form):
             Field('picture'),
             Field('phone'),
             Field('website'),
+            Field('type'),
             Field('expertise'),
             HTML(_(u"""Use the Ctrl key on your keyboard to select multiple. <br> If it lacks a domain that you would like to add to this list, do not hesitate to talk to the team Centech""")),
             Field('about'),
@@ -103,6 +114,10 @@ class MentorCreateForm(forms.Form):
         )
 
 class MentorUpdateForm(forms.Form):
+
+    type = forms.ChoiceField(
+        choices = MENTOR_TYPE_CHOICES,
+    )
 
     firstname = forms.CharField(
         label=_('First name'),
@@ -169,6 +184,7 @@ class MentorUpdateForm(forms.Form):
         self.fields['lastname'].initial = mentor.user.last_name
         self.fields['phone'].initial = mentor.phone
         self.fields['website'].initial = mentor.website
+        self.fields['type'].initial = mentor.type
 
         self.helper.layout = Layout(
             HTML("<h1>"),
@@ -179,6 +195,7 @@ class MentorUpdateForm(forms.Form):
             Field('picture'),
             Field('phone'),
             Field('website'),
+            Field('type'),
             Field('expertise'),
             HTML(_(u"""Use the Ctrl key on your keyboard to select multiple. <br> If it lacks a domain that you would like to add to this list, do not hesitate to talk to the team Centech""")),
             Field('about'),

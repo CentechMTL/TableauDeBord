@@ -35,10 +35,10 @@
             <br><br>
 
             {% if founder.phone != "" %}
-                <br><b>{% trans "Phone" %} : </b> {{ founder.phone }}<br>
+                <b>{% trans "Phone" %} : </b> {{ founder.phone }}<br>
             {% endif %}
             {% if founder.website != "" %}
-                <br><b>{% trans "Web site" %} : </b> <a href="{{ founder.website }}">{{ founder.website }}</a><br>
+                <b>{% trans "Web site" %} : </b> <a href="{{ founder.website }}">{{ founder.website }}</a><br>
             {% endif %}
             <br><br>
         </div>

@@ -35,13 +35,13 @@
             <br><br>
 
             {% if mentor.phone != "" %}
-                <br><b>{% trans "Phone" %} : </b> {{ mentor.phone }}<br>
+                <b>{% trans "Phone" %} : </b> {{ mentor.phone }}<br>
             {% endif %}
             {% if mentor.website != "" %}
-                <br><b>{% trans "Web site" %} : </b> <a href="{{ mentor.website }}">{{ mentor.website }}</a><br>
+                <b>{% trans "Web site" %} : </b> <a href="{{ mentor.website }}">{{ mentor.website }}</a><br>
             {% endif %}
             {% if mentor.url %}
-                <br><b>{% trans "Directory of ETS" %} : </b> <a href="{{ mentor.url }}">{{ mentor.user.first_name }} {{ mentor.user.last_name }}</a><br>
+                <b>{% trans "Directory of ETS" %} : </b> <a href="{{ mentor.url }}">{{ mentor.user.first_name }} {{ mentor.user.last_name }}</a><br>
             {% endif %}
             <br><br>
         </div>

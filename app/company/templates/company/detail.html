@@ -39,10 +39,11 @@
                 {% endif %}
                 <br><br>
 
-                {% trans "Incubation phase" %} : {{ company.companyStatus }}<br><br>
+                {% trans "Incubation phase" %} : {{ company.companyStatus }}<br>
                 {% if company.url != "" %}
-                {% trans "Web site" %} : <a href="{{ company.url }}">{{ company.url }}</a><br><br>
+                {% trans "Web site" %} : <a href="{{ company.url }}">{{ company.url }}</a>
                 {% endif %}
+                <br><br>
             </div>
         </div>
     </div>

@@ -31,7 +31,7 @@
                 var data = google.visualization.arrayToDataTable([
                     ['{% trans "Companies" %}', '{% trans "Amount" %}'],
                     {% for company, ammount in data %}
-                        ['{{company}}', {{ammount}}],
+                        ['{{company.name|safe}}', {{ammount}}],
                     {% endfor %}
                 ]);
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-12 09:43-0400\n"
+"POT-Creation-Date: 2015-07-06 12:47-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: .\app\company\forms.py:40 .\app\company\forms.py:69
-#: .\app\company\forms.py:146 .\app\company\models.py:18
+#: .\app\company\forms.py:154 .\app\company\models.py:18
 #: .\app\company\models.py:29
 msgid "Name"
 msgstr "Nom"
@@ -31,45 +31,49 @@ msgstr "Nom du nouveau statut"
 msgid "New status"
 msgstr "Nouveau statut"
 
-#: .\app\company\forms.py:56 .\app\company\forms.py:140
-#: .\app\company\forms.py:218
+#: .\app\company\forms.py:56 .\app\company\forms.py:141
+#: .\app\company\forms.py:228
 #: .\app\company\templates\company\presence_form.html:20
 msgid "Save"
 msgstr "Enregistrer"
 
-#: .\app\company\forms.py:72 .\app\company\forms.py:149
+#: .\app\company\forms.py:62 .\app\company\forms.py:147
+msgid "incubated on"
+msgstr "incubé le"
+
+#: .\app\company\forms.py:72 .\app\company\forms.py:157
 msgid "Name of the company"
 msgstr "Nom de la compagnie"
 
-#: .\app\company\forms.py:75 .\app\company\forms.py:152
+#: .\app\company\forms.py:75 .\app\company\forms.py:160
 #: .\app\company\models.py:30
 msgid "Logo"
 msgstr "Logo"
 
-#: .\app\company\forms.py:80 .\app\company\forms.py:157
+#: .\app\company\forms.py:80 .\app\company\forms.py:165
 #: .\app\company\models.py:32
 msgid "Video"
 msgstr "Vidéo"
 
-#: .\app\company\forms.py:83 .\app\company\forms.py:160
+#: .\app\company\forms.py:83 .\app\company\forms.py:168
 msgid "https://urlvideo.com/"
 msgstr "https://urlvideo.com/"
 
-#: .\app\company\forms.py:86 .\app\company\forms.py:163
+#: .\app\company\forms.py:86 .\app\company\forms.py:171
 #: .\app\company\templates\company\detail.html:29
 msgid "Web site"
 msgstr "Site web"
 
-#: .\app\company\forms.py:89 .\app\company\forms.py:166
+#: .\app\company\forms.py:89 .\app\company\forms.py:174
 msgid "https://example.com"
 msgstr "https://exemple.com"
 
-#: .\app\company\forms.py:92 .\app\company\forms.py:169
+#: .\app\company\forms.py:92 .\app\company\forms.py:177
 #: .\app\company\models.py:33
 msgid "Description"
 msgstr "Description"
 
-#: .\app\company\forms.py:96 .\app\company\forms.py:173
+#: .\app\company\forms.py:96 .\app\company\forms.py:181
 msgid "Write here a brief summary of your business."
 msgstr "Ecrivez ici un bref résumé de votre entreprise."
 
@@ -79,13 +83,13 @@ msgstr "Ecrivez ici un bref résumé de votre entreprise."
 msgid "Incubation phase"
 msgstr "Phase d'incubation"
 
-#: .\app\company\forms.py:109 .\app\company\forms.py:180
+#: .\app\company\forms.py:109 .\app\company\forms.py:188
 #: .\app\company\models.py:37 .\app\company\templates\company\detail.html:56
 #: .\templates\dashboard.html:72
 msgid "Founders"
 msgstr "Fondateurs"
 
-#: .\app\company\forms.py:116 .\app\company\forms.py:187
+#: .\app\company\forms.py:116 .\app\company\forms.py:195
 #: .\app\company\models.py:39 .\app\company\templates\company\detail.html:84
 #: .\templates\dashboard.html:71
 msgid "Mentors"
@@ -95,7 +99,7 @@ msgstr "Mentors"
 msgid "New company"
 msgstr "Nouvelle compagnie"
 
-#: .\app\company\forms.py:209 .\templates\dashboard.html:208
+#: .\app\company\forms.py:218 .\templates\dashboard.html:217
 msgid "Update company"
 msgstr "Modifier cette compagnie"
 
@@ -103,7 +107,7 @@ msgstr "Modifier cette compagnie"
 msgid "Company Status"
 msgstr "Statut de la compagnie"
 
-#: .\app\company\models.py:26 .\app\company\models.py:76
+#: .\app\company\models.py:26 .\app\company\models.py:77
 #: .\templates\dashboard.html:70
 msgid "Companies"
 msgstr "Compagnies"
@@ -116,11 +120,11 @@ msgstr "URL"
 msgid "Status"
 msgstr "Statut"
 
-#: .\app\company\models.py:73
+#: .\app\company\models.py:74
 msgid "Presences"
 msgstr "Presences"
 
-#: .\app\company\models.py:78 .\app\company\templates\company\presence.html:14
+#: .\app\company\models.py:79 .\app\company\templates\company\presence.html:14
 #: .\app\company\templates\company\presence_confirm_delete.html:10
 msgid "Date"
 msgstr "Date"
@@ -174,17 +178,17 @@ msgid "Presence in Centech"
 msgstr "Presence au Centech"
 
 #: .\app\company\templates\company\presence.html:19
-#: .\app\company\templates\company\presence.html:37
+#: .\app\company\templates\company\presence.html:38
 msgid "Modify"
 msgstr "Modifier"
 
 #: .\app\company\templates\company\presence.html:20
-#: .\app\company\templates\company\presence.html:38
+#: .\app\company\templates\company\presence.html:39
 #: .\app\company\templates\company\presence_confirm_delete.html:20
 msgid "Delete"
 msgstr "Supprimer"
 
-#: .\app\company\templates\company\presence.html:45
+#: .\app\company\templates\company\presence.html:46
 msgid "New Presence"
 msgstr "Nouvelle presence"
 
@@ -200,11 +204,37 @@ msgstr "Annuler"
 msgid "New presence"
 msgstr "Nouvelle présence"
 
-#: .\centech2\settings.py:179
+#: .\app\kanboard\forms.py:31
+msgid "Title*"
+msgstr ""
+
+#: .\app\kanboard\forms.py:34
+msgid "Titre"
+msgstr ""
+
+#: .\app\kanboard\forms.py:37
+msgid "Comment"
+msgstr ""
+
+#: .\app\kanboard\forms.py:41
+#, fuzzy
+#| msgid "Write here a brief summary of your business."
+msgid "Write here a brief description."
+msgstr "Ecrivez ici un bref résumé de votre entreprise."
+
+#: .\app\kanboard\forms.py:52
+msgid "Assign to"
+msgstr ""
+
+#: .\app\kanboard\models.py:28
+msgid "Phase"
+msgstr ""
+
+#: .\centech2\settings.py:182
 msgid "French"
 msgstr "Français"
 
-#: .\centech2\settings.py:180
+#: .\centech2\settings.py:183
 msgid "English"
 msgstr "Anglais"
 
@@ -216,69 +246,86 @@ msgstr "Tableau de bord v.1"
 msgid "Summary"
 msgstr "Sommaire"
 
-#: .\templates\dashboard.html:77 .\templates\dashboard.html.py:111
+#: .\templates\dashboard.html:77 .\templates\dashboard.html.py:114
 msgid "Select a company"
 msgstr "Sélectionnez une compagnie"
 
-#: .\templates\dashboard.html:87 .\templates\dashboard.html.py:98
-#: .\templates\dashboard.html:121 .\templates\dashboard.html.py:131
-#: .\templates\dashboard.html:142
+#: .\templates\dashboard.html:87 .\templates\dashboard.html.py:99
+#: .\templates\dashboard.html:124 .\templates\dashboard.html.py:136
+#: .\templates\dashboard.html:149
+#, fuzzy
+#| msgid "Presence"
+msgid "Presentation"
+msgstr "Presence"
+
+#: .\templates\dashboard.html:88 .\templates\dashboard.html.py:100
+#: .\templates\dashboard.html:125 .\templates\dashboard.html.py:137
+#: .\templates\dashboard.html:150
 msgid "IRL"
 msgstr "IRL"
 
-#: .\templates\dashboard.html:88 .\templates\dashboard.html.py:99
-#: .\templates\dashboard.html:122 .\templates\dashboard.html.py:132
-#: .\templates\dashboard.html:143
+#: .\templates\dashboard.html:89 .\templates\dashboard.html.py:101
+#: .\templates\dashboard.html:126 .\templates\dashboard.html.py:138
+#: .\templates\dashboard.html:151
 msgid "TRL"
 msgstr "TRL"
 
-#: .\templates\dashboard.html:89 .\templates\dashboard.html.py:100
-#: .\templates\dashboard.html:123 .\templates\dashboard.html.py:133
-#: .\templates\dashboard.html:144
+#: .\templates\dashboard.html:90 .\templates\dashboard.html.py:102
+#: .\templates\dashboard.html:127 .\templates\dashboard.html.py:139
+#: .\templates\dashboard.html:152
 msgid "Experiments"
 msgstr "Expérimentations"
 
-#: .\templates\dashboard.html:90 .\templates\dashboard.html.py:101
-#: .\templates\dashboard.html:124 .\templates\dashboard.html.py:134
-#: .\templates\dashboard.html:145
+#: .\templates\dashboard.html:91 .\templates\dashboard.html.py:103
+#: .\templates\dashboard.html:128 .\templates\dashboard.html.py:140
+#: .\templates\dashboard.html:153
 msgid "Business Model Canvas"
 msgstr "Canevas de modèle d'affaire"
 
-#: .\templates\dashboard.html:95 .\templates\dashboard.html.py:106
-#: .\templates\dashboard.html:129 .\templates\dashboard.html.py:139
-#: .\templates\dashboard.html:150
+#: .\templates\dashboard.html:96 .\templates\dashboard.html.py:108
+#: .\templates\dashboard.html:133 .\templates\dashboard.html.py:145
+#: .\templates\dashboard.html:158
 msgid "Finance"
 msgstr "Finance"
 
-#: .\templates\dashboard.html:175
+#: .\templates\dashboard.html:97 .\templates\dashboard.html.py:109
+#: .\templates\dashboard.html:146 .\templates\dashboard.html.py:159
+msgid "KanBoard"
+msgstr ""
+
+#: .\templates\dashboard.html:134
+msgid "Kanboard"
+msgstr ""
+
+#: .\templates\dashboard.html:184
 msgid "Welcome to the Centech Dashboard."
 msgstr "Bienvenue sur le tableau de bord du Centech"
 
-#: .\templates\dashboard.html:189 .\templates\dashboard.html.py:200
+#: .\templates\dashboard.html:198 .\templates\dashboard.html.py:209
 msgid "Update profile"
 msgstr "Modifier profil"
 
-#: .\templates\dashboard.html:216
+#: .\templates\dashboard.html:225
 msgid "Add new founder"
 msgstr "Ajouter un nouveau fondateur"
 
-#: .\templates\dashboard.html:223
+#: .\templates\dashboard.html:232
 msgid "Add new mentor"
 msgstr "Ajouter un nouveau mentor"
 
-#: .\templates\dashboard.html:230
+#: .\templates\dashboard.html:239
 msgid "Add new status"
 msgstr "Ajouter un nouveau statut"
 
-#: .\templates\dashboard.html:237
+#: .\templates\dashboard.html:246
 msgid "Add new company"
 msgstr "Ajouter une nouvelle compagnie"
 
-#: .\templates\dashboard.html:247
+#: .\templates\dashboard.html:256
 msgid "Change password"
 msgstr "Modifier le mot de passe"
 
-#: .\templates\dashboard.html:254
+#: .\templates\dashboard.html:263
 msgid "Log out"
 msgstr "Déconnexion"
 

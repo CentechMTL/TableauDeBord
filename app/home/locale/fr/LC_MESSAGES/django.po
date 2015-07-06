@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-12 09:43-0400\n"
+"POT-Creation-Date: 2015-07-06 12:47-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -61,23 +61,23 @@ msgstr "Expertise"
 msgid "Area of expertise"
 msgstr "Aires d'expertise"
 
-#: .\app\home\models.py:43
+#: .\app\home\models.py:45
 msgid "User"
 msgstr "Utilisateur"
 
-#: .\app\home\models.py:44
+#: .\app\home\models.py:46
 msgid "Identifiant"
 msgstr "Identifiant"
 
-#: .\app\home\models.py:47
+#: .\app\home\models.py:49
 msgid "Phone"
 msgstr "téléphone"
 
-#: .\app\home\models.py:48
+#: .\app\home\models.py:50
 msgid "Web site"
 msgstr "site web"
 
-#: .\app\home\models.py:49
+#: .\app\home\models.py:51
 msgid "Picture"
 msgstr "Photo"
 
@@ -92,7 +92,7 @@ msgstr "Suivez nous sur"
 #: .\app\home\templates\home\index.html:42
 msgid ""
 "Cette plateforme est une plateforme privée appartenant au Centech, "
-"incubateur de société technologique de l'Ecole de Technologie Supérieur de "
+"incubateur de sociétés technologiques de l'École de Technologie Supérieur de "
 "Montréal."
 msgstr ""
 
@@ -132,105 +132,33 @@ msgstr "Compte"
 msgid "My account"
 msgstr "Mon compte"
 
-#: .\app\home\templates\home\summary.html:10
-msgid "Summary of the Centech"
-msgstr "Sommaire du Centech"
-
-#: .\app\home\templates\home\summary.html:12
+#: .\app\home\templates\home\summary.html:13
 msgid "Number of companies"
 msgstr "Nombre de compagnies"
 
-#: .\app\home\templates\home\summary.html:13
+#: .\app\home\templates\home\summary.html:14
 msgid "Number of founders"
 msgstr "Nombre de fondateurs"
 
-#: .\app\home\templates\home\summary.html:14
+#: .\app\home\templates\home\summary.html:15
 msgid "Number of mentors"
 msgstr "Nombre de mentors"
 
-#: .\app\home\templates\home\summary.html:22
-msgid "Indicators of performance"
-msgstr "Indicateurs de performance"
+#: .\app\home\templates\home\summary.html:33
+msgid "Companies"
+msgstr "Compagnies"
 
-#: .\app\home\templates\home\summary.html:24
-msgid "Number of IRL noted by the Centech"
-msgstr "Nombre d'IRL noté par le Centech"
+#: .\app\home\templates\home\summary.html:33
+msgid "Amount"
+msgstr "Somme"
 
-#: .\app\home\templates\home\summary.html:25
-msgid "Average of IRL"
-msgstr "Moyenne des IRL"
+#: .\app\home\templates\home\summary.html:72
+msgid "Average IRLs"
+msgstr "Moyenne des IRLs"
 
-#: .\app\home\templates\home\summary.html:28
-msgid "Number of TRL noted by the Centech"
-msgstr "Nombre de TRL noté par le Centech"
-
-#: .\app\home\templates\home\summary.html:29
-msgid "Average of TRL"
-msgstr "Moyenne des TRL"
-
-#: .\app\home\templates\home\summary.html:32
-msgid "Finance"
-msgstr "Finance"
-
-#: .\app\home\templates\home\summary.html:34
-msgid "Number of stock exchange ask"
-msgstr "Nombre de bourse demandée"
-
-#: .\app\home\templates\home\summary.html:35
-msgid "Amount of stock exchange ask"
-msgstr "Montant des bourses demandées"
-
-#: .\app\home\templates\home\summary.html:36
-msgid "Amount of stock exchange received"
-msgstr "Montant des bourses reçues"
-
-#: .\app\home\templates\home\summary.html:39
-msgid "Number of subsidies ask"
-msgstr "Nombre de subvention demandée"
-
-#: .\app\home\templates\home\summary.html:40
-msgid "Amount of subsidies ask"
-msgstr "Montant des subventions demandées"
-
-#: .\app\home\templates\home\summary.html:41
-msgid "Amount of subsidies received"
-msgstr "Montant des subventions reçues"
-
-#: .\app\home\templates\home\summary.html:44
-msgid "Number of investments ask"
-msgstr "Nombre d'investissement demandé"
-
-#: .\app\home\templates\home\summary.html:45
-msgid "Amount of investments ask"
-msgstr "Montant des investissements demandés"
-
-#: .\app\home\templates\home\summary.html:46
-msgid "Amount of investments received"
-msgstr "Montant des investissements reçus"
-
-#: .\app\home\templates\home\summary.html:49
-msgid "Number of loans ask"
-msgstr "Nombre de prêt demandé"
-
-#: .\app\home\templates\home\summary.html:50
-msgid "Amount of loans ask"
-msgstr "Montant des prêts demandé"
-
-#: .\app\home\templates\home\summary.html:51
-msgid "Amount of loans received"
-msgstr "Montant des prêts reçus"
-
-#: .\app\home\templates\home\summary.html:54
-msgid "Number of sales ask"
-msgstr "Nombre de vente demandée"
-
-#: .\app\home\templates\home\summary.html:55
-msgid "Amount of sales ask"
-msgstr "Montant des ventes demandées"
-
-#: .\app\home\templates\home\summary.html:56
-msgid "Amount of sales received"
-msgstr "Montant des ventes reçues"
+#: .\app\home\templates\home\summary.html:73
+msgid "Average TRLs"
+msgstr "Moyenne des TRLs"
 
 #: .\app\home\templates\registration\login.html:11
 msgid "Your username and password didn't match. Please try again."

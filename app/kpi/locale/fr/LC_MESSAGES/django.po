@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-12 09:43-0400\n"
+"POT-Creation-Date: 2015-07-06 12:47-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,32 +17,19 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: .\app\kpi\models.py:18
-msgid "Types of KPI"
-msgstr "Types de KPI"
-
-#: .\app\kpi\models.py:20 .\app\kpi\templates\kpi\irl.html:64
-#: .\app\kpi\templates\kpi\trl.html:65
-msgid "Name"
-msgstr "Nom"
-
-#: .\app\kpi\models.py:28
+#: .\app\kpi\models.py:17
 msgid "KPIs"
 msgstr "KPIs"
 
-#: .\app\kpi\models.py:30
+#: .\app\kpi\models.py:19
 msgid "Companies"
 msgstr "Compagnies"
 
-#: .\app\kpi\models.py:31
-msgid "Status"
-msgstr "Status"
+#: .\app\kpi\models.py:20
+msgid "Type"
+msgstr "Type"
 
-#: .\app\kpi\models.py:32
-msgid "Type of KPI"
-msgstr "Type de KPI"
-
-#: .\app\kpi\models.py:33 .\app\kpi\templates\kpi\irl.html:65
+#: .\app\kpi\models.py:22 .\app\kpi\templates\kpi\irl.html:65
 #: .\app\kpi\templates\kpi\irl.html:115
 #: .\app\kpi\templates\kpi\irl_confirm_delete.html:11
 #: .\app\kpi\templates\kpi\trl.html:66 .\app\kpi\templates\kpi\trl.html:116
@@ -50,13 +37,13 @@ msgstr "Type de KPI"
 msgid "Level"
 msgstr "Niveau"
 
-#: .\app\kpi\models.py:34 .\app\kpi\templates\kpi\irl.html:101
+#: .\app\kpi\models.py:23 .\app\kpi\templates\kpi\irl.html:101
 #: .\app\kpi\templates\kpi\irl.html:114 .\app\kpi\templates\kpi\trl.html:102
 #: .\app\kpi\templates\kpi\trl.html:115
 msgid "Date"
 msgstr "Date"
 
-#: .\app\kpi\models.py:35 .\app\kpi\templates\kpi\irl.html:116
+#: .\app\kpi\models.py:24 .\app\kpi\templates\kpi\irl.html:116
 #: .\app\kpi\templates\kpi\irl_confirm_delete.html:13
 #: .\app\kpi\templates\kpi\trl.html:117
 #: .\app\kpi\templates\kpi\trl_confirm_delete.html:13
@@ -108,6 +95,10 @@ msgstr ""
 #: .\app\kpi\templates\kpi\irl.html:46
 msgid "IRL of"
 msgstr "IRL de"
+
+#: .\app\kpi\templates\kpi\irl.html:64 .\app\kpi\templates\kpi\trl.html:65
+msgid "Name"
+msgstr "Nom"
 
 #: .\app\kpi\templates\kpi\irl.html:95
 #: .\app\kpi\templates\kpi\irl_confirm_delete.html:6

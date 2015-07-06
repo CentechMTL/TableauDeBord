@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-12 09:43-0400\n"
+"POT-Creation-Date: 2015-07-06 12:47-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,14 +18,10 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: .\app\businessCanvas\models.py:26
-msgid "Business canvas type"
-msgstr "Type d'élément du canevas de modèle d'affaire"
-
-#: .\app\businessCanvas\models.py:37
 msgid "Business canvas element"
 msgstr "Element du canevas modèle d'affaire"
 
-#: .\app\businessCanvas\models.py:39
+#: .\app\businessCanvas\models.py:28
 #: .\app\businessCanvas\templates\businessCanvas\businesscanvaselement_list.html:149
 #: .\app\businessCanvas\templates\businessCanvas\businesscanvaselement_list.html:185
 #: .\app\businessCanvas\templates\businessCanvas\businesscanvaselement_list.html:222
@@ -39,7 +35,7 @@ msgstr "Element du canevas modèle d'affaire"
 msgid "Title"
 msgstr "Titre"
 
-#: .\app\businessCanvas\models.py:40
+#: .\app\businessCanvas\models.py:29
 #: .\app\businessCanvas\templates\businessCanvas\businesscanvaselement_list.html:150
 #: .\app\businessCanvas\templates\businessCanvas\businesscanvaselement_list.html:186
 #: .\app\businessCanvas\templates\businessCanvas\businesscanvaselement_list.html:223
@@ -53,64 +49,57 @@ msgstr "Titre"
 msgid "Comment"
 msgstr "Commentaire"
 
-#: .\app\businessCanvas\models.py:42
+#: .\app\businessCanvas\models.py:31
 msgid "Date of creation"
-msgstr ""
+msgstr "Date de création"
 
-#: .\app\businessCanvas\models.py:43
+#: .\app\businessCanvas\models.py:32
 msgid "Date of updated"
-msgstr ""
+msgstr "Date de modification"
 
-#: .\app\businessCanvas\models.py:44
+#: .\app\businessCanvas\models.py:33
 msgid "Type"
 msgstr "Type"
 
-#: .\app\businessCanvas\models.py:45 .\app\businessCanvas\models.py:60
+#: .\app\businessCanvas\models.py:34 .\app\businessCanvas\models.py:49
 msgid "Company"
 msgstr "Compagnie"
 
-#: .\app\businessCanvas\models.py:47
+#: .\app\businessCanvas\models.py:36
 msgid "Disactivated"
 msgstr "Désactiver"
 
-#: .\app\businessCanvas\models.py:56
-#: .\app\businessCanvas\templates\businessCanvas\Archive_confirm_delete.html:8
+#: .\app\businessCanvas\models.py:45
+#: .\app\businessCanvas\templates\businessCanvas\archive_confirm_delete.html:6
+#: .\app\businessCanvas\templates\businessCanvas\archive_confirm_delete.html:8
 #: .\app\businessCanvas\templates\businessCanvas\businesscanvaselement_list.html:522
 #: .\app\businessCanvas\templates\businessCanvas\businesscanvaselementarchived_list.html:179
 msgid "Archive"
 msgstr "Archive"
 
-#: .\app\businessCanvas\models.py:59
+#: .\app\businessCanvas\models.py:48
 msgid "Date"
 msgstr "Date"
 
-#: .\app\businessCanvas\models.py:62
+#: .\app\businessCanvas\models.py:51
 msgid "Elements of the archive"
 msgstr "Elements de l'archive"
 
-#: .\app\businessCanvas\templates\businessCanvas\Archive_confirm_delete.html:6
-msgid "Experiment"
-msgstr ""
-
-#: .\app\businessCanvas\templates\businessCanvas\Archive_confirm_delete.html:9
+#: .\app\businessCanvas\templates\businessCanvas\archive_confirm_delete.html:9
 msgid "Are you sure you want to delete this archive ?"
-msgstr ""
+msgstr "Êtes-vous sûr de vouloir supprimer cette archive ?"
 
-#: .\app\businessCanvas\templates\businessCanvas\Archive_confirm_delete.html:11
+#: .\app\businessCanvas\templates\businessCanvas\archive_confirm_delete.html:11
 msgid "create on"
-msgstr ""
+msgstr "créé le"
 
-#: .\app\businessCanvas\templates\businessCanvas\Archive_confirm_delete.html:15
-#, fuzzy
-#| msgid "Date"
+#: .\app\businessCanvas\templates\businessCanvas\archive_confirm_delete.html:15
 msgid "Delete"
-msgstr "Date"
+msgstr "Supprimer"
 
-#: .\app\businessCanvas\templates\businessCanvas\Archive_confirm_delete.html:15
-#, fuzzy
-#| msgid "Channels"
+#: .\app\businessCanvas\templates\businessCanvas\archive_confirm_delete.html:15
 msgid "Cancel"
-msgstr "Filières"
+msgstr "Annuler"
 
 #: .\app\businessCanvas\templates\businessCanvas\businesscanvaselement_list.html:131
 msgid "Business Model Canvas"

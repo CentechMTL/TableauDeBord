@@ -28,8 +28,8 @@ class Card(models.Model):
     phase = models.CharField(max_length=50, choices=PHASE_CHOICES, verbose_name=_('Phase'))
     order = models.SmallIntegerField()
 
-    assigned = models.ForeignKey(Founder, related_name="cards", blank=True, null=True)
-    creator = models.ForeignKey(User, blank=True, null=True)
+    assigned = models.ForeignKey(Founder, related_name="cards_assigned", blank=True, null=True)
+    creator = models.ForeignKey(User, related_name="cards_create", blank=True, null=True)
 
     created = models.DateTimeField(blank=True)
     updated = models.DateTimeField(blank=True)

@@ -7,6 +7,7 @@ from app.kanboard.models import Card, PHASE_CHOICES
 from app.company.models import Company
 from app.founder.models import Founder
 from app.mentor.models import Mentor
+from django.contrib.auth.models import User
 
 from app.kanboard.forms import CardForm
 
@@ -18,6 +19,29 @@ import json
 
 PHASE_RE = re.compile(u'^phase-([\d]+)\[\]$')
 CARD_RE = re.compile(u'^card-([\d]+)$')
+
+
+#Return detail of a kanboard
+def getDetailKanboard(request, company_id):
+    if request.is_ajax():
+        message = []
+
+        for phaseLoop in PHASE_CHOICES:
+            print(phaseLoop[1])
+            phase = {}
+            cards = Card.objects.filter(phase = phaseLoop[1],
+                                        company = company_id)
+            for card in cards:
+                phase[card.id] = card.id
+            tuple = (phaseLoop[1], phase)
+            message.append(tuple)
+
+        data = json.dumps(message)
+        print(data)
+        return HttpResponse(data, content_type='application/json')
+
+    #The visitor can't see this page!
+    return HttpResponseRedirect("/user/noAccessPermissions")
 
 #Return detail of a card
 def getDetailCard(request, card_id):
@@ -36,10 +60,15 @@ def getDetailCard(request, card_id):
                     message['phase'] = phase[0]
 
             message['id'] = card.id
-            message['deadline'] = card.deadline.strftime('%Y-%m-%d')
-            message['assigned'] = card.assigned.userProfile_id
-            if card.assigned:
+            message['creator'] = request.user.username
+
+            if card.assigned :
+                message['assigned'] = card.assigned.userProfile_id
                 message['picture'] = str(card.assigned.picture)
+
+            if card.deadline :
+                message['deadline'] = card.deadline.strftime('%Y-%m-%d')
+
         except:
             pass
         data = json.dumps(message)
@@ -54,6 +83,7 @@ def addCard(request, id):
         if request.method == "POST":
             error = False
 
+            #We take data
             title = request.POST.get('title', '')
             if title == None or title == "":
                 error = True
@@ -69,13 +99,22 @@ def addCard(request, id):
             phase = request.POST.get('phase', '')
             company = request.POST.get('company', '')
 
+            #If we have all data
             if error == False:
+                #If it's a new card
                 if(update == 'False'):
                     pictureAssigned = False
                     phase = PHASE_CHOICES[int(phase)-1]
                     company = Company.objects.get(id = company)
 
-                    card = Card(title = title, company = company, comment = comment, phase = phase[1], order = order)
+                    card = Card(title = title,
+                                company = company,
+                                comment = comment,
+                                creator = request.user, #Session variable
+                                phase = phase[1],
+                                order = order
+                                )
+
                     if deadline != "":
                         card.deadline = deadline
                     if assigned != "":
@@ -86,7 +125,17 @@ def addCard(request, id):
                         card.assigned = None
                     card.save()
                     id = card.id
-                    return JsonResponse({'phase': phase[0], 'company': company.id, 'id': id, 'title': title, 'comment': comment, 'updated': False, 'picture': pictureAssigned, 'assigned': assigned})
+                    return JsonResponse({'phase': phase[0],
+                                         'company': company.id,
+                                         'id': id,
+                                         'title': title,
+                                         'comment': comment,
+                                         'updated': False,
+                                         'picture': pictureAssigned,
+                                         'assigned': assigned,
+                                         })
+
+                #If it's an update of a card
                 else:
                     pictureAssigned = False
                     phase = PHASE_CHOICES[int(phase)-1]
@@ -99,15 +148,24 @@ def addCard(request, id):
                     card.company = company
                     if deadline != "":
                         card.deadline = deadline
+                    else:
+                        card.deadline = None
                     if assigned != "":
                         founder = Founder.objects.get(userProfile_id = assigned)
                         card.assigned = founder
                         pictureAssigned = str(founder.picture)
                     else:
                         card.assigned = None
-                    card.order = order
                     card.save()
-                    return JsonResponse({'phase': phase[0], 'company': company.id, 'id': update, 'title': title, 'comment': comment, 'updated': True, 'picture': pictureAssigned, 'assigned': assigned})
+                    return JsonResponse({'phase': phase[0],
+                                         'company': company.id,
+                                         'id': update,
+                                         'title': title,
+                                         'comment': comment,
+                                         'updated': True,
+                                         'picture': pictureAssigned,
+                                         'assigned': assigned
+                                         })
 
     #The visitor can't see this page!
     return HttpResponseRedirect("/user/noAccessPermissions")
@@ -170,9 +228,8 @@ class BoardIndex(TemplateView):
 
         context = super(BoardIndex, self).get_context_data(**kwargs)
         context['company'] = company
-        context['phases'] = PHASE_CHOICES
-
         context['form'] = CardForm(company)
+
         return context
 
 

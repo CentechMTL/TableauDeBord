@@ -1,32 +1,34 @@
-// Change the form for update element
 function editCard(id, baseLien){
-    idCard = id;
-    var myRegexp = /([a-zA-Z]+)/g;
-    var match = myRegexp.exec(id); //match[1] is the id of element
+    var myRegexp = /([0-9]+)/g;
+    var match = myRegexp.exec(baseLien); //match[1] is the id of the archive
     if(match[1]){
-        card = match[1];
         var pos = baseLien.lastIndexOf('/'); // position du dernier "/"
         baseLien = baseLien.substr(0, pos+1);
-        var lien = baseLien+idCard;
+        var lien = baseLien+id;
 
         $.ajax({
-          type: 'GET',
-          url: lien,
+            type: 'GET',
+            url: lien,
 
-          success: function(data, status) {
-                alert("It's ok sîr!");
-                var form = document.getElementById(card);
-                var inputs = form.getElementsByTagName("input");
-                //inputs[0] -> token CSRF
-                inputs[1].value = data.title;
-                inputs[2].value = data.comment;
-                inputs[3].value = idElement;
+            success: function(data, status) {
+                var form = document.getElementById('form');
+                document.getElementById('phase').value = data.phase;
+                document.getElementById('title').value = data.title;
+                document.getElementById('comment').value = data.comment;
+                document.getElementById('update').value = data.id;
+                if(data.deadline){
+                    document.getElementById('deadline').value = data.deadline;
+                }
+                if(data.assigned){
+                    document.getElementById('assigned').value = data.assigned;
+                }
 
-                updateDisplayForm(type, "True");
+                document.getElementById('create-card').click();
             },
 
-          error: function(resultat, status, erreur) {
-            alert(erreur); }
+            error: function(resultat, status, erreur) {
+                alert(erreur);
+            }
         });
     }
 }

@@ -3,9 +3,16 @@
 {% load i18n %}
 {% block extrahead %}
     <link rel="stylesheet" href="{% static 'kanboard/kanboard.css' %}" type="text/css" media="all" />
+    <script type="text/javascript" src="{% static 'kanboard/js/resize_board.js' %}"></script>
     <script type="text/javascript" src="{% static 'kanboard/js/jquery-1.3.2.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'kanboard/js/jquery-ui-1.7.2.custom.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'kanboard/js/main.js' %}"></script>
+    <script type="text/javascript" src="{% static 'kanboard/js/initSortable.js' %}"></script>
+    <script type="text/javascript" src="{% static 'kanboard/js/createCard.js' %}"></script>
+    <script type="text/javascript" src="{% static 'kanboard/js/initKanboard.js' %}"></script>
+    <script type="text/javascript" src="{% static 'kanboard/js/addCard.js' %}"></script>
+    <script type="text/javascript" src="{% static 'kanboard/js/editCard.js' %}"></script>
+    <script type="text/javascript" src="{% static 'kanboard/js/deleteCard.js' %}"></script>
+    <script type="text/javascript" src="{% static 'kanboard/js/refreshCard.js' %}"></script>
 
     <script type="text/javascript" src="{% static 'js/tokenCSRF.js' %}"></script>
 
@@ -14,338 +21,79 @@
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 
-<script>
-    $(function() {
-    var dialog, form,
+    <script>
+        $(function() {
+            initKanboard("{% url "kanboard:getDetailKanboard" 1 %}",
+                        {{company.id}},
+                        "{% url "kanboard:kanboardGetDetailCard" 1 %}",
+                        "{% url "kanboard:kanboardDeleteCard" 1 %}",
+                        "{% url "founder:detail" 1 %}"
+                        );
 
-    dialog = $( "#dialog-form" ).dialog({
-      autoOpen: false,
-      height: 450,
-      width: 350,
-      modal: true,
-      buttons: {
-        "Create": function() {
-          if(document.getElementById("title").value != ""){
-            addCard('{% url "kanboard:kanboard" 1 %}');
-            dialog.dialog( "close" );
-            document.getElementById("title").style.border = "1px solid #a9a9a9";
-          }
-          else{
-            document.getElementById("title").style.border = "1px solid red";
-          }
-        },
-        Cancel: function() {
-          dialog.dialog( "close" );
-        }
-      },
-      close: function() {
-        form[ 0 ].reset();
-        document.getElementById('update').value = "False";
-      }
-    });
+            var dialog, form,
 
-    form = dialog.find( "form" );
+            dialog = $( "#dialog-form" ).dialog({
+                autoOpen: false,
+                height: 450,
+                width: 350,
+                modal: true,
+                buttons: {
+                    "Create": function() {
+                        if(document.getElementById("title").value != ""){
+                            addCard('{% url "kanboard:kanboard" 1 %}',
+                                    "{% url "kanboard:kanboardGetDetailCard" 1 %}",
+                                    {{company.id}},
+                                    "{% url "kanboard:kanboardDeleteCard" 1 %}",
+                                    "{% url 'founder:detail' 1 %}"
+                                    );
 
-    $( "#create-card" ).click(function() {
-      dialog.dialog( "open" );
-    });
-  });
-  </script>
+                            dialog.dialog( "close" );
+                            document.getElementById("title").style.border = "1px solid #a9a9a9";
+                        }
+                        else{
+                            document.getElementById("title").style.border = "1px solid red";
+                        }
+                    },
+                    Cancel: function() {
+                        dialog.dialog( "close" );
+                    }
+                },
+                close: function() {
+                    form[ 0 ].reset();
+                    document.getElementById('update').value = "False";
+                }
+            });
 
-<script>
-function createCard(id, baseLien){
-    var myRegexp = /([0-9]+)/g;
-    var match = myRegexp.exec(baseLien); //match[1] is the id of the archive
-    if(match[1]){
-        var pos = baseLien.lastIndexOf('/'); // position du dernier "/"
-        var lien = baseLien.substr(0, pos+1);
-        lien = lien+id;
-        $.ajax({
-            type: 'GET',
-            url: lien,
+            form = dialog.find( "form" );
 
-            success: function(data, status) {
-                //Create card
-                var li = document.createElement('li');
-                li.className = "card ui-sortable-handle";
-                li.id = "card-"+data.id;
+            $( "#create-card" ).click(function() {
+                dialog.dialog( "open" );
+            });
 
-                //Add card on the phase
-                var ul = document.getElementById("phase-"+data.phase);
-                ul.appendChild(li);
-
-                refreshCard(id, baseLien);
-            },
-
-            error: function(resultat, status, erreur) {
-                alert(erreur);
-            }
         });
-    }
-}
-</script>
-
-<script>
-function addCard(baseLien){
-    //DATA of the form
-    var phase = document.getElementById("phase").value;
-    var title = document.getElementById("title").value;
-    var comment = document.getElementById("comment").value;
-    var deadline = document.getElementById("deadline").value;
-    var assigned = document.getElementById("assigned").value;
-    var update = document.getElementById("update").value;
-
-    //Prepare the link
-    baseLien = baseLien.replace(/([0-9]+)/, phase);
-
-    var newUl = document.getElementById('phase-'+ phase);
-    order = newUl.getElementsByTagName('li').length + 1;
-
-    //Link to add a card
-    lien = baseLien + "add/";
-
-    $.ajax({
-        type: 'POST',
-        url: lien,
-        data: '&title=' + title
-            + '&comment=' + comment
-            + '&deadline=' + deadline
-            + '&assigned=' + assigned
-            + '&order=' + order
-            + '&phase=' + phase
-            + '&company=' + {{company.id}}
-            + '&update=' + update,
-
-        success: function(data, status) {
-            //It's a new card
-            if(!data.updated){
-                if(data.title){
-                    createCard(data.id, "{% url "kanboard:kanboardGetDetailCard" 1 %}");
-                }
-            }
-
-            //It's an update of a card
-            else{
-                //Init the form
-                document.getElementById('update').value = "False";
-                refreshCard(data.id, "{% url "kanboard:kanboardGetDetailCard" 1 %}");
-            }
-        },
-
-        error: function(resultat, status, erreur) {
-            //Init the form
-            document.getElementById('update').value = "False";
-        }
-    });
-}
-</script>
-
-<script>
-function refreshCard(id, baseLien){
-    var myRegexp = /([0-9]+)/g;
-    var match = myRegexp.exec(baseLien); //match[1] is the id of the archive
-    if(match[1]){
-        var pos = baseLien.lastIndexOf('/'); // position du dernier "/"
-        baseLien = baseLien.substr(0, pos+1);
-        var lien = baseLien+id;
-
-        $.ajax({
-            type: 'GET',
-            url: lien,
-
-            success: function(data, status) {
-                //Reset all the content of the card
-                var li = document.getElementById("card-"+data.id);
-                li.innerHTML = "";
-
-                //Coloration of the card
-                if(new Date() > new Date(data.deadline)){
-                    li.style.backgroundColor = '#eedada';
-                }
-                else
-                {
-                   li.style.backgroundColor = '#ffffff';
-                }
-
-                //Title
-                var titre = document.createElement('h3');
-                titre.innerHTML = data.title;
-
-                //Link to delete this card
-                var spanDelete = document.createElement('span');
-                spanDelete.className = data.id;
-                spanDelete.setAttribute('onclick','deleteCard(this.className, "{% url "kanboard:kanboardDeleteCard" 1 %}");');
-                spanDelete.innerHTML = "<i class='fa fa-trash'></i>";
-                spanDelete.style.float = "right";
-                var linkDelete = document.createElement('a');
-
-                //Link to edit this card
-                var spanEdit = document.createElement('span');
-                spanEdit.className = data.id;
-                spanEdit.setAttribute('onclick','editCard(this.className,  "{% url "kanboard:kanboardGetDetailCard" 1 %}");');
-                spanEdit.innerHTML = "<i class='fa fa-pencil-square-o'></i>";
-                spanEdit.style.float = "right";
-                var linkEdit = document.createElement('a');
-
-                //Description of the card
-                var p = document.createElement('p');
-                p.innerHTML = data.comment;
-
-                //Picture of assigned
-                if(data.picture){
-                    var linkAssigned = document.createElement('a');
-
-                    lien = "{% url 'founder:detail' 1 %}";
-                    var pos = lien.lastIndexOf('/'); // position du dernier "/"
-                    lien = lien.substr(0, pos+1);
-                    var lien = lien+data.assigned;
-                    linkAssigned.href = lien;
-                    linkAssigned.className = "assigned";
-
-                    var imgAssigned = document.createElement('img');
-                    imgAssigned.className = "avatar";
-                    imgAssigned.src = "/media/" + data.picture;
-                    imgAssigned.style.width = "40px";
-
-                    linkAssigned.appendChild(imgAssigned);
-                }
-
-                linkDelete.appendChild(spanDelete);
-                linkEdit.appendChild(spanEdit);
-                titre.appendChild(linkDelete);
-                titre.appendChild(linkEdit);
-                li.appendChild(titre);
-                li.appendChild(p);
-                if(data.picture != false){
-                    li.appendChild(linkAssigned);
-                }
-
-                //Change column for go in the new phase
-                var ul = li.parentElement;
-                var newUl = document.getElementById('phase-'+ data.phase);
-
-                if(ul != newUl){
-                    ul.removeChild(li);
-                    newUl.appendChild(li);
-                }
-            },
-
-            error: function(resultat, status, erreur) {
-                alert(erreur);
-            }
-        });
-    }
-}
-</script>
-
-<script>
-function deleteCard(id, baseLien){
-    var myRegexp = /([0-9]+)/g;
-    var match = myRegexp.exec(baseLien); //match[1] is the id of the archive
-    if(match[1]){
-        var pos = baseLien.lastIndexOf('/'); // position du dernier "/"
-        baseLien = baseLien.substr(0, pos+1);
-        var lien = baseLien+id;
-    }
-    var li = document.getElementById("card-"+id);
-
-    $.ajax({
-          type: 'GET',
-          url: lien,
-
-          success: function(data, status) {
-                li.remove();
-            },
-
-          error: function(resultat, status, erreur) {
-                alert(erreur);
-            }
-        });
-}
-</script>
-
-<script>
-function editCard(id, baseLien){
-    var myRegexp = /([0-9]+)/g;
-    var match = myRegexp.exec(baseLien); //match[1] is the id of the archive
-    if(match[1]){
-        var pos = baseLien.lastIndexOf('/'); // position du dernier "/"
-        baseLien = baseLien.substr(0, pos+1);
-        var lien = baseLien+id;
-
-        $.ajax({
-            type: 'GET',
-            url: lien,
-
-            success: function(data, status) {
-                var form = document.getElementById('form');
-                document.getElementById('phase').value = data.phase;
-                document.getElementById('title').value = data.title;
-                document.getElementById('comment').value = data.comment;
-                document.getElementById('update').value = data.id;
-                if(data.deadline){
-                    document.getElementById('deadline').value = data.deadline;
-                }
-                if(data.assigned){
-                    document.getElementById('assigned').value = data.assigned;
-                }
-
-                document.getElementById('create-card').click();
-            },
-
-            error: function(resultat, status, erreur) {
-                alert(erreur);
-            }
-        });
-    }
-}
-</script>
+    </script>
 {% endblock %}
 
 {% block content %}
-<h1>Kanboard de {{company.name}}</h1>
-<br><br>
-<div id="dialog-form" title="Create new task">
-  <form id="form">{% csrf_token %}
-    <fieldset>
-      {{ form.as_p }}
-      <input type="hidden" name="update" value="False" id="update" >
-      <!-- Allow form submission with keyboard without duplicating the dialog button -->
-      <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
-    </fieldset>
-  </form>
-</div>
-<button id="create-card">Create new task</button><br><br>
-<div id="board">
-    {% for phase in phases %}
-    <div class="column">
-        <h2>{{ phase.1 }}</h2>
-        <ul class="sortable phase" id='phase-{{ phase.0 }}'>
-            {% for card in company.cards.all %}
-            {% if card.phase == phase.1 %}
-                {% if card.is_past_due %}
-                    <li class="card" id='card-{{ card.id }}' style="background-color: #eedada;">
-                {% else %}
-                    <li class="card" id='card-{{ card.id }}'>
-                {% endif %}
-                    <h3>
-                        {{card.deadline.is_past_due}}
-                        {{ card.title }}
-                        <a><span class="{{card.id}}" style="float: right;" onclick='deleteCard(this.className, "{% url "kanboard:kanboardDeleteCard" 1 %}");' class="{{card.id}}"><i class="fa fa-trash"></i></span></a>
-                        <a><span class="{{card.id}}" style="float: right;" onclick='editCard(this.className,  "{% url "kanboard:kanboardGetDetailCard" 1 %}");' class="{{card.id}}"><i class="fa fa-pencil-square-o"></i></span></a>
-                    </h3>
-                    <p>{{ card.comment }}</p>
-                    {% if card.assigned %}
-                        <a class="assigned" href="{% url 'founder:detail' card.assigned.pk %}"><img class="avatar" src="/media/{{ card.assigned.picture }}" style="width:40px;"/></a>
-                    {% endif %}
-                </li>
-            {% endif %}
-            {% endfor %}
-        </ul>
+    <h1>Kanboard de {{company.name}}</h1><br><br>
+
+    <!-- Form for the Kanboard -->
+    <div id="dialog-form" title="Create new task">
+        <form id="form">{% csrf_token %}
+            <fieldset>
+                {{ form.as_p }}
+
+                <input type="hidden" name="update" value="False" id="update" >
+            </fieldset>
+        </form>
     </div>
-    {% endfor %}
-</div>
-<script>
-        $( "#deadline" ).datepicker({ dateFormat: 'yy-mm-dd' });
-</script>
+    <button id="create-card">Create new task</button><br><br>
+
+    <!-- The Kanboard populate in Ajax -->
+    <div id="board"></div>
+
+    <!-- Datepicker JQuery -->
+    <script>
+            $( "#deadline" ).datepicker({ dateFormat: 'yy-mm-dd' });
+    </script>
 {% endblock %}

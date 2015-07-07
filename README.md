@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/MaisonLogicielLibre/TableauDeBord.svg?branch=dev)](https://travis-ci.org/zestedesavoir/zds-site)
+[![Build Status](https://travis-ci.org/MaisonLogicielLibre/TableauDeBord.svg?branch=dev)](https://travis-ci.org/MaisonLogicielLibre/TableauDeBord)
 [![Licence GPL](http://img.shields.io/badge/license-GPL-green.svg)](http://www.gnu.org/licenses/quick-guide-gplv3.fr.html)
 
 # Tableau de bord

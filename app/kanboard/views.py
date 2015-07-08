@@ -27,7 +27,6 @@ def getDetailKanboard(request, company_id):
         message = []
 
         for phaseLoop in PHASE_CHOICES:
-            print(phaseLoop[1])
             phase = {}
             cards = Card.objects.filter(phase = phaseLoop[1],
                                         company = company_id)
@@ -37,7 +36,6 @@ def getDetailKanboard(request, company_id):
             message.append(tuple)
 
         data = json.dumps(message)
-        print(data)
         return HttpResponse(data, content_type='application/json')
 
     #The visitor can't see this page!
@@ -60,7 +58,6 @@ def getDetailCard(request, card_id):
                     message['phase'] = phase[0]
 
             message['id'] = card.id
-            print(card.creator)
             message['creator'] = card.creator.username
 
             if card.assigned :
@@ -111,7 +108,7 @@ def addCard(request, id):
                     card = Card(title = title,
                                 company = company,
                                 comment = comment,
-                                creator = request.user, #Session variable
+                                creator = request.user,
                                 phase = phase[1],
                                 order = order
                                 )
@@ -236,7 +233,6 @@ class BoardIndex(TemplateView):
 
 #Update the kanboard
 def update(request, id):
-    print('update')
     updates = []
     if request.is_ajax():
         try:

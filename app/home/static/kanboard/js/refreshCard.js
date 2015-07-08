@@ -1,4 +1,4 @@
-function refreshCard(id, baseLien, linkDeleteCard, linkFounder){
+function refreshCard(id, baseLien, linkDeleteCard, linkFounder, username){
     var linkGetDetail = baseLien;
     var myRegexp = /([0-9]+)/g;
     var match = myRegexp.exec(baseLien); //match[1] is the id of the archive
@@ -78,10 +78,13 @@ function refreshCard(id, baseLien, linkDeleteCard, linkFounder){
                     linkAssigned.appendChild(imgAssigned);
                 }
 
-                linkDelete.appendChild(spanDelete);
-                linkEdit.appendChild(spanEdit);
-                titre.appendChild(linkDelete);
-                titre.appendChild(linkEdit);
+                //We can edit and delete only if we are the creator of the task/card
+                if(data.creator == username){
+                    linkDelete.appendChild(spanDelete);
+                    linkEdit.appendChild(spanEdit);
+                    titre.appendChild(linkDelete);
+                    titre.appendChild(linkEdit);
+                }
                 li.appendChild(titre);
                 li.appendChild(creator);
                 if(data.deadline){

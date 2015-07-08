@@ -1,4 +1,4 @@
-function initKanboard(baseLien, id, lienGetDetail, linkDeleteCard, linkFounder){
+function initKanboard(baseLien, id, lienGetDetail, linkDeleteCard, linkFounder, username){
     var myRegexp = /([0-9]+)/g;
     var match = myRegexp.exec(baseLien); //match[1] is the id of the archive
     if(match[1]){
@@ -34,7 +34,7 @@ function initKanboard(baseLien, id, lienGetDetail, linkDeleteCard, linkFounder){
 
                         ul.appendChild(li);
 
-                        refreshCard(card, lienGetDetail, linkDeleteCard, linkFounder);
+                        refreshCard(card, lienGetDetail, linkDeleteCard, linkFounder, username);
                     }
 
                     div.appendChild(titlePhase);

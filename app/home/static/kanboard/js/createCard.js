@@ -1,4 +1,4 @@
-function createCard(id, baseLien, linkDeleteCard, linkFounder){
+function createCard(id, baseLien, linkDeleteCard, linkFounder, username){
     var linkGetDetail = baseLien;
     var myRegexp = /([0-9]+)/g;
     var match = myRegexp.exec(baseLien); //match[1] is the id of the archive
@@ -20,7 +20,7 @@ function createCard(id, baseLien, linkDeleteCard, linkFounder){
                 var ul = document.getElementById("phase-"+data.phase);
                 ul.appendChild(li);
 
-                refreshCard(id, baseLien, linkDeleteCard, linkFounder);
+                refreshCard(id, baseLien, linkDeleteCard, linkFounder, username);
             },
 
             error: function(resultat, status, erreur) {

@@ -60,7 +60,8 @@ def getDetailCard(request, card_id):
                     message['phase'] = phase[0]
 
             message['id'] = card.id
-            message['creator'] = request.user.username
+            print(card.creator)
+            message['creator'] = card.creator.username
 
             if card.assigned :
                 message['assigned'] = card.assigned.userProfile_id

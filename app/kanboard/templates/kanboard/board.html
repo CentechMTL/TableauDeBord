@@ -23,13 +23,16 @@
 
     <script>
         $(function() {
+            //Populate the kanboard
             initKanboard("{% url "kanboard:getDetailKanboard" 1 %}",
                         {{company.id}},
                         "{% url "kanboard:kanboardGetDetailCard" 1 %}",
                         "{% url "kanboard:kanboardDeleteCard" 1 %}",
-                        "{% url "founder:detail" 1 %}"
+                        "{% url "founder:detail" 1 %}",
+                        "{{user.username}}"
                         );
 
+            //Init the form
             var dialog, form,
 
             dialog = $( "#dialog-form" ).dialog({
@@ -44,7 +47,8 @@
                                     "{% url "kanboard:kanboardGetDetailCard" 1 %}",
                                     {{company.id}},
                                     "{% url "kanboard:kanboardDeleteCard" 1 %}",
-                                    "{% url 'founder:detail' 1 %}"
+                                    "{% url 'founder:detail' 1 %}",
+                                    "{{user.username}}"
                                     );
 
                             dialog.dialog( "close" );
@@ -75,7 +79,7 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Kanboard de {{company.name}}</h1><br><br>
+    <h1>{% trans "Kanboard of" %} {{company.name}}</h1><br><br>
 
     <!-- Form for the Kanboard -->
     <div id="dialog-form" title="Create new task">
@@ -87,7 +91,7 @@
             </fieldset>
         </form>
     </div>
-    <button id="create-card">Create new task</button><br><br>
+    <button id="create-card">{% trans "Create new task" %}</button><br><br>
 
     <!-- The Kanboard populate in Ajax -->
     <div id="board"></div>

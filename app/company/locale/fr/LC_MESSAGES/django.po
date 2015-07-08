@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-06 17:54-0400\n"
+"POT-Creation-Date: 2015-07-08 17:07-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -147,7 +147,7 @@ msgstr "Modifier cette compagnie"
 msgid "Company Status"
 msgstr "Statut de la compagnie"
 
-#: .\app\company\models.py:26 .\app\company\models.py:82
+#: .\app\company\models.py:26 .\app\company\models.py:103
 #: .\templates\dashboard.html:70
 msgid "Companies"
 msgstr "Compagnies"
@@ -160,11 +160,12 @@ msgstr "URL"
 msgid "Status"
 msgstr "Statut"
 
-#: .\app\company\models.py:79
+#: .\app\company\models.py:100
 msgid "Presences"
 msgstr "Presences"
 
-#: .\app\company\models.py:84 .\app\company\templates\company\presence.html:14
+#: .\app\company\models.py:105
+#: .\app\company\templates\company\presence.html:14
 #: .\app\company\templates\company\presence_confirm_delete.html:10
 msgid "Date"
 msgstr "Date"
@@ -268,6 +269,14 @@ msgstr ""
 
 #: .\app\kanboard\models.py:28
 msgid "Phase"
+msgstr ""
+
+#: .\app\kanboard\templates\kanboard\board.html:82
+msgid "Kanboard of"
+msgstr ""
+
+#: .\app\kanboard\templates\kanboard\board.html:94
+msgid "Create new task"
 msgstr ""
 
 #: .\centech2\settings.py:182

@@ -18,8 +18,7 @@ from app.founder.models import Founder
 from app.mentor.models import Mentor
 from app.kpi.models import KPI, KPI_TYPE_CHOICES
 from app.finance.models import Bourse, Subvention, Pret, Investissement, Vente
-
-
+from app.experiment.models import CustomerExperiment
 
 #General view
 class Summary(generic.TemplateView):
@@ -91,19 +90,29 @@ class Summary(generic.TemplateView):
 
         KPIs = []
         for company in companies:
-            irl = company.get_last_irl()
-            trl = company.get_last_trl()
-            KPIs.append((company, irl, trl))
+            KPIs.append((company, company.get_last_irl(), company.get_last_trl()))
+
+        experiments = []
+        for company in companies:
+            inProgress = company.experiments.filter(validated = None).count()
+            validated = company.experiments.filter(validated = True).count()
+            lastExperiment = company.get_last_experiment()
+            experiments.append((company, inProgress, validated, lastExperiment))
 
         context = super(Summary, self).get_context_data(**kwargs)
-        context['KPI'] = KPIs
-        print(KPIs)
+
         context['companies'] = companies
         context['founders'] = founders
         context['mentors'] = mentors
         context['finances'] = finances
+
+        context['KPI'] = KPIs
         context['averageIRL'] = round(KPI.objects.filter(type=KPI_TYPE_CHOICES[0][0]).aggregate(Avg('level')).values()[0], 2)
         context['averageTRL'] = round(KPI.objects.filter(type=KPI_TYPE_CHOICES[1][0]).aggregate(Avg('level')).values()[0], 2)
+
+        context['experiments'] = experiments
+        context['experiments_inProgress_count'] = CustomerExperiment.objects.filter(validated = None).count()
+        context['experiments_validated_count'] = CustomerExperiment.objects.filter(validated = True).count()
 
         return context
 

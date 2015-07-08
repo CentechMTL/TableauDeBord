@@ -83,6 +83,13 @@ class Company(models.Model):
         else:
             return None
 
+    def get_last_experiment(self):
+        experiments =  self.experiments.order_by("-dateFinish")
+        if experiments:
+            return experiments[0]
+        else:
+            return None
+
     def image_thumb(self):
         return '<img src="/media/%s" width="100" height="100" />' % (self.logo)
     image_thumb.allow_tags = True

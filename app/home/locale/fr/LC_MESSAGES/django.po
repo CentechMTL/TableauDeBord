@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-06 17:54-0400\n"
+"POT-Creation-Date: 2015-07-08 17:07-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -148,42 +148,100 @@ msgstr "Compte"
 msgid "My account"
 msgstr "Mon compte"
 
-#: .\app\home\templates\home\summary.html:13
+#: .\app\home\templates\home\summary.html:12
 msgid "Number of companies"
 msgstr "Nombre de compagnies"
 
-#: .\app\home\templates\home\summary.html:14
+#: .\app\home\templates\home\summary.html:16
 msgid "Number of founders"
 msgstr "Nombre de fondateurs"
 
-#: .\app\home\templates\home\summary.html:15
+#: .\app\home\templates\home\summary.html:20
 msgid "Number of mentors"
 msgstr "Nombre de mentors"
 
-#: .\app\home\templates\home\summary.html:20
+#: .\app\home\templates\home\summary.html:25
 msgid "Finances"
 msgstr "Finances"
 
-#: .\app\home\templates\home\summary.html:33
+#: .\app\home\templates\home\summary.html:40
+#: .\app\home\templates\home\summary.html:96
+#: .\app\home\templates\home\summary.html:162
 msgid "Companies"
 msgstr "Compagnies"
 
-#: .\app\home\templates\home\summary.html:33
-#: .\app\home\templates\home\summary.html:42
+#: .\app\home\templates\home\summary.html:40
+#: .\app\home\templates\home\summary.html:53
 msgid "Amount"
 msgstr "Somme"
 
-#: .\app\home\templates\home\summary.html:67
+#: .\app\home\templates\home\summary.html:80
 msgid "Indicators of performances"
 msgstr "Indicateurs de performances"
 
-#: .\app\home\templates\home\summary.html:72
+#: .\app\home\templates\home\summary.html:82
 msgid "Average IRLs"
 msgstr "Moyenne des IRLs"
 
-#: .\app\home\templates\home\summary.html:73
+#: .\app\home\templates\home\summary.html:83
 msgid "Average TRLs"
 msgstr "Moyenne des TRLs"
+
+#: .\app\home\templates\home\summary.html:97
+msgid "IRL"
+msgstr "IRL"
+
+#: .\app\home\templates\home\summary.html:99
+msgid "TRL"
+msgstr "TRL"
+
+#: .\app\home\templates\home\summary.html:103
+#: .\app\home\templates\home\summary.html:105
+msgid "Last irl"
+msgstr "Dernier IRL"
+
+#: .\app\home\templates\home\summary.html:103
+#: .\app\home\templates\home\summary.html:107
+msgid "Last trl"
+msgstr "Dernier TRL"
+
+#: .\app\home\templates\home\summary.html:123
+msgid "Level"
+msgstr "Niveau"
+
+#: .\app\home\templates\home\summary.html:140
+msgid "Experiments"
+msgstr "Expérimentations"
+
+#: .\app\home\templates\home\summary.html:143
+msgid "Experiments in progress"
+msgstr "Expérimentations en cours"
+
+#: .\app\home\templates\home\summary.html:147
+msgid "Experiments validated"
+msgstr "Expérimentations validées"
+
+#: .\app\home\templates\home\summary.html:163
+#: .\app\home\templates\home\summary.html:169
+#: .\app\home\templates\home\summary.html:171
+msgid "In progress"
+msgstr "En cours"
+
+#: .\app\home\templates\home\summary.html:165
+#: .\app\home\templates\home\summary.html:169
+#: .\app\home\templates\home\summary.html:173
+msgid "Validated"
+msgstr "Validé"
+
+#: .\app\home\templates\home\summary.html:169
+#: .\app\home\templates\home\summary.html:171
+#: .\app\home\templates\home\summary.html:173
+msgid "Last experimentation"
+msgstr "Dernière expérimentation"
+
+#: .\app\home\templates\home\summary.html:187
+msgid "Number of experimentations"
+msgstr "Nombre d'expérimentations"
 
 #: .\app\home\templates\registration\login.html:11
 msgid "Your username and password didn't match. Please try again."

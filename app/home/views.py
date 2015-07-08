@@ -89,7 +89,15 @@ class Summary(generic.TemplateView):
         finances['ventes'] = sales
         finances['prêts'] = loans
 
+        KPIs = []
+        for company in companies:
+            irl = company.get_last_irl()
+            trl = company.get_last_trl()
+            KPIs.append((company, irl, trl))
+
         context = super(Summary, self).get_context_data(**kwargs)
+        context['KPI'] = KPIs
+        print(KPIs)
         context['companies'] = companies
         context['founders'] = founders
         context['mentors'] = mentors

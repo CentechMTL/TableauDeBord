@@ -69,6 +69,20 @@ class Company(models.Model):
 
         return users
 
+    def get_last_irl(self):
+        irls =  self.KPIs.filter(type="IRL").order_by("-period_start")
+        if irls:
+            return irls[0]
+        else:
+            return None
+
+    def get_last_trl(self):
+        trls =  self.KPIs.filter(type="TRL").order_by("-period_start")
+        if trls:
+            return trls[0]
+        else:
+            return None
+
     def image_thumb(self):
         return '<img src="/media/%s" width="100" height="100" />' % (self.logo)
     image_thumb.allow_tags = True

@@ -16,7 +16,7 @@ class KPI(models.Model):
     class Meta:
         verbose_name_plural = _('KPIs')
 
-    company = models.ForeignKey(Company, verbose_name=_('Companies'))
+    company = models.ForeignKey(Company, verbose_name=_('Companies'), related_name="KPIs")
     type = models.CharField(max_length=50, choices=KPI_TYPE_CHOICES, verbose_name=_('Type'))
 
     level = models.IntegerField(choices=((0, 0),(1, 1),(2, 2),(3, 3),(4, 4),(5, 5),(6, 6),(7, 7),(8, 8),(9, 9)), verbose_name=_('Level'))

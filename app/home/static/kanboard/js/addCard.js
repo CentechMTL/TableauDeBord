@@ -32,7 +32,7 @@ function addCard(baseLien, linkGetDetail, companyId, linkDeleteCard, linkFounder
             //It's a new card
             if(!data.updated){
                 if(data.title){
-                    createCard(data.id, linkGetDetail, linkDeleteCard, linkFounder);
+                    createCard(data.id, linkGetDetail, linkDeleteCard, linkFounder, username);
                 }
             }
 

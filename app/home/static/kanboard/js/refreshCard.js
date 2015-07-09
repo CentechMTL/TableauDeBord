@@ -16,7 +16,12 @@ function refreshCard(id, baseLien, linkDeleteCard, linkFounder, username){
                 var li = document.getElementById("card-"+data.id);
                 li.innerHTML = "";
 
-                //Coloration of the card
+                /*==================================================================
+                Coloration of the card
+
+                If the deadline is overdue, the card become red
+                Else the card is white
+                ==================================================================*/
                 if(new Date() > new Date(data.deadline)){
                     li.style.backgroundColor = '#eedada';
                 }
@@ -25,6 +30,9 @@ function refreshCard(id, baseLien, linkDeleteCard, linkFounder, username){
                    li.style.backgroundColor = '#ffffff';
                 }
 
+                /*==================================================================
+                Create HTML element for placement
+                ==================================================================*/
                 //Title
                 var titre = document.createElement('h3');
                 titre.innerHTML = data.title;
@@ -78,6 +86,10 @@ function refreshCard(id, baseLien, linkDeleteCard, linkFounder, username){
                     linkAssigned.appendChild(imgAssigned);
                 }
 
+                /*==================================================================
+                placement of HTML elements
+                ==================================================================*/
+
                 //We can edit and delete only if we are the creator of the task/card
                 if(data.creator == username){
                     linkDelete.appendChild(spanDelete);
@@ -95,7 +107,9 @@ function refreshCard(id, baseLien, linkDeleteCard, linkFounder, username){
                     li.appendChild(linkAssigned);
                 }
 
-                //Change column for go in the new phase
+                /*==================================================================
+                Change column for go in the new phase
+                ==================================================================*/
                 var ul = li.parentElement;
                 var newUl = document.getElementById('phase-'+ data.phase);
 

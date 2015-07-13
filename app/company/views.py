@@ -234,14 +234,13 @@ class CompanyUpdate(generic.UpdateView):
         object.description = form.data['about']
         object.video = form.data['video']
 
-        print('date incubation -> '+form.data['incubated_on'])
         try:
             if form.data['incubated_on'] != "":
                 object.incubated_on = form.data['incubated_on']
             else:
                 object.incubated_on = None
         except:
-            print('toto')
+            pass
 
         try:
             object.logo = self.request.FILES['logo']

@@ -191,7 +191,6 @@ class IrlUpdate(UpdateView):
         groups = self.request.user.groups.values()
         for group in groups:
             if group['name'] == 'Centech':
-                print('toto')
                 return super(IrlUpdate, self).dispatch(*args, **kwargs)
 
         #The visitor can't see this page!

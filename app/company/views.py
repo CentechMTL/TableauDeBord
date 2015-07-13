@@ -3,7 +3,7 @@
 from django.shortcuts import render_to_response, get_object_or_404, render
 from app.company.models import Company, Presence, CompanyStatus
 from app.founder.models import Founder
-from app.company.forms import CompanyFilter, CompanyUpdateForm, CompanyCreateForm, CompanyStatusCreateForm
+from app.company.forms import CompanyFilter, MiniCompanyUpdateForm, CompanyUpdateForm, CompanyCreateForm, CompanyStatusCreateForm
 from django.views import generic
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
@@ -180,7 +180,6 @@ class CompanyCreate(generic.CreateView):
 #Update form
 class CompanyUpdate(generic.UpdateView):
     model = Company
-    form_class = CompanyUpdateForm
     template_name = "company/company_form.html"
 
     #You need to be connected, and you need to have access as founder or centech
@@ -192,6 +191,7 @@ class CompanyUpdate(generic.UpdateView):
                 founder = Founder.objects.filter(user = self.request.user.id)
                 company = Company.objects.get(founders = founder)
                 if(int(self.kwargs["pk"]) == int(company.id)):
+                    self.form_class = MiniCompanyUpdateForm
                     return super(CompanyUpdate, self).dispatch(*args, **kwargs)
             except:
                 pass
@@ -200,10 +200,8 @@ class CompanyUpdate(generic.UpdateView):
         groups = self.request.user.groups.values()
         for group in groups:
             if group['name'] == 'Centech':
+                self.form_class = CompanyUpdateForm
                 return super(CompanyUpdate, self).dispatch(*args, **kwargs)
-
-        #The visitor can't see this page!
-        return HttpResponseRedirect("/user/noAccessPermissions")
 
 
     def get_form(self, form_class):
@@ -235,6 +233,11 @@ class CompanyUpdate(generic.UpdateView):
         object.video = form.data['video']
 
         try:
+            object.logo = self.request.FILES['logo']
+        except:
+            pass
+
+        try:
             if form.data['incubated_on'] != "":
                 object.incubated_on = form.data['incubated_on']
             else:
@@ -243,18 +246,20 @@ class CompanyUpdate(generic.UpdateView):
             pass
 
         try:
-            object.logo = self.request.FILES['logo']
+            if form.data['founders']:
+                object.founders.clear()
+                for founder in form.cleaned_data["founders"]:
+                        object.founders.add(founder)
         except:
             pass
 
-        object.founders.clear()
-        for founder in form.cleaned_data["founders"]:
-                object.founders.add(founder)
-
-        object.mentors.clear()
-        for mentor in form.cleaned_data["mentors"]:
-                object.mentors.add(mentor)
-
+        try:
+            if form.data['mentors']:
+                object.mentors.clear()
+                for mentor in form.cleaned_data["mentors"]:
+                        object.mentors.add(mentor)
+        except:
+            pass
     def get_success_url(self):
         return reverse_lazy("company:detail", kwargs={'pk': int(self.kwargs["pk"])})
 

@@ -169,15 +169,7 @@ class CompanyCreateForm(forms.Form):
             StrictButton(_('Save'), type="submit")
         )
 
-class CompanyUpdateForm(forms.Form):
-
-    incubated_on = forms.DateField(
-        label=_('incubated on'),
-        required = False,
-        input_formats=('%Y-%m-%d',),
-    )
-    incubated_on.widget.attrs.update({'type': 'date', 'class': 'datepicker'})
-
+class MiniCompanyUpdateForm(forms.Form):
     name = forms.CharField(
         label=_('Name'),
         required=True,
@@ -236,6 +228,52 @@ class CompanyUpdateForm(forms.Form):
         )
     )
 
+    def __init__(self, company, *args, **kwargs):
+        super(MiniCompanyUpdateForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_class = 'content-wrapper'
+        self.helper.form_method = 'post'
+
+        self.company = company
+        self.fields['about'].initial = company.description
+        self.fields['name'].initial = company.name
+        self.fields['url'].initial = company.url
+        self.fields['video'].initial = company.video
+
+        self.fields['facebook'].initial = company.facebook
+        self.fields['twitter'].initial = company.twitter
+        self.fields['googlePlus'].initial = company.googlePlus
+        self.fields['linkedIn'].initial = company.linkedIn
+
+        self.helper.layout = Layout(
+            HTML("<h1>"),
+            HTML(_("Update company")),
+            HTML("</h1>"),
+            Field('name'),
+            Field('logo'),
+            Field('video'),
+            Field('url'),
+            Field('facebook'),
+            Field('twitter'),
+            Field('googlePlus'),
+            Field('linkedIn'),
+            Field('about'),
+            StrictButton(_('Save'), type="submit")
+        )
+
+    def save(self):
+        self.company.save()
+
+
+class CompanyUpdateForm(MiniCompanyUpdateForm):
+
+    incubated_on = forms.DateField(
+        label=_('incubated on'),
+        required = False,
+        input_formats=('%Y-%m-%d',),
+    )
+    incubated_on.widget.attrs.update({'type': 'date', 'class': 'datepicker'})
+
     founders = forms.ModelMultipleChoiceField(
         label=_(u"Founders"),
         queryset=Founder.objects.all(),
@@ -251,7 +289,7 @@ class CompanyUpdateForm(forms.Form):
     )
 
     def __init__(self, company, *args, **kwargs):
-        super(CompanyUpdateForm, self).__init__(*args, **kwargs)
+        super(CompanyUpdateForm, self).__init__(company, *args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_class = 'content-wrapper'
         self.helper.form_method = 'post'
@@ -289,6 +327,3 @@ class CompanyUpdateForm(forms.Form):
             Field('about'),
             StrictButton(_('Save'), type="submit")
         )
-
-    def save(self):
-        self.company.save()

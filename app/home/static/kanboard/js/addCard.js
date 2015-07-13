@@ -5,6 +5,7 @@ function addCard(baseLien, linkGetDetail, companyId, linkDeleteCard, linkFounder
     var comment = document.getElementById("comment").value;
     var deadline = document.getElementById("deadline").value;
     var assigned = document.getElementById("assigned").value;
+    var state = document.getElementById("state").checked;
     var update = document.getElementById("update").value;
 
     //Prepare the link
@@ -26,6 +27,7 @@ function addCard(baseLien, linkGetDetail, companyId, linkDeleteCard, linkFounder
             + '&order=' + order
             + '&phase=' + phase
             + '&company=' + companyId
+            + '&state=' + state
             + '&update=' + update,
 
         success: function(data, status) {

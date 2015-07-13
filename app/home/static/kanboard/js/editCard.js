@@ -16,6 +16,7 @@ function editCard(id, baseLien){
                 document.getElementById('title').value = data.title;
                 document.getElementById('comment').value = data.comment;
                 document.getElementById('update').value = data.id;
+                document.getElementById('state').checked = data.state;
                 if(data.deadline){
                     document.getElementById('deadline').value = data.deadline;
                 }

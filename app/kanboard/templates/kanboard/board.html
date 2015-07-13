@@ -23,13 +23,13 @@
 
     <script>
         $(function() {
-            //Populate the kanboard
-            initKanboard("{% url "kanboard:getDetailKanboard" 1 %}",
+            initKanboard('{% url 'kanboard:getDetailKanboard' company.id True %}',
                         {{company.id}},
-                        "{% url "kanboard:kanboardGetDetailCard" 1 %}",
-                        "{% url "kanboard:kanboardDeleteCard" 1 %}",
-                        "{% url "founder:detail" 1 %}",
-                        "{{user.username}}"
+                        '{% url 'kanboard:kanboardGetDetailCard' 1 %}',
+                        '{% url 'kanboard:kanboardDeleteCard' 1 %}',
+                        '{% url 'founder:detail' 1 %}',
+                        '{{user.username}}',
+                        'True'
                         );
 
             //Init the form
@@ -92,6 +92,19 @@
         </form>
     </div>
     <button id="create-card">{% trans "Create new task" %}</button><br><br>
+
+    <select id='State' onchange="initKanboard('{% url 'kanboard:getDetailKanboard' company.id False %}',
+                                    {{company.id}},
+                                    '{% url 'kanboard:kanboardGetDetailCard' 1 %}',
+                                    '{% url 'kanboard:kanboardDeleteCard' 1 %}',
+                                    '{% url 'founder:detail' 1 %}',
+                                    '{{user.username}}',
+                                    this.value
+                                    );">
+        <option value="true">Completed</option>
+        <option value="false" selected="selected">In progress</option>
+        <option value="none">All</option>
+    </select>
 
     <!-- The Kanboard populate in Ajax -->
     <div id="board"></div>

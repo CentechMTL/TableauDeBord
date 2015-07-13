@@ -22,16 +22,26 @@ CARD_RE = re.compile(u'^card-([\d]+)$')
 
 
 #Return detail of a kanboard
-def getDetailKanboard(request, company_id):
+def getDetailKanboard(request, company_id, state):
     if request.is_ajax():
         message = []
+
+        if state == 'true':
+            state = True
+        elif state == 'false':
+            state = False
+        else:
+            state = None
 
         for phaseLoop in PHASE_CHOICES:
             phase = {}
             cards = Card.objects.filter(phase = phaseLoop[1],
                                         company = company_id)
             for card in cards:
-                phase[card.id] = card.id
+                if(state == card.state):
+                    phase[card.id] = card.id
+                elif(state == None):
+                    phase[card.id] = card.id
             tuple = (phaseLoop[1], phase)
             message.append(tuple)
 
@@ -51,7 +61,7 @@ def getDetailCard(request, card_id):
 
             message['title'] = card.title
             message['comment'] = card.comment
-
+            message['state'] = card.state
 
             for phase in PHASE_CHOICES:
                 if phase[1] == card.phase:
@@ -96,6 +106,11 @@ def addCard(request, id):
             update = request.POST.get('update', '')
             phase = request.POST.get('phase', '')
             company = request.POST.get('company', '')
+            state = request.POST.get('state', '')
+            if state == 'false':
+                state = False
+            else:
+                state = True
 
             #If we have all data
             if error == False:
@@ -110,7 +125,8 @@ def addCard(request, id):
                                 comment = comment,
                                 creator = request.user,
                                 phase = phase[1],
-                                order = order
+                                order = order,
+                                state = state
                                 )
 
                     if deadline != "":
@@ -141,6 +157,7 @@ def addCard(request, id):
 
                     card = Card.objects.get(id = update)
                     card.title = title
+                    card.state = state
                     card.comment = comment
                     card.phase = phase[1]
                     card.company = company

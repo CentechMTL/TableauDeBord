@@ -12,110 +12,126 @@ function refreshCard(id, baseLien, linkDeleteCard, linkFounder, username){
             url: lien,
 
             success: function(data, status) {
-                //Reset all the content of the card
+                //The card
                 var li = document.getElementById("card-"+data.id);
-                li.innerHTML = "";
 
-                /*==================================================================
-                Coloration of the card
-
-                If the deadline is overdue, the card become red
-                Else the card is white
-                ==================================================================*/
-                if(new Date() > new Date(data.deadline)){
-                    li.style.backgroundColor = '#eedada';
+                //If the card is not in the actual filter
+                state = document.getElementById('State').value;
+                if(state == 'true'){
+                    state = true;
                 }
-                else
-                {
-                   li.style.backgroundColor = '#ffffff';
+                else if(state == 'false'){
+                    state = false;
                 }
 
-                /*==================================================================
-                Create HTML element for placement
-                ==================================================================*/
-                //Title
-                var titre = document.createElement('h3');
-                titre.innerHTML = data.title;
-
-                //Creator
-                var creator = document.createElement('span');
-                creator.innerHTML = "créé par : " + data.creator + "<br>";
-
-                //Deadline
-                var date = document.createElement('span');
-                if(data.deadline){
-                    date.innerHTML = "pour le : " + data.deadline + "<br>";
+                if(state != 'none' && data.state != state){
+                    li.parentElement.removeChild(li);
                 }
+                else{
+                    //Reset all the content of the card
+                    li.innerHTML = "";
 
-                //Link to delete this card
-                var spanDelete = document.createElement('span');
-                spanDelete.className = data.id;
-                spanDelete.setAttribute('onclick',"deleteCard(this.className,'"+linkDeleteCard+"');");
-                spanDelete.innerHTML = "<i class='fa fa-trash'></i>";
-                spanDelete.style.float = "right";
-                var linkDelete = document.createElement('a');
+                    /*==================================================================
+                    Coloration of the card
 
-                //Link to edit this card
-                var spanEdit = document.createElement('span');
-                spanEdit.className = data.id;
-                spanEdit.setAttribute('onclick',"editCard(this.className,'"+linkGetDetail+"');");
-                spanEdit.innerHTML = "<i class='fa fa-pencil-square-o'></i>";
-                spanEdit.style.float = "right";
-                var linkEdit = document.createElement('a');
+                    If the deadline is overdue, the card become red
+                    Else the card is white
+                    ==================================================================*/
+                    if(new Date() > new Date(data.deadline)){
+                        li.style.backgroundColor = '#eedada';
+                    }
+                    else
+                    {
+                       li.style.backgroundColor = '#ffffff';
+                    }
 
-                //Description of the card
-                var p = document.createElement('p');
-                p.innerHTML = "<br>" + data.comment;
+                    /*==================================================================
+                    Create HTML element for placement
+                    ==================================================================*/
+                    //Title
+                    var titre = document.createElement('h3');
+                    titre.innerHTML = data.title;
 
-                //Picture of assigned
-                if(data.picture){
-                    var linkAssigned = document.createElement('a');
+                    //Creator
+                    var creator = document.createElement('span');
+                    creator.innerHTML = "créé par : " + data.creator + "<br>";
 
-                    lien = linkFounder;
-                    var pos = lien.lastIndexOf('/'); // position du dernier "/"
-                    lien = lien.substr(0, pos+1);
-                    var lien = lien+data.assigned;
-                    linkAssigned.href = lien;
-                    linkAssigned.className = "assigned";
+                    //Deadline
+                    var date = document.createElement('span');
+                    if(data.deadline){
+                        date.innerHTML = "pour le : " + data.deadline + "<br>";
+                    }
 
-                    var imgAssigned = document.createElement('img');
-                    imgAssigned.className = "avatar";
-                    imgAssigned.src = "/media/" + data.picture;
-                    imgAssigned.style.width = "40px";
+                    //Link to delete this card
+                    var spanDelete = document.createElement('span');
+                    spanDelete.className = data.id;
+                    spanDelete.setAttribute('onclick',"deleteCard(this.className,'"+linkDeleteCard+"');");
+                    spanDelete.innerHTML = "<i class='fa fa-trash'></i>";
+                    spanDelete.style.float = "right";
+                    var linkDelete = document.createElement('a');
 
-                    linkAssigned.appendChild(imgAssigned);
-                }
+                    //Link to edit this card
+                    var spanEdit = document.createElement('span');
+                    spanEdit.className = data.id;
+                    spanEdit.setAttribute('onclick',"editCard(this.className,'"+linkGetDetail+"');");
+                    spanEdit.innerHTML = "<i class='fa fa-pencil-square-o'></i>";
+                    spanEdit.style.float = "right";
+                    var linkEdit = document.createElement('a');
 
-                /*==================================================================
-                placement of HTML elements
-                ==================================================================*/
+                    //Description of the card
+                    var p = document.createElement('p');
+                    p.innerHTML = "<br>" + data.comment;
 
-                //We can edit and delete only if we are the creator of the task/card
-                if(data.creator == username){
-                    linkDelete.appendChild(spanDelete);
-                    linkEdit.appendChild(spanEdit);
-                    titre.appendChild(linkDelete);
-                    titre.appendChild(linkEdit);
-                }
-                li.appendChild(titre);
-                li.appendChild(creator);
-                if(data.deadline){
-                    li.appendChild(date);
-                }
-                li.appendChild(p);
-                if(data.picture){
-                    li.appendChild(linkAssigned);
-                }
+                    //Picture of assigned
+                    if(data.picture){
+                        var linkAssigned = document.createElement('a');
 
-                /*==================================================================
-                Change column for go in the new phase
-                ==================================================================*/
-                var ul = li.parentElement;
-                var newUl = document.getElementById('phase-'+ data.phase);
+                        lien = linkFounder;
+                        var pos = lien.lastIndexOf('/'); // position du dernier "/"
+                        lien = lien.substr(0, pos+1);
+                        var lien = lien+data.assigned;
+                        linkAssigned.href = lien;
+                        linkAssigned.className = "assigned";
 
-                if(ul != newUl){
-                    ul.removeChild(li);
-                    newUl.appendChild(li);
+                        var imgAssigned = document.createElement('img');
+                        imgAssigned.className = "avatar";
+                        imgAssigned.src = "/media/" + data.picture;
+                        imgAssigned.style.width = "40px";
+
+                        linkAssigned.appendChild(imgAssigned);
+                    }
+
+                    /*==================================================================
+                    placement of HTML elements
+                    ==================================================================*/
+
+                    //We can edit and delete only if we are the creator of the task/card
+                    if(data.creator == username){
+                        linkDelete.appendChild(spanDelete);
+                        linkEdit.appendChild(spanEdit);
+                        titre.appendChild(linkDelete);
+                        titre.appendChild(linkEdit);
+                    }
+                    li.appendChild(titre);
+                    li.appendChild(creator);
+                    if(data.deadline){
+                        li.appendChild(date);
+                    }
+                    li.appendChild(p);
+                    if(data.picture){
+                        li.appendChild(linkAssigned);
+                    }
+
+                    /*==================================================================
+                    Change column for go in the new phase
+                    ==================================================================*/
+                    var ul = li.parentElement;
+                    var newUl = document.getElementById('phase-'+ data.phase);
+
+                    if(ul != newUl){
+                        ul.removeChild(li);
+                        newUl.appendChild(li);
+                    }
                 }
             },
 

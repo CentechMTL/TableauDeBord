@@ -9,5 +9,5 @@ urlpatterns = patterns('app.kanboard.views',
    url(r'^(\d+)/add/$', addCard, name='kanboardAddCard'),
    url(r'^delete/card/(\d+)$', deleteCard, name='kanboardDeleteCard'),
    url(r'^getDetail/card/(\d+)$', getDetailCard, name='kanboardGetDetailCard'),
-   url(r'^getKanboard/(\d+)$', getDetailKanboard, name='getDetailKanboard'),
+   url(r'^getKanboard/(\d+)/([a-zA-Z]+)$', getDetailKanboard, name='getDetailKanboard'),
 )

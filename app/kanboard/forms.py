@@ -17,10 +17,20 @@ from crispy_forms.layout import HTML, Layout, \
 class CardForm(forms.ModelForm):
     class Meta:
         model = Card
-        fields = ['phase', 'title', 'comment', 'deadline']
+        fields = ['phase', 'title', 'comment', 'deadline', 'state']
         widgets = {
             'deadline' : forms.DateInput(attrs={'type':'date'})
         }
+
+    state = forms.BooleanField(
+        label = _('State'),
+        widget = forms.CheckboxInput(
+            attrs = {
+                'required' : False,
+                'id': 'state'
+            }
+        )
+    )
 
     phase = forms.ChoiceField(
         choices = PHASE_CHOICES,

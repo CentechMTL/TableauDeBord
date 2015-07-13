@@ -31,6 +31,9 @@ class Card(models.Model):
     assigned = models.ForeignKey(Founder, related_name="cards_assigned", blank=True, null=True)
     creator = models.ForeignKey(User, related_name="cards_create", blank=True, null=True)
 
+    #False -> In progress | True -> Completed
+    state = models.BooleanField(verbose_name=_('State'))
+
     created = models.DateTimeField(blank=True)
     updated = models.DateTimeField(blank=True)
 

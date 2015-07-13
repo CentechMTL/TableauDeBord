@@ -203,6 +203,8 @@ class CompanyUpdate(generic.UpdateView):
                 self.form_class = CompanyUpdateForm
                 return super(CompanyUpdate, self).dispatch(*args, **kwargs)
 
+        #The visitor can't see this page!
+        return HttpResponseRedirect("/user/noAccessPermissions")
 
     def get_form(self, form_class):
         company = self.get_object()

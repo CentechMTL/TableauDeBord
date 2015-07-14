@@ -1,4 +1,4 @@
-function addCard(baseLien, linkGetDetail, companyId, linkDeleteCard, linkFounder, username){
+function addCard(baseLien, linkGetDetail, companyId, linkDeleteCard, linkFounder, username, linkCard){
     //DATA of the form
     var phase = document.getElementById("phase").value;
     var title = document.getElementById("title").value;
@@ -34,7 +34,7 @@ function addCard(baseLien, linkGetDetail, companyId, linkDeleteCard, linkFounder
             //It's a new card
             if(!data.updated){
                 if(data.title){
-                    createCard(data.id, linkGetDetail, linkDeleteCard, linkFounder, username);
+                    createCard(data.id, linkGetDetail, linkDeleteCard, linkFounder, username, linkCard);
                 }
             }
 
@@ -42,7 +42,7 @@ function addCard(baseLien, linkGetDetail, companyId, linkDeleteCard, linkFounder
             else{
                 //Init the form
                 document.getElementById('update').value = "False";
-                refreshCard(data.id, linkGetDetail, linkDeleteCard, linkFounder, username);
+                refreshCard(data.id, linkGetDetail, linkDeleteCard, linkFounder, username, linkCard);
             }
         },
 

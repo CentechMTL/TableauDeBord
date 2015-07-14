@@ -1,4 +1,4 @@
-function refreshCard(id, baseLien, linkDeleteCard, linkFounder, username){
+function refreshCard(id, baseLien, linkDeleteCard, linkFounder, username, linkCard){
     var linkGetDetail = baseLien;
     var myRegexp = /([0-9]+)/g;
     var match = myRegexp.exec(baseLien); //match[1] is the id of the archive
@@ -51,7 +51,14 @@ function refreshCard(id, baseLien, linkDeleteCard, linkFounder, username){
                     ==================================================================*/
                     //Title
                     var titre = document.createElement('h3');
-                    titre.innerHTML = data.title;
+                    var lienTitre = document.createElement('a');
+
+                    var pos = linkCard.lastIndexOf('/'); // position du dernier "/"
+                    linkCard = linkCard.substr(0, pos-1);
+                    linkCard = linkCard + data.id;
+                    lienTitre.href = linkCard;
+                    lienTitre.innerHTML = data.title;
+                    titre.appendChild(lienTitre);
 
                     //Creator
                     var creator = document.createElement('span');

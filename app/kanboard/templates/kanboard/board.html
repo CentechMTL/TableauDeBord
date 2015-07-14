@@ -29,7 +29,8 @@
                         '{% url 'kanboard:kanboardDeleteCard' 1 %}',
                         '{% url 'founder:detail' 1 %}',
                         '{{user.username}}',
-                        'True'
+                        'True',
+                        '{% url 'kanboard:card' 1 %}'
                         );
 
             //Init the form
@@ -48,7 +49,8 @@
                                     {{company.id}},
                                     "{% url "kanboard:kanboardDeleteCard" 1 %}",
                                     "{% url 'founder:detail' 1 %}",
-                                    "{{user.username}}"
+                                    "{{user.username}}",
+                                    '{% url 'kanboard:card' 1 %}'
                                     );
 
                             dialog.dialog( "close" );
@@ -99,7 +101,8 @@
                                     '{% url 'kanboard:kanboardDeleteCard' 1 %}',
                                     '{% url 'founder:detail' 1 %}',
                                     '{{user.username}}',
-                                    this.value
+                                    this.value,
+                                    '{% url 'kanboard:card' 1 %}'
                                     );">
         <option value="true">Completed</option>
         <option value="false" selected="selected">In progress</option>

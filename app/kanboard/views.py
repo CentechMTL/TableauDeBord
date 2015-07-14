@@ -1,9 +1,10 @@
 import re
+import time
 from django import http
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 
-from app.kanboard.models import Card, PHASE_CHOICES
+from app.kanboard.models import Card, Comment, PHASE_CHOICES
 from app.company.models import Company
 from app.founder.models import Founder
 from app.mentor.models import Mentor
@@ -11,7 +12,7 @@ from django.contrib.auth.models import User
 
 from app.kanboard.forms import CardForm
 
-from django.views.generic import TemplateView
+from django.views import generic
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
@@ -199,7 +200,77 @@ def deleteCard(request, card_id):
     #The visitor can't see this page!
     return HttpResponseRedirect("/user/noAccessPermissions")
 
-class BoardIndex(TemplateView):
+#Update the kanboard
+def update(request, id):
+    updates = []
+    if request.is_ajax():
+        try:
+            company = Company.objects.get(id = id)
+
+            #Verify data and create a tmp list of cards and phases
+            for phase_name, card_names in request.POST.lists():
+                cards = []
+                phase_match = PHASE_RE.match(phase_name) #Regex to verify data
+                if not phase_match:
+                    raise Exception("Malformed phase_name: <%s>" % phase_name)
+                phase = PHASE_CHOICES[int(phase_match.group(1))-1]
+
+                #Listing of cards in the phase
+                for card_name in card_names:
+                    card_match = CARD_RE.match(card_name) #Regex to verify data
+                    if not card_match:
+                        raise Exception("Malformed card_name: <%s>" % card_name)
+                    card = get_object_or_404(Card, pk=int(card_match.group(1)))
+                    cards.append(card)
+                updates.append((phase[1], cards))
+
+                #Update phase of cards
+                for phase, cards in updates:
+                    for card in cards:
+                        if card.phase != phase:
+                            card.change_phase(phase)
+
+                #Update order of cards
+                for phase, cards in updates:
+                    for i, card in enumerate(cards):
+                        card.order = i+1
+                        card.save()
+
+        except Exception, e:
+            print "Exception: %s, %r" % (e, e)
+            raise
+
+    return http.HttpResponse() # nothing exciting...
+
+#Add a card
+def addComment(request, id):
+    if request.is_ajax():
+        if request.method == "POST":
+            error = False
+
+            #We take data
+            comment = request.POST.get('comment', '')
+
+            #If we have all data
+            if error == False:
+                comment = Comment(comment = comment,
+                            card = Card.objects.get(id=id),
+                            creator = request.user
+                            )
+
+                comment.save()
+
+                return JsonResponse({'comment': comment.comment,
+                                     'creator': comment.creator.username,
+                                     'created': comment.created.strftime("%Y/%m/%d"),
+                                     'id': comment.id,
+                                     })
+
+
+    #The visitor can't see this page!
+    return HttpResponseRedirect("/user/noAccessPermissions")
+
+class BoardIndex(generic.TemplateView):
     template_name = 'kanboard/board.html'
 
     #You need to be connected, and you need to have access as founder, mentor or Centech
@@ -247,45 +318,11 @@ class BoardIndex(TemplateView):
 
         return context
 
+#Display detail of the company
+class CardView(generic.DetailView):
+    model = Card
+    template_name = 'kanboard/card.html'
 
-#Update the kanboard
-def update(request, id):
-    updates = []
-    if request.is_ajax():
-        try:
-            company = Company.objects.get(id = id)
-
-            #Verify data and create a tmp list of cards and phases
-            for phase_name, card_names in request.POST.lists():
-                cards = []
-                phase_match = PHASE_RE.match(phase_name) #Regex to verify data
-                if not phase_match:
-                    raise Exception("Malformed phase_name: <%s>" % phase_name)
-                phase = PHASE_CHOICES[int(phase_match.group(1))-1]
-
-                #Listing of cards in the phase
-                for card_name in card_names:
-                    card_match = CARD_RE.match(card_name) #Regex to verify data
-                    if not card_match:
-                        raise Exception("Malformed card_name: <%s>" % card_name)
-                    card = get_object_or_404(Card, pk=int(card_match.group(1)))
-                    cards.append(card)
-                updates.append((phase[1], cards))
-
-                #Update phase of cards
-                for phase, cards in updates:
-                    for card in cards:
-                        if card.phase != phase:
-                            card.change_phase(phase)
-
-                #Update order of cards
-                for phase, cards in updates:
-                    for i, card in enumerate(cards):
-                        card.order = i+1
-                        card.save()
-
-        except Exception, e:
-            print "Exception: %s, %r" % (e, e)
-            raise
-
-    return http.HttpResponse() # nothing exciting...
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(CardView, self).dispatch(*args, **kwargs)

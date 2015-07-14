@@ -1,4 +1,4 @@
-function initKanboard(baseLien, id, lienGetDetail, linkDeleteCard, linkFounder, username, state){
+function initKanboard(baseLien, id, lienGetDetail, linkDeleteCard, linkFounder, username, state, linkCard){
     var pos = baseLien.lastIndexOf('/'); // position du dernier "/"
     baseLien = baseLien.substr(0, pos+1);
     baseLien = baseLien + state
@@ -32,7 +32,7 @@ function initKanboard(baseLien, id, lienGetDetail, linkDeleteCard, linkFounder, 
 
                     ul.appendChild(li);
 
-                    refreshCard(card, lienGetDetail, linkDeleteCard, linkFounder, username);
+                    refreshCard(card, lienGetDetail, linkDeleteCard, linkFounder, username, linkCard);
                 }
 
                 div.appendChild(titlePhase);

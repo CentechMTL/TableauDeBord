@@ -65,3 +65,24 @@ class Card(models.Model):
 
 #SIGNALS CONNECTED
 models.signals.pre_save.connect(signals.card_order, sender=Card)
+
+
+class Comment(models.Model):
+    """
+    A comment on a specific card
+    """
+    comment = models.TextField(blank=True)
+    card = models.ForeignKey(Card, related_name="comments")
+    creator = models.ForeignKey(User, blank=True, null=True)
+
+    created = models.DateTimeField(blank=True)
+    updated = models.DateTimeField(blank=True)
+
+    def __unicode__(self):
+        return "%s -- %s -- %s" % (self.id, self.card ,self.creator)
+
+    def save(self, *args, **kwarg):
+        if not self.id:
+            self.created = timezone.now()
+        self.updated = timezone.now()
+        super(Comment, self).save(*args, **kwarg)

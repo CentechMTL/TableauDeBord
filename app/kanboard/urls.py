@@ -1,13 +1,17 @@
 from django.conf.urls import patterns, url, include
-from app.kanboard.views import BoardIndex, addCard, deleteCard, getDetailCard, getDetailKanboard
+from app.kanboard import views
 
 urlpatterns = patterns('app.kanboard.views',
-   #url(r'^board/(?P<board_slug>[\w-]+)/$', 'board', name='kanboard'),
-   url(r'^(?P<pk>\d+)/$', BoardIndex.as_view(), name='kanboard'),
-   url(r'^(\d+)/update/$', 'update'),
+    #kanboard of a company
+    url(r'^(?P<pk>\d+)/$', views.BoardIndex.as_view(), name='kanboard'),
+    #Detail of a card
+    url(r'^card/(?P<pk>\d+)/$', views.CardView.as_view(), name='card'),
 
-   url(r'^(\d+)/add/$', addCard, name='kanboardAddCard'),
-   url(r'^delete/card/(\d+)$', deleteCard, name='kanboardDeleteCard'),
-   url(r'^getDetail/card/(\d+)$', getDetailCard, name='kanboardGetDetailCard'),
-   url(r'^getKanboard/(\d+)/([a-zA-Z]+)$', getDetailKanboard, name='getDetailKanboard'),
+    #Ajax
+    url(r'^(\d+)/update/$', views.update),
+    url(r'^(\d+)/add/$', views.addCard, name='kanboardAddCard'),
+    url(r'^addComment/(\d+)$', views.addComment, name='addComment'),
+    url(r'^delete/card/(\d+)$', views.deleteCard, name='kanboardDeleteCard'),
+    url(r'^getDetail/card/(\d+)$', views.getDetailCard, name='kanboardGetDetailCard'),
+    url(r'^getKanboard/(\d+)/([a-zA-Z]+)$', views.getDetailKanboard, name='getDetailKanboard'),
 )

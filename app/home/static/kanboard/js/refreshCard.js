@@ -35,14 +35,15 @@ function refreshCard(id, baseLien, linkDeleteCard, linkFounder, username){
                     Coloration of the card
 
                     If the deadline is overdue, the card become red
+                    If the task is completed, the card become green
                     Else the card is white
                     ==================================================================*/
+                    li.style.backgroundColor = '#ffffff';
                     if(new Date() > new Date(data.deadline)){
                         li.style.backgroundColor = '#eedada';
                     }
-                    else
-                    {
-                       li.style.backgroundColor = '#ffffff';
+                    if(data.state == true){
+                        li.style.backgroundColor = '#daeddd';
                     }
 
                     /*==================================================================

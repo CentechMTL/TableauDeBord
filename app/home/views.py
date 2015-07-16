@@ -204,12 +204,16 @@ def generate_presentation(request):
               })
 
 
-    commande = "pandoc " + setting + " " + os.path.join(settings.BASE_DIR, "app\\home\\templates\\home\\") + "result" + ".tex " + "-o " + os.path.join(settings.BASE_DIR, "media\\generated_pandoc\\") + "result" + ".pdf"
+    commande = "pandoc -t beamer " + os.path.join(settings.BASE_DIR, "app/home/templates/home/") + "result" + ".tex " + "-o " + os.path.join(settings.BASE_DIR, "media/generated_pandoc/") + "result" + ".pdf"
     print settings.BASE_DIR
     print commande
     os.system(commande)
 
-    response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename="result.pdf"'
+    path_pdf = os.path.join(settings.BASE_DIR, "media/generated_pandoc/") + 'result.pdf'
+    response = HttpResponse(
+        open(path_pdf, 'rb').read(),
+        content_type="application_pdf")
+    response["Content-Disposition"] = \
+        "attachment; filename=presentation_centech.pdf"
 
     return response

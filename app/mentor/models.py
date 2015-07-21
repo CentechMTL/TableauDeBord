@@ -8,8 +8,8 @@ from app.home.models import UserProfile,Expertise
 from app.founder.models import Founder
 
 MENTOR_TYPE_CHOICES = (
-    (u'1', 'Finance'),
-    (u'2', 'Technologie'),
+    (u'1', 'Affaires'),
+    (u'2', 'Technologiques'),
 )
 
 #Mentors

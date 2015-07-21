@@ -22,7 +22,4 @@ urlpatterns = patterns('',
 
     #Form
     url(r'^password/(?P<pk>\d+)$', views.PasswordUpdate.as_view(), name='change_password'),
-
-
-    url(r'^pdf/$',views.generate_presentation, name='pdf'),
 )

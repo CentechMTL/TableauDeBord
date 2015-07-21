@@ -187,33 +187,3 @@ def logout_view(request):
     logout(request)
     # Redirect to a success page.
     return HttpResponseRedirect("/")
-
-from django.template import loader, Context
-import os
-from centech2 import settings
-
-def generate_presentation(request):
-
-    title = "Présentation générale du Centech"
-
-    template_file = 'home/result.tex'
-
-    t = loader.get_template(template_file)
-    context = Context({
-              "title":    title,
-              })
-
-
-    commande = "pandoc -t beamer " + os.path.join(settings.BASE_DIR, "app/home/templates/home/") + "result" + ".tex " + "-o " + os.path.join(settings.BASE_DIR, "media/generated_pandoc/") + "result" + ".pdf"
-    print settings.BASE_DIR
-    print commande
-    os.system(commande)
-
-    path_pdf = os.path.join(settings.BASE_DIR, "media/generated_pandoc/") + 'result.pdf'
-    response = HttpResponse(
-        open(path_pdf, 'rb').read(),
-        content_type="application_pdf")
-    response["Content-Disposition"] = \
-        "attachment; filename=presentation_centech.pdf"
-
-    return response

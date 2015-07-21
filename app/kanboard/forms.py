@@ -23,7 +23,7 @@ class CardForm(forms.ModelForm):
         }
 
     state = forms.BooleanField(
-        label = _('State'),
+        label = _('Complete'),
         widget = forms.CheckboxInput(
             attrs = {
                 'required' : False,

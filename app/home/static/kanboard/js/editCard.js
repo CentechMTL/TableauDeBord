@@ -11,6 +11,11 @@ function editCard(id, baseLien){
             url: lien,
 
             success: function(data, status) {
+                //We change the title of the form
+                var titleForm = document.getElementById('ui-id-1');
+                titleForm.innerHTML = "Edit the task";
+
+                //We populate the form
                 var form = document.getElementById('form');
                 document.getElementById('phase').value = data.phase;
                 document.getElementById('title').value = data.title;

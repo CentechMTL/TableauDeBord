@@ -43,6 +43,10 @@ function addCard(baseLien, linkGetDetail, companyId, linkDeleteCard, linkFounder
                 //Init the form
                 document.getElementById('update').value = "False";
                 refreshCard(data.id, linkGetDetail, linkDeleteCard, linkFounder, username, linkCard);
+
+                //Init the title of the form
+                var titleForm = document.getElementById('ui-id-1');
+                titleForm.innerHTML = "Create new task";
             }
         },
 

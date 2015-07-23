@@ -9,7 +9,7 @@ urlpatterns = patterns('',
     url(r'^(?P<page>\d+)$', views.FounderIndex.as_view(), name='index'),
 
     #Detail of a founder
-    url(r'^(?P<pk>\d+)$', views.FounderView.as_view(), name='detail'),
+    url(r'^detail/(?P<pk>\d+)$', views.FounderView.as_view(), name='detail'),
 
     #Forms
     url(r'^profile/add$', views.FounderCreate.as_view(), name='add'),

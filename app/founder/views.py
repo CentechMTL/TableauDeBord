@@ -220,8 +220,14 @@ class FounderIndex(generic.ListView):
         context['filter'] = ff
 
         text = ""
+        compteur = 0
         for getVariable in self.request.GET:
-            text += "?" + getVariable + "=" + self.request.GET[getVariable]
+            for getValue in self.request.GET.getlist(getVariable):
+                if compteur == 0:
+                    text += "?" + getVariable + "=" + getValue
+                else:
+                    text += "&" + getVariable + "=" + getValue
+                compteur += 1
         context['get'] = text
 
         return context

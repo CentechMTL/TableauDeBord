@@ -6,6 +6,8 @@ from app.founder import views
 urlpatterns = patterns('',
     #List of founders
     url(r'^$', views.FounderIndex.as_view(), name='index'),
+    url(r'^(?P<page>\d+)$', views.FounderIndex.as_view(), name='index'),
+
     #Detail of a founder
     url(r'^(?P<pk>\d+)$', views.FounderView.as_view(), name='detail'),
 

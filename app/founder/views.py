@@ -201,21 +201,29 @@ class FounderUpdate(generic.UpdateView):
 
 #List of founders
 class FounderIndex(generic.ListView):
+    model = Founder
     template_name = 'founder/index.html'
-    context_object_name = 'founder'
+    context_object_name = 'founder_list'
+    page_kwarg = 'page'
+    paginate_by = 9
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(FounderIndex, self).dispatch(*args, **kwargs)
 
     def get_queryset(self):
-        obj = Founder.objects.all()
-        return obj
-
+        ff = FounderFilter(self.request.GET)
+        return ff.qs
     def get_context_data(self, **kwargs):
         ff = FounderFilter(self.request.GET, queryset=self.get_queryset())
         context = super(FounderIndex, self).get_context_data(**kwargs)
         context['filter'] = ff
+
+        text = ""
+        for getVariable in self.request.GET:
+            text += "?" + getVariable + "=" + self.request.GET[getVariable]
+        context['get'] = text
+
         return context
 
 #Display the detail of a founder

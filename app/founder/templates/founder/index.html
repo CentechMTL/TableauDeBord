@@ -8,7 +8,7 @@
     <h1>{% trans "Centech Founders" %}</h1>
     <div class="panel panel-default">
         <div class="panel-body well">
-            <form action="" method="get">
+            <form action="{% url 'founder:index' %}" method="get">
                 <div class="row">
                     <div class="col-md-1"></div>
                     <div class="col-md-3">
@@ -21,9 +21,10 @@
             </form>
         </div>
     </div>
-        {% if filter %}
+
+    {% if founder_list %}
         <div class="row" style="margin-bottom: 50px;">
-        {% for founder in filter %}
+        {% for founder in founder_list %}
                 <div class="col-md-4" style="height: 150px; margin-bottom: 30px;">
                     <a href="{% url 'founder:detail' founder.pk %}">
                     {% if founder.picture != "" %}
@@ -44,4 +45,21 @@
     {% else %}
         <p>{% trans "No founders exist." %}</p>
     {% endif %}
+    <div class="pagination">
+    {% if is_paginated %}
+        <div class="pagination">
+            <span class="page-links">
+                {% if page_obj.has_previous %}
+                    <a href="{% url 'founder:index' page_obj.previous_page_number %}{{get}}">previous</a>
+                {% endif %}
+                <span class="page-current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                </span>
+                {% if page_obj.has_next %}
+                    <a href="{% url 'founder:index' page_obj.next_page_number %}{{get}}">next</a>
+                {% endif %}
+            </span>
+        </div>
+    {% endif %}
+</div>
 {% endblock %}

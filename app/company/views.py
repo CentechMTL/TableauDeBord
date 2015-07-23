@@ -185,6 +185,14 @@ class CompanyUpdate(generic.UpdateView):
     #You need to be connected, and you need to have access as founder or centech
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
+        #Let the centech in first for allow modify a company of a founder who work for the Centech
+        #For know if the user is in the group "Centech"
+        groups = self.request.user.groups.values()
+        for group in groups:
+            if group['name'] == 'Centech':
+                self.form_class = CompanyUpdateForm
+                return super(CompanyUpdate, self).dispatch(*args, **kwargs)
+
         #For know the company of the user if is a founder
         if self.request.user.is_active:
             try:
@@ -195,13 +203,6 @@ class CompanyUpdate(generic.UpdateView):
                     return super(CompanyUpdate, self).dispatch(*args, **kwargs)
             except:
                 pass
-
-        #For know if the user is in the group "Centech"
-        groups = self.request.user.groups.values()
-        for group in groups:
-            if group['name'] == 'Centech':
-                self.form_class = CompanyUpdateForm
-                return super(CompanyUpdate, self).dispatch(*args, **kwargs)
 
         #The visitor can't see this page!
         return HttpResponseRedirect("/user/noAccessPermissions")

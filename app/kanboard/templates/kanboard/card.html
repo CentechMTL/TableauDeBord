@@ -23,20 +23,20 @@
             <div class="col-sm-12" align="left" style="border: 1px solid black;">
         {% endif %}
             <h1><strong>{{card.title}}</strong></h1>
-            From <strong>{{card.creator}}</strong>
+            {%trans "From" %} <strong>{{card.creator}}</strong>
             {% if card.assigned %}
-                to <strong><a href="{% url 'founder:detail' card.assigned.userProfile_id%}">{{card.assigned}}</a></strong>
+                {%trans "to" %} <strong><a href="{% url 'founder:detail' card.assigned.userProfile_id%}">{{card.assigned}}</a></strong>
             {% endif %}
-            since {{card.created|date:"Y/m/d"}}<br>
-            Todo before the <strong>{{card.deadline|date:"Y/m/d" }}</strong><br>
+            {%trans "since" %} {{card.created|date:"Y/m/d"}}<br>
+            {%trans "Todo before the" %} <strong>{{card.deadline|date:"Y/m/d" }}</strong><br>
             <br>
-            <h4>Description of the task : </h4>
+            <h4>{%trans "Description of the task" %} : </h4>
             <p style="margin-left: 20px;">{{card.comment}}</p>
         </div>
     </div>
     <div class="row">
         <div class="col-sm-12" id="listComments">
-            <h2>Comments : </h2>
+            <h2>{%trans "Comments" %} : </h2>
             {% for comment in card.comments.all %}
                 <div style="padding: 10px; border-bottom:1px dashed black;">
                     {{comment.comment}}<br>{{comment.created|date:"Y/m/d"}} - {{comment.creator}}
@@ -46,5 +46,5 @@
     </div>
 
     <textarea id='textarea' style="margin-top: 50px; width: 100%;" ></textarea><br>
-    <button onclick="addComment('{% url 'kanboard:addComment' 1 %}', {{card.id}});">Envoyer</button>
+    <button onclick="addComment('{% url 'kanboard:addComment' 1 %}', {{card.id}});">{%trans "Save" %}</button>
 {% endblock %}

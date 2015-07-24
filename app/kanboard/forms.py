@@ -55,7 +55,9 @@ class CardForm(forms.ModelForm):
         )
     )
 
-    deadline = forms.DateField()
+    deadline = forms.DateField(
+        label = _(u"Todo before the")
+    )
     deadline.widget.attrs.update({'id':'deadline'})
 
     assigned = forms.ModelChoiceField(

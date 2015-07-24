@@ -62,12 +62,12 @@ function refreshCard(id, baseLien, linkDeleteCard, linkFounder, username, linkCa
 
                     //Creator
                     var creator = document.createElement('span');
-                    creator.innerHTML = "créé par : " + data.creator + "<br>";
+                    creator.innerHTML =  gettext('created by') + " : " + data.creator + "<br>";
 
                     //Deadline
                     var date = document.createElement('span');
                     if(data.deadline){
-                        date.innerHTML = "pour le : " + data.deadline + "<br>";
+                        date.innerHTML = gettext('for') + " : " + data.deadline + "<br>";
                     }
 
                     //Link to delete this card

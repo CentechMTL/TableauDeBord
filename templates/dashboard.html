@@ -321,6 +321,10 @@
 
     <!-- Google analytics-->
     <script src="{% static 'js/googleAnalytics.js' %}"></script>
+
+    <!-- Internationalization Javascript -->
+    <script type="text/javascript" src="{% url 'django.views.i18n.javascript_catalog' %}"></script>
+
     {% block extrajs %}{% endblock %}
 </body>
 </html>

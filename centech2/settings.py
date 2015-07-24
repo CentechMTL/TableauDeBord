@@ -111,10 +111,12 @@ USE_TZ = False #todo add timezone support
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
-STATIC_ROOT = os.path.join(BASE_DIR, 'app/home/static')
+STATIC_ROOT = '/static/'
 STATIC_URL = '/static/'
+
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
 LOGIN_URL = '/user/login'
 LOGOUT_URL = '/user/logout'
 LOGIN_REDIRECT_URL = '/company'
@@ -193,7 +195,8 @@ LOCALE_PATHS = (
     'app/experiment/locale/',
     'app/businessCanvas/locale/',
     'app/finance/locale/',
-    'app/valuePropositionCanvas/locale/'
+    'app/valuePropositionCanvas/locale/',
+    'app/kanboard/locale/'
 )
 
 

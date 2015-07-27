@@ -46,7 +46,7 @@
                 {% if company.url != "" %}
                 {% trans "Web site" %} : <a href="{{ company.url }}">{{ company.url }}</a><br><br>
                 {% endif %}
-                {% if company.url != "" %}
+                {% if company.incubated_on %}
                 {% trans "Incubation date" %} : {{ company.incubated_on }}
                 {% endif %}
                 <br><br>

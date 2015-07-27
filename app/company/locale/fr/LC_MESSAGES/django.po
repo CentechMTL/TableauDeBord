@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-27 13:05-0400\n"
+"POT-Creation-Date: 2015-07-27 15:27-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -60,7 +60,7 @@ msgid "https://urlvideo.com/"
 msgstr "https://urlvideo.com/"
 
 #: .\app\company\forms.py:86 .\app\company\forms.py:191
-#: .\app\company\templates\company\detail.html:131
+#: .\app\company\templates\company\detail.html:47
 msgid "Web site"
 msgstr "Site web"
 
@@ -113,20 +113,20 @@ msgstr "Description"
 msgid "Write here a brief summary of your business."
 msgstr "Ecrivez ici un bref résumé de votre entreprise."
 
-#: .\app\company\forms.py:127 .\app\company\templates\company\detail.html:129
+#: .\app\company\forms.py:127 .\app\company\templates\company\detail.html:45
 #: .\app\company\templates\company\filter.html:24
 #: .\app\company\templates\company\index.html:36
 msgid "Incubation phase"
 msgstr "Phase d'incubation"
 
 #: .\app\company\forms.py:133 .\app\company\forms.py:278
-#: .\app\company\models.py:38 .\app\company\templates\company\detail.html:169
+#: .\app\company\models.py:38 .\app\company\templates\company\detail.html:88
 #: .\templates\dashboard.html:72
 msgid "Founders"
 msgstr "Fondateurs"
 
 #: .\app\company\forms.py:140 .\app\company\forms.py:285
-#: .\app\company\models.py:40 .\app\company\templates\company\detail.html:197
+#: .\app\company\models.py:40 .\app\company\templates\company\detail.html:116
 #: .\templates\dashboard.html:71
 msgid "Mentors"
 msgstr "Mentors"
@@ -144,7 +144,7 @@ msgstr "Modifier cette compagnie"
 msgid "Company Status"
 msgstr "Statut de la compagnie"
 
-#: .\app\company\models.py:27 .\app\company\models.py:113
+#: .\app\company\models.py:27 .\app\company\models.py:116
 #: .\templates\dashboard.html:70
 msgid "Companies"
 msgstr "Compagnies"
@@ -157,11 +157,11 @@ msgstr "URL"
 msgid "Status"
 msgstr "Statut"
 
-#: .\app\company\models.py:110
+#: .\app\company\models.py:113
 msgid "Presences"
 msgstr "Presences"
 
-#: .\app\company\models.py:115
+#: .\app\company\models.py:118
 #: .\app\company\templates\company\presence.html:14
 #: .\app\company\templates\company\presence_confirm_delete.html:10
 msgid "Date"
@@ -172,27 +172,31 @@ msgstr "Date"
 msgid "Company"
 msgstr "Compagnie"
 
-#: .\app\company\templates\company\detail.html:102
+#: .\app\company\templates\company\detail.html:18
 msgid "Modify this company"
 msgstr "Modifier cette compagnie"
 
-#: .\app\company\templates\company\detail.html:143
+#: .\app\company\templates\company\detail.html:50
+msgid "Incubation date"
+msgstr "Date d'incubation"
+
+#: .\app\company\templates\company\detail.html:62
 msgid "Time spent incubation"
 msgstr "Temps d'incubation passé"
 
-#: .\app\company\templates\company\detail.html:150
+#: .\app\company\templates\company\detail.html:69
 msgid "About"
 msgstr "A propos"
 
-#: .\app\company\templates\company\detail.html:160
+#: .\app\company\templates\company\detail.html:79
 msgid "Video pitch"
 msgstr "Vidéo de présentation"
 
-#: .\app\company\templates\company\detail.html:193
+#: .\app\company\templates\company\detail.html:112
 msgid "No founders exist."
 msgstr "Aucun fondateurs."
 
-#: .\app\company\templates\company\detail.html:220
+#: .\app\company\templates\company\detail.html:139
 msgid "No mentors exist."
 msgstr "Aucun mentors."
 

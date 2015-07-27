@@ -44,7 +44,10 @@
 
                 {% trans "Incubation phase" %} : {{ company.companyStatus }}<br>
                 {% if company.url != "" %}
-                {% trans "Web site" %} : <a href="{{ company.url }}">{{ company.url }}</a>
+                {% trans "Web site" %} : <a href="{{ company.url }}">{{ company.url }}</a><br><br>
+                {% endif %}
+                {% if company.url != "" %}
+                {% trans "Incubation date" %} : {{ company.incubated_on }}
                 {% endif %}
                 <br><br>
             </div>

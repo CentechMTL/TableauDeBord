@@ -2,6 +2,7 @@
 
 from django.db import models
 from datetime import datetime
+import time
 from django.utils import timezone
 from embed_video.fields import EmbedVideoField
 from django.utils.translation import ugettext_lazy as _
@@ -87,6 +88,15 @@ class Company(models.Model):
         experiments =  self.experiments.order_by("-dateFinish")
         if experiments:
             return experiments[0]
+        else:
+            return None
+
+    def get_percentage_incubation_time(self):
+        if self.incubated_on:
+            now = datetime.date(datetime.today())
+            delta_days = (now - self.incubated_on).days
+            percentage = int(round(((float(delta_days))/(355*3))*100, 0))
+            return percentage
         else:
             return None
 

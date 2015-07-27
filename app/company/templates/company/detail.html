@@ -5,6 +5,11 @@
 <!-- Load internationalisation utils-->
 {% load i18n %}
 
+{% block extrahead %}
+    <!-- PROGRESS_BAR CSS -->
+    <link rel="stylesheet" href="{% static 'company/css/progress_bar.css' %}">
+{% endblock %}
+
 {% block content %}
     {% if isCentech %}
     <div class="row" style="margin-bottom: 20px;">
@@ -45,6 +50,16 @@
             </div>
         </div>
     </div>
+    {% if company.incubated_on %}
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="meter">
+                <span style="width: {{company.get_percentage_incubation_time}}%">{{company.get_percentage_incubation_time}}%</span>
+            </div>
+            <div align="center">{% trans "Time spent incubation" %} : {{company.get_percentage_incubation_time}}%</div><br>
+        </div>
+    </div>
+    {% endif %}
     <div class="well well-lg" style="background-color: #87cefa">
      <div class="row">
         <div class="col-sm-12" align="center" style="text-align: justify;">

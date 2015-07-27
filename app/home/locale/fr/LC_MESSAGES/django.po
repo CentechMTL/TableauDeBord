@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-08 17:07-0400\n"
+"POT-Creation-Date: 2015-07-27 13:05-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -123,8 +123,6 @@ msgid "No Access"
 msgstr "Pas d'autorisation"
 
 #: .\app\home\templates\home\noAccessPermissions.html:7
-#, fuzzy
-#| msgid "Sorry! But you don't have the permissions to access this pag"
 msgid "Sorry! But you don't have the permissions to access this page"
 msgstr "Désolé! Mais vous n'avez pas la permissions d'accéder a cette page"
 

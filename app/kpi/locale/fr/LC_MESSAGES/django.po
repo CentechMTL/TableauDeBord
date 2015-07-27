@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-08 17:07-0400\n"
+"POT-Creation-Date: 2015-07-27 13:05-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -116,8 +116,6 @@ msgstr "Modifier"
 #: .\app\kpi\templates\kpi\irl_confirm_delete.html:17
 #: .\app\kpi\templates\kpi\trl.html:120 .\app\kpi\templates\kpi\trl.html:130
 #: .\app\kpi\templates\kpi\trl_confirm_delete.html:17
-#, fuzzy
-#| msgid "Date"
 msgid "Delete"
 msgstr "Supprimer"
 

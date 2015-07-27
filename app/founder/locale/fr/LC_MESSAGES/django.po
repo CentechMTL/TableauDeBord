@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-08 17:07-0400\n"
+"POT-Creation-Date: 2015-07-27 13:05-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,7 +20,7 @@ msgstr ""
 #: .\app\founder\forms.py:23 .\app\founder\forms.py:26
 #: .\app\founder\forms.py:144 .\app\founder\forms.py:147
 msgid "First name"
-msgstr "Prénom "
+msgstr "Prénom"
 
 #: .\app\founder\forms.py:29 .\app\founder\forms.py:32
 #: .\app\founder\forms.py:150 .\app\founder\forms.py:153
@@ -51,37 +51,35 @@ msgstr "https://exemple.com"
 
 #: .\app\founder\forms.py:60 .\app\founder\forms.py:169
 msgid "Facebook"
-msgstr ""
+msgstr "Facebook"
 
 #: .\app\founder\forms.py:63 .\app\founder\forms.py:172
 msgid "https://www.facebook.com/lastname.firstname"
-msgstr ""
+msgstr "https://www.facebook.com/nom.prenom"
 
 #: .\app\founder\forms.py:66 .\app\founder\forms.py:175
 msgid "Twitter"
-msgstr ""
+msgstr "Twitter"
 
 #: .\app\founder\forms.py:69 .\app\founder\forms.py:178
 msgid "https://twitter.com/username"
-msgstr ""
+msgstr "https://twitter.com/nomUtilisateur"
 
 #: .\app\founder\forms.py:72 .\app\founder\forms.py:181
 msgid "Google+"
-msgstr ""
+msgstr "Google+"
 
 #: .\app\founder\forms.py:75 .\app\founder\forms.py:184
-#, fuzzy
-#| msgid "https://example.com"
 msgid "https://plus.google.com/id"
-msgstr "https://exemple.com"
+msgstr "https://plus.google.com/id"
 
 #: .\app\founder\forms.py:78 .\app\founder\forms.py:187
 msgid "linkedIn"
-msgstr ""
+msgstr "linkedIn"
 
 #: .\app\founder\forms.py:81 .\app\founder\forms.py:190
 msgid "https://ca.linkedin.com/in/username"
-msgstr ""
+msgstr "https://ca.linkedin.com/in/nomUtilisateur"
 
 #: .\app\founder\forms.py:84 .\app\founder\forms.py:193
 msgid "Description"
@@ -163,6 +161,14 @@ msgstr "Profil"
 msgid "Centech Founders"
 msgstr "Fondateur du Centech"
 
-#: .\app\founder\templates\founder\index.html:45
+#: .\app\founder\templates\founder\index.html:37
+msgid "Previous"
+msgstr "Précédente"
+
+#: .\app\founder\templates\founder\index.html:47
+msgid "Next"
+msgstr "Suivante"
+
+#: .\app\founder\templates\founder\index.html:82
 msgid "No founders exist."
 msgstr "Aucun fondateur"

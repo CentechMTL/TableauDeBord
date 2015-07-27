@@ -20,7 +20,7 @@ class KPI(models.Model):
     type = models.CharField(max_length=50, choices=KPI_TYPE_CHOICES, verbose_name=_('Type'))
 
     level = models.IntegerField(choices=((0, 0),(1, 1),(2, 2),(3, 3),(4, 4),(5, 5),(6, 6),(7, 7),(8, 8),(9, 9)), verbose_name=_('Level'))
-    period_start = models.DateField(auto_now_add=True, auto_now=False, verbose_name=_('Date'))
+    period_start = models.DateTimeField(auto_now_add=True, auto_now=False, verbose_name=_('Date'))
     comment = models.TextField(blank=True, default="", verbose_name=_('Comment'))
 
     def __str__(self):

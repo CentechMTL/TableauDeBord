@@ -96,7 +96,10 @@ class Company(models.Model):
             now = datetime.date(datetime.today())
             delta_days = (now - self.incubated_on).days
             percentage = int(round(((float(delta_days))/(355*3))*100, 0))
-            return percentage
+            if percentage > 100:
+                return 100
+            else:
+                return percentage
         else:
             return None
 

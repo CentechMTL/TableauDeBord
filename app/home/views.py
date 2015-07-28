@@ -150,6 +150,10 @@ def index(request):
 def noAccessPermissions(request):
     return render(request, 'home/noAccessPermissions.html')
 
+#Iframe vers ma StartUp
+def maStartup(request):
+    return render(request, 'home/maStartup.html')
+
 #Set the session variable for the dashboard template
 def setCompanyInSession(request, company_id):
     message= {}

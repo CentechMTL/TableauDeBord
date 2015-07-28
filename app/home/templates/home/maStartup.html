@@ -1,0 +1,17 @@
+{% extends "dashboard.html" %}
+<!-- Load internationalisation utils-->
+{% load i18n %}
+{% block title %}{{app.site.entreprise.name}} | {% trans "No Access" %}{% endblock %}
+
+
+{% block content %}
+    <iframe id="iframeStartup" src="http://mastartup.etsmtl.ca/sign-in" width="100%"></iframe>
+{% endblock %}
+
+{% block extrajs %}
+<script type="text/javascript">
+    heightMenu = document.getElementById("top-menu").offsetHeight;
+    heightWindows = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+    document.getElementById("iframeStartup").height = heightWindows - heightMenu;
+</script>
+{% endblock %}

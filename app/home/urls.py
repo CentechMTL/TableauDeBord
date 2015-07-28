@@ -17,6 +17,9 @@ urlpatterns = patterns('',
     #Error page
     url(r'^noAccessPermissions$', views.noAccessPermissions, name='noAccessPermissions'),
 
+    #Carte routiere du centech -iframe
+    url(r'^maStartup$', views.maStartup, name='maStartup'),
+
     #Stock in session the company selected in the main menu
     url(r'^setCompanyInSession/(?P<company_id>\d+)$', views.setCompanyInSession, name='setCompanyInSession'),
 

@@ -67,12 +67,13 @@
                     </div>
                 </li>
                 <li class="active">
-                    <a href="/company/"><div><i class="fa fa-university"></i> <span class="nav-label">{% trans "Companies" %}</span></div></a>
-                    <a href="/mentor/"><div><i class="fa fa-graduation-cap"></i> <span class="nav-label">{% trans "Mentors" %}</span></div></a>
-                    <a href="/founder/"><div><i class="fa fa-users"></i> <span class="nav-label">{% trans "Founders" %}</span></div></a>
+                    <a href="{% url 'home:maStartup' %}"><div><i class="fa fa-globe"></i> <span class="nav-label">{% trans "Road map" %}</span></div></a>
+                    <a href="{% url 'company:index' %}"><div><i class="fa fa-university"></i> <span class="nav-label">{% trans "Companies" %}</span></div></a>
+                    <a href="{% url 'mentor:index' %}"><div><i class="fa fa-graduation-cap"></i> <span class="nav-label">{% trans "Mentors" %}</span></div></a>
+                    <a href="{% url 'founder:index' %}"><div><i class="fa fa-users"></i> <span class="nav-label">{% trans "Founders" %}</span></div></a>
                     {% if isCentech %}
-                    <a href="/summary/"><div><i class="fa fa-bar-chart" ></i> <span class="nav-label">{% trans "Summary" %}</span></div></a>
-                    <a href="/company/presence/"><div><i class="fa fa-graduation-cap"></i> <span class="nav-label">{% trans "Presence" %}</span></div></a>
+                    <a href="{% url 'home:summary' %}"><div><i class="fa fa-bar-chart" ></i> <span class="nav-label">{% trans "Summary" %}</span></div></a>
+                    <a href="{% url 'company:presence_list' %}"><div><i class="fa fa-graduation-cap"></i> <span class="nav-label">{% trans "Presence" %}</span></div></a>
                         <select id="selectCompany" class="menuDashboard" onchange="updateMenu(this.value)">
                             <option value="0">{% trans "Select a company" %}</option>
                             {% for company in list_company %}
@@ -84,16 +85,16 @@
                             {% endfor %}
                         </select>
                         {% if request.session.companySelected %}
-                            <a class="menuCompany" href="/company/{{request.session.companySelected}}"><div><i class="fa fa-info-circle"></i> <span class="nav-label">{% trans "Presentation" %}</span></div></a>
-                            <a class="menuIrl" href="/kpi/irl/{{request.session.companySelected}}"><div><i class="fa fa-bar-chart"></i> <span class="nav-label">{% trans "IRL" %}</span></div></a>
-                            <a class="menuTrl" href="/kpi/trl/{{request.session.companySelected}}"><div><i class="fa fa-bar-chart"></i> <span class="nav-label">{% trans "TRL" %}</span></div></a>
-                            <a class="menuExperiment" href="/experiment/{{request.session.companySelected}}"><div><i class="fa fa-flask"></i> <span class="nav-label">{% trans "Experiments" %}</span></div></a>
-                            <a class="menuBusinessCanvas" href="/businessCanvas/{{request.session.companySelected}}"><div><i class="fa fa-table"></i> <span class="nav-label">{% trans "Business Model Canvas" %}</span></div></a>
+                            <a class="menuCompany" href="{% url 'company:detail' request.session.companySelected %}"><div><i class="fa fa-info-circle"></i> <span class="nav-label">{% trans "Presentation" %}</span></div></a>
+                            <a class="menuIrl" href="{% url 'kpi:irl_filter' request.session.companySelected %}"><div><i class="fa fa-bar-chart"></i> <span class="nav-label">{% trans "IRL" %}</span></div></a>
+                            <a class="menuTrl" href="{% url 'kpi:trl_filter' request.session.companySelected %}"><div><i class="fa fa-bar-chart"></i> <span class="nav-label">{% trans "TRL" %}</span></div></a>
+                            <a class="menuExperiment" href="{% url 'experiment:experiment_list' request.session.companySelected %}"><div><i class="fa fa-flask"></i> <span class="nav-label">{% trans "Experiments" %}</span></div></a>
+                            <a class="menuBusinessCanvas" href="{% url 'businessCanvas:businessCanvasElement_list' request.session.companySelected %}"><div><i class="fa fa-table"></i> <span class="nav-label">{% trans "Business Model Canvas" %}</span></div></a>
                             {% comment %}
-                            <a class="menuValuePropositionCanvas" href="/valuePropositionCanvas/{{request.session.companySelected}}"><div><i class="fa fa-table"></i> <span class="nav-label">{% trans "Value Proposition Canvas" %}</span></div></a>
+                            <a class="menuValuePropositionCanvas" href="{% url 'valuePropositionCanvas:valuePropositionCanvasElement_list' request.session.companySelected %}"><div><i class="fa fa-table"></i> <span class="nav-label">{% trans "Value Proposition Canvas" %}</span></div></a>
                             {% endcomment %}
-                            <a class="menuFinance" href="/finance/{{request.session.companySelected}}"><div><i class="fa fa-usd"></i> <span class="nav-label">{% trans "Finance" %}</span></div></a>
-                            <a class="menuKanboard" href="/kanboard/{{request.session.companySelected}}"><div><i class="fa fa-list-ul"></i> <span class="nav-label">{% trans "KanBoard" %}</span></div></a>
+                            <a class="menuFinance" href="{% url 'finance:detail_finance' request.session.companySelected %}"><div><i class="fa fa-usd"></i> <span class="nav-label">{% trans "Finance" %}</span></div></a>
+                            <a class="menuKanboard" href="{% url 'kanboard:kanboard' request.session.companySelected %}"><div><i class="fa fa-list-ul"></i> <span class="nav-label">{% trans "KanBoard" %}</span></div></a>
                         {% else %}
                             <a class="menuCompany" style="visibility: hidden;" href="/company"><div><i class="fa fa-info-circle"></i> <span class="nav-label">{% trans "Presentation" %}</span></div></a>
                             <a class="menuIrl" style="visibility: hidden;" href="/kpi/irl"><div><i class="fa fa-bar-chart"></i> <span class="nav-label">{% trans "IRL" %}</span></div></a>
@@ -119,16 +120,16 @@
                             {% endfor %}
                         </select>
                         {% if request.session.companySelected %}
-                            <a class="menuCompany" href="/company/{{request.session.companySelected}}"><div><i class="fa fa-info-circle"></i> <span class="nav-label">{% trans "Presentation" %}</span></div></a>
-                            <a class="menuIrl" href="/kpi/irl/{{request.session.companySelected}}"><div><i class="fa fa-bar-chart"></i> <span class="nav-label">{% trans "IRL" %}</span></div></a>
-                            <a class="menuTrl" href="/kpi/trl/{{request.session.companySelected}}"><div><i class="fa fa-bar-chart"></i> <span class="nav-label">{% trans "TRL" %}</span></div></a>
-                            <a class="menuExperiment" href="/experiment/{{request.session.companySelected}}"><div><i class="fa fa-flask"></i> <span class="nav-label">{% trans "Experiments" %}</span></div></a>
-                            <a class="menuBusinessCanvas" href="/businessCanvas/{{request.session.companySelected}}"><div><i class="fa fa-table"></i> <span class="nav-label">{% trans "Business Model Canvas" %}</span></div></a>
+                            <a class="menuCompany" href="{% url 'company:detail' request.session.companySelected %}"><div><i class="fa fa-info-circle"></i> <span class="nav-label">{% trans "Presentation" %}</span></div></a>
+                            <a class="menuIrl" href="{% url 'kpi:irl_filter' request.session.companySelected %}"><div><i class="fa fa-bar-chart"></i> <span class="nav-label">{% trans "IRL" %}</span></div></a>
+                            <a class="menuTrl" href="{% url 'kpi:trl_filter' request.session.companySelected %}"><div><i class="fa fa-bar-chart"></i> <span class="nav-label">{% trans "TRL" %}</span></div></a>
+                            <a class="menuExperiment" href="{% url 'experiment:experiment_list' request.session.companySelected %}"><div><i class="fa fa-flask"></i> <span class="nav-label">{% trans "Experiments" %}</span></div></a>
+                            <a class="menuBusinessCanvas" href="{% url 'businessCanvas:businessCanvasElement_list' request.session.companySelected %}"><div><i class="fa fa-table"></i> <span class="nav-label">{% trans "Business Model Canvas" %}</span></div></a>
                             {% comment %}
-                            <a class="menuValuePropositionCanvas" href="/valuePropositionCanvas/{{request.session.companySelected}}"><div><i class="fa fa-table"></i> <span class="nav-label">{% trans "Value Proposition Canvas" %}</span></div></a>
+                            <a class="menuValuePropositionCanvas" href="{% url 'valuePropositionCanvas:valuePropositionCanvasElement_list' request.session.companySelected %}"><div><i class="fa fa-table"></i> <span class="nav-label">{% trans "Value Proposition Canvas" %}</span></div></a>
                             {% endcomment %}
-                            <a class="menuFinance" href="/finance/{{request.session.companySelected}}"><div><i class="fa fa-usd"></i> <span class="nav-label">{% trans "Finance" %}</span></div></a>
-                            <a class="menuKanboard" href="/kanboard/{{request.session.companySelected}}"><div><i class="fa fa-list-ul"></i> <span class="nav-label">{% trans "Kanboard" %}</span></div></a>
+                            <a class="menuFinance" href="{% url 'finance:detail_finance' request.session.companySelected %}"><div><i class="fa fa-usd"></i> <span class="nav-label">{% trans "Finance" %}</span></div></a>
+                            <a class="menuKanboard" href="{% url 'kanboard:kanboard' request.session.companySelected %}"><div><i class="fa fa-list-ul"></i> <span class="nav-label">{% trans "Kanboard" %}</span></div></a>
                         {% else %}
                             <a class="menuCompany" style="visibility: hidden;" href="/company"><div><i class="fa fa-info-circle"></i> <span class="nav-label">{% trans "Presentation" %}</span></div></a>
                             <a class="menuIrl" style="visibility: hidden;" href="/kpi/irl"><div><i class="fa fa-bar-chart"></i> <span class="nav-label">{% trans "IRL" %}</span></div></a>
@@ -142,16 +143,16 @@
                             <a class="menuKanboard" style="visibility: hidden;" href="/kanboard"><div><i class="fa fa-list-ul"></i> <span class="nav-label">{% trans "KanBoard" %}</span></div></a>
                         {% endif %}
                     {% else %} <!-- Not a Centech or Mentor -->
-                        <a class="menuCompany" href="/company/{{userCompanyId}}"><div><i class="fa fa-info-circle"></i> <span class="nav-label">{% trans "Presentation" %}</span></div></a>
-                        <a class="menuIrl" href="/kpi/irl/{{userCompanyId}}"><div><i class="fa fa-bar-chart"></i> <span class="nav-label">{% trans "IRL" %}</span></div></a>
-                        <a class="menuTrl" href="/kpi/trl/{{userCompanyId}}"><div><i class="fa fa-bar-chart"></i> <span class="nav-label">{% trans "TRL" %}</span></div></a>
-                        <a class="menuExperiment" href="/experiment/{{userCompanyId}}"><div><i class="fa fa-flask"></i> <span class="nav-label">{% trans "Experiments" %}</span></div></a>
-                        <a class="menuBusinessCanvas" href="/businessCanvas/{{userCompanyId}}"><div><i class="fa fa-table"></i> <span class="nav-label">{% trans "Business Model Canvas" %}</span></div></a>
+                        <a class="menuCompany" href="{% url 'company:detail' userCompanyId %}"><div><i class="fa fa-info-circle"></i> <span class="nav-label">{% trans "Presentation" %}</span></div></a>
+                        <a class="menuIrl" href="{% url 'kpi:irl_filter' userCompanyId %}"><div><i class="fa fa-bar-chart"></i> <span class="nav-label">{% trans "IRL" %}</span></div></a>
+                        <a class="menuTrl" href="{% url 'kpi:trl_filter' userCompanyId %}"><div><i class="fa fa-bar-chart"></i> <span class="nav-label">{% trans "TRL" %}</span></div></a>
+                        <a class="menuExperiment" href="{% url 'experiment:experiment_list' userCompanyId %}"><div><i class="fa fa-flask"></i> <span class="nav-label">{% trans "Experiments" %}</span></div></a>
+                        <a class="menuBusinessCanvas" href="{% url 'businessCanvas:businessCanvasElement_list' userCompanyId %}"><div><i class="fa fa-table"></i> <span class="nav-label">{% trans "Business Model Canvas" %}</span></div></a>
                         {% comment %}
-                        <a class="menuValuePropositionCanvas" href="/valuePropositionCanvas/{{userCompanyId}}"><div><i class="fa fa-table"></i> <span class="nav-label">{% trans "Value Proposition Canvas" %}</span></div></a>
+                        <a class="menuValuePropositionCanvas" href="{% url 'valuePropositionCanvas:valuePropositionCanvasElement_list' userCompanyId %}"><div><i class="fa fa-table"></i> <span class="nav-label">{% trans "Value Proposition Canvas" %}</span></div></a>
                         {% endcomment %}
-                        <a class="menuFinance" href="/finance/{{userCompanyId}}"><div><i class="fa fa-usd"></i> <span class="nav-label">{% trans "Finance" %}</span></div></a>
-                        <a class="menuKanboard" href="/kanboard/{{userCompanyId}}"><div><i class="fa fa-list-ul"></i> <span class="nav-label">{% trans "KanBoard" %}</span></div></a>
+                        <a class="menuFinance" href="{% url 'finance:detail_finance' userCompanyId %}"><div><i class="fa fa-usd"></i> <span class="nav-label">{% trans "Finance" %}</span></div></a>
+                        <a class="menuKanboard" href="{% url 'kanboard:kanboard' userCompanyId %}"><div><i class="fa fa-list-ul"></i> <span class="nav-label">{% trans "KanBoard" %}</span></div></a>
                     {% endif %}
                 </li>
                 <li>
@@ -188,7 +189,7 @@
                             {% if isMentor %}
                                 <li>
                                     {% with profile=user.profile %}
-                                    <a href="/mentor/profile/{{ profile.userProfile_id }}" style="text-decoration: none; color: black; font-size: 14px;">
+                                    <a href="{%url 'mentor:update' profile.userProfile_id %}" style="text-decoration: none; color: black; font-size: 14px;">
                                        <div class="dropdown-messages-box">
                                             <i class="fa fa-user"></i> {% trans "Update profile" %}
                                         </div>
@@ -199,7 +200,7 @@
 
                                 <li>
                                     {% with profile=user.profile %}
-                                    <a href="/founder/profile/{{ profile.userProfile_id }}" style="text-decoration: none; color: black; font-size: 14px;">
+                                    <a href="{% url 'founder:update' profile.userProfile_id %}" style="text-decoration: none; color: black; font-size: 14px;">
                                         <div class="dropdown-messages-box">
                                             <i class="fa fa-user"></i> {% trans "Update profile" %}
                                         </div>
@@ -207,7 +208,7 @@
                                     {% endwith %}
                                 </li>
                                 <li>
-                                    <a href="/company/update/{{ userCompanyId }}" style="text-decoration: none; color: black; font-size: 14px;">
+                                    <a href="{% url 'company:update' userCompanyId %}" style="text-decoration: none; color: black; font-size: 14px;">
                                         <div class="dropdown-messages-box">
                                             <i class="fa fa-university"></i> {% trans "Update company" %}
                                         </div>
@@ -215,28 +216,28 @@
                                 </li>
                             {% elif isCentech %}
                                 <li>
-                                    <a href="/founder/profile/add" style="text-decoration: none; color: black; font-size: 14px;">
+                                    <a href="{% url 'founder:add' %}" style="text-decoration: none; color: black; font-size: 14px;">
                                         <div class="dropdown-messages-box">
                                             <i class="fa fa-users"></i> {% trans "Add new founder" %}
                                         </div>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/mentor/profile/add" style="text-decoration: none; color: black; font-size: 14px;">
+                                    <a href="{% url 'mentor:create' %}" style="text-decoration: none; color: black; font-size: 14px;">
                                         <div class="dropdown-messages-box">
                                             <i class="fa fa-graduation-cap"></i> {% trans "Add new mentor" %}
                                         </div>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/company/status/add/" style="text-decoration: none; color: black; font-size: 14px;">
+                                    <a href="{% url 'company:status_create' %}" style="text-decoration: none; color: black; font-size: 14px;">
                                         <div class="dropdown-messages-box">
                                             <i class="fa fa-tags"></i> {% trans "Add new status" %}
                                         </div>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/company/add/" style="text-decoration: none; color: black; font-size: 14px;">
+                                    <a href="{% url 'company:create' %}" style="text-decoration: none; color: black; font-size: 14px;">
                                         <div class="dropdown-messages-box">
                                             <i class="fa fa-university"></i> {% trans "Add new company" %}
                                         </div>
@@ -246,14 +247,14 @@
                                 <hr>
                                 <li>MY ACCOUNT</li>
                                 <li>
-                                    <a href="/user/password/{{ user.id }}" style="text-decoration: none; color: black; font-size: 14px;">
+                                    <a href="{% url 'home:change_password' user.id %}" style="text-decoration: none; color: black; font-size: 14px;">
                                         <div class="dropdown-messages-box">
                                             <i class="fa fa-key"></i> {% trans "Change password" %}
                                         </div>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/user/logout" style="text-decoration: none; color: black; font-size: 14px;">
+                                    <a href="{% url 'home:logout' %}" style="text-decoration: none; color: black; font-size: 14px;">
                                         <div class="dropdown-messages-box">
                                             <i class="fa fa-sign-out pull-left"></i> {% trans "Log out" %}
                                         </div>

@@ -12,7 +12,8 @@ from django.contrib.auth.decorators import login_required
 from app.company.models import Company
 from app.founder.models import Founder
 from app.mentor.models import Mentor
-from app.valuePropositionCanvas.models import ValuePropositionCanvasElement, ValuePropositionCanvasType
+from app.valuePropositionCanvas.models import ValuePropositionCanvasElement, VALUE_PROPOSITION_CANVAS_TYPE_CHOICES
+from app.businessCanvas.models import BusinessCanvasElement
 from django.http import HttpResponseRedirect
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -29,7 +30,8 @@ class ValuePropositionCanvasElementList(generic.ListView):
         for group in groups:
             if group['name'] == 'Centech':
                 try:
-                    company = Company.objects.get(id = int(self.args[0])) #If the company exist, else we go to except
+                    idCompany = BusinessCanvasElement.objects.get(id=int(self.args[0])).company.id
+                    company = Company.objects.get(id = idCompany) #If the company exist, else we go to except
                     return super(ValuePropositionCanvasElementList, self).dispatch(*args, **kwargs)
                 except:
                     pass
@@ -39,7 +41,7 @@ class ValuePropositionCanvasElementList(generic.ListView):
             try:
                 founder = Founder.objects.filter(user = self.request.user.id)
                 company = Company.objects.get(founders = founder)
-                if(int(self.args[0]) == int(company.id)):
+                if(BusinessCanvasElement.objects.get(id=int(self.args[0])).company == int(company.id)):
                     return super(ValuePropositionCanvasElementList, self).dispatch(*args, **kwargs)
             except:
                 pass
@@ -59,39 +61,27 @@ class ValuePropositionCanvasElementList(generic.ListView):
 
     def get_context_data(self, **kwargs):
         context = super(ValuePropositionCanvasElementList, self).get_context_data(**kwargs)
-        isFounder = False
-        listFounder = Founder.objects.filter(company__pk = self.args[0])
-        for founder in listFounder:
-            if founder.user.id == self.request.user.id:
-                isFounder = True
+        context['valueProposition'] = self.args[0]
+        context['title'] = BusinessCanvasElement.objects.get(id = self.args[0]).title
 
-        context['companyId'] = self.args[0]
-        context['isFounder'] = isFounder
+        valueProposition = self.args[0]
 
-        company = Company.objects.get(id=self.args[0])
-
-        Gain = ValuePropositionCanvasType.objects.get(name="Gain")
-        listGains = ValuePropositionCanvasElement.objects.filter(type = Gain, company = company)
+        listGains = ValuePropositionCanvasElement.objects.filter(type = VALUE_PROPOSITION_CANVAS_TYPE_CHOICES[0][0], valueProposition = valueProposition)
         context['listGains'] = listGains
 
-        Pain = ValuePropositionCanvasType.objects.get(name="Pain")
-        listPains = ValuePropositionCanvasElement.objects.filter(type = Pain, company = company)
+        listPains = ValuePropositionCanvasElement.objects.filter(type = VALUE_PROPOSITION_CANVAS_TYPE_CHOICES[1][0], valueProposition = valueProposition)
         context['listPains'] = listPains
 
-        customerJob = ValuePropositionCanvasType.objects.get(name="CustomerJob")
-        listCustomerJobs = ValuePropositionCanvasElement.objects.filter(type = customerJob, company = company)
+        listCustomerJobs = ValuePropositionCanvasElement.objects.filter(type = VALUE_PROPOSITION_CANVAS_TYPE_CHOICES[2][0], valueProposition = valueProposition)
         context['listCustomerJobs'] = listCustomerJobs
 
-        gainCreator = ValuePropositionCanvasType.objects.get(name="GainCreator")
-        listGainCreators = ValuePropositionCanvasElement.objects.filter(type = gainCreator, company = company)
+        listGainCreators = ValuePropositionCanvasElement.objects.filter(type = VALUE_PROPOSITION_CANVAS_TYPE_CHOICES[3][0], valueProposition = valueProposition)
         context['listGainCreators'] = listGainCreators
 
-        painReliever = ValuePropositionCanvasType.objects.get(name="PainReliever")
-        listPainRelievers = ValuePropositionCanvasElement.objects.filter(type = painReliever, company = company)
+        listPainRelievers = ValuePropositionCanvasElement.objects.filter(type = VALUE_PROPOSITION_CANVAS_TYPE_CHOICES[4][0], valueProposition = valueProposition)
         context['listPainRelievers'] = listPainRelievers
 
-        productAndService = ValuePropositionCanvasType.objects.get(name="ProductAndService")
-        listProductAndServices = ValuePropositionCanvasElement.objects.filter(type = productAndService, company = company)
+        listProductAndServices = ValuePropositionCanvasElement.objects.filter(type = VALUE_PROPOSITION_CANVAS_TYPE_CHOICES[5][0], valueProposition = valueProposition)
         context['listProductAndServices'] = listProductAndServices
 
         return context
@@ -117,7 +107,7 @@ def getDetail(request, element_id):
             element = ValuePropositionCanvasElement.objects.get(id=element_id)
             message['title'] = element.title
             message['comment'] = element.comment
-            message['type'] = element.type.name
+            message['type'] = element.type
         except:
             null
 
@@ -142,15 +132,18 @@ def addElement(request):
             if typeName == None:
                 error = True
 
-            companyId = request.POST.get('company', '')
-            if companyId == None:
+            valueProposition = request.POST.get('valueProposition', '')
+            try:
+                valueProposition = BusinessCanvasElement.objects.get(id=valueProposition)
+            except:
                 error = True
 
             if error == False:
                 if(request.POST.get('update', '') == "False"):
-                    type = ValuePropositionCanvasType.objects.get(name = typeName)
-                    company = Company.objects.get(id = companyId)
-                    element = ValuePropositionCanvasElement(title = title, comment = comment, type = type, company= company)
+                    print typeName
+                    element = ValuePropositionCanvasElement(title = title, comment = comment, type = typeName, valueProposition = valueProposition)
+                    print element.title
+                    print element.type
                     element.save()
                     id = element.id
                     return JsonResponse({'type': typeName, 'id': id, 'title': title, 'updated': 'False'})

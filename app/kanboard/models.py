@@ -1,3 +1,5 @@
+# coding: utf-8
+
 import datetime
 from django.utils import timezone
 
@@ -11,9 +13,10 @@ from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 
 PHASE_CHOICES = (
-    (1, u'Finance'),
-    (2, u'R&D'),
-    (3, u'Centech'),
+    (1, u'Commercialisation'),
+    (2, u'Développement de produit'),
+    (3, u'Financement'),
+    (4, u'Gouvernance'),
 )
 
 class Card(models.Model):

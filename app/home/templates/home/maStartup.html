@@ -3,15 +3,29 @@
 {% load i18n %}
 {% block title %}{{app.site.entreprise.name}} | {% trans "No Access" %}{% endblock %}
 
+{% block extrahead %}
+<style>
+    .container{
+        width: 100%;
+        padding: 0px;
+    }
+    .col-lg-12{
+        padding: 0px;
+    }
+    #page-wrapper{
+        min-height: 0px;
+    }
+</style>
+{% endblock %}
 
 {% block content %}
-    <iframe id="iframeStartup" src="http://mastartup.etsmtl.ca/sign-in" width="100%"></iframe>
+    <iframe id="iframeStartup" src="http://mastartup.etsmtl.ca/sign-in" width="100%" style="border:none;"></iframe>
 {% endblock %}
 
 {% block extrajs %}
 <script type="text/javascript">
     heightMenu = document.getElementById("top-menu").offsetHeight;
     heightWindows = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-    document.getElementById("iframeStartup").height = heightWindows - heightMenu;
+    document.getElementById("iframeStartup").height = heightWindows - heightMenu -4;
 </script>
 {% endblock %}

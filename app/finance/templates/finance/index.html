@@ -41,7 +41,7 @@
                 google.setOnLoadCallback(drawChart);
                 function drawChart() {
                 var data = google.visualization.arrayToDataTable([
-                  ['Type de financement', 'En attente', 'Reçu'],
+                  ['Type de financement', 'Demandé', 'Reçu'],
                   ['Bourses', {{totalBoursesSoumises}}, {{totalBoursesRecues}}],
                   ['Subventions', {{totalSubventionsSoumises}}, {{totalSubventionsRecues}}],
                   ['Investissements', {{totalInvestissementsSoumis}}, {{totalInvestissementsRecus}}],
@@ -79,7 +79,7 @@
 
                 function drawChart() {
                     var data = google.visualization.arrayToDataTable([
-                        ['', 'En attente', 'Reçu'],
+                        ['', 'Demandée', 'Reçu'],
                         ['Bourses', {{totalBoursesSoumises}}, {{totalBoursesRecues}}], ]);
                     var options = {
                         colors: ['#4285F4', '#56cc32'],
@@ -160,7 +160,7 @@
 
                 function drawChart() {
                     var data = google.visualization.arrayToDataTable([
-                        ['', 'En attente', 'Reçu'],
+                        ['', 'Demandée', 'Reçu'],
                         ['Subventions', {{totalSubventionsSoumises}}, {{totalSubventionsRecues}}], ]);
                     var options = {
                         colors: ['#4285F4', '#56cc32'],
@@ -241,7 +241,7 @@
 
                 function drawChart() {
                     var data = google.visualization.arrayToDataTable([
-                        ['', 'En attente', 'Reçu'],
+                        ['', 'Demandé', 'Reçu'],
                         ['Investissements', {{totalInvestissementsSoumis}}, {{totalInvestissementsRecus}}], ]);
                     var options = {
                         colors: ['#4285F4', '#56cc32'],
@@ -323,7 +323,7 @@
 
                 function drawChart() {
                     var data = google.visualization.arrayToDataTable([
-                        ['', 'En attente', 'Reçu'],
+                        ['', 'Demandé', 'Reçu'],
                         ['Prets', {{totalPretsSoumis}}, {{totalPretsRecus}}], ]);
                     var options = {
                         colors: ['#4285F4', '#56cc32'],
@@ -405,7 +405,7 @@
 
                 function drawChart() {
                     var data = google.visualization.arrayToDataTable([
-                        ['', 'ODS', 'Reçu'],
+                        ['', 'Offre De Service', 'Reçu'],
                         ['Ventes', {{totalVentesSoumises}}, {{totalVentesRecues}}], ]);
                     var options = {
                         colors: ['#4285F4', '#56cc32'],

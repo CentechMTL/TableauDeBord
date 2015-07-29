@@ -30,8 +30,8 @@
             var donnees = $(this).serialize();
             $.ajax({
                 type: this.method,
-                url: '{% url "addElement" %}',
-                data: donnees + '&type=' + this.id + '&company=' + {{companyId}},
+                url: '{% url "valuePropositionCanvas:addElement" %}',
+                data: donnees + '&type=' + this.id + '&valueProposition=' + {{valueProposition}},
 
                 success: function(data) {
                     //Delete content of the form
@@ -42,9 +42,9 @@
                     if(data.updated == "False"){
 
                         //<div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
-                        //  <span class="Channel{{elem.id}}" onclick='getDetail(this.className, "{% url "getDetail" 1 %}")'>{{elem.title}}</span>
-                        //  <span style="float: right;" class="Channel{{elem.id}}" onclick='deleteElement(this.className, "{% url "deleteElement" 1 %}");'><i class="fa fa-trash"></i></span>
-                        //  <span style="float: right;" class="Channel{{elem.id}}" onclick='editElement(this.className, "{% url "getDetail" 1 %}");'><i class="fa fa-pencil-square-o"></i></span>
+                        //  <span class="Channel{{elem.id}}" onclick='getDetail(this.className, "{% url "valuePropositionCanvas:getDetail" 1 %}")'>{{elem.title}}</span>
+                        //  <span style="float: right;" class="Channel{{elem.id}}" onclick='deleteElement(this.className, "{% url "valuePropositionCanvas:deleteElement" 1 %}");'><i class="fa fa-trash"></i></span>
+                        //  <span style="float: right;" class="Channel{{elem.id}}" onclick='editElement(this.className, "{% url "valuePropositionCanvas:getDetail" 1 %}");'><i class="fa fa-pencil-square-o"></i></span>
                         //  <p style="visibility: hidden; display: none;"></p>
                         //</div>
 
@@ -57,20 +57,20 @@
                         //The span of the title
                         var spanTitle = document.createElement('span');
                         spanTitle.className = data.type+data.id;
-                        spanTitle.setAttribute('onclick','getDetail(this.className, "{% url "getDetail" 1 %}")')
+                        spanTitle.setAttribute('onclick','getDetail(this.className, "{% url "valuePropositionCanvas:getDetail" 1 %}")')
                         spanTitle.innerHTML = data.title;
 
                         //The span of delete
                         var spanDelete = document.createElement('span');
                         spanDelete.className = data.type+data.id;
-                        spanDelete.setAttribute('onclick','deleteElement(this.className, "{% url "deleteElement" 1 %}");')
+                        spanDelete.setAttribute('onclick','deleteElement(this.className, "{% url "valuePropositionCanvas:deleteElement" 1 %}");')
                         spanDelete.innerHTML = "<i class=\"fa fa-trash\"></i>";
                         spanDelete.style.float = "right";
 
                         //The span of edit
                         var spanEdit = document.createElement('span');
                         spanEdit.className = data.type+data.id;
-                        spanEdit.setAttribute('onclick','editElement(this.className, "{% url "getDetail" 1 %}");')
+                        spanEdit.setAttribute('onclick','editElement(this.className, "{% url "valuePropositionCanvas:getDetail" 1 %}");')
                         spanEdit.innerHTML = "<i class=\"fa fa-pencil-square-o\"></i>";
                         spanEdit.style.float = "right";
 
@@ -116,6 +116,7 @@
 <div class="row">
     <div class="col-sm-12" align="center">
         <h1>{% trans "Value Proposition Canvas" %}</h1>
+        <h2>{{title}}</h2>
     </div>
 </div>
 <div class="row">
@@ -142,10 +143,10 @@
                         </form>
                         {% for elem in listProductAndServices %}
                             <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
-                                <span class="ProductAndService{{elem.id}}" onclick='getDetail(this.className, "{% url "getDetail" 1 %}");'>{{elem.title}}</span>
+                                <span class="ProductAndService{{elem.id}}" onclick='getDetail(this.className, "{% url "valuePropositionCanvas:getDetail" 1 %}");'>{{elem.title}}</span>
                                 {%if isFounder %}
-                                <span style="float: right;" class="ProductAndService{{elem.id}}" onclick='deleteElement(this.className, "{% url "deleteElement" 1 %}");'><i class="fa fa-trash"></i></span>
-                                <span style="float: right;" class="ProductAndService{{elem.id}}" onclick='editElement(this.className, "{% url "getDetail" 1 %}");'><i class="fa fa-pencil-square-o"></i></span>
+                                <span style="float: right;" class="ProductAndService{{elem.id}}" onclick='deleteElement(this.className, "{% url "valuePropositionCanvas:deleteElement" 1 %}");'><i class="fa fa-trash"></i></span>
+                                <span style="float: right;" class="ProductAndService{{elem.id}}" onclick='editElement(this.className, "{% url "valuePropositionCanvas:getDetail" 1 %}");'><i class="fa fa-pencil-square-o"></i></span>
                                 {% endif %}
                                 <p style="visibility: hidden; display: none;"></p>
                             </div>
@@ -167,10 +168,10 @@
                     </form>
                     {% for elem in listGainCreators %}
                             <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
-                                <span class="GainCreator{{elem.id}}" onclick='getDetail(this.className, "{% url "getDetail" 1 %}")'>{{elem.title}}</span>
+                                <span class="GainCreator{{elem.id}}" onclick='getDetail(this.className, "{% url "valuePropositionCanvas:getDetail" 1 %}")'>{{elem.title}}</span>
                                 {%if isFounder %}
-                                <span style="float: right;" class="GainCreator{{elem.id}}" onclick='deleteElement(this.className, "{% url "deleteElement" 1 %}");'><i class="fa fa-trash"></i></span>
-                                <span style="float: right;" class="GainCreator{{elem.id}}" onclick='editElement(this.className, "{% url "getDetail" 1 %}");'><i class="fa fa-pencil-square-o"></i></span>
+                                <span style="float: right;" class="GainCreator{{elem.id}}" onclick='deleteElement(this.className, "{% url "valuePropositionCanvas:deleteElement" 1 %}");'><i class="fa fa-trash"></i></span>
+                                <span style="float: right;" class="GainCreator{{elem.id}}" onclick='editElement(this.className, "{% url "valuePropositionCanvas:getDetail" 1 %}");'><i class="fa fa-pencil-square-o"></i></span>
                                 {% endif %}
                                 <p style="visibility: hidden; display: none;"></p>
                             </div>
@@ -194,10 +195,10 @@
                     </form>
                         {% for elem in listGains %}
                             <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
-                                <span class="Gain{{elem.id}}" onclick='getDetail(this.className, "{% url "getDetail" 1 %}")'>{{elem.title}}</span>
+                                <span class="Gain{{elem.id}}" onclick='getDetail(this.className, "{% url "valuePropositionCanvas:getDetail" 1 %}")'>{{elem.title}}</span>
                                 {%if isFounder %}
-                                <span style="float: right;" class="Gain{{elem.id}}" onclick='deleteElement(this.className, "{% url "deleteElement" 1 %}");'><i class="fa fa-trash"></i></span>
-                                <span style="float: right;" class="Gain{{elem.id}}" onclick='editElement(this.className, "{% url "getDetail" 1 %}");'><i class="fa fa-pencil-square-o"></i></span>
+                                <span style="float: right;" class="Gain{{elem.id}}" onclick='deleteElement(this.className, "{% url "valuePropositionCanvas:deleteElement" 1 %}");'><i class="fa fa-trash"></i></span>
+                                <span style="float: right;" class="Gain{{elem.id}}" onclick='editElement(this.className, "{% url "valuePropositionCanvas:getDetail" 1 %}");'><i class="fa fa-pencil-square-o"></i></span>
                                 {% endif %}
                                 <p style="visibility: hidden; display: none;"></p>
                             </div>
@@ -219,10 +220,10 @@
                     </form>
                         {% for elem in listCustomerJobs %}
                             <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
-                                <span class="CustomerJob{{elem.id}}" onclick='getDetail(this.className, "{% url "getDetail" 1 %}")'>{{elem.title}}</span>
+                                <span class="CustomerJob{{elem.id}}" onclick='getDetail(this.className, "{% url "valuePropositionCanvas:getDetail" 1 %}")'>{{elem.title}}</span>
                                 {%if isFounder %}
-                                <span style="float: right;" class="CustomerJob{{elem.id}}" onclick='deleteElement(this.className, "{% url "deleteElement" 1 %}");'><i class="fa fa-trash"></i></span>
-                                <span style="float: right;" class="CustomerJob{{elem.id}}" onclick='editElement(this.className, "{% url "getDetail" 1 %}");'><i class="fa fa-pencil-square-o"></i></span>
+                                <span style="float: right;" class="CustomerJob{{elem.id}}" onclick='deleteElement(this.className, "{% url "valuePropositionCanvas:deleteElement" 1 %}");'><i class="fa fa-trash"></i></span>
+                                <span style="float: right;" class="CustomerJob{{elem.id}}" onclick='editElement(this.className, "{% url "valuePropositionCanvas:getDetail" 1 %}");'><i class="fa fa-pencil-square-o"></i></span>
                                 {% endif %}
                                 <p style="visibility: hidden; display: none;"></p>
                             </div>
@@ -246,10 +247,10 @@
                     </form>
                         {% for elem in listPainRelievers %}
                             <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
-                                <span class="PainReliever{{elem.id}}" onclick='getDetail(this.className, "{% url "getDetail" 1 %}")'>{{elem.title}}</span>
+                                <span class="PainReliever{{elem.id}}" onclick='getDetail(this.className, "{% url "valuePropositionCanvas:getDetail" 1 %}")'>{{elem.title}}</span>
                                 {%if isFounder %}
-                                <span style="float: right;" class="PainReliever{{elem.id}}" onclick='deleteElement(this.className, "{% url "deleteElement" 1 %}");'><i class="fa fa-trash"></i></span>
-                                <span style="float: right;" class="PainReliever{{elem.id}}" onclick='editElement(this.className, "{% url "getDetail" 1 %}");'><i class="fa fa-pencil-square-o"></i></span>
+                                <span style="float: right;" class="PainReliever{{elem.id}}" onclick='deleteElement(this.className, "{% url "valuePropositionCanvas:deleteElement" 1 %}");'><i class="fa fa-trash"></i></span>
+                                <span style="float: right;" class="PainReliever{{elem.id}}" onclick='editElement(this.className, "{% url "valuePropositionCanvas:getDetail" 1 %}");'><i class="fa fa-pencil-square-o"></i></span>
                                 {% endif %}
                                 <p style="visibility: hidden; display: none;"></p>
                             </div>
@@ -271,10 +272,10 @@
                     </form>
                         {% for elem in listPains %}
                             <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
-                                <span class="Pain{{elem.id}}" onclick='getDetail(this.className, "{% url "getDetail" 1 %}")'>{{elem.title}}</span>
+                                <span class="Pain{{elem.id}}" onclick='getDetail(this.className, "{% url "valuePropositionCanvas:getDetail" 1 %}")'>{{elem.title}}</span>
                                 {%if isFounder %}
-                                <span style="float: right;" class="Pain{{elem.id}}" onclick='deleteElement(this.className, "{% url "deleteElement" 1 %}");'><i class="fa fa-trash"></i></span>
-                                <span style="float: right;" class="Pain{{elem.id}}" onclick='editElement(this.className, "{% url "getDetail" 1 %}");'><i class="fa fa-pencil-square-o"></i></span>
+                                <span style="float: right;" class="Pain{{elem.id}}" onclick='deleteElement(this.className, "{% url "valuePropositionCanvas:deleteElement" 1 %}");'><i class="fa fa-trash"></i></span>
+                                <span style="float: right;" class="Pain{{elem.id}}" onclick='editElement(this.className, "{% url "valuePropositionCanvas:getDetail" 1 %}");'><i class="fa fa-pencil-square-o"></i></span>
                                 {% endif %}
                                 <p style="visibility: hidden; display: none;"></p>
                             </div>

@@ -64,6 +64,13 @@ class ValuePropositionCanvasElementList(generic.ListView):
         context['valueProposition'] = self.args[0]
         context['title'] = BusinessCanvasElement.objects.get(id = self.args[0]).title
 
+        #Acces right
+        for founder in BusinessCanvasElement.objects.get(id = self.args[0]).company.founders.all():
+            if founder.user == self.request.user:
+                context['isFounder'] = True
+            else:
+                context['isFounder'] = False
+
         valueProposition = self.args[0]
 
         listGains = ValuePropositionCanvasElement.objects.filter(type = VALUE_PROPOSITION_CANVAS_TYPE_CHOICES[0][0], valueProposition = valueProposition)
@@ -91,11 +98,16 @@ def deleteElement(request, element_id):
 
     if request.is_ajax():
         element = ValuePropositionCanvasElement.objects.get(id=element_id)
-        element.delete()
-        message['delete'] = "Deleted"
+        #Acces right
+        list_of_founders = element.valueProposition.company.founders.all()
+        for founder in list_of_founders:
+            if founder.user == request.user:
+                element.delete()
+                message['delete'] = "Deleted"
 
-        data = json.dumps(message)
-        return HttpResponse(data, content_type='application/json')
+                data = json.dumps(message)
+                return HttpResponse(data, content_type='application/json')
+
     #The visitor can't see this page!
     return HttpResponseRedirect("/user/noAccessPermissions")
 
@@ -139,21 +151,25 @@ def addElement(request):
                 error = True
 
             if error == False:
-                if(request.POST.get('update', '') == "False"):
-                    print typeName
-                    element = ValuePropositionCanvasElement(title = title, comment = comment, type = typeName, valueProposition = valueProposition)
-                    print element.title
-                    print element.type
-                    element.save()
-                    id = element.id
-                    return JsonResponse({'type': typeName, 'id': id, 'title': title, 'updated': 'False'})
-                else:
-                    id = request.POST.get('update', '')
-                    element = ValuePropositionCanvasElement.objects.get(id = id)
-                    element.title = title
-                    element.comment = comment
-                    element.save()
-                    return JsonResponse({'type': typeName, 'id': id, 'title': title, 'updated': 'True'})
+                #Acces right
+                list_of_founders = valueProposition.company.founders.all()
+                for founder in list_of_founders:
+                    if founder.user == request.user:
+                        if(request.POST.get('update', '') == "False"):
+                            print typeName
+                            element = ValuePropositionCanvasElement(title = title, comment = comment, type = typeName, valueProposition = valueProposition)
+                            print element.title
+                            print element.type
+                            element.save()
+                            id = element.id
+                            return JsonResponse({'type': typeName, 'id': id, 'title': title, 'updated': 'False'})
+                        else:
+                            id = request.POST.get('update', '')
+                            element = ValuePropositionCanvasElement.objects.get(id = id)
+                            element.title = title
+                            element.comment = comment
+                            element.save()
+                            return JsonResponse({'type': typeName, 'id': id, 'title': title, 'updated': 'True'})
         #The visitor can't see this page!
         return HttpResponseRedirect("/user/noAccessPermissions")
     #The visitor can't see this page!

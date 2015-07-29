@@ -8,6 +8,7 @@ from django.core.urlresolvers import reverse, reverse_lazy
 from django.views import generic
 from django.utils import timezone
 import json
+from datetime import datetime
 from django.contrib.auth.models import User
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
@@ -113,6 +114,16 @@ class Summary(generic.TemplateView):
         context['experiments'] = experiments
         context['experiments_inProgress_count'] = CustomerExperiment.objects.filter(validated = None).count()
         context['experiments_validated_count'] = CustomerExperiment.objects.filter(validated = True).count()
+
+        timeOfIncubation = []
+        for company in companies:
+            if company.incubated_on:
+                now = datetime.date(datetime.today())
+                delta_days = ((now - company.incubated_on).days)/30
+                timeOfIncubation.append((company, delta_days))
+            else:
+                timeOfIncubation.append((company, 0))
+        context['timeOfIncubation'] = timeOfIncubation
 
         return context
 

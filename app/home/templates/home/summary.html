@@ -7,6 +7,11 @@
 {% load i18n %}
 
 {% block content %}
+
+<!-----------------------------------------
+================= GENERAL =================
+------------------------------------------>
+
 <div class="row" align="center" style="margin-top: 50px;">
     <div class="col-sm-4" style="border-right: 1px solid grey;">
         <strong>{% trans "Number of companies" %}</strong> <br>
@@ -21,6 +26,10 @@
         <span style="font-size: 70px;">{{mentors.count}}</span>
     </div>
 </div>
+
+<!-----------------------------------------
+================ FINANCES =================
+------------------------------------------>
 
 <h1>{% trans "Finances" %}</h1>
 <div class="row">
@@ -76,6 +85,10 @@
         </div>
     </div>
 </div>
+
+<!-----------------------------------------
+======== INDICATORS OF PERFORMANCES =======
+------------------------------------------>
 
 <h1>{% trans "Indicators of performances" %}</h1>
 <div class="row" align="center">
@@ -136,6 +149,10 @@
         </script>
     </div>
 </div>
+
+<!-----------------------------------------
+============= EXPERIMENTATIONS ============
+------------------------------------------>
 
 <h1>{% trans "Experiments" %}</h1>
 <div class="row" align="center">
@@ -199,8 +216,55 @@
         </script>
     </div>
 </div>
-<br>
 
+<!-----------------------------------------
+============ TIME OF INCUBATION ===========
+------------------------------------------>
+<h1>{% trans "Month spent in incubation" %}</h1>
+
+<div class="row" style="padding-top: 0px;">
+    <div class="col-sm-12">
+        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+        <div id="chart_timeOfIncubation"></div>
+        <script type="text/javascript">
+            google.load("visualization", "1", {packages: ["corechart", 'bar']});
+            google.setOnLoadCallback(drawDualX);
+
+            function drawDualX() {
+                var data = new google.visualization.DataTable();
+                data.addColumn('string', '{% trans "Companies" %}');
+                data.addColumn('number', '{% trans "Month spent in incubation" %}');
+                {% for company, timeSpent in timeOfIncubation %}
+                    data.addRows([['{{company.name|safe}}', {{timeSpent}}],]);
+                {% endfor %}
+
+                var options = {
+                    height: data.getNumberOfRows() * 30,
+                    chartArea: {
+                        top:20,
+                        height: data.getNumberOfRows() * 30 -100 ,
+                    },
+                    hAxis: {
+                        maxAlternation:1,
+                        title: "{% trans 'Month spent in incubation' %}",
+                        minValue: 0,
+
+                    },
+                    bars: 'horizontal',
+                    backgroundColor : 'none'
+                };
+
+                var chart = new google.visualization.BarChart(document.getElementById('chart_timeOfIncubation'));
+
+                chart.draw(data, options);
+            }
+        </script>
+    </div>
+</div>
+<br>
+{% endblock %}
+
+{% block extrajs %}
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 

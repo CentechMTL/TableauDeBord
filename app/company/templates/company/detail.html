@@ -47,13 +47,16 @@
                 {% trans "Web site" %} : <a href="{{ company.url }}">{{ company.url }}</a><br><br>
                 {% endif %}
                 {% if company.incubated_on %}
-                {% trans "Incubation date" %} : {{ company.incubated_on }}
+                    {% trans "Incubation date" %} : {{ company.incubated_on }}
+                    {% if company.endOfIncubation %}
+                        <br>{% trans "End of incubation date" %} : {{ company.endOfIncubation }}
+                    {% endif %}
                 {% endif %}
                 <br><br>
             </div>
         </div>
     </div>
-    {% if company.incubated_on %}
+    {% if company.get_percentage_incubation_time %}
     <div class="row">
         <div class="col-sm-12">
             <div class="meter">

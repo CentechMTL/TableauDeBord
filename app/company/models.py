@@ -45,6 +45,8 @@ class Company(models.Model):
     linkedIn = models.URLField(blank=True, null=True, verbose_name=_('linkedIn'))
 
     incubated_on = models.DateField(blank=True, null=True)
+    endOfIncubation = models.DateField(blank=True, null=True)
+
     created = models.DateTimeField(blank=True)
     updated = models.DateTimeField(blank=True)
 
@@ -92,10 +94,11 @@ class Company(models.Model):
             return None
 
     def get_percentage_incubation_time(self):
-        if self.incubated_on:
+        if self.incubated_on and self.endOfIncubation:
             now = datetime.date(datetime.today())
             delta_days = (now - self.incubated_on).days
-            percentage = int(round(((float(delta_days))/(355*3))*100, 0))
+            timeOfIncubation = (self.endOfIncubation - self.incubated_on).days
+            percentage = int(round(((float(delta_days))/timeOfIncubation)*100, 0))
             if percentage > 100:
                 return 100
             else:

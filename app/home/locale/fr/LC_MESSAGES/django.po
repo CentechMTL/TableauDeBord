@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-27 15:27-0400\n"
+"POT-Creation-Date: 2015-07-29 10:30-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -118,6 +118,7 @@ msgid ""
 "sur notre plateforme, merci de contacter nos services via l'adresse"
 msgstr ""
 
+#: .\app\home\templates\home\maStartup.html:4
 #: .\app\home\templates\home\noAccessPermissions.html:4
 msgid "No Access"
 msgstr "Pas d'autorisation"

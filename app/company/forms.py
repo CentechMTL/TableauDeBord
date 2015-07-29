@@ -59,11 +59,18 @@ class CompanyStatusCreateForm(forms.Form):
 class CompanyCreateForm(forms.Form):
 
     incubated_on = forms.DateField(
-        label=_('incubated on'),
+        label=_('Incubated on'),
         required = False,
         input_formats=('%Y-%m-%d',),
     )
     incubated_on.widget.attrs.update({'type': 'date', 'class': 'datepicker'})
+
+    endOfIncubation = forms.DateField(
+        label=_('Incubation end on'),
+        required = False,
+        input_formats=('%Y-%m-%d',),
+    )
+    endOfIncubation.widget.attrs.update({'type': 'date', 'class': 'datepicker'})
 
     name = forms.CharField(
         label=_('Name'),
@@ -156,6 +163,7 @@ class CompanyCreateForm(forms.Form):
             Field('name'),
             Field('status'),
             Field('incubated_on'),
+            Field('endOfIncubation'),
             Field('logo'),
             Field('video'),
             Field('url'),
@@ -268,11 +276,18 @@ class MiniCompanyUpdateForm(forms.Form):
 class CompanyUpdateForm(MiniCompanyUpdateForm):
 
     incubated_on = forms.DateField(
-        label=_('incubated on'),
+        label=_('Incubated on'),
         required = False,
         input_formats=('%Y-%m-%d',),
     )
     incubated_on.widget.attrs.update({'type': 'date', 'class': 'datepicker'})
+
+    endOfIncubation = forms.DateField(
+        label=_('Incubation end on'),
+        required = False,
+        input_formats=('%Y-%m-%d',),
+    )
+    endOfIncubation.widget.attrs.update({'type': 'date', 'class': 'datepicker'})
 
     founders = forms.ModelMultipleChoiceField(
         label=_(u"Founders"),
@@ -303,7 +318,8 @@ class CompanyUpdateForm(MiniCompanyUpdateForm):
         self.fields['mentors'].initial = company.mentors.all
         if company.incubated_on :
             self.fields['incubated_on'].initial = company.incubated_on.isoformat()
-
+        if company.endOfIncubation :
+            self.fields['endOfIncubation'].initial = company.endOfIncubation.isoformat()
         self.fields['facebook'].initial = company.facebook
         self.fields['twitter'].initial = company.twitter
         self.fields['googlePlus'].initial = company.googlePlus
@@ -324,6 +340,7 @@ class CompanyUpdateForm(MiniCompanyUpdateForm):
             Field('founders'),
             Field('mentors'),
             Field('incubated_on'),
+            Field('endOfIncubation'),
             Field('about'),
             StrictButton(_('Save'), type="submit")
         )

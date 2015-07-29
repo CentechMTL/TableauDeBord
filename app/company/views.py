@@ -155,6 +155,8 @@ class CompanyCreate(generic.CreateView):
         try:
             if(form.data['incubated_on'] != ""):
                 newCompany.incubated_on = form.data['incubated_on']
+            if(form.data['endOfIncubation'] != ""):
+                newCompany.endOfIncubation = form.data['endOfIncubation']
         except:
             pass
 
@@ -245,6 +247,11 @@ class CompanyUpdate(generic.UpdateView):
                 object.incubated_on = form.data['incubated_on']
             else:
                 object.incubated_on = None
+
+            if form.data['endOfIncubation'] != "":
+                object.endOfIncubation = form.data['endOfIncubation']
+            else:
+                object.endOfIncubation = None
         except:
             pass
 

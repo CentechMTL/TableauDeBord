@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-27 15:28-0400\n"
+"POT-Creation-Date: 2015-07-29 10:30-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -45,11 +45,11 @@ msgstr "A faire avant le"
 msgid "Assign to"
 msgstr "Assignée à"
 
-#: .\app\kanboard\models.py:28
+#: .\app\kanboard\models.py:31
 msgid "Phase"
 msgstr "Phase"
 
-#: .\app\kanboard\models.py:35
+#: .\app\kanboard\models.py:38
 msgid "State"
 msgstr "Etat"
 

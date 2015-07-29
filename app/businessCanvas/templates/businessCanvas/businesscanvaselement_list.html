@@ -243,7 +243,6 @@
                                 {%if isFounder %}
                                 <span style="float: right;" class="ValueProposition{{elem.id}}" onclick='deleteElement(this.className, "{% url "businessCanvas:businessCanvasDeleteElement" 1 %}");'><i class="fa fa-trash"></i></span>
                                 <span style="float: right;" class="ValueProposition{{elem.id}}" onclick='editElement(this.className, "{% url "businessCanvas:businessCanvasGetDetail" 1 %}");'><i class="fa fa-pencil-square-o"></i></span>
-                                <span style="float: right;" class="ValueProposition{{elem.id}}"><a href="{% url 'valuePropositionCanvas:valuePropositionCanvasElement_list' elem.id %}"><i class="fa fa-external-link"></i></a></span>
                                 {% endif %}
                                 <p style="visibility: hidden; display: none;"></p>
                             </div>

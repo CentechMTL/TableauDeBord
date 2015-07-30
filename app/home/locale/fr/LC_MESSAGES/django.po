@@ -247,7 +247,7 @@ msgstr "Nombre d'expérimentations"
 #: .\app\home\templates\home\summary.html:236
 #: .\app\home\templates\home\summary.html:249
 msgid "Month spent in incubation"
-msgstr "Mois passé en incubation"
+msgstr "Mois passés en incubation"
 
 #: .\app\home\templates\registration\login.html:11
 msgid "Your username and password didn't match. Please try again."

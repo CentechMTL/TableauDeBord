@@ -220,7 +220,9 @@
 <!-----------------------------------------
 ============ TIME OF INCUBATION ===========
 ------------------------------------------>
-<h1>{% trans "Month spent in incubation" %}</h1>
+{% trans "Incubation duration (months)" as titleOfChart %}
+
+<h1>{{ titleOfChart|escape }}</h1>
 
 <div class="row" style="padding-top: 0px;">
     <div class="col-sm-12">
@@ -232,10 +234,10 @@
 
             function drawDualX() {
                 var data = new google.visualization.DataTable();
-                data.addColumn('string', '{% trans "Companies" %}');
-                data.addColumn('number', '{% trans "Month spent in incubation" %}');
+                data.addColumn('string', "{% trans "Companies" %}");
+                data.addColumn('number', "{{ titleOfChart|escapejs }}");
                 {% for company, timeSpent in timeOfIncubation %}
-                    data.addRows([['{{company.name|safe}}', {{timeSpent}}],]);
+                    data.addRows([["{{company.name|safe}}", {{timeSpent}}],]);
                 {% endfor %}
 
                 var options = {
@@ -246,7 +248,7 @@
                     },
                     hAxis: {
                         maxAlternation:1,
-                        title: "{% trans 'Month spent in incubation' %}",
+                        title: "{{ titleOfChart|escapejs }}",
                         minValue: 0,
 
                     },

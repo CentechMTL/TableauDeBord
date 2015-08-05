@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-05 14:34-0400\n"
+"POT-Creation-Date: 2015-08-05 15:30-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -53,21 +53,22 @@ msgstr "Phase"
 msgid "State"
 msgstr "Etat"
 
-#: .\app\kanboard\templates\kanboard\board.html:45
-msgid "Send"
-msgstr "Envoyé"
-
-#: .\app\kanboard\templates\kanboard\board.html:63
+#: .\app\kanboard\templates\kanboard\board.html:48
 msgid "Cancel"
 msgstr "Fermer"
 
-#: .\app\kanboard\templates\kanboard\board.html:74
-#: .\app\kanboard\templates\kanboard\board.html:92
-#: .\app\kanboard\templates\kanboard\board.html:101
+#: .\app\kanboard\templates\kanboard\board.html:80
+#: .\app\kanboard\templates\kanboard\board.html:103
+#: .\app\kanboard\templates\kanboard\board.html:112
 msgid "Create new task"
 msgstr "Créé une nouvelle tâche"
 
-#: .\app\kanboard\templates\kanboard\board.html:89
+#: .\app\kanboard\templates\kanboard\board.html:83
+#: .\app\kanboard\templates\kanboard\board.html:87
+msgid "Create"
+msgstr "Créer"
+
+#: .\app\kanboard\templates\kanboard\board.html:100
 msgid "Kanboard of"
 msgstr "Kanboard de"
 

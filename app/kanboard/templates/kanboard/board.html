@@ -22,6 +22,35 @@
     <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 
     <script>
+        function setButtonOfForm(label){
+            $('#dialog-form').dialog('option', 'buttons', [
+            {
+                text: label,
+                click: function() {
+                        if(document.getElementById("title").value != ""){
+                            addCard('{% url "kanboard:kanboard" 1 %}',
+                                    "{% url "kanboard:kanboardGetDetailCard" 1 %}",
+                                    {{company.id}},
+                                    "{% url "kanboard:kanboardDeleteCard" 1 %}",
+                                    "{% url 'founder:detail' 1 %}",
+                                    "{{user.username}}",
+                                    '{% url 'kanboard:card' 1 %}'
+                                    );
+                            $('#dialog-form').dialog( "close" );
+                            document.getElementById("title").style.border = "1px solid #a9a9a9";
+                        }
+                        else{
+                            document.getElementById("title").style.border = "1px solid red";
+                        }
+                    }
+            },
+            {
+                text: '{% trans "Cancel" %}',
+                click: function() { $('#dialog-form').dialog('close'); }
+            }]);
+        }
+    </script>
+    <script>
         $(function() {
             initKanboard('{% url 'kanboard:getDetailKanboard' company.id True %}',
                         {{company.id}},
@@ -41,29 +70,6 @@
                 height: 500,
                 width: 350,
                 modal: true,
-                buttons: {
-                    {% trans "Send" %}: function() {
-                        if(document.getElementById("title").value != ""){
-                            addCard('{% url "kanboard:kanboard" 1 %}',
-                                    "{% url "kanboard:kanboardGetDetailCard" 1 %}",
-                                    {{company.id}},
-                                    "{% url "kanboard:kanboardDeleteCard" 1 %}",
-                                    "{% url 'founder:detail' 1 %}",
-                                    "{{user.username}}",
-                                    '{% url 'kanboard:card' 1 %}'
-                                    );
-
-                            dialog.dialog( "close" );
-                            document.getElementById("title").style.border = "1px solid #a9a9a9";
-                        }
-                        else{
-                            document.getElementById("title").style.border = "1px solid red";
-                        }
-                    },
-                    {% trans "Cancel" %}: function() {
-                        dialog.dialog( "close" );
-                    }
-                },
                 close: function() {
                     //Init the form
                     form[ 0 ].reset();
@@ -72,8 +78,13 @@
                     //Init the title of the form
                     var titleForm = document.getElementById('ui-id-1');
                     titleForm.innerHTML = "{% trans 'Create new task' %}";
+
+                    //Init button of the form
+                    setButtonOfForm("{% trans "Create" %}");
                 }
             });
+
+            setButtonOfForm("{% trans "Create" %}");
 
             form = dialog.find( "form" );
 

@@ -15,6 +15,9 @@ function editCard(id, baseLien){
                 var titleForm = document.getElementById('ui-id-1');
                 titleForm.innerHTML = gettext("Edit the task");
 
+                //We change the button of the form
+                setButtonOfForm(gettext("Edit"));
+
                 //We populate the form
                 var form = document.getElementById('form');
                 document.getElementById('phase').value = data.phase;

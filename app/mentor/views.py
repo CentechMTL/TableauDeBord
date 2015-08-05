@@ -19,6 +19,7 @@ from django.contrib import messages
 from django.conf import settings
 from django.core.mail import send_mail
 import random
+import os
 
 class MentorCreate(generic.CreateView):
     model = Mentor
@@ -177,6 +178,7 @@ class MentorUpdate(generic.UpdateView):
         object.url = form.data['url']
 
         try:
+            self.request.FILES['picture'].name = object.user.username + os.path.splitext(self.request.FILES['picture'].name)[1]
             object.picture = self.request.FILES['picture']
         except:
             pass

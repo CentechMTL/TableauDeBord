@@ -19,6 +19,7 @@ from django.contrib import messages
 from django.conf import settings
 from django.core.mail import send_mail
 import random
+import os
 
 class FounderCreate(generic.CreateView):
     model = Founder
@@ -182,6 +183,7 @@ class FounderUpdate(generic.UpdateView):
         object.about = form.data['about']
 
         try:
+            self.request.FILES['picture'].name = object.user.username + os.path.splitext(self.request.FILES['picture'].name)[1]
             object.picture = self.request.FILES['picture']
         except:
             pass

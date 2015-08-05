@@ -56,7 +56,7 @@ class CardForm(forms.ModelForm):
     )
 
     deadline = forms.DateField(
-        label = _(u"Todo before the")
+        label = _(u"Due date")
     )
     deadline.widget.attrs.update({'id':'deadline'})
 

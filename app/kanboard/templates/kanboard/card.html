@@ -28,7 +28,7 @@
                 {%trans "to" %} <strong><a href="{% url 'founder:detail' card.assigned.userProfile_id%}">{{card.assigned}}</a></strong>
             {% endif %}
             {%trans "since" %} {{card.created|date:"Y/m/d"}}<br>
-            {%trans "Todo before the" %} <strong>{{card.deadline|date:"Y/m/d" }}</strong><br>
+            {%trans "Due date" %} <strong>{{card.deadline|date:"Y/m/d" }}</strong><br>
             <br>
             <h4>{%trans "Description of the task" %} : </h4>
             <p style="margin-left: 20px;">{{card.comment}}</p>

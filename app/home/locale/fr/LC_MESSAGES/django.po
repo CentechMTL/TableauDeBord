@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-04 11:24-0400\n"
+"POT-Creation-Date: 2015-08-05 14:33-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -166,7 +166,7 @@ msgstr "Finances"
 #: .\app\home\templates\home\summary.html:49
 #: .\app\home\templates\home\summary.html:109
 #: .\app\home\templates\home\summary.html:179
-#: .\app\home\templates\home\summary.html:235
+#: .\app\home\templates\home\summary.html:237
 msgid "Companies"
 msgstr "Compagnies"
 
@@ -244,8 +244,6 @@ msgid "Number of experimentations"
 msgstr "Nombre d'expérimentations"
 
 #: .\app\home\templates\home\summary.html:223
-#: .\app\home\templates\home\summary.html:236
-#: .\app\home\templates\home\summary.html:249
 msgid "Incubation duration (months)"
 msgstr "Temps d'incubation (mois)"
 

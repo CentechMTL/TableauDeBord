@@ -10,6 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponseRedirect
 from django.contrib import messages
+import os
 
 from app.home.views import setCompanyInSession
 
@@ -238,6 +239,7 @@ class CompanyUpdate(generic.UpdateView):
         object.video = form.data['video']
 
         try:
+            self.request.FILES['logo'].name = object.name + os.path.splitext(self.request.FILES['logo'].name)[1]
             object.logo = self.request.FILES['logo']
         except:
             pass

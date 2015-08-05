@@ -23,7 +23,7 @@ class Education(models.Model):
         verbose_name_plural = _('Education')
 
     education = models.CharField(max_length=200, verbose_name=_('Education level'))
-    def __str__(self):
+    def __unicode__(self):
         return self.education
 
 #Areas of expertise
@@ -33,7 +33,7 @@ class Expertise(models.Model):
 
     expertise = models.CharField(max_length=200, verbose_name=_('Area of expertise'))
 
-    def __str__(self):
+    def __unicode__(self):
         return self.expertise
 
 #User, we can't extends auth_user without auxiliar conflits
@@ -55,7 +55,7 @@ class UserProfile(models.Model):
     googlePlus = models.URLField(blank=True, null=True, verbose_name=_('Google+'))
     linkedIn = models.URLField(blank=True, null=True, verbose_name=_('linkedIn'))
 
-    def __str__(self):
+    def __unicode__(self):
         return self.user.username
 
     def image_thumb(self):

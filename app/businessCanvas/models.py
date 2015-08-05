@@ -35,7 +35,7 @@ class BusinessCanvasElement(models.Model):
     #True -> Archived | False -> Current use
     disactivated = models.BooleanField(default=False, verbose_name=_('Disactivated'))
 
-    def __str__(self):
+    def __unicode__(self):
         return self.title
 
 #Archive of the business canvas
@@ -50,5 +50,5 @@ class Archive(models.Model):
     #List of elements in the archive
     elements = models.ManyToManyField(BusinessCanvasElement,blank=True, verbose_name=_('Elements of the archive'))
 
-    def __str__(self):
+    def __unicode__(self):
         return str(self.date)

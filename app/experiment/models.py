@@ -24,7 +24,7 @@ class CustomerExperiment(models.Model):
     conclusions = models.TextField(max_length=512,blank=True, verbose_name=_('Conclusion'))
 
 
-    def __str__(self):
+    def __unicode__(self):
         return self.hypothesis
 
     def get_absolute_url(self):

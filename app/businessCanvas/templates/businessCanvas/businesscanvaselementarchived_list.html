@@ -2,48 +2,17 @@
 <!-- Load internationalisation utils-->
 {% load i18n %}
 {% load staticfiles %}
+
 {% block extrahead %}
 <!-- Main CSS --->
 <link rel="stylesheet" href="{% static 'businessCanvas/css/style.css' %}">
 
-<script type="text/javascript"
- src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js">
-</script>
-<!--TODO insert the JS file and remove the hardcode-->
-<script type="text/javascript">
-// GET for show details of an element
-function getDetail(id){
-    var myRegexp = /([0-9]+)/g;
-    var match = myRegexp.exec(id); //match[1] is the id of element
-    var div = document.getElementById(match[1]);
-    var p = div.getElementsByTagName("p")[0];
-    if(p.style.visibility == "hidden"){
-       var lien = "/businessCanvas/getDetail/"+div.id;
-        var id = div.id;
-
-        $.ajax({
-          type: 'GET',
-          url: lien,
-
-          success: function(data, status) {
-                p.textContent = data.comment;
-                p.style.visibility = "visible";
-                p.style.display = "block";
-            },
-
-          error: function(resultat, status, erreur) {
-            alert(erreur); }
-        });
-    }
-    else{
-        p.style.visibility = "hidden";
-        p.style.display = "none";
-    }
-}
-</script>
-
+<script type="text/javascript" src="{% static 'businessCanvas/js/getDetail.js' %}"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 {% endblock %}
+
 {% block title %}Business Model Canvas{% endblock %}
+
 {% block content %}
 <!--TODO check for autogenerate the table-->
 <div class="row">
@@ -60,7 +29,7 @@ function getDetail(id){
                     <div id="divKeyPartner">
                         {% for elem in listKeyPartners %}
                             <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
-                                <span class="KeyPartner{{elem.id}}" onclick="getDetail(this.className);">{{elem.title}}</span>
+                                <span class="KeyPartner{{elem.id}}" onclick="getDetail(this.className, '{% url 'businessCanvas:businessCanvasGetDetail' 1 %}');">{{elem.title}}</span>
                                 <p style="visibility: hidden; display: none;"></p>
                             </div>
                         {% endfor %}
@@ -71,7 +40,7 @@ function getDetail(id){
                     <div id="divKeyActivitie">
                     {% for elem in listKeyActivities %}
                             <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
-                                <span class="KeyActivitie{{elem.id}}" onclick="getDetail(this.className)">{{elem.title}}</span>
+                                <span class="KeyActivitie{{elem.id}}" onclick="getDetail(this.className, '{% url 'businessCanvas:businessCanvasGetDetail' 1 %}')">{{elem.title}}</span>
                                 <p style="visibility: hidden; display: none;"></p>
                             </div>
                         {% endfor %}
@@ -82,7 +51,7 @@ function getDetail(id){
                     <div id="divValueProposition">
                         {% for elem in listValuePropositions %}
                             <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
-                                <span class="ValueProposition{{elem.id}}" onclick="getDetail(this.className)">{{elem.title}}</span>
+                                <span class="ValueProposition{{elem.id}}" onclick="getDetail(this.className, '{% url 'businessCanvas:businessCanvasGetDetail' 1 %}')">{{elem.title}}</span>
                                 <p style="visibility: hidden; display: none;"></p>
                             </div>
                         {% endfor %}
@@ -93,7 +62,7 @@ function getDetail(id){
                     <div id="divCustomerRelationship">
                         {% for elem in listCustomerRelationships %}
                             <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
-                                <span class="CustomerRelationship{{elem.id}}" onclick="getDetail(this.className)">{{elem.title}}</span>
+                                <span class="CustomerRelationship{{elem.id}}" onclick="getDetail(this.className, '{% url 'businessCanvas:businessCanvasGetDetail' 1 %}')">{{elem.title}}</span>
                                 <p style="visibility: hidden; display: none;"></p>
                             </div>
                         {% endfor %}
@@ -104,7 +73,7 @@ function getDetail(id){
                     <div id="divCustomerSegment">
                         {% for elem in listCustomerSegments %}
                             <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
-                                <span class="CustomerSegment{{elem.id}}" onclick="getDetail(this.className)">{{elem.title}}</span>
+                                <span class="CustomerSegment{{elem.id}}" onclick="getDetail(this.className, '{% url 'businessCanvas:businessCanvasGetDetail' 1 %}')">{{elem.title}}</span>
                                 <p style="visibility: hidden; display: none;"></p>
                             </div>
                         {% endfor %}
@@ -117,7 +86,7 @@ function getDetail(id){
                     <div id="divKeyResource">
                         {% for elem in listKeyResources %}
                             <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
-                                <span class="KeyResource{{elem.id}}" onclick="getDetail(this.className)">{{elem.title}}</span>
+                                <span class="KeyResource{{elem.id}}" onclick="getDetail(this.className, '{% url 'businessCanvas:businessCanvasGetDetail' 1 %}')">{{elem.title}}</span>
                                 <p style="visibility: hidden; display: none;"></p>
                             </div>
                         {% endfor %}
@@ -128,7 +97,7 @@ function getDetail(id){
                     <div id="divChannel">
                         {% for elem in listChannels %}
                             <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
-                                <span class="Channel{{elem.id}}" onclick="getDetail(this.className)">{{elem.title}}</span>
+                                <span class="Channel{{elem.id}}" onclick="getDetail(this.className, '{% url 'businessCanvas:businessCanvasGetDetail' 1 %}')">{{elem.title}}</span>
                                 <p style="visibility: hidden; display: none;"></p>
                             </div>
                         {% endfor %}
@@ -141,7 +110,7 @@ function getDetail(id){
                     <div id="divCostStructure">
                         {% for elem in listCostStructures %}
                             <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
-                                <span class="CostStructure{{elem.id}}" onclick="getDetail(this.className)">{{elem.title}}</span>
+                                <span class="CostStructure{{elem.id}}" onclick="getDetail(this.className, '{% url 'businessCanvas:businessCanvasGetDetail' 1 %}')">{{elem.title}}</span>
                                 <p style="visibility: hidden; display: none;"></p>
                             </div>
                         {% endfor %}
@@ -152,7 +121,7 @@ function getDetail(id){
                     <div id="divRevenueStream">
                         {% for elem in listRevenueStreams %}
                             <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
-                                <span class="RevenueStream{{elem.id}}" onclick="getDetail(this.className)">{{elem.title}}</span>
+                                <span class="RevenueStream{{elem.id}}" onclick="getDetail(this.className, '{% url 'businessCanvas:businessCanvasGetDetail' 1 %}')">{{elem.title}}</span>
                                 <p style="visibility: hidden; display: none;"></p>
                             </div>
                         {% endfor %}
@@ -169,7 +138,7 @@ function getDetail(id){
                     <div id="divBrainstormingSpace">
                         {% for elem in listBrainstormingSpaces %}
                             <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
-                                <span class="BrainstormingSpace{{elem.id}}" onclick="getDetail(this.className)">{{elem.title}}</span>
+                                <span class="BrainstormingSpace{{elem.id}}" onclick="getDetail(this.className, '{% url 'businessCanvas:businessCanvasGetDetail' 1 %}')">{{elem.title}}</span>
                                 <p style="visibility: hidden; display: none;"></p>
                             </div>
                         {% endfor %}

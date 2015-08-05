@@ -297,7 +297,6 @@ class PresenceList(generic.ListView):
 
     def get_context_data(self, **kwargs):
         context = super(PresenceList, self).get_context_data(**kwargs)
-        #TODO Revoir le système d'affichage des présences
         emergence = CompanyStatus.objects.get(status = "Emergence Mai 2015")
         companies = Company.objects.filter(companyStatus = emergence)
         context['companies'] = companies

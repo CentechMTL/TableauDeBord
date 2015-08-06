@@ -26,7 +26,6 @@ function addCard(baseLien, linkGetDetail, companyId, linkDeleteCard, linkFounder
             + '&assigned=' + assigned
             + '&order=' + order
             + '&phase=' + phase
-            + '&company=' + companyId
             + '&state=' + state
             + '&update=' + update,
 

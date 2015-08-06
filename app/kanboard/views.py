@@ -105,8 +105,21 @@ def addCard(request, id):
             assigned = request.POST.get('assigned', '')
             order = request.POST.get('order', '')
             update = request.POST.get('update', '')
+
             phase = request.POST.get('phase', '')
-            company = request.POST.get('company', '')
+            try:
+                phase = int(phase)
+                exist = False
+                print phase
+                for elem in PHASE_CHOICES:
+                    print elem[0]
+                    if elem[0] == int(phase):
+                        exist = True
+                if exist == False:
+                    error = True
+            except:
+                error = True
+
             state = request.POST.get('state', '')
             if state == 'false':
                 state = False
@@ -118,8 +131,8 @@ def addCard(request, id):
                 #If it's a new card
                 if(update == 'False'):
                     pictureAssigned = False
-                    phase = PHASE_CHOICES[int(phase)-1]
-                    company = Company.objects.get(id = company)
+                    phase = PHASE_CHOICES[phase-1]
+                    company = Company.objects.get(id = id)
 
                     card = Card(title = title,
                                 company = company,
@@ -153,8 +166,8 @@ def addCard(request, id):
                 #If it's an update of a card
                 else:
                     pictureAssigned = False
-                    phase = PHASE_CHOICES[int(phase)-1]
-                    company = Company.objects.get(id = company)
+                    phase = PHASE_CHOICES[phase-1]
+                    company = Company.objects.get(id = id)
 
                     card = Card.objects.get(id = update)
                     card.title = title
@@ -250,6 +263,8 @@ def addComment(request, id):
 
             #We take data
             comment = request.POST.get('comment', '')
+            if comment == None or comment == "":
+                error = True
 
             #If we have all data
             if error == False:
@@ -265,10 +280,6 @@ def addComment(request, id):
                                      'created': comment.created.strftime("%Y/%m/%d"),
                                      'id': comment.id,
                                      })
-
-
-    #The visitor can't see this page!
-    return HttpResponseRedirect("/user/noAccessPermissions")
 
 class BoardIndex(generic.TemplateView):
     template_name = 'kanboard/board.html'
@@ -323,6 +334,44 @@ class CardView(generic.DetailView):
     model = Card
     template_name = 'kanboard/card.html'
 
+        #You need to be connected, and you need to have access as founder, mentor or Centech
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(CardView, self).dispatch(*args, **kwargs)
+        #For know if the user is in the group "Centech"
+        groups = self.request.user.groups.values()
+        for group in groups:
+            if group['name'] == 'Centech':
+                try:
+                    #If the company exist, else we go to except
+                    card = Card.objects.get(id = int(kwargs['pk']))
+                    company = Company.objects.get(id = card.company.id)
+                    return super(CardView, self).dispatch(*args, **kwargs)
+                except:
+                    pass
+
+        #For know the company of the user if is a founder
+        if self.request.user.is_active:
+            try:
+                founder = Founder.objects.get(user = self.request.user.id)
+                companies = Company.objects.filter(founders = founder)
+                card = Card.objects.get(id = int(kwargs['pk']))
+                for company in companies:
+                    if(card.company == company):
+                        return super(CardView, self).dispatch(*args, **kwargs)
+            except:
+                pass
+
+        #For know the company of the user if is a mentor
+        if self.request.user.is_active:
+            try:
+                mentor = Mentor.objects.get(user = self.request.user.id)
+                companies = Company.objects.filter(mentors = mentor)
+                card = Card.objects.get(id = int(kwargs['pk']))
+                for company in companies:
+                    if(card.company == company):
+                        return super(CardView, self).dispatch(*args, **kwargs)
+            except:
+                pass
+
+        #The visitor can't see this page!
+        return HttpResponseRedirect("/user/noAccessPermissions")

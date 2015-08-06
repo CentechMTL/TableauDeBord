@@ -20,7 +20,6 @@ function addComment(lien, cardId){
         },
 
         error: function(resultat, status, erreur) {
-            alert('error');
         }
     });
 }

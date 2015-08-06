@@ -20,3 +20,17 @@ class CardFactory(factory.DjangoModelFactory):
 
         card.save()
 
+class CommentFactory(factory.DjangoModelFactory):
+    class Meta:
+        model = Card
+
+    comment = factory.Sequence('Comment ïtrema755 N°{0}'.format)
+
+    @classmethod
+    def __init__(self, **kwargs):
+        card = kwargs.pop('card', None)
+        creator = kwargs.pop('creator', None)
+
+        comment = super(CommentFactory, self).__init__(self, **kwargs)
+
+        comment.save()

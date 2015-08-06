@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/MaisonLogicielLibre/TableauDeBord.svg?branch=dev)](https://travis-ci.org/zestedesavoir/zds-site)
+[![Build Status](https://travis-ci.org/MaisonLogicielLibre/TableauDeBord.svg?branch=dev)](https://travis-ci.org/MaisonLogicielLibre/TableauDeBord)
 [![Coverage Status](https://coveralls.io/repos/MaisonLogicielLibre/TableauDeBord/badge.svg?branch=dev&service=github)](https://coveralls.io/github/MaisonLogicielLibre/TableauDeBord?branch=dev)
 [![Licence GPL](http://img.shields.io/badge/license-GPL-green.svg)](http://www.gnu.org/licenses/quick-guide-gplv3.fr.html)
 

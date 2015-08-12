@@ -140,10 +140,10 @@ DAB_FIELD_RENDERER = 'django_admin_bootstrapped.renderers.BootstrapFieldRenderer
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST = ''
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'appliedrd@gmail.com'
-EMAIL_HOST_PASSWORD = 'fukzxpfatanqdikm'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
 
 # Restrict access to todo lists/views to `is_staff()` users.
 # False here falls back to `is_authenticated()` users.
@@ -206,7 +206,7 @@ DASHBOARD_APP = {
         'litteral_name': u"Tableau de Bord",
         'url': u"http://127.0.0.1:8000",
         'dns': u"kpi.etsmtl.ca",
-        'email_technique': u"rignon.noel.1@ens.etsmtl.ca",
+        'email_technique': u"support.centech@etsmtl.ca",
         'repository': u"https://github.com/MaisonLogicielLibre/TableauDeBord",
         'bugtracker': u"https://github.com/MaisonLogicielLibre/TableauDeBord/issues",
         'entreprise': {

@@ -20,6 +20,7 @@ from app.mentor.models import Mentor
 from app.kpi.models import KPI, KPI_TYPE_CHOICES
 from app.finance.models import Bourse, Subvention, Pret, Investissement, Vente
 from app.experiment.models import CustomerExperiment
+from app.home.models import FloorPlan
 
 #General view
 class Summary(generic.TemplateView):
@@ -202,3 +203,26 @@ def logout_view(request):
     logout(request)
     # Redirect to a success page.
     return HttpResponseRedirect("/")
+
+def get_url(request, namespace, arguments):
+    message = {}
+    """
+    args = {}
+    for argument in arguments:
+        args.append(argument)
+    """
+    if request.is_ajax():
+        print 'is_ajax'
+        message['url'] = reverse(namespace, args={arguments})
+        print 'message add'
+        data = json.dumps(message)
+        print 'data dumps'
+        return HttpResponse(data, content_type='application/json')
+    #The visitor can't see this page!
+    return HttpResponseRedirect("/user/noAccessPermissions")
+
+#Floor Plan Page
+class floor_plan(generic.ListView):
+    model = FloorPlan
+    template_name = 'home/floorPlan.html'
+    context_object_name = 'list_floor_plan'

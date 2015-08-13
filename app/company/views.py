@@ -297,11 +297,13 @@ class PresenceList(generic.ListView):
 
     def get_context_data(self, **kwargs):
         context = super(PresenceList, self).get_context_data(**kwargs)
-        emergence = CompanyStatus.objects.get(status = "Emergence Mai 2015")
-        companies = Company.objects.filter(companyStatus = emergence)
+        status = CompanyStatus.objects.get(id = self.kwargs['status'])
+        companies = Company.objects.filter(companyStatus = status)
         context['companies'] = companies
         presences = Presence.objects.all()
         context['presence_list'] = presences
+        context['status_selected'] = status
+        context['list_company_status'] = CompanyStatus.objects.all()
 
         return context
 

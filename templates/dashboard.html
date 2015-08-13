@@ -35,11 +35,12 @@
                 <li class="active">
                     <a href="{% url 'home:maStartup' %}"><div><i class="fa fa-globe"></i> <span class="nav-label">{% trans "Road map" %}</span></div></a>
                     <a href="{% url 'company:index' %}"><div><i class="fa fa-university"></i> <span class="nav-label">{% trans "Companies" %}</span></div></a>
+                    <a href="{% url 'home:floorPlan' %}"><div><i class="fa fa-street-view "></i> <span class="nav-label">{% trans "Floor plan" %}</span></div></a>
                     <a href="{% url 'mentor:index' %}"><div><i class="fa fa-graduation-cap"></i> <span class="nav-label">{% trans "Mentors" %}</span></div></a>
                     <a href="{% url 'founder:index' %}"><div><i class="fa fa-users"></i> <span class="nav-label">{% trans "Founders" %}</span></div></a>
                     {% if isCentech %}
                     <a href="{% url 'home:summary' %}"><div><i class="fa fa-bar-chart" ></i> <span class="nav-label">{% trans "Summary" %}</span></div></a>
-                    <a href="{% url 'company:presence_list' %}"><div><i class="fa fa-graduation-cap"></i> <span class="nav-label">{% trans "Presence" %}</span></div></a>
+                    <a href="{% url 'company:presence_list' 1%}"><div><i class="fa fa-graduation-cap"></i> <span class="nav-label">{% trans "Presence" %}</span></div></a>
                         <select id="selectCompany" class="menuDashboard" onchange="updateMenu(this.value)">
                             <option value="0">{% trans "Select a company" %}</option>
                             {% for company in list_company %}

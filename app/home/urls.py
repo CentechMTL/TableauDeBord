@@ -17,8 +17,14 @@ urlpatterns = patterns('',
     #Error page
     url(r'^noAccessPermissions$', views.noAccessPermissions, name='noAccessPermissions'),
 
+    #Get url with Ajax
+    url(r'^getUrl/(.+)/(.+)$', views.get_url, name='get_url'),
+
     #Carte routiere du centech -iframe
     url(r'^maStartup$', views.maStartup, name='maStartup'),
+
+    #Floor plan page
+    url(r'^floorPlan$', views.floor_plan.as_view(), name='floorPlan'),
 
     #Stock in session the company selected in the main menu
     url(r'^setCompanyInSession/(?P<company_id>\d+)$', views.setCompanyInSession, name='setCompanyInSession'),

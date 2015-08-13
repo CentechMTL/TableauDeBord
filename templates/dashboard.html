@@ -151,8 +151,8 @@
                                 <i class="fa fa-cog fa-2x"></i>
                             </a>
                             <ul class="dropdown-menu dropdown-messages">
-                                <li>OPTIONS</li>
                             {% if isMentor %}
+                                <li>MENTOR</li>
                                 <li>
                                     {% with profile=user.profile %}
                                     <a href="{%url 'mentor:update' profile.userProfile_id %}" style="text-decoration: none; color: black; font-size: 14px;">
@@ -162,8 +162,9 @@
                                     </a>
                                     {% endwith %}
                                 </li>
+                                <hr>
                             {% elif isFounder %}
-
+                                <li>FOUNDER</li>
                                 <li>
                                     {% with profile=user.profile %}
                                     <a href="{% url 'founder:update' profile.userProfile_id %}" style="text-decoration: none; color: black; font-size: 14px;">
@@ -180,7 +181,10 @@
                                         </div>
                                     </a>
                                 </li>
-                            {% elif isCentech %}
+                                <hr>
+                            {% endif %}
+                            {% if isCentech %}
+                                <li>ADMINISTRATION</li>
                                 <li>
                                     <a href="{% url 'founder:add' %}" style="text-decoration: none; color: black; font-size: 14px;">
                                         <div class="dropdown-messages-box">
@@ -209,8 +213,8 @@
                                         </div>
                                     </a>
                                 </li>
-                        {% endif %}
                                 <hr>
+                        {% endif %}
                                 <li>MY ACCOUNT</li>
                                 <li>
                                     <a href="{% url 'home:change_password' user.id %}" style="text-decoration: none; color: black; font-size: 14px;">

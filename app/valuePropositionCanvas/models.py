@@ -23,7 +23,7 @@ class ValuePropositionCanvasType(models.Model):
 
     name = models.CharField(max_length=50)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 #Elements of canvas
@@ -37,5 +37,5 @@ class ValuePropositionCanvasElement(models.Model):
     type = models.ForeignKey(ValuePropositionCanvasType,verbose_name=_('Type'))
     company = models.ForeignKey(Company)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title

@@ -16,7 +16,7 @@ class Bourse(models.Model):
     description = models.CharField(blank=True, max_length=512, verbose_name=_('Description'))
     company = models.ForeignKey(Company, verbose_name=_('Company'), related_name="grants")
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     def get_absolute_url(self):
@@ -32,7 +32,7 @@ class Subvention(models.Model):
     description = models.CharField(blank=True, max_length=512, verbose_name=_('Description'))
     company = models.ForeignKey(Company, verbose_name=_('Company'), related_name="subsidies")
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     def get_absolute_url(self):
@@ -48,7 +48,7 @@ class Investissement(models.Model):
     description = models.CharField(blank=True, max_length=512, verbose_name=_('Description'))
     company = models.ForeignKey(Company, verbose_name=_('Company'), related_name="investments")
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     def get_absolute_url(self):
@@ -64,7 +64,7 @@ class Pret(models.Model):
     description = models.CharField(blank=True, max_length=512, verbose_name=_('Description'))
     company = models.ForeignKey(Company, verbose_name=_('Company'), related_name="loans")
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     def get_absolute_url(self):
@@ -80,7 +80,7 @@ class Vente(models.Model):
     description = models.CharField(blank=True, max_length=512, verbose_name=_('Description'))
     company = models.ForeignKey(Company, verbose_name=_('Company'), related_name="sales")
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     def get_absolute_url(self):

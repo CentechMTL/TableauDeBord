@@ -23,7 +23,7 @@ class KPI(models.Model):
     period_start = models.DateTimeField(auto_now_add=True, auto_now=False, verbose_name=_('Date'))
     comment = models.TextField(blank=True, default="", verbose_name=_('Comment'))
 
-    def __unicode__(self):
+    def __str__(self):
         return self.company.name
 
     def get_absolute_url(self):

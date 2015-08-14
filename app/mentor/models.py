@@ -19,7 +19,7 @@ class Mentor(UserProfile):
     type = models.CharField(max_length=20, choices=MENTOR_TYPE_CHOICES, null=True, blank=True, verbose_name=_('Type'))
     url = models.URLField(blank=True, null=True, verbose_name=_('URL'))
 
-    def __unicode__(self):
+    def __str__(self):
         return self.user.username
 
     def get_queryset(self):

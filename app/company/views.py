@@ -300,7 +300,17 @@ class PresenceList(generic.ListView):
         status = CompanyStatus.objects.get(id = self.kwargs['status'])
         companies = Company.objects.filter(companyStatus = status)
         context['companies'] = companies
-        presences = Presence.objects.all()
+        allPresences = Presence.objects.all()
+        presences = []
+        for presence in allPresences:
+            for company in presence.company.all():
+                if company.companyStatus == status:
+                    print company.name
+                    print presence
+                    print len(presences)
+                    presences.append(presence)
+                    break
+
         context['presence_list'] = presences
         context['status_selected'] = status
         context['list_company_status'] = CompanyStatus.objects.all()
@@ -333,7 +343,7 @@ class PresenceUpdate(generic.UpdateView):
     fields = ['company','date']
 
     def get_url(self):
-        return reverse_lazy('company:presence_list')
+        return reverse_lazy('company:presence_list', self.object.get_absolute_url())
 
     #You need to be connected, and you need to have access as centech only
     @method_decorator(login_required)
@@ -365,9 +375,10 @@ class PresenceDelete(generic.DeleteView):
         return HttpResponseRedirect("/user/noAccessPermissions")
 
     def get_success_url(self, **kwargs):
-        return reverse_lazy('company:presence_list')
+        return self.object.get_absolute_url()
 
     def get_context_data(self, **kwargs):
         context = super(PresenceDelete, self).get_context_data(**kwargs)
         context['presence'] = kwargs['object']
+        context['status'] = kwargs['object'].company.all()[0].companyStatus.id
         return context

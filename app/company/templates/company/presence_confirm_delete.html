@@ -17,6 +17,6 @@
     </p>
     <form method="post" action="">
        {% csrf_token %}
-       <button type="submit">{% trans "Delete" %}</button> - <a href="{% url 'company:presence_list' %}">{% trans "Cancel" %}</a>
+       <button type="submit">{% trans "Delete" %}</button> - <a href="{% url 'company:presence_list' status%}">{% trans "Cancel" %}</a>
     </form>
 {% endblock %}

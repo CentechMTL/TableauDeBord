@@ -124,4 +124,4 @@ class Presence(models.Model):
         return str(self.date)
 
     def get_absolute_url(self):
-        return reverse('company:presence_list')
+        return reverse('company:presence_list', args={self.company.all()[0].companyStatus.id})

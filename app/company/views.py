@@ -245,6 +245,11 @@ class CompanyUpdate(generic.UpdateView):
             pass
 
         try:
+            object.companyStatus = CompanyStatus.objects.get(id = form.data['status'])
+        except:
+            pass
+
+        try:
             if form.data['incubated_on'] != "":
                 object.incubated_on = form.data['incubated_on']
             else:

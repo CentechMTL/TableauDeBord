@@ -303,6 +303,13 @@ class CompanyUpdateForm(MiniCompanyUpdateForm):
         widget=forms.SelectMultiple()
     )
 
+    status = forms.ModelChoiceField(
+        label=_(u"Incubation phase"),
+        queryset=CompanyStatus.objects.all(),
+        required=True,
+    )
+
+
     def __init__(self, company, *args, **kwargs):
         super(CompanyUpdateForm, self).__init__(company, *args, **kwargs)
         self.helper = FormHelper()
@@ -324,12 +331,14 @@ class CompanyUpdateForm(MiniCompanyUpdateForm):
         self.fields['twitter'].initial = company.twitter
         self.fields['googlePlus'].initial = company.googlePlus
         self.fields['linkedIn'].initial = company.linkedIn
+        self.fields['status'].initial = company.companyStatus
 
         self.helper.layout = Layout(
             HTML("<h1>"),
             HTML(_("Update company")),
             HTML("</h1>"),
             Field('name'),
+            Field('status'),
             Field('logo'),
             Field('video'),
             Field('url'),

@@ -111,10 +111,12 @@ USE_TZ = False #todo add timezone support
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
-STATIC_ROOT = os.path.join(BASE_DIR, 'app/home/static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
+
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
 LOGIN_URL = '/user/login'
 LOGOUT_URL = '/user/logout'
 LOGIN_REDIRECT_URL = '/company'
@@ -138,10 +140,10 @@ DAB_FIELD_RENDERER = 'django_admin_bootstrapped.renderers.BootstrapFieldRenderer
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST = ''
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'appliedrd@gmail.com'
-EMAIL_HOST_PASSWORD = 'fukzxpfatanqdikm'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
 
 # Restrict access to todo lists/views to `is_staff()` users.
 # False here falls back to `is_authenticated()` users.
@@ -193,7 +195,8 @@ LOCALE_PATHS = (
     'app/experiment/locale/',
     'app/businessCanvas/locale/',
     'app/finance/locale/',
-    'app/valuePropositionCanvas/locale/'
+    'app/valuePropositionCanvas/locale/',
+    'app/kanboard/locale/'
 )
 
 
@@ -203,7 +206,7 @@ DASHBOARD_APP = {
         'litteral_name': u"Tableau de Bord",
         'url': u"http://127.0.0.1:8000",
         'dns': u"kpi.etsmtl.ca",
-        'email_technique': u"rignon.noel.1@ens.etsmtl.ca",
+        'email_technique': u"support.centech@etsmtl.ca",
         'repository': u"https://github.com/MaisonLogicielLibre/TableauDeBord",
         'bugtracker': u"https://github.com/MaisonLogicielLibre/TableauDeBord/issues",
         'entreprise': {

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-06 17:54-0400\n"
+"POT-Creation-Date: 2015-08-05 15:29-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -52,8 +52,6 @@ msgstr "Date de soumission"
 #: .\app\finance\models.py:45 .\app\finance\models.py:61
 #: .\app\finance\models.py:77
 #: .\app\finance\templates\finance\bourse_confirm_delete.html:13
-#: .\app\finance\templates\finance\index.html:103
-#: .\app\finance\templates\finance\index.html:184
 #: .\app\finance\templates\finance\index.html:265
 #: .\app\finance\templates\finance\index.html:347
 #: .\app\finance\templates\finance\investissement_confirm_delete.html:13
@@ -73,11 +71,8 @@ msgstr "Date reçu"
 #: .\app\finance\models.py:47 .\app\finance\models.py:63
 #: .\app\finance\models.py:79
 #: .\app\finance\templates\finance\bourse_confirm_delete.html:20
-#: .\app\finance\templates\finance\index.html:105
-#: .\app\finance\templates\finance\index.html:186
 #: .\app\finance\templates\finance\index.html:267
 #: .\app\finance\templates\finance\index.html:349
-#: .\app\finance\templates\finance\index.html:431
 #: .\app\finance\templates\finance\investissement_confirm_delete.html:20
 #: .\app\finance\templates\finance\pret_confirm_delete.html:21
 #: .\app\finance\templates\finance\subvention_confirm_delete.html:20
@@ -206,6 +201,19 @@ msgstr "Ventes"
 #: .\app\finance\templates\finance\index.html:474
 msgid "Return to the top of the page"
 msgstr "Retour en haut de la page"
+
+#: .\app\finance\templates\finance\index.html:103
+#: .\app\finance\templates\finance\index.html:184
+msgctxt "Féminin"
+msgid "Amount requested"
+msgstr "Somme demandée"
+
+#: .\app\finance\templates\finance\index.html:105
+#: .\app\finance\templates\finance\index.html:186
+#: .\app\finance\templates\finance\index.html:431
+msgctxt "Féminin"
+msgid "Amount received"
+msgstr "Somme reçue"
 
 #: .\app\finance\templates\finance\index.html:107
 #: .\app\finance\templates\finance\index.html:128

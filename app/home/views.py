@@ -8,6 +8,7 @@ from django.core.urlresolvers import reverse, reverse_lazy
 from django.views import generic
 from django.utils import timezone
 import json
+from datetime import datetime
 from django.contrib.auth.models import User
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
@@ -18,8 +19,8 @@ from app.founder.models import Founder
 from app.mentor.models import Mentor
 from app.kpi.models import KPI, KPI_TYPE_CHOICES
 from app.finance.models import Bourse, Subvention, Pret, Investissement, Vente
-
-
+from app.experiment.models import CustomerExperiment
+from app.home.models import FloorPlan
 
 #General view
 class Summary(generic.TemplateView):
@@ -89,13 +90,41 @@ class Summary(generic.TemplateView):
         finances['ventes'] = sales
         finances['prêts'] = loans
 
+        KPIs = []
+        for company in companies:
+            KPIs.append((company, company.get_last_irl(), company.get_last_trl()))
+
+        experiments = []
+        for company in companies:
+            inProgress = company.experiments.filter(validated = None).count()
+            validated = company.experiments.filter(validated = True).count()
+            lastExperiment = company.get_last_experiment()
+            experiments.append((company, inProgress, validated, lastExperiment))
+
         context = super(Summary, self).get_context_data(**kwargs)
+
         context['companies'] = companies
         context['founders'] = founders
         context['mentors'] = mentors
         context['finances'] = finances
+
+        context['KPI'] = KPIs
         context['averageIRL'] = round(KPI.objects.filter(type=KPI_TYPE_CHOICES[0][0]).aggregate(Avg('level')).values()[0], 2)
         context['averageTRL'] = round(KPI.objects.filter(type=KPI_TYPE_CHOICES[1][0]).aggregate(Avg('level')).values()[0], 2)
+
+        context['experiments'] = experiments
+        context['experiments_inProgress_count'] = CustomerExperiment.objects.filter(validated = None).count()
+        context['experiments_validated_count'] = CustomerExperiment.objects.filter(validated = True).count()
+
+        timeOfIncubation = []
+        for company in companies:
+            if company.incubated_on:
+                now = datetime.date(datetime.today())
+                delta_days = ((now - company.incubated_on).days)/30
+                timeOfIncubation.append((company, delta_days))
+            else:
+                timeOfIncubation.append((company, 0))
+        context['timeOfIncubation'] = timeOfIncubation
 
         return context
 
@@ -133,6 +162,10 @@ def index(request):
 def noAccessPermissions(request):
     return render(request, 'home/noAccessPermissions.html')
 
+#Iframe vers ma StartUp
+def maStartup(request):
+    return render(request, 'home/maStartup.html')
+
 #Set the session variable for the dashboard template
 def setCompanyInSession(request, company_id):
     message= {}
@@ -166,66 +199,30 @@ def setCompanyInSession(request, company_id):
         return HttpResponse(data, content_type='application/json')
 
 
-#Register
-#http://www.tangowithdjango.com/book17/chapters/login.html
-def register(request):
-
-    # A boolean value for telling the template whether the registration was successful.
-    # Set to False initially. Code changes value to True when registration succeeds.
-    registered = False
-
-    # If it's a HTTP POST, we're interested in processing form data.
-    if request.method == 'POST':
-        # Attempt to grab information from the raw form information.
-        # Note that we make use of both UserForm and UserProfileForm.
-        user_form = UserForm(data=request.POST)
-        profile_form = UserProfileForm(data=request.POST)
-
-        # If the two forms are valid...
-        if user_form.is_valid() and profile_form.is_valid():
-            # Save the user's form data to the database.
-            user = user_form.save()
-
-            # Now we hash the password with the set_password method.
-            # Once hashed, we can update the user object.
-            user.set_password(user.password)
-            user.save()
-
-            # Now sort out the UserProfile instance.
-            # Since we need to set the user attribute ourselves, we set commit=False.
-            # This delays saving the model until we're ready to avoid integrity problems.
-            profile = profile_form.save(commit=False)
-            profile.user = user
-
-            # Did the user provide a profile picture?
-            # If so, we need to get it from the input form and put it in the UserProfile model.
-            if 'picture' in request.FILES:
-                profile.picture = request.FILES['picture']
-
-            # Now we save the UserProfile model instance.
-            profile.save()
-
-            # Update our variable to tell the template registration was successful.
-            registered = True
-
-        # Invalid form or forms - mistakes or something else?
-        # Print problems to the terminal.
-        # They'll also be shown to the user.
-        else:
-            print user_form.errors, profile_form.errors
-
-    # Not a HTTP POST, so we render our form using two ModelForm instances.
-    # These forms will be blank, ready for user input.
-    else:
-        user_form = UserForm()
-        profile_form = UserProfileForm()
-
-    # Render the template depending on the context.
-    return render(request,
-            'user/register.html',
-            {'user_form': user_form, 'profile_form': profile_form, 'registered': registered} )
-
 def logout_view(request):
     logout(request)
     # Redirect to a success page.
     return HttpResponseRedirect("/")
+
+def get_url(request, namespace, arguments):
+    message = {}
+    """
+    args = {}
+    for argument in arguments:
+        args.append(argument)
+    """
+    if request.is_ajax():
+        print 'is_ajax'
+        message['url'] = reverse(namespace, args={arguments})
+        print 'message add'
+        data = json.dumps(message)
+        print 'data dumps'
+        return HttpResponse(data, content_type='application/json')
+    #The visitor can't see this page!
+    return HttpResponseRedirect("/user/noAccessPermissions")
+
+#Floor Plan Page
+class floor_plan(generic.ListView):
+    model = FloorPlan
+    template_name = 'home/floorPlan.html'
+    context_object_name = 'list_floor_plan'

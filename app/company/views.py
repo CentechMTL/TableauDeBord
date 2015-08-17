@@ -3,13 +3,14 @@
 from django.shortcuts import render_to_response, get_object_or_404, render
 from app.company.models import Company, Presence, CompanyStatus
 from app.founder.models import Founder
-from app.company.forms import CompanyFilter, CompanyUpdateForm, CompanyCreateForm, CompanyStatusCreateForm
+from app.company.forms import CompanyFilter, MiniCompanyUpdateForm, CompanyUpdateForm, CompanyCreateForm, CompanyStatusCreateForm
 from django.views import generic
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponseRedirect
 from django.contrib import messages
+import os
 
 from app.home.views import setCompanyInSession
 
@@ -155,6 +156,8 @@ class CompanyCreate(generic.CreateView):
         try:
             if(form.data['incubated_on'] != ""):
                 newCompany.incubated_on = form.data['incubated_on']
+            if(form.data['endOfIncubation'] != ""):
+                newCompany.endOfIncubation = form.data['endOfIncubation']
         except:
             pass
 
@@ -180,31 +183,32 @@ class CompanyCreate(generic.CreateView):
 #Update form
 class CompanyUpdate(generic.UpdateView):
     model = Company
-    form_class = CompanyUpdateForm
     template_name = "company/company_form.html"
 
     #You need to be connected, and you need to have access as founder or centech
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
+        #Let the centech in first for allow modify a company of a founder who work for the Centech
+        #For know if the user is in the group "Centech"
+        groups = self.request.user.groups.values()
+        for group in groups:
+            if group['name'] == 'Centech':
+                self.form_class = CompanyUpdateForm
+                return super(CompanyUpdate, self).dispatch(*args, **kwargs)
+
         #For know the company of the user if is a founder
         if self.request.user.is_active:
             try:
                 founder = Founder.objects.filter(user = self.request.user.id)
                 company = Company.objects.get(founders = founder)
                 if(int(self.kwargs["pk"]) == int(company.id)):
+                    self.form_class = MiniCompanyUpdateForm
                     return super(CompanyUpdate, self).dispatch(*args, **kwargs)
             except:
                 pass
 
-        #For know if the user is in the group "Centech"
-        groups = self.request.user.groups.values()
-        for group in groups:
-            if group['name'] == 'Centech':
-                return super(CompanyUpdate, self).dispatch(*args, **kwargs)
-
         #The visitor can't see this page!
         return HttpResponseRedirect("/user/noAccessPermissions")
-
 
     def get_form(self, form_class):
         company = self.get_object()
@@ -234,28 +238,45 @@ class CompanyUpdate(generic.UpdateView):
         object.description = form.data['about']
         object.video = form.data['video']
 
-        print('date incubation -> '+form.data['incubated_on'])
+        try:
+            self.request.FILES['logo'].name = object.name + os.path.splitext(self.request.FILES['logo'].name)[1]
+            object.logo = self.request.FILES['logo']
+        except:
+            pass
+
+        try:
+            object.companyStatus = CompanyStatus.objects.get(id = form.data['status'])
+        except:
+            pass
+
         try:
             if form.data['incubated_on'] != "":
                 object.incubated_on = form.data['incubated_on']
             else:
                 object.incubated_on = None
-        except:
-            print('toto')
 
-        try:
-            object.logo = self.request.FILES['logo']
+            if form.data['endOfIncubation'] != "":
+                object.endOfIncubation = form.data['endOfIncubation']
+            else:
+                object.endOfIncubation = None
         except:
             pass
 
-        object.founders.clear()
-        for founder in form.cleaned_data["founders"]:
-                object.founders.add(founder)
+        try:
+            if form.data['founders']:
+                object.founders.clear()
+                for founder in form.cleaned_data["founders"]:
+                        object.founders.add(founder)
+        except:
+            pass
 
-        object.mentors.clear()
-        for mentor in form.cleaned_data["mentors"]:
-                object.mentors.add(mentor)
-
+        try:
+            if form.data['mentors']:
+                object.mentors.clear()
+                for mentor in form.cleaned_data["mentors"]:
+                        object.mentors.add(mentor)
+        except:
+            pass
     def get_success_url(self):
         return reverse_lazy("company:detail", kwargs={'pk': int(self.kwargs["pk"])})
 
@@ -281,12 +302,23 @@ class PresenceList(generic.ListView):
 
     def get_context_data(self, **kwargs):
         context = super(PresenceList, self).get_context_data(**kwargs)
-        #TODO Revoir le système d'affichage des présences
-        emergence = CompanyStatus.objects.get(status = "Emergence Mai 2015")
-        companies = Company.objects.filter(companyStatus = emergence)
+        status = CompanyStatus.objects.get(id = self.kwargs['status'])
+        companies = Company.objects.filter(companyStatus = status)
         context['companies'] = companies
-        presences = Presence.objects.all()
+        allPresences = Presence.objects.all()
+        presences = []
+        for presence in allPresences:
+            for company in presence.company.all():
+                if company.companyStatus == status:
+                    print company.name
+                    print presence
+                    print len(presences)
+                    presences.append(presence)
+                    break
+
         context['presence_list'] = presences
+        context['status_selected'] = status
+        context['list_company_status'] = CompanyStatus.objects.all()
 
         return context
 
@@ -316,7 +348,7 @@ class PresenceUpdate(generic.UpdateView):
     fields = ['company','date']
 
     def get_url(self):
-        return reverse_lazy('company:presence_list')
+        return reverse_lazy('company:presence_list', self.object.get_absolute_url())
 
     #You need to be connected, and you need to have access as centech only
     @method_decorator(login_required)
@@ -348,9 +380,10 @@ class PresenceDelete(generic.DeleteView):
         return HttpResponseRedirect("/user/noAccessPermissions")
 
     def get_success_url(self, **kwargs):
-        return reverse_lazy('company:presence_list')
+        return self.object.get_absolute_url()
 
     def get_context_data(self, **kwargs):
         context = super(PresenceDelete, self).get_context_data(**kwargs)
         context['presence'] = kwargs['object']
+        context['status'] = kwargs['object'].company.all()[0].companyStatus.id
         return context

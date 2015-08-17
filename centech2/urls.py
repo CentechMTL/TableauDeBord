@@ -6,6 +6,12 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
+js_info_dict = {
+    'domain': 'djangojs',
+    'packages': ('app.kanboard',),
+}
+
+
 urlpatterns = patterns('',
 
     url(r'^', include('app.home.urls', namespace="home")),
@@ -21,8 +27,15 @@ urlpatterns = patterns('',
     url(r'^valuePropositionCanvas/', include('app.valuePropositionCanvas.urls', namespace="valuePropositionCanvas")),
     url(r'^kanboard/', include('app.kanboard.urls', namespace="kanboard")),
 
+    #Admin panels of Django
     url(r'^admin/', include(admin.site.urls)),
+
+    #Internationalization Django
     url(r'^i18n/', include('django.conf.urls.i18n')),
+
+    #Internationalization Javascript
+    url(r'^jsi18n/$', 'django.views.i18n.javascript_catalog', js_info_dict),
+
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += staticfiles_urlpatterns()

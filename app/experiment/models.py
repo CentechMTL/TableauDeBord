@@ -7,11 +7,11 @@ from django.core.urlresolvers import reverse_lazy
 
 #Experimentation of companies
 class CustomerExperiment(models.Model):
-    company = models.ForeignKey(Company)
+    company = models.ForeignKey(Company, verbose_name=_('Company'), related_name="experiments")
 
     #date
-    dateStart = models.DateField(auto_now_add=True, auto_now=False, verbose_name=_('Start date'))
-    dateFinish = models.DateField(auto_now=True, verbose_name=_('End date'))
+    dateStart = models.DateTimeField(auto_now_add=True, auto_now=False, verbose_name=_('Start date'))
+    dateFinish = models.DateTimeField(auto_now=True, verbose_name=_('End date'))
 
     hypothesis = models.TextField(max_length=512, verbose_name=_('Hypothesis'))
 

@@ -1,3 +1,5 @@
+# coding: utf-8
+
 import datetime
 from django.utils import timezone
 
@@ -11,9 +13,10 @@ from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 
 PHASE_CHOICES = (
-    (1, u'Finance'),
-    (2, u'R&D'),
-    (3, u'Centech'),
+    (1, u'Commercialisation'),
+    (2, u'Développement de produit'),
+    (3, u'Financement'),
+    (4, u'Gouvernance'),
 )
 
 class Card(models.Model):
@@ -28,8 +31,11 @@ class Card(models.Model):
     phase = models.CharField(max_length=50, choices=PHASE_CHOICES, verbose_name=_('Phase'))
     order = models.SmallIntegerField()
 
-    assigned = models.ForeignKey(Founder, related_name="cards", blank=True, null=True)
-    creator = models.ForeignKey(User, blank=True, null=True)
+    assigned = models.ForeignKey(Founder, related_name="cards_assigned", blank=True, null=True)
+    creator = models.ForeignKey(User, related_name="cards_create", blank=True, null=True)
+
+    #False -> In progress | True -> Completed
+    state = models.BooleanField(verbose_name=_('State'))
 
     created = models.DateTimeField(blank=True)
     updated = models.DateTimeField(blank=True)
@@ -37,7 +43,7 @@ class Card(models.Model):
     class Meta:
         ordering = ['order', ]
 
-    def __unicode__(self):
+    def __str__(self):
         return "%s -- %s" % (self.title, self.company)
 
     def save(self, *args, **kwarg):
@@ -62,3 +68,24 @@ class Card(models.Model):
 
 #SIGNALS CONNECTED
 models.signals.pre_save.connect(signals.card_order, sender=Card)
+
+
+class Comment(models.Model):
+    """
+    A comment on a specific card
+    """
+    comment = models.TextField(blank=True)
+    card = models.ForeignKey(Card, related_name="comments")
+    creator = models.ForeignKey(User, blank=True, null=True)
+
+    created = models.DateTimeField(blank=True)
+    updated = models.DateTimeField(blank=True)
+
+    def __str__(self):
+        return "%s -- %s -- %s" % (self.id, self.card ,self.creator)
+
+    def save(self, *args, **kwarg):
+        if not self.id:
+            self.created = timezone.now()
+        self.updated = timezone.now()
+        super(Comment, self).save(*args, **kwarg)

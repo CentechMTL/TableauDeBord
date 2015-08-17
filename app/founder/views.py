@@ -17,8 +17,9 @@ from django.core.urlresolvers import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.conf import settings
-from django.core.mail import send_mail
+from django.core.mail import EmailMessage
 import random
+import os
 
 class FounderCreate(generic.CreateView):
     model = Founder
@@ -119,7 +120,10 @@ class FounderCreate(generic.CreateView):
         message += u"Si nous persistons à vous envoyer des courriel sans votre accord, contacter nous à l'adresse suivante : "
         message += app['site']['email_technique']
 
-        send_mail('Bienvenue sur le Tableau de Bord du Centech', message, app['site']['email_technique'], [app['site']['email_technique'], email], fail_silently=False)
+        emailReady = EmailMessage('Bienvenue sur le Tableau de Bord du Centech', message, app['site']['email_technique'],
+            [email], [app['site']['email_technique']],
+            reply_to=[app['site']['email_technique']])
+        emailReady.send(fail_silently=False)
 
     def get_success_url(self):
         return reverse_lazy("founder:detail", kwargs={'pk': self.founderCreate.userProfile_id})
@@ -182,6 +186,7 @@ class FounderUpdate(generic.UpdateView):
         object.about = form.data['about']
 
         try:
+            self.request.FILES['picture'].name = object.user.username + os.path.splitext(self.request.FILES['picture'].name)[1]
             object.picture = self.request.FILES['picture']
         except:
             pass
@@ -201,21 +206,35 @@ class FounderUpdate(generic.UpdateView):
 
 #List of founders
 class FounderIndex(generic.ListView):
+    model = Founder
     template_name = 'founder/index.html'
-    context_object_name = 'founder'
+    context_object_name = 'founder_list'
+    page_kwarg = 'page'
+    paginate_by = 9
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(FounderIndex, self).dispatch(*args, **kwargs)
 
     def get_queryset(self):
-        obj = Founder.objects.all()
-        return obj
-
+        ff = FounderFilter(self.request.GET)
+        return ff.qs
     def get_context_data(self, **kwargs):
         ff = FounderFilter(self.request.GET, queryset=self.get_queryset())
         context = super(FounderIndex, self).get_context_data(**kwargs)
         context['filter'] = ff
+
+        text = ""
+        compteur = 0
+        for getVariable in self.request.GET:
+            for getValue in self.request.GET.getlist(getVariable):
+                if compteur == 0:
+                    text += "?" + getVariable + "=" + getValue
+                else:
+                    text += "&" + getVariable + "=" + getValue
+                compteur += 1
+        context['get'] = text
+
         return context
 
 #Display the detail of a founder

@@ -11,7 +11,6 @@ from django.conf import settings
 def app_settings(request):
     return {'app': settings.DASHBOARD_APP}
 
-#TODO Redécouper, documenter, faciliter l'utilisation et la maintenance
 #Make a list of company to insert in the main menu
 def company_select(request):
     #For the list of company

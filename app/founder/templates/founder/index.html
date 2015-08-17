@@ -8,7 +8,7 @@
     <h1>{% trans "Centech Founders" %}</h1>
     <div class="panel panel-default">
         <div class="panel-body well">
-            <form action="" method="get">
+            <form action="{% url 'founder:index' %}" method="get">
                 <div class="row">
                     <div class="col-md-1"></div>
                     <div class="col-md-3">
@@ -21,9 +21,46 @@
             </form>
         </div>
     </div>
-        {% if filter %}
+    {% if is_paginated %}
+        <div class="row" style="font-size:16px; margin-bottom: 50px; background-color:#19aa8d; color: white;" align="center">
+            <div class="col-md-1">
+
+                {% if page_obj.number != 1 %}
+                    <a style="color:white;" href="{% url 'founder:index' 1 %}{{get}}">
+                        1
+                    </a>
+                {% endif %}
+            </div>
+            <div class="col-md-4">
+                {% if page_obj.has_previous %}
+                    <a style="color:white;" href="{% url 'founder:index' page_obj.previous_page_number %}{{get}}">
+                        {% trans "Previous" %}
+                    </a>
+                {% endif %}
+            </div>
+            <div class="col-md-2">
+                Page N°{{page_obj.number}}
+            </div>
+            <div class="col-md-4">
+                {% if page_obj.has_next%}
+                    <a style="color:white;" href="{% url 'founder:index' page_obj.next_page_number %}{{get}}">
+                        {% trans "Next" %}
+                    </a>
+                {% endif %}
+            </div>
+            <div class="col-md-1">
+                {%if page_obj.number != page_obj.paginator.num_pages%}
+                <a style="color:white;" href="{% url 'founder:index' page_obj.paginator.num_pages %}{{get}}">
+                    {{page_obj.paginator.num_pages}}
+                </a>
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+
+    {% if founder_list %}
         <div class="row" style="margin-bottom: 50px;">
-        {% for founder in filter %}
+        {% for founder in founder_list %}
                 <div class="col-md-4" style="height: 150px; margin-bottom: 30px;">
                     <a href="{% url 'founder:detail' founder.pk %}">
                     {% if founder.picture != "" %}

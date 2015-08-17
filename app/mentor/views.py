@@ -17,8 +17,9 @@ from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse_lazy, reverse
 from django.contrib import messages
 from django.conf import settings
-from django.core.mail import send_mail
+from django.core.mail import EmailMessage
 import random
+import os
 
 class MentorCreate(generic.CreateView):
     model = Mentor
@@ -114,7 +115,10 @@ class MentorCreate(generic.CreateView):
         message += u"Si nous persistons à vous envoyer des courriel sans votre accord, contacter nous à l'adresse suivante : "
         message += app['site']['email_technique']
 
-        send_mail('Bienvenue sur le Tableau de Bord du Centech', message, app['site']['email_technique'], [app['site']['email_technique'], email], fail_silently=False)
+        emailReady = EmailMessage('Bienvenue sur le Tableau de Bord du Centech', message, app['site']['email_technique'],
+            [email], [app['site']['email_technique']],
+            reply_to=[app['site']['email_technique']])
+        emailReady.send(fail_silently=False)
 
     def get_success_url(self):
         return reverse_lazy("mentor:detail", kwargs={'pk': self.mentorCreate.userProfile_id})
@@ -177,6 +181,7 @@ class MentorUpdate(generic.UpdateView):
         object.url = form.data['url']
 
         try:
+            self.request.FILES['picture'].name = object.user.username + os.path.splitext(self.request.FILES['picture'].name)[1]
             object.picture = self.request.FILES['picture']
         except:
             pass

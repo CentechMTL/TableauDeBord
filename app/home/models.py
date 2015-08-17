@@ -62,9 +62,16 @@ class UserProfile(models.Model):
         return '<img src="/media/%s" width="100" height="100" />' % (self.picture)
     image_thumb.allow_tags = True
 
+class FloorPlan(models.Model):
+    title = models.CharField(max_length=100,verbose_name=_('Title'))
+    image = models.ImageField(upload_to='floor_plan', verbose_name=_('Image'))
 
+    def __str__(self):
+        return self.title
 
-
+    def image_thumb(self):
+        return '<img src="/media/%s" width="100" height="100" />' % (self.image)
+    image_thumb.allow_tags = True
 
 
 

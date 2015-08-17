@@ -5,6 +5,11 @@
 <!-- Load internationalisation utils-->
 {% load i18n %}
 
+{% block extrahead %}
+    <!-- PROGRESS_BAR CSS -->
+    <link rel="stylesheet" href="{% static 'company/css/progress_bar.css' %}">
+{% endblock %}
+
 {% block content %}
     {% if isCentech %}
     <div class="row" style="margin-bottom: 20px;">
@@ -20,8 +25,6 @@
             <div>
                 {% if company.logo != "" %}
                     <img class="logo" src="/media/{{ company.logo }}" /><br>
-                {% else %}
-                    <img class="logo" src="/media/logo/default.jpg" /><br>
                 {% endif %}
                 <h1><strong>{{ company.name }}</strong></h1>
 
@@ -41,12 +44,34 @@
 
                 {% trans "Incubation phase" %} : {{ company.companyStatus }}<br>
                 {% if company.url != "" %}
-                {% trans "Web site" %} : <a href="{{ company.url }}">{{ company.url }}</a>
+                {% trans "Web site" %} : <a href="{{ company.url }}">{{ company.url }}</a><br><br>
+                {% endif %}
+                {% if company.incubated_on %}
+                    {% trans "Incubation date" %} : {{ company.incubated_on }}
+                    {% if company.endOfIncubation %}
+                        <br>{% trans "End of incubation date" %} : {{ company.endOfIncubation }}
+                    {% endif %}
                 {% endif %}
                 <br><br>
             </div>
         </div>
     </div>
+    {% if company.get_percentage_incubation_time %}
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="meter">
+                {% if company.get_percentage_incubation_time > 95 %}
+                    <span class="red" style="width: {{company.get_percentage_incubation_time}}%">{{company.get_percentage_incubation_time}}%</span>
+                {% elif company.get_percentage_incubation_time > 70 %}
+                    <span class="yellow" style="width: {{company.get_percentage_incubation_time}}%">{{company.get_percentage_incubation_time}}%</span>
+                {% else %}
+                    <span class="green" style="width: {{company.get_percentage_incubation_time}}%">{{company.get_percentage_incubation_time}}%</span>
+                {% endif %}
+            </div>
+            <div align="center">{% trans "Time spent incubation" %} : {{company.get_percentage_incubation_time}}%</div><br>
+        </div>
+    </div>
+    {% endif %}
     <div class="well well-lg" style="background-color: #87cefa">
      <div class="row">
         <div class="col-sm-12" align="center" style="text-align: justify;">

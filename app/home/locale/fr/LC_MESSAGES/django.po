@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-06 17:54-0400\n"
+"POT-Creation-Date: 2015-08-05 15:29-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -118,13 +118,12 @@ msgid ""
 "sur notre plateforme, merci de contacter nos services via l'adresse"
 msgstr ""
 
+#: .\app\home\templates\home\maStartup.html:4
 #: .\app\home\templates\home\noAccessPermissions.html:4
 msgid "No Access"
 msgstr "Pas d'autorisation"
 
 #: .\app\home\templates\home\noAccessPermissions.html:7
-#, fuzzy
-#| msgid "Sorry! But you don't have the permissions to access this pag"
 msgid "Sorry! But you don't have the permissions to access this page"
 msgstr "Désolé! Mais vous n'avez pas la permissions d'accéder a cette page"
 
@@ -148,42 +147,105 @@ msgstr "Compte"
 msgid "My account"
 msgstr "Mon compte"
 
-#: .\app\home\templates\home\summary.html:13
+#: .\app\home\templates\home\summary.html:17
 msgid "Number of companies"
 msgstr "Nombre de compagnies"
 
-#: .\app\home\templates\home\summary.html:14
+#: .\app\home\templates\home\summary.html:21
 msgid "Number of founders"
 msgstr "Nombre de fondateurs"
 
-#: .\app\home\templates\home\summary.html:15
+#: .\app\home\templates\home\summary.html:25
 msgid "Number of mentors"
 msgstr "Nombre de mentors"
 
-#: .\app\home\templates\home\summary.html:20
+#: .\app\home\templates\home\summary.html:34
 msgid "Finances"
 msgstr "Finances"
 
-#: .\app\home\templates\home\summary.html:33
+#: .\app\home\templates\home\summary.html:49
+#: .\app\home\templates\home\summary.html:109
+#: .\app\home\templates\home\summary.html:179
+#: .\app\home\templates\home\summary.html:237
 msgid "Companies"
 msgstr "Compagnies"
 
-#: .\app\home\templates\home\summary.html:33
-#: .\app\home\templates\home\summary.html:42
+#: .\app\home\templates\home\summary.html:49
+#: .\app\home\templates\home\summary.html:62
 msgid "Amount"
 msgstr "Somme"
 
-#: .\app\home\templates\home\summary.html:67
+#: .\app\home\templates\home\summary.html:93
 msgid "Indicators of performances"
 msgstr "Indicateurs de performances"
 
-#: .\app\home\templates\home\summary.html:72
+#: .\app\home\templates\home\summary.html:95
 msgid "Average IRLs"
 msgstr "Moyenne des IRLs"
 
-#: .\app\home\templates\home\summary.html:73
+#: .\app\home\templates\home\summary.html:96
 msgid "Average TRLs"
 msgstr "Moyenne des TRLs"
+
+#: .\app\home\templates\home\summary.html:110
+msgid "IRL"
+msgstr "IRL"
+
+#: .\app\home\templates\home\summary.html:112
+msgid "TRL"
+msgstr "TRL"
+
+#: .\app\home\templates\home\summary.html:116
+#: .\app\home\templates\home\summary.html:118
+msgid "Last irl"
+msgstr "Dernier IRL"
+
+#: .\app\home\templates\home\summary.html:116
+#: .\app\home\templates\home\summary.html:120
+msgid "Last trl"
+msgstr "Dernier TRL"
+
+#: .\app\home\templates\home\summary.html:136
+msgid "Level"
+msgstr "Niveau"
+
+#: .\app\home\templates\home\summary.html:157
+msgid "Experiments"
+msgstr "Expérimentations"
+
+#: .\app\home\templates\home\summary.html:160
+msgid "Experiments in progress"
+msgstr "Expérimentations en cours"
+
+#: .\app\home\templates\home\summary.html:164
+msgid "Experiments validated"
+msgstr "Expérimentations validées"
+
+#: .\app\home\templates\home\summary.html:180
+#: .\app\home\templates\home\summary.html:186
+#: .\app\home\templates\home\summary.html:188
+msgid "In progress"
+msgstr "En cours"
+
+#: .\app\home\templates\home\summary.html:182
+#: .\app\home\templates\home\summary.html:186
+#: .\app\home\templates\home\summary.html:190
+msgid "Validated"
+msgstr "Validé"
+
+#: .\app\home\templates\home\summary.html:186
+#: .\app\home\templates\home\summary.html:188
+#: .\app\home\templates\home\summary.html:190
+msgid "Last experimentation"
+msgstr "Dernière expérimentation"
+
+#: .\app\home\templates\home\summary.html:204
+msgid "Number of experimentations"
+msgstr "Nombre d'expérimentations"
+
+#: .\app\home\templates\home\summary.html:223
+msgid "Incubation duration (months)"
+msgstr "Temps d'incubation (mois)"
 
 #: .\app\home\templates\registration\login.html:11
 msgid "Your username and password didn't match. Please try again."

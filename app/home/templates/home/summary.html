@@ -7,74 +7,266 @@
 {% load i18n %}
 
 {% block content %}
-    <div class="row" style="margin-top: 50px;">
-        <div class="col-sm-12" align="center">
-            <div class="row" align="center">
-                <div class="col-sm-4" style="border-right: 1px solid grey;"><strong>{% trans "Number of companies" %}</strong> <br><span style="font-size: 70px;">{{companies.count}}</span></div>
-                <div class="col-sm-4" ><strong>{% trans "Number of founders" %}</strong> <br><span style="font-size: 70px;">{{founders.count}}</span></div>
-                <div class="col-sm-4" style="border-left: 1px solid grey;"><strong>{% trans "Number of mentors" %}</strong> <br><span style="font-size: 70px;">{{mentors.count}}</span></div>
-            </div>
-        </div>
+
+<!-----------------------------------------
+================= GENERAL =================
+------------------------------------------>
+
+<div class="row" align="center" style="margin-top: 50px;">
+    <div class="col-sm-4" style="border-right: 1px solid grey;">
+        <strong>{% trans "Number of companies" %}</strong> <br>
+        <span style="font-size: 70px;">{{companies.count}}</span>
     </div>
+    <div class="col-sm-4" >
+        <strong>{% trans "Number of founders" %}</strong> <br>
+        <span style="font-size: 70px;">{{founders.count}}</span>
+    </div>
+    <div class="col-sm-4" style="border-left: 1px solid grey;">
+        <strong>{% trans "Number of mentors" %}</strong> <br>
+        <span style="font-size: 70px;">{{mentors.count}}</span>
+    </div>
+</div>
+
+<!-----------------------------------------
+================ FINANCES =================
+------------------------------------------>
 
 <h1>{% trans "Finances" %}</h1>
-<div id="accordion" style="margin-top: 50px;">
-    {% for type, data in finances.items %}
-    <h3 id="elem-{{type}}">{{type|capfirst}}</h3>
-    <div id="{{type}}">
+<div class="row">
+    <div class="col-sm-12">
+        <div id="accordion">
+            {% for type, data in finances.items %}
+            <h3 id="elem-{{type}}">{{type|capfirst}}</h3>
+            <div id="{{type}}">
+                <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+                <div id="chart_{{type}}"></div>
+                <script type="text/javascript">
+                    google.load("visualization", "1", {packages: ["corechart", 'bar']});
+                    google.setOnLoadCallback(drawDualX);
+
+                    function drawDualX() {
+                        var data = google.visualization.arrayToDataTable([
+                            ['{% trans "Companies" %}', '{% trans "Amount" %}'],
+                            {% for company, ammount in data %}
+                                ['{{company.name|safe}}', {{ammount}}],
+                            {% endfor %}
+                        ]);
+
+                        var options = {
+                            height: data.getNumberOfRows() * 20,
+                            chartArea: {
+                                top:20,
+                                height: data.getNumberOfRows() * 20 -100 ,
+                            },
+                            hAxis: {
+                                title: '{% trans "Amount" %} - {{type}}',
+                                minValue: 0
+                            },
+                            bars: 'horizontal',
+                            backgroundColor : 'none'
+                        };
+
+                        //Init elem for set height and width of the chart
+                        var elem = document.getElementById('elem-{{type}}');
+                        elem.click();
+
+                        var chart = new google.visualization.BarChart(document.getElementById('chart_{{type}}'));
+
+                        google.visualization.events.addListener(chart, 'ready', function () {
+                            //Close elem
+                            elem.click();
+                        });
+
+                        chart.draw(data, options);
+                    }
+                </script>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<!-----------------------------------------
+======== INDICATORS OF PERFORMANCES =======
+------------------------------------------>
+
+<h1>{% trans "Indicators of performances" %}</h1>
+<div class="row" align="center">
+    <div class="col-sm-6" style="border-right: 1px solid grey;"><strong>{% trans "Average IRLs" %}</strong> <br><span style="font-size: 70px;">{{averageIRL}}</span></div>
+    <div class="col-sm-6" ><strong>{% trans "Average TRLs" %}</strong> <br><span style="font-size: 70px;">{{averageTRL}}</span></div>
+</div>
+
+<div class="row" style="padding-top: 0px;">
+    <div class="col-sm-12">
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-        <div id="chart_{{type}}"></div>
+        <div id="chart_kpi"></div>
         <script type="text/javascript">
             google.load("visualization", "1", {packages: ["corechart", 'bar']});
             google.setOnLoadCallback(drawDualX);
 
             function drawDualX() {
-                var data = google.visualization.arrayToDataTable([
-                    ['{% trans "Companies" %}', '{% trans "Amount" %}'],
-                    {% for company, ammount in data %}
-                        ['{{company.name|safe}}', {{ammount}}],
-                    {% endfor %}
-                ]);
+                var data = new google.visualization.DataTable();
+                data.addColumn('string', '{% trans "Companies" %}');
+                data.addColumn('number', '{% trans "IRL" %}');
+                data.addColumn({type: 'string', role: 'tooltip'});
+                data.addColumn('number', '{% trans "TRL" %}');
+                data.addColumn({type: 'string', role: 'tooltip'});
+                {% for company, irl, trl in KPI %}
+                    {% if irl and trl %}
+                        data.addRows([['{{company.name|safe}}', {{irl.level}}, "IRL:{{irl.level}}\n{% trans "Last irl" %}:{{irl.period_start}}", {{trl.level}}, "TRL:{{trl.level}}\n{% trans "Last trl" %}:{{trl.period_start}}"],]);
+                    {% elif irl %}
+                        data.addRows([['{{company.name|safe}}', {{irl.level}}, "IRL:{{irl.level}}\n{% trans "Last irl" %}:{{irl.period_start}}", {{trl.level}}, "TRL:{{trl.level}}"],]);
+                    {% elif trl %}
+                        data.addRows([['{{company.name|safe}}', {{irl.level}}, "IRL:{{irl.level}}", {{trl.level}}, "TRL:{{trl.level}}\n{% trans "Last trl" %}:{{trl.period_start}}"],]);
+                    {% else %}
+                        data.addRows([['{{company.name|safe}}', {{irl.level}}, "IRL:{{irl.level}}", {{trl.level}}, "TRL:{{trl.level}}"],]);
+                    {% endif %}
+                {% endfor %}
 
                 var options = {
                     height: data.getNumberOfRows() * 30,
+                    chartArea: {
+                        top:20,
+                        height: data.getNumberOfRows() * 30 -100 ,
+                    },
                     hAxis: {
-                        title: '{% trans "Amount" %} - {{type}}',
-                        minValue: 0
+                        gridlines: {
+                            count: 10
+                        },
+                        title: '{% trans "Level" %}',
+                        minValue: 0,
+                        maxValue: 9
+
                     },
                     bars: 'horizontal',
                     backgroundColor : 'none'
                 };
 
-                //Init elem for set height and width of the chart
-                var elem = document.getElementById('elem-{{type}}');
-                elem.click();
-
-                var chart = new google.visualization.BarChart(document.getElementById('chart_{{type}}'));
-
-                google.visualization.events.addListener(chart, 'ready', function () {
-                    //Close elem
-                    elem.click();
-                });
+                var chart = new google.visualization.BarChart(document.getElementById('chart_kpi'));
 
                 chart.draw(data, options);
             }
         </script>
     </div>
-    {% endfor %}
 </div>
 
-<h1>{% trans "Indicators of performances" %}</h1>
+<!-----------------------------------------
+============= EXPERIMENTATIONS ============
+------------------------------------------>
 
-<div class="row" style="margin-top: 50px;">
-    <div class="col-sm-12" align="center">
-        <div class="row" align="center">
-            <div class="col-sm-6" style="border-right: 1px solid grey;"><strong>{% trans "Average IRLs" %}</strong> <br><span style="font-size: 70px;">{{averageIRL}}</span></div>
-            <div class="col-sm-6" ><strong>{% trans "Average TRLs" %}</strong> <br><span style="font-size: 70px;">{{averageTRL}}</span></div>
-        </div>
+<h1>{% trans "Experiments" %}</h1>
+<div class="row" align="center">
+    <div class="col-sm-6" style="border-right: 1px solid grey;">
+        <strong>{% trans "Experiments in progress" %}</strong> <br>
+        <span style="font-size: 70px;">{{experiments_inProgress_count}}</span>
+    </div>
+    <div class="col-sm-6" >
+        <strong>{% trans "Experiments validated" %}</strong> <br>
+        <span style="font-size: 70px;">{{experiments_validated_count}}</span>
     </div>
 </div>
 
+<div class="row" style="padding-top: 0px;">
+    <div class="col-sm-12">
+        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+        <div id="chart_experiment"></div>
+        <script type="text/javascript">
+            google.load("visualization", "1", {packages: ["corechart", 'bar']});
+            google.setOnLoadCallback(drawDualX);
+
+            function drawDualX() {
+                var data = new google.visualization.DataTable();
+                data.addColumn('string', '{% trans "Companies" %}');
+                data.addColumn('number', '{% trans "In progress" %}');
+                data.addColumn({type: 'string', role: 'tooltip'});
+                data.addColumn('number', '{% trans "Validated" %}');
+                data.addColumn({type: 'string', role: 'tooltip'});
+                {% for company, inProgress, validated, lastExperiment in experiments %}
+                    {% if inProgress and validated %}
+                        data.addRows([['{{company.name|safe}}', {{inProgress}}, "{% trans "In progress" %}:{{inProgress}}\n{% trans "Last experimentation" %}:{{lastExperiment.dateFinish}}", {{validated}}, "{% trans "Validated" %}:{{validated}}\n{% trans "Last experimentation" %}:{{lastExperiment.dateFinish}}"],]);
+                    {% elif inProgress %}
+                        data.addRows([['{{company.name|safe}}', {{inProgress}}, "{% trans "In progress" %}:{{inProgress}}\n{% trans "Last experimentation" %}:{{lastExperiment.dateFinish}}", {{validated}}, ""],]);
+                    {% elif validated %}
+                        data.addRows([['{{company.name|safe}}', {{inProgress}}, "", {{validated}}, "{% trans "Validated" %}:{{validated}}\n{% trans "Last experimentation" %}:{{lastExperiment.dateFinish}}"],]);
+                    {% else %}
+                        data.addRows([['{{company.name|safe}}', {{inProgress}}, "", {{validated}}, ""],]);
+                    {% endif %}
+                {% endfor %}
+
+                var options = {
+                    height: data.getNumberOfRows() * 30,
+                    chartArea: {
+                        top:20,
+                        height: data.getNumberOfRows() * 30 -100 ,
+                    },
+                    hAxis: {
+                        maxAlternation:1,
+                        title: "{% trans 'Number of experimentations' %}",
+                        minValue: 0,
+
+                    },
+                    bars: 'horizontal',
+                    backgroundColor : 'none'
+                };
+
+                var chart = new google.visualization.BarChart(document.getElementById('chart_experiment'));
+
+                chart.draw(data, options);
+            }
+        </script>
+    </div>
+</div>
+
+<!-----------------------------------------
+============ TIME OF INCUBATION ===========
+------------------------------------------>
+{% trans "Incubation duration (months)" as titleOfChart %}
+
+<h1>{{ titleOfChart|escape }}</h1>
+
+<div class="row" style="padding-top: 0px;">
+    <div class="col-sm-12">
+        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+        <div id="chart_timeOfIncubation"></div>
+        <script type="text/javascript">
+            google.load("visualization", "1", {packages: ["corechart", 'bar']});
+            google.setOnLoadCallback(drawDualX);
+
+            function drawDualX() {
+                var data = new google.visualization.DataTable();
+                data.addColumn('string', "{% trans "Companies" %}");
+                data.addColumn('number', "{{ titleOfChart|escapejs }}");
+                {% for company, timeSpent in timeOfIncubation %}
+                    data.addRows([["{{company.name|safe}}", {{timeSpent}}],]);
+                {% endfor %}
+
+                var options = {
+                    height: data.getNumberOfRows() * 30,
+                    chartArea: {
+                        top:20,
+                        height: data.getNumberOfRows() * 30 -100 ,
+                    },
+                    hAxis: {
+                        maxAlternation:1,
+                        title: "{{ titleOfChart|escapejs }}",
+                        minValue: 0,
+
+                    },
+                    bars: 'horizontal',
+                    backgroundColor : 'none'
+                };
+
+                var chart = new google.visualization.BarChart(document.getElementById('chart_timeOfIncubation'));
+
+                chart.draw(data, options);
+            }
+        </script>
+    </div>
+</div>
+<br>
+{% endblock %}
+
+{% block extrajs %}
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 

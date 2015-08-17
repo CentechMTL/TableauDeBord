@@ -2,7 +2,7 @@
 
 from django.contrib import admin
 from django.contrib.auth.models import User
-from app.home.models import UserProfile,Education,Expertise
+from app.home.models import UserProfile,Education,Expertise, FloorPlan
 from app.company.models import Company,CompanyStatus
 from app.home.forms import UserForm
 
@@ -15,6 +15,7 @@ class UserAdmin(admin.ModelAdmin):
 
 admin.site.register(Expertise)
 admin.site.register(Education)
+admin.site.register(FloorPlan)
 
 
 

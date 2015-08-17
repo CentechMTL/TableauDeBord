@@ -2,6 +2,7 @@
 
 from django.db import models
 from datetime import datetime
+import time
 from django.utils import timezone
 from embed_video.fields import EmbedVideoField
 from django.utils.translation import ugettext_lazy as _
@@ -44,6 +45,8 @@ class Company(models.Model):
     linkedIn = models.URLField(blank=True, null=True, verbose_name=_('linkedIn'))
 
     incubated_on = models.DateField(blank=True, null=True)
+    endOfIncubation = models.DateField(blank=True, null=True)
+
     created = models.DateTimeField(blank=True)
     updated = models.DateTimeField(blank=True)
 
@@ -69,6 +72,40 @@ class Company(models.Model):
 
         return users
 
+    def get_last_irl(self):
+        irls =  self.KPIs.filter(type="IRL").order_by("-period_start")
+        if irls:
+            return irls[0]
+        else:
+            return None
+
+    def get_last_trl(self):
+        trls =  self.KPIs.filter(type="TRL").order_by("-period_start")
+        if trls:
+            return trls[0]
+        else:
+            return None
+
+    def get_last_experiment(self):
+        experiments =  self.experiments.order_by("-dateFinish")
+        if experiments:
+            return experiments[0]
+        else:
+            return None
+
+    def get_percentage_incubation_time(self):
+        if self.incubated_on and self.endOfIncubation:
+            now = datetime.date(datetime.today())
+            delta_days = (now - self.incubated_on).days
+            timeOfIncubation = (self.endOfIncubation - self.incubated_on).days
+            percentage = int(round(((float(delta_days))/timeOfIncubation)*100, 0))
+            if percentage > 100:
+                return 100
+            else:
+                return percentage
+        else:
+            return None
+
     def image_thumb(self):
         return '<img src="/media/%s" width="100" height="100" />' % (self.logo)
     image_thumb.allow_tags = True
@@ -87,4 +124,4 @@ class Presence(models.Model):
         return str(self.date)
 
     def get_absolute_url(self):
-        return reverse('company:presence_list')
+        return reverse('company:presence_list', args={self.company.all()[0].companyStatus.id})

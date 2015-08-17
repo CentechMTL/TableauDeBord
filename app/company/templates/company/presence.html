@@ -1,14 +1,37 @@
 {% extends "dashboard.html" %}
 <!-- Load internationalisation utils-->
 {% load i18n %}
+{% load staticfiles %}
 {% block title %}{% trans "Presence" %}{% endblock %}
 {% load extras %}
 
+{% block extrahead %}
+    <script type="text/javascript" src="{% static 'js/getUrl.js' %}"></script>
+{% endblock %}
+
 {% block content %}
     <h1>{% trans "Presence in Centech" %}</h1>
-    <!--TODO Check for implement a calendar-->
     <div class="row">
-        <div class="col-sm-12" align="center">
+        <div class="col-sm-12">
+        <hr>
+        <!-- TO SELECT THE STATUS WHAT WE WANT DISPLAY -->
+        <label for="status">Select a status : </label>
+        <select id="status" onchange='getUrl("company:presence_list", this.value, true);'>
+            {% for status in list_company_status %}
+                {% if status.id == status_selected.id%}
+                    <option value='{{status.id}}' selected="selected">{{status.status}}</option>
+                {% else %}
+                    <option value='{{status.id}}'>{{status.status}}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+        <hr>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12" style="overflow-y:auto" >
+            <!-- THE STATUS WHAT WE WANT DISPLAY -->
             <table cellpadding="0" cellspacing="0" class="table table-bordered">
                 <tr>
                     <th>{% trans "Date" %}</th>

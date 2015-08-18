@@ -6,6 +6,10 @@
 <!-- Load internationalisation utils-->
 {% load i18n %}
 
+{% block extrahead %}
+    <script type="text/javascript" src="{% static 'js/getUrl.js' %}"></script>
+{% endblock %}
+
 {% block content %}
 
 <!-----------------------------------------
@@ -117,21 +121,25 @@
             function drawDualX() {
                 var data = new google.visualization.DataTable();
                 data.addColumn('string', '{% trans "Companies" %}');
+                data.addColumn('string', 'id');
                 data.addColumn('number', '{% trans "IRL" %}');
                 data.addColumn({type: 'string', role: 'tooltip'});
                 data.addColumn('number', '{% trans "TRL" %}');
                 data.addColumn({type: 'string', role: 'tooltip'});
                 {% for company, irl, trl in KPI %}
                     {% if irl and trl %}
-                        data.addRows([['{{company.name|safe}}', {{irl.level}}, "IRL:{{irl.level}}\n{% trans "Last irl" %}:{{irl.period_start}}", {{trl.level}}, "TRL:{{trl.level}}\n{% trans "Last trl" %}:{{trl.period_start}}"],]);
+                        data.addRows([['{{company.name|safe}}', '{{company.id}}', {{irl.level}}, "IRL:{{irl.level}}\n{% trans "Last irl" %}:{{irl.period_start}}", {{trl.level}}, "TRL:{{trl.level}}\n{% trans "Last trl" %}:{{trl.period_start}}"],]);
                     {% elif irl %}
-                        data.addRows([['{{company.name|safe}}', {{irl.level}}, "IRL:{{irl.level}}\n{% trans "Last irl" %}:{{irl.period_start}}", {{trl.level}}, "TRL:{{trl.level}}"],]);
+                        data.addRows([['{{company.name|safe}}', '{{company.id}}', {{irl.level}}, "IRL:{{irl.level}}\n{% trans "Last irl" %}:{{irl.period_start}}", {{trl.level}}, "TRL:{{trl.level}}"],]);
                     {% elif trl %}
-                        data.addRows([['{{company.name|safe}}', {{irl.level}}, "IRL:{{irl.level}}", {{trl.level}}, "TRL:{{trl.level}}\n{% trans "Last trl" %}:{{trl.period_start}}"],]);
+                        data.addRows([['{{company.name|safe}}', '{{company.id}}', {{irl.level}}, "IRL:{{irl.level}}", {{trl.level}}, "TRL:{{trl.level}}\n{% trans "Last trl" %}:{{trl.period_start}}"],]);
                     {% else %}
-                        data.addRows([['{{company.name|safe}}', {{irl.level}}, "IRL:{{irl.level}}", {{trl.level}}, "TRL:{{trl.level}}"],]);
+                        data.addRows([['{{company.name|safe}}', '{{company.id}}', {{irl.level}}, "IRL:{{irl.level}}", {{trl.level}}, "TRL:{{trl.level}}"],]);
                     {% endif %}
                 {% endfor %}
+
+                var view = new google.visualization.DataView(data);
+                view.setColumns([0, 2, 4]);
 
                 var options = {
                     height: data.getNumberOfRows() * 30,
@@ -154,7 +162,22 @@
 
                 var chart = new google.visualization.BarChart(document.getElementById('chart_kpi'));
 
-                chart.draw(data, options);
+                chart.draw(view, options);
+
+                var selectHandler = function(e) {
+                    type = chart.getSelection()[0]['column'];
+                    id = data.getValue(chart.getSelection()[0]['row'], 1 );
+                    if(type == 1){
+                        getUrl("kpi:irl_filter", id, true);
+                    }
+                    else if(type == 2){
+                        getUrl("kpi:trl_filter", id, true);
+                    }
+                    //Else nothing
+                }
+
+                // Add our selection handler.
+                google.visualization.events.addListener(chart, 'select', selectHandler);
             }
         </script>
     </div>
@@ -187,21 +210,25 @@
             function drawDualX() {
                 var data = new google.visualization.DataTable();
                 data.addColumn('string', '{% trans "Companies" %}');
+                data.addColumn('string', 'link');
                 data.addColumn('number', '{% trans "In progress" %}');
                 data.addColumn({type: 'string', role: 'tooltip'});
                 data.addColumn('number', '{% trans "Validated" %}');
                 data.addColumn({type: 'string', role: 'tooltip'});
                 {% for company, inProgress, validated, lastExperiment in experiments %}
                     {% if inProgress and validated %}
-                        data.addRows([['{{company.name|safe}}', {{inProgress}}, "{% trans "In progress" %}:{{inProgress}}\n{% trans "Last experimentation" %}:{{lastExperiment.dateFinish}}", {{validated}}, "{% trans "Validated" %}:{{validated}}\n{% trans "Last experimentation" %}:{{lastExperiment.dateFinish}}"],]);
+                        data.addRows([['{{company.name|safe}}', '{% url 'experiment:experiment_list' company.id %}', {{inProgress}}, "{% trans "In progress" %}:{{inProgress}}\n{% trans "Last experimentation" %}:{{lastExperiment.dateFinish}}", {{validated}}, "{% trans "Validated" %}:{{validated}}\n{% trans "Last experimentation" %}:{{lastExperiment.dateFinish}}"],]);
                     {% elif inProgress %}
-                        data.addRows([['{{company.name|safe}}', {{inProgress}}, "{% trans "In progress" %}:{{inProgress}}\n{% trans "Last experimentation" %}:{{lastExperiment.dateFinish}}", {{validated}}, ""],]);
+                        data.addRows([['{{company.name|safe}}', '{% url 'experiment:experiment_list' company.id %}', {{inProgress}}, "{% trans "In progress" %}:{{inProgress}}\n{% trans "Last experimentation" %}:{{lastExperiment.dateFinish}}", {{validated}}, ""],]);
                     {% elif validated %}
-                        data.addRows([['{{company.name|safe}}', {{inProgress}}, "", {{validated}}, "{% trans "Validated" %}:{{validated}}\n{% trans "Last experimentation" %}:{{lastExperiment.dateFinish}}"],]);
+                        data.addRows([['{{company.name|safe}}', '{% url 'experiment:experiment_list' company.id %}', {{inProgress}}, "", {{validated}}, "{% trans "Validated" %}:{{validated}}\n{% trans "Last experimentation" %}:{{lastExperiment.dateFinish}}"],]);
                     {% else %}
-                        data.addRows([['{{company.name|safe}}', {{inProgress}}, "", {{validated}}, ""],]);
+                        data.addRows([['{{company.name|safe}}', '{% url 'experiment:experiment_list' company.id %}', {{inProgress}}, "", {{validated}}, ""],]);
                     {% endif %}
                 {% endfor %}
+
+                var view = new google.visualization.DataView(data);
+                view.setColumns([0, 2, 4]);
 
                 var options = {
                     height: data.getNumberOfRows() * 30,
@@ -221,7 +248,14 @@
 
                 var chart = new google.visualization.BarChart(document.getElementById('chart_experiment'));
 
-                chart.draw(data, options);
+                chart.draw(view, options);
+
+                var selectHandler = function(e) {
+                    window.location = data.getValue(chart.getSelection()[0]['row'], 1 );
+                }
+
+                // Add our selection handler.
+                google.visualization.events.addListener(chart, 'select', selectHandler);
             }
         </script>
     </div>
@@ -245,10 +279,14 @@
             function drawDualX() {
                 var data = new google.visualization.DataTable();
                 data.addColumn('string', "{% trans "Companies" %}");
+                data.addColumn('string', "link");
                 data.addColumn('number', "{{ titleOfChart|escapejs }}");
                 {% for company, timeSpent in timeOfIncubation %}
-                    data.addRows([["{{company.name|safe}}", {{timeSpent}}],]);
+                    data.addRows([["{{company.name|safe}}", '{% url 'company:detail' company.id %}', {{timeSpent}}],]);
                 {% endfor %}
+
+                var view = new google.visualization.DataView(data);
+                view.setColumns([0, 2]);
 
                 var options = {
                     height: data.getNumberOfRows() * 30,
@@ -268,7 +306,14 @@
 
                 var chart = new google.visualization.BarChart(document.getElementById('chart_timeOfIncubation'));
 
-                chart.draw(data, options);
+                chart.draw(view, options);
+
+                var selectHandler = function(e) {
+                    window.location = data.getValue(chart.getSelection()[0]['row'], 1 );
+                }
+
+                // Add our selection handler.
+                google.visualization.events.addListener(chart, 'select', selectHandler);
             }
         </script>
     </div>

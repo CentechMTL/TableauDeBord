@@ -212,11 +212,8 @@ def get_url(request, namespace, arguments):
         args.append(argument)
     """
     if request.is_ajax():
-        print 'is_ajax'
         message['url'] = reverse(namespace, args={arguments})
-        print 'message add'
         data = json.dumps(message)
-        print 'data dumps'
         return HttpResponse(data, content_type='application/json')
     #The visitor can't see this page!
     return HttpResponseRedirect("/user/noAccessPermissions")

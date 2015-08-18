@@ -14,7 +14,7 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.db.models import Avg
 
-from app.company.models import Company
+from app.company.models import Company, CompanyStatus
 from app.founder.models import Founder
 from app.mentor.models import Mentor
 from app.kpi.models import KPI, KPI_TYPE_CHOICES
@@ -39,7 +39,12 @@ class Summary(generic.TemplateView):
         return HttpResponseRedirect("/user/noAccessPermissions")
 
     def get_context_data(self, **kwargs):
-        companies = Company.objects.all().order_by('incubated_on')
+        try:
+            status = CompanyStatus.objects.get(id = kwargs['status'])
+            companies = Company.objects.filter(companyStatus=status).order_by('incubated_on')
+        except:
+            companies = Company.objects.all().order_by('incubated_on')
+
         founders = Founder.objects.all()
         mentors = Mentor.objects.all()
 
@@ -102,6 +107,12 @@ class Summary(generic.TemplateView):
             experiments.append((company, inProgress, validated, lastExperiment))
 
         context = super(Summary, self).get_context_data(**kwargs)
+
+        context['list_company_status'] = CompanyStatus.objects.all()
+        try:
+            context['status_selected'] = CompanyStatus.objects.get(id = kwargs['status'])
+        except:
+            pass
 
         context['companies'] = companies
         context['founders'] = founders
@@ -204,15 +215,21 @@ def logout_view(request):
     # Redirect to a success page.
     return HttpResponseRedirect("/")
 
-def get_url(request, namespace, arguments):
+def get_url(request, namespace, arguments=""):
     message = {}
+    print ('namespace => ' + namespace)
+    print ('arguments => ' + arguments)
     """
     args = {}
     for argument in arguments:
         args.append(argument)
     """
     if request.is_ajax():
-        message['url'] = reverse(namespace, args={arguments})
+        if arguments != "":
+            message['url'] = reverse(namespace, args={arguments})
+        else:
+            message['url'] = reverse(namespace)
+        print ('url' + message['url'])
         data = json.dumps(message)
         return HttpResponse(data, content_type='application/json')
     #The visitor can't see this page!

@@ -8,7 +8,10 @@ redirect  -> true if you want be redirect to this url directly
 **/
 
 function getUrl(namespace, arg, redirect){
-    link = "/getUrl/" + namespace + "/" + arg;
+    link = "/getUrl/" + namespace;
+    if(arg){
+        link +=  "/" + arg;
+    }
     $.ajax({
         type: 'GET',
         url: link,

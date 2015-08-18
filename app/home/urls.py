@@ -9,6 +9,7 @@ urlpatterns = patterns('',
 
     #Display the summary page
     url(r'^summary/$', views.Summary.as_view(), name='summary'),
+    url(r'^summary/(?P<status>\d+)$', views.Summary.as_view(), name='summary'),
 
     #Connection
     url(r'^logout$',views.logout_view,name='logout'),
@@ -19,7 +20,7 @@ urlpatterns = patterns('',
 
     #Get url with Ajax
     url(r'^getUrl/(.+)/(.+)$', views.get_url, name='get_url'),
-
+    url(r'^getUrl/(.+)$', views.get_url, name='get_url'),
     #Carte routiere du centech -iframe
     url(r'^maStartup$', views.maStartup, name='maStartup'),
 

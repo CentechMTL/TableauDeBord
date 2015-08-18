@@ -39,7 +39,7 @@
                     <a href="{% url 'mentor:index' %}"><div><i class="fa fa-graduation-cap"></i> <span class="nav-label">{% trans "Mentors" %}</span></div></a>
                     <a href="{% url 'founder:index' %}"><div><i class="fa fa-users"></i> <span class="nav-label">{% trans "Founders" %}</span></div></a>
                     {% if isCentech %}
-                    <a href="{% url 'home:summary' %}"><div><i class="fa fa-bar-chart" ></i> <span class="nav-label">{% trans "Summary" %}</span></div></a>
+                    <a href="{% url 'home:summary' 1%}"><div><i class="fa fa-bar-chart" ></i> <span class="nav-label">{% trans "Summary" %}</span></div></a>
                     <a href="{% url 'company:presence_list' 1%}"><div><i class="fa fa-graduation-cap"></i> <span class="nav-label">{% trans "Presence" %}</span></div></a>
                         <select id="selectCompany" class="menuDashboard" onchange="updateMenu(this.value)">
                             <option value="0">{% trans "Select a company" %}</option>

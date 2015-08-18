@@ -12,6 +12,26 @@
 
 {% block content %}
 
+<div class="row">
+    <div class="col-sm-12">
+        <hr>
+        <!-- TO SELECT THE STATUS WHAT WE WANT DISPLAY -->
+        {{status_selected.id}}
+        <label for="status">{% trans "Select a status" %} : </label>
+        <select id="status" onchange='getUrl("home:summary", this.value, true);'>
+            <option value=''>{% trans "All" %}</option>
+            {% for status in list_company_status %}
+                {% if status.id == status_selected.id%}
+                    <option value='{{status.id}}' selected="selected">{{status.status}} - {{status.id}}</option>
+                {% else %}
+                    <option value='{{status.id}}'>{{status.status}}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+        <hr>
+    </div>
+</div>
+
 <!-----------------------------------------
 ================= GENERAL =================
 ------------------------------------------>
@@ -60,10 +80,10 @@
                         view.setColumns([0, 2]);
 
                         var options = {
-                            height: data.getNumberOfRows() * 20,
+                            height: data.getNumberOfRows() * 25 + 100,
                             chartArea: {
                                 top:20,
-                                height: data.getNumberOfRows() * 20 -100 ,
+                                height: data.getNumberOfRows() * 25,
                             },
                             hAxis: {
                                 title: '{% trans "Amount" %} - {{type}}',
@@ -142,10 +162,10 @@
                 view.setColumns([0, 2, 4]);
 
                 var options = {
-                    height: data.getNumberOfRows() * 30,
+                    height: data.getNumberOfRows() * 30 + 100,
                     chartArea: {
                         top:20,
-                        height: data.getNumberOfRows() * 30 -100 ,
+                        height: data.getNumberOfRows() * 30 ,
                     },
                     hAxis: {
                         gridlines: {
@@ -231,10 +251,10 @@
                 view.setColumns([0, 2, 4]);
 
                 var options = {
-                    height: data.getNumberOfRows() * 30,
+                    height: data.getNumberOfRows() * 30 +100,
                     chartArea: {
                         top:20,
-                        height: data.getNumberOfRows() * 30 -100 ,
+                        height: data.getNumberOfRows() * 30,
                     },
                     hAxis: {
                         maxAlternation:1,
@@ -289,10 +309,10 @@
                 view.setColumns([0, 2]);
 
                 var options = {
-                    height: data.getNumberOfRows() * 30,
+                    height: data.getNumberOfRows() * 25 + 100,
                     chartArea: {
                         top:20,
-                        height: data.getNumberOfRows() * 30 -100 ,
+                        height: data.getNumberOfRows() * 25,
                     },
                     hAxis: {
                         maxAlternation:1,

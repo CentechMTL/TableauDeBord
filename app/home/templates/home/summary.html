@@ -46,11 +46,14 @@
 
                     function drawDualX() {
                         var data = google.visualization.arrayToDataTable([
-                            ['{% trans "Companies" %}', '{% trans "Amount" %}'],
+                            ['{% trans "Companies" %}', 'link', '{% trans "Amount" %}'],
                             {% for company, ammount in data %}
-                                ['{{company.name|safe}}', {{ammount}}],
+                                ['{{company.name|safe}}', '{% url 'finance:detail_finance' company.id %}', {{ammount}}],
                             {% endfor %}
                         ]);
+
+                        var view = new google.visualization.DataView(data);
+                        view.setColumns([0, 2]);
 
                         var options = {
                             height: data.getNumberOfRows() * 20,
@@ -77,7 +80,14 @@
                             elem.click();
                         });
 
-                        chart.draw(data, options);
+                        chart.draw(view, options);
+
+                        var selectHandler = function(e) {
+                            window.location = data.getValue(chart.getSelection()[0]['row'], 1 );
+                        }
+
+                        // Add our selection handler.
+                        google.visualization.events.addListener(chart, 'select', selectHandler);
                     }
                 </script>
             </div>

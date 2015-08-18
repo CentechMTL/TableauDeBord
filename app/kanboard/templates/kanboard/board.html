@@ -120,9 +120,9 @@
                                     this.value,
                                     '{% url 'kanboard:card' 1 %}'
                                     );">
-        <option value="true">Completed</option>
-        <option value="false" selected="selected">In progress</option>
-        <option value="none">All</option>
+        <option value="true">{% trans "Complete" %}</option>
+        <option value="false" selected="selected">{% trans "In progress" %}</option>
+        <option value="none">{% trans "All" %}</option>
     </select>
 
     <!-- The Kanboard populate in Ajax -->

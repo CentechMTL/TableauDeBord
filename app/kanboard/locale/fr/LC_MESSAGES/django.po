@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-05 15:30-0400\n"
+"POT-Creation-Date: 2015-08-18 09:42-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: .\app\kanboard\forms.py:26
+#: .\app\kanboard\forms.py:26 .\app\kanboard\templates\kanboard\board.html:123
 msgid "Complete"
 msgstr "Effectué"
 
@@ -71,6 +71,14 @@ msgstr "Créer"
 #: .\app\kanboard\templates\kanboard\board.html:100
 msgid "Kanboard of"
 msgstr "Kanboard de"
+
+#: .\app\kanboard\templates\kanboard\board.html:124
+msgid "In progress"
+msgstr "En cours"
+
+#: .\app\kanboard\templates\kanboard\board.html:125
+msgid "All"
+msgstr "Tous"
 
 #: .\app\kanboard\templates\kanboard\card.html:26
 msgid "From"

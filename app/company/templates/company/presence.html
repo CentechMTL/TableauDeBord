@@ -15,7 +15,7 @@
         <div class="col-sm-12">
         <hr>
         <!-- TO SELECT THE STATUS WHAT WE WANT DISPLAY -->
-        <label for="status">Select a status : </label>
+        <label for="status">{% trans "Select a status" %} : </label>
         <select id="status" onchange='getUrl("company:presence_list", this.value, true);'>
             {% for status in list_company_status %}
                 {% if status.id == status_selected.id%}

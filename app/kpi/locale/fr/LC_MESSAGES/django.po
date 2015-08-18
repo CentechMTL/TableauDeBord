@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-05 15:30-0400\n"
+"POT-Creation-Date: 2015-08-18 09:42-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,20 +32,20 @@ msgstr "Type"
 #: .\app\kpi\models.py:22 .\app\kpi\templates\kpi\irl.html:65
 #: .\app\kpi\templates\kpi\irl.html:115
 #: .\app\kpi\templates\kpi\irl_confirm_delete.html:11
-#: .\app\kpi\templates\kpi\trl.html:66 .\app\kpi\templates\kpi\trl.html:116
+#: .\app\kpi\templates\kpi\trl.html:66 .\app\kpi\templates\kpi\trl.html:115
 #: .\app\kpi\templates\kpi\trl_confirm_delete.html:11
 msgid "Level"
 msgstr "Niveau"
 
 #: .\app\kpi\models.py:23 .\app\kpi\templates\kpi\irl.html:101
 #: .\app\kpi\templates\kpi\irl.html:114 .\app\kpi\templates\kpi\trl.html:102
-#: .\app\kpi\templates\kpi\trl.html:115
+#: .\app\kpi\templates\kpi\trl.html:114
 msgid "Date"
 msgstr "Date"
 
 #: .\app\kpi\models.py:24 .\app\kpi\templates\kpi\irl.html:116
 #: .\app\kpi\templates\kpi\irl_confirm_delete.html:13
-#: .\app\kpi\templates\kpi\trl.html:117
+#: .\app\kpi\templates\kpi\trl.html:116
 #: .\app\kpi\templates\kpi\trl_confirm_delete.html:13
 msgid "Comment"
 msgstr "Commentaire"
@@ -108,13 +108,13 @@ msgid "IRL"
 msgstr "IRL"
 
 #: .\app\kpi\templates\kpi\irl.html:118 .\app\kpi\templates\kpi\irl.html:128
-#: .\app\kpi\templates\kpi\trl.html:119 .\app\kpi\templates\kpi\trl.html:129
+#: .\app\kpi\templates\kpi\trl.html:118 .\app\kpi\templates\kpi\trl.html:128
 msgid "Modify"
 msgstr "Modifier"
 
 #: .\app\kpi\templates\kpi\irl.html:119 .\app\kpi\templates\kpi\irl.html:129
 #: .\app\kpi\templates\kpi\irl_confirm_delete.html:17
-#: .\app\kpi\templates\kpi\trl.html:120 .\app\kpi\templates\kpi\trl.html:130
+#: .\app\kpi\templates\kpi\trl.html:119 .\app\kpi\templates\kpi\trl.html:129
 #: .\app\kpi\templates\kpi\trl_confirm_delete.html:17
 msgid "Delete"
 msgstr "Supprimer"
@@ -213,11 +213,11 @@ msgstr "TRL de"
 msgid "TRL"
 msgstr "TRL"
 
-#: .\app\kpi\templates\kpi\trl.html:138
+#: .\app\kpi\templates\kpi\trl.html:137
 msgid "No one TRL for the moment."
 msgstr "Aucun TRL."
 
-#: .\app\kpi\templates\kpi\trl.html:141
+#: .\app\kpi\templates\kpi\trl.html:140
 msgid "New TRL"
 msgstr "Nouveau TRL"
 

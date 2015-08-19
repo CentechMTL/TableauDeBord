@@ -16,13 +16,12 @@
     <div class="col-sm-12">
         <hr>
         <!-- TO SELECT THE STATUS WHAT WE WANT DISPLAY -->
-        {{status_selected.id}}
         <label for="status">{% trans "Select a status" %} : </label>
         <select id="status" onchange='getUrl("home:summary", this.value, true);'>
             <option value=''>{% trans "All" %}</option>
             {% for status in list_company_status %}
                 {% if status.id == status_selected.id%}
-                    <option value='{{status.id}}' selected="selected">{{status.status}} - {{status.id}}</option>
+                    <option value='{{status.id}}' selected="selected">{{status.status}}</option>
                 {% else %}
                     <option value='{{status.id}}'>{{status.status}}</option>
                 {% endif %}

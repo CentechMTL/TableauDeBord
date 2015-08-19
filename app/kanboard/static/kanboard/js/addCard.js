@@ -9,14 +9,13 @@ function addCard(baseLien, linkGetDetail, companyId, linkDeleteCard, linkFounder
     var update = document.getElementById("update").value;
 
     //Prepare the link
-    baseLien = baseLien.replace(/([0-9]+)/, phase);
+    baseLien = baseLien.replace(/([0-9]+)/, companyId);
 
     var newUl = document.getElementById('phase-'+ phase);
     order = newUl.getElementsByTagName('li').length + 1;
 
     //Link to add a card
     lien = baseLien + "add/";
-
     $.ajax({
         type: 'POST',
         url: lien,

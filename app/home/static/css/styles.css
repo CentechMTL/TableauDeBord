@@ -100,6 +100,7 @@ legend {
 
 button{
     margin-top: 20px;
+    margin-bottom: 20px;
     height: 30px;
     padding: 30px;
     padding-top: 5px;
@@ -112,6 +113,13 @@ button{
 }
 
 button:hover{
+    color: orange;
+}
+
+.btn{
+    margin-bottom:20px;
+}
+.btn:hover{
     color: orange;
 }
 

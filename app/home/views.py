@@ -3,7 +3,7 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from app.home.forms import UpdatePasswordForm,UserProfileForm
 from django.contrib.auth import authenticate,login,logout
-from django.shortcuts import render,get_object_or_404
+from django.shortcuts import render,get_object_or_404, redirect
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.views import generic
 from django.utils import timezone
@@ -15,6 +15,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Avg
 
 from app.company.models import Company, CompanyStatus
+from app.company.forms import MiniCompanyStatusUpdateForm
 from app.founder.models import Founder
 from app.mentor.models import Mentor
 from app.kpi.models import KPI, KPI_TYPE_CHOICES
@@ -37,6 +38,16 @@ class Summary(generic.TemplateView):
 
         #The visitor can't see this page!
         return HttpResponseRedirect("/user/noAccessPermissions")
+
+    def post(self, request, *args, **kwargs):
+        object = CompanyStatus.objects.get(id = kwargs['status'])
+        form = MiniCompanyStatusUpdateForm(object, request.POST)
+        if form.is_valid():
+            object.comment = form.data['comment']
+            object.save()
+
+        return HttpResponseRedirect(reverse('home:summary', kwargs={'status' : object.id}))
+
 
     def get_context_data(self, **kwargs):
         try:
@@ -110,7 +121,9 @@ class Summary(generic.TemplateView):
 
         context['list_company_status'] = CompanyStatus.objects.all()
         try:
-            context['status_selected'] = CompanyStatus.objects.get(id = kwargs['status'])
+            status = CompanyStatus.objects.get(id = kwargs['status'])
+            context['status_selected'] = status
+            context['form_comment'] = MiniCompanyStatusUpdateForm(status)
         except:
             pass
 

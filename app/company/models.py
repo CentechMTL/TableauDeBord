@@ -17,6 +17,7 @@ class CompanyStatus(models.Model):
         verbose_name_plural = _('Company Status')
 
     status = models.CharField(max_length=50, verbose_name=_('Name'))
+    comment = models.TextField(verbose_name=_('Comment'), blank=True)
 
     def __unicode__(self):
         return self.status

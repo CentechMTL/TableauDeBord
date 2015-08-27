@@ -56,6 +56,35 @@ class CompanyStatusCreateForm(forms.Form):
             StrictButton(_('Save'), type="submit")
         )
 
+class MiniCompanyStatusUpdateForm(forms.Form):
+    comment = forms.CharField(
+        label=_('Comment'),
+        required=False,
+        widget=forms.Textarea(
+            attrs={
+                'placeholder': _(u'Write here a comment about this group.'),
+                'class': 'md-editor'
+            }
+        )
+    )
+
+    def __init__(self, status, *args, **kwargs):
+        super(MiniCompanyStatusUpdateForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_class = 'content-wrapper'
+        self.helper.form_method = 'post'
+
+        self.status = status
+        self.fields['comment'].initial = status.comment
+
+        self.helper.layout = Layout(
+            Field('comment'),
+            StrictButton(_('Save'), type="submit")
+        )
+
+    def save(self):
+        self.status.save()
+
 class CompanyCreateForm(forms.Form):
 
     incubated_on = forms.DateField(

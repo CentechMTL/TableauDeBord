@@ -43,7 +43,7 @@ class Card(models.Model):
     class Meta:
         ordering = ['order', ]
 
-    def __str__(self):
+    def __unicode__(self):
         return "%s -- %s" % (self.title, self.company)
 
     def save(self, *args, **kwarg):
@@ -81,7 +81,7 @@ class Comment(models.Model):
     created = models.DateTimeField(blank=True)
     updated = models.DateTimeField(blank=True)
 
-    def __str__(self):
+    def __unicode__(self):
         return "%s -- %s -- %s" % (self.id, self.card ,self.creator)
 
     def save(self, *args, **kwarg):

@@ -18,7 +18,7 @@ class CompanyStatus(models.Model):
 
     status = models.CharField(max_length=50, verbose_name=_('Name'))
 
-    def __str__(self):
+    def __unicode__(self):
         return self.status
 
 #Companies
@@ -50,7 +50,7 @@ class Company(models.Model):
     created = models.DateTimeField(blank=True)
     updated = models.DateTimeField(blank=True)
 
-    def __str__(self):
+    def __unicode__(self):
         return self.name
 
     def save(self, *args, **kwarg):
@@ -120,7 +120,7 @@ class Presence(models.Model):
     #Date of the meeting
     date = models.DateTimeField(blank=True, verbose_name=_('Date'))
 
-    def __str__(self):
+    def __unicode__(self):
         return str(self.date)
 
     def get_absolute_url(self):

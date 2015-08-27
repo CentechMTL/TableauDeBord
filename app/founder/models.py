@@ -12,5 +12,5 @@ class Founder(UserProfile):
     equity = models.FloatField(default=0,blank=True, verbose_name=_('Equity'))
     about = models.CharField(max_length=2000,verbose_name=_('About'),blank=True)
 
-    def __str__(self):
+    def __unicode__(self):
         return self.user.username

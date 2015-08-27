@@ -146,8 +146,26 @@ class Summary(generic.TemplateView):
         context['finances'] = finances
 
         context['KPI'] = KPIs
-        context['averageIRL'] = round(KPI.objects.filter(type=KPI_TYPE_CHOICES[0][0]).aggregate(Avg('level')).values()[0], 2)
-        context['averageTRL'] = round(KPI.objects.filter(type=KPI_TYPE_CHOICES[1][0]).aggregate(Avg('level')).values()[0], 2)
+        IRLs = []
+        TRLs = []
+        for company in companies:
+            IRLs.append(company.get_last_irl())
+            TRLs.append(company.get_last_trl())
+
+        try:
+            sumIRLs = 0
+            for irl in IRLs:
+                sumIRLs += irl.level
+            context['averageIRL'] = round(sumIRLs/float(len(IRLs)), 2)
+        except:
+            context['averageIRL'] = "~"
+        try:
+            sumTRLs = 0
+            for trl in TRLs:
+                sumTRLs += trl.level
+            context['averageTRL'] = round(sumTRLs/float(len(TRLs)), 2)
+        except:
+            context['averageTRL'] = "~"
 
         context['experiments'] = experiments
         context['experiments_inProgress_count'] = CustomerExperiment.objects.filter(validated = None).count()

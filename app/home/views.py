@@ -115,8 +115,11 @@ class Summary(generic.TemplateView):
             pass
 
         context['companies'] = companies
+        context['companies_count'] = Company.objects.all().count()
         context['founders'] = founders
+        context['founders_count'] = Founder.objects.all().count()
         context['mentors'] = mentors
+        context['mentors_count'] = Mentor.objects.all().count()
         context['finances'] = finances
 
         context['KPI'] = KPIs

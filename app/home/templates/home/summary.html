@@ -35,21 +35,20 @@
 ================= GENERAL =================
 ------------------------------------------>
 
-<div class="row" align="center" style="margin-top: 50px;">
+<div class="row" align="center" style="margin-top: 50px; border-bottom: 1px solid grey;">
     <div class="col-sm-4" style="border-right: 1px solid grey;">
         <strong>{% trans "Number of companies" %}</strong> <br>
-        <span style="font-size: 70px;">{{companies.count}}</span>
+        <span style="font-size: 70px;">{{companies_count}}</span>
     </div>
     <div class="col-sm-4" >
         <strong>{% trans "Number of founders" %}</strong> <br>
-        <span style="font-size: 70px;">{{founders.count}}</span>
+        <span style="font-size: 70px;">{{founders_count}}</span>
     </div>
     <div class="col-sm-4" style="border-left: 1px solid grey;">
         <strong>{% trans "Number of mentors" %}</strong> <br>
-        <span style="font-size: 70px;">{{mentors.count}}</span>
+        <span style="font-size: 70px;">{{mentors_count}}</span>
     </div>
 </div>
-
 <!-----------------------------------------
 ================ FINANCES =================
 ------------------------------------------>
@@ -283,6 +282,7 @@
 <!-----------------------------------------
 ============ TIME OF INCUBATION ===========
 ------------------------------------------>
+{% if status_selected.id != 1 %}
 {% trans "Incubation duration (months)" as titleOfChart %}
 
 <h1>{{ titleOfChart|escape }}</h1>
@@ -335,6 +335,18 @@
                 google.visualization.events.addListener(chart, 'select', selectHandler);
             }
         </script>
+    </div>
+</div>
+
+{% endif %}
+<!-----------------------------------------
+================= COMMENT =================
+------------------------------------------>
+<h1>{% trans "Comment" %}</h1>
+
+<div class="row" style="padding-top: 0px;">
+    <div class="col-sm-12">
+        Commentaires
     </div>
 </div>
 <br>

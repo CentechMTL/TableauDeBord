@@ -56,8 +56,18 @@ class Summary(generic.TemplateView):
         except:
             companies = Company.objects.all().order_by('incubated_on')
 
-        founders = Founder.objects.all()
-        mentors = Mentor.objects.all()
+        founders = []
+        mentors = []
+        for company in companies:
+            founderCompany = company.founders.all()
+            for founder in founderCompany:
+                if founder not in founders:
+                    founders.append(founder)
+
+            mentorCompany = company.mentors.all()
+            for mentor in mentorCompany:
+                if mentor not in mentors:
+                    mentors.append(mentor)
 
         grants = []
         for company in companies:
@@ -128,11 +138,11 @@ class Summary(generic.TemplateView):
             pass
 
         context['companies'] = companies
-        context['companies_count'] = Company.objects.all().count()
+        context['companies_count'] = len(companies)
         context['founders'] = founders
-        context['founders_count'] = Founder.objects.all().count()
+        context['founders_count'] = len(founders)
         context['mentors'] = mentors
-        context['mentors_count'] = Mentor.objects.all().count()
+        context['mentors_count'] = len(mentors)
         context['finances'] = finances
 
         context['KPI'] = KPIs

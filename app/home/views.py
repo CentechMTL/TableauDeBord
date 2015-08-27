@@ -121,11 +121,15 @@ class Summary(generic.TemplateView):
             KPIs.append((company, company.get_last_irl(), company.get_last_trl()))
 
         experiments = []
+        experimentsValidated = 0
+        experimentsInProgress = 0
         for company in companies:
             inProgress = company.experiments.filter(validated = None).count()
             validated = company.experiments.filter(validated = True).count()
             lastExperiment = company.get_last_experiment()
             experiments.append((company, inProgress, validated, lastExperiment))
+            experimentsValidated += validated
+            experimentsInProgress += inProgress
 
         context = super(Summary, self).get_context_data(**kwargs)
 
@@ -168,8 +172,8 @@ class Summary(generic.TemplateView):
             context['averageTRL'] = "~"
 
         context['experiments'] = experiments
-        context['experiments_inProgress_count'] = CustomerExperiment.objects.filter(validated = None).count()
-        context['experiments_validated_count'] = CustomerExperiment.objects.filter(validated = True).count()
+        context['experiments_inProgress_count'] = experimentsInProgress
+        context['experiments_validated_count'] = experimentsValidated
 
         timeOfIncubation = []
         for company in companies:

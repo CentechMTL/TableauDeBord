@@ -57,8 +57,8 @@
     <div class="col-sm-12">
         <div id="accordion">
             {% for type, data in finances.items %}
-            <h3 id="elem-{{type}}">{{type|capfirst}}</h3>
-            <div id="{% trans type %}">
+            <h3 id="elem-{{type}}">{% trans type %}</h3>
+            <div id="{{type}}">
                 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
                 <div id="chart_{{type}}"></div>
                 <script type="text/javascript">

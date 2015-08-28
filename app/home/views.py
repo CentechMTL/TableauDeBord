@@ -110,11 +110,11 @@ class Summary(generic.TemplateView):
             loans.append((company, totalLoans))
 
         finances = {}
-        finances['grants'] = grants
-        finances['subsidies'] = subsidies
-        finances['investments'] = investments
-        finances['sales'] = sales
-        finances['loans'] = loans
+        finances['Grants'] = grants
+        finances['Subsidies'] = subsidies
+        finances['Investments'] = investments
+        finances['Sales'] = sales
+        finances['Loans'] = loans
 
         KPIs = []
         for company in companies:

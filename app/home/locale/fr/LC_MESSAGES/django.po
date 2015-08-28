@@ -8,140 +8,139 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-18 09:42-0400\n"
+"POT-Creation-Date: 2015-08-28 14:44+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: .\app\home\forms.py:43
+#: app/home/forms.py:43
 msgid "New password"
 msgstr "Nouveau mot de passe"
 
-#: .\app\home\forms.py:50
+#: app/home/forms.py:50
 msgid "Actual password"
 msgstr "Mot de passe actuel"
 
-#: .\app\home\forms.py:55
+#: app/home/forms.py:55
 msgid "New password again"
 msgstr "Nouveau mot de passe encore"
 
-#: .\app\home\forms.py:73
+#: app/home/forms.py:73
 msgid "Your new password :"
 msgstr "Votre nouveau mot de passe :"
 
-#: .\app\home\forms.py:75
+#: app/home/forms.py:75
 msgid "must contain at least 6 characters"
 msgstr "Doit contenir au moins 6 caractères"
 
-#: .\app\home\forms.py:77
+#: app/home/forms.py:77
 msgid "must not be more than 76 characters"
 msgstr "Ne doit pas contenir plus de 76 caractères"
 
-#: .\app\home\forms.py:82
+#: app/home/forms.py:82
 msgid "Save"
 msgstr "Enregistrer"
 
-#: .\app\home\models.py:23
+#: app/home/models.py:23
 msgid "Education"
 msgstr "Niveau d'étude"
 
-#: .\app\home\models.py:25
+#: app/home/models.py:25
 msgid "Education level"
 msgstr "Niveau d'étude"
 
-#: .\app\home\models.py:32
+#: app/home/models.py:32
 msgid "Expertise"
 msgstr "Expertise"
 
-#: .\app\home\models.py:34
+#: app/home/models.py:34
 msgid "Area of expertise"
 msgstr "Aires d'expertise"
 
-#: .\app\home\models.py:45
+#: app/home/models.py:45
 msgid "User"
 msgstr "Utilisateur"
 
-#: .\app\home\models.py:46
+#: app/home/models.py:46
 msgid "Identifiant"
 msgstr "Identifiant"
 
-#: .\app\home\models.py:49
+#: app/home/models.py:49
 msgid "Phone"
 msgstr "téléphone"
 
-#: .\app\home\models.py:50
+#: app/home/models.py:50
 msgid "Web site"
 msgstr "site web"
 
-#: .\app\home\models.py:51
+#: app/home/models.py:51
 msgid "Picture"
 msgstr "Photo"
 
-#: .\app\home\models.py:53
+#: app/home/models.py:53
 msgid "Facebook"
 msgstr "Facebook"
 
-#: .\app\home\models.py:54
+#: app/home/models.py:54
 msgid "Twitter"
 msgstr "Twitter"
 
-#: .\app\home\models.py:55
+#: app/home/models.py:55
 msgid "Google+"
 msgstr "Google+"
 
-#: .\app\home\models.py:56
+#: app/home/models.py:56
 msgid "linkedIn"
 msgstr "linkedIn"
 
-#: .\app\home\models.py:66
-#, fuzzy
-#| msgid "Twitter"
+#: app/home/models.py:66
 msgid "Title"
-msgstr "Twitter"
+msgstr "Titre"
 
-#: .\app\home\models.py:67
+#: app/home/models.py:67
 msgid "Image"
 msgstr "Image"
 
-#: .\app\home\templates\home\floorPlan.html:4
+#: app/home/templates/home/floorPlan.html:4
 msgid "Floor plan"
 msgstr "Plan d'étage"
 
-#: .\app\home\templates\home\index.html:11
+#: app/home/templates/home/index.html:11
 msgid "Dashboard"
 msgstr "Tableau de Bord"
 
-#: .\app\home\templates\home\index.html:13
+#: app/home/templates/home/index.html:13
 msgid "Follow us on"
 msgstr "Suivez nous sur"
 
-#: .\app\home\templates\home\index.html:42
+#: app/home/templates/home/index.html:42
 msgid ""
 "Cette plateforme est une plateforme privée appartenant au Centech, "
 "incubateur de sociétés technologiques de l'École de Technologie Supérieur de "
 "Montréal."
 msgstr ""
 
-#: .\app\home\templates\home\index.html:43
+#: app/home/templates/home/index.html:43
 msgid ""
 "Si vous voulez disposer d'un compte d'accès ou avoir plus de renseignement "
 "sur notre plateforme, merci de contacter nos services via l'adresse"
 msgstr ""
 
-#: .\app\home\templates\home\maStartup.html:4
-#: .\app\home\templates\home\noAccessPermissions.html:4
+#: app/home/templates/home/maStartup.html:4
+#: app/home/templates/home/noAccessPermissions.html:4
 msgid "No Access"
 msgstr "Pas d'autorisation"
 
-#: .\app\home\templates\home\noAccessPermissions.html:7
+#: app/home/templates/home/noAccessPermissions.html:7
 msgid "Sorry! But you don't have the permissions to access this page"
 msgstr "Désolé! Mais vous n'avez pas la permissions d'accéder a cette page"
 
-#: .\app\home\templates\home\noAccessPermissions.html:9
+#: app/home/templates/home/noAccessPermissions.html:9
 msgid ""
 "If it's an error, you can contact the administrator for have access on this "
 "page"
@@ -149,124 +148,132 @@ msgstr ""
 "Si c'est une erreur, vous pouvez contacter l'administrateur pour avoir "
 "l'accès a cette page"
 
-#: .\app\home\templates\home\noAccessPermissions.html:11
+#: app/home/templates/home/noAccessPermissions.html:11
 msgid "Sorry for inconvenience"
 msgstr "Désolé pour le dérangement"
 
-#: .\app\home\templates\home\password_update_form.html:6
+#: app/home/templates/home/password_update_form.html:6
 msgid "Account"
 msgstr "Compte"
 
-#: .\app\home\templates\home\password_update_form.html:8
+#: app/home/templates/home/password_update_form.html:8
 msgid "My account"
 msgstr "Mon compte"
 
-#: .\app\home\templates\home\summary.html:17
+#: app/home/templates/home/summary.html:18
+msgid "Select a status"
+msgstr "Sélectionner un status"
+
+#: app/home/templates/home/summary.html:20
+msgid "All"
+msgstr "Tous"
+
+#: app/home/templates/home/summary.html:39
 msgid "Number of companies"
 msgstr "Nombre de compagnies"
 
-#: .\app\home\templates\home\summary.html:21
+#: app/home/templates/home/summary.html:43
 msgid "Number of founders"
 msgstr "Nombre de fondateurs"
 
-#: .\app\home\templates\home\summary.html:25
+#: app/home/templates/home/summary.html:47
 msgid "Number of mentors"
 msgstr "Nombre de mentors"
 
-#: .\app\home\templates\home\summary.html:34
+#: app/home/templates/home/summary.html:55
 msgid "Finances"
 msgstr "Finances"
 
-#: .\app\home\templates\home\summary.html:49
-#: .\app\home\templates\home\summary.html:109
-#: .\app\home\templates\home\summary.html:179
-#: .\app\home\templates\home\summary.html:237
+#: app/home/templates/home/summary.html:70
+#: app/home/templates/home/summary.html:140
+#: app/home/templates/home/summary.html:229
+#: app/home/templates/home/summary.html:299
 msgid "Companies"
 msgstr "Compagnies"
 
-#: .\app\home\templates\home\summary.html:49
-#: .\app\home\templates\home\summary.html:62
+#: app/home/templates/home/summary.html:70
+#: app/home/templates/home/summary.html:86
 msgid "Amount"
 msgstr "Somme"
 
-#: .\app\home\templates\home\summary.html:93
+#: app/home/templates/home/summary.html:124
 msgid "Indicators of performances"
 msgstr "Indicateurs de performances"
 
-#: .\app\home\templates\home\summary.html:95
+#: app/home/templates/home/summary.html:126
 msgid "Average IRLs"
 msgstr "Moyenne des IRLs"
 
-#: .\app\home\templates\home\summary.html:96
+#: app/home/templates/home/summary.html:127
 msgid "Average TRLs"
 msgstr "Moyenne des TRLs"
 
-#: .\app\home\templates\home\summary.html:110
+#: app/home/templates/home/summary.html:142
 msgid "IRL"
 msgstr "IRL"
 
-#: .\app\home\templates\home\summary.html:112
+#: app/home/templates/home/summary.html:144
 msgid "TRL"
 msgstr "TRL"
 
-#: .\app\home\templates\home\summary.html:116
-#: .\app\home\templates\home\summary.html:118
+#: app/home/templates/home/summary.html:148
+#: app/home/templates/home/summary.html:150
 msgid "Last irl"
 msgstr "Dernier IRL"
 
-#: .\app\home\templates\home\summary.html:116
-#: .\app\home\templates\home\summary.html:120
+#: app/home/templates/home/summary.html:148
+#: app/home/templates/home/summary.html:152
 msgid "Last trl"
 msgstr "Dernier TRL"
 
-#: .\app\home\templates\home\summary.html:136
+#: app/home/templates/home/summary.html:171
 msgid "Level"
 msgstr "Niveau"
 
-#: .\app\home\templates\home\summary.html:157
+#: app/home/templates/home/summary.html:207
 msgid "Experiments"
 msgstr "Expérimentations"
 
-#: .\app\home\templates\home\summary.html:160
+#: app/home/templates/home/summary.html:210
 msgid "Experiments in progress"
 msgstr "Expérimentations en cours"
 
-#: .\app\home\templates\home\summary.html:164
+#: app/home/templates/home/summary.html:214
 msgid "Experiments validated"
 msgstr "Expérimentations validées"
 
-#: .\app\home\templates\home\summary.html:180
-#: .\app\home\templates\home\summary.html:186
-#: .\app\home\templates\home\summary.html:188
+#: app/home/templates/home/summary.html:231
+#: app/home/templates/home/summary.html:237
+#: app/home/templates/home/summary.html:239
 msgid "In progress"
 msgstr "En cours"
 
-#: .\app\home\templates\home\summary.html:182
-#: .\app\home\templates\home\summary.html:186
-#: .\app\home\templates\home\summary.html:190
+#: app/home/templates/home/summary.html:233
+#: app/home/templates/home/summary.html:237
+#: app/home/templates/home/summary.html:241
 msgid "Validated"
 msgstr "Validé"
 
-#: .\app\home\templates\home\summary.html:186
-#: .\app\home\templates\home\summary.html:188
-#: .\app\home\templates\home\summary.html:190
+#: app/home/templates/home/summary.html:237
+#: app/home/templates/home/summary.html:239
+#: app/home/templates/home/summary.html:241
 msgid "Last experimentation"
 msgstr "Dernière expérimentation"
 
-#: .\app\home\templates\home\summary.html:204
+#: app/home/templates/home/summary.html:258
 msgid "Number of experimentations"
 msgstr "Nombre d'expérimentations"
 
-#: .\app\home\templates\home\summary.html:223
+#: app/home/templates/home/summary.html:285
 msgid "Incubation duration (months)"
 msgstr "Temps d'incubation (mois)"
 
-#: .\app\home\templates\registration\login.html:11
+#: app/home/templates/registration/login.html:11
 msgid "Your username and password didn't match. Please try again."
 msgstr ""
 "Votre nom d'utilisateur et votre mot de passe ne correspondent pas. Veuillez "
 "recommencer."
 
-#: .\app\home\templates\registration\login.html:12
+#: app/home/templates/registration/login.html:12
 msgid "If it's an error, please contact the administrator"
 msgstr "Si c'est une erreur, merci de contact l'administrateur"

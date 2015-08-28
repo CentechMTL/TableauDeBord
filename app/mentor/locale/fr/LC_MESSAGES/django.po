@@ -8,107 +8,108 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-18 09:42-0400\n"
+"POT-Creation-Date: 2015-08-28 14:44+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: .\app\mentor\forms.py:33 .\app\mentor\forms.py:158
-#: .\app\mentor\templates\mentor\detail.html:44
+#: app/mentor/forms.py:33 app/mentor/forms.py:158
+#: app/mentor/templates/mentor/detail.html:44
 msgid "Directory of ETS"
 msgstr "Bottin ETS"
 
-#: .\app\mentor\forms.py:36 .\app\mentor\forms.py:97 .\app\mentor\forms.py:161
-#: .\app\mentor\forms.py:210
+#: app/mentor/forms.py:36 app/mentor/forms.py:97 app/mentor/forms.py:161
+#: app/mentor/forms.py:210
 msgid "https://example.com"
 msgstr "https://exemple.com"
 
-#: .\app\mentor\forms.py:39 .\app\mentor\forms.py:164
+#: app/mentor/forms.py:39 app/mentor/forms.py:164
 msgid "Facebook"
 msgstr "Facebook"
 
-#: .\app\mentor\forms.py:42 .\app\mentor\forms.py:167
+#: app/mentor/forms.py:42 app/mentor/forms.py:167
 msgid "https://www.facebook.com/lastname.firstname"
 msgstr "https://www.facebook.com/nom.prenom"
 
-#: .\app\mentor\forms.py:45 .\app\mentor\forms.py:170
+#: app/mentor/forms.py:45 app/mentor/forms.py:170
 msgid "Twitter"
 msgstr "Twitter"
 
-#: .\app\mentor\forms.py:48 .\app\mentor\forms.py:173
+#: app/mentor/forms.py:48 app/mentor/forms.py:173
 msgid "https://twitter.com/username"
 msgstr "https://twitter.com/nomUtilisateur"
 
-#: .\app\mentor\forms.py:51 .\app\mentor\forms.py:176
+#: app/mentor/forms.py:51 app/mentor/forms.py:176
 msgid "Google+"
 msgstr "Google+"
 
-#: .\app\mentor\forms.py:54 .\app\mentor\forms.py:179
+#: app/mentor/forms.py:54 app/mentor/forms.py:179
 msgid "https://plus.google.com/id"
 msgstr "https://plus.google.com/id"
 
-#: .\app\mentor\forms.py:57 .\app\mentor\forms.py:182
+#: app/mentor/forms.py:57 app/mentor/forms.py:182
 msgid "linkedIn"
 msgstr "linkedIn"
 
-#: .\app\mentor\forms.py:60 .\app\mentor\forms.py:185
+#: app/mentor/forms.py:60 app/mentor/forms.py:185
 msgid "https://ca.linkedin.com/in/username"
 msgstr "https://ca.linkedin.com/in/nomUtilisateur"
 
-#: .\app\mentor\forms.py:63 .\app\mentor\forms.py:66 .\app\mentor\forms.py:188
-#: .\app\mentor\forms.py:191
+#: app/mentor/forms.py:63 app/mentor/forms.py:66 app/mentor/forms.py:188
+#: app/mentor/forms.py:191
 msgid "First name"
 msgstr "Prénom"
 
-#: .\app\mentor\forms.py:69 .\app\mentor\forms.py:72 .\app\mentor\forms.py:194
-#: .\app\mentor\forms.py:197
+#: app/mentor/forms.py:69 app/mentor/forms.py:72 app/mentor/forms.py:194
+#: app/mentor/forms.py:197
 msgid "Last name"
 msgstr "Nom de famille"
 
-#: .\app\mentor\forms.py:75 .\app\mentor\forms.py:78
+#: app/mentor/forms.py:75 app/mentor/forms.py:78
 msgid "Username"
 msgstr "Pseudo"
 
-#: .\app\mentor\forms.py:81 .\app\mentor\forms.py:84
+#: app/mentor/forms.py:81 app/mentor/forms.py:84
 msgid "Email"
 msgstr "Email"
 
-#: .\app\mentor\forms.py:87 .\app\mentor\forms.py:91 .\app\mentor\forms.py:200
-#: .\app\mentor\forms.py:204
+#: app/mentor/forms.py:87 app/mentor/forms.py:91 app/mentor/forms.py:200
+#: app/mentor/forms.py:204
 msgid "Phone number"
 msgstr "Numéro de téléphone"
 
-#: .\app\mentor\forms.py:94 .\app\mentor\forms.py:207
-#: .\app\mentor\templates\mentor\detail.html:41
+#: app/mentor/forms.py:94 app/mentor/forms.py:207
+#: app/mentor/templates/mentor/detail.html:41
 msgid "Web site"
 msgstr "Site web"
 
-#: .\app\mentor\forms.py:100 .\app\mentor\forms.py:213
+#: app/mentor/forms.py:100 app/mentor/forms.py:213
 msgid "Description"
 msgstr "Description"
 
-#: .\app\mentor\forms.py:104 .\app\mentor\forms.py:217
+#: app/mentor/forms.py:104 app/mentor/forms.py:217
 msgid "Write here a brief summary of your skills and your career."
 msgstr "Ecrivez ici un bref résumé de vos compétences et de votre parcours."
 
-#: .\app\mentor\forms.py:111 .\app\mentor\forms.py:224
-#: .\app\mentor\models.py:17 .\app\mentor\templates\mentor\detail.html:63
+#: app/mentor/forms.py:111 app/mentor/forms.py:224 app/mentor/models.py:17
+#: app/mentor/templates/mentor/detail.html:63
 msgid "Areas of expertise"
 msgstr "Aires d'expertise"
 
-#: .\app\mentor\forms.py:118 .\app\mentor\forms.py:235
+#: app/mentor/forms.py:118 app/mentor/forms.py:235
 msgid "Picture"
 msgstr "Photo"
 
-#: .\app\mentor\forms.py:130
+#: app/mentor/forms.py:130
 msgid "New mentor"
 msgstr "Nouveau mentor"
 
-#: .\app\mentor\forms.py:146 .\app\mentor\forms.py:275
+#: app/mentor/forms.py:146 app/mentor/forms.py:275
 msgid ""
 "Use the Ctrl key on your keyboard to select multiple. <br> If it lacks a "
 "domain that you would like to add to this list, do not hesitate to talk to "
@@ -118,51 +119,51 @@ msgstr ""
 "<br>Si il manque un domaine que vous aimeriez voir ajouter à cette liste, "
 "n'hésiter pas a en parler a l'équipe du Centech"
 
-#: .\app\mentor\forms.py:148 .\app\mentor\forms.py:277
+#: app/mentor/forms.py:148 app/mentor/forms.py:277
 msgid "Save"
 msgstr "Enregistrer"
 
-#: .\app\mentor\forms.py:261
+#: app/mentor/forms.py:261
 msgid "Update this mentor"
 msgstr "Modifier ce mentor"
 
-#: .\app\mentor\models.py:18 .\app\mentor\templates\mentor\detail.html:53
+#: app/mentor/models.py:18 app/mentor/templates/mentor/detail.html:53
 msgid "About"
 msgstr "A propos"
 
-#: .\app\mentor\models.py:19
+#: app/mentor/models.py:19
 msgid "Type"
 msgstr "Type"
 
-#: .\app\mentor\models.py:20
+#: app/mentor/models.py:20
 msgid "URL"
 msgstr "URL"
 
-#: .\app\mentor\templates\mentor\detail.html:9
+#: app/mentor/templates/mentor/detail.html:9
 msgid "Modify this mentor"
 msgstr "Modifier ce mentor"
 
-#: .\app\mentor\templates\mentor\detail.html:38
+#: app/mentor/templates/mentor/detail.html:38
 msgid "Phone"
 msgstr "Téléphone"
 
-#: .\app\mentor\templates\mentor\detail.html:73
+#: app/mentor/templates/mentor/detail.html:73
 msgid "Companies"
 msgstr "Compagnies"
 
-#: .\app\mentor\templates\mentor\detail.html:97
+#: app/mentor/templates/mentor/detail.html:97
 msgid "No companies exist."
 msgstr "Aucune compagnies."
 
-#: .\app\mentor\templates\mentor\index.html:4
-#: .\app\mentor\templates\mentor\index.html:6
+#: app/mentor/templates/mentor/index.html:4
+#: app/mentor/templates/mentor/index.html:6
 msgid "Centech Mentors"
 msgstr "Mentors du Centech"
 
-#: .\app\mentor\templates\mentor\index.html:45
+#: app/mentor/templates/mentor/index.html:47
 msgid "No mentors exist."
 msgstr "Aucun mentors."
 
-#: .\app\mentor\templates\mentor\mentor_form.html:6
+#: app/mentor/templates/mentor/mentor_form.html:6
 msgid "Profile"
 msgstr "Profil"

@@ -156,7 +156,7 @@ class detailFinance(generic.TemplateView):
         context['totalVentesRecues'] = totalVentesRecues
         return context
 
-#For create a new stock exchange
+#For create a new grants
 class BourseCreate(generic.CreateView):
     model = Bourse
     fields = ['name','dateSoumission','sommeSoumission','dateReception',
@@ -193,7 +193,7 @@ class BourseCreate(generic.CreateView):
          form.instance.company = company
          return super(BourseCreate, self).form_valid(form)
 
-#For update a stock exchange
+#For update a grants
 class BourseUpdate(generic.UpdateView):
     model = Bourse
     fields = ['name','dateSoumission','sommeSoumission','dateReception',
@@ -230,7 +230,7 @@ class BourseUpdate(generic.UpdateView):
         #The visitor can't see this page!
         return HttpResponseRedirect("/user/noAccessPermissions")
 
-#For delete a Stock exchange
+#For delete a grants
 class BourseDelete(generic.DeleteView):
     model = Bourse
 

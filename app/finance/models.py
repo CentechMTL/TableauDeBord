@@ -6,7 +6,7 @@ from django.shortcuts import redirect
 from django.core.urlresolvers import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 
-#Stock exchange
+#Grants
 class Bourse(models.Model):
     name = models.CharField(blank=True, max_length=200, verbose_name=_('Name'))
     dateSoumission = models.DateField(verbose_name=_('Date of submission'))

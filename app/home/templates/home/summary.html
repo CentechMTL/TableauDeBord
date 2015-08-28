@@ -58,7 +58,7 @@
         <div id="accordion">
             {% for type, data in finances.items %}
             <h3 id="elem-{{type}}">{{type|capfirst}}</h3>
-            <div id="{{type}}">
+            <div id="{% trans type %}">
                 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
                 <div id="chart_{{type}}"></div>
                 <script type="text/javascript">
@@ -83,7 +83,7 @@
                                 height: data.getNumberOfRows() * 25,
                             },
                             hAxis: {
-                                title: '{% trans "Amount" %} - {{type}}',
+                                title: '{% trans "Amount" %} - {% trans type %}',
                                 minValue: 0
                             },
                             bars: 'horizontal',

@@ -23,7 +23,7 @@
     <h2 id="menu-sommaire">{% trans "Summary" %}</h2>
     <ul>
     <li><a href="#menu-general">{% trans "Overview" %}</a><br></li>
-    <li><a href="#menu-bourses">{% trans "Stock exchanges" %}</a><br></li>
+    <li><a href="#menu-bourses">{% trans "Grants" %}</a><br></li>
     <li><a href="#menu-subventions">{% trans "Subsidies" %}</a><br></li>
     <li><a href="#menu-investissements">{% trans "Investments" %}</a><br></li>
     <li><a href="#menu-prets">{% trans "Loans" %}</a><br></li>
@@ -67,7 +67,7 @@
     <a href="#menu-sommaire">{% trans "Return to the top of the page" %}</a>
 
     <!-- BOURSES --->
-    <h2 id="menu-bourses" style="margin-top: 50px;">{% trans "Stock exchanges" %}</h2>
+    <h2 id="menu-bourses" style="margin-top: 50px;">{% trans "Grants" %}</h2>
     <div class="row" style="margin-top: 20px;">
         <div class="col-sm-3" align="center">
             <div id="bourses" style="height: 300px;"></div>
@@ -141,7 +141,7 @@
         {% endfor %}
     </table>
     {% if isFounder or isCentech %}
-    <a href="{% url 'finance:bourse_add' company.id %}">{% trans "New stock exchange" %}</a>
+    <a href="{% url 'finance:bourse_add' company.id %}">{% trans "New grant" %}</a>
     {% endif %}
         </div>
     </div>

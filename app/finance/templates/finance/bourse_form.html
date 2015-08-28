@@ -2,7 +2,7 @@
 <!-- Load internationalisation utils-->
 {% load i18n %}
 {% load staticfiles %}
-{% block title %}{% trans "Stock exchanges" %}{% endblock %}
+{% block title %}{% trans "Grants" %}{% endblock %}
 
 {% block extrahead %}
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/redmond/jquery-ui.css" />
@@ -11,7 +11,7 @@
 {% endblock %}
 
 {% block content %}
-    <h1>{% trans "Stock exchanges" %}</h1>
+    <h1>{% trans "Grants" %}</h1>
     <form method="post">{% csrf_token%}
         {{ form.as_p }}
         <input type="submit" value="Submit"/>

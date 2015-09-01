@@ -7,7 +7,7 @@ from django.test import TestCase
 
 from app.founder.factories import FounderFactory
 from app.mentor.factories import MentorFactory
-from app.home.factories import UserFactory, StaffUserFactory
+from app.home.factories import UserFactory, StaffUserProfileFactory
 from app.company.factories import CompanyFactory, CompanyStatusFactory
 
 class CompanyTests(TestCase):
@@ -17,7 +17,7 @@ class CompanyTests(TestCase):
             'django.core.mail.backends.locmem.EmailBackend'
         self.founder = FounderFactory()
         self.mentor = MentorFactory()
-        self.staff = StaffUserFactory()
+        self.staff = StaffUserProfileFactory()
 
         self.status = CompanyStatusFactory()
         self.company = CompanyFactory(companyStatus = self.status)
@@ -130,7 +130,7 @@ class CompanyTests(TestCase):
         """
         self.client.logout()
         self.assertTrue(
-        self.client.login(username=self.staff.username, password="Toto1234!#")
+        self.client.login(username=self.staff.user.username, password="Toto1234!#")
         )
 
         result = self.client.get(
@@ -184,7 +184,7 @@ class CompanyTests(TestCase):
         """
         self.client.logout()
         self.assertTrue(
-        self.client.login(username=self.staff.username, password="Toto1234!#")
+        self.client.login(username=self.staff.user.username, password="Toto1234!#")
         )
 
         result = self.client.get(
@@ -249,7 +249,7 @@ class CompanyTests(TestCase):
         Access of an inexistant company
         """
         self.client.logout()
-        self.client.login(username=self.staff.username, password="Toto1234!#")
+        self.client.login(username=self.staff.user.username, password="Toto1234!#")
 
         result = self.client.get(
             reverse('company:update', kwargs={'pk': 999999}),
@@ -267,7 +267,7 @@ class CompanyTests(TestCase):
         """
         self.client.logout()
         self.assertTrue(
-        self.client.login(username=self.staff.username, password="Toto1234!#")
+        self.client.login(username=self.staff.user.username, password="Toto1234!#")
         )
 
         result = self.client.get(

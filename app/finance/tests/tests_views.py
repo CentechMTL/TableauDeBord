@@ -9,7 +9,7 @@ import time
 
 from app.founder.factories import FounderFactory
 from app.mentor.factories import MentorFactory
-from app.home.factories import UserFactory, StaffUserFactory
+from app.home.factories import UserFactory, StaffUserProfileFactory
 from app.company.factories import CompanyStatusFactory, CompanyFactory
 from app.finance.factories import BourseFactory, SubventionFactory, InvestissementFactory, PretFactory, VenteFactory
 
@@ -21,7 +21,7 @@ class FinanceTests(TestCase):
 
         self.founder = FounderFactory()
         self.mentor = MentorFactory()
-        self.staff = StaffUserFactory()
+        self.staff = StaffUserProfileFactory()
 
         self.founderCompany = FounderFactory()
         self.mentorCompany = MentorFactory()
@@ -46,7 +46,7 @@ class FinanceTests(TestCase):
         Access : Staff
         """
         self.client.logout()
-        self.client.login(username=self.staff.username, password="Toto1234!#")
+        self.client.login(username=self.staff.user.username, password="Toto1234!#")
 
         result = self.client.get(
             reverse('finance:detail_finance', args= [self.company.id]),
@@ -113,7 +113,7 @@ class FinanceTests(TestCase):
         Access : Staff
         """
         self.client.logout()
-        self.client.login(username=self.staff.username, password="Toto1234!#")
+        self.client.login(username=self.staff.user.username, password="Toto1234!#")
 
         result = self.client.get(
             reverse('finance:bourse_add', args= [self.company.id]),
@@ -167,7 +167,7 @@ class FinanceTests(TestCase):
         Access : Staff
         """
         self.client.logout()
-        self.client.login(username=self.staff.username, password="Toto1234!#")
+        self.client.login(username=self.staff.user.username, password="Toto1234!#")
 
         result = self.client.get(
             reverse('finance:bourse_update', args= [self.bourse.id]),
@@ -221,7 +221,7 @@ class FinanceTests(TestCase):
         Access : Staff
         """
         self.client.logout()
-        self.client.login(username=self.staff.username, password="Toto1234!#")
+        self.client.login(username=self.staff.user.username, password="Toto1234!#")
 
         result = self.client.get(
             reverse('finance:bourse_delete', args= [self.bourse.id]),
@@ -275,7 +275,7 @@ class FinanceTests(TestCase):
         Access : Staff
         """
         self.client.logout()
-        self.client.login(username=self.staff.username, password="Toto1234!#")
+        self.client.login(username=self.staff.user.username, password="Toto1234!#")
 
         result = self.client.get(
             reverse('finance:subvention_add', args= [self.company.id]),
@@ -329,7 +329,7 @@ class FinanceTests(TestCase):
         Access : Staff
         """
         self.client.logout()
-        self.client.login(username=self.staff.username, password="Toto1234!#")
+        self.client.login(username=self.staff.user.username, password="Toto1234!#")
 
         result = self.client.get(
             reverse('finance:subvention_update', args= [self.subvention.id]),
@@ -383,7 +383,7 @@ class FinanceTests(TestCase):
         Access : Staff
         """
         self.client.logout()
-        self.client.login(username=self.staff.username, password="Toto1234!#")
+        self.client.login(username=self.staff.user.username, password="Toto1234!#")
 
         result = self.client.get(
             reverse('finance:subvention_delete', args= [self.subvention.id]),
@@ -438,7 +438,7 @@ class FinanceTests(TestCase):
         Access : Staff
         """
         self.client.logout()
-        self.client.login(username=self.staff.username, password="Toto1234!#")
+        self.client.login(username=self.staff.user.username, password="Toto1234!#")
 
         result = self.client.get(
             reverse('finance:investissement_add', args= [self.company.id]),
@@ -492,7 +492,7 @@ class FinanceTests(TestCase):
         Access : Staff
         """
         self.client.logout()
-        self.client.login(username=self.staff.username, password="Toto1234!#")
+        self.client.login(username=self.staff.user.username, password="Toto1234!#")
 
         result = self.client.get(
             reverse('finance:investissement_update', args= [self.investissement.id]),
@@ -546,7 +546,7 @@ class FinanceTests(TestCase):
         Access : Staff
         """
         self.client.logout()
-        self.client.login(username=self.staff.username, password="Toto1234!#")
+        self.client.login(username=self.staff.user.username, password="Toto1234!#")
 
         result = self.client.get(
             reverse('finance:investissement_delete', args= [self.investissement.id]),
@@ -601,7 +601,7 @@ class FinanceTests(TestCase):
         Access : Staff
         """
         self.client.logout()
-        self.client.login(username=self.staff.username, password="Toto1234!#")
+        self.client.login(username=self.staff.user.username, password="Toto1234!#")
 
         result = self.client.get(
             reverse('finance:pret_add', args= [self.company.id]),
@@ -655,7 +655,7 @@ class FinanceTests(TestCase):
         Access : Staff
         """
         self.client.logout()
-        self.client.login(username=self.staff.username, password="Toto1234!#")
+        self.client.login(username=self.staff.user.username, password="Toto1234!#")
 
         result = self.client.get(
             reverse('finance:pret_update', args= [self.pret.id]),
@@ -709,7 +709,7 @@ class FinanceTests(TestCase):
         Access : Staff
         """
         self.client.logout()
-        self.client.login(username=self.staff.username, password="Toto1234!#")
+        self.client.login(username=self.staff.user.username, password="Toto1234!#")
 
         result = self.client.get(
             reverse('finance:pret_delete', args= [self.pret.id]),
@@ -764,7 +764,7 @@ class FinanceTests(TestCase):
         Access : Staff
         """
         self.client.logout()
-        self.client.login(username=self.staff.username, password="Toto1234!#")
+        self.client.login(username=self.staff.user.username, password="Toto1234!#")
 
         result = self.client.get(
             reverse('finance:vente_add', args= [self.company.id]),
@@ -818,7 +818,7 @@ class FinanceTests(TestCase):
         Access : Staff
         """
         self.client.logout()
-        self.client.login(username=self.staff.username, password="Toto1234!#")
+        self.client.login(username=self.staff.user.username, password="Toto1234!#")
 
         result = self.client.get(
             reverse('finance:vente_update', args= [self.vente.id]),
@@ -872,7 +872,7 @@ class FinanceTests(TestCase):
         Access : Staff
         """
         self.client.logout()
-        self.client.login(username=self.staff.username, password="Toto1234!#")
+        self.client.login(username=self.staff.user.username, password="Toto1234!#")
 
         result = self.client.get(
             reverse('finance:vente_delete', args= [self.vente.id]),

@@ -7,7 +7,7 @@ from django.test import TestCase
 
 from app.founder.factories import FounderFactory
 from app.mentor.factories import MentorFactory
-from app.home.factories import UserFactory, StaffUserFactory
+from app.home.factories import UserFactory, StaffUserProfileFactory
 
 class MentorTests(TestCase):
 
@@ -16,7 +16,7 @@ class MentorTests(TestCase):
             'django.core.mail.backends.locmem.EmailBackend'
         self.founder = FounderFactory()
         self.mentor = MentorFactory()
-        self.staff = StaffUserFactory()
+        self.staff = StaffUserProfileFactory()
 
     def test_index(self):
         """
@@ -127,7 +127,7 @@ class MentorTests(TestCase):
         """
         self.client.logout()
         self.assertTrue(
-        self.client.login(username=self.staff.username, password="Toto1234!#")
+        self.client.login(username=self.staff.user.username, password="Toto1234!#")
         )
 
         result = self.client.get(
@@ -182,7 +182,7 @@ class MentorTests(TestCase):
         """
         self.client.logout()
         self.assertTrue(
-        self.client.login(username=self.staff.username, password="Toto1234!#")
+        self.client.login(username=self.staff.user.username, password="Toto1234!#")
         )
 
         result = self.client.get(
@@ -244,7 +244,7 @@ class MentorTests(TestCase):
         Access of an inexistant mentor
         """
         self.client.logout()
-        self.client.login(username=self.staff.username, password="Toto1234!#")
+        self.client.login(username=self.staff.user.username, password="Toto1234!#")
 
         result = self.client.get(
             reverse('mentor:update', kwargs={'pk': 999999}),

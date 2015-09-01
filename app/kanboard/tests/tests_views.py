@@ -10,7 +10,7 @@ import time
 
 from app.founder.factories import FounderFactory
 from app.mentor.factories import MentorFactory
-from app.home.factories import UserFactory, StaffUserFactory
+from app.home.factories import UserFactory, StaffUserProfileFactory
 from app.company.factories import CompanyStatusFactory, CompanyFactory
 from app.kanboard.factories import CardFactory
 from app.kanboard.models import PHASE_CHOICES
@@ -23,7 +23,7 @@ class KanboardTests(TestCase):
 
         self.founder = FounderFactory()
         self.mentor = MentorFactory()
-        self.staff = StaffUserFactory()
+        self.staff = StaffUserProfileFactory()
 
         self.founderCompany = FounderFactory()
         self.mentorCompany = MentorFactory()
@@ -46,7 +46,7 @@ class KanboardTests(TestCase):
         Access : Staff
         """
         self.client.logout()
-        self.client.login(username=self.staff.username, password="Toto1234!#")
+        self.client.login(username=self.staff.user.username, password="Toto1234!#")
 
         result = self.client.get(
             reverse('kanboard:kanboard', args= [self.company.id]),
@@ -112,7 +112,7 @@ class KanboardTests(TestCase):
         Access : Staff
         """
         self.client.logout()
-        self.client.login(username=self.staff.username, password="Toto1234!#")
+        self.client.login(username=self.staff.user.username, password="Toto1234!#")
 
         result = self.client.get(
             reverse('kanboard:card', args= [self.card.id]),

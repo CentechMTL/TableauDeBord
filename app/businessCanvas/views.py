@@ -259,7 +259,7 @@ class BusinessCanvasElementArchivedList(generic.ListView):
     #You need to be connected, and you need to have access as founder, mentor or Centech
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        archive = get_object_or_404(Company, id = self.args[0])
+        archive = get_object_or_404(Archive, id = self.args[0])
         company = get_object_or_404(Company, id = archive.company.id)
 
         if self.request.user.profile.isCentech():

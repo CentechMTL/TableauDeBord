@@ -190,7 +190,7 @@ class CompanyUpdate(generic.UpdateView):
             return super(CompanyUpdate, self).dispatch(*args, **kwargs)
 
         if self.request.user.profile.isFounder():
-            if self.request.user.profile.isFounder() in company.founders:
+            if company in self.request.user.profile.isFounder().company.all():
                 self.form_class = MiniCompanyUpdateForm
                 return super(CompanyUpdate, self).dispatch(*args, **kwargs)
 

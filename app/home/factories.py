@@ -56,6 +56,12 @@ class StaffUserFactory(factory.DjangoModelFactory):
         user.save()
         return user
 
+class StaffUserProfileFactory(factory.DjangoModelFactory):
+    class Meta:
+        model = UserProfile
+
+    user = factory.SubFactory(StaffUserFactory)
+
 class ExpertiseFactory(factory.DjangoModelFactory):
     class Meta:
         model = Expertise

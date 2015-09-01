@@ -9,7 +9,7 @@ import time
 
 from app.founder.factories import FounderFactory
 from app.mentor.factories import MentorFactory
-from app.home.factories import UserFactory, StaffUserFactory
+from app.home.factories import UserFactory, StaffUserFactory, StaffUserProfileFactory
 from app.company.factories import CompanyStatusFactory, CompanyFactory
 from app.businessCanvas.factories import BusinessCanvasElementFactory, ArchiveFactory
 
@@ -23,7 +23,7 @@ class BusinessCanvasTests(TestCase):
 
         self.founder = FounderFactory()
         self.mentor = MentorFactory()
-        self.staff = StaffUserFactory()
+        self.staff = StaffUserProfileFactory()
 
         self.founderCompany = FounderFactory()
         self.mentorCompany = MentorFactory()
@@ -51,7 +51,7 @@ class BusinessCanvasTests(TestCase):
         Access : Staff
         """
         self.client.logout()
-        self.client.login(username=self.staff.username, password="Toto1234!#")
+        self.client.login(username=self.staff.user.username, password="Toto1234!#")
 
         result = self.client.get(
             reverse('businessCanvas:businessCanvasElement_list', args= [self.company.id]),
@@ -117,7 +117,7 @@ class BusinessCanvasTests(TestCase):
         Access : Staff
         """
         self.client.logout()
-        self.client.login(username=self.staff.username, password="Toto1234!#")
+        self.client.login(username=self.staff.user.username, password="Toto1234!#")
 
         result = self.client.get(
             reverse('businessCanvas:businessCanvasElementArchived_list', args= [self.archive.id]),
@@ -195,10 +195,10 @@ class BusinessCanvasTests(TestCase):
         No Access : Staff
         """
         self.client.logout()
-        self.client.login(username=self.staff.username, password="Toto1234!#")
+        self.client.login(username=self.staff.user.username, password="Toto1234!#")
 
         result = self.client.get(
-            reverse('businessCanvas:businessCanvasDeleteArchive', args= [self.archive.id]),
+            reverse('businessCanvas:businessCanvasDeleteArchive', kwargs= {'pk': self.archive.id}),
             follow=False
         )
         self.assertEqual(result.status_code, 302)

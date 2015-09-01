@@ -9,7 +9,7 @@ import time
 
 from app.founder.factories import FounderFactory
 from app.mentor.factories import MentorFactory
-from app.home.factories import UserFactory, StaffUserFactory
+from app.home.factories import UserFactory, StaffUserProfileFactory
 from app.company.factories import CompanyStatusFactory, CompanyFactory
 from app.kpi.factories import KPIFactory
 
@@ -23,7 +23,7 @@ class FinanceTests(TestCase):
 
         self.founder = FounderFactory()
         self.mentor = MentorFactory()
-        self.staff = StaffUserFactory()
+        self.staff = StaffUserProfileFactory()
 
         self.founderCompany = FounderFactory()
         self.mentorCompany = MentorFactory()
@@ -45,7 +45,7 @@ class FinanceTests(TestCase):
         Access : Staff
         """
         self.client.logout()
-        self.client.login(username=self.staff.username, password="Toto1234!#")
+        self.client.login(username=self.staff.user.username, password="Toto1234!#")
 
         result = self.client.get(
             reverse('kpi:trl_filter', args= [self.company.id]),
@@ -111,7 +111,7 @@ class FinanceTests(TestCase):
         Access : Staff
         """
         self.client.logout()
-        self.client.login(username=self.staff.username, password="Toto1234!#")
+        self.client.login(username=self.staff.user.username, password="Toto1234!#")
 
         result = self.client.get(
             reverse('kpi:irl_filter', args= [self.company.id]),
@@ -177,7 +177,7 @@ class FinanceTests(TestCase):
         Access : Staff
         """
         self.client.logout()
-        self.client.login(username=self.staff.username, password="Toto1234!#")
+        self.client.login(username=self.staff.user.username, password="Toto1234!#")
 
         result = self.client.get(
             reverse('kpi:trl_add', args= [self.company.id]),
@@ -243,7 +243,7 @@ class FinanceTests(TestCase):
         Access : Staff
         """
         self.client.logout()
-        self.client.login(username=self.staff.username, password="Toto1234!#")
+        self.client.login(username=self.staff.user.username, password="Toto1234!#")
 
         result = self.client.get(
             reverse('kpi:irl_add', args= [self.company.id]),
@@ -309,7 +309,7 @@ class FinanceTests(TestCase):
         Access : Staff
         """
         self.client.logout()
-        self.client.login(username=self.staff.username, password="Toto1234!#")
+        self.client.login(username=self.staff.user.username, password="Toto1234!#")
 
         result = self.client.get(
             reverse('kpi:trl_update', kwargs={'pk': self.trl.id}),
@@ -375,7 +375,7 @@ class FinanceTests(TestCase):
         Access : Staff
         """
         self.client.logout()
-        self.client.login(username=self.staff.username, password="Toto1234!#")
+        self.client.login(username=self.staff.user.username, password="Toto1234!#")
 
         result = self.client.get(
             reverse('kpi:irl_update', kwargs={'pk': self.irl.id}),
@@ -441,7 +441,7 @@ class FinanceTests(TestCase):
         Access : Staff
         """
         self.client.logout()
-        self.client.login(username=self.staff.username, password="Toto1234!#")
+        self.client.login(username=self.staff.user.username, password="Toto1234!#")
 
         result = self.client.get(
             reverse('kpi:trl_delete', kwargs={'pk': self.trl.id}),
@@ -507,7 +507,7 @@ class FinanceTests(TestCase):
         Access : Staff
         """
         self.client.logout()
-        self.client.login(username=self.staff.username, password="Toto1234!#")
+        self.client.login(username=self.staff.user.username, password="Toto1234!#")
 
         result = self.client.get(
             reverse('kpi:irl_delete', kwargs={'pk': self.irl.id}),

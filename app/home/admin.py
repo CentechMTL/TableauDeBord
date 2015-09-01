@@ -12,10 +12,11 @@ class UserProfileAdmin(admin.ModelAdmin):
 class UserAdmin(admin.ModelAdmin):
     readonly_fields = ['image_thumb']
 
-
 admin.site.register(Expertise)
 admin.site.register(Education)
 admin.site.register(FloorPlan)
+admin.site.register(UserProfile)
+
 
 
 

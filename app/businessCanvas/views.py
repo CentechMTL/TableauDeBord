@@ -65,16 +65,12 @@ class ArchiveDelete(generic.DeleteView):
     #You need to be connected, and you need to have access as founder, mentor or Centech
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        #For know the company of the user if is a founder
-        archive = Archive.objects.get(id=self.kwargs['pk'])
-        if self.request.user.is_active:
-            try:
-                founder = Founder.objects.filter(user = self.request.user.id)
-                company = Company.objects.get(founders = founder)
-                if(int(archive.company.id) == int(company.id)):
-                    return super(ArchiveDelete, self).dispatch(*args, **kwargs)
-            except:
-                pass
+        self.object = self.get_object()
+        company = get_object_or_404(Company, id = self.object.company.id)
+
+        if self.request.user.profile.isFounder():
+            if company in self.request.user.profile.isFounder().company.all():
+                return super(ArchiveDelete, self).dispatch(*args, **kwargs)
 
         #The visitor can't see this page!
         return HttpResponseRedirect("/user/noAccessPermissions")
@@ -178,35 +174,18 @@ class BusinessCanvasElementList(generic.ListView):
     #You need to be connected, and you need to have access as founder, mentor or Centech
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        #For know if the user is in the group "Centech"
-        groups = self.request.user.groups.values()
-        for group in groups:
-            if group['name'] == 'Centech':
-                try:
-                    company = Company.objects.get(id = int(self.args[0])) #If the company exist, else we go to except
-                    return super(BusinessCanvasElementList, self).dispatch(*args, **kwargs)
-                except:
-                    pass
+        company = get_object_or_404(Company, id = self.args[0])
 
-        #For know the company of the user if is a founder
-        if self.request.user.is_active:
-            try:
-                founder = Founder.objects.filter(user = self.request.user.id)
-                company = Company.objects.get(founders = founder)
-                if(int(self.args[0]) == int(company.id)):
-                    return super(BusinessCanvasElementList, self).dispatch(*args, **kwargs)
-            except:
-                pass
+        if self.request.user.profile.isCentech():
+            return super(BusinessCanvasElementList, self).dispatch(*args, **kwargs)
 
-        #For know the company of the user if is a mentor
-        if self.request.user.is_active:
-            try:
-                mentor = Mentor.objects.filter(user = self.request.user.id)
-                company = Company.objects.get(mentors = mentor)
-                if(int(self.args[0]) == int(company.id)):
-                    return super(BusinessCanvasElementList, self).dispatch(*args, **kwargs)
-            except:
-                pass
+        if self.request.user.profile.isFounder():
+            if company in self.request.user.profile.isFounder().company.all():
+                return super(BusinessCanvasElementList, self).dispatch(*args, **kwargs)
+
+        if self.request.user.profile.isMentor():
+            if company in self.request.user.profile.isMentor().company.all():
+                return super(BusinessCanvasElementList, self).dispatch(*args, **kwargs)
 
         #The visitor can't see this page!
         return HttpResponseRedirect("/user/noAccessPermissions")
@@ -280,32 +259,19 @@ class BusinessCanvasElementArchivedList(generic.ListView):
     #You need to be connected, and you need to have access as founder, mentor or Centech
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        #For know if the user is in the group "Centech"
-        groups = self.request.user.groups.values()
-        for group in groups:
-            if group['name'] == 'Centech':
+        archive = get_object_or_404(Company, id = self.args[0])
+        company = get_object_or_404(Company, id = archive.company.id)
+
+        if self.request.user.profile.isCentech():
+            return super(BusinessCanvasElementArchivedList, self).dispatch(*args, **kwargs)
+
+        if self.request.user.profile.isFounder():
+            if company in self.request.user.profile.isFounder().company.all():
                 return super(BusinessCanvasElementArchivedList, self).dispatch(*args, **kwargs)
 
-        #For know the company of the user if is a founder
-        archive = Archive.objects.get(id=self.args[0])
-        if self.request.user.is_active:
-            try:
-                founder = Founder.objects.filter(user = self.request.user.id)
-                company = Company.objects.get(founders = founder)
-                if(int(archive.company.id) == int(company.id)):
-                    return super(BusinessCanvasElementArchivedList, self).dispatch(*args, **kwargs)
-            except:
-                pass
-
-        #For know the company of the user if is a mentor
-        if self.request.user.is_active:
-            try:
-                mentor = Mentor.objects.filter(user = self.request.user.id)
-                company = Company.objects.get(mentors = mentor)
-                if(int(self.args[0]) == int(company.id)):
-                    return super(BusinessCanvasElementArchivedList, self).dispatch(*args, **kwargs)
-            except:
-                pass
+        if self.request.user.profile.isMentor():
+            if company in self.request.user.profile.isMentor().company.all():
+                return super(BusinessCanvasElementArchivedList, self).dispatch(*args, **kwargs)
 
         #The visitor can't see this page!
         return HttpResponseRedirect("/user/noAccessPermissions")

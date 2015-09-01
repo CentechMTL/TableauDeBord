@@ -30,11 +30,9 @@ class Summary(generic.TemplateView):
     #You need to be connected, and you need to have access as centech only
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        #For know if the user is in the group "Centech"
-        groups = self.request.user.groups.values()
-        for group in groups:
-            if group['name'] == 'Centech':
-                return super(Summary, self).dispatch(*args, **kwargs)
+        #
+        if self.request.user.profile.isCentech() or self.request.user.profile.isExecutive():
+            return super(Summary, self).dispatch(*args, **kwargs)
 
         #The visitor can't see this page!
         return HttpResponseRedirect("/user/noAccessPermissions")

@@ -287,35 +287,18 @@ class BoardIndex(generic.TemplateView):
     #You need to be connected, and you need to have access as founder, mentor or Centech
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        #For know if the user is in the group "Centech"
-        groups = self.request.user.groups.values()
-        for group in groups:
-            if group['name'] == 'Centech':
-                try:
-                    company = Company.objects.get(id = int(kwargs['pk'])) #If the company exist, else we go to except
-                    return super(BoardIndex, self).dispatch(*args, **kwargs)
-                except:
-                    pass
+        company = get_object_or_404(Company, id = int(kwargs['pk']))
 
-        #For know the company of the user if is a founder
-        if self.request.user.is_active:
-            try:
-                founder = Founder.objects.filter(user = self.request.user.id)
-                company = Company.objects.get(founders = founder)
-                if(int(kwargs['pk']) == int(company.id)):
-                    return super(BoardIndex, self).dispatch(*args, **kwargs)
-            except:
-                pass
+        if self.request.user.profile.isCentech():
+            return super(BoardIndex, self).dispatch(*args, **kwargs)
 
-        #For know the company of the user if is a mentor
-        if self.request.user.is_active:
-            try:
-                mentor = Mentor.objects.filter(user = self.request.user.id)
-                company = Company.objects.get(mentors = mentor)
-                if(int(kwargs['pk']) == int(company.id)):
-                    return super(BoardIndex, self).dispatch(*args, **kwargs)
-            except:
-                pass
+        if self.request.user.profile.isFounder():
+            if company in self.request.user.profile.isFounder().company.all():
+                return super(BoardIndex, self).dispatch(*args, **kwargs)
+
+        if self.request.user.profile.isMentor():
+            if company in self.request.user.profile.isMentor().company.all():
+                return super(BoardIndex, self).dispatch(*args, **kwargs)
 
         #The visitor can't see this page!
         return HttpResponseRedirect("/user/noAccessPermissions")
@@ -337,41 +320,19 @@ class CardView(generic.DetailView):
         #You need to be connected, and you need to have access as founder, mentor or Centech
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        #For know if the user is in the group "Centech"
-        groups = self.request.user.groups.values()
-        for group in groups:
-            if group['name'] == 'Centech':
-                try:
-                    #If the company exist, else we go to except
-                    card = Card.objects.get(id = int(kwargs['pk']))
-                    company = Company.objects.get(id = card.company.id)
-                    return super(CardView, self).dispatch(*args, **kwargs)
-                except:
-                    pass
+        card = get_object_or_404(Card, id = int(kwargs['pk']))
+        company = get_object_or_404(Company, id = card.company.id)
 
-        #For know the company of the user if is a founder
-        if self.request.user.is_active:
-            try:
-                founder = Founder.objects.get(user = self.request.user.id)
-                companies = Company.objects.filter(founders = founder)
-                card = Card.objects.get(id = int(kwargs['pk']))
-                for company in companies:
-                    if(card.company == company):
-                        return super(CardView, self).dispatch(*args, **kwargs)
-            except:
-                pass
+        if self.request.user.profile.isCentech():
+            return super(CardView, self).dispatch(*args, **kwargs)
 
-        #For know the company of the user if is a mentor
-        if self.request.user.is_active:
-            try:
-                mentor = Mentor.objects.get(user = self.request.user.id)
-                companies = Company.objects.filter(mentors = mentor)
-                card = Card.objects.get(id = int(kwargs['pk']))
-                for company in companies:
-                    if(card.company == company):
-                        return super(CardView, self).dispatch(*args, **kwargs)
-            except:
-                pass
+        if self.request.user.profile.isFounder():
+            if company in self.request.user.profile.isFounder().company.all():
+                return super(CardView, self).dispatch(*args, **kwargs)
+
+        if self.request.user.profile.isMentor():
+            if company in self.request.user.profile.isMentor().company.all():
+                return super(CardView, self).dispatch(*args, **kwargs)
 
         #The visitor can't see this page!
         return HttpResponseRedirect("/user/noAccessPermissions")

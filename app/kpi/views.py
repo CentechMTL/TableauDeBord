@@ -1,7 +1,7 @@
 # coding: utf-8
 
 from django.http import HttpResponse
-from django.shortcuts import render_to_response, redirect
+from django.shortcuts import render_to_response, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from app.kpi.models import KPI, KPI_TYPE_CHOICES
 from app.company.models import Company
@@ -21,35 +21,18 @@ class trl(TemplateView):
     #You need to be connected, and you need to have access as founder, mentor or Centech
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        #For know if the user is in the group "Centech"
-        groups = self.request.user.groups.values()
-        for group in groups:
-            if group['name'] == 'Centech':
-                try:
-                    company = Company.objects.get(id = int(self.args[0])) #If the company exist, else we go to except
-                    return super(trl, self).dispatch(*args, **kwargs)
-                except:
-                    pass
+        company = get_object_or_404(Company, id = int(self.args[0]))
 
-        #For know the company of the user if is a founder
-        if self.request.user.is_active:
-            try:
-                founder = Founder.objects.filter(user = self.request.user.id)
-                company = Company.objects.get(founders = founder)
-                if(int(self.args[0]) == int(company.id)):
-                    return super(trl, self).dispatch(*args, **kwargs)
-            except:
-                pass
+        if self.request.user.profile.isCentech():
+            return super(trl, self).dispatch(*args, **kwargs)
 
-        #For know the company of the user if is a mentor
-        if self.request.user.is_active:
-            try:
-                mentor = Mentor.objects.filter(user = self.request.user.id)
-                company = Company.objects.get(mentors = mentor)
-                if(int(self.args[0]) == int(company.id)):
-                    return super(trl, self).dispatch(*args, **kwargs)
-            except:
-                pass
+        if self.request.user.profile.isFounder():
+            if company in self.request.user.profile.isFounder().company.all():
+                return super(trl, self).dispatch(*args, **kwargs)
+
+        if self.request.user.profile.isMentor():
+            if company in self.request.user.profile.isMentor().company.all():
+             return super(trl, self).dispatch(*args, **kwargs)
 
         #The visitor can't see this page!
         return HttpResponseRedirect("/user/noAccessPermissions")
@@ -72,35 +55,18 @@ class irl(TemplateView):
    #You need to be connected, and you need to have access as founder, mentor or Centech
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        #For know if the user is in the group "Centech"
-        groups = self.request.user.groups.values()
-        for group in groups:
-            if group['name'] == 'Centech':
-                try:
-                    company = Company.objects.get(id = int(self.args[0])) #If the company exist, else we go to except
-                    return super(irl, self).dispatch(*args, **kwargs)
-                except:
-                    pass
+        company = get_object_or_404(Company, id = int(self.args[0]))
 
-        #For know the company of the user if is a founder
-        if self.request.user.is_active:
-            try:
-                founder = Founder.objects.filter(user = self.request.user.id)
-                company = Company.objects.get(founders = founder)
-                if(int(self.args[0]) == int(company.id)):
-                    return super(irl, self).dispatch(*args, **kwargs)
-            except:
-                pass
+        if self.request.user.profile.isCentech():
+            return super(irl, self).dispatch(*args, **kwargs)
 
-        #For know the company of the user if is a mentor
-        if self.request.user.is_active:
-            try:
-                mentor = Mentor.objects.filter(user = self.request.user.id)
-                company = Company.objects.get(mentors = mentor)
-                if(int(self.args[0]) == int(company.id)):
-                    return super(irl, self).dispatch(*args, **kwargs)
-            except:
-                pass
+        if self.request.user.profile.isFounder():
+            if company in self.request.user.profile.isFounder().company.all():
+                return super(irl, self).dispatch(*args, **kwargs)
+
+        if self.request.user.profile.isMentor():
+            if company in self.request.user.profile.isMentor().company.all():
+                return super(irl, self).dispatch(*args, **kwargs)
 
         #The visitor can't see this page!
         return HttpResponseRedirect("/user/noAccessPermissions")
@@ -124,11 +90,8 @@ class IrlCreate(CreateView):
     #You need to be connected, and you need to have access as centech only
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        #For know if the user is in the group "Centech"
-        groups = self.request.user.groups.values()
-        for group in groups:
-            if group['name'] == 'Centech':
-                return super(IrlCreate, self).dispatch(*args, **kwargs)
+        if self.request.user.profile.isCentech():
+            return super(IrlCreate, self).dispatch(*args, **kwargs)
 
         #The visitor can't see this page!
         return HttpResponseRedirect("/user/noAccessPermissions")
@@ -155,11 +118,8 @@ class TrlCreate(CreateView):
     #You need to be connected, and you need to have access as centech only
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        #For know if the user is in the group "Centech"
-        groups = self.request.user.groups.values()
-        for group in groups:
-            if group['name'] == 'Centech':
-                return super(TrlCreate, self).dispatch(*args, **kwargs)
+        if self.request.user.profile.isCentech():
+            return super(TrlCreate, self).dispatch(*args, **kwargs)
 
         #The visitor can't see this page!
         return HttpResponseRedirect("/user/noAccessPermissions")
@@ -187,11 +147,8 @@ class IrlUpdate(UpdateView):
     #You need to be connected, and you need to have access as centech only
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        #For know if the user is in the group "Centech"
-        groups = self.request.user.groups.values()
-        for group in groups:
-            if group['name'] == 'Centech':
-                return super(IrlUpdate, self).dispatch(*args, **kwargs)
+        if self.request.user.profile.isCentech():
+            return super(IrlUpdate, self).dispatch(*args, **kwargs)
 
         #The visitor can't see this page!
         return HttpResponseRedirect("/user/noAccessPermissions")
@@ -204,11 +161,8 @@ class IrlDelete(DeleteView):
     #You need to be connected, and you need to have access as centech only
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        #For know if the user is in the group "Centech"
-        groups = self.request.user.groups.values()
-        for group in groups:
-            if group['name'] == 'Centech':
-                return super(IrlDelete, self).dispatch(*args, **kwargs)
+        if self.request.user.profile.isCentech():
+            return super(IrlDelete, self).dispatch(*args, **kwargs)
 
         #The visitor can't see this page!
         return HttpResponseRedirect("/user/noAccessPermissions")
@@ -236,11 +190,8 @@ class TrlUpdate(UpdateView):
     #You need to be connected, and you need to have access as centech only
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        #For know if the user is in the group "Centech"
-        groups = self.request.user.groups.values()
-        for group in groups:
-            if group['name'] == 'Centech':
-                return super(TrlUpdate, self).dispatch(*args, **kwargs)
+        if self.request.user.profile.isCentech():
+            return super(TrlUpdate, self).dispatch(*args, **kwargs)
 
         #The visitor can't see this page!
         return HttpResponseRedirect("/user/noAccessPermissions")
@@ -253,11 +204,8 @@ class TrlDelete(DeleteView):
     #You need to be connected, and you need to have access as centech only
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        #For know if the user is in the group "Centech"
-        groups = self.request.user.groups.values()
-        for group in groups:
-            if group['name'] == 'Centech':
-                return super(TrlDelete, self).dispatch(*args, **kwargs)
+        if self.request.user.profile.isCentech():
+            return super(TrlDelete, self).dispatch(*args, **kwargs)
 
         #The visitor can't see this page!
         return HttpResponseRedirect("/user/noAccessPermissions")

@@ -48,10 +48,11 @@
         <span style="font-size: 70px;">{{mentors_count}}</span>
     </div>
 </div>
+
 <!-----------------------------------------
 ================ FINANCES =================
 ------------------------------------------>
-
+{% if isCentech %}
 <h1>{% trans "Finances" %}</h1>
 <div class="row">
     <div class="col-sm-12">
@@ -116,10 +117,13 @@
         </div>
     </div>
 </div>
+{% endif %}
+
 
 <!-----------------------------------------
 ======== INDICATORS OF PERFORMANCES =======
 ------------------------------------------>
+{% if isCentech %}
 
 <h1>{% trans "Indicators of performances" %}</h1>
 <div class="row" align="center">
@@ -199,10 +203,13 @@
         </script>
     </div>
 </div>
+{% endif %}
+
 
 <!-----------------------------------------
 ============= EXPERIMENTATIONS ============
 ------------------------------------------>
+{% if isCentech %}
 
 <h1>{% trans "Experiments" %}</h1>
 <div class="row" align="center">
@@ -277,6 +284,8 @@
         </script>
     </div>
 </div>
+
+{% endif %}
 
 <!-----------------------------------------
 ============ TIME OF INCUBATION ===========

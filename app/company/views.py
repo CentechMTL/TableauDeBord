@@ -57,11 +57,8 @@ class CompanyStatusCreate(generic.CreateView):
     #You need to be connected, and you need to have access as centech only
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        #For know if the user is in the group "Centech"
-        groups = self.request.user.groups.values()
-        for group in groups:
-            if group['name'] == 'Centech':
-                return super(CompanyStatusCreate, self).dispatch(*args, **kwargs)
+        if self.request.user.profile.isCentech():
+            return super(CompanyStatusCreate, self).dispatch(*args, **kwargs)
 
         #The visitor can't see this page!
         return HttpResponseRedirect("/user/noAccessPermissions")
@@ -105,11 +102,8 @@ class CompanyCreate(generic.CreateView):
     #You need to be connected, and you need to have access as centech only
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        #For know if the user is in the group "Centech"
-        groups = self.request.user.groups.values()
-        for group in groups:
-            if group['name'] == 'Centech':
-                return super(CompanyCreate, self).dispatch(*args, **kwargs)
+        if self.request.user.profile.isCentech():
+            return super(CompanyCreate, self).dispatch(*args, **kwargs)
 
         #The visitor can't see this page!
         return HttpResponseRedirect("/user/noAccessPermissions")
@@ -188,24 +182,17 @@ class CompanyUpdate(generic.UpdateView):
     #You need to be connected, and you need to have access as founder or centech
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        #Let the centech in first for allow modify a company of a founder who work for the Centech
-        #For know if the user is in the group "Centech"
-        groups = self.request.user.groups.values()
-        for group in groups:
-            if group['name'] == 'Centech':
-                self.form_class = CompanyUpdateForm
-                return super(CompanyUpdate, self).dispatch(*args, **kwargs)
+        company = get_object_or_404(Company, id=self.kwargs["pk"])
 
-        #For know the company of the user if is a founder
-        if self.request.user.is_active:
-            try:
-                founder = Founder.objects.filter(user = self.request.user.id)
-                company = Company.objects.get(founders = founder)
-                if(int(self.kwargs["pk"]) == int(company.id)):
-                    self.form_class = MiniCompanyUpdateForm
-                    return super(CompanyUpdate, self).dispatch(*args, **kwargs)
-            except:
-                pass
+        #Let the centech in first for allow modify a company of a founder who work in the Centech
+        if self.request.user.profile.isCentech():
+            self.form_class = CompanyUpdateForm
+            return super(CompanyUpdate, self).dispatch(*args, **kwargs)
+
+        if self.request.user.profile.isFounder():
+            if self.request.user.profile.isFounder() in company.founders:
+                self.form_class = MiniCompanyUpdateForm
+                return super(CompanyUpdate, self).dispatch(*args, **kwargs)
 
         #The visitor can't see this page!
         return HttpResponseRedirect("/user/noAccessPermissions")
@@ -288,11 +275,8 @@ class PresenceList(generic.ListView):
    #You need to be connected, and you need to have access as centech only
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        #For know if the user is in the group "Centech"
-        groups = self.request.user.groups.values()
-        for group in groups:
-            if group['name'] == 'Centech':
-                return super(PresenceList, self).dispatch(*args, **kwargs)
+        if self.request.user.profile.isCentech():
+            return super(PresenceList, self).dispatch(*args, **kwargs)
 
         #The visitor can't see this page!
         return HttpResponseRedirect("/user/noAccessPermissions")
@@ -330,11 +314,8 @@ class PresenceAdd(generic.CreateView):
     #You need to be connected, and you need to have access as centech only
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        #For know if the user is in the group "Centech"
-        groups = self.request.user.groups.values()
-        for group in groups:
-            if group['name'] == 'Centech':
-                return super(PresenceAdd, self).dispatch(*args, **kwargs)
+        if self.request.user.profile.isCentech():
+            return super(PresenceAdd, self).dispatch(*args, **kwargs)
 
         #The visitor can't see this page!
         return HttpResponseRedirect("/user/noAccessPermissions")
@@ -353,11 +334,8 @@ class PresenceUpdate(generic.UpdateView):
     #You need to be connected, and you need to have access as centech only
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        #For know if the user is in the group "Centech"
-        groups = self.request.user.groups.values()
-        for group in groups:
-            if group['name'] == 'Centech':
-                return super(PresenceUpdate, self).dispatch(*args, **kwargs)
+        if self.request.user.profile.isCentech():
+            return super(PresenceUpdate, self).dispatch(*args, **kwargs)
 
         #The visitor can't see this page!
         return HttpResponseRedirect("/user/noAccessPermissions")
@@ -370,11 +348,8 @@ class PresenceDelete(generic.DeleteView):
     #You need to be connected, and you need to have access as centech only
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        #For know if the user is in the group "Centech"
-        groups = self.request.user.groups.values()
-        for group in groups:
-            if group['name'] == 'Centech':
-                return super(PresenceDelete, self).dispatch(*args, **kwargs)
+        if self.request.user.profile.isCentech():
+            return super(PresenceDelete, self).dispatch(*args, **kwargs)
 
         #The visitor can't see this page!
         return HttpResponseRedirect("/user/noAccessPermissions")

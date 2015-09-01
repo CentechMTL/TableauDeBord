@@ -30,11 +30,8 @@ class MentorCreate(generic.CreateView):
     #You need to be connected, and you need to have access as centech only
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        #For know if the user is in the group "Centech"
-        groups = self.request.user.groups.values()
-        for group in groups:
-            if group['name'] == 'Centech':
-                return super(MentorCreate, self).dispatch(*args, **kwargs)
+        if self.request.user.profile.isCentech():
+            return super(MentorCreate, self).dispatch(*args, **kwargs)
 
         #The visitor can't see this page!
         return HttpResponseRedirect("/user/noAccessPermissions")
@@ -132,18 +129,16 @@ class MentorUpdate(generic.UpdateView):
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         #For know the company of the user if is a founder
-        if self.request.user.is_active:
+        if self.request.user.profile.isMentor():
             try:
                 if(int(self.request.user.profile.userProfile_id) == int(self.kwargs['pk'])):
                     return super(MentorUpdate, self).dispatch(*args, **kwargs)
             except:
                 pass
 
-        #For know if the user is in the group "Centech"
-        groups = self.request.user.groups.values()
-        for group in groups:
-            if group['name'] == 'Centech':
-                return super(MentorUpdate, self).dispatch(*args, **kwargs)
+        if self.request.user.profile.isCentech():
+            return super(MentorUpdate, self).dispatch(*args, **kwargs)
+
         #The visitor can't see this page!
         return HttpResponseRedirect("/user/noAccessPermissions")
 
@@ -200,8 +195,17 @@ class MentorIndex(generic.ListView):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(MentorIndex, self).dispatch(*args, **kwargs)
+        if self.request.user.profile.isCentech():
+            return super(MentorIndex, self).dispatch(*args, **kwargs)
 
+        if self.request.user.profile.isFounder():
+            return super(MentorIndex, self).dispatch(*args, **kwargs)
+
+        if self.request.user.profile.isMentor():
+            return super(MentorIndex, self).dispatch(*args, **kwargs)
+
+        #The visitor can't see this page!
+        return HttpResponseRedirect("/user/noAccessPermissions")
     def get_queryset(self):
         obj = Mentor.objects.all()
         return Mentor.objects.all()
@@ -219,7 +223,17 @@ class MentorView(generic.DetailView):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(MentorView, self).dispatch(*args, **kwargs)
+        if self.request.user.profile.isCentech():
+            return super(MentorView, self).dispatch(*args, **kwargs)
+
+        if self.request.user.profile.isFounder():
+            return super(MentorView, self).dispatch(*args, **kwargs)
+
+        if self.request.user.profile.isMentor():
+            return super(MentorView, self).dispatch(*args, **kwargs)
+
+        #The visitor can't see this page!
+        return HttpResponseRedirect("/user/noAccessPermissions")
 
     def get_context_data(self, **kwargs):
         mentor = Mentor.objects.get(userProfile_id = self.kwargs['pk'])

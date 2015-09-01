@@ -62,6 +62,34 @@ class UserProfile(models.Model):
         return '<img src="/media/%s" width="100" height="100" />' % (self.picture)
     image_thumb.allow_tags = True
 
+    def isCentech(self):
+        groups = self.user.groups.values()
+        for group in groups:
+            if group['name'] == 'Centech':
+                return True
+        return False
+
+    def isExecutive(self):
+        groups = self.user.groups.values()
+        for group in groups:
+            if group['name'] == 'Executive':
+                return True
+        return False
+
+    def isFounder(self):
+        from app.founder.models import Founder
+        try:
+            return Founder.objects.get(user = self.user)
+        except:
+            return False
+
+    def isMentor(self):
+        from app.mentor.models import Mentor
+        try:
+            return Mentor.objects.get(user = self.user)
+        except:
+            return False
+
 class FloorPlan(models.Model):
     title = models.CharField(max_length=100,verbose_name=_('Title'))
     image = models.ImageField(upload_to='floor_plan', verbose_name=_('Image'))

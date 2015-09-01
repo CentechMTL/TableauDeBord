@@ -23,35 +23,18 @@ class CustomerExperimentList(generic.ListView):
     #You need to be connected, and you need to have access as founder, mentor or Centech
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        #For know if the user is in the group "Centech"
-        groups = self.request.user.groups.values()
-        for group in groups:
-            if group['name'] == 'Centech':
-                try:
-                    company = Company.objects.get(id = int(self.args[0])) #If the company exist, else we go to except
-                    return super(CustomerExperimentList, self).dispatch(*args, **kwargs)
-                except:
-                    pass
+        company = get_object_or_404(Company, id = self.args[0])
 
-        #For know the company of the user if is a founder
-        if self.request.user.is_active:
-            try:
-                founder = Founder.objects.filter(user = self.request.user.id)
-                company = Company.objects.get(founders = founder)
-                if(int(self.args[0]) == int(company.id)):
-                    return super(CustomerExperimentList, self).dispatch(*args, **kwargs)
-            except:
-                pass
+        if self.request.user.profile.isCentech():
+            return super(CustomerExperimentList, self).dispatch(*args, **kwargs)
 
-        #For know the company of the user if is a mentor
-        if self.request.user.is_active:
-            try:
-                mentor = Mentor.objects.filter(user = self.request.user.id)
-                company = Company.objects.get(mentors = mentor)
-                if(int(self.args[0]) == int(company.id)):
-                    return super(CustomerExperimentList, self).dispatch(*args, **kwargs)
-            except:
-                pass
+        if self.request.user.profile.isFounder():
+            if company in self.request.user.profile.isFounder().company.all():
+                return super(CustomerExperimentList, self).dispatch(*args, **kwargs)
+
+        if self.request.user.profile.isMentor():
+            if company in self.request.user.profile.isMentor().company.all():
+                return super(CustomerExperimentList, self).dispatch(*args, **kwargs)
 
         #The visitor can't see this page!
         return HttpResponseRedirect("/user/noAccessPermissions")
@@ -79,16 +62,12 @@ class CustomerExperimentCreate(CreateView):
     #You need to be connected, and you need to have access as founder only
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        #For know the company of the user if is a founder
-        if self.request.user.is_active:
-            try:
-                founder = Founder.objects.filter(user = self.request.user.id)
-                company = Company.objects.get(founders = founder)
-                if(int(self.args[0]) == int(company.id)):
-                    return super(CustomerExperimentCreate, self).dispatch(*args, **kwargs)
-            except:
-                #The visitor can't see this page!
-                return HttpResponseRedirect("/user/noAccessPermissions")
+        company = get_object_or_404(Company, id = self.args[0])
+
+        if self.request.user.profile.isFounder():
+            if self.request.user.profile.isFounder().company.all():
+                return super(CustomerExperimentCreate, self).dispatch(*args, **kwargs)
+
         #The visitor can't see this page!
         return HttpResponseRedirect("/user/noAccessPermissions")
 
@@ -109,18 +88,13 @@ class CustomerExperimentUpdate(UpdateView):
     #You need to be connected, and you need to have access as founder only
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        #For know the company of the user if is a founder
-        if self.request.user.is_active:
-            try:
-                founder = Founder.objects.filter(user = self.request.user.id)
-                company = Company.objects.get(founders = founder)
-                self.object = self.get_object()
-                company_id = self.object.company.id
-                if(int(company_id) == int(company.id)):
-                    return super(CustomerExperimentUpdate, self).dispatch(*args, **kwargs)
-            except:
-                #The visitor can't see this page!
-                return HttpResponseRedirect("/user/noAccessPermissions")
+        self.object = self.get_object()
+        company = get_object_or_404(Company, id = self.object.company.id)
+
+        if self.request.user.profile.isFounder():
+            if company in self.request.user.profile.isFounder().company.all():
+                return super(CustomerExperimentUpdate, self).dispatch(*args, **kwargs)
+
         #The visitor can't see this page!
         return HttpResponseRedirect("/user/noAccessPermissions")
 
@@ -131,20 +105,13 @@ class CustomerExperimentDelete(DeleteView):
     #You need to be connected, and you need to have access as founder only
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        #For know the company of the user if is a founder
-        if self.request.user.is_active:
-             try:
-                founder = Founder.objects.filter(user = self.request.user.id)
+        self.object = self.get_object()
+        company = get_object_or_404(Company, id = self.object.company.id)
 
-                company = Company.objects.get(founders = founder)
-                customerExperiment = CustomerExperiment.objects.get(id = kwargs['pk'])
+        if self.request.user.profile.isFounder():
+            if company in self.request.user.profile.isFounder().company.all():
+                return super(CustomerExperimentDelete, self).dispatch(*args, **kwargs)
 
-                company_id = customerExperiment.company.id
-                if(int(company_id) == int(company.id)):
-                    return super(CustomerExperimentDelete, self).dispatch(*args, **kwargs)
-             except:
-                #The visitor can't see this page!
-                return HttpResponseRedirect("/user/noAccessPermissions")
         #The visitor can't see this page!
         return HttpResponseRedirect("/user/noAccessPermissions")
 

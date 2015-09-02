@@ -156,6 +156,7 @@ class CompanyCreate(generic.CreateView):
             pass
 
         try:
+            self.request.FILES['logo'].name = newCompany.name + os.path.splitext(self.request.FILES['logo'].name)[1]
             newCompany.logo = self.request.FILES['logo']
         except:
             pass

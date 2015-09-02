@@ -85,6 +85,7 @@ class MentorCreate(generic.CreateView):
         newMentor.url = form.data['url']
 
         try:
+            self.request.FILES['picture'].name = newMentor.user.username + os.path.splitext(self.request.FILES['picture'].name)[1]
             newMentor.picture = self.request.FILES['picture']
         except:
             pass

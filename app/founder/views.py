@@ -86,6 +86,7 @@ class FounderCreate(generic.CreateView):
         newFounder.about = form.data['about']
 
         try:
+            self.request.FILES['picture'].name = newFounder.user.username + os.path.splitext(self.request.FILES['picture'].name)[1]
             newFounder.picture = self.request.FILES['picture']
         except:
             pass

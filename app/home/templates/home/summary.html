@@ -290,7 +290,7 @@
 <!-----------------------------------------
 ============ TIME OF INCUBATION ===========
 ------------------------------------------>
-{% if status_selected.id != 1 %}
+{% if status_selected.id != 1 and status_selected.id != 7%}
 {% trans "Incubation duration (months)" as titleOfChart %}
 
 <h1>{{ titleOfChart|escape }}</h1>

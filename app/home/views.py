@@ -27,10 +27,9 @@ from app.home.models import FloorPlan
 class Summary(generic.TemplateView):
     template_name = 'home/summary.html'
 
-    #You need to be connected, and you need to have access as centech only
+    #You need to be connected, and you need to have access as centech or executive
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        #
         if self.request.user.profile.isCentech() or self.request.user.profile.isExecutive():
             return super(Summary, self).dispatch(*args, **kwargs)
 
@@ -221,7 +220,18 @@ def noAccessPermissions(request):
 
 #Iframe vers ma StartUp
 def maStartup(request):
-    return render(request, 'home/maStartup.html')
+    if request.user.is_active:
+        if request.user.profile.isCentech():
+                return render(request, 'home/maStartup.html')
+
+        if request.user.profile.isFounder():
+                return render(request, 'home/maStartup.html')
+
+        if request.user.profile.isMentor():
+                return render(request, 'home/maStartup.html')
+
+    #The visitor can't see this page!
+    return HttpResponseRedirect("/user/noAccessPermissions")
 
 #Set the session variable for the dashboard template
 def setCompanyInSession(request, company_id):
@@ -286,3 +296,18 @@ class floor_plan(generic.ListView):
     model = FloorPlan
     template_name = 'home/floorPlan.html'
     context_object_name = 'list_floor_plan'
+
+    #You need to be connected, and you need to have access as centech only
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        if self.request.user.profile.isCentech():
+            return super(floor_plan, self).dispatch(*args, **kwargs)
+
+        if self.request.user.profile.isFounder():
+            return super(floor_plan, self).dispatch(*args, **kwargs)
+
+        if self.request.user.profile.isMentor():
+            return super(floor_plan, self).dispatch(*args, **kwargs)
+
+        #The visitor can't see this page!
+        return HttpResponseRedirect("/user/noAccessPermissions")

@@ -7,7 +7,7 @@ from django.test import TestCase
 
 from app.founder.factories import FounderFactory
 from app.mentor.factories import MentorFactory
-from app.home.factories import UserFactory, StaffUserProfileFactory
+from app.home.factories import UserFactory, StaffUserProfileFactory, ExecutiveUserProfileFactory
 
 class MentorTests(TestCase):
 
@@ -17,6 +17,7 @@ class MentorTests(TestCase):
         self.founder = FounderFactory()
         self.mentor = MentorFactory()
         self.staff = StaffUserProfileFactory()
+        self.executive = ExecutiveUserProfileFactory()
 
     def test_index(self):
         """
@@ -24,9 +25,7 @@ class MentorTests(TestCase):
         """
 
         """
-        Access
-
-        We are connected
+        Access : We are connected
         """
         self.client.logout()
         self.client.login(username=self.mentor.user.username, password="Toto1234!#")
@@ -42,11 +41,22 @@ class MentorTests(TestCase):
         nb_mentor = len(result.context['mentorFilter'])
 
         """
-        No Access
-
-        We are not connected
+        No Access : We are not connected
         """
         self.client.logout()
+
+        # list of mentors.
+        result = self.client.get(
+            reverse('mentor:index'),
+            follow=False
+        )
+        self.assertEqual(result.status_code, 302)
+
+        """
+        No Access : Executive
+        """
+        self.client.logout()
+        self.client.login(username=self.executive.user.username, password="Toto1234!#")
 
         # list of mentors.
         result = self.client.get(
@@ -104,6 +114,17 @@ class MentorTests(TestCase):
         )
         self.assertEqual(result.status_code, 302)
 
+        """
+        No Access : Executive
+        """
+        self.client.logout()
+        self.client.login(username=self.executive.user.username, password="Toto1234!#")
+
+        result = self.client.get(
+            reverse('mentor:detail', kwargs={'pk': self.mentor.userProfile_id}),
+            follow=False
+        )
+        self.assertEqual(result.status_code, 302)
 
         """
         Access of an inexistant mentor
@@ -152,6 +173,16 @@ class MentorTests(TestCase):
         #A mentor
         self.client.logout()
         self.client.login(username=self.mentor.user.username, password="Toto1234!#")
+
+        result = self.client.get(
+            reverse('mentor:create'),
+            follow=False
+        )
+        self.assertEqual(result.status_code, 302)
+
+        #An executive
+        self.client.logout()
+        self.client.login(username=self.executive.user.username, password="Toto1234!#")
 
         result = self.client.get(
             reverse('mentor:create'),
@@ -221,6 +252,16 @@ class MentorTests(TestCase):
         #A mentor
         self.client.logout()
         self.client.login(username=self.mentor.user.username, password="Toto1234!#")
+
+        result = self.client.get(
+            reverse('mentor:update', kwargs={'pk': mentorTest.userProfile_id}),
+            follow=False
+        )
+        self.assertEqual(result.status_code, 302)
+
+        #An executive
+        self.client.logout()
+        self.client.login(username=self.executive.user.username, password="Toto1234!#")
 
         result = self.client.get(
             reverse('mentor:update', kwargs={'pk': mentorTest.userProfile_id}),

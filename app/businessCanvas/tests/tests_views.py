@@ -9,7 +9,7 @@ import time
 
 from app.founder.factories import FounderFactory
 from app.mentor.factories import MentorFactory
-from app.home.factories import UserFactory, StaffUserFactory, StaffUserProfileFactory
+from app.home.factories import UserFactory, StaffUserProfileFactory, ExecutiveUserProfileFactory
 from app.company.factories import CompanyStatusFactory, CompanyFactory
 from app.businessCanvas.factories import BusinessCanvasElementFactory, ArchiveFactory
 
@@ -24,6 +24,7 @@ class BusinessCanvasTests(TestCase):
         self.founder = FounderFactory()
         self.mentor = MentorFactory()
         self.staff = StaffUserProfileFactory()
+        self.executive = ExecutiveUserProfileFactory()
 
         self.founderCompany = FounderFactory()
         self.mentorCompany = MentorFactory()
@@ -108,6 +109,18 @@ class BusinessCanvasTests(TestCase):
         )
         self.assertEqual(result.status_code, 302)
 
+        """
+        No Access : Executive
+        """
+        self.client.logout()
+        self.client.login(username=self.executive.user.username, password="Toto1234!#")
+
+        result = self.client.get(
+            reverse('businessCanvas:businessCanvasElement_list', args= [self.company.id]),
+            follow=False
+        )
+        self.assertEqual(result.status_code, 302)
+
     def test_businessCanvasElementArchived_list(self):
         """
         To test the business canvas archived list of a company.
@@ -174,6 +187,18 @@ class BusinessCanvasTests(TestCase):
         )
         self.assertEqual(result.status_code, 302)
 
+        """
+        No Access : Executive
+        """
+        self.client.logout()
+        self.client.login(username=self.executive.user.username, password="Toto1234!#")
+
+        result = self.client.get(
+            reverse('businessCanvas:businessCanvasElementArchived_list', args= [self.archive.id]),
+            follow=False
+        )
+        self.assertEqual(result.status_code, 302)
+
     def test_businessCanvasDeleteArchive(self):
         """
         To test delete a business canvas archive of a company.
@@ -233,6 +258,18 @@ class BusinessCanvasTests(TestCase):
         """
         self.client.logout()
         self.client.login(username=self.mentor.user.username, password="Toto1234!#")
+
+        result = self.client.get(
+            reverse('businessCanvas:businessCanvasDeleteArchive', args= [self.archive.id]),
+            follow=False
+        )
+        self.assertEqual(result.status_code, 302)
+
+        """
+        No Access : Executive
+        """
+        self.client.logout()
+        self.client.login(username=self.executive.user.username, password="Toto1234!#")
 
         result = self.client.get(
             reverse('businessCanvas:businessCanvasDeleteArchive', args= [self.archive.id]),

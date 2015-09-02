@@ -7,7 +7,7 @@ from django.test import TestCase
 
 from app.founder.factories import FounderFactory
 from app.mentor.factories import MentorFactory
-from app.home.factories import UserFactory, StaffUserProfileFactory
+from app.home.factories import UserFactory, StaffUserProfileFactory, ExecutiveUserProfileFactory
 from app.company.factories import CompanyFactory, CompanyStatusFactory
 
 class CompanyTests(TestCase):
@@ -18,6 +18,7 @@ class CompanyTests(TestCase):
         self.founder = FounderFactory()
         self.mentor = MentorFactory()
         self.staff = StaffUserProfileFactory()
+        self.executive = ExecutiveUserProfileFactory()
 
         self.status = CompanyStatusFactory()
         self.company = CompanyFactory(companyStatus = self.status)
@@ -44,6 +45,7 @@ class CompanyTests(TestCase):
         self.assertEqual(1, len(result.context['filter']))
 
         nb_company = len(result.context['filter'])
+
         """
         No Access
 
@@ -162,6 +164,16 @@ class CompanyTests(TestCase):
         )
         self.assertEqual(result.status_code, 302)
 
+        #An executive
+        self.client.logout()
+        self.client.login(username=self.executive.user.username, password="Toto1234!#")
+
+        result = self.client.get(
+            reverse('company:create'),
+            follow=False
+        )
+        self.assertEqual(result.status_code, 302)
+
         """
         No Access : Not logged
         """
@@ -233,6 +245,16 @@ class CompanyTests(TestCase):
         )
         self.assertEqual(result.status_code, 302)
 
+        #An executive
+        self.client.logout()
+        self.client.login(username=self.executive.user.username, password="Toto1234!#")
+
+        result = self.client.get(
+            reverse('company:update', kwargs={'pk': self.company.id}),
+            follow=False
+        )
+        self.assertEqual(result.status_code, 302)
+
         """
         No Access : Not logged
         """
@@ -292,6 +314,16 @@ class CompanyTests(TestCase):
         #A mentor
         self.client.logout()
         self.client.login(username=self.mentor.user.username, password="Toto1234!#")
+
+        result = self.client.get(
+            reverse('company:status_create'),
+            follow=False
+        )
+        self.assertEqual(result.status_code, 302)
+
+        #An executive
+        self.client.logout()
+        self.client.login(username=self.executive.user.username, password="Toto1234!#")
 
         result = self.client.get(
             reverse('company:status_create'),

@@ -62,6 +62,40 @@ class StaffUserProfileFactory(factory.DjangoModelFactory):
 
     user = factory.SubFactory(StaffUserFactory)
 
+class ExecutiveUserFactory(factory.DjangoModelFactory):
+    class Meta:
+        model = User
+
+    username = factory.Sequence('ExecutiveUser{0}'.format)
+    password = "Toto1234!#"
+
+    is_active = True
+
+    @classmethod
+    def _prepare(cls, create, **kwargs):
+        password = kwargs.pop('password', None)
+        user = super(ExecutiveUserFactory, cls)._prepare(create, **kwargs)
+        if password:
+            user.set_password(password)
+            if create:
+                user.save()
+
+        group_executive = Group.objects.filter(name="Executive").first()
+        if group_executive is None:
+            group_executive = Group(name="Executive")
+            group_executive.save()
+
+        user.groups.add(group_executive)
+
+        user.save()
+        return user
+
+class ExecutiveUserProfileFactory(factory.DjangoModelFactory):
+    class Meta:
+        model = UserProfile
+
+    user = factory.SubFactory(ExecutiveUserFactory)
+
 class ExpertiseFactory(factory.DjangoModelFactory):
     class Meta:
         model = Expertise

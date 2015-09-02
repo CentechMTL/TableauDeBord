@@ -7,7 +7,7 @@ from django.test import TestCase
 
 from app.founder.factories import FounderFactory
 from app.mentor.factories import MentorFactory
-from app.home.factories import UserFactory, StaffUserProfileFactory
+from app.home.factories import UserFactory, StaffUserProfileFactory, ExecutiveUserProfileFactory
 
 class FounderTests(TestCase):
 
@@ -17,6 +17,7 @@ class FounderTests(TestCase):
         self.founder = FounderFactory()
         self.mentor = MentorFactory()
         self.staff = StaffUserProfileFactory()
+        self.executive = ExecutiveUserProfileFactory()
 
     def test_index(self):
         """
@@ -24,9 +25,7 @@ class FounderTests(TestCase):
         """
 
         """
-        Access
-
-        We are connected
+        Access : We are connected
         """
         self.client.logout()
         self.client.login(username=self.mentor.user.username, password="Toto1234!#")
@@ -40,14 +39,25 @@ class FounderTests(TestCase):
         self.assertEqual(1, len(result.context['filter']))
 
         nb_founder = len(result.context['filter'])
-        """
-        No Access
 
-        We are not connected
+        """
+        No Access : We are not connected
         """
         self.client.logout()
 
         # list of founders.
+        result = self.client.get(
+            reverse('founder:index'),
+            follow=False
+        )
+        self.assertEqual(result.status_code, 302)
+
+        """
+        No Access : Executive
+        """
+        self.client.logout()
+        self.client.login(username=self.executive.user.username, password="Toto1234!#")
+
         result = self.client.get(
             reverse('founder:index'),
             follow=False
@@ -103,6 +113,17 @@ class FounderTests(TestCase):
         )
         self.assertEqual(result.status_code, 302)
 
+        """
+        No Access : Executive
+        """
+        self.client.logout()
+        self.client.login(username=self.executive.user.username, password="Toto1234!#")
+
+        result = self.client.get(
+            reverse('founder:detail', kwargs={'pk': self.founder.userProfile_id}),
+            follow=False
+        )
+        self.assertEqual(result.status_code, 302)
 
         """
         Access of an inexistant founder
@@ -151,6 +172,16 @@ class FounderTests(TestCase):
         #A mentor
         self.client.logout()
         self.client.login(username=self.mentor.user.username, password="Toto1234!#")
+
+        result = self.client.get(
+            reverse('founder:add'),
+            follow=False
+        )
+        self.assertEqual(result.status_code, 302)
+
+        #An executive
+        self.client.logout()
+        self.client.login(username=self.executive.user.username, password="Toto1234!#")
 
         result = self.client.get(
             reverse('founder:add'),
@@ -220,6 +251,16 @@ class FounderTests(TestCase):
         #A mentor
         self.client.logout()
         self.client.login(username=self.mentor.user.username, password="Toto1234!#")
+
+        result = self.client.get(
+            reverse('founder:update', kwargs={'pk': founderTest.userProfile_id}),
+            follow=False
+        )
+        self.assertEqual(result.status_code, 302)
+
+        #An executive
+        self.client.logout()
+        self.client.login(username=self.executive.user.username, password="Toto1234!#")
 
         result = self.client.get(
             reverse('founder:update', kwargs={'pk': founderTest.userProfile_id}),

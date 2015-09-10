@@ -44,8 +44,9 @@ def company_select(request):
                 list_menu = ['companies', 'summary']
 
         #To set the default company selected
-        if not list_company :
-            setCompanyInSession(request, list_company[0].id)
+        if list_company:
+            if 'companySelected' not in request.session.keys():
+                setCompanyInSession(request, list_company[0].id)
 
     else:
         isCentech = False

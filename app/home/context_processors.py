@@ -44,7 +44,7 @@ def company_select(request):
                 list_menu = ['companies', 'summary']
 
         #To set the default company selected
-        if list_company :
+        if not list_company :
             setCompanyInSession(request, list_company[0].id)
 
     else:

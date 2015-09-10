@@ -1,7 +1,9 @@
 # coding: utf-8
 
+import re
+
 from django import forms
-import django_filters
+from django_filters import FilterSet, MethodFilter, ChoiceFilter
 from app.mentor.models import Mentor, MENTOR_TYPE_CHOICES
 from app.home.models import Expertise, Education
 
@@ -15,13 +17,38 @@ from django.utils.translation import ugettext_lazy as _
 FILTER_MENTOR_CHOICES = list(MENTOR_TYPE_CHOICES)
 FILTER_MENTOR_CHOICES.insert(0, ('','---------') )
 
-class MentorFilter(django_filters.FilterSet):
-    type = django_filters.ChoiceFilter(choices= FILTER_MENTOR_CHOICES )
+class MentorFilter(FilterSet):
+    name = MethodFilter(action='filter_username')
+    type = ChoiceFilter(choices= FILTER_MENTOR_CHOICES )
+
     class Meta:
         model = Mentor
         fields = {'expertise' : ['exact'], 'type': ['exact']}
 
+    def filter_username(self, queryset, value):
+        if value:
+            query = []
 
+            value = re.sub("[^\w]", " ",  value).split()
+            for word in value:
+                firstname = list(queryset.filter(user__first_name__icontains = word).all())
+                lastname = list(queryset.filter(user__last_name__icontains = word).all())
+                username = list(queryset.filter(user__username__icontains = word).all())
+
+                for user in firstname:
+                    if user not in query:
+                        query.append(user)
+                for user in lastname:
+                    if user not in query:
+                        query.append(user)
+                for user in username:
+                    if user not in query:
+                        query.append(user)
+
+            return query
+
+        else:
+            return queryset
 
 class MentorCreateForm(forms.Form):
 

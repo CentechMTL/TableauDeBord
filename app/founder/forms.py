@@ -1,7 +1,9 @@
 # coding: utf-8
 
+import re
+
 from django import forms
-import django_filters
+from django_filters import FilterSet, MethodFilter
 from app.founder.models import Founder
 from app.home.models import Expertise, Education
 
@@ -12,10 +14,37 @@ from crispy_forms.layout import HTML, Layout, \
 
 from django.utils.translation import ugettext_lazy as _
 
-class FounderFilter(django_filters.FilterSet):
+class FounderFilter(FilterSet):
+    name = MethodFilter(action='filter_username')
+
     class Meta:
         model = Founder
         fields = ['expertise']
+
+    def filter_username(self, queryset, value):
+        if value:
+            query = []
+
+            value = re.sub("[^\w]", " ",  value).split()
+            for word in value:
+                firstname = list(queryset.filter(user__first_name__icontains = word).all())
+                lastname = list(queryset.filter(user__last_name__icontains = word).all())
+                username = list(queryset.filter(user__username__icontains = word).all())
+
+                for user in firstname:
+                    if user not in query:
+                        query.append(user)
+                for user in lastname:
+                    if user not in query:
+                        query.append(user)
+                for user in username:
+                    if user not in query:
+                        query.append(user)
+
+            return query
+
+        else:
+            return queryset
 
 class FounderCreateForm(forms.Form):
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-28 15:26+0000\n"
+"POT-Creation-Date: 2015-09-10 12:58+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,96 +18,100 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: app/founder/forms.py:23 app/founder/forms.py:26 app/founder/forms.py:144
-#: app/founder/forms.py:147
+#: app/founder/forms.py:18
+msgid "Search by name"
+msgstr "Rechercher par nom"
+
+#: app/founder/forms.py:52 app/founder/forms.py:55 app/founder/forms.py:173
+#: app/founder/forms.py:176
 msgid "First name"
 msgstr "Prénom"
 
-#: app/founder/forms.py:29 app/founder/forms.py:32 app/founder/forms.py:150
-#: app/founder/forms.py:153
+#: app/founder/forms.py:58 app/founder/forms.py:61 app/founder/forms.py:179
+#: app/founder/forms.py:182
 msgid "Last name"
 msgstr "Nom de famille"
 
-#: app/founder/forms.py:35 app/founder/forms.py:38
+#: app/founder/forms.py:64 app/founder/forms.py:67
 msgid "Username"
 msgstr "Pseudo"
 
-#: app/founder/forms.py:41 app/founder/forms.py:44
+#: app/founder/forms.py:70 app/founder/forms.py:73
 msgid "Email"
 msgstr "Email"
 
-#: app/founder/forms.py:47 app/founder/forms.py:51 app/founder/forms.py:156
-#: app/founder/forms.py:160
+#: app/founder/forms.py:76 app/founder/forms.py:80 app/founder/forms.py:185
+#: app/founder/forms.py:189
 msgid "Phone number"
 msgstr "Numéro de téléphone"
 
-#: app/founder/forms.py:54 app/founder/forms.py:163
+#: app/founder/forms.py:83 app/founder/forms.py:192
 #: app/founder/templates/founder/detail.html:41
 msgid "Web site"
 msgstr "Site web"
 
-#: app/founder/forms.py:57 app/founder/forms.py:166
+#: app/founder/forms.py:86 app/founder/forms.py:195
 msgid "https://example.com"
 msgstr "https://exemple.com"
 
-#: app/founder/forms.py:60 app/founder/forms.py:169
+#: app/founder/forms.py:89 app/founder/forms.py:198
 msgid "Facebook"
 msgstr "Facebook"
 
-#: app/founder/forms.py:63 app/founder/forms.py:172
+#: app/founder/forms.py:92 app/founder/forms.py:201
 msgid "https://www.facebook.com/lastname.firstname"
 msgstr "https://www.facebook.com/nom.prenom"
 
-#: app/founder/forms.py:66 app/founder/forms.py:175
+#: app/founder/forms.py:95 app/founder/forms.py:204
 msgid "Twitter"
 msgstr "Twitter"
 
-#: app/founder/forms.py:69 app/founder/forms.py:178
+#: app/founder/forms.py:98 app/founder/forms.py:207
 msgid "https://twitter.com/username"
 msgstr "https://twitter.com/nomUtilisateur"
 
-#: app/founder/forms.py:72 app/founder/forms.py:181
+#: app/founder/forms.py:101 app/founder/forms.py:210
 msgid "Google+"
 msgstr "Google+"
 
-#: app/founder/forms.py:75 app/founder/forms.py:184
+#: app/founder/forms.py:104 app/founder/forms.py:213
 msgid "https://plus.google.com/id"
 msgstr "https://plus.google.com/id"
 
-#: app/founder/forms.py:78 app/founder/forms.py:187
+#: app/founder/forms.py:107 app/founder/forms.py:216
 msgid "linkedIn"
 msgstr "linkedIn"
 
-#: app/founder/forms.py:81 app/founder/forms.py:190
+#: app/founder/forms.py:110 app/founder/forms.py:219
 msgid "https://ca.linkedin.com/in/username"
 msgstr "https://ca.linkedin.com/in/nomUtilisateur"
 
-#: app/founder/forms.py:84 app/founder/forms.py:193
+#: app/founder/forms.py:113 app/founder/forms.py:222
 msgid "Description"
 msgstr "Description"
 
-#: app/founder/forms.py:88 app/founder/forms.py:197
+#: app/founder/forms.py:117 app/founder/forms.py:226
 msgid "Write here a brief summary of your skills and your career."
 msgstr "Ecrivez ici un bref résumé de vos compétences et de votre parcours."
 
-#: app/founder/forms.py:95 app/founder/forms.py:204
+#: app/founder/forms.py:124 app/founder/forms.py:233
 msgid "Education"
 msgstr "Niveau d'étude"
 
-#: app/founder/forms.py:102 app/founder/forms.py:211 app/founder/models.py:11
+#: app/founder/forms.py:131 app/founder/forms.py:240 app/founder/models.py:11
 #: app/founder/templates/founder/detail.html:61
 msgid "Areas of expertise"
 msgstr "Aires d'expertise"
 
-#: app/founder/forms.py:109 app/founder/forms.py:218
+#: app/founder/forms.py:138 app/founder/forms.py:247
 msgid "Picture"
 msgstr "Photo"
 
-#: app/founder/forms.py:121
+#: app/founder/forms.py:150
 msgid "New founder"
 msgstr "Nouveau fondateur"
 
-#: app/founder/forms.py:136 app/founder/forms.py:256
+#: app/founder/forms.py:165 app/founder/forms.py:285
 msgid ""
 "Use the Ctrl key on your keyboard to select multiple. <br> If it lacks a "
 "domain that you would like to add to this list, do not hesitate to talk to "
@@ -117,11 +121,11 @@ msgstr ""
 "<br>Si il manque un domaine que vous aimeriez voir ajouter à cette liste, "
 "n'hésiter pas a en parler a l'équipe du Centech"
 
-#: app/founder/forms.py:138 app/founder/forms.py:258
+#: app/founder/forms.py:167 app/founder/forms.py:287
 msgid "Save"
 msgstr "Enregistrer"
 
-#: app/founder/forms.py:243
+#: app/founder/forms.py:272
 msgid "Update this founder"
 msgstr "Modifier ce fondateur"
 

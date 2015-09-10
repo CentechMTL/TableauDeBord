@@ -15,7 +15,7 @@ from crispy_forms.layout import HTML, Layout, \
 from django.utils.translation import ugettext_lazy as _
 
 class FounderFilter(FilterSet):
-    name = MethodFilter(action='filter_username', label=_('Name'))
+    name = MethodFilter(action='filter_username', label=_('Search by name'))
 
     class Meta:
         model = Founder

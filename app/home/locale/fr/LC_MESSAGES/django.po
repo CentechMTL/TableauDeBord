@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-28 15:26+0000\n"
+"POT-Creation-Date: 2015-09-10 12:58+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -98,11 +98,11 @@ msgstr "Google+"
 msgid "linkedIn"
 msgstr "linkedIn"
 
-#: app/home/models.py:66
+#: app/home/models.py:94
 msgid "Title"
 msgstr "Titre"
 
-#: app/home/models.py:67
+#: app/home/models.py:95
 msgid "Image"
 msgstr "Image"
 
@@ -180,91 +180,91 @@ msgstr "Nombre de fondateurs"
 msgid "Number of mentors"
 msgstr "Nombre de mentors"
 
-#: app/home/templates/home/summary.html:55
+#: app/home/templates/home/summary.html:56
 msgid "Finances"
 msgstr "Finances"
 
-#: app/home/templates/home/summary.html:70
-#: app/home/templates/home/summary.html:140
-#: app/home/templates/home/summary.html:229
-#: app/home/templates/home/summary.html:299
+#: app/home/templates/home/summary.html:71
+#: app/home/templates/home/summary.html:144
+#: app/home/templates/home/summary.html:236
+#: app/home/templates/home/summary.html:308
 msgid "Companies"
 msgstr "Compagnies"
 
-#: app/home/templates/home/summary.html:70
-#: app/home/templates/home/summary.html:86
+#: app/home/templates/home/summary.html:71
+#: app/home/templates/home/summary.html:87
 msgid "Amount"
 msgstr "Somme"
 
-#: app/home/templates/home/summary.html:124
+#: app/home/templates/home/summary.html:128
 msgid "Indicators of performances"
 msgstr "Indicateurs de performances"
 
-#: app/home/templates/home/summary.html:126
+#: app/home/templates/home/summary.html:130
 msgid "Average IRLs"
 msgstr "Moyenne des IRLs"
 
-#: app/home/templates/home/summary.html:127
+#: app/home/templates/home/summary.html:131
 msgid "Average TRLs"
 msgstr "Moyenne des TRLs"
 
-#: app/home/templates/home/summary.html:142
+#: app/home/templates/home/summary.html:146
 msgid "IRL"
 msgstr "IRL"
 
-#: app/home/templates/home/summary.html:144
+#: app/home/templates/home/summary.html:148
 msgid "TRL"
 msgstr "TRL"
 
-#: app/home/templates/home/summary.html:148
-#: app/home/templates/home/summary.html:150
+#: app/home/templates/home/summary.html:152
+#: app/home/templates/home/summary.html:154
 msgid "Last irl"
 msgstr "Dernier IRL"
 
-#: app/home/templates/home/summary.html:148
 #: app/home/templates/home/summary.html:152
+#: app/home/templates/home/summary.html:156
 msgid "Last trl"
 msgstr "Dernier TRL"
 
-#: app/home/templates/home/summary.html:171
+#: app/home/templates/home/summary.html:175
 msgid "Level"
 msgstr "Niveau"
 
-#: app/home/templates/home/summary.html:207
+#: app/home/templates/home/summary.html:214
 msgid "Experiments"
 msgstr "Expérimentations"
 
-#: app/home/templates/home/summary.html:210
+#: app/home/templates/home/summary.html:217
 msgid "Experiments in progress"
 msgstr "Expérimentations en cours"
 
-#: app/home/templates/home/summary.html:214
+#: app/home/templates/home/summary.html:221
 msgid "Experiments validated"
 msgstr "Expérimentations validées"
 
-#: app/home/templates/home/summary.html:231
-#: app/home/templates/home/summary.html:237
-#: app/home/templates/home/summary.html:239
+#: app/home/templates/home/summary.html:238
+#: app/home/templates/home/summary.html:244
+#: app/home/templates/home/summary.html:246
 msgid "In progress"
 msgstr "En cours"
 
-#: app/home/templates/home/summary.html:233
-#: app/home/templates/home/summary.html:237
-#: app/home/templates/home/summary.html:241
+#: app/home/templates/home/summary.html:240
+#: app/home/templates/home/summary.html:244
+#: app/home/templates/home/summary.html:248
 msgid "Validated"
 msgstr "Validé"
 
-#: app/home/templates/home/summary.html:237
-#: app/home/templates/home/summary.html:239
-#: app/home/templates/home/summary.html:241
+#: app/home/templates/home/summary.html:244
+#: app/home/templates/home/summary.html:246
+#: app/home/templates/home/summary.html:248
 msgid "Last experimentation"
 msgstr "Dernière expérimentation"
 
-#: app/home/templates/home/summary.html:258
+#: app/home/templates/home/summary.html:265
 msgid "Number of experimentations"
 msgstr "Nombre d'expérimentations"
 
-#: app/home/templates/home/summary.html:285
+#: app/home/templates/home/summary.html:294
 msgid "Incubation duration (months)"
 msgstr "Temps d'incubation (mois)"
 

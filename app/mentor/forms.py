@@ -18,7 +18,7 @@ FILTER_MENTOR_CHOICES = list(MENTOR_TYPE_CHOICES)
 FILTER_MENTOR_CHOICES.insert(0, ('','---------') )
 
 class MentorFilter(FilterSet):
-    name = MethodFilter(action='filter_username', label=_('Name'))
+    name = MethodFilter(action='filter_username', label=_('Search by name'))
     type = ChoiceFilter(choices= FILTER_MENTOR_CHOICES )
 
     class Meta:

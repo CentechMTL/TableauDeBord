@@ -117,9 +117,9 @@ class Presence(models.Model):
         verbose_name_plural = _('Presences')
 
     #List of company
-    company = models.ManyToManyField(Company,blank=True, verbose_name=_('Companies'))
+    company = models.ManyToManyField(Company, verbose_name=_('Companies'))
     #Date of the meeting
-    date = models.DateTimeField(blank=True, verbose_name=_('Date'))
+    date = models.DateTimeField(verbose_name=_('Date'))
 
     def __unicode__(self):
         return str(self.date)

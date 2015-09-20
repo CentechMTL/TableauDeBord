@@ -10,6 +10,8 @@ from app.company.models import Company
 from app.finance.models import Bourse, Subvention, Investissement, Pret, Vente
 from app.founder.models import Founder
 from app.mentor.models import Mentor
+from app.finance.forms import FinanceForm, FinanceCreateForm
+from django.contrib import messages
 
 #The general view
 class detailFinance(generic.TemplateView):
@@ -142,8 +144,8 @@ class detailFinance(generic.TemplateView):
 #For create a new grants
 class BourseCreate(generic.CreateView):
     model = Bourse
-    fields = ['name','dateSoumission','sommeSoumission','dateReception',
-              'sommeReception','description']
+    template_name = 'finance/bourse_form.html'
+    form_class = FinanceCreateForm
 
     #You need to be connected, and you need to have access as founder or Centech
     @method_decorator(login_required)
@@ -160,20 +162,60 @@ class BourseCreate(generic.CreateView):
         #The visitor can't see this page!
         return HttpResponseRedirect("/user/noAccessPermissions")
 
+    def get_form(self, form_class):
+        return form_class()
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            self.create_object(form)
+            messages.success(self.request, self.get_success_message())
+            return self.form_valid(form)
+
+        return render(request, self.template_name, {'form': form})
+
     def form_valid(self, form):
-         company = Company.objects.get(id = self.args[0])
-         form.instance.company = company
-         return super(BourseCreate, self).form_valid(form)
+        return HttpResponseRedirect(self.get_success_url())
+
+    def create_object(self, form):
+        company = Company.objects.get(id=self.args[0])
+        name = form.data['name']
+        sommeSoumission = form.data['sommeSoumission']
+        dateSoumission = form.data['dateSoumission']
+        sommeReception = form.data['sommeReception']
+        dateReception = form.data['dateReception']
+        description = form.data['description']
+
+        newObject = Bourse(company=company,
+                        name=name,
+                        sommeSoumission=sommeSoumission,
+                        dateSoumission=dateSoumission)
+        newObject.save()
+        self.object = newObject
+
+        try:
+            if(sommeReception):
+                newObject.sommeReception = sommeReception
+            if(dateReception):
+                newObject.dateReception = dateReception
+            if(description):
+                newObject.description = description
+        except:
+            pass
+
+        newObject.save()
+
+    def get_success_url(self):
+        return reverse_lazy('finance:detail_finance', args={self.object.company.id})
+
+    def get_success_message(self):
+        return (u'La bourse a bien été ajouté.')
 
 #For update a grants
 class BourseUpdate(generic.UpdateView):
     model = Bourse
-    fields = ['name','dateSoumission','sommeSoumission','dateReception',
-              'sommeReception','description']
-
-    def get_url(self):
-        self.object = self.get_object()
-        return reverse_lazy('finance:detail_finance', kwargs = {'companyId' : self.object.company.id, })
+    form_class = FinanceForm
+    template_name = "finance/bourse_form.html"
 
     #You need to be connected, and you need to have access as founder or Centech
     @method_decorator(login_required)
@@ -190,6 +232,32 @@ class BourseUpdate(generic.UpdateView):
 
         #The visitor can't see this page!
         return HttpResponseRedirect("/user/noAccessPermissions")
+
+    def get_form(self):
+        self.form = self.form_class(self.get_object())
+        return self.form
+
+    def post(self, request, *args, **kwargs):
+        object = self.get_object()
+        form = self.form_class(object, request.POST)
+        if form.is_valid():
+            print form.is_valid()
+            self.update_object(object, form)
+            return self.form_valid(form)
+
+        return render(request, self.template_name, {'form': form})
+
+    def update_object(self, object, form):
+        object.name = form.data['name']
+        object.sommeSoumission = form.data['sommeSoumission']
+        object.dateSoumission = form.data['dateSoumission']
+        object.sommeReception = form.data['sommeReception']
+        object.dateReception = form.data['dateReception']
+        object.description = form.data['description']
+
+    def get_success_url(self):
+        self.object = self.get_object()
+        return reverse_lazy('finance:detail_finance', args={self.object.company.id})
 
 #For delete a grants
 class BourseDelete(generic.DeleteView):
@@ -228,8 +296,8 @@ class BourseDelete(generic.DeleteView):
 #For create a new Subsidy
 class SubventionCreate(generic.CreateView):
     model = Subvention
-    fields = ['name','dateSoumission','sommeSoumission','dateReception',
-              'sommeReception','description']
+    template_name = 'finance/subvention_form.html'
+    form_class = FinanceCreateForm
 
     #You need to be connected, and you need to have access as founder or Centech
     @method_decorator(login_required)
@@ -246,20 +314,60 @@ class SubventionCreate(generic.CreateView):
         #The visitor can't see this page!
         return HttpResponseRedirect("/user/noAccessPermissions")
 
+    def get_form(self, form_class):
+        return form_class()
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            self.create_object(form)
+            messages.success(self.request, self.get_success_message())
+            return self.form_valid(form)
+
+        return render(request, self.template_name, {'form': form})
+
     def form_valid(self, form):
-         company = Company.objects.get(id = self.args[0])
-         form.instance.company = company
-         return super(SubventionCreate, self).form_valid(form)
+        return HttpResponseRedirect(self.get_success_url())
+
+    def create_object(self, form):
+        company = Company.objects.get(id=self.args[0])
+        name = form.data['name']
+        sommeSoumission = form.data['sommeSoumission']
+        dateSoumission = form.data['dateSoumission']
+        sommeReception = form.data['sommeReception']
+        dateReception = form.data['dateReception']
+        description = form.data['description']
+
+        newObject = Subvention(company=company,
+                        name=name,
+                        sommeSoumission=sommeSoumission,
+                        dateSoumission=dateSoumission)
+        newObject.save()
+        self.object = newObject
+
+        try:
+            if(sommeReception):
+                newObject.sommeReception = sommeReception
+            if(dateReception):
+                newObject.dateReception = dateReception
+            if(description):
+                newObject.description = description
+        except:
+            pass
+
+        newObject.save()
+
+    def get_success_url(self):
+        return reverse_lazy('finance:detail_finance', args={self.object.company.id})
+
+    def get_success_message(self):
+        return (u'La subvention a bien été ajouté.')
 
 #For update a Subsidy
 class SubventionUpdate(generic.UpdateView):
     model = Subvention
-    fields = ['name','dateSoumission','sommeSoumission','dateReception',
-              'sommeReception','description']
-
-    def get_url(self):
-        self.object = self.get_object()
-        return reverse_lazy('finance:detail_finance', kwargs = {'companyId' : self.object.company.id, })
+    form_class = FinanceForm
+    template_name = "finance/subvention_form.html"
 
     #You need to be connected, and you need to have access as founder or Centech
     @method_decorator(login_required)
@@ -276,6 +384,32 @@ class SubventionUpdate(generic.UpdateView):
 
         #The visitor can't see this page!
         return HttpResponseRedirect("/user/noAccessPermissions")
+
+    def get_form(self):
+        self.form = self.form_class(self.get_object())
+        return self.form
+
+    def post(self, request, *args, **kwargs):
+        object = self.get_object()
+        form = self.form_class(object, request.POST)
+        if form.is_valid():
+            print form.is_valid()
+            self.update_object(object, form)
+            return self.form_valid(form)
+
+        return render(request, self.template_name, {'form': form})
+
+    def update_object(self, object, form):
+        object.name = form.data['name']
+        object.sommeSoumission = form.data['sommeSoumission']
+        object.dateSoumission = form.data['dateSoumission']
+        object.sommeReception = form.data['sommeReception']
+        object.dateReception = form.data['dateReception']
+        object.description = form.data['description']
+
+    def get_success_url(self):
+        self.object = self.get_object()
+        return reverse_lazy('finance:detail_finance', args={self.object.company.id})
 
 #For delete a Subsidy
 class SubventionDelete(generic.DeleteView):
@@ -314,8 +448,8 @@ class SubventionDelete(generic.DeleteView):
 #For create a new Investment
 class InvestissementCreate(generic.CreateView):
     model = Investissement
-    fields = ['name','dateSoumission','sommeSoumission','dateReception',
-              'sommeReception','description']
+    template_name = 'finance/investissement_form.html'
+    form_class = FinanceCreateForm
 
     #You need to be connected, and you need to have access as founder or Centech
     @method_decorator(login_required)
@@ -332,25 +466,65 @@ class InvestissementCreate(generic.CreateView):
         #The visitor can't see this page!
         return HttpResponseRedirect("/user/noAccessPermissions")
 
+    def get_form(self, form_class):
+        return form_class()
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            self.create_object(form)
+            messages.success(self.request, self.get_success_message())
+            return self.form_valid(form)
+
+        return render(request, self.template_name, {'form': form})
+
     def form_valid(self, form):
-         company = Company.objects.get(id = self.args[0])
-         form.instance.company = company
-         return super(InvestissementCreate, self).form_valid(form)
+        return HttpResponseRedirect(self.get_success_url())
+
+    def create_object(self, form):
+        company = Company.objects.get(id=self.args[0])
+        name = form.data['name']
+        sommeSoumission = form.data['sommeSoumission']
+        dateSoumission = form.data['dateSoumission']
+        sommeReception = form.data['sommeReception']
+        dateReception = form.data['dateReception']
+        description = form.data['description']
+
+        newObject = Investissement(company=company,
+                        name=name,
+                        sommeSoumission=sommeSoumission,
+                        dateSoumission=dateSoumission)
+        newObject.save()
+        self.object = newObject
+
+        try:
+            if(sommeReception):
+                newObject.sommeReception = sommeReception
+            if(dateReception):
+                newObject.dateReception = dateReception
+            if(description):
+                newObject.description = description
+        except:
+            pass
+
+        newObject.save()
+
+    def get_success_url(self):
+        return reverse_lazy('finance:detail_finance', args={self.object.company.id})
+
+    def get_success_message(self):
+        return (u'L\'investissement a bien été ajouté.')
 
 #For update an Investment
 class InvestissementUpdate(generic.UpdateView):
     model = Investissement
-    fields = ['name','dateSoumission','sommeSoumission','dateReception',
-              'sommeReception','description']
-
-    def get_url(self):
-        return reverse_lazy('finance:detail_finance', kwargs = {'companyId' : self.args[0], })
+    form_class = FinanceForm
+    template_name = "finance/investissement_form.html"
 
     #You need to be connected, and you need to have access as founder or Centech
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         self.object = self.get_object()
-        company = get_object_or_404(Company, id = self.object.company.id)
 
         if self.request.user.profile.isCentech():
             return super(InvestissementUpdate, self).dispatch(*args, **kwargs)
@@ -361,6 +535,32 @@ class InvestissementUpdate(generic.UpdateView):
 
         #The visitor can't see this page!
         return HttpResponseRedirect("/user/noAccessPermissions")
+
+    def get_form(self):
+        self.form = self.form_class(self.get_object())
+        return self.form
+
+    def post(self, request, *args, **kwargs):
+        object = self.get_object()
+        form = self.form_class(object, request.POST)
+        if form.is_valid():
+            print form.is_valid()
+            self.update_object(object, form)
+            return self.form_valid(form)
+
+        return render(request, self.template_name, {'form': form})
+
+    def update_object(self, object, form):
+        object.name = form.data['name']
+        object.sommeSoumission = form.data['sommeSoumission']
+        object.dateSoumission = form.data['dateSoumission']
+        object.sommeReception = form.data['sommeReception']
+        object.dateReception = form.data['dateReception']
+        object.description = form.data['description']
+
+    def get_success_url(self):
+        self.object = self.get_object()
+        return reverse_lazy('finance:detail_finance', args={self.object.company.id})
 
 #For delete an Investment
 class InvestissementDelete(generic.DeleteView):
@@ -399,8 +599,8 @@ class InvestissementDelete(generic.DeleteView):
 #For create a new Loans
 class PretCreate(generic.CreateView):
     model = Pret
-    fields = ['name','dateSoumission','sommeSoumission','dateReception',
-              'sommeReception','description']
+    template_name = 'finance/pret_form.html'
+    form_class = FinanceCreateForm
 
     #You need to be connected, and you need to have access as founder or Centech
     @method_decorator(login_required)
@@ -417,19 +617,60 @@ class PretCreate(generic.CreateView):
         #The visitor can't see this page!
         return HttpResponseRedirect("/user/noAccessPermissions")
 
+    def get_form(self, form_class):
+        return form_class()
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            self.create_object(form)
+            messages.success(self.request, self.get_success_message())
+            return self.form_valid(form)
+
+        return render(request, self.template_name, {'form': form})
+
     def form_valid(self, form):
-         company = Company.objects.get(id = self.args[0])
-         form.instance.company = company
-         return super(PretCreate, self).form_valid(form)
+        return HttpResponseRedirect(self.get_success_url())
+
+    def create_object(self, form):
+        company = Company.objects.get(id=self.args[0])
+        name = form.data['name']
+        sommeSoumission = form.data['sommeSoumission']
+        dateSoumission = form.data['dateSoumission']
+        sommeReception = form.data['sommeReception']
+        dateReception = form.data['dateReception']
+        description = form.data['description']
+
+        newObject = Pret(company=company,
+                        name=name,
+                        sommeSoumission=sommeSoumission,
+                        dateSoumission=dateSoumission)
+        newObject.save()
+        self.object = newObject
+
+        try:
+            if(sommeReception):
+                newObject.sommeReception = sommeReception
+            if(dateReception):
+                newObject.dateReception = dateReception
+            if(description):
+                newObject.description = description
+        except:
+            pass
+
+        newObject.save()
+
+    def get_success_url(self):
+        return reverse_lazy('finance:detail_finance', args={self.object.company.id})
+
+    def get_success_message(self):
+        return (u'Le pret a bien été ajouté.')
 
 #For update a Loans
 class PretUpdate(generic.UpdateView):
     model = Pret
-    fields = ['name','dateSoumission','sommeSoumission','dateReception',
-              'sommeReception','description']
-
-    def get_url(self):
-        return reverse_lazy('finance:detail_finance', kwargs = {'companyId' : self.args[0], })
+    form_class = FinanceForm
+    template_name = "finance/pret_form.html"
 
     #You need to be connected, and you need to have access as founder or Centech
     @method_decorator(login_required)
@@ -446,6 +687,32 @@ class PretUpdate(generic.UpdateView):
 
         #The visitor can't see this page!
         return HttpResponseRedirect("/user/noAccessPermissions")
+
+    def get_form(self):
+        self.form = self.form_class(self.get_object())
+        return self.form
+
+    def post(self, request, *args, **kwargs):
+        object = self.get_object()
+        form = self.form_class(object, request.POST)
+        if form.is_valid():
+            print form.is_valid()
+            self.update_object(object, form)
+            return self.form_valid(form)
+
+        return render(request, self.template_name, {'form': form})
+
+    def update_object(self, object, form):
+        object.name = form.data['name']
+        object.sommeSoumission = form.data['sommeSoumission']
+        object.dateSoumission = form.data['dateSoumission']
+        object.sommeReception = form.data['sommeReception']
+        object.dateReception = form.data['dateReception']
+        object.description = form.data['description']
+
+    def get_success_url(self):
+        self.object = self.get_object()
+        return reverse_lazy('finance:detail_finance', args={self.object.company.id})
 
 #For delete a Loans
 class PretDelete(generic.DeleteView):
@@ -481,15 +748,17 @@ class PretDelete(generic.DeleteView):
         self.object.delete()
         return redirect(reverse_lazy('finance:detail_finance', args = {company_id}))
 
+
 #For create a new Sale
 class VenteCreate(generic.CreateView):
     model = Vente
-    fields = ['name','dateSoumission','sommeSoumission','dateReception',
-              'sommeReception','description']
+    template_name = 'finance/vente_form.html'
+    form_class = FinanceCreateForm
 
     #You need to be connected, and you need to have access as founder or Centech
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
+
         company = get_object_or_404(Company, id = self.args[0])
 
         if self.request.user.profile.isCentech():
@@ -502,19 +771,60 @@ class VenteCreate(generic.CreateView):
         #The visitor can't see this page!
         return HttpResponseRedirect("/user/noAccessPermissions")
 
+    def get_form(self, form_class):
+        return form_class()
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            self.create_object(form)
+            messages.success(self.request, self.get_success_message())
+            return self.form_valid(form)
+
+        return render(request, self.template_name, {'form': form})
+
     def form_valid(self, form):
-         company = Company.objects.get(id = self.args[0])
-         form.instance.company = company
-         return super(VenteCreate, self).form_valid(form)
+        return HttpResponseRedirect(self.get_success_url())
+
+    def create_object(self, form):
+        company = Company.objects.get(id=self.args[0])
+        name = form.data['name']
+        sommeSoumission = form.data['sommeSoumission']
+        dateSoumission = form.data['dateSoumission']
+        sommeReception = form.data['sommeReception']
+        dateReception = form.data['dateReception']
+        description = form.data['description']
+
+        newObject = Vente(company=company,
+                        name=name,
+                        sommeSoumission=sommeSoumission,
+                        dateSoumission=dateSoumission)
+        newObject.save()
+        self.object = newObject
+
+        try:
+            if(sommeReception):
+                newObject.sommeReception = sommeReception
+            if(dateReception):
+                newObject.dateReception = dateReception
+            if(description):
+                newObject.description = description
+        except:
+            pass
+
+        newObject.save()
+
+    def get_success_url(self):
+        return reverse_lazy('finance:detail_finance', args={self.object.company.id})
+
+    def get_success_message(self):
+        return (u'La vente a bien été ajouté.')
 
 #For update a Sale
 class VenteUpdate(generic.UpdateView):
     model = Vente
-    fields = ['name','dateSoumission','sommeSoumission','dateReception',
-              'sommeReception','description']
-
-    def get_url(self):
-        return reverse_lazy('finance:detail_finance', kwargs = {'companyId' : self.args[0], })
+    form_class = FinanceForm
+    template_name = "finance/vente_form.html"
 
     #You need to be connected, and you need to have access as founder or Centech
     @method_decorator(login_required)
@@ -531,6 +841,32 @@ class VenteUpdate(generic.UpdateView):
 
         #The visitor can't see this page!
         return HttpResponseRedirect("/user/noAccessPermissions")
+
+    def get_form(self):
+        self.form = self.form_class(self.get_object())
+        return self.form
+
+    def post(self, request, *args, **kwargs):
+        object = self.get_object()
+        form = self.form_class(object, request.POST)
+        if form.is_valid():
+            print form.is_valid()
+            self.update_object(object, form)
+            return self.form_valid(form)
+
+        return render(request, self.template_name, {'form': form})
+
+    def update_object(self, object, form):
+        object.name = form.data['name']
+        object.sommeSoumission = form.data['sommeSoumission']
+        object.dateSoumission = form.data['dateSoumission']
+        object.sommeReception = form.data['sommeReception']
+        object.dateReception = form.data['dateReception']
+        object.description = form.data['description']
+
+    def get_success_url(self, *args):
+        self.object = self.get_object()
+        return reverse_lazy('finance:detail_finance', args={self.object.company.id})
 
 #For delete a Sale
 class VenteDelete(generic.DeleteView):

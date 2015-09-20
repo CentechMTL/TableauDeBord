@@ -2,6 +2,7 @@
 <!-- Load internationalisation utils-->
 {% load i18n %}
 {% load staticfiles %}
+{% load crispy_forms_tags %}
 {% block title %}{% trans "Grants" %}{% endblock %}
 
 {% block extrahead %}
@@ -13,12 +14,11 @@
 {% block content %}
     <h1>{% trans "Grants" %}</h1>
     <form method="post">{% csrf_token%}
-        {{ form.as_p }}
-        <input type="submit" value="Submit"/>
+        {% crispy form %}
     </form>
 
     <script>
-        $( "#id_dateSoumission" ).datepicker({ dateFormat: 'dd/mm/yy' });
-        $( "#id_dateReception" ).datepicker({ dateFormat: 'dd/mm/yy' });
+        $( "#id_dateSoumission" ).datepicker({ dateFormat: 'yy-mm-dd' });
+        $( "#id_dateReception" ).datepicker({ dateFormat: 'yy-mm-dd' });
     </script>
 {% endblock %}

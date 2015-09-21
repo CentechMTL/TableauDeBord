@@ -11,7 +11,7 @@
 {% endblock %}
 
 {% block content %}
-    {% if isCentech %}
+    {% if isCentech or isFounderOfCompany%}
     <div class="row" style="margin-bottom: 20px;">
         <a href="{% url 'company:update' company.id %}" style="color: white;">
             <div class="col-sm-12" align="center" style="border: 1px solid lightgrey; border-top: none; background-color: #293846;">

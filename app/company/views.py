@@ -48,6 +48,19 @@ class CompanyView(generic.DetailView):
         setCompanyInSession(self.request, self.kwargs['pk'])
         return super(CompanyView, self).dispatch(*args, **kwargs)
 
+    def get_context_data(self, **kwargs):
+        context = super(CompanyView, self).get_context_data(**kwargs)
+
+        isFounderOfCompany = False
+        try:
+            founder = Founder.objects.get(user = self.request.user)
+            if Company.objects.get(id = self.kwargs['pk']) in founder.company.all():
+                isFounderOfCompany = True
+        except:
+            pass
+
+        context['isFounderOfCompany'] = isFounderOfCompany
+        return context
 
 class CompanyStatusCreate(generic.CreateView):
     model = CompanyStatus

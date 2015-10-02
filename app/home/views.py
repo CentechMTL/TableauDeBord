@@ -309,5 +309,8 @@ class floor_plan(generic.ListView):
         if self.request.user.profile.isMentor():
             return super(floor_plan, self).dispatch(*args, **kwargs)
 
+        if self.request.user.profile.isExecutive():
+            return super(floor_plan, self).dispatch(*args, **kwargs)
+
         #The visitor can't see this page!
         return HttpResponseRedirect("/user/noAccessPermissions")

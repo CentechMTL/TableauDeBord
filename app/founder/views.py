@@ -219,6 +219,9 @@ class FounderIndex(generic.ListView):
         if self.request.user.profile.isMentor():
             return super(FounderIndex, self).dispatch(*args, **kwargs)
 
+        if self.request.user.profile.isExecutive():
+            return super(FounderIndex, self).dispatch(*args, **kwargs)
+
         #The visitor can't see this page!
         return HttpResponseRedirect("/user/noAccessPermissions")
 
@@ -257,6 +260,9 @@ class FounderView(generic.DetailView):
             return super(FounderView, self).dispatch(*args, **kwargs)
 
         if self.request.user.profile.isMentor():
+            return super(FounderView, self).dispatch(*args, **kwargs)
+
+        if self.request.user.profile.isExecutive():
             return super(FounderView, self).dispatch(*args, **kwargs)
 
         #The visitor can't see this page!

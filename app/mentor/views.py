@@ -205,6 +205,9 @@ class MentorIndex(generic.ListView):
         if self.request.user.profile.isMentor():
             return super(MentorIndex, self).dispatch(*args, **kwargs)
 
+        if self.request.user.profile.isExecutive():
+            return super(MentorIndex, self).dispatch(*args, **kwargs)
+
         #The visitor can't see this page!
         return HttpResponseRedirect("/user/noAccessPermissions")
     def get_queryset(self):
@@ -231,6 +234,9 @@ class MentorView(generic.DetailView):
             return super(MentorView, self).dispatch(*args, **kwargs)
 
         if self.request.user.profile.isMentor():
+            return super(MentorView, self).dispatch(*args, **kwargs)
+
+        if self.request.user.profile.isExecutive():
             return super(MentorView, self).dispatch(*args, **kwargs)
 
         #The visitor can't see this page!

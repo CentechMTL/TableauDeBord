@@ -41,7 +41,7 @@ def company_select(request):
                 list_company += isFounder.company.all()
                 list_menu += ['companies', 'floor_plan', 'mentors', 'founders', 'road_map']
             if isExecutive:
-                list_menu = ['companies', 'summary']
+                list_menu = ['companies', 'summary', 'mentors', 'founders', 'floor_plan']
 
         #To set the default company selected
         if list_company:

@@ -150,7 +150,7 @@ class FounderTests(TestCase):
         self.assertEqual(result.status_code, 200)
 
         """
-        No Access : Executive
+        Access : Executive
         """
         self.client.logout()
         self.client.login(username=self.executive.user.username, password="Toto1234!#")
@@ -159,7 +159,7 @@ class FounderTests(TestCase):
             reverse('home:floorPlan'),
             follow=False
         )
-        self.assertEqual(result.status_code, 302)
+        self.assertEqual(result.status_code, 200)
 
 
         """

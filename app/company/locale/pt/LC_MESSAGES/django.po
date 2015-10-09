@@ -1,0 +1,365 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Tableau PTBR\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-09-29 13:03+0000\n"
+"PO-Revision-Date: 2015-09-29 20:42-0300\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"X-Generator: Poedit 1.8.5\n"
+
+#: app/company/forms.py:40 app/company/forms.py:105 app/company/forms.py:211
+#: app/company/models.py:19 app/company/models.py:31
+msgid "Name"
+msgstr "Nome"
+
+#: app/company/forms.py:43
+msgid "Name of the new status"
+msgstr "Nome do novo status"
+
+#: app/company/forms.py:53
+msgid "New status"
+msgstr "Novo status"
+
+#: app/company/forms.py:56 app/company/forms.py:82 app/company/forms.py:206
+#: app/company/forms.py:298 app/company/forms.py:383
+#: app/company/templates/company/presence_form.html:19
+msgid "Save"
+msgstr "Salvar"
+
+#: app/company/forms.py:61 app/company/models.py:20
+msgid "Comment"
+msgstr "Comentar"
+
+#: app/company/forms.py:65
+msgid "Write here a comment about this group."
+msgstr "Escreva aqui um comentário sobre este grupo."
+
+#: app/company/forms.py:91 app/company/forms.py:308
+msgid "Incubated on"
+msgstr "Incubada em"
+
+#: app/company/forms.py:98 app/company/forms.py:315
+msgid "Incubation end on"
+msgstr "Incubação termina em"
+
+#: app/company/forms.py:108 app/company/forms.py:214
+msgid "Name of the company"
+msgstr "Nome da empresa"
+
+#: app/company/forms.py:111 app/company/forms.py:217 app/company/models.py:32
+msgid "Logo"
+msgstr "Logo"
+
+#: app/company/forms.py:116 app/company/forms.py:222 app/company/models.py:34
+msgid "Video"
+msgstr "Vídeo"
+
+#: app/company/forms.py:119 app/company/forms.py:225
+msgid "https://urlvideo.com/"
+msgstr "https://urlvideo.com/"
+
+#: app/company/forms.py:122 app/company/forms.py:228
+#: app/company/templates/company/detail.html:47
+msgid "Web site"
+msgstr "Website"
+
+#: app/company/forms.py:125 app/company/forms.py:231
+msgid "https://example.com"
+msgstr "https://example.com"
+
+#: app/company/forms.py:128 app/company/forms.py:234 app/company/models.py:43
+msgid "Facebook"
+msgstr "Facebook"
+
+#: app/company/forms.py:131 app/company/forms.py:237
+msgid "https://www.facebook.com/lastname.firstname"
+msgstr "https://www.facebook.com/lastname.firstname"
+
+#: app/company/forms.py:134 app/company/forms.py:240 app/company/models.py:44
+msgid "Twitter"
+msgstr "Twitter"
+
+#: app/company/forms.py:137 app/company/forms.py:243
+msgid "https://twitter.com/username"
+msgstr "https://twitter.com/username"
+
+#: app/company/forms.py:140 app/company/forms.py:246 app/company/models.py:45
+msgid "Google+"
+msgstr "Google+"
+
+#: app/company/forms.py:143 app/company/forms.py:249
+msgid "https://plus.google.com/id"
+msgstr "https://plus.google.com/id"
+
+#: app/company/forms.py:146 app/company/forms.py:252 app/company/models.py:46
+msgid "linkedIn"
+msgstr "LinkedIn"
+
+#: app/company/forms.py:149 app/company/forms.py:255
+msgid "https://ca.linkedin.com/in/username"
+msgstr "https://ca.linkedin.com/in/username"
+
+#: app/company/forms.py:152 app/company/forms.py:258 app/company/models.py:35
+msgid "Description"
+msgstr "Descrição"
+
+#: app/company/forms.py:156 app/company/forms.py:262
+msgid "Write here a brief summary of your business."
+msgstr "Escreva aqui um breve sumário de seu negócio."
+
+#: app/company/forms.py:163 app/company/forms.py:336
+#: app/company/templates/company/detail.html:45
+#: app/company/templates/company/filter.html:24
+#: app/company/templates/company/index.html:38
+msgid "Incubation phase"
+msgstr "Fase de Incubação"
+
+#: app/company/forms.py:169 app/company/forms.py:322 app/company/models.py:39
+#: app/company/templates/company/detail.html:97 templates/dashboard.html:53
+msgid "Founders"
+msgstr "Fundadores"
+
+#: app/company/forms.py:176 app/company/forms.py:329 app/company/models.py:41
+#: app/company/templates/company/detail.html:125 templates/dashboard.html:50
+msgid "Mentors"
+msgstr "Mentores"
+
+#: app/company/forms.py:190
+msgid "New company"
+msgstr "Nova empresa"
+
+#: app/company/forms.py:287 app/company/forms.py:367
+msgid "Update company"
+msgstr "Atualizar empresa"
+
+#: app/company/models.py:17
+msgid "Company Status"
+msgstr "Status da empresa"
+
+#: app/company/models.py:28 app/company/models.py:120
+#: templates/dashboard.html:47
+msgid "Companies"
+msgstr "Empresas"
+
+#: app/company/models.py:33
+msgid "URL"
+msgstr "URL"
+
+#: app/company/models.py:36
+msgid "Status"
+msgstr "Status"
+
+#: app/company/models.py:117
+msgid "Presences"
+msgstr "Presenças"
+
+#: app/company/models.py:122 app/company/templates/company/presence.html:37
+#: app/company/templates/company/presence_confirm_delete.html:10
+msgid "Date"
+msgstr "Data"
+
+#: app/company/templates/company/company_form.html:6
+#: app/company/templates/company/presence_confirm_delete.html:11
+msgid "Company"
+msgstr "Empresa"
+
+#: app/company/templates/company/detail.html:18
+msgid "Modify this company"
+msgstr "Modificar esta empresa"
+
+#: app/company/templates/company/detail.html:50
+msgid "Incubation date"
+msgstr "Data de incubação"
+
+#: app/company/templates/company/detail.html:52
+msgid "End of incubation date"
+msgstr "Fim da data de incubação"
+
+#: app/company/templates/company/detail.html:71
+msgid "Time spent incubation"
+msgstr "Tempo inbucada"
+
+#: app/company/templates/company/detail.html:78
+msgid "About"
+msgstr "Sobre"
+
+#: app/company/templates/company/detail.html:88
+msgid "Video pitch"
+msgstr "Pitch em vídeo"
+
+#: app/company/templates/company/detail.html:121
+msgid "No founders exist."
+msgstr "Não há fundadores."
+
+#: app/company/templates/company/detail.html:148
+msgid "No mentors exist."
+msgstr "Não há mentores."
+
+#: app/company/templates/company/filter.html:9
+#: app/company/templates/company/index.html:4
+#: app/company/templates/company/index.html:8
+msgid "Centech Companies"
+msgstr "Empresas da Centech"
+
+#: app/company/templates/company/filter.html:37
+#: app/company/templates/company/index.html:47
+msgid "No companies satisfy that query."
+msgstr "Nenhuma empresa satisfaz esta consulta."
+
+#: app/company/templates/company/presence.html:5
+#: app/company/templates/company/presence_confirm_delete.html:5
+#: app/company/templates/company/presence_confirm_delete.html:7
+#: app/company/templates/company/presence_form.html:5
+#: templates/dashboard.html:59
+msgid "Presence"
+msgstr "Presença"
+
+#: app/company/templates/company/presence.html:13
+msgid "Presence in Centech"
+msgstr "Presença na Centech"
+
+#: app/company/templates/company/presence.html:18
+msgid "Select a status"
+msgstr "Selecione um status"
+
+#: app/company/templates/company/presence.html:42
+#: app/company/templates/company/presence.html:61
+msgid "Modify"
+msgstr "Modificar"
+
+#: app/company/templates/company/presence.html:43
+#: app/company/templates/company/presence.html:62
+#: app/company/templates/company/presence_confirm_delete.html:20
+msgid "Delete"
+msgstr "Deletar"
+
+#: app/company/templates/company/presence.html:69
+msgid "New Presence"
+msgstr "Nova assistência"
+
+#: app/company/templates/company/presence_confirm_delete.html:8
+msgid "Are you sure you want to delete this presence ?"
+msgstr "Você tem certeza que quer deletar essa assistência?"
+
+#: app/company/templates/company/presence_confirm_delete.html:20
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: app/company/templates/company/presence_form.html:16
+msgid "New presence"
+msgstr "Nova assistência"
+
+#: centech2/settings.py:184
+msgid "French"
+msgstr "Francês"
+
+#: centech2/settings.py:185
+msgid "English"
+msgstr "Inglês"
+
+#: templates/dashboard.html:10
+msgid "Dashboard v.1"
+msgstr "Dashboard v.1"
+
+#: templates/dashboard.html:41
+msgid "Road map"
+msgstr "Roadmap"
+
+#: templates/dashboard.html:44
+msgid "Floor plan"
+msgstr "Planta Baixa"
+
+#: templates/dashboard.html:56
+msgid "Summary"
+msgstr "Sumário"
+
+#: templates/dashboard.html:67
+msgid "Select a company"
+msgstr "Selecionar uma empresa"
+
+#: templates/dashboard.html:77 templates/dashboard.html.py:89
+msgid "Presentation"
+msgstr "Apresentação"
+
+#: templates/dashboard.html:78 templates/dashboard.html.py:90
+msgid "IRL"
+msgstr "Nível de Prontidão para Investimento"
+
+#: templates/dashboard.html:79 templates/dashboard.html.py:91
+msgid "TRL"
+msgstr "Nível de Maturidade Tecnológica"
+
+#: templates/dashboard.html:80 templates/dashboard.html.py:92
+msgid "Experiments"
+msgstr "Experimentos"
+
+#: templates/dashboard.html:81 templates/dashboard.html.py:93
+msgid "Business Model Canvas"
+msgstr "Canvas do Modelo de Negócio"
+
+#: templates/dashboard.html:86 templates/dashboard.html.py:98
+msgid "Finance"
+msgstr "Finanças"
+
+#: templates/dashboard.html:87 templates/dashboard.html.py:99
+msgid "KanBoard"
+msgstr "KanBoard"
+
+#: templates/dashboard.html:122
+msgid "Welcome to the Centech Dashboard."
+msgstr "Benvindo ao Dashboard da Centech"
+
+#: templates/dashboard.html:136 templates/dashboard.html.py:148
+msgid "Update profile"
+msgstr "Atualizar perfil"
+
+#: templates/dashboard.html:160
+msgid "Add new founder"
+msgstr "Adicionar novo empreendedor"
+
+#: templates/dashboard.html:167
+msgid "Add new mentor"
+msgstr "Adicionar novo mentor"
+
+#: templates/dashboard.html:174
+msgid "Add new status"
+msgstr "Adicionar novo status"
+
+#: templates/dashboard.html:181
+msgid "Add new company"
+msgstr "Adicionar nova empresa"
+
+#: templates/dashboard.html:192
+msgid "Change password"
+msgstr "Mudar o password"
+
+#: templates/dashboard.html:200
+msgid "Log out"
+msgstr "Log out"
+
+#: templates/landing_base.html:12
+msgid "Centech Dashboard"
+msgstr "Dashboard da Centech"
+
+#: templates/landing_base.html:43
+msgid "Toggle navigation"
+msgstr "Mudar navegação"
+
+#: templates/landing_base.html:74
+msgid "Login"
+msgstr "Login"
+
+#: templates/landing_base.html:114
+msgid "All Rights Reserved"
+msgstr "Todos os direitos reservados"

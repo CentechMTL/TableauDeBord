@@ -183,6 +183,7 @@ gettext = lambda x: x
 LANGUAGES = (
    ('fr', gettext('French')),
    ('en', gettext('English')),
+   ('pt', gettext('Portuguese'))
 )
 
 #List of translation directory

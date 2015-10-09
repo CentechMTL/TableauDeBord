@@ -1,0 +1,180 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-09-29 13:03+0000\n"
+"PO-Revision-Date: 2015-09-29 21:00-0300\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"X-Generator: Poedit 1.8.5\n"
+
+#: app/founder/forms.py:18
+msgid "Search by name"
+msgstr "Buscar por nome"
+
+#: app/founder/forms.py:52 app/founder/forms.py:55 app/founder/forms.py:173
+#: app/founder/forms.py:176
+msgid "First name"
+msgstr "Nome"
+
+#: app/founder/forms.py:58 app/founder/forms.py:61 app/founder/forms.py:179
+#: app/founder/forms.py:182
+msgid "Last name"
+msgstr "Sobrenome"
+
+#: app/founder/forms.py:64 app/founder/forms.py:67
+msgid "Username"
+msgstr "Username"
+
+#: app/founder/forms.py:70 app/founder/forms.py:73
+msgid "Email"
+msgstr "Email"
+
+#: app/founder/forms.py:76 app/founder/forms.py:80 app/founder/forms.py:185
+#: app/founder/forms.py:189
+msgid "Phone number"
+msgstr "Número de telefone"
+
+#: app/founder/forms.py:83 app/founder/forms.py:192
+#: app/founder/templates/founder/detail.html:41
+msgid "Web site"
+msgstr "Website"
+
+#: app/founder/forms.py:86 app/founder/forms.py:195
+msgid "https://example.com"
+msgstr "https://example.com"
+
+#: app/founder/forms.py:89 app/founder/forms.py:198
+msgid "Facebook"
+msgstr "Facebook"
+
+#: app/founder/forms.py:92 app/founder/forms.py:201
+msgid "https://www.facebook.com/lastname.firstname"
+msgstr "https://www.facebook.com/lastname.firstname"
+
+#: app/founder/forms.py:95 app/founder/forms.py:204
+msgid "Twitter"
+msgstr "Twitter"
+
+#: app/founder/forms.py:98 app/founder/forms.py:207
+msgid "https://twitter.com/username"
+msgstr "https://twitter.com/username"
+
+#: app/founder/forms.py:101 app/founder/forms.py:210
+msgid "Google+"
+msgstr "Google+"
+
+#: app/founder/forms.py:104 app/founder/forms.py:213
+msgid "https://plus.google.com/id"
+msgstr "https://plus.google.com/id"
+
+#: app/founder/forms.py:107 app/founder/forms.py:216
+msgid "linkedIn"
+msgstr "linkedIn"
+
+#: app/founder/forms.py:110 app/founder/forms.py:219
+msgid "https://ca.linkedin.com/in/username"
+msgstr "https://ca.linkedin.com/in/username"
+
+#: app/founder/forms.py:113 app/founder/forms.py:222
+msgid "Description"
+msgstr "Description"
+
+#: app/founder/forms.py:117 app/founder/forms.py:226
+msgid "Write here a brief summary of your skills and your career."
+msgstr ""
+"Escreva aqui um breve sumário de suas competências e de sua carreira."
+
+#: app/founder/forms.py:124 app/founder/forms.py:233
+msgid "Education"
+msgstr "Educação"
+
+#: app/founder/forms.py:131 app/founder/forms.py:240 app/founder/models.py:11
+#: app/founder/templates/founder/detail.html:61
+msgid "Areas of expertise"
+msgstr "Áreas de especialização"
+
+#: app/founder/forms.py:138 app/founder/forms.py:247
+msgid "Picture"
+msgstr "Foto"
+
+#: app/founder/forms.py:150
+msgid "New founder"
+msgstr "Novo fundador"
+
+#: app/founder/forms.py:165 app/founder/forms.py:285
+msgid ""
+"Use the Ctrl key on your keyboard to select multiple. <br> If it lacks a "
+"domain that you would like to add to this list, do not hesitate to talk to "
+"the team Centech"
+msgstr ""
+"Use a tecla Ctrl no seu teclado para selecionar múltiplos. Se há algum "
+"domínio que você deseja adicionar na lista, não hesite em entrar em "
+"contato com o time da Centech"
+
+#: app/founder/forms.py:167 app/founder/forms.py:287
+msgid "Save"
+msgstr "Salvar"
+
+#: app/founder/forms.py:272
+msgid "Update this founder"
+msgstr "Atualizar este fundador"
+
+#: app/founder/models.py:10
+msgid "Education level"
+msgstr "Nível de formação"
+
+#: app/founder/models.py:12
+msgid "Equity"
+msgstr "Capital próprio"
+
+#: app/founder/models.py:13 app/founder/templates/founder/detail.html:50
+msgid "About"
+msgstr "Sobre"
+
+#: app/founder/templates/founder/detail.html:9
+msgid "Modify this founder"
+msgstr "Modificar este fundador"
+
+#: app/founder/templates/founder/detail.html:38
+msgid "Phone"
+msgstr "Telefone"
+
+#: app/founder/templates/founder/detail.html:72
+msgid "Companies"
+msgstr "Empresas"
+
+#: app/founder/templates/founder/detail.html:96
+msgid "No companies exist."
+msgstr "Não há empresas existentes."
+
+#: app/founder/templates/founder/founder_form.html:6
+msgid "Profile"
+msgstr "Perfil"
+
+#: app/founder/templates/founder/index.html:4
+#: app/founder/templates/founder/index.html:8
+msgid "Centech Founders"
+msgstr "Fundadores da UCS"
+
+#: app/founder/templates/founder/index.html:39
+msgid "Previous"
+msgstr "Anterior"
+
+#: app/founder/templates/founder/index.html:49
+msgid "Next"
+msgstr "Próximo"
+
+#: app/founder/templates/founder/index.html:84
+msgid "No founders exist."
+msgstr "Não há fundadores."

@@ -2,14 +2,16 @@
 <!-- Load internationalisation utils-->
 {% load i18n %}
 {% load staticfiles %}
+
 {% block title %}{% trans "Presence" %}{% endblock %}
 
 {% block extrahead %}
+    <link rel="stylesheet" href="{% static 'css/filteredSelectedMultiple.css' %}" />
+    <script src="{% static 'js/filteredSelectedMultiple.js' %}"></script>
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/redmond/jquery-ui.css" />
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 {% endblock %}
-
 
 {% block content %}
 {% if isCentech %}
@@ -18,9 +20,16 @@
         {{ form.as_p }}
         <button type="submit">{% trans "Save" %}</button>
     </form>
-
-    <script>
-            $( "#id_date" ).datepicker({ dateFormat: 'dd/mm/yy' });
-    </script>
 {% endif %}
+{% endblock %}
+
+{% block extrajs %}
+    <script>
+        $( "#id_date" ).datepicker({ dateFormat: 'yy-mm-dd' });
+
+        jQuery.each($("select[multiple]"), function () {
+        // "Locations" can be any label you want
+        SelectFilter.init(this.id, "Locations", 0, "/media/");
+        });
+    </script>
 {% endblock %}

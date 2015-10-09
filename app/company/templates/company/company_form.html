@@ -1,11 +1,15 @@
 {% extends "dashboard.html" %}
 {% load crispy_forms_tags %}
+
 <!-- Load internationalisation utils-->
 {% load i18n %}
 {% load staticfiles %}
+
 {% block title %}{% trans "Company" %}{% endblock %}
 
 {% block extrahead %}
+    <link rel="stylesheet" href="{% static 'css/filteredSelectedMultiple.css' %}" />
+    <script src="{% static 'js/filteredSelectedMultiple.js' %}"></script>
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/redmond/jquery-ui.css" />
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
@@ -15,9 +19,16 @@
     <form enctype="multipart/form-data" method="post">{% csrf_token%}
         {% crispy form %}
     </form>
+{% endblock %}
 
+{% block extrajs %}
     <script>
         $( "#id_incubated_on" ).datepicker({ dateFormat: 'yy-mm-dd' });
         $( "#id_endOfIncubation" ).datepicker({ dateFormat: 'yy-mm-dd' });
+
+        jQuery.each($("select[multiple]"), function () {
+        // "Locations" can be any label you want
+        SelectFilter.init(this.id, "Locations", 0, "/media/");
+        });
     </script>
 {% endblock %}

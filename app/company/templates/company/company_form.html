@@ -1,8 +1,7 @@
 {% extends "dashboard.html" %}
-{% load crispy_forms_tags %}
-
 <!-- Load internationalisation utils-->
 {% load i18n %}
+{% load bootstrap3 %}
 {% load staticfiles %}
 
 {% block title %}{% trans "Company" %}{% endblock %}
@@ -17,7 +16,15 @@
 
 {% block content %}
     <form enctype="multipart/form-data" method="post">{% csrf_token%}
-        {% crispy form %}
+        {% bootstrap_form form %}
+        {% buttons %}
+            <button type="submit" class="btn btn-primary">
+                {% trans "Save" %}
+            </button>
+            <button type="reset" class="btn">
+                {% trans "Reset" %}
+            </button>
+        {% endbuttons %}
     </form>
 {% endblock %}
 

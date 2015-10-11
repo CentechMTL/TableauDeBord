@@ -4,7 +4,8 @@ from django.test import TestCase
 from app.company.factories import CompanyStatusFactory
 from app.home.factories import StaffUserFactory
 
-from app.company.forms import CompanyCreateForm, CompanyUpdateForm, CompanyStatusCreateForm
+from app.company.forms import CompanyForm, CompanyStatusForm
+
 
 class CompanyStatusCreateFormTest(TestCase):
     """
@@ -13,14 +14,15 @@ class CompanyStatusCreateFormTest(TestCase):
 
     def test_valid(self):
         data = {
-            'name': 'Tester'
+            'status': 'Tester'
         }
 
-        form = CompanyStatusCreateForm(data=data)
+        form = CompanyStatusForm(data)
         self.assertTrue(form.is_valid())
 
     def test_missing_name(self):
         data = {
         }
-        form = CompanyStatusCreateForm(data=data)
+
+        form = CompanyStatusForm(data)
         self.assertFalse(form.is_valid())

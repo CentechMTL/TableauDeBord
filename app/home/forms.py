@@ -16,26 +16,42 @@ MAX_PASSWORD_LENGTH = 76
 # Min password length for the user.
 MIN_PASSWORD_LENGTH = 6
 
-#TODO Faire un système d'héritage des formulaires de profil
-"""
-UserForm (firstname, lastname)
-    ProfileForm (website, phone, picture)
-        MentorForm (expertise)
-        FounderForm (expertise, education)
 
-PasswordForm (password)
-"""
 class UserForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput())
-
     class Meta:
         model = User
-        fields = ('username', 'email', 'password')
+        fields = ['first_name', 'last_name', 'username', 'email']
+
+    first_name = forms.CharField(
+        label=_('First name'),
+        required=True,
+    )
+    first_name.widget.attrs.update({'placeholder': _(u'First name')})
+
+    last_name = forms.CharField(
+        label=_('Last name'),
+        required=True,
+    )
+    last_name.widget.attrs.update({'placeholder': _(u'Last name')})
+
+    username = forms.CharField(
+        label=_('Username'),
+        required=True,
+    )
+    username.widget.attrs.update({'placeholder': _(u'Username')})
+
+    email = forms.CharField(
+        label=_('Email'),
+        required=True,
+    )
+    email.widget.attrs.update({'placeholder': _(u'Email')})
+
 
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ('website', 'picture')
+
 
 class UpdatePasswordForm(forms.Form):
 

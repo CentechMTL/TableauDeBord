@@ -3,6 +3,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
+import os
 import datetime
 from django.utils import timezone
 from phonenumber_field.modelfields import PhoneNumberField
@@ -17,17 +18,20 @@ EDUCATION_CHOICES = (
     ('Baccalaureat', 'Baccalaureat'),
 )
 
-#Education level
+
 class Education(models.Model):
+    # Education level
     class Meta:
         verbose_name_plural = _('Education')
 
     education = models.CharField(max_length=200, verbose_name=_('Education level'))
+
     def __unicode__(self):
         return self.education
 
-#Areas of expertise
+
 class Expertise(models.Model):
+    # Areas of expertise
     class Meta:
         verbose_name_plural = _('Expertise')
 
@@ -36,8 +40,9 @@ class Expertise(models.Model):
     def __unicode__(self):
         return self.expertise
 
-#User, we can't extends auth_user without auxiliar conflits
+
 class UserProfile(models.Model):
+    # User, we can't extends auth_user without auxiliar conflits
     class Meta:
         ordering = ['user__last_name']
 
@@ -57,6 +62,14 @@ class UserProfile(models.Model):
 
     def __unicode__(self):
         return self.user.username
+
+    def save(self, *args, **kwarg):
+        if self.userProfile_id:
+            origin = UserProfile.objects.get(userProfile_id=self.userProfile_id)
+            if origin.picture != self.picture:
+                self.picture.name = unicode(self.userProfile_id) + os.path.splitext(self.picture.name)[1]
+
+        super(UserProfile, self).save(*args, **kwarg)
 
     def image_thumb(self):
         return '<img src="/media/%s" width="100" height="100" />' % (self.picture)
@@ -89,6 +102,7 @@ class UserProfile(models.Model):
             return Mentor.objects.get(user = self.user)
         except:
             return False
+
 
 class FloorPlan(models.Model):
     title = models.CharField(max_length=100,verbose_name=_('Title'))

@@ -6,22 +6,24 @@
 
 {% block content %}
     <!--TODO Check for autogenerate the page-->
-    <div class="row">
+    <div class="row" id="menu-sommaire">
         <div class="col-sm-12" align="center">
             <br>
             <h1>{% trans "Finance of" %} {{ company.name }}</h1>
         </div>
     </div>
-
-    <h2 id="menu-sommaire">{% trans "Summary" %}</h2>
-    <ul>
-    <li><a href="#menu-general">{% trans "Overview" %}</a><br></li>
-    <li><a href="#menu-bourses">{% trans "Grants" %}</a><br></li>
-    <li><a href="#menu-subventions">{% trans "Subsidies" %}</a><br></li>
-    <li><a href="#menu-investissements">{% trans "Investments" %}</a><br></li>
-    <li><a href="#menu-prets">{% trans "Loans" %}</a><br></li>
-    <li><a href="#menu-ventes">{% trans "Sales" %}</a><br></li>
-    </ul>
+    <div class="row">
+        <div class="col-sm-12" align="center">
+            <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                <a class="btn btn-danger" href="#menu-general">{% trans "Overview" %}</a>
+                <a class="btn btn-danger" href="#menu-bourses">{% trans "Grants" %}</a>
+                <a class="btn btn-danger" href="#menu-subventions">{% trans "Subsidies" %}</a>
+                <a class="btn btn-danger" href="#menu-investissements">{% trans "Investments" %}</a>
+                <a class="btn btn-danger" href="#menu-prets">{% trans "Loans" %}</a>
+                <a class="btn btn-danger" href="#menu-ventes">{% trans "Sales" %}</a>
+            </div>
+        </div>
+    </div>
 
     <!--- VUE GENERALE --->
     <h2 id="menu-general">{% trans "Overview" %}</h2>

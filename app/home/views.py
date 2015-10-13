@@ -1,39 +1,32 @@
 # coding: utf-8
 
 from django.http import HttpResponse, HttpResponseRedirect
-from app.home.forms import UpdatePasswordForm,UserProfileForm
-from django.contrib.auth import authenticate,login,logout
-from django.shortcuts import render,get_object_or_404, redirect
-from django.core.urlresolvers import reverse, reverse_lazy
+from django.contrib.auth import logout
+from django.shortcuts import render
+from django.core.urlresolvers import reverse
 from django.views import generic
-from django.utils import timezone
 import json
 from datetime import datetime
-from django.contrib.auth.models import User
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
-from django.db.models import Avg
 
 from app.company.models import Company, CompanyStatus
 from app.company.forms import MiniCompanyStatusUpdateForm
-from app.founder.models import Founder
 from app.mentor.models import Mentor
-from app.kpi.models import KPI, KPI_TYPE_CHOICES
-from app.finance.models import Bourse, Subvention, Pret, Investissement, Vente
-from app.experiment.models import CustomerExperiment
 from app.home.models import FloorPlan
 
-#General view
+
 class Summary(generic.TemplateView):
+    # General view
     template_name = 'home/summary.html'
 
-    #You need to be connected, and you need to have access as centech or executive
+    # You need to be connected, and you need to have access as centech or executive
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         if self.request.user.profile.isCentech() or self.request.user.profile.isExecutive():
             return super(Summary, self).dispatch(*args, **kwargs)
 
-        #The visitor can't see this page!
+        # The visitor can't see this page!
         return HttpResponseRedirect("/user/noAccessPermissions")
 
     def post(self, request, *args, **kwargs):
@@ -44,7 +37,6 @@ class Summary(generic.TemplateView):
             object.save()
 
         return HttpResponseRedirect(reverse('home:summary', kwargs={'status' : object.id}))
-
 
     def get_context_data(self, **kwargs):
         try:
@@ -184,42 +176,19 @@ class Summary(generic.TemplateView):
 
         return context
 
-#Form for update password
-class PasswordUpdate(generic.UpdateView):
-    form_class = UpdatePasswordForm
-    template_name = "home/password_update_form.html"
-    model = User
 
-    def post(self, request, *args, **kwargs):
-        form = self.form_class(request.user, request.POST)
-
-        if form.is_valid():
-            user = authenticate(username=request.user.username, password=form.data['password_old'])
-            if(user == request.user):
-                self.update_user(request.user, form)
-                return self.form_valid(form)
-
-        return render(request, self.template_name, {'form': form})
-
-    def get_form(self, form_class):
-        return form_class(self.request.user)
-
-    def update_user(self, object, form):
-        object.set_password(form.data['password_new'])
-
-    def get_success_url(self):
-        return reverse_lazy("company:index")
-
-#Home page
 def index(request):
+    # Home page
     return render(request, 'home/index.html')
 
-#NoAccessPermissions page
+
 def noAccessPermissions(request):
+    # NoAccessPermissions page
     return render(request, 'home/noAccessPermissions.html')
 
-#Iframe vers ma StartUp
+
 def maStartup(request):
+    # Iframe vers ma StartUp
     if request.user.is_active:
         if request.user.profile.isCentech():
                 return render(request, 'home/maStartup.html')
@@ -230,28 +199,29 @@ def maStartup(request):
         if request.user.profile.isMentor():
                 return render(request, 'home/maStartup.html')
 
-    #The visitor can't see this page!
+    # The visitor can't see this page!
     return HttpResponseRedirect("/user/noAccessPermissions")
 
-#Set the session variable for the dashboard template
+
 def setCompanyInSession(request, company_id):
-    message= {}
+    # Set the session variable for the dashboard template
+    message = {}
 
     auth = False
 
     try:
-        #The user is admin
+        # The user is admin
         groups = request.user.groups.values()
         for group in groups:
             if group['name'] == 'Centech':
                 auth = True
 
-        #The user is mentor for this company
+        # The user is mentor for this company
         mentor = Mentor.objects.get(user = request.user.id)
         print(request.user.id)
         companies = Company.objects.filter(mentors = mentor)
         for company in companies:
-            if(int(company_id) == int(company.id)):
+            if int(company_id) == int(company.id):
                 auth = True
         else:
             pass
@@ -271,6 +241,7 @@ def logout_view(request):
     # Redirect to a success page.
     return HttpResponseRedirect("/")
 
+
 def get_url(request, namespace, arguments=""):
     message = {}
     print ('namespace => ' + namespace)
@@ -288,16 +259,18 @@ def get_url(request, namespace, arguments=""):
         print ('url' + message['url'])
         data = json.dumps(message)
         return HttpResponse(data, content_type='application/json')
-    #The visitor can't see this page!
+
+    # The visitor can't see this page!
     return HttpResponseRedirect("/user/noAccessPermissions")
 
-#Floor Plan Page
+
 class floor_plan(generic.ListView):
+    # Floor Plan Page
     model = FloorPlan
     template_name = 'home/floorPlan.html'
     context_object_name = 'list_floor_plan'
 
-    #You need to be connected, and you need to have access as centech only
+    # You need to be connected, and you need to have access as centech only
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         if self.request.user.profile.isCentech():
@@ -312,5 +285,5 @@ class floor_plan(generic.ListView):
         if self.request.user.profile.isExecutive():
             return super(floor_plan, self).dispatch(*args, **kwargs)
 
-        #The visitor can't see this page!
+        # The visitor can't see this page!
         return HttpResponseRedirect("/user/noAccessPermissions")

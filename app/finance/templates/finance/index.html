@@ -333,104 +333,62 @@
         function drawcharts() {
 
             var dataOverview = google.visualization.arrayToDataTable([
-                ['Type de financement', 'Demandé', 'Reçu'],
-                ['Bourses', {{totalBoursesSoumises}}, {{totalBoursesRecues}}],
-                ['Subventions', {{totalSubventionsSoumises}}, {{totalSubventionsRecues}}],
-                ['Investissements', {{totalInvestissementsSoumis}}, {{totalInvestissementsRecus}}],
-                ['Prêts', {{totalPretsSoumis}}, {{totalPretsRecus}}],
-                ['Ventes', {{totalVentesSoumises}}, {{totalVentesRecues}}]
+                ['Type de financement', '{% trans "Requested" %}', '{% trans "Received" %}'],
+                ['{% trans "Grants" %}', {{totalBoursesSoumises}}, {{totalBoursesRecues}}],
+                ['{% trans "Subsidies" %}', {{totalSubventionsSoumises}}, {{totalSubventionsRecues}}],
+                ['{% trans "Investments" %}', {{totalInvestissementsSoumis}}, {{totalInvestissementsRecus}}],
+                ['{% trans "Loans" %}', {{totalPretsSoumis}}, {{totalPretsRecus}}],
+                ['{% trans "Sales" %}', {{totalVentesSoumises}}, {{totalVentesRecues}}]
             ]);
-
-            var optionsOverview = {
-                colors: ['#4285F4', '#56cc32'],
-                chart: {
-                    title: 'Etude financière de la compagnie',
-                    subtitle: '{{company.name}}'
-                }
-            };
 
             var dataBourses = google.visualization.arrayToDataTable([
-                ['', 'Demandée', 'Reçu'],
-                ['Bourses', {{totalBoursesSoumises}}, {{totalBoursesRecues}}]
+                ['', '{% trans "Requested" %}', '{% trans "Received" %}'],
+                ['{% trans "Grants" %}', {{totalBoursesSoumises}}, {{totalBoursesRecues}}]
             ]);
-
-            var optionsBourses = {
-                colors: ['#4285F4', '#56cc32'],
-                chart: {
-                    title: 'Etude des bourses de la compagnie',
-                    subtitle: '{{company.name}}'
-                }
-            };
 
             var dataSubventions = google.visualization.arrayToDataTable([
-                ['', 'Demandée', 'Reçu'],
-                ['Subventions', {{totalSubventionsSoumises}}, {{totalSubventionsRecues}}]
+                ['', '{% trans "Requested" %}', '{% trans "Received" %}'],
+                ['{% trans "Subsidies" %}', {{totalSubventionsSoumises}}, {{totalSubventionsRecues}}]
             ]);
-
-            var optionsSubventions = {
-                colors: ['#4285F4', '#56cc32'],
-                chart: {
-                    title: 'Etude des subventions de la compagnie',
-                    subtitle: '{{company.name}}'
-                }
-            };
 
             var dataInvestissements = google.visualization.arrayToDataTable([
-                ['', 'Demandé', 'Reçu'],
-                ['Investissements', {{totalInvestissementsSoumis}}, {{totalInvestissementsRecus}}]
+                ['', '{% trans "Requested" %}', '{% trans "Received" %}'],
+                ['{% trans "Investments" %}', {{totalInvestissementsSoumis}}, {{totalInvestissementsRecus}}]
             ]);
-
-            var optionsInvestissements = {
-                colors: ['#4285F4', '#56cc32'],
-                chart: {
-                    title: 'Etude des investissement de la compagnie',
-                    subtitle: '{{company.name}}'
-                }
-            };
 
             var dataPrets = google.visualization.arrayToDataTable([
-                ['', 'Demandé', 'Reçu'],
-                ['Prets', {{totalPretsSoumis}}, {{totalPretsRecus}}]
+                ['', '{% trans "Requested" %}', '{% trans "Received" %}'],
+                ['{% trans "Loans" %}', {{totalPretsSoumis}}, {{totalPretsRecus}}]
             ]);
-
-            var optionsPrets = {
-                colors: ['#4285F4', '#56cc32'],
-                chart: {
-                    title: 'Etude des prets de la compagnie',
-                    subtitle: '{{company.name}}',
-                }
-            };
 
             var dataVentes = google.visualization.arrayToDataTable([
-                ['', 'Offre De Service', 'Reçu'],
-                ['Ventes', {{totalVentesSoumises}}, {{totalVentesRecues}}]
+                ['', '{% trans "Service offering" %}', '{% trans "Received" %}'],
+                ['{% trans "Sales" %}', {{totalVentesSoumises}}, {{totalVentesRecues}}]
             ]);
 
-            var optionsVentes = {
+            var options = {
                 colors: ['#4285F4', '#56cc32'],
-                chart: {
-                    title: 'Etude des ventes de la compagnie',
-                    subtitle: '{{company.name}}',
-                }
+                backgroundColor : 'none'
             };
 
+
             var chartOverview = new google.visualization.ColumnChart(document.getElementById('overview'));
-            chartOverview.draw(dataOverview, optionsOverview);
+            chartOverview.draw(dataOverview, options);
 
             var chartBourses = new google.visualization.ColumnChart(document.getElementById('bourses'));
-            chartBourses.draw(dataBourses, optionsBourses);
+            chartBourses.draw(dataBourses, options);
 
             var chartSubventions = new google.visualization.ColumnChart(document.getElementById('subventions'));
-            chartSubventions.draw(dataSubventions, optionsSubventions);
+            chartSubventions.draw(dataSubventions, options);
 
             var chartInvestissements = new google.visualization.ColumnChart(document.getElementById('investissements'));
-            chartInvestissements.draw(dataInvestissements, optionsInvestissements);
+            chartInvestissements.draw(dataInvestissements, options);
 
             var chartPrets = new google.visualization.ColumnChart(document.getElementById('prets'));
-            chartPrets.draw(dataPrets, optionsPrets);
+            chartPrets.draw(dataPrets, options);
 
             var chartVentes = new google.visualization.ColumnChart(document.getElementById('ventes'));
-            chartVentes.draw(dataVentes, optionsVentes);
+            chartVentes.draw(dataVentes, options);
         }
 
         google.setOnLoadCallback(drawcharts);

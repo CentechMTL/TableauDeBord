@@ -32,6 +32,7 @@
                         <img src="{% static 'img/centech-logo.png' %}" width="40">
                     </div>
                 </li>
+
                 <li class="active">
                     <!-----------------------------------------
                     ============== GENERAL MENU ===============
@@ -119,6 +120,28 @@
                     <li>
                         <span class="m-r-sm text-muted welcome-message">{% trans "Welcome to the Centech Dashboard." %}</span>
                     </li>
+
+                    <!-- MENU LANGUAGE -->
+                    <form action="/i18n/setlang/" method="post" style="display: none" id="change_language_form">
+                        {% csrf_token %}
+                        <input type="hidden" value="" name="language" id="language" />
+                    </form>
+
+                    <li class="dropdown">
+                        <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                            <i class="fa fa-flag"> Language</i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-messages">
+                            <li> {% trans "Language"  %}</li>
+                            <li>
+                                {% get_language_info_list for LANGUAGES as languages %}
+                                {% for language in languages %}
+                                    <a style="" lang_code="{{ language.code }}" class="change_language">{{ language.name_local|capfirst }} </a>
+                                {% endfor %}
+                            </li>
+                        </ul>
+                    </li>
+
                     <!-- MENU PROFIL -->
                     <li class="dropdown">
                             <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
@@ -126,7 +149,7 @@
                             </a>
                             <ul class="dropdown-menu dropdown-messages">
                             {% if isMentor %}
-                                <li>MENTOR</li>
+                                <li>{% trans "MENTOR" %}</li>
                                 <li>
                                     {% with profile=user.profile %}
                                     <a href="{%url 'mentor:update' profile.userProfile_id %}" style="text-decoration: none; color: black; font-size: 14px;">
@@ -138,7 +161,7 @@
                                 </li>
                                 <hr>
                             {% elif isFounder %}
-                                <li>FOUNDER</li>
+                                <li>{% trans "FOUNDER" %}</li>
                                 <li>
                                     {% with profile=user.profile %}
                                     <a href="{% url 'founder:update' profile.userProfile_id %}" style="text-decoration: none; color: black; font-size: 14px;">
@@ -151,7 +174,7 @@
                                 <hr>
                             {% endif %}
                             {% if isCentech %}
-                                <li>ADMINISTRATION</li>
+                                <li>{% trans "ADMINISTRATION" %}</li>
                                 <li>
                                     <a href="{% url 'founder:add' %}" style="text-decoration: none; color: black; font-size: 14px;">
                                         <div class="dropdown-messages-box">
@@ -182,10 +205,10 @@
                                 </li>
                                 <hr>
                         {% endif %}
-                                <li>MY ACCOUNT</li>
+                                <li>{% trans "MY ACCOUNT" %}</li>
                                 {% if isCentech or isFounder or isMentor %}
                                 <li>
-                                    <a href="{% url 'home:change_password' user.id %}" style="text-decoration: none; color: black; font-size: 14px;">
+                                    <a href="{% url 'home:change_password' %}" style="text-decoration: none; color: black; font-size: 14px;">
                                         <div class="dropdown-messages-box">
                                             <i class="fa fa-key"></i> {% trans "Change password" %}
                                         </div>
@@ -267,6 +290,14 @@
 
     <!-- UpdateMenu -->
     <script type="text/javascript" src="{% static 'js/updateMenu.js' %}"></script>
+
+    <script>
+        $('.change_language').click(function(e){
+            e.preventDefault();
+            $('#language').val($(this).attr('lang_code'));
+            $('#change_language_form').submit();
+        });
+    </script>
     {% block extrajs %}{% endblock %}
 </body>
 </html>

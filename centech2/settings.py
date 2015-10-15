@@ -34,7 +34,7 @@ ALLOWED_HOSTS = ['localhost']
 CRISPY_TEMPLATE_PACK = 'bootstrap'
 
 INSTALLED_APPS = (
-    'django_admin_bootstrapped',
+    'bootstrap3',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -183,6 +183,7 @@ gettext = lambda x: x
 LANGUAGES = (
    ('fr', gettext('French')),
    ('en', gettext('English')),
+   ('pt', gettext('Portuguese'))
 )
 
 #List of translation directory

@@ -53,7 +53,7 @@ class FounderTests(TestCase):
         self.assertEqual(result.status_code, 302)
 
         """
-        No Access : Executive
+        Access : Executive
         """
         self.client.logout()
         self.client.login(username=self.executive.user.username, password="Toto1234!#")
@@ -62,7 +62,7 @@ class FounderTests(TestCase):
             reverse('founder:index'),
             follow=False
         )
-        self.assertEqual(result.status_code, 302)
+        self.assertEqual(result.status_code, 200)
 
         """
         Context data
@@ -114,7 +114,7 @@ class FounderTests(TestCase):
         self.assertEqual(result.status_code, 302)
 
         """
-        No Access : Executive
+        Access : Executive
         """
         self.client.logout()
         self.client.login(username=self.executive.user.username, password="Toto1234!#")
@@ -123,7 +123,7 @@ class FounderTests(TestCase):
             reverse('founder:detail', kwargs={'pk': self.founder.userProfile_id}),
             follow=False
         )
-        self.assertEqual(result.status_code, 302)
+        self.assertEqual(result.status_code, 200)
 
         """
         Access of an inexistant founder

@@ -1,11 +1,36 @@
 {% extends "dashboard.html" %}
-{% load crispy_forms_tags %}
+
 <!-- Load internationalisation utils-->
 {% load i18n %}
+{% load bootstrap3 %}
 {% load staticfiles %}
+
 {% block title %}{% trans "Profile" %}{% endblock %}
+
+{% block extrahead %}
+    <link rel="stylesheet" href="{% static 'css/filteredSelectedMultiple.css' %}" />
+    <script src="{% static 'js/filteredSelectedMultiple.js' %}"></script>
+{% endblock %}
+
 {% block content %}
     <form enctype="multipart/form-data" method="post">{% csrf_token%}
-        {% crispy form %}
+        {% bootstrap_form form %}
+        {% buttons %}
+            <button type="submit" class="btn btn-primary">
+                {% trans "Save" %}
+            </button>
+            <button type="reset" class="btn">
+                {% trans "Reset" %}
+            </button>
+        {% endbuttons %}
     </form>
+{% endblock %}
+
+{% block extrajs %}
+    <script>
+        jQuery.each($("select[multiple]"), function () {
+            // "Locations" can be any label you want
+            SelectFilter.init(this.id, "Locations", 0, "/media/");
+            });
+    </script>
 {% endblock %}

@@ -14,7 +14,8 @@ from embed_video.fields import EmbedVideoField
 from django.utils.translation import ugettext_lazy as _
 from django.forms import widgets
 
-class FinanceCreateForm(forms.Form):
+
+class FinanceForm(forms.ModelForm):
     name = forms.CharField(
         label=_('Name'),
         required=True,
@@ -23,25 +24,38 @@ class FinanceCreateForm(forms.Form):
     sommeSoumission = forms.DecimalField(
         label=_('Amount requested'),
         required=True,
-        min_value = 0,
+        min_value=0,
     )
 
     dateSoumission = forms.DateField(
         label=_('Date of submission'),
         input_formats=('%Y-%m-%d',),
+        required=True,
+        widget=forms.DateInput(
+            format='%Y-%m-%d',
+            attrs={
+                'class': 'datepicker'
+            }
+        )
     )
     dateSoumission.widget.attrs.update({'type': 'date', 'class': 'datepicker'})
 
     sommeReception = forms.DecimalField(
         label=_('Amount received'),
-        required=True,
-        min_value = 0,
+        required=False,
+        min_value=0,
     )
 
     dateReception = forms.DateField(
         label=_('Date de reception'),
-        required = False,
+        required=False,
         input_formats=('%Y-%m-%d',),
+        widget=forms.DateInput(
+            format='%Y-%m-%d',
+            attrs={
+                'class': 'datepicker'
+            }
+        )
     )
     dateReception.widget.attrs.update({'type': 'date', 'class': 'datepicker'})
 
@@ -56,88 +70,32 @@ class FinanceCreateForm(forms.Form):
         )
     )
 
-    def __init__(self, *args, **kwargs):
-        super(FinanceCreateForm, self).__init__(*args, **kwargs)
-        self.helper = FormHelper()
-        self.helper.form_class = 'content-wrapper'
-        self.helper.form_method = 'post'
 
-        self.helper.layout = Layout(
-            Field('name'),
-            Field('sommeSoumission'),
-            Field('dateSoumission'),
-            Field('sommeReception'),
-            Field('dateReception'),
-            Field('description'),
-            StrictButton(_('Save'), type="submit")
-        )
+class BourseForm(FinanceForm):
+    class Meta:
+        model = Bourse
+        fields = ['name', 'sommeSoumission', 'dateSoumission', 'sommeReception', 'dateReception', 'description']
 
-class FinanceForm(forms.Form):
-    name = forms.CharField(
-        label=_('Name'),
-        required=True,
-    )
 
-    sommeSoumission = forms.DecimalField(
-        label=_('Amount requested'),
-        required=True,
-        min_value = 0,
-    )
+class SubventionForm(FinanceForm):
+    class Meta:
+        model = Subvention
+        fields = ['name', 'sommeSoumission', 'dateSoumission', 'sommeReception', 'dateReception', 'description']
 
-    dateSoumission = forms.DateField(
-        label=_('Date of submission'),
-        input_formats=('%Y-%m-%d',),
-    )
-    dateSoumission.widget.attrs.update({'type': 'date', 'class': 'datepicker'})
 
-    sommeReception = forms.DecimalField(
-        label=_('Amount received'),
-        required=True,
-        min_value = 0,
-    )
+class PretForm(FinanceForm):
+    class Meta:
+        model = Pret
+        fields = ['name', 'sommeSoumission', 'dateSoumission', 'sommeReception', 'dateReception', 'description']
 
-    dateReception = forms.DateField(
-        label=_('Date de reception'),
-        required = False,
-        input_formats=('%Y-%m-%d',),
-    )
-    dateReception.widget.attrs.update({'type': 'date', 'class': 'datepicker'})
 
-    description = forms.CharField(
-        label=_('Description'),
-        required=False,
-        widget=forms.Textarea(
-            attrs={
-                'placeholder': _(u'Write here a brief description.'),
-                'class': 'md-editor'
-            }
-        )
-    )
+class InvestissementForm(FinanceForm):
+    class Meta:
+        model = Investissement
+        fields = ['name', 'sommeSoumission', 'dateSoumission', 'sommeReception', 'dateReception', 'description']
 
-    def __init__(self, object, *args, **kwargs):
-        super(FinanceForm, self).__init__(*args, **kwargs)
-        self.helper = FormHelper()
-        self.helper.form_class = 'content-wrapper'
-        self.helper.form_method = 'post'
 
-        self.object = object
-        self.fields['name'].initial = object.name
-        self.fields['sommeSoumission'].initial = object.sommeSoumission
-        self.fields['dateSoumission'].initial = object.dateSoumission.isoformat()
-        self.fields['sommeReception'].initial = object.sommeReception
-        if(object.dateReception):
-            self.fields['dateReception'].initial = object.dateReception.isoformat()
-        self.fields['description'].initial = object.description
-
-        self.helper.layout = Layout(
-            Field('name'),
-            Field('sommeSoumission'),
-            Field('dateSoumission'),
-            Field('sommeReception'),
-            Field('dateReception'),
-            Field('description'),
-            StrictButton(_('Save'), type="submit")
-        )
-
-    def save(self):
-        self.object.save()
+class VenteForm(FinanceForm):
+    class Meta:
+        model = Vente
+        fields = ['name', 'sommeSoumission', 'dateSoumission', 'sommeReception', 'dateReception', 'description']

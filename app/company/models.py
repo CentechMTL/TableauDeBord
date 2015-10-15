@@ -2,17 +2,17 @@
 
 from django.db import models
 from datetime import datetime
-import time
+import os
 from django.utils import timezone
 from embed_video.fields import EmbedVideoField
 from django.utils.translation import ugettext_lazy as _
 from app.founder.models import Founder
 from app.mentor.models import Mentor
 from django.core.urlresolvers import reverse
-from django import forms
 
-#Status of a company in the Centech (ex: emergence)
+
 class CompanyStatus(models.Model):
+    # Status of a company in the Centech (ex: emergence)
     class Meta:
         verbose_name_plural = _('Company Status')
 
@@ -22,23 +22,23 @@ class CompanyStatus(models.Model):
     def __unicode__(self):
         return self.status
 
-#Companies
+
 class Company(models.Model):
     class Meta:
         verbose_name_plural = _('Companies')
 
-    #General information
+    # General information
     name = models.CharField(max_length=200, verbose_name=_('Name'))
-    logo = models.ImageField(upload_to='logo',blank=True, verbose_name=_('Logo'))
+    logo = models.ImageField(upload_to='logo', blank=True, verbose_name=_('Logo'))
     url = models.URLField(blank=True, verbose_name=_('URL'))
     video = EmbedVideoField(blank=True, verbose_name=_('Video'))
-    description = models.TextField(blank=True,max_length=2000, verbose_name=_('Description'))
-    companyStatus = models.ForeignKey(CompanyStatus,verbose_name=_('Status'))
+    description = models.TextField(blank=True, max_length=2000, verbose_name=_('Description'))
+    companyStatus = models.ForeignKey(CompanyStatus, verbose_name=_('Status'))
 
-    #List of founders
-    founders = models.ManyToManyField(Founder,blank=True, verbose_name=_('Founders'), related_name = "company")
-    #List of mentors
-    mentors = models.ManyToManyField(Mentor,blank=True, verbose_name=_('Mentors'), related_name = "company")
+    # List of founders
+    founders = models.ManyToManyField(Founder, blank=True, verbose_name=_('Founders'), related_name = "company")
+    # List of mentors
+    mentors = models.ManyToManyField(Mentor, blank=True, verbose_name=_('Mentors'), related_name = "company")
 
     facebook = models.URLField(blank=True, null=True, verbose_name=_('Facebook'))
     twitter = models.URLField(blank=True, null=True, verbose_name=_('Twitter'))
@@ -57,6 +57,11 @@ class Company(models.Model):
     def save(self, *args, **kwarg):
         if not self.id:
             self.created = timezone.now()
+        else:
+            origin = Company.objects.get(id=self.id)
+            if origin.logo != self.logo:
+                self.logo.name = unicode(self.id) + os.path.splitext(self.logo.name)[1]
+
         self.updated = timezone.now()
         super(Company, self).save(*args, **kwarg)
 
@@ -74,21 +79,21 @@ class Company(models.Model):
         return users
 
     def get_last_irl(self):
-        irls =  self.KPIs.filter(type="IRL").order_by("-period_start")
+        irls = self.KPIs.filter(type="IRL").order_by("-period_start")
         if irls:
             return irls[0]
         else:
             return None
 
     def get_last_trl(self):
-        trls =  self.KPIs.filter(type="TRL").order_by("-period_start")
+        trls = self.KPIs.filter(type="TRL").order_by("-period_start")
         if trls:
             return trls[0]
         else:
             return None
 
     def get_last_experiment(self):
-        experiments =  self.experiments.order_by("-dateFinish")
+        experiments = self.experiments.order_by("-dateFinish")
         if experiments:
             return experiments[0]
         else:
@@ -108,17 +113,18 @@ class Company(models.Model):
             return None
 
     def image_thumb(self):
-        return '<img src="/media/%s" width="100" height="100" />' % (self.logo)
+        return '<img src="/media/%s" width="100" height="100" />' % self.logo
     image_thumb.allow_tags = True
 
-#Presence of companies
+
 class Presence(models.Model):
+    # Presence of companies
     class Meta:
         verbose_name_plural = _('Presences')
 
-    #List of company
+    # List of company
     company = models.ManyToManyField(Company, verbose_name=_('Companies'))
-    #Date of the meeting
+    # Date of the meeting
     date = models.DateTimeField(verbose_name=_('Date'))
 
     def __unicode__(self):

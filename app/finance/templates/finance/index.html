@@ -3,66 +3,34 @@
 {% load i18n %}
 {% load embed_video_tags %}
 {% load staticfiles %}
-<!-- Load internationalisation utils-->
-{% load i18n %}
-
-{% block extrahead %}
-    <script src="{% static 'graph/dist/jquery.min.js" type="text/javascript"></script>
-    <script src="{% static 'graph/dist/jsgraph.min.js" type="text/javascript"></script>
-{% endblock %}
 
 {% block content %}
     <!--TODO Check for autogenerate the page-->
-    <div class="row">
+    <div class="row" id="menu-sommaire">
         <div class="col-sm-12" align="center">
             <br>
             <h1>{% trans "Finance of" %} {{ company.name }}</h1>
         </div>
     </div>
-
-    <h2 id="menu-sommaire">{% trans "Summary" %}</h2>
-    <ul>
-    <li><a href="#menu-general">{% trans "Overview" %}</a><br></li>
-    <li><a href="#menu-bourses">{% trans "Grants" %}</a><br></li>
-    <li><a href="#menu-subventions">{% trans "Subsidies" %}</a><br></li>
-    <li><a href="#menu-investissements">{% trans "Investments" %}</a><br></li>
-    <li><a href="#menu-prets">{% trans "Loans" %}</a><br></li>
-    <li><a href="#menu-ventes">{% trans "Sales" %}</a><br></li>
-    </ul>
+    <div class="row">
+        <div class="col-sm-12" align="center">
+            <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                <a class="btn btn-danger" href="#menu-general">{% trans "Overview" %}</a>
+                <a class="btn btn-danger" href="#menu-bourses">{% trans "Grants" %}</a>
+                <a class="btn btn-danger" href="#menu-subventions">{% trans "Subsidies" %}</a>
+                <a class="btn btn-danger" href="#menu-investissements">{% trans "Investments" %}</a>
+                <a class="btn btn-danger" href="#menu-prets">{% trans "Loans" %}</a>
+                <a class="btn btn-danger" href="#menu-ventes">{% trans "Sales" %}</a>
+            </div>
+        </div>
+    </div>
 
     <!--- VUE GENERALE --->
     <h2 id="menu-general">{% trans "Overview" %}</h2>
     <div class="row">
         <div class="col-sm-12" align="center">
-            <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-            <div id="columnchart_material" style="height: 300px;"></div>
-            <script type="text/javascript">
-                google.load("visualization", "1.1", {packages:["bar"]});
-                google.setOnLoadCallback(drawChart);
-                function drawChart() {
-                var data = google.visualization.arrayToDataTable([
-                  ['Type de financement', 'Demandé', 'Reçu'],
-                  ['Bourses', {{totalBoursesSoumises}}, {{totalBoursesRecues}}],
-                  ['Subventions', {{totalSubventionsSoumises}}, {{totalSubventionsRecues}}],
-                  ['Investissements', {{totalInvestissementsSoumis}}, {{totalInvestissementsRecus}}],
-                  ['Prêts', {{totalPretsSoumis}}, {{totalPretsRecus}}],
-                  ['Ventes', {{totalVentesSoumises}}, {{totalVentesRecues}}]
-                ]);
-
-                var options = {
-                  colors: ['#4285F4', '#56cc32'],
-                  chart: {
-                    title: 'Etude financière de la compagnie',
-                    subtitle: '{{company.name}}'
-                  }
-                };
-
-                var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
-
-                chart.draw(data, options);
-                }
-            </script>
-        </div>
+            <div id="overview" style="height: 300px;"></div>
+            </div>
     </div>
     <a href="#menu-sommaire">{% trans "Return to the top of the page" %}</a>
 
@@ -71,29 +39,6 @@
     <div class="row" style="margin-top: 20px;">
         <div class="col-sm-3" align="center">
             <div id="bourses" style="height: 300px;"></div>
-            <script type="text/javascript">
-                google.load("visualization", "1.1", {
-                    packages: ["bar"]
-                });
-                google.setOnLoadCallback(drawChart);
-
-                function drawChart() {
-                    var data = google.visualization.arrayToDataTable([
-                        ['', 'Demandée', 'Reçu'],
-                        ['Bourses', {{totalBoursesSoumises}}, {{totalBoursesRecues}}], ]);
-                    var options = {
-                        colors: ['#4285F4', '#56cc32'],
-                        chart: {
-                            title: 'Etude des bourses de la compagnie',
-                            subtitle: '{{company.name}}',
-                        }
-                    };
-
-                    var chart = new google.charts.Bar(document.getElementById('bourses'));
-
-                    chart.draw(data, options);
-                }
-            </script>
         </div>
         <div class="col-sm-9" align="center">
             <table cellpadding="0" cellspacing="0" class="table table-bordered">
@@ -152,29 +97,6 @@
     <div class="row" style="margin-top: 20px;">
         <div class="col-sm-3" align="center">
             <div id="subventions" style="height: 300px;"></div>
-            <script type="text/javascript">
-                google.load("visualization", "1.1", {
-                    packages: ["bar"]
-                });
-                google.setOnLoadCallback(drawChart);
-
-                function drawChart() {
-                    var data = google.visualization.arrayToDataTable([
-                        ['', 'Demandée', 'Reçu'],
-                        ['Subventions', {{totalSubventionsSoumises}}, {{totalSubventionsRecues}}], ]);
-                    var options = {
-                        colors: ['#4285F4', '#56cc32'],
-                        chart: {
-                            title: 'Etude des subventions de la compagnie',
-                            subtitle: '{{company.name}}',
-                        }
-                    };
-
-                    var chart = new google.charts.Bar(document.getElementById('subventions'));
-
-                    chart.draw(data, options);
-                }
-            </script>
         </div>
         <div class="col-sm-9" align="center">
             <table cellpadding="0" cellspacing="0" class="table table-bordered">
@@ -233,29 +155,6 @@
     <div class="row" style="margin-top: 20px;">
         <div class="col-sm-3" align="center">
             <div id="investissements" style="height: 300px;"></div>
-            <script type="text/javascript">
-                google.load("visualization", "1.1", {
-                    packages: ["bar"]
-                });
-                google.setOnLoadCallback(drawChart);
-
-                function drawChart() {
-                    var data = google.visualization.arrayToDataTable([
-                        ['', 'Demandé', 'Reçu'],
-                        ['Investissements', {{totalInvestissementsSoumis}}, {{totalInvestissementsRecus}}], ]);
-                    var options = {
-                        colors: ['#4285F4', '#56cc32'],
-                        chart: {
-                            title: 'Etude des investissement de la compagnie',
-                            subtitle: '{{company.name}}',
-                        }
-                    };
-
-                    var chart = new google.charts.Bar(document.getElementById('investissements'));
-
-                    chart.draw(data, options);
-                }
-            </script>
         </div>
         <div class="col-sm-9" align="center">
             <table cellpadding="0" cellspacing="0" class="table table-bordered">
@@ -315,29 +214,6 @@
     <div class="row" style="margin-top: 20px;">
         <div class="col-sm-3" align="center">
             <div id="prets" style="height: 300px;"></div>
-            <script type="text/javascript">
-                google.load("visualization", "1.1", {
-                    packages: ["bar"]
-                });
-                google.setOnLoadCallback(drawChart);
-
-                function drawChart() {
-                    var data = google.visualization.arrayToDataTable([
-                        ['', 'Demandé', 'Reçu'],
-                        ['Prets', {{totalPretsSoumis}}, {{totalPretsRecus}}], ]);
-                    var options = {
-                        colors: ['#4285F4', '#56cc32'],
-                        chart: {
-                            title: 'Etude des prets de la compagnie',
-                            subtitle: '{{company.name}}',
-                        }
-                    };
-
-                    var chart = new google.charts.Bar(document.getElementById('prets'));
-
-                    chart.draw(data, options);
-                }
-            </script>
         </div>
         <div class="col-sm-9" align="center">
             <table cellpadding="0" cellspacing="0" class="table table-bordered">
@@ -397,29 +273,6 @@
     <div class="row" style="margin-top: 20px;">
         <div class="col-sm-3" align="center">
             <div id="ventes" style="height: 300px; margin-bottom: 50px;"></div>
-            <script type="text/javascript">
-                google.load("visualization", "1.1", {
-                    packages: ["bar"]
-                });
-                google.setOnLoadCallback(drawChart);
-
-                function drawChart() {
-                    var data = google.visualization.arrayToDataTable([
-                        ['', 'Offre De Service', 'Reçu'],
-                        ['Ventes', {{totalVentesSoumises}}, {{totalVentesRecues}}], ]);
-                    var options = {
-                        colors: ['#4285F4', '#56cc32'],
-                        chart: {
-                            title: 'Etude des ventes de la compagnie',
-                            subtitle: '{{company.name}}',
-                        }
-                    };
-
-                    var chart = new google.charts.Bar(document.getElementById('ventes'));
-
-                    chart.draw(data, options);
-                }
-            </script>
         </div>
         <div class="col-sm-9" align="center">
             <table cellpadding="0" cellspacing="0" class="table table-bordered">
@@ -474,4 +327,73 @@
     <a href="#menu-sommaire">{% trans "Return to the top of the page" %}</a>
 
     {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+{% endblock %}
+
+{% block extrajs %}
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+        function drawcharts() {
+
+            var dataOverview = google.visualization.arrayToDataTable([
+                ['Type de financement', '{% trans "Requested" %}', '{% trans "Received" %}'],
+                ['{% trans "Grants" %}', {{totalBoursesSoumises}}, {{totalBoursesRecues}}],
+                ['{% trans "Subsidies" %}', {{totalSubventionsSoumises}}, {{totalSubventionsRecues}}],
+                ['{% trans "Investments" %}', {{totalInvestissementsSoumis}}, {{totalInvestissementsRecus}}],
+                ['{% trans "Loans" %}', {{totalPretsSoumis}}, {{totalPretsRecus}}],
+                ['{% trans "Sales" %}', {{totalVentesSoumises}}, {{totalVentesRecues}}]
+            ]);
+
+            var dataBourses = google.visualization.arrayToDataTable([
+                ['', '{% trans "Requested" %}', '{% trans "Received" %}'],
+                ['{% trans "Grants" %}', {{totalBoursesSoumises}}, {{totalBoursesRecues}}]
+            ]);
+
+            var dataSubventions = google.visualization.arrayToDataTable([
+                ['', '{% trans "Requested" %}', '{% trans "Received" %}'],
+                ['{% trans "Subsidies" %}', {{totalSubventionsSoumises}}, {{totalSubventionsRecues}}]
+            ]);
+
+            var dataInvestissements = google.visualization.arrayToDataTable([
+                ['', '{% trans "Requested" %}', '{% trans "Received" %}'],
+                ['{% trans "Investments" %}', {{totalInvestissementsSoumis}}, {{totalInvestissementsRecus}}]
+            ]);
+
+            var dataPrets = google.visualization.arrayToDataTable([
+                ['', '{% trans "Requested" %}', '{% trans "Received" %}'],
+                ['{% trans "Loans" %}', {{totalPretsSoumis}}, {{totalPretsRecus}}]
+            ]);
+
+            var dataVentes = google.visualization.arrayToDataTable([
+                ['', '{% trans "Service offering" %}', '{% trans "Received" %}'],
+                ['{% trans "Sales" %}', {{totalVentesSoumises}}, {{totalVentesRecues}}]
+            ]);
+
+            var options = {
+                colors: ['#4285F4', '#56cc32'],
+                backgroundColor : 'none'
+            };
+
+
+            var chartOverview = new google.visualization.ColumnChart(document.getElementById('overview'));
+            chartOverview.draw(dataOverview, options);
+
+            var chartBourses = new google.visualization.ColumnChart(document.getElementById('bourses'));
+            chartBourses.draw(dataBourses, options);
+
+            var chartSubventions = new google.visualization.ColumnChart(document.getElementById('subventions'));
+            chartSubventions.draw(dataSubventions, options);
+
+            var chartInvestissements = new google.visualization.ColumnChart(document.getElementById('investissements'));
+            chartInvestissements.draw(dataInvestissements, options);
+
+            var chartPrets = new google.visualization.ColumnChart(document.getElementById('prets'));
+            chartPrets.draw(dataPrets, options);
+
+            var chartVentes = new google.visualization.ColumnChart(document.getElementById('ventes'));
+            chartVentes.draw(dataVentes, options);
+        }
+
+        google.setOnLoadCallback(drawcharts);
+        google.load("visualization", "1", {packages:["corechart"]});
+    </script>
 {% endblock %}

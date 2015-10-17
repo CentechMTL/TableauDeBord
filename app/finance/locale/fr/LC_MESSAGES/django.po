@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-10 12:58+0000\n"
+"POT-Creation-Date: 2015-10-17 20:47+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,14 +18,14 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: app/finance/models.py:11 app/finance/models.py:27 app/finance/models.py:43
-#: app/finance/models.py:59 app/finance/models.py:75
+#: app/finance/forms.py:20 app/finance/models.py:11 app/finance/models.py:27
+#: app/finance/models.py:43 app/finance/models.py:59 app/finance/models.py:75
 #: app/finance/templates/finance/bourse_confirm_delete.html:11
-#: app/finance/templates/finance/index.html:101
-#: app/finance/templates/finance/index.html:182
-#: app/finance/templates/finance/index.html:263
-#: app/finance/templates/finance/index.html:345
-#: app/finance/templates/finance/index.html:427
+#: app/finance/templates/finance/index.html:46
+#: app/finance/templates/finance/index.html:104
+#: app/finance/templates/finance/index.html:162
+#: app/finance/templates/finance/index.html:221
+#: app/finance/templates/finance/index.html:280
 #: app/finance/templates/finance/investissement_confirm_delete.html:11
 #: app/finance/templates/finance/pret_confirm_delete.html:12
 #: app/finance/templates/finance/subvention_confirm_delete.html:11
@@ -33,25 +33,11 @@ msgstr ""
 msgid "Name"
 msgstr "Nom"
 
-#: app/finance/models.py:12 app/finance/models.py:28 app/finance/models.py:44
-#: app/finance/models.py:60 app/finance/models.py:76
-#: app/finance/templates/finance/bourse_confirm_delete.html:12
-#: app/finance/templates/finance/index.html:102
-#: app/finance/templates/finance/index.html:183
-#: app/finance/templates/finance/index.html:264
-#: app/finance/templates/finance/index.html:346
-#: app/finance/templates/finance/investissement_confirm_delete.html:12
-#: app/finance/templates/finance/pret_confirm_delete.html:13
-#: app/finance/templates/finance/subvention_confirm_delete.html:12
-#: app/finance/templates/finance/vente_confirm_delete.html:11
-msgid "Date of submission"
-msgstr "Date de soumission"
-
-#: app/finance/models.py:13 app/finance/models.py:29 app/finance/models.py:45
-#: app/finance/models.py:61 app/finance/models.py:77
+#: app/finance/forms.py:25 app/finance/models.py:13 app/finance/models.py:29
+#: app/finance/models.py:45 app/finance/models.py:61 app/finance/models.py:77
 #: app/finance/templates/finance/bourse_confirm_delete.html:13
-#: app/finance/templates/finance/index.html:265
-#: app/finance/templates/finance/index.html:347
+#: app/finance/templates/finance/index.html:164
+#: app/finance/templates/finance/index.html:223
 #: app/finance/templates/finance/investissement_confirm_delete.html:13
 #: app/finance/templates/finance/pret_confirm_delete.html:14
 #: app/finance/templates/finance/subvention_confirm_delete.html:13
@@ -59,16 +45,25 @@ msgstr "Date de soumission"
 msgid "Amount requested"
 msgstr "Somme demandé"
 
-#: app/finance/models.py:14 app/finance/models.py:30 app/finance/models.py:46
-#: app/finance/models.py:62 app/finance/models.py:78
-msgid "Received date"
-msgstr "Date reçu"
+#: app/finance/forms.py:31 app/finance/models.py:12 app/finance/models.py:28
+#: app/finance/models.py:44 app/finance/models.py:60 app/finance/models.py:76
+#: app/finance/templates/finance/bourse_confirm_delete.html:12
+#: app/finance/templates/finance/index.html:47
+#: app/finance/templates/finance/index.html:105
+#: app/finance/templates/finance/index.html:163
+#: app/finance/templates/finance/index.html:222
+#: app/finance/templates/finance/investissement_confirm_delete.html:12
+#: app/finance/templates/finance/pret_confirm_delete.html:13
+#: app/finance/templates/finance/subvention_confirm_delete.html:12
+#: app/finance/templates/finance/vente_confirm_delete.html:11
+msgid "Date of submission"
+msgstr "Date de soumission"
 
-#: app/finance/models.py:15 app/finance/models.py:31 app/finance/models.py:47
-#: app/finance/models.py:63 app/finance/models.py:79
+#: app/finance/forms.py:44 app/finance/models.py:15 app/finance/models.py:31
+#: app/finance/models.py:47 app/finance/models.py:63 app/finance/models.py:79
 #: app/finance/templates/finance/bourse_confirm_delete.html:20
-#: app/finance/templates/finance/index.html:267
-#: app/finance/templates/finance/index.html:349
+#: app/finance/templates/finance/index.html:166
+#: app/finance/templates/finance/index.html:225
 #: app/finance/templates/finance/investissement_confirm_delete.html:20
 #: app/finance/templates/finance/pret_confirm_delete.html:21
 #: app/finance/templates/finance/subvention_confirm_delete.html:20
@@ -76,10 +71,25 @@ msgstr "Date reçu"
 msgid "Amount received"
 msgstr "Somme reçu"
 
-#: app/finance/models.py:16 app/finance/models.py:32 app/finance/models.py:48
-#: app/finance/models.py:64 app/finance/models.py:80
+#: app/finance/forms.py:50
+#, fuzzy
+#| msgid "Date of reception"
+msgid "Date de reception"
+msgstr "Date de réception"
+
+#: app/finance/forms.py:63 app/finance/models.py:16 app/finance/models.py:32
+#: app/finance/models.py:48 app/finance/models.py:64 app/finance/models.py:80
 msgid "Description"
 msgstr "Description"
+
+#: app/finance/forms.py:67
+msgid "Write here a brief description."
+msgstr "Écrivez ici une brève description"
+
+#: app/finance/models.py:14 app/finance/models.py:30 app/finance/models.py:46
+#: app/finance/models.py:62 app/finance/models.py:78
+msgid "Received date"
+msgstr "Date reçu"
 
 #: app/finance/models.py:17 app/finance/models.py:33 app/finance/models.py:49
 #: app/finance/models.py:65 app/finance/models.py:81
@@ -88,10 +98,10 @@ msgstr "Compagnie"
 
 #: app/finance/templates/finance/bourse_confirm_delete.html:5
 #: app/finance/templates/finance/bourse_confirm_delete.html:7
-#: app/finance/templates/finance/bourse_form.html:5
-#: app/finance/templates/finance/bourse_form.html:14
-#: app/finance/templates/finance/index.html:26
-#: app/finance/templates/finance/index.html:70
+#: app/finance/templates/finance/index.html:19
+#: app/finance/templates/finance/index.html:38
+#: app/finance/templates/finance/index.html:339
+#: app/finance/templates/finance/index.html:348
 msgid "Grants"
 msgstr "Bourses"
 
@@ -100,11 +110,11 @@ msgid "Are you sure you want to delete this grants ?"
 msgstr "Êtes vous sûr de vouloir supprimer cette bourse ?"
 
 #: app/finance/templates/finance/bourse_confirm_delete.html:16
-#: app/finance/templates/finance/index.html:104
-#: app/finance/templates/finance/index.html:185
-#: app/finance/templates/finance/index.html:266
-#: app/finance/templates/finance/index.html:348
-#: app/finance/templates/finance/index.html:430
+#: app/finance/templates/finance/index.html:49
+#: app/finance/templates/finance/index.html:107
+#: app/finance/templates/finance/index.html:165
+#: app/finance/templates/finance/index.html:224
+#: app/finance/templates/finance/index.html:283
 #: app/finance/templates/finance/investissement_confirm_delete.html:16
 #: app/finance/templates/finance/pret_confirm_delete.html:17
 #: app/finance/templates/finance/subvention_confirm_delete.html:16
@@ -113,16 +123,16 @@ msgid "Date of reception"
 msgstr "Date de réception"
 
 #: app/finance/templates/finance/bourse_confirm_delete.html:25
-#: app/finance/templates/finance/index.html:108
-#: app/finance/templates/finance/index.html:129
-#: app/finance/templates/finance/index.html:189
-#: app/finance/templates/finance/index.html:210
-#: app/finance/templates/finance/index.html:270
-#: app/finance/templates/finance/index.html:291
-#: app/finance/templates/finance/index.html:352
-#: app/finance/templates/finance/index.html:373
-#: app/finance/templates/finance/index.html:434
-#: app/finance/templates/finance/index.html:455
+#: app/finance/templates/finance/index.html:53
+#: app/finance/templates/finance/index.html:74
+#: app/finance/templates/finance/index.html:111
+#: app/finance/templates/finance/index.html:132
+#: app/finance/templates/finance/index.html:169
+#: app/finance/templates/finance/index.html:190
+#: app/finance/templates/finance/index.html:228
+#: app/finance/templates/finance/index.html:249
+#: app/finance/templates/finance/index.html:287
+#: app/finance/templates/finance/index.html:308
 #: app/finance/templates/finance/investissement_confirm_delete.html:25
 #: app/finance/templates/finance/pret_confirm_delete.html:26
 #: app/finance/templates/finance/subvention_confirm_delete.html:25
@@ -138,141 +148,163 @@ msgstr "Supprimer"
 msgid "Cancel"
 msgstr "Annuler"
 
-#: app/finance/templates/finance/index.html:19
+#: app/finance/templates/finance/finance_form.html:20
+msgid "Save"
+msgstr "Enregistrer"
+
+#: app/finance/templates/finance/finance_form.html:23
+msgid "Reset"
+msgstr "Réinitialiser"
+
+#: app/finance/templates/finance/index.html:12
 msgid "Finance of"
 msgstr "Finance de"
 
-#: app/finance/templates/finance/index.html:23
-msgid "Summary"
-msgstr "Sommaire"
-
-#: app/finance/templates/finance/index.html:25
-#: app/finance/templates/finance/index.html:34
+#: app/finance/templates/finance/index.html:18
+#: app/finance/templates/finance/index.html:29
 msgid "Overview"
 msgstr "Vue générale"
 
-#: app/finance/templates/finance/index.html:27
-#: app/finance/templates/finance/index.html:151
+#: app/finance/templates/finance/index.html:20
+#: app/finance/templates/finance/index.html:96
+#: app/finance/templates/finance/index.html:340
+#: app/finance/templates/finance/index.html:353
 #: app/finance/templates/finance/subvention_confirm_delete.html:5
 #: app/finance/templates/finance/subvention_confirm_delete.html:7
-#: app/finance/templates/finance/subvention_form.html:4
-#: app/finance/templates/finance/subvention_form.html:13
 msgid "Subsidies"
 msgstr "Subventions"
 
-#: app/finance/templates/finance/index.html:28
-#: app/finance/templates/finance/index.html:232
+#: app/finance/templates/finance/index.html:21
+#: app/finance/templates/finance/index.html:154
+#: app/finance/templates/finance/index.html:341
+#: app/finance/templates/finance/index.html:358
 #: app/finance/templates/finance/investissement_confirm_delete.html:5
 #: app/finance/templates/finance/investissement_confirm_delete.html:7
-#: app/finance/templates/finance/investissement_form.html:4
-#: app/finance/templates/finance/investissement_form.html:13
 msgid "Investments"
 msgstr "Investissements"
 
-#: app/finance/templates/finance/index.html:29
-#: app/finance/templates/finance/index.html:314
+#: app/finance/templates/finance/index.html:22
+#: app/finance/templates/finance/index.html:213
+#: app/finance/templates/finance/index.html:342
+#: app/finance/templates/finance/index.html:363
 #: app/finance/templates/finance/pret_confirm_delete.html:5
 #: app/finance/templates/finance/pret_confirm_delete.html:7
-#: app/finance/templates/finance/pret_form.html:4
-#: app/finance/templates/finance/pret_form.html:13
 msgid "Loans"
 msgstr "Prêts"
 
-#: app/finance/templates/finance/index.html:30
-#: app/finance/templates/finance/index.html:396
+#: app/finance/templates/finance/index.html:23
+#: app/finance/templates/finance/index.html:272
+#: app/finance/templates/finance/index.html:343
+#: app/finance/templates/finance/index.html:368
 #: app/finance/templates/finance/vente_confirm_delete.html:5
 #: app/finance/templates/finance/vente_confirm_delete.html:7
-#: app/finance/templates/finance/vente_form.html:4
-#: app/finance/templates/finance/vente_form.html:13
 msgid "Sales"
 msgstr "Ventes"
 
-#: app/finance/templates/finance/index.html:67
-#: app/finance/templates/finance/index.html:148
-#: app/finance/templates/finance/index.html:229
-#: app/finance/templates/finance/index.html:310
-#: app/finance/templates/finance/index.html:392
-#: app/finance/templates/finance/index.html:474
+#: app/finance/templates/finance/index.html:35
+#: app/finance/templates/finance/index.html:93
+#: app/finance/templates/finance/index.html:151
+#: app/finance/templates/finance/index.html:209
+#: app/finance/templates/finance/index.html:268
+#: app/finance/templates/finance/index.html:327
 msgid "Return to the top of the page"
 msgstr "Retour en haut de la page"
 
-#: app/finance/templates/finance/index.html:103
-#: app/finance/templates/finance/index.html:184
+#: app/finance/templates/finance/index.html:48
+#: app/finance/templates/finance/index.html:106
 msgctxt "Féminin"
 msgid "Amount requested"
 msgstr "Somme demandée"
 
-#: app/finance/templates/finance/index.html:105
-#: app/finance/templates/finance/index.html:186
-#: app/finance/templates/finance/index.html:431
+#: app/finance/templates/finance/index.html:50
+#: app/finance/templates/finance/index.html:108
+#: app/finance/templates/finance/index.html:284
 msgctxt "Féminin"
 msgid "Amount received"
 msgstr "Somme reçue"
 
-#: app/finance/templates/finance/index.html:107
-#: app/finance/templates/finance/index.html:128
-#: app/finance/templates/finance/index.html:188
-#: app/finance/templates/finance/index.html:209
-#: app/finance/templates/finance/index.html:269
-#: app/finance/templates/finance/index.html:290
-#: app/finance/templates/finance/index.html:351
-#: app/finance/templates/finance/index.html:372
-#: app/finance/templates/finance/index.html:433
-#: app/finance/templates/finance/index.html:454
+#: app/finance/templates/finance/index.html:52
+#: app/finance/templates/finance/index.html:73
+#: app/finance/templates/finance/index.html:110
+#: app/finance/templates/finance/index.html:131
+#: app/finance/templates/finance/index.html:168
+#: app/finance/templates/finance/index.html:189
+#: app/finance/templates/finance/index.html:227
+#: app/finance/templates/finance/index.html:248
+#: app/finance/templates/finance/index.html:286
+#: app/finance/templates/finance/index.html:307
 msgid "Modify"
 msgstr "Modifier"
 
-#: app/finance/templates/finance/index.html:118
-#: app/finance/templates/finance/index.html:123
-#: app/finance/templates/finance/index.html:199
-#: app/finance/templates/finance/index.html:204
-#: app/finance/templates/finance/index.html:280
-#: app/finance/templates/finance/index.html:285
-#: app/finance/templates/finance/index.html:362
-#: app/finance/templates/finance/index.html:367
-#: app/finance/templates/finance/index.html:444
-#: app/finance/templates/finance/index.html:449
+#: app/finance/templates/finance/index.html:63
+#: app/finance/templates/finance/index.html:68
+#: app/finance/templates/finance/index.html:121
+#: app/finance/templates/finance/index.html:126
+#: app/finance/templates/finance/index.html:179
+#: app/finance/templates/finance/index.html:184
+#: app/finance/templates/finance/index.html:238
+#: app/finance/templates/finance/index.html:243
+#: app/finance/templates/finance/index.html:297
+#: app/finance/templates/finance/index.html:302
 msgid "In waiting"
 msgstr "En attente"
 
-#: app/finance/templates/finance/index.html:144
+#: app/finance/templates/finance/index.html:89
 msgid "New grant"
 msgstr "Nouvelle bourse"
 
-#: app/finance/templates/finance/index.html:225
+#: app/finance/templates/finance/index.html:147
 msgid "New subsidy"
 msgstr "Nouvelle subvention"
 
-#: app/finance/templates/finance/index.html:306
+#: app/finance/templates/finance/index.html:205
 msgid "New investment"
 msgstr "Nouvel investissement"
 
-#: app/finance/templates/finance/index.html:388
+#: app/finance/templates/finance/index.html:264
 msgid "New loan"
 msgstr "Nouveau prêt"
 
-#: app/finance/templates/finance/index.html:428
+#: app/finance/templates/finance/index.html:281
 msgid "Date ODS"
 msgstr "Date ODS"
 
-#: app/finance/templates/finance/index.html:429
+#: app/finance/templates/finance/index.html:282
 msgid "Amount ODS"
 msgstr "Somme ODS"
 
-#: app/finance/templates/finance/index.html:470
+#: app/finance/templates/finance/index.html:323
 msgid "New sale"
 msgstr "Nouvelle vente"
+
+#: app/finance/templates/finance/index.html:338
+#: app/finance/templates/finance/index.html:347
+#: app/finance/templates/finance/index.html:352
+#: app/finance/templates/finance/index.html:357
+#: app/finance/templates/finance/index.html:362
+#, fuzzy
+#| msgid "Amount requested"
+msgid "Requested"
+msgstr "Somme demandé"
+
+#: app/finance/templates/finance/index.html:338
+#: app/finance/templates/finance/index.html:347
+#: app/finance/templates/finance/index.html:352
+#: app/finance/templates/finance/index.html:357
+#: app/finance/templates/finance/index.html:362
+#: app/finance/templates/finance/index.html:367
+#, fuzzy
+#| msgid "Received date"
+msgid "Received"
+msgstr "Date reçu"
+
+#: app/finance/templates/finance/index.html:367
+msgid "Service offering"
+msgstr "Offre de service"
 
 #: app/finance/templates/finance/investissement_confirm_delete.html:8
 msgid "Are you sure you want to delete this investments ?"
 msgstr "Êtes vous sûr de vouloir supprimer cet investissement ?"
-
-#: app/finance/templates/finance/investissement_form.html:16
-#: app/finance/templates/finance/pret_form.html:16
-#: app/finance/templates/finance/subvention_form.html:16
-#: app/finance/templates/finance/vente_form.html:16
-msgid "Save"
-msgstr "Enregistrer"
 
 #: app/finance/templates/finance/pret_confirm_delete.html:8
 msgid "Are you sure you want to delete this loan ?"
@@ -285,3 +317,6 @@ msgstr "Êtes vous sûr de vouloir supprimer cette subvention ?"
 #: app/finance/templates/finance/vente_confirm_delete.html:8
 msgid "Are you sure you want to delete this sale ?"
 msgstr "Êtes vous sûr de vouloir supprimer cette vente ?"
+
+#~ msgid "Summary"
+#~ msgstr "Sommaire"

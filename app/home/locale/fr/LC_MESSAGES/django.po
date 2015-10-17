@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-10 12:58+0000\n"
+"POT-Creation-Date: 2015-10-17 20:47+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,91 +18,79 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: app/home/forms.py:43
-msgid "New password"
-msgstr "Nouveau mot de passe"
+#: app/home/forms.py:15 app/home/forms.py:18
+msgid "First name"
+msgstr "Prénom"
 
-#: app/home/forms.py:50
-msgid "Actual password"
-msgstr "Mot de passe actuel"
+#: app/home/forms.py:21 app/home/forms.py:24
+msgid "Last name"
+msgstr "Nom"
 
-#: app/home/forms.py:55
-msgid "New password again"
-msgstr "Nouveau mot de passe encore"
+#: app/home/forms.py:27 app/home/forms.py:30
+msgid "Username"
+msgstr "Nom d'utilisateur"
 
-#: app/home/forms.py:73
-msgid "Your new password :"
-msgstr "Votre nouveau mot de passe :"
+#: app/home/forms.py:33 app/home/forms.py:36
+msgid "Email"
+msgstr "Courriel"
 
-#: app/home/forms.py:75
-msgid "must contain at least 6 characters"
-msgstr "Doit contenir au moins 6 caractères"
-
-#: app/home/forms.py:77
-msgid "must not be more than 76 characters"
-msgstr "Ne doit pas contenir plus de 76 caractères"
-
-#: app/home/forms.py:82
-msgid "Save"
-msgstr "Enregistrer"
-
-#: app/home/models.py:23
+#: app/home/models.py:25
 msgid "Education"
 msgstr "Niveau d'étude"
 
-#: app/home/models.py:25
+#: app/home/models.py:27
 msgid "Education level"
 msgstr "Niveau d'étude"
 
-#: app/home/models.py:32
+#: app/home/models.py:36
 msgid "Expertise"
 msgstr "Expertise"
 
-#: app/home/models.py:34
+#: app/home/models.py:38
 msgid "Area of expertise"
 msgstr "Aires d'expertise"
 
-#: app/home/models.py:45
+#: app/home/models.py:50
 msgid "User"
 msgstr "Utilisateur"
 
-#: app/home/models.py:46
+#: app/home/models.py:51
 msgid "Identifiant"
 msgstr "Identifiant"
 
-#: app/home/models.py:49
+#: app/home/models.py:54
 msgid "Phone"
 msgstr "téléphone"
 
-#: app/home/models.py:50
+#: app/home/models.py:55
 msgid "Web site"
 msgstr "site web"
 
-#: app/home/models.py:51
+#: app/home/models.py:56
 msgid "Picture"
 msgstr "Photo"
 
-#: app/home/models.py:53
+#: app/home/models.py:58
 msgid "Facebook"
 msgstr "Facebook"
 
-#: app/home/models.py:54
+#: app/home/models.py:59
 msgid "Twitter"
 msgstr "Twitter"
 
-#: app/home/models.py:55
+#: app/home/models.py:60
 msgid "Google+"
 msgstr "Google+"
 
-#: app/home/models.py:56
+#: app/home/models.py:61
 msgid "linkedIn"
 msgstr "linkedIn"
 
-#: app/home/models.py:94
+#: app/home/models.py:108
 msgid "Title"
 msgstr "Titre"
 
-#: app/home/models.py:95
+#: app/home/models.py:109
 msgid "Image"
 msgstr "Image"
 
@@ -156,9 +144,13 @@ msgstr "Désolé pour le dérangement"
 msgid "Account"
 msgstr "Compte"
 
-#: app/home/templates/home/password_update_form.html:8
-msgid "My account"
-msgstr "Mon compte"
+#: app/home/templates/home/password_update_form.html:12
+msgid "Save"
+msgstr "Enregistrer"
+
+#: app/home/templates/home/password_update_form.html:15
+msgid "Reset"
+msgstr "Réinitialiser"
 
 #: app/home/templates/home/summary.html:18
 msgid "Select a status"

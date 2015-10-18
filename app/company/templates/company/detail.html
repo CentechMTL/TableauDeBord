@@ -12,141 +12,148 @@
 
 {% block content %}
     {% if isCentech or isFounderOfCompany%}
-    <div class="row" style="margin-bottom: 20px;">
-        <a href="{% url 'company:update' company.id %}" style="color: white;">
-            <div class="col-sm-12" align="center" style="border: 1px solid lightgrey; border-top: none; background-color: #293846;">
-                {% trans "Modify this company" %}
-            </div>
-        </a>
+    <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuCompany" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            {% trans "Actions on this company" %}
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuCompany">
+            <li><a href="{% url 'company:update' company.id %}">{% trans "Modify this company" %}</a></li>
+        </ul>
     </div>
     {% endif %}
     <div class="row">
         <div class="col-sm-12" align="center">
-            <div>
-                {% if company.logo != "" %}
-                    <img class="logo" src="/media/{{ company.logo }}" /><br>
-                {% endif %}
-                <h1><strong>{{ company.name }}</strong></h1>
+            {% if company.logo != "" %}
+                <img class="logo thumbnail" src="/media/{{ company.logo }}" />
+            {% endif %}
 
-                {% if company.facebook %}
-                    <a href="{{company.facebook}}"><i class="fa fa-facebook-square fa-3x"></i></a>
-                {% endif %}
-                {% if company.twitter %}
-                    <a href="{{company.twitter}}"><i class="fa fa-twitter-square fa-3x"></i></a>
-                {% endif %}
-                {% if company.googlePlus %}
-                    <a href="{{company.googlePlus}}"><i class="fa fa-google-plus-square fa-3x"></i></a>
-                {% endif %}
-                {% if company.linkedIn %}
-                    <a href="{{company.linkedIn}}"><i class="fa fa-linkedin-square fa-3x"></i></a>
-                {% endif %}
-                <br><br>
+            <h1><strong>{{ company.name }}</strong></h1>
 
-                {% trans "Incubation phase" %} : {{ company.companyStatus }}<br>
-                {% if company.url != "" %}
-                {% trans "Web site" %} : <a href="{{ company.url }}">{{ company.url }}</a><br><br>
-                {% endif %}
-                {% if company.incubated_on %}
-                    {% trans "Incubation date" %} : {{ company.incubated_on }}
-                    {% if company.endOfIncubation %}
-                        <br>{% trans "End of incubation date" %} : {{ company.endOfIncubation }}
-                    {% endif %}
-                {% endif %}
-                <br><br>
-            </div>
+            {% if company.facebook %}
+                <a href="{{company.facebook}}"><i class="fa fa-facebook-square fa-3x"></i></a>
+            {% endif %}
+            {% if company.twitter %}
+                <a href="{{company.twitter}}"><i class="fa fa-twitter-square fa-3x"></i></a>
+            {% endif %}
+            {% if company.googlePlus %}
+                <a href="{{company.googlePlus}}"><i class="fa fa-google-plus-square fa-3x"></i></a>
+            {% endif %}
+            {% if company.linkedIn %}
+                <a href="{{company.linkedIn}}"><i class="fa fa-linkedin-square fa-3x"></i></a>
+            {% endif %}
+            <br>
+            {% if company.url != "" %}
+            {% trans "Web site" %} : <a href="{{ company.url }}">{{ company.url }}</a><br><br>
+            {% endif %}
+            <br>
         </div>
     </div>
-    {% if company.get_percentage_incubation_time %}
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="meter">
-                {% if company.get_percentage_incubation_time > 95 %}
-                    <span class="red" style="width: {{company.get_percentage_incubation_time}}%">{{company.get_percentage_incubation_time}}%</span>
-                {% elif company.get_percentage_incubation_time > 70 %}
-                    <span class="yellow" style="width: {{company.get_percentage_incubation_time}}%">{{company.get_percentage_incubation_time}}%</span>
-                {% else %}
-                    <span class="green" style="width: {{company.get_percentage_incubation_time}}%">{{company.get_percentage_incubation_time}}%</span>
-                {% endif %}
-            </div>
-            <div align="center">{% trans "Time spent incubation" %} : {{company.get_percentage_incubation_time}}%</div><br>
+
+    <div class="panel panel-default">
+        <div class="panel-heading"><h3>{% trans "Incubation" %}</h3></div>
+        <div class="panel-body text-justify">
+            <dl class="dl-horizontal">
+                <dt>{% trans "Incubation phase" context "20 characters max"%} :</dt>
+                <dd>{{ company.companyStatus }}</dd>
+
+            {% if company.incubated_on and company.endOfIncubation %}
+                <dt>{% trans "Begin date of phase" context "20 characters max" %} :</dt>
+                <dd>{{ company.incubated_on }}</dd>
+                <dt>{% trans "End date of phase" context "20 characters max" %} :</dt>
+                <dd>{{ company.endOfIncubation }}</dd>
+            {% endif %}
+
+            </dl>
+
+            {% if company.get_percentage_incubation_time %}
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="meter">
+                                {% if company.get_percentage_incubation_time > 95 %}
+                                    <span class="red" style="width: {{company.get_percentage_incubation_time}}%">{{company.get_percentage_incubation_time}}%</span>
+                                {% elif company.get_percentage_incubation_time > 70 %}
+                                    <span class="yellow" style="width: {{company.get_percentage_incubation_time}}%">{{company.get_percentage_incubation_time}}%</span>
+                                {% else %}
+                                    <span class="green" style="width: {{company.get_percentage_incubation_time}}%">{{company.get_percentage_incubation_time}}%</span>
+                                {% endif %}
+                            </div>
+                            <div align="center">{% trans "Time spent incubation" %} : {{company.get_percentage_incubation_time}}%</div>
+                        </div>
+                    </div>
+            {% endif %}
         </div>
     </div>
-    {% endif %}
-    <div class="well well-lg" style="background-color: #87cefa">
-     <div class="row">
-        <div class="col-sm-12" align="center" style="text-align: justify;">
-            <h2 align="center"><strong>{% trans "About" %}</strong></h2>
-                <!--TODO Add a markdown system-->
-                <p>{{ company.description }}</p>
+    <div class="panel panel-default">
+        <div class="panel-heading"><h3>{% trans "About" %}</h3></div>
+        <div class="panel-body text-justify">
+            {{ company.description }}
         </div>
-         </div>
     </div>
     {% if company.video != "" %}
-    <div class="well well-lg" style="background-color: gold">
-     <div class="row">
-        <div class="col-sm-12" align="center">
-            <h2 align="center"><strong>{% trans "Video pitch" %}</strong></h2>
+    <div class="panel panel-default">
+        <div class="panel-heading"><h3>{% trans "Video pitch" %}</h3></div>
+        <div class="panel-body text-center">
                 {% video company.video as my_video %}
                     {{ my_video|embed:'medium' }}
                 {% endvideo %}
         </div>
-         </div>
     </div>
     {% endif %}
-    <div class="well well-lg" style="background-color: lightgreen">
-        <h2 align="center"><strong>{% trans "Founders" %}</strong></h2>
-        {% if company.founders.all %}
-            <div class="row">
-            {% for founder in company.founders.all %}
-            <div class="col-md-4" style="height: 150px; margin-bottom: 30px;">
-                <a href="{% url 'founder:detail' founder.pk %}">
-                    {% if founder.picture != "" %}
-                        <img class="avatar" src="/media/{{ founder.picture }}" style="height:100%; max-width: 100%;"/><br>
-                    {% else %}
-                        <img class="avatar" src="/media/user_profile/default.jpg" style="height:100%; max-width: 100%;"/><br>
+    <div class="panel panel-default">
+        <div class="panel-heading"><h3>{% trans "Founders" %}</h3></div>
+        <div class="panel-body">
+            {% if company.founders.all %}
+                <div class="row">
+                {% for founder in company.founders.all %}
+                    <div class="col-md-4" style="height: 150px; margin-bottom: 30px;">
+                        <a href="{% url 'founder:detail' founder.pk %}">
+                            {% if founder.picture != "" %}
+                                <img class="avatar" src="/media/{{ founder.picture }}" style="height:100%; max-width: 100%;"/><br>
+                            {% else %}
+                                <img class="avatar" src="/media/user_profile/default.jpg" style="height:100%; max-width: 100%;"/><br>
+                            {% endif %}
+
+                            {{ founder.user.first_name }} {{ founder.user.last_name }}
+                        </a>
+                    </div>
+                    {% if forloop.counter|divisibleby:3 %}
+                        <div class="row" style="margin-bottom: 50px;">
+                        </div>
                     {% endif %}
-
-                    {{ founder.user.first_name }} {{ founder.user.last_name }}
-                </a>
-                <br>
-            </div>
-            {% if forloop.counter|divisibleby:3 %}
-                <div class="row" style="margin-bottom: 50px;">
+                {% endfor %}
                 </div>
-            {% endif %}
-            {% endfor %}
-            </div>
-
-        {% else %}
-            <p>{% trans "No founders exist." %}</p>
-        {% endif %}
-    </div>
-    <div class="well well-lg" style="background-color: #87cefa">
-        <h2 align="center"><strong>{% trans "Mentors" %}</strong></h2>
-        {% if company.mentors.all %}
-        <div class="row">
-            {% for mentor in company.mentors.all %}
-
-            <div class="col-md-4" style="height: 150px; margin-bottom: 30px;">
-                <a href="{% url 'mentor:detail' mentor.pk %}">
-                    {% if mentor.picture != "" %}
-                        <img class="avatar" src="/media/{{ mentor.picture }}" style="height:100%; max-width: 100%;" /><br>
-                    {% else %}
-                        <img class="avatar" src="/media/user_profile/default.jpg" style="height:100%; max-width: 100%;" /><br>
-                    {% endif %}
-                    {{ mentor.user.first_name }} {{ mentor.user.last_name }}
-                </a>
-                <br>
-            </div>
-            {% if forloop.counter|divisibleby:3 %}
-            <div class="row" style="margin-bottom: 50px;">
-                </div>
-            {% endif %}
-            {% endfor %}
-            </div>
             {% else %}
-            <p>{% trans "No mentors exist." %}</p>
-        {% endif %}
+                <p>{% trans "No founders exist." %}</p>
+            {% endif %}
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading"><h3>{% trans "Mentors" %}</h3></div>
+        <div class="panel-body">
+            {% if company.mentors.all %}
+                <div class="row">
+                    {% for mentor in company.mentors.all %}
+                        <div class="col-md-4" style="height: 150px; margin-bottom: 30px;">
+                            <a href="{% url 'mentor:detail' mentor.pk %}">
+                                {% if mentor.picture != "" %}
+                                    <img class="avatar" src="/media/{{ mentor.picture }}" style="height:100%; max-width: 100%;" /><br>
+                                {% else %}
+                                    <img class="avatar" src="/media/user_profile/default.jpg" style="height:100%; max-width: 100%;" /><br>
+                                {% endif %}
+                                {{ mentor.user.first_name }} {{ mentor.user.last_name }}
+                            </a>
+                        </div>
+                        {% if forloop.counter|divisibleby:3 %}
+                            <div class="row" style="margin-bottom: 50px;">
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p>{% trans "No mentors exist." %}</p>
+            {% endif %}
+        </div>
     </div>
     {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 {% endblock %}

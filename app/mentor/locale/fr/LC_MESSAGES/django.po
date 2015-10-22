@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-17 20:47+0000\n"
+"POT-Creation-Date: 2015-10-22 01:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,7 +22,7 @@ msgstr ""
 msgid "Search by name"
 msgstr "Rechercher par nom"
 
-#: app/mentor/forms.py:66 app/mentor/templates/mentor/detail.html:44
+#: app/mentor/forms.py:66 app/mentor/templates/mentor/detail.html:48
 msgid "Directory of ETS"
 msgstr "Bottin ETS"
 
@@ -66,7 +66,7 @@ msgstr "https://ca.linkedin.com/in/nomUtilisateur"
 msgid "Phone number"
 msgstr "Numéro de téléphone"
 
-#: app/mentor/forms.py:103 app/mentor/templates/mentor/detail.html:41
+#: app/mentor/forms.py:103 app/mentor/templates/mentor/detail.html:45
 msgid "Web site"
 msgstr "Site web"
 
@@ -79,7 +79,7 @@ msgid "Write here a brief summary of your skills and your career."
 msgstr "Ecrivez ici un bref résumé de vos compétences et de votre parcours."
 
 #: app/mentor/forms.py:120 app/mentor/models.py:17
-#: app/mentor/templates/mentor/detail.html:63
+#: app/mentor/templates/mentor/detail.html:65
 msgid "Areas of expertise"
 msgstr "Aires d'expertise"
 
@@ -87,7 +87,7 @@ msgstr "Aires d'expertise"
 msgid "Picture"
 msgstr "Photo"
 
-#: app/mentor/models.py:18 app/mentor/templates/mentor/detail.html:53
+#: app/mentor/models.py:18 app/mentor/templates/mentor/detail.html:56
 msgid "About"
 msgstr "A propos"
 
@@ -99,19 +99,23 @@ msgstr "Type"
 msgid "URL"
 msgstr "URL"
 
-#: app/mentor/templates/mentor/detail.html:9
+#: app/mentor/templates/mentor/detail.html:8
+msgid "Actions on this mentor"
+msgstr "Actions sur ce mentor"
+
+#: app/mentor/templates/mentor/detail.html:12
 msgid "Modify this mentor"
 msgstr "Modifier ce mentor"
 
-#: app/mentor/templates/mentor/detail.html:38
+#: app/mentor/templates/mentor/detail.html:42
 msgid "Phone"
 msgstr "Téléphone"
 
-#: app/mentor/templates/mentor/detail.html:73
+#: app/mentor/templates/mentor/detail.html:77
 msgid "Companies"
 msgstr "Compagnies"
 
-#: app/mentor/templates/mentor/detail.html:97
+#: app/mentor/templates/mentor/detail.html:102
 msgid "No companies exist."
 msgstr "Aucune compagnies."
 

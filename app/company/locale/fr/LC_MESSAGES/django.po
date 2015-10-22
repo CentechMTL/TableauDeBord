@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-17 20:47+0000\n"
+"POT-Creation-Date: 2015-10-22 01:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -104,8 +104,7 @@ msgstr "Description"
 msgid "Write here a brief summary of your business."
 msgstr "Ecrivez ici un bref résumé de votre entreprise."
 
-#: app/company/forms.py:148 app/company/templates/company/detail.html:45
-#: app/company/templates/company/filter.html:24
+#: app/company/forms.py:148 app/company/templates/company/filter.html:24
 #: app/company/templates/company/index.html:38
 msgid "Incubation phase"
 msgstr "Phase d'incubation"
@@ -119,12 +118,12 @@ msgid "Incubation end on"
 msgstr "Incubation terminée le"
 
 #: app/company/forms.py:178 app/company/models.py:39
-#: app/company/templates/company/detail.html:97 templates/dashboard.html:54
+#: app/company/templates/company/detail.html:105 templates/dashboard.html:54
 msgid "Founders"
 msgstr "Fondateurs"
 
 #: app/company/forms.py:185 app/company/models.py:41
-#: app/company/templates/company/detail.html:125 templates/dashboard.html:51
+#: app/company/templates/company/detail.html:133 templates/dashboard.html:51
 msgid "Mentors"
 msgstr "Mentors"
 
@@ -163,35 +162,50 @@ msgstr "Compagnie"
 msgid "Reset"
 msgstr "Réinitialiser"
 
-#: app/company/templates/company/detail.html:18
+#: app/company/templates/company/detail.html:17
+msgid "Actions on this company"
+msgstr "Actions sur cette compagnie"
+
+#: app/company/templates/company/detail.html:21
 msgid "Modify this company"
 msgstr "Modifier cette compagnie"
 
-#: app/company/templates/company/detail.html:50
-msgid "Incubation date"
-msgstr "Date d'incubation"
+#: app/company/templates/company/detail.html:54
+msgid "Incubation"
+msgstr "Incubation"
 
-#: app/company/templates/company/detail.html:52
-msgid "End of incubation date"
-msgstr "Date de fin d'incubation"
+#: app/company/templates/company/detail.html:57
+msgctxt "20 characters max"
+msgid "Incubation phase"
+msgstr "Phase d'incubation"
 
-#: app/company/templates/company/detail.html:71
+#: app/company/templates/company/detail.html:61
+msgctxt "20 characters max"
+msgid "Begin date of phase"
+msgstr "Date de début"
+
+#: app/company/templates/company/detail.html:63
+msgctxt "20 characters max"
+msgid "End date of phase"
+msgstr "Date de fin"
+
+#: app/company/templates/company/detail.html:81
 msgid "Time spent incubation"
 msgstr "Temps d'incubation passé"
 
-#: app/company/templates/company/detail.html:78
+#: app/company/templates/company/detail.html:88
 msgid "About"
 msgstr "A propos"
 
-#: app/company/templates/company/detail.html:88
+#: app/company/templates/company/detail.html:95
 msgid "Video pitch"
 msgstr "Vidéo de présentation"
 
-#: app/company/templates/company/detail.html:121
+#: app/company/templates/company/detail.html:128
 msgid "No founders exist."
 msgstr "Aucun fondateurs."
 
-#: app/company/templates/company/detail.html:148
+#: app/company/templates/company/detail.html:155
 msgid "No mentors exist."
 msgstr "Aucun mentors."
 
@@ -321,7 +335,7 @@ msgstr "KanBoard"
 msgid "Welcome to the Centech Dashboard."
 msgstr "Bienvenue sur le tableau de bord du Centech"
 
-#: templates/dashboard.html:137
+#: templates/dashboard.html:134 templates/dashboard.html.py:137
 msgid "Language"
 msgstr "Langage"
 
@@ -384,6 +398,12 @@ msgstr "Connexion"
 #: templates/landing_base.html:114
 msgid "All Rights Reserved"
 msgstr "Tous droits réservés"
+
+#~ msgid "Incubation date"
+#~ msgstr "Date d'incubation"
+
+#~ msgid "End of incubation date"
+#~ msgstr "Date de fin d'incubation"
 
 #~ msgid "New status"
 #~ msgstr "Nouveau statut"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-17 20:47+0000\n"
+"POT-Creation-Date: 2015-10-22 01:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,7 +26,7 @@ msgstr "Rechercher par nom"
 msgid "Phone number"
 msgstr "Numéro de téléphone"
 
-#: app/founder/forms.py:60 app/founder/templates/founder/detail.html:41
+#: app/founder/forms.py:60 app/founder/templates/founder/detail.html:43
 msgid "Web site"
 msgstr "Site web"
 
@@ -79,7 +79,7 @@ msgid "Education"
 msgstr "Niveau d'étude"
 
 #: app/founder/forms.py:108 app/founder/models.py:11
-#: app/founder/templates/founder/detail.html:61
+#: app/founder/templates/founder/detail.html:60
 msgid "Areas of expertise"
 msgstr "Aires d'expertise"
 
@@ -95,15 +95,19 @@ msgstr "Niveau d'étude"
 msgid "Equity"
 msgstr "Equité"
 
-#: app/founder/models.py:13 app/founder/templates/founder/detail.html:50
+#: app/founder/models.py:13 app/founder/templates/founder/detail.html:51
 msgid "About"
 msgstr "A propos"
 
-#: app/founder/templates/founder/detail.html:9
+#: app/founder/templates/founder/detail.html:8
+msgid "Actions on this founder"
+msgstr "Actions sur ce fondateur"
+
+#: app/founder/templates/founder/detail.html:12
 msgid "Modify this founder"
 msgstr "Modifier ce fondateur"
 
-#: app/founder/templates/founder/detail.html:38
+#: app/founder/templates/founder/detail.html:40
 msgid "Phone"
 msgstr "Téléphone"
 

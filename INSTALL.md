@@ -12,6 +12,8 @@
 
  3 - Installation des packages requis
 
+>**WARNING** Si vous êtes sous Windows, supprimer mysql-python du fichier requirements.txt et installer le manuellement depuis [cette page](https://pypi.python.org/pypi/MySQL-python/1.2.5)
+
 ```
 cd chemin/vers/TableauDeBord/
 pip install -r requirements.txt

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-10 12:58+0000\n"
+"POT-Creation-Date: 2015-10-22 01:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,31 +18,31 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: app/kanboard/forms.py:26 app/kanboard/templates/kanboard/board.html:123
+#: app/kanboard/forms.py:19 app/kanboard/templates/kanboard/board.html:123
 msgid "Complete"
 msgstr "Effectué"
 
-#: app/kanboard/forms.py:41
+#: app/kanboard/forms.py:34
 msgid "Title*"
 msgstr "Titre*"
 
-#: app/kanboard/forms.py:44
+#: app/kanboard/forms.py:37
 msgid "Titre"
 msgstr "Titre"
 
-#: app/kanboard/forms.py:47
+#: app/kanboard/forms.py:40
 msgid "Comment"
 msgstr "Commentaire"
 
-#: app/kanboard/forms.py:51
+#: app/kanboard/forms.py:44
 msgid "Write here a brief description."
 msgstr "Ecrivez ici une brève description"
 
-#: app/kanboard/forms.py:59 app/kanboard/templates/kanboard/card.html:31
+#: app/kanboard/forms.py:52 app/kanboard/templates/kanboard/card.html:31
 msgid "Due date"
 msgstr "Date d'échéance"
 
-#: app/kanboard/forms.py:64
+#: app/kanboard/forms.py:57
 msgid "Assign to"
 msgstr "Assignée à"
 

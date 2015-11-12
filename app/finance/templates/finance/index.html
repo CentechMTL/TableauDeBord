@@ -369,10 +369,15 @@
             ]);
 
             var options = {
+                backgroundColor : 'none',
                 colors: ['#4285F4', '#56cc32'],
-                backgroundColor : 'none'
+                vAxis: {
+                    minValue: 0,
+                    viewWindow:{
+                        min:0
+                    }
+                }
             };
-
 
             var chartOverview = new google.visualization.ColumnChart(document.getElementById('overview'));
             chartOverview.draw(dataOverview, options);

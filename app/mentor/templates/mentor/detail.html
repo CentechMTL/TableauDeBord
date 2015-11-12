@@ -3,23 +3,27 @@
 {% load i18n %}
 {% block content %}
     {% if isCentech %}
-    <div class="row" style="margin-bottom: 20px;">
-        <a href="{% url 'mentor:update' mentor.userProfile_id %}" style="color: white;">
-            <div class="col-sm-12" align="center" style="border: 1px solid lightgrey; border-top: none; background-color: #293846;">
-                {% trans "Modify this mentor" %}
-            </div>
-        </a>
+    <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuCompany" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            {% trans "Actions on this mentor" %}
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuCompany">
+            <li><a href="{% url 'mentor:update' mentor.userProfile_id %}">{% trans "Modify this mentor" %}</a></li>
+        </ul>
     </div>
     {% endif %}
+
     <div class="row">
         <div class="col-sm-12" align="center">
-            <br>
             {% if mentor.picture != "" %}
-                <img class="avatar" src="/media/{{ mentor.picture }}" /><br>
+                <img class="avatar thumbnail" src="/media/{{ mentor.picture }}" />
             {% else %}
-                <img class="avatar" src="/media/user_profile/default.jpg" /><br>
+                <img class="avatar thumbnail" src="/media/user_profile/default.jpg" />
             {% endif %}
+
             <h1><strong>{{ mentor.user.first_name }} {{ mentor.user.last_name }}</strong></h1>
+
             {% if mentor.facebook %}
                 <a href="{{mentor.facebook}}"><i class="fa fa-facebook-square fa-3x"></i></a>
             {% endif %}
@@ -46,56 +50,57 @@
             <br><br>
         </div>
     </div>
+
     {%if mentor.about != "" %}
-    <div class="well well-lg" style="background-color: #87cefa">
-        <div class="row">
-            <div class="col-sm-12" align="center" style="text-align: justify;">
-                <h2 align="center"><strong>{% trans "About" %}</strong></h2>
-                <!--TODO Set a Mardown system-->
+        <div class="panel panel-default">
+            <div class="panel-heading"><h3>{% trans "About" %}</h3></div>
+            <div class="panel-body text-justify">
                 {{ mentor.about }}
             </div>
         </div>
-    </div>
     {% endif %}
-    <div class="well well-lg" style="background-color: gold">
-     <div class="row">
-        <div class="col-sm-12" align="center">
-            <h2 align="center" ><strong>{% trans "Areas of expertise" %}</strong></h2>
-            <ul>
-                {% for expertise in mentor.expertise.all %}
-                    <li>{{ expertise.expertise }}</li>
-                {% endfor %}
-            </ul>
+
+    {%if mentor.expertise.all%}
+        <div class="panel panel-default">
+            <div class="panel-heading"><h3>{% trans "Areas of expertise" %}</h3></div>
+            <div class="panel-body text-justify">
+                <ul>
+                    {% for expertise in mentor.expertise.all %}
+                        <li>{{ expertise.expertise }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
-         </div>
-    </div>
-    <div class="well well-lg" style="background-color: lightgreen">
-        <h2 align="center"><strong>{% trans "Companies" %}</strong></h2>
-        {% if companies %}
-            <div class="row">
-            {% for company in companies %}
-            <div class="col-md-4" style="height: 150px; margin-bottom: 30px;">
-                <a href="{% url 'company:detail' company.pk %}">
-                    {% if company.logo != "" %}
-                        <img class="avatar" src="/media/{{ company.logo }}" style="height:100%; max-width: 100%;"/><br>
-                    {% else %}
-                        <img class="avatar" src="/media/logo/default.jpg" style="height:100%; max-width: 100%;"/><br>
-                    {% endif %}
+    {% endif %}
 
-                    {{ company.name }}
-                </a>
-                <br>
-            </div>
-            {% if forloop.counter|divisibleby:3 %}
-                <div class="row" style="margin-bottom: 50px;">
+    <div class="panel panel-default">
+        <div class="panel-heading"><h3>{% trans "Companies" %}</h3></div>
+        <div class="panel-body text-justify">
+            {% if companies %}
+                <div class="row">
+                {% for company in companies %}
+                <div class="col-md-4" style="height: 150px; margin-bottom: 30px;">
+                    <a href="{% url 'company:detail' company.pk %}">
+                        {% if company.logo != "" %}
+                            <img class="avatar" src="/media/{{ company.logo }}" style="height:100%; max-width: 100%;"/><br>
+                        {% else %}
+                            <img class="avatar" src="/media/logo/default.jpg" style="height:100%; max-width: 100%;"/><br>
+                        {% endif %}
+
+                        {{ company.name }}
+                    </a>
+                    <br>
                 </div>
-            {% endif %}
-            {% endfor %}
-            </div>
+                {% if forloop.counter|divisibleby:3 %}
+                    <div class="row" style="margin-bottom: 50px;">
+                    </div>
+                {% endif %}
+                {% endfor %}
+                </div>
 
-        {% else %}
-            <p>{% trans "No companies exist." %}</p>
-        {% endif %}
+            {% else %}
+                <p>{% trans "No companies exist." %}</p>
+            {% endif %}
+        </div>
     </div>
-    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 {% endblock %}

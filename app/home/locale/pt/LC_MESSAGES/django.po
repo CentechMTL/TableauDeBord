@@ -7,102 +7,92 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-29 13:03+0000\n"
+"POT-Creation-Date: 2015-10-22 01:05+0000\n"
 "PO-Revision-Date: 2015-10-08 22:30-0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"Last-Translator: \n"
-"Language-Team: \n"
 "X-Generator: Poedit 1.8.5\n"
 
-#: app/home/forms.py:43
-msgid "New password"
-msgstr "Nova senha"
+#: app/home/forms.py:15 app/home/forms.py:18
+msgid "First name"
+msgstr ""
 
-#: app/home/forms.py:50
-msgid "Actual password"
-msgstr "Senha atual"
+#: app/home/forms.py:21 app/home/forms.py:24
+msgid "Last name"
+msgstr ""
 
-#: app/home/forms.py:55
-msgid "New password again"
-msgstr "Repita a nova senha"
+#: app/home/forms.py:27 app/home/forms.py:30
+#, fuzzy
+#| msgid "User"
+msgid "Username"
+msgstr "Usuário"
 
-#: app/home/forms.py:73
-msgid "Your new password :"
-msgstr "Sua nova senha :"
+#: app/home/forms.py:33 app/home/forms.py:36
+msgid "Email"
+msgstr ""
 
-#: app/home/forms.py:75
-msgid "must contain at least 6 characters"
-msgstr "deve conter no mínimo 6 caracteres"
-
-#: app/home/forms.py:77
-msgid "must not be more than 76 characters"
-msgstr "não deve conter mais de 76 caracteres"
-
-#: app/home/forms.py:82
-msgid "Save"
-msgstr "Salvar"
-
-#: app/home/models.py:23
+#: app/home/models.py:25
 msgid "Education"
 msgstr "Formação"
 
-#: app/home/models.py:25
+#: app/home/models.py:27
 msgid "Education level"
 msgstr "Nível de formação"
 
-#: app/home/models.py:32
+#: app/home/models.py:36
 msgid "Expertise"
 msgstr "Especialização"
 
-#: app/home/models.py:34
+#: app/home/models.py:38
 msgid "Area of expertise"
 msgstr "Área de especialização"
 
-#: app/home/models.py:45
+#: app/home/models.py:50
 msgid "User"
 msgstr "Usuário"
 
-#: app/home/models.py:46
+#: app/home/models.py:51
 msgid "Identifiant"
 msgstr "Identificação"
 
-#: app/home/models.py:49
+#: app/home/models.py:54
 msgid "Phone"
 msgstr "Telefone"
 
-#: app/home/models.py:50
+#: app/home/models.py:55
 msgid "Web site"
 msgstr "Website"
 
-#: app/home/models.py:51
+#: app/home/models.py:56
 msgid "Picture"
 msgstr "Foto"
 
-#: app/home/models.py:53
+#: app/home/models.py:58
 msgid "Facebook"
 msgstr "Facebook"
 
-#: app/home/models.py:54
+#: app/home/models.py:59
 msgid "Twitter"
 msgstr "Twitter"
 
-#: app/home/models.py:55
+#: app/home/models.py:60
 msgid "Google+"
 msgstr "Google+"
 
-#: app/home/models.py:56
+#: app/home/models.py:61
 msgid "linkedIn"
 msgstr "LinkedIn"
 
-#: app/home/models.py:94
+#: app/home/models.py:108
 msgid "Title"
 msgstr "Título"
 
-#: app/home/models.py:95
+#: app/home/models.py:109
 msgid "Image"
 msgstr "Imagem"
 
@@ -158,9 +148,13 @@ msgstr "Desculpe pela inconveniência"
 msgid "Account"
 msgstr "Conta"
 
-#: app/home/templates/home/password_update_form.html:8
-msgid "My account"
-msgstr "Minha conta"
+#: app/home/templates/home/password_update_form.html:12
+msgid "Save"
+msgstr "Salvar"
+
+#: app/home/templates/home/password_update_form.html:15
+msgid "Reset"
+msgstr ""
 
 #: app/home/templates/home/summary.html:18
 msgid "Select a status"
@@ -277,3 +271,24 @@ msgstr "Seu login e senha não conferem. Por favor tente novamente."
 #: app/home/templates/registration/login.html:12
 msgid "If it's an error, please contact the administrator"
 msgstr "Se há um erro, por favor contate o administrador"
+
+#~ msgid "New password"
+#~ msgstr "Nova senha"
+
+#~ msgid "Actual password"
+#~ msgstr "Senha atual"
+
+#~ msgid "New password again"
+#~ msgstr "Repita a nova senha"
+
+#~ msgid "Your new password :"
+#~ msgstr "Sua nova senha :"
+
+#~ msgid "must contain at least 6 characters"
+#~ msgstr "deve conter no mínimo 6 caracteres"
+
+#~ msgid "must not be more than 76 characters"
+#~ msgstr "não deve conter mais de 76 caracteres"
+
+#~ msgid "My account"
+#~ msgstr "Minha conta"

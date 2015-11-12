@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-10 12:58+0000\n"
+"POT-Creation-Date: 2015-10-22 01:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,137 +18,121 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: app/company/forms.py:40 app/company/forms.py:105 app/company/forms.py:211
-#: app/company/models.py:19 app/company/models.py:31
+#: app/company/forms.py:41 app/company/forms.py:83 app/company/models.py:19
+#: app/company/models.py:31
 msgid "Name"
 msgstr "Nom"
 
-#: app/company/forms.py:43
+#: app/company/forms.py:44
 msgid "Name of the new status"
 msgstr "Nom du nouveau statut"
 
-#: app/company/forms.py:53
-msgid "New status"
-msgstr "Nouveau statut"
-
-#: app/company/forms.py:56 app/company/forms.py:82 app/company/forms.py:206
-#: app/company/forms.py:298 app/company/forms.py:383
-#: app/company/templates/company/presence_form.html:19
-msgid "Save"
-msgstr "Enregistrer"
-
-#: app/company/forms.py:61 app/company/models.py:20
+#: app/company/forms.py:49 app/company/models.py:20
 msgid "Comment"
 msgstr "Commentaire"
 
-#: app/company/forms.py:65
+#: app/company/forms.py:53
 msgid "Write here a comment about this group."
 msgstr "Entrez ici un bref commentaire sur ce groupe"
 
-#: app/company/forms.py:91 app/company/forms.py:308
-msgid "Incubated on"
-msgstr "Incubé le"
+#: app/company/forms.py:70 app/company/templates/company/company_form.html:22
+#: app/company/templates/company/presence_form.html:21
+msgid "Save"
+msgstr "Enregistrer"
 
-#: app/company/forms.py:98 app/company/forms.py:315
-msgid "Incubation end on"
-msgstr "Incubation terminée le"
-
-#: app/company/forms.py:108 app/company/forms.py:214
+#: app/company/forms.py:86
 msgid "Name of the company"
 msgstr "Nom de la compagnie"
 
-#: app/company/forms.py:111 app/company/forms.py:217 app/company/models.py:32
+#: app/company/forms.py:89 app/company/models.py:32
 msgid "Logo"
 msgstr "Logo"
 
-#: app/company/forms.py:116 app/company/forms.py:222 app/company/models.py:34
+#: app/company/forms.py:94 app/company/models.py:34
 msgid "Video"
 msgstr "Vidéo"
 
-#: app/company/forms.py:119 app/company/forms.py:225
+#: app/company/forms.py:97
 msgid "https://urlvideo.com/"
 msgstr "https://urlvideo.com/"
 
-#: app/company/forms.py:122 app/company/forms.py:228
-#: app/company/templates/company/detail.html:47
+#: app/company/forms.py:100 app/company/templates/company/detail.html:47
 msgid "Web site"
 msgstr "Site web"
 
-#: app/company/forms.py:125 app/company/forms.py:231
+#: app/company/forms.py:103
 msgid "https://example.com"
 msgstr "https://exemple.com"
 
-#: app/company/forms.py:128 app/company/forms.py:234 app/company/models.py:43
+#: app/company/forms.py:106 app/company/models.py:43
 msgid "Facebook"
 msgstr "Facebook"
 
-#: app/company/forms.py:131 app/company/forms.py:237
+#: app/company/forms.py:109
 msgid "https://www.facebook.com/lastname.firstname"
 msgstr "https://www.facebook.com/nom.prenom"
 
-#: app/company/forms.py:134 app/company/forms.py:240 app/company/models.py:44
+#: app/company/forms.py:112 app/company/models.py:44
 msgid "Twitter"
 msgstr "Twitter"
 
-#: app/company/forms.py:137 app/company/forms.py:243
+#: app/company/forms.py:115
 msgid "https://twitter.com/username"
 msgstr "https://twitter.com/nomUtilisateur"
 
-#: app/company/forms.py:140 app/company/forms.py:246 app/company/models.py:45
+#: app/company/forms.py:118 app/company/models.py:45
 msgid "Google+"
 msgstr "Google+"
 
-#: app/company/forms.py:143 app/company/forms.py:249
+#: app/company/forms.py:121
 msgid "https://plus.google.com/id"
 msgstr "https://plus.google.com/id"
 
-#: app/company/forms.py:146 app/company/forms.py:252 app/company/models.py:46
+#: app/company/forms.py:124 app/company/models.py:46
 msgid "linkedIn"
 msgstr "linkedIn"
 
-#: app/company/forms.py:149 app/company/forms.py:255
+#: app/company/forms.py:127
 msgid "https://ca.linkedin.com/in/username"
 msgstr "https://ca.linkedin.com/in/nomUtilisateur"
 
-#: app/company/forms.py:152 app/company/forms.py:258 app/company/models.py:35
+#: app/company/forms.py:130 app/company/models.py:35
 msgid "Description"
 msgstr "Description"
 
-#: app/company/forms.py:156 app/company/forms.py:262
+#: app/company/forms.py:134
 msgid "Write here a brief summary of your business."
 msgstr "Ecrivez ici un bref résumé de votre entreprise."
 
-#: app/company/forms.py:163 app/company/forms.py:336
-#: app/company/templates/company/detail.html:45
-#: app/company/templates/company/filter.html:24
+#: app/company/forms.py:148 app/company/templates/company/filter.html:24
 #: app/company/templates/company/index.html:38
 msgid "Incubation phase"
 msgstr "Phase d'incubation"
 
-#: app/company/forms.py:169 app/company/forms.py:322 app/company/models.py:39
-#: app/company/templates/company/detail.html:97 templates/dashboard.html:53
+#: app/company/forms.py:154
+msgid "Incubated on"
+msgstr "Incubé le"
+
+#: app/company/forms.py:166
+msgid "Incubation end on"
+msgstr "Incubation terminée le"
+
+#: app/company/forms.py:178 app/company/models.py:39
+#: app/company/templates/company/detail.html:105 templates/dashboard.html:54
 msgid "Founders"
 msgstr "Fondateurs"
 
-#: app/company/forms.py:176 app/company/forms.py:329 app/company/models.py:41
-#: app/company/templates/company/detail.html:125 templates/dashboard.html:50
+#: app/company/forms.py:185 app/company/models.py:41
+#: app/company/templates/company/detail.html:133 templates/dashboard.html:51
 msgid "Mentors"
 msgstr "Mentors"
-
-#: app/company/forms.py:190
-msgid "New company"
-msgstr "Nouvelle compagnie"
-
-#: app/company/forms.py:287 app/company/forms.py:367
-msgid "Update company"
-msgstr "Modifier cette compagnie"
 
 #: app/company/models.py:17
 msgid "Company Status"
 msgstr "Statut de la compagnie"
 
-#: app/company/models.py:28 app/company/models.py:120
-#: templates/dashboard.html:47
+#: app/company/models.py:28 app/company/models.py:126
+#: templates/dashboard.html:48
 msgid "Companies"
 msgstr "Compagnies"
 
@@ -160,49 +144,68 @@ msgstr "URL"
 msgid "Status"
 msgstr "Statut"
 
-#: app/company/models.py:117
+#: app/company/models.py:123
 msgid "Presences"
 msgstr "Presences"
 
-#: app/company/models.py:122 app/company/templates/company/presence.html:37
+#: app/company/models.py:128 app/company/templates/company/presence.html:37
 #: app/company/templates/company/presence_confirm_delete.html:10
 msgid "Date"
 msgstr "Date"
 
-#: app/company/templates/company/company_form.html:6
+#: app/company/templates/company/company_form.html:7
 #: app/company/templates/company/presence_confirm_delete.html:11
 msgid "Company"
 msgstr "Compagnie"
 
-#: app/company/templates/company/detail.html:18
+#: app/company/templates/company/company_form.html:25
+msgid "Reset"
+msgstr "Réinitialiser"
+
+#: app/company/templates/company/detail.html:17
+msgid "Actions on this company"
+msgstr "Actions sur cette compagnie"
+
+#: app/company/templates/company/detail.html:21
 msgid "Modify this company"
 msgstr "Modifier cette compagnie"
 
-#: app/company/templates/company/detail.html:50
-msgid "Incubation date"
-msgstr "Date d'incubation"
+#: app/company/templates/company/detail.html:54
+msgid "Incubation"
+msgstr "Incubation"
 
-#: app/company/templates/company/detail.html:52
-msgid "End of incubation date"
-msgstr "Date de fin d'incubation"
+#: app/company/templates/company/detail.html:57
+msgctxt "20 characters max"
+msgid "Incubation phase"
+msgstr "Phase d'incubation"
 
-#: app/company/templates/company/detail.html:71
+#: app/company/templates/company/detail.html:61
+msgctxt "20 characters max"
+msgid "Begin date of phase"
+msgstr "Date de début"
+
+#: app/company/templates/company/detail.html:63
+msgctxt "20 characters max"
+msgid "End date of phase"
+msgstr "Date de fin"
+
+#: app/company/templates/company/detail.html:81
 msgid "Time spent incubation"
 msgstr "Temps d'incubation passé"
 
-#: app/company/templates/company/detail.html:78
+#: app/company/templates/company/detail.html:88
 msgid "About"
 msgstr "A propos"
 
-#: app/company/templates/company/detail.html:88
+#: app/company/templates/company/detail.html:95
 msgid "Video pitch"
 msgstr "Vidéo de présentation"
 
-#: app/company/templates/company/detail.html:121
+#: app/company/templates/company/detail.html:128
 msgid "No founders exist."
 msgstr "Aucun fondateurs."
 
-#: app/company/templates/company/detail.html:148
+#: app/company/templates/company/detail.html:155
 msgid "No mentors exist."
 msgstr "Aucun mentors."
 
@@ -220,8 +223,8 @@ msgstr "Aucune compagnies ne satisfait cette demande."
 #: app/company/templates/company/presence.html:5
 #: app/company/templates/company/presence_confirm_delete.html:5
 #: app/company/templates/company/presence_confirm_delete.html:7
-#: app/company/templates/company/presence_form.html:5
-#: templates/dashboard.html:59
+#: app/company/templates/company/presence_form.html:6
+#: templates/dashboard.html:60
 msgid "Presence"
 msgstr "Presence"
 
@@ -256,9 +259,17 @@ msgstr "Êtes-vous sûr de vouloir supprimer cette présence ?"
 msgid "Cancel"
 msgstr "Annuler"
 
-#: app/company/templates/company/presence_form.html:16
+#: app/company/templates/company/presence_form.html:18
 msgid "New presence"
 msgstr "Nouvelle présence"
+
+#: app/company/views.py:84
+msgid "This status has been added."
+msgstr "Le statut a été ajouté"
+
+#: app/company/views.py:103
+msgid "This company has been added."
+msgstr "La compagnie a été ajouté"
 
 #: centech2/settings.py:184
 msgid "French"
@@ -268,83 +279,107 @@ msgstr "Français"
 msgid "English"
 msgstr "Anglais"
 
+#: centech2/settings.py:186
+msgid "Portuguese"
+msgstr "Portugais"
+
 #: templates/dashboard.html:10
 msgid "Dashboard v.1"
 msgstr "Tableau de bord v.1"
 
-#: templates/dashboard.html:41
+#: templates/dashboard.html:42
 msgid "Road map"
 msgstr "Carte routière"
 
-#: templates/dashboard.html:44
+#: templates/dashboard.html:45
 msgid "Floor plan"
 msgstr "Plan d'étage"
 
-#: templates/dashboard.html:56
+#: templates/dashboard.html:57
 msgid "Summary"
 msgstr "Sommaire"
 
-#: templates/dashboard.html:67
+#: templates/dashboard.html:68
 msgid "Select a company"
 msgstr "Sélectionnez une compagnie"
 
-#: templates/dashboard.html:77 templates/dashboard.html.py:89
+#: templates/dashboard.html:78 templates/dashboard.html.py:90
 msgid "Presentation"
 msgstr "Présentation"
 
-#: templates/dashboard.html:78 templates/dashboard.html.py:90
+#: templates/dashboard.html:79 templates/dashboard.html.py:91
 msgid "IRL"
 msgstr "IRL"
 
-#: templates/dashboard.html:79 templates/dashboard.html.py:91
+#: templates/dashboard.html:80 templates/dashboard.html.py:92
 msgid "TRL"
 msgstr "TRL"
 
-#: templates/dashboard.html:80 templates/dashboard.html.py:92
+#: templates/dashboard.html:81 templates/dashboard.html.py:93
 msgid "Experiments"
 msgstr "Expérimentations"
 
-#: templates/dashboard.html:81 templates/dashboard.html.py:93
+#: templates/dashboard.html:82 templates/dashboard.html.py:94
 msgid "Business Model Canvas"
 msgstr "Canevas de modèle d'affaire"
 
-#: templates/dashboard.html:86 templates/dashboard.html.py:98
+#: templates/dashboard.html:87 templates/dashboard.html.py:99
 msgid "Finance"
 msgstr "Finance"
 
-#: templates/dashboard.html:87 templates/dashboard.html.py:99
+#: templates/dashboard.html:88 templates/dashboard.html.py:100
 msgid "KanBoard"
 msgstr "KanBoard"
 
-#: templates/dashboard.html:122
+#: templates/dashboard.html:123
 msgid "Welcome to the Centech Dashboard."
 msgstr "Bienvenue sur le tableau de bord du Centech"
 
-#: templates/dashboard.html:136 templates/dashboard.html.py:148
+#: templates/dashboard.html:134 templates/dashboard.html.py:137
+msgid "Language"
+msgstr "Langage"
+
+#: templates/dashboard.html:154
+msgid "MENTOR"
+msgstr "MENTOR"
+
+#: templates/dashboard.html:159 templates/dashboard.html.py:171
 msgid "Update profile"
 msgstr "Modifier profil"
 
-#: templates/dashboard.html:160
+#: templates/dashboard.html:166
+msgid "FOUNDER"
+msgstr "FONDATEUR"
+
+#: templates/dashboard.html:179
+msgid "ADMINISTRATION"
+msgstr "ADMINISTRATION"
+
+#: templates/dashboard.html:183
 msgid "Add new founder"
 msgstr "Ajouter un nouveau fondateur"
 
-#: templates/dashboard.html:167
+#: templates/dashboard.html:190
 msgid "Add new mentor"
 msgstr "Ajouter un nouveau mentor"
 
-#: templates/dashboard.html:174
+#: templates/dashboard.html:197
 msgid "Add new status"
 msgstr "Ajouter un nouveau statut"
 
-#: templates/dashboard.html:181
+#: templates/dashboard.html:204
 msgid "Add new company"
 msgstr "Ajouter une nouvelle compagnie"
 
-#: templates/dashboard.html:192
+#: templates/dashboard.html:210
+msgid "MY ACCOUNT"
+msgstr "MON COMPTE"
+
+#: templates/dashboard.html:215
 msgid "Change password"
 msgstr "Modifier le mot de passe"
 
-#: templates/dashboard.html:200
+#: templates/dashboard.html:223
 msgid "Log out"
 msgstr "Déconnexion"
 
@@ -363,6 +398,21 @@ msgstr "Connexion"
 #: templates/landing_base.html:114
 msgid "All Rights Reserved"
 msgstr "Tous droits réservés"
+
+#~ msgid "Incubation date"
+#~ msgstr "Date d'incubation"
+
+#~ msgid "End of incubation date"
+#~ msgstr "Date de fin d'incubation"
+
+#~ msgid "New status"
+#~ msgstr "Nouveau statut"
+
+#~ msgid "New company"
+#~ msgstr "Nouvelle compagnie"
+
+#~ msgid "Update company"
+#~ msgstr "Modifier cette compagnie"
 
 #~ msgid "Kanboard"
 #~ msgstr "Kanboard"

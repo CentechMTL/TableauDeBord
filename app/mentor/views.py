@@ -29,8 +29,49 @@ class MentorCreate(generic.CreateView):
         return HttpResponseRedirect("/user/noAccessPermissions")
 
     def get_success_url(self):
+        # Create the mentor associated
         mentor = Mentor.objects.create(user=self.object)
+
+        # Defined the new password
+        caractere = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        password = ""
+        for index in range(10):
+            password += random.choice(caractere)
+
+        mentor.user.set_password(password)
+        mentor.user.save()
+
+        # Send welcome email
+        self.send_courriel(mentor, password)
+
         return reverse_lazy("mentor:detail", kwargs={'pk': mentor.userProfile_id})
+
+    def send_courriel(self, mentor, password):
+        app = settings.DASHBOARD_APP
+        message = u"Un compte vient de vous être créé pour accéder au Tableau de Bord du Centech. Vous pouvez dès maintenant vous y connecter avec les identifiants ci-dessous : \n\n"
+        message += u"Username : "
+        message += mentor.user.username
+        message += u"\n"
+        message += u"Password : "
+        message += password
+        message += u"\n"
+        message += u"Lien : "
+        message += app['site']['dns']
+        message += u"\n\n\n"
+        message += u"Pour toute question ou demande d'aide, n'hésitais pas à nous contacter à l'adresse suivante : "
+        message += app['site']['email_technique']
+        message += u"\n\n"
+        message += u"Nous vous souhaitons une agréable journée!"
+        message += u"\n\n"
+        message += u"----------------------------------------\n\n"
+        message += u"Ce message du Centech est un élément important d'un programme auquel vous ou votre entreprise participer. Si ce n'est pas le cas veuillez nous en excuser et effacer ce message.\n"
+        message += u"Si nous persistons à vous envoyer des courriel sans votre accord, contacter nous à l'adresse suivante : "
+        message += app['site']['email_technique']
+
+        emailReady = EmailMessage('Bienvenue sur le Tableau de Bord du Centech', message,
+                                  app['site']['email_technique'], [mentor.user.email],
+                                  [app['site']['email_technique']], reply_to=[app['site']['email_technique']])
+        emailReady.send(fail_silently=False)
 
 
 # Form for update profile of a mentor

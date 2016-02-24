@@ -149,23 +149,40 @@ class PresenceList(generic.ListView):
 
     def get_context_data(self, **kwargs):
         context = super(PresenceList, self).get_context_data(**kwargs)
-        status = CompanyStatus.objects.get(id=self.kwargs['status'])
-        companies = Company.objects.filter(companyStatus=status)
-        context['companies'] = companies
-        all_presences = Presence.objects.all()
-        presences = []
-        for presence in all_presences:
-            for company in presence.company.all():
-                if company.companyStatus == status:
-                    print company.name
-                    print presence
-                    print len(presences)
-                    presences.append(presence)
-                    break
 
-        context['presence_list'] = presences
-        context['status_selected'] = status
-        context['list_company_status'] = CompanyStatus.objects.all()
+        try:
+            status = CompanyStatus.objects.get(id=self.kwargs['status'])
+        except Exception:
+            status = CompanyStatus.objects.filter()
+            if status.count():
+                status = status[0]
+            else:
+                status = None
+
+        if status:
+            context['status_selected'] = status
+            companies = Company.objects.filter(companyStatus=status)
+            if companies.count():
+                context['companies'] = companies
+                all_presences = Presence.objects.all()
+                presences = []
+                for presence in all_presences:
+                    for company in presence.company.all():
+                        if company.companyStatus == status:
+                            print company.name
+                            print presence
+                            print len(presences)
+                            presences.append(presence)
+                            break
+
+                context['presence_list'] = presences
+
+        list_company_status = []
+        for status in CompanyStatus.objects.all():
+            if status.companies.count():
+                list_company_status.append(status)
+
+        context['list_company_status'] = list_company_status
 
         return context
 

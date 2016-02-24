@@ -34,7 +34,7 @@
                     {% endif %}
                     <strong>{{ mentor.user.first_name }} {{ mentor.user.last_name }}</strong>
                 </a><br>
-                Mentor
+                {{ mentor.get_type }}
             </div>
         </div>
         {% endfor %}

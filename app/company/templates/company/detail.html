@@ -144,7 +144,8 @@
                                     <img class="avatar" src="/media/user_profile/default.jpg" style="height:100%; max-width: 100%;" /><br>
                                 {% endif %}
                                 {{ mentor.user.first_name }} {{ mentor.user.last_name }}
-                            </a>
+                            </a><br/>
+                            {{ mentor.get_type }}
                         </div>
                         {% if forloop.counter|divisibleby:3 %}
                             <div class="row" style="margin-bottom: 50px;">

@@ -68,9 +68,8 @@ class Command(BaseCommand):
                 'show_code': (len(room.code) > 0),
                 'bg_color': bg_color,
             }
-
-            if room_label != "TRANS-ALTA":
-                floor_map.add_room(data, options)
+            
+            floor_map.add_room(data, options)
 
         floor_map.render_image()
         floor_map.save_to(output_image)

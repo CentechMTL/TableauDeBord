@@ -9,7 +9,6 @@ from django.utils import timezone
 from phonenumber_field.modelfields import PhoneNumberField
 from embed_video.admin import AdminVideoMixin
 from embed_video.fields import EmbedVideoField
-from django.utils import timezone
 
 #TODO delete foreign key
 EDUCATION_CHOICES = (
@@ -104,6 +103,7 @@ class UserProfile(models.Model):
             return False
 
 
+# Deprecated : Use classes Rent classes instead
 class FloorPlan(models.Model):
     title = models.CharField(max_length=100,verbose_name=_('Title'))
     image = models.ImageField(upload_to='floor_plan', verbose_name=_('Image'))
@@ -114,6 +114,61 @@ class FloorPlan(models.Model):
     def image_thumb(self):
         return '<img src="/media/%s" width="100" height="100" />' % (self.image)
     image_thumb.allow_tags = True
+
+
+class RoomType(models.Model):
+    # Data
+    name = models.CharField(max_length=100, verbose_name=_('Name'))
+    description = models.CharField(blank=True, max_length="100", verbose_name=_('Description'))
+    is_rental = models.BooleanField(default=False, verbose_name=_('Is rental'))
+
+
+class Room(models.Model):
+    # Data
+    from app.company.models import Company
+    companies = models.ManyToManyField(
+        Company,
+        through='Rent',
+        through_fields=('room', 'company'),
+        verbose_name=_('Rented by')
+    )
+    type = models.ForeignKey(RoomType, verbose_name=_('Type'))
+
+    code = models.CharField(blank=True, max_length=10, verbose_name=_('Code'))
+    static_label = models.CharField(blank=True, max_length=100, verbose_name=_('Label'))
+
+    coords = models.CommaSeparatedIntegerField(max_length=2000, verbose_name=_('Coordinates'))
+    text_coords = models.CommaSeparatedIntegerField(
+        null=True,
+        max_length=50,
+        verbose_name=_('Text area coordinates'))
+
+    def is_rental(self):
+        return self.type.is_rental
+
+    def get_owner_name(self):
+        owners = Rent.objects.filter(room=self.pk).order_by('-date_end')
+        if len(owners) > 0:
+            end_date = datetime.datetime.combine(owners[0].date_end, datetime.time.min)
+
+            if end_date > datetime.datetime.now():
+                return owners[0].company.name
+            else:
+                return False
+        else:
+            return False
+
+
+class Rent(models.Model):
+    from app.company.models import Company
+
+    # Identifiers
+    room = models.ForeignKey(Room, verbose_name=_('Room'))
+    company = models.ForeignKey(Company, verbose_name=_('Company'))
+
+    # Data
+    date_start = models.DateField(verbose_name=_('Start date'))
+    date_end = models.DateField(verbose_name=_('End date'))
 
 
 

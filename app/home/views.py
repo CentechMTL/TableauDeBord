@@ -13,7 +13,7 @@ from django.contrib.auth.decorators import login_required
 from app.company.models import Company, CompanyStatus
 from app.company.forms import MiniCompanyStatusUpdateForm
 from app.mentor.models import Mentor
-from app.home.models import FloorPlan
+from app.home.models import RoomType, Room
 
 
 class Summary(generic.TemplateView):
@@ -266,9 +266,29 @@ def get_url(request, namespace, arguments=""):
 
 class floor_plan(generic.ListView):
     # Floor Plan Page
-    model = FloorPlan
+    model = Room
     template_name = 'home/floorPlan.html'
-    context_object_name = 'list_floor_plan'
+    context_object_name = 'list_room_data'
+
+    # ToDo : Prevent having the following static room types
+    room_types = RoomType.objects
+
+    if not room_types.filter(pk=1).exists():
+        new_type = room_types.create(pk=1)
+        new_type.name = "Unavailable"
+        new_type.save()
+
+    if not room_types.filter(pk=2).exists():
+        new_type = room_types.create(pk=2)
+        new_type.name = "Infrastructure"
+        new_type.save()
+
+    if not room_types.filter(pk=3).exists():
+        new_type = room_types.create(pk=3)
+        new_type.is_rental = True
+        new_type.name = "Rental"
+        new_type.save()
+    # ToDo end
 
     # You need to be connected, and you need to have access as centech only
     @method_decorator(login_required)

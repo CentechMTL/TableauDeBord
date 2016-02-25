@@ -7,7 +7,7 @@ from itertools import combinations
 from PIL import Image, ImageDraw, ImageFont
 from _utils import *
 
-DEBUG_MODE = True
+DEBUG_MODE = False
 
 map_settings = {
         'image_quality': 100,

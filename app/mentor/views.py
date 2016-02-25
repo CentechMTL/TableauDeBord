@@ -13,6 +13,9 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse_lazy
 
+from django.conf import settings
+import random
+from django.core.mail import EmailMessage
 
 class MentorCreate(generic.CreateView):
     model = User

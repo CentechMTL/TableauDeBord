@@ -64,7 +64,7 @@
         <div class="row">
         {% for founder in founder_list %}
             <div class="col-md-3" style="padding: 10px;">
-                <div class="panel" style="height: 150px; padding: 10px;">
+                <div class="panel panel-default" style="height: 150px; padding: 10px;">
                     <a href="{% url 'founder:detail' founder.pk %}">
                         {% if founder.picture != "" %}
                         <img src="/media/{{ founder.picture }}" class="thumbnail" style="margin-bottom: 0px; height:70%; max-width: 100%;"/>

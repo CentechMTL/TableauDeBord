@@ -28,7 +28,7 @@
     <div class="row">
     {% for company in filter %}
         <div class="col-md-4" style="padding: 10px;">
-            <div class="panel" style="height: 150px; padding: 10px;">
+            <div class="panel panel-default" style="height: 150px; padding: 10px;">
                 <a href="{% url 'company:detail' company.id %}">
                 {% if company.logo != "" %}
                     <img src="/media/{{ company.logo }}" class="thumbnail" style="margin-bottom: 0px; height:70%; max-width: 100%;"/>

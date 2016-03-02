@@ -223,3 +223,8 @@ DASHBOARD_APP = {
         },
     }
 }
+
+BOOTSTRAP3 = {
+   # Class to indicate success, meaning the field has valid input (better to set this in your Django form)
+    'success_css_class': '',
+}

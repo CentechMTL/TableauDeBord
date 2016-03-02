@@ -84,12 +84,14 @@
             {% endif %}
         </div>
     </div>
+    {% if company.description != "" %}
     <div class="panel panel-default">
         <div class="panel-heading"><h3>{% trans "About" %}</h3></div>
         <div class="panel-body text-justify">
             {{ company.description }}
         </div>
     </div>
+    {% endif %}
     {% if company.video != "" %}
     <div class="panel panel-default">
         <div class="panel-heading"><h3>{% trans "Video pitch" %}</h3></div>

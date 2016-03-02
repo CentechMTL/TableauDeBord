@@ -203,7 +203,7 @@ class RentalForm(forms.ModelForm):
 
     room = forms.ModelChoiceField(
         label=_(u"Room code"),
-        queryset=Room.objects.filter(type=RoomType.objects.get(name='Rental')).order_by('code'),
+        queryset=Room.objects.filter(type__is_rental=True).order_by('code'),
         required=True,
     )
 

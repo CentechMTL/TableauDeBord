@@ -122,6 +122,9 @@ class RoomType(models.Model):
     description = models.CharField(blank=True, max_length="100", verbose_name=_('Description'))
     is_rental = models.BooleanField(default=False, verbose_name=_('Is rental'))
 
+    def __unicode__(self):
+        return self.name
+
 
 class Room(models.Model):
     # Data
@@ -135,6 +138,12 @@ class Room(models.Model):
         null=True,
         max_length=50,
         verbose_name=_('Text area coordinates'))
+
+    def __unicode__(self):
+        if self.code:
+            return self.code
+        else:
+            return self.id
 
     def is_rental(self):
         return self.type.is_rental

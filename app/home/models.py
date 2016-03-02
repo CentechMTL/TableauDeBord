@@ -125,13 +125,6 @@ class RoomType(models.Model):
 
 class Room(models.Model):
     # Data
-    from app.company.models import Company
-    companies = models.ManyToManyField(
-        Company,
-        through='Rent',
-        through_fields=('room', 'company'),
-        verbose_name=_('Rented by')
-    )
     type = models.ForeignKey(RoomType, verbose_name=_('Type'))
 
     code = models.CharField(blank=True, max_length=10, verbose_name=_('Code'))
@@ -147,24 +140,21 @@ class Room(models.Model):
         return self.type.is_rental
 
     def get_owner_name(self):
-        owners = Rent.objects.filter(room=self.pk).order_by('-date_end')
-        if len(owners) > 0:
-            end_date = datetime.datetime.combine(owners[0].date_end, datetime.time.min)
+        owner_result = self.rentals.filter(
+            date_end__gte=datetime.date.today(),
+            date_start__lte=datetime.date.today()
+        ).first()
 
-            if end_date > datetime.datetime.now():
-                return owners[0].company.name
-            else:
-                return False
+        if owner_result:
+            return owner_result.company.name
         else:
             return False
 
 
 class Rent(models.Model):
-    from app.company.models import Company
-
     # Identifiers
-    room = models.ForeignKey(Room, verbose_name=_('Room'))
-    company = models.ForeignKey(Company, verbose_name=_('Company'))
+    room = models.ForeignKey(Room, verbose_name=_('Room'), related_name='rentals')
+    company = models.ForeignKey('company.Company', verbose_name=_('Company'), related_name='rentals')
 
     # Data
     date_start = models.DateField(verbose_name=_('Start date'))

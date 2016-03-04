@@ -252,7 +252,8 @@ class RentalForm(forms.ModelForm):
             for name in lst_conflicting[1:-1]:
                 str_conflicts = ", ".join([str_conflicts, name])
 
-            str_conflicts = " ".join([str_conflicts, str(_("and")), lst_conflicting[-1:][0]])
+            if len(lst_conflicting) > 1:
+                str_conflicts = " ".join([str_conflicts, str(_("and")), lst_conflicting[-1:][0]])
 
             raise forms.ValidationError({
                 'room': [forms.ValidationError(

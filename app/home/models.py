@@ -131,13 +131,36 @@ class Room(models.Model):
     type = models.ForeignKey(RoomType, verbose_name=_('Type'))
 
     code = models.CharField(blank=True, max_length=10, verbose_name=_('Code'))
-    static_label = models.CharField(blank=True, max_length=100, verbose_name=_('Label'))
+    static_label = models.CharField(
+        blank=True,
+        max_length=100,
+        verbose_name=_('Label'),
+        help_text=_('<b>Warning:</b> Will be overwritten by rental owner, if any.')
+    )
 
-    coords = models.CommaSeparatedIntegerField(max_length=2000, verbose_name=_('Coordinates'))
+    """
+    CommaSeparatedIntegerField:
+        Stores a string of integers separated by commas (e.g. "0,0,100,200")
+        Therefore, max_length refers to the string length and not list capacity
+        So to support the list [1,2,3,4] the lowest max_length would be 7 (no spaces allowed, brackets are excluded)
+
+    Coordinates syntax:
+        The system expects a list of integers to be interpreted as a list of points
+        See HTML map tag for reference
+    """
+    coords = models.CommaSeparatedIntegerField(
+        max_length=2000,
+        verbose_name=_('Coordinates'),
+        help_text=_("For a rectangle, please use the following format: <em>x1,y1,x2,y2</em>.<br>"
+                    "For a polygon, please use the following format: <em>x1,y1,...,xn,yn</em>.")
+    )
     text_coords = models.CommaSeparatedIntegerField(
         null=True,
         max_length=50,
-        verbose_name=_('Text area coordinates'))
+        verbose_name=_('Text area coordinates'),
+        help_text=_("Area where the label should be displayed (defaults to room coordinates)<br>"
+                    "Please use the following format: <em>x1,y1,x2,y2</em>. <b>Rectangle only!</b>")
+    )
 
     def __unicode__(self):
         if self.code:
@@ -149,13 +172,22 @@ class Room(models.Model):
         return self.type.is_rental
 
     def get_owner_name(self):
-        owner_result = self.rentals.filter(
-            date_end__gte=datetime.date.today(),
-            date_start__lte=datetime.date.today()
-        ).first()
+        """
+        get_owner_name():
+        Returns:
+            The company owner's name if the room type has the is_rental flag
+            Otherwise returns boolean False
+        """
+        if self.is_rental():
+            owner_result = self.rentals.filter(
+                date_end__gte=datetime.date.today(),
+                date_start__lte=datetime.date.today()
+            ).first()
 
-        if owner_result:
-            return owner_result.company.name
+            if owner_result:
+                return owner_result.company.name
+            else:
+                return False
         else:
             return False
 

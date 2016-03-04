@@ -130,14 +130,6 @@ class Room(models.Model):
     # Data
     type = models.ForeignKey(RoomType, verbose_name=_('Type'))
 
-    code = models.CharField(blank=True, max_length=10, verbose_name=_('Code'))
-    static_label = models.CharField(
-        blank=True,
-        max_length=100,
-        verbose_name=_('Label'),
-        help_text=_('<b>Warning:</b> Will be overwritten by rental owner, if any.')
-    )
-
     """
     CommaSeparatedIntegerField:
         Stores a string of integers separated by commas (e.g. "0,0,100,200")
@@ -154,6 +146,15 @@ class Room(models.Model):
         help_text=_("For a rectangle, please use the following format: <em>x1,y1,x2,y2</em>.<br>"
                     "For a polygon, please use the following format: <em>x1,y1,...,xn,yn</em>.")
     )
+
+    code = models.CharField(blank=True, max_length=10, verbose_name=_('Code'))
+    static_label = models.CharField(
+        blank=True,
+        max_length=100,
+        verbose_name=_('Label'),
+        help_text=_('<b>Warning:</b> Will be overwritten by rental owner, if any.')
+    )
+
     text_coords = models.CommaSeparatedIntegerField(
         blank=True,
         null=True,

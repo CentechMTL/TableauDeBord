@@ -5,7 +5,7 @@ from _builder import FloorMap
 from ast import literal_eval
 import os
 
-MEDIA_PATH = settings.MEDIA_ROOT + "\\floor_map"
+MEDIA_PATH = os.path.join(settings.MEDIA_ROOT, "floor_map")
 INPUT_FILENAME = "floor_map_base.jpg"
 OUTPUT_FILENAME = "floor_map.jpg"
 

@@ -155,6 +155,7 @@ class Room(models.Model):
                     "For a polygon, please use the following format: <em>x1,y1,...,xn,yn</em>.")
     )
     text_coords = models.CommaSeparatedIntegerField(
+        blank=True,
         null=True,
         max_length=50,
         verbose_name=_('Text area coordinates'),

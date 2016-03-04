@@ -54,7 +54,7 @@ class Command(BaseCommand):
                 bg_color = CLR_GREY
             # ToDo end
 
-            if room.text_coords is not None:
+            if room.text_coords:
                 room.text_coords = literal_eval(room.text_coords)
 
             data = {

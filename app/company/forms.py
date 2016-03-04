@@ -241,6 +241,10 @@ class RentalForm(forms.ModelForm):
         return date_end
 
     def clean(self):
+        # Always check that key exists in cleaned_data before using it in clean() method.
+        if ('room' and 'date_start' and 'date_end') not in self.cleaned_data:
+            return self.cleaned_data
+
         lst_conflicting = []
 
         for rent in self.conflicts():

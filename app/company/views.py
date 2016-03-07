@@ -65,7 +65,7 @@ class CompanyView(generic.DetailView):
         company = Company.objects.get(id=self.kwargs['pk'])
         founder = Founder.objects.filter(company=company)
 
-        context['isFounderOfCompany'] = bool(founder)
+        context['is_founder_of_company'] = bool(founder)
         context['rentals'] = company.rentals.all().order_by("date_start")
         return context
 

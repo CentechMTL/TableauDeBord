@@ -90,7 +90,7 @@ class ArchiveDelete(generic.DeleteView):
 
     def get_context_data(self, **kwargs):
         context = super(ArchiveDelete, self).get_context_data(**kwargs)
-        context['companyId'] = kwargs['object'].company.id
+        context['company_id'] = kwargs['object'].company.id
         context['archive'] = kwargs['object']
         return context
 
@@ -236,8 +236,8 @@ class BusinessCanvasElementList(generic.ListView):
             if founder.user.id == self.request.user.id:
                 is_founder = True
 
-        context['companyId'] = self.args[0]
-        context['isFounder'] = is_founder
+        context['company_id'] = self.args[0]
+        context['is_founder'] = is_founder
 
         company = Company.objects.get(id=self.args[0])
         archives = Archive.objects.filter(company=company).order_by('date')

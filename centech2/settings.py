@@ -43,6 +43,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django_filters',
+    'djcelery',
     'crispy_forms',
     'embed_video',
     'app.home',

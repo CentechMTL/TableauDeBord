@@ -11,7 +11,7 @@
 {% endblock %}
 
 {% block content %}
-    {% if isCentech or isFounderOfCompany%}
+    {% if isCentech or isFounderOfCompany %}
     <div class="dropdown">
         <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuCompany" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
             {% trans "Actions on this company" %}
@@ -162,7 +162,7 @@
     <div class="panel panel-default">
         <div class="panel-heading"><h3>{% trans "Room rental" %}</h3></div>
         <div class="panel-body">
-            {% if company.rentals.all %}
+            {% if rentals %}
                 <table cellpadding="0" cellspacing="0" class="table table-bordered">
                     <tr>
                         <th>{% trans "Room" %}</th>
@@ -173,7 +173,7 @@
                         <th>{% trans "Delete" %}</th>
                         {% endif %}
                     </tr>
-                    {% for rental in company.rentals.all %}
+                    {% for rental in rentals %}
                         <tr>
                             <td>{{ rental.room.code }}</td>
                             <td>{{ rental.date_start }}</td>

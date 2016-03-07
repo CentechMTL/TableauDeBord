@@ -56,15 +56,11 @@ class CompanyView(generic.DetailView):
     def get_context_data(self, **kwargs):
         context = super(CompanyView, self).get_context_data(**kwargs)
 
-        is_founder_of_company = False
-        try:
-            founder = Founder.objects.get(user = self.request.user)
-            if Company.objects.get(id = self.kwargs['pk']) in founder.company.all():
-                is_founder_of_company = True
-        except:
-            pass
+        company = Company.objects.get(id=self.kwargs['pk'])
+        founder = Founder.objects.filter(company=company)
 
-        context['isFounderOfCompany'] = is_founder_of_company
+        context['isFounderOfCompany'] = bool(founder)
+        context['rentals'] = company.rentals.all().order_by("date_start")
         return context
 
 

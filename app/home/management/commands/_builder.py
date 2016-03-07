@@ -137,12 +137,12 @@ class Room:
             self.coords = coords
 
         # Sets default text area if none was specified
-        if text_area is None:
-            # Generates a new boundary box from the coordinates received
-            self._text_area_coords = boundary_box(coords)
-        else:
+        if text_area:
             # Cleans received text area & makes sure the coords are in the correct order
             self._text_area_coords = boundary_box(text_area)
+        else:
+            # Generates a new boundary box from the coordinates received
+            self._text_area_coords = boundary_box(coords)
 
     # Bumps text to a new line and re-balances text to the smallest width
     def bump_text(self, text, bumps_wanted=0):

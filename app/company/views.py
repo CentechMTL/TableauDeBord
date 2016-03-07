@@ -3,17 +3,19 @@
 from django.shortcuts import render_to_response, get_object_or_404
 from app.company.models import Company, Presence, CompanyStatus
 from app.founder.models import Founder
-from app.company.forms import CompanyFilter, CompanyStatusForm, CompanyForm, MiniCompanyForm
+from app.home.models import Rent
+from app.company.forms import CompanyFilter, CompanyStatusForm, CompanyForm, MiniCompanyForm,\
+    RentalForm, RentalFormUpdate
 from django.views import generic
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse_lazy
+from django.core.management import call_command
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.utils.translation import ugettext as _
-
-
 from app.home.views import setCompanyInSession
+from datetime import date
 
 
 def filter(request):
@@ -54,15 +56,11 @@ class CompanyView(generic.DetailView):
     def get_context_data(self, **kwargs):
         context = super(CompanyView, self).get_context_data(**kwargs)
 
-        is_founder_of_company = False
-        try:
-            founder = Founder.objects.get(user = self.request.user)
-            if Company.objects.get(id = self.kwargs['pk']) in founder.company.all():
-                is_founder_of_company = True
-        except:
-            pass
+        company = Company.objects.get(id=self.kwargs['pk'])
+        founder = Founder.objects.filter(company=company)
 
-        context['isFounderOfCompany'] = is_founder_of_company
+        context['isFounderOfCompany'] = bool(founder)
+        context['rentals'] = company.rentals.all().order_by("date_start")
         return context
 
 
@@ -244,3 +242,88 @@ class PresenceDelete(generic.DeleteView):
         context['presence'] = kwargs['object']
         context['status'] = kwargs['object'].company.all()[0].companyStatus.id
         return context
+
+
+class RentalCreate(generic.CreateView):
+    # Add a new rental
+    model = Rent
+    template_name = 'company/rent_form.html'
+    form_class = RentalForm
+
+    # You need to be connected, and you need to have access as centech only
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        if self.request.user.profile.isCentech():
+            return super(RentalCreate, self).dispatch(*args, **kwargs)
+
+        # The visitor can't see this page!
+        return HttpResponseRedirect("/user/noAccessPermissions")
+
+    def get_initial(self):
+        if 'pk' in self.kwargs:
+            return {'company': int(self.kwargs['pk'])}
+
+    def get_success_url(self):
+        messages.add_message(self.request, messages.SUCCESS, _(u'The rental has been saved.'))
+        return reverse_lazy("company:detail", kwargs={'pk': self.request.POST['company']})
+
+    def form_valid(self, form):
+        redirect_url = super(RentalCreate, self).form_valid(form)
+        if self.object.date_start <= date.today() <= self.object.date_end:
+            call_command('updatefloormap')
+        return redirect_url
+
+
+class RentalUpdate(generic.UpdateView):
+    # Update the rental
+    model = Rent
+    template_name = 'company/rent_form.html'
+    form_class = RentalFormUpdate
+
+    # You need to be connected, and you need to have access as Centech only
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        if self.request.user.profile.isCentech():
+            return super(RentalUpdate, self).dispatch(*args, **kwargs)
+
+        # The visitor can't see this page!
+        return HttpResponseRedirect("/user/noAccessPermissions")
+
+    def get_success_url(self):
+        messages.add_message(self.request, messages.SUCCESS, _(u'The rental has been saved.'))
+        return reverse_lazy("company:detail", kwargs={'pk': self.request.POST['company']})
+
+    def form_valid(self, form):
+        redirect_url = super(RentalUpdate, self).form_valid(form)
+        if self.object.date_start <= date.today() <= self.object.date_end:
+            call_command('updatefloormap')
+        return redirect_url
+
+
+class RentalDelete(generic.DeleteView):
+    # Delete the rental
+    model = Rent
+
+    # You need to be connected, and you need to have access as centech only
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        if self.request.user.profile.isCentech():
+            return super(RentalDelete, self).dispatch(*args, **kwargs)
+
+        # The visitor can't see this page!
+        return HttpResponseRedirect("/user/noAccessPermissions")
+
+    def get_success_url(self, **kwargs):
+        messages.add_message(self.request, messages.SUCCESS, _(u'The rental has been removed.'))
+        return reverse_lazy("company:detail", kwargs={'pk': self.object.company.id})
+
+    def get_context_data(self, **kwargs):
+        context = super(RentalDelete, self).get_context_data(**kwargs)
+        context['rental'] = kwargs['object']
+        return context
+
+    def delete(self, request, *args, **kwargs):
+        redirect_url = super(RentalDelete, self).delete(request, *args, **kwargs)
+        if self.object.date_start <= date.today() <= self.object.date_end:
+            call_command('updatefloormap')
+        return redirect_url

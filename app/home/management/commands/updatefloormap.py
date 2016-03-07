@@ -5,7 +5,7 @@ from _builder import FloorMap
 from ast import literal_eval
 import os
 
-MEDIA_PATH = settings.MEDIA_ROOT + "\\floor_map"
+MEDIA_PATH = os.path.join(settings.MEDIA_ROOT, "floor_map")
 INPUT_FILENAME = "floor_map_base.jpg"
 OUTPUT_FILENAME = "floor_map.jpg"
 
@@ -54,7 +54,7 @@ class Command(BaseCommand):
                 bg_color = CLR_GREY
             # ToDo end
 
-            if room.text_coords is not None:
+            if room.text_coords:
                 room.text_coords = literal_eval(room.text_coords)
 
             data = {
@@ -68,9 +68,8 @@ class Command(BaseCommand):
                 'show_code': (len(room.code) > 0),
                 'bg_color': bg_color,
             }
-
-            if room_label != "TRANS-ALTA":
-                floor_map.add_room(data, options)
+            
+            floor_map.add_room(data, options)
 
         floor_map.render_image()
         floor_map.save_to(output_image)

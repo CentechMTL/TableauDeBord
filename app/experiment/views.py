@@ -55,8 +55,8 @@ class CustomerExperimentList(generic.ListView):
         for founder in listFounder:
             if founder.user.id == self.request.user.id:
                 isFounder = True
-        context['companyId'] = self.args[0]
-        context['isFounder'] = isFounder
+        context['company_id'] = self.args[0]
+        context['is_founder'] = isFounder
         return context
 
 
@@ -147,7 +147,7 @@ class CustomerExperimentDelete(DeleteView):
     def get_context_data(self, **kwargs):
         context = super(CustomerExperimentDelete, self).\
             get_context_data(**kwargs)
-        context['companyId'] = kwargs['object'].company.id
+        context['company_id'] = kwargs['object'].company.id
         context['experiment'] = kwargs['object']
         return context
 

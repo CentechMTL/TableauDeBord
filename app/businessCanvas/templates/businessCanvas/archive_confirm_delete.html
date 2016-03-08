@@ -12,6 +12,6 @@
 
     <form method="post" action="">
        {% csrf_token %}
-       <button type="submit">{% trans "Delete" %}</button> - <a href="{% url 'businessCanvas:businessCanvasElement_list' companyId %}">{% trans "Cancel" %}</a>
+       <button type="submit">{% trans "Delete" %}</button> - <a href="{% url 'businessCanvas:businessCanvasElement_list' company_id %}">{% trans "Cancel" %}</a>
     </form>
 {% endblock %}

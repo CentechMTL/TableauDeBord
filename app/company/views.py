@@ -4,8 +4,8 @@ from django.shortcuts import render_to_response, get_object_or_404
 from app.company.models import Company, Presence, CompanyStatus
 from app.founder.models import Founder
 from app.home.models import Rent
-from app.company.forms import CompanyFilter, CompanyStatusForm, CompanyForm, MiniCompanyForm,\
-    RentalForm, RentalFormUpdate
+from app.company.forms import CompanyFilter, CompanyStatusForm, CompanyForm, \
+    MiniCompanyForm, RentalForm, RentalFormUpdate
 from django.views import generic
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
@@ -19,7 +19,10 @@ from datetime import date
 
 
 def filter(request):
-    f = CompanyFilter(request.GET, queryset=Company.objects.filter(name__icontains= request.GET['name']))
+    f = CompanyFilter(
+        request.GET,
+        queryset=Company.objects.filter(name__icontains=request.GET['name'])
+    )
     return render_to_response('company/filter.html', {'filter': f})
 
 
@@ -36,7 +39,10 @@ class CompanyIndex(generic.ListView):
         return Company.objects.all()
 
     def get_context_data(self, **kwargs):
-        cf = CompanyFilter(self.request.GET, queryset=Company.objects.order_by('name'))
+        cf = CompanyFilter(
+            self.request.GET,
+            queryset=Company.objects.order_by('name')
+        )
         context = super(CompanyIndex, self).get_context_data(**kwargs)
         context['filter'] = cf
 
@@ -59,7 +65,7 @@ class CompanyView(generic.DetailView):
         company = Company.objects.get(id=self.kwargs['pk'])
         founder = Founder.objects.filter(company=company)
 
-        context['isFounderOfCompany'] = bool(founder)
+        context['is_founder_of_company'] = bool(founder)
         context['rentals'] = company.rentals.all().order_by("date_start")
         return context
 
@@ -79,7 +85,11 @@ class CompanyStatusCreate(generic.CreateView):
         return HttpResponseRedirect("/user/noAccessPermissions")
 
     def get_success_url(self):
-        messages.add_message(self.request, messages.SUCCESS, _(u'This status has been added.'))
+        messages.add_message(
+            self.request,
+            messages.SUCCESS,
+            _(u'This status has been added.')
+        )
         return reverse_lazy("company:index")
 
 
@@ -98,7 +108,11 @@ class CompanyCreate(generic.CreateView):
         return HttpResponseRedirect("/user/noAccessPermissions")
 
     def get_success_url(self):
-        messages.add_message(self.request, messages.SUCCESS, _(u'This company has been added.'))
+        messages.add_message(
+            self.request,
+            messages.SUCCESS,
+            _(u'This company has been added.')
+        )
         return reverse_lazy("company:index")
 
 
@@ -106,12 +120,14 @@ class CompanyUpdate(generic.UpdateView):
     model = Company
     template_name = "company/company_form.html"
 
-    # You need to be connected, and you need to have access as founder or centech
+    # You need to be connected, and you need to have access
+    # as founder or centech
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         company = get_object_or_404(Company, id=self.kwargs["pk"])
 
-        # Let the centech in first for allow modify a company of a founder who work in the Centech
+        # Let the centech in first for allow modify a company
+        # of a founder who work in the Centech
         if self.request.user.profile.isCentech():
             self.form_class = CompanyForm
             return super(CompanyUpdate, self).dispatch(*args, **kwargs)
@@ -125,7 +141,10 @@ class CompanyUpdate(generic.UpdateView):
         return HttpResponseRedirect("/user/noAccessPermissions")
 
     def get_success_url(self):
-        return reverse_lazy("company:detail", kwargs={'pk': int(self.kwargs["pk"])})
+        return reverse_lazy(
+            "company:detail",
+            kwargs={'pk': int(self.kwargs["pk"])}
+        )
 
 
 class PresenceList(generic.ListView):
@@ -206,10 +225,13 @@ class PresenceAdd(generic.CreateView):
 class PresenceUpdate(generic.UpdateView):
     # Update the presence
     model = Presence
-    fields = ['company','date']
+    fields = ['company', 'date']
 
     def get_url(self):
-        return reverse_lazy('company:presence_list', self.object.get_absolute_url())
+        return reverse_lazy(
+            'company:presence_list',
+            self.object.get_absolute_url()
+        )
 
     # You need to be connected, and you need to have access as centech only
     @method_decorator(login_required)
@@ -250,7 +272,8 @@ class RentalCreate(generic.CreateView):
     template_name = 'company/rent_form.html'
     form_class = RentalForm
 
-    # You need to be connected, and you need to have access as centech only
+    # You need to be connected, and you need to have access
+    # as centech only
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         if self.request.user.profile.isCentech():
@@ -264,8 +287,15 @@ class RentalCreate(generic.CreateView):
             return {'company': int(self.kwargs['pk'])}
 
     def get_success_url(self):
-        messages.add_message(self.request, messages.SUCCESS, _(u'The rental has been saved.'))
-        return reverse_lazy("company:detail", kwargs={'pk': self.request.POST['company']})
+        messages.add_message(
+            self.request,
+            messages.SUCCESS,
+            _(u'The rental has been saved.')
+        )
+        return reverse_lazy(
+            "company:detail",
+            kwargs={'pk': self.request.POST['company']}
+        )
 
     def form_valid(self, form):
         redirect_url = super(RentalCreate, self).form_valid(form)
@@ -280,7 +310,8 @@ class RentalUpdate(generic.UpdateView):
     template_name = 'company/rent_form.html'
     form_class = RentalFormUpdate
 
-    # You need to be connected, and you need to have access as Centech only
+    # You need to be connected, and you need to have access
+    # as Centech only
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         if self.request.user.profile.isCentech():
@@ -290,8 +321,15 @@ class RentalUpdate(generic.UpdateView):
         return HttpResponseRedirect("/user/noAccessPermissions")
 
     def get_success_url(self):
-        messages.add_message(self.request, messages.SUCCESS, _(u'The rental has been saved.'))
-        return reverse_lazy("company:detail", kwargs={'pk': self.request.POST['company']})
+        messages.add_message(
+            self.request,
+            messages.SUCCESS,
+            _(u'The rental has been saved.')
+        )
+        return reverse_lazy(
+            "company:detail",
+            kwargs={'pk': self.request.POST['company']}
+        )
 
     def form_valid(self, form):
         redirect_url = super(RentalUpdate, self).form_valid(form)
@@ -304,7 +342,8 @@ class RentalDelete(generic.DeleteView):
     # Delete the rental
     model = Rent
 
-    # You need to be connected, and you need to have access as centech only
+    # You need to be connected, and you need to have access
+    # as centech only
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         if self.request.user.profile.isCentech():
@@ -314,8 +353,15 @@ class RentalDelete(generic.DeleteView):
         return HttpResponseRedirect("/user/noAccessPermissions")
 
     def get_success_url(self, **kwargs):
-        messages.add_message(self.request, messages.SUCCESS, _(u'The rental has been removed.'))
-        return reverse_lazy("company:detail", kwargs={'pk': self.object.company.id})
+        messages.add_message(
+            self.request,
+            messages.SUCCESS,
+            _(u'The rental has been removed.')
+        )
+        return reverse_lazy(
+            "company:detail",
+            kwargs={'pk': self.object.company.id}
+        )
 
     def get_context_data(self, **kwargs):
         context = super(RentalDelete, self).get_context_data(**kwargs)
@@ -323,7 +369,8 @@ class RentalDelete(generic.DeleteView):
         return context
 
     def delete(self, request, *args, **kwargs):
-        redirect_url = super(RentalDelete, self).delete(request, *args, **kwargs)
+        redirect_url = super(RentalDelete, self).\
+            delete(request, *args, **kwargs)
         if self.object.date_start <= date.today() <= self.object.date_end:
             call_command('updatefloormap')
         return redirect_url

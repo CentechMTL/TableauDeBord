@@ -11,7 +11,7 @@
 {% endblock %}
 
 {% block content %}
-    {% if isCentech or isFounderOfCompany %}
+    {% if isCentech or is_founder_of_company %}
     <div class="dropdown">
         <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuCompany" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
             {% trans "Actions on this company" %}

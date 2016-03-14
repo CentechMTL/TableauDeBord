@@ -11,4 +11,3 @@ class FounderFactory(factory.DjangoModelFactory):
         model = Founder
 
     user = factory.SubFactory(UserFactory)
-

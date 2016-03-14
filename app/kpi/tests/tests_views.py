@@ -9,11 +9,13 @@ import time
 
 from app.founder.factories import FounderFactory
 from app.mentor.factories import MentorFactory
-from app.home.factories import UserFactory, StaffUserProfileFactory, ExecutiveUserProfileFactory
+from app.home.factories import UserFactory, StaffUserProfileFactory, \
+    ExecutiveUserProfileFactory
 from app.company.factories import CompanyStatusFactory, CompanyFactory
 from app.kpi.factories import KPIFactory
 
 from app.kpi.models import KPI_TYPE_CHOICES
+
 
 class FinanceTests(TestCase):
 
@@ -29,13 +31,22 @@ class FinanceTests(TestCase):
         self.founderCompany = FounderFactory()
         self.mentorCompany = MentorFactory()
         self.status = CompanyStatusFactory()
-        self.company = CompanyFactory(companyStatus = self.status)
+        self.company = CompanyFactory(companyStatus=self.status)
         self.company.founders.add(self.founderCompany)
         self.company.mentors.add(self.mentorCompany)
         self.company.save()
 
-        self.irl = KPIFactory(company=self.company, level=1, type=KPI_TYPE_CHOICES[0])
-        self.trl = KPIFactory(company=self.company, level=1, type=KPI_TYPE_CHOICES[1])
+        self.irl = KPIFactory(
+            company=self.company,
+            level=1,
+            type=KPI_TYPE_CHOICES[0]
+        )
+
+        self.trl = KPIFactory(
+            company=self.company,
+            level=1,
+            type=KPI_TYPE_CHOICES[1]
+        )
 
     def test_trl_filter(self):
         """
@@ -46,10 +57,16 @@ class FinanceTests(TestCase):
         Access : Staff
         """
         self.client.logout()
-        self.client.login(username=self.staff.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.staff.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('kpi:trl_filter', args= [self.company.id]),
+            reverse(
+                'kpi:trl_filter',
+                args=[self.company.id]
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 200)
@@ -58,10 +75,16 @@ class FinanceTests(TestCase):
         Access : Founders of the company
         """
         self.client.logout()
-        self.client.login(username=self.founderCompany.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.founderCompany.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('kpi:trl_filter', args= [self.company.id]),
+            reverse(
+                'kpi:trl_filter',
+                args=[self.company.id]
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 200)
@@ -70,10 +93,16 @@ class FinanceTests(TestCase):
         Access : Mentors of the company
         """
         self.client.logout()
-        self.client.login(username=self.mentorCompany.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.mentorCompany.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('kpi:trl_filter', args= [self.company.id]),
+            reverse(
+                'kpi:trl_filter',
+                args=[self.company.id]
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 200)
@@ -82,23 +111,34 @@ class FinanceTests(TestCase):
         No Access : Other founders
         """
         self.client.logout()
-        self.client.login(username=self.founder.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.founder.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('kpi:trl_filter', args= [self.company.id]),
+            reverse(
+                'kpi:trl_filter',
+                args=[self.company.id]
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
-
 
         """
         No Access : Other mentors
         """
         self.client.logout()
-        self.client.login(username=self.mentor.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.mentor.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('kpi:trl_filter', args= [self.company.id]),
+            reverse(
+                'kpi:trl_filter',
+                args=[self.company.id]
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
@@ -107,10 +147,16 @@ class FinanceTests(TestCase):
         No Access : Executive
         """
         self.client.logout()
-        self.client.login(username=self.executive.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.executive.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('kpi:trl_filter', args= [self.company.id]),
+            reverse(
+                'kpi:trl_filter',
+                args=[self.company.id]
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
@@ -124,10 +170,16 @@ class FinanceTests(TestCase):
         Access : Staff
         """
         self.client.logout()
-        self.client.login(username=self.staff.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.staff.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('kpi:irl_filter', args= [self.company.id]),
+            reverse(
+                'kpi:irl_filter',
+                args=[self.company.id]
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 200)
@@ -136,10 +188,16 @@ class FinanceTests(TestCase):
         Access : Founders of the company
         """
         self.client.logout()
-        self.client.login(username=self.founderCompany.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.founderCompany.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('kpi:irl_filter', args= [self.company.id]),
+            reverse(
+                'kpi:irl_filter',
+                args=[self.company.id]
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 200)
@@ -148,10 +206,16 @@ class FinanceTests(TestCase):
         Access : Mentors of the company
         """
         self.client.logout()
-        self.client.login(username=self.mentorCompany.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.mentorCompany.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('kpi:irl_filter', args= [self.company.id]),
+            reverse(
+                'kpi:irl_filter',
+                args=[self.company.id]
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 200)
@@ -160,23 +224,34 @@ class FinanceTests(TestCase):
         No Access : Other founders
         """
         self.client.logout()
-        self.client.login(username=self.founder.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.founder.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('kpi:irl_filter', args= [self.company.id]),
+            reverse(
+                'kpi:irl_filter',
+                args=[self.company.id]
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
-
 
         """
         No Access : Other mentors
         """
         self.client.logout()
-        self.client.login(username=self.mentor.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.mentor.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('kpi:irl_filter', args= [self.company.id]),
+            reverse(
+                'kpi:irl_filter',
+                args=[self.company.id]
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
@@ -185,10 +260,16 @@ class FinanceTests(TestCase):
         No Access : Executive
         """
         self.client.logout()
-        self.client.login(username=self.executive.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.executive.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('kpi:irl_filter', args= [self.company.id]),
+            reverse(
+                'kpi:irl_filter',
+                args=[self.company.id]
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
@@ -202,10 +283,16 @@ class FinanceTests(TestCase):
         Access : Staff
         """
         self.client.logout()
-        self.client.login(username=self.staff.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.staff.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('kpi:trl_add', args= [self.company.id]),
+            reverse(
+                'kpi:trl_add',
+                args=[self.company.id]
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 200)
@@ -214,10 +301,16 @@ class FinanceTests(TestCase):
         No Access : Founders of the company
         """
         self.client.logout()
-        self.client.login(username=self.founderCompany.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.founderCompany.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('kpi:trl_add', args= [self.company.id]),
+            reverse(
+                'kpi:trl_add',
+                args=[self.company.id]
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
@@ -226,10 +319,16 @@ class FinanceTests(TestCase):
         No Access : Mentors of the company
         """
         self.client.logout()
-        self.client.login(username=self.mentorCompany.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.mentorCompany.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('kpi:trl_add', args= [self.company.id]),
+            reverse(
+                'kpi:trl_add',
+                args=[self.company.id]
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
@@ -238,23 +337,34 @@ class FinanceTests(TestCase):
         No Access : Other founders
         """
         self.client.logout()
-        self.client.login(username=self.founder.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.founder.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('kpi:trl_add', args= [self.company.id]),
+            reverse(
+                'kpi:trl_add',
+                args=[self.company.id]
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
-
 
         """
         No Access : Other mentors
         """
         self.client.logout()
-        self.client.login(username=self.mentor.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.mentor.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('kpi:trl_add', args= [self.company.id]),
+            reverse(
+                'kpi:trl_add',
+                args=[self.company.id]
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
@@ -263,10 +373,16 @@ class FinanceTests(TestCase):
         No Access : Executive
         """
         self.client.logout()
-        self.client.login(username=self.executive.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.executive.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('kpi:trl_add', args= [self.company.id]),
+            reverse(
+                'kpi:trl_add',
+                args=[self.company.id]
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
@@ -280,10 +396,16 @@ class FinanceTests(TestCase):
         Access : Staff
         """
         self.client.logout()
-        self.client.login(username=self.staff.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.staff.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('kpi:irl_add', args= [self.company.id]),
+            reverse(
+                'kpi:irl_add',
+                args=[self.company.id]
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 200)
@@ -292,10 +414,16 @@ class FinanceTests(TestCase):
         No Access : Founders of the company
         """
         self.client.logout()
-        self.client.login(username=self.founderCompany.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.founderCompany.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('kpi:irl_add', args= [self.company.id]),
+            reverse(
+                'kpi:irl_add',
+                args=[self.company.id]
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
@@ -304,10 +432,16 @@ class FinanceTests(TestCase):
         No Access : Mentors of the company
         """
         self.client.logout()
-        self.client.login(username=self.mentorCompany.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.mentorCompany.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('kpi:irl_add', args= [self.company.id]),
+            reverse(
+                'kpi:irl_add',
+                args=[self.company.id]
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
@@ -316,23 +450,34 @@ class FinanceTests(TestCase):
         No Access : Other founders
         """
         self.client.logout()
-        self.client.login(username=self.founder.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.founder.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('kpi:irl_add', args= [self.company.id]),
+            reverse(
+                'kpi:irl_add',
+                args=[self.company.id]
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
-
 
         """
         No Access : Other mentors
         """
         self.client.logout()
-        self.client.login(username=self.mentor.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.mentor.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('kpi:irl_add', args= [self.company.id]),
+            reverse(
+                'kpi:irl_add',
+                args=[self.company.id]
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
@@ -341,10 +486,16 @@ class FinanceTests(TestCase):
         No Access : Executive
         """
         self.client.logout()
-        self.client.login(username=self.executive.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.executive.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('kpi:irl_add', args= [self.company.id]),
+            reverse(
+                'kpi:irl_add',
+                args=[self.company.id]
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
@@ -358,10 +509,18 @@ class FinanceTests(TestCase):
         Access : Staff
         """
         self.client.logout()
-        self.client.login(username=self.staff.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.staff.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('kpi:trl_update', kwargs={'pk': self.trl.id}),
+            reverse(
+                'kpi:trl_update',
+                kwargs={
+                    'pk': self.trl.id
+                }
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 200)
@@ -370,10 +529,18 @@ class FinanceTests(TestCase):
         No Access : Founders of the company
         """
         self.client.logout()
-        self.client.login(username=self.founderCompany.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.founderCompany.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('kpi:trl_update', kwargs={'pk': self.trl.id}),
+            reverse(
+                'kpi:trl_update',
+                kwargs={
+                    'pk': self.trl.id
+                }
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
@@ -382,10 +549,18 @@ class FinanceTests(TestCase):
         No Access : Mentors of the company
         """
         self.client.logout()
-        self.client.login(username=self.mentorCompany.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.mentorCompany.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('kpi:trl_update', kwargs={'pk': self.trl.id}),
+            reverse(
+                'kpi:trl_update',
+                kwargs={
+                    'pk': self.trl.id
+                }
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
@@ -394,23 +569,38 @@ class FinanceTests(TestCase):
         No Access : Other founders
         """
         self.client.logout()
-        self.client.login(username=self.founder.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.founder.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('kpi:trl_update', kwargs={'pk': self.trl.id}),
+            reverse(
+                'kpi:trl_update',
+                kwargs={
+                    'pk': self.trl.id
+                }
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
-
 
         """
         No Access : Other mentors
         """
         self.client.logout()
-        self.client.login(username=self.mentor.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.mentor.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('kpi:trl_update', kwargs={'pk': self.trl.id}),
+            reverse(
+                'kpi:trl_update',
+                kwargs={
+                    'pk': self.trl.id
+                }
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
@@ -419,10 +609,18 @@ class FinanceTests(TestCase):
         No Access : Executive
         """
         self.client.logout()
-        self.client.login(username=self.executive.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.executive.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('kpi:trl_update', kwargs={'pk': self.trl.id}),
+            reverse(
+                'kpi:trl_update',
+                kwargs={
+                    'pk': self.trl.id
+                }
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
@@ -436,10 +634,18 @@ class FinanceTests(TestCase):
         Access : Staff
         """
         self.client.logout()
-        self.client.login(username=self.staff.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.staff.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('kpi:irl_update', kwargs={'pk': self.irl.id}),
+            reverse(
+                'kpi:irl_update',
+                kwargs={
+                    'pk': self.irl.id
+                }
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 200)
@@ -448,10 +654,18 @@ class FinanceTests(TestCase):
         No Access : Founders of the company
         """
         self.client.logout()
-        self.client.login(username=self.founderCompany.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.founderCompany.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('kpi:irl_update', kwargs={'pk': self.irl.id}),
+            reverse(
+                'kpi:irl_update',
+                kwargs={
+                    'pk': self.irl.id
+                }
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
@@ -460,10 +674,18 @@ class FinanceTests(TestCase):
         No Access : Mentors of the company
         """
         self.client.logout()
-        self.client.login(username=self.mentorCompany.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.mentorCompany.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('kpi:irl_update', kwargs={'pk': self.irl.id}),
+            reverse(
+                'kpi:irl_update',
+                kwargs={
+                    'pk': self.irl.id
+                }
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
@@ -472,23 +694,38 @@ class FinanceTests(TestCase):
         No Access : Other founders
         """
         self.client.logout()
-        self.client.login(username=self.founder.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.founder.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('kpi:irl_update', kwargs={'pk': self.irl.id}),
+            reverse(
+                'kpi:irl_update',
+                kwargs={
+                    'pk': self.irl.id
+                }
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
-
 
         """
         No Access : Other mentors
         """
         self.client.logout()
-        self.client.login(username=self.mentor.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.mentor.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('kpi:irl_update', kwargs={'pk': self.irl.id}),
+            reverse(
+                'kpi:irl_update',
+                kwargs={
+                    'pk': self.irl.id
+                }
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
@@ -497,10 +734,18 @@ class FinanceTests(TestCase):
         No Access : Executive
         """
         self.client.logout()
-        self.client.login(username=self.executive.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.executive.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('kpi:irl_update', kwargs={'pk': self.irl.id}),
+            reverse(
+                'kpi:irl_update',
+                kwargs={
+                    'pk': self.irl.id
+                }
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
@@ -514,10 +759,18 @@ class FinanceTests(TestCase):
         Access : Staff
         """
         self.client.logout()
-        self.client.login(username=self.staff.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.staff.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('kpi:trl_delete', kwargs={'pk': self.trl.id}),
+            reverse(
+                'kpi:trl_delete',
+                kwargs={
+                    'pk': self.trl.id
+                }
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 200)
@@ -526,10 +779,18 @@ class FinanceTests(TestCase):
         No Access : Founders of the company
         """
         self.client.logout()
-        self.client.login(username=self.founderCompany.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.founderCompany.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('kpi:trl_delete', kwargs={'pk': self.trl.id}),
+            reverse(
+                'kpi:trl_delete',
+                kwargs={
+                    'pk': self.trl.id
+                }
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
@@ -538,10 +799,18 @@ class FinanceTests(TestCase):
         No Access : Mentors of the company
         """
         self.client.logout()
-        self.client.login(username=self.mentorCompany.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.mentorCompany.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('kpi:trl_delete', kwargs={'pk': self.trl.id}),
+            reverse(
+                'kpi:trl_delete',
+                kwargs={
+                    'pk': self.trl.id
+                }
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
@@ -550,23 +819,38 @@ class FinanceTests(TestCase):
         No Access : Other founders
         """
         self.client.logout()
-        self.client.login(username=self.founder.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.founder.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('kpi:trl_delete', kwargs={'pk': self.trl.id}),
+            reverse(
+                'kpi:trl_delete',
+                kwargs={
+                    'pk': self.trl.id
+                }
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
-
 
         """
         No Access : Other mentors
         """
         self.client.logout()
-        self.client.login(username=self.mentor.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.mentor.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('kpi:trl_delete', kwargs={'pk': self.trl.id}),
+            reverse(
+                'kpi:trl_delete',
+                kwargs={
+                    'pk': self.trl.id
+                }
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
@@ -575,10 +859,18 @@ class FinanceTests(TestCase):
         No Access : Executive
         """
         self.client.logout()
-        self.client.login(username=self.executive.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.executive.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('kpi:trl_delete', kwargs={'pk': self.trl.id}),
+            reverse(
+                'kpi:trl_delete',
+                kwargs={
+                    'pk': self.trl.id
+                }
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
@@ -592,10 +884,18 @@ class FinanceTests(TestCase):
         Access : Staff
         """
         self.client.logout()
-        self.client.login(username=self.staff.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.staff.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('kpi:irl_delete', kwargs={'pk': self.irl.id}),
+            reverse(
+                'kpi:irl_delete',
+                kwargs={
+                    'pk': self.irl.id
+                }
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 200)
@@ -604,10 +904,18 @@ class FinanceTests(TestCase):
         No Access : Founders of the company
         """
         self.client.logout()
-        self.client.login(username=self.founderCompany.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.founderCompany.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('kpi:irl_delete', kwargs={'pk': self.irl.id}),
+            reverse(
+                'kpi:irl_delete',
+                kwargs={
+                    'pk': self.irl.id
+                }
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
@@ -616,10 +924,18 @@ class FinanceTests(TestCase):
         No Access : Mentors of the company
         """
         self.client.logout()
-        self.client.login(username=self.mentorCompany.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.mentorCompany.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('kpi:irl_delete', kwargs={'pk': self.irl.id}),
+            reverse(
+                'kpi:irl_delete',
+                kwargs={
+                    'pk': self.irl.id
+                }
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
@@ -628,23 +944,38 @@ class FinanceTests(TestCase):
         No Access : Other founders
         """
         self.client.logout()
-        self.client.login(username=self.founder.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.founder.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('kpi:irl_delete', kwargs={'pk': self.irl.id}),
+            reverse(
+                'kpi:irl_delete',
+                kwargs={
+                    'pk': self.irl.id
+                }
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
-
 
         """
         No Access : Other mentors
         """
         self.client.logout()
-        self.client.login(username=self.mentor.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.mentor.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('kpi:irl_delete', kwargs={'pk': self.irl.id}),
+            reverse(
+                'kpi:irl_delete',
+                kwargs={
+                    'pk': self.irl.id
+                }
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
@@ -653,10 +984,18 @@ class FinanceTests(TestCase):
         No Access : Executive
         """
         self.client.logout()
-        self.client.login(username=self.executive.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.executive.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('kpi:irl_delete', kwargs={'pk': self.irl.id}),
+            reverse(
+                'kpi:irl_delete',
+                kwargs={
+                    'pk': self.irl.id
+                }
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 302)

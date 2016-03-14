@@ -273,16 +273,9 @@ class UpdateFloorMap(TestCase):
             dict(size=11, text="000000000000.0.0\n11")
         )
 
-        room.label = "One Fish Two Fish Red Fish Blue Fish"
-        room.code = "C-12274"
-        room.options['show_code'] = True
-        self.assertDictEqual(
-            room.get_room_format(),
-            dict(size=16, text="One Fish\nTwo Fish\nRed Fish\nBlue Fish\nC-12274")
-        )
-
         # When best_format() fails
 
+        room.label = "One Fish Two Fish Red Fish Blue Fish"
         room.set_area_coords(0, 0, 10, 10)
         room.options['show_code'] = False
         self.assertDictEqual(room.get_room_format(), dict(size=24, text="..."))

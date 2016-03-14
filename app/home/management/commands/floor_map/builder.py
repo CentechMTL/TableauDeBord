@@ -104,6 +104,11 @@ class Room:
             if code_width > max_width:
                 self.options['show_code'] = False
 
+    def get_font(self, size):
+        font_path = os.path.join(settings.MEDIA_ROOT, settings.FONTS_DIR, settings.FONT_FACE)
+        font = ImageFont.truetype(font_path, size=size)
+        return font
+
     def set_coords(self, *coords):
         if len(coords) < 4 or len(coords) % 2 == 1:
             ex = "Invalid coordinates received : %s" % str(coords)
@@ -192,7 +197,7 @@ class Room:
         :param text: The text to display (excluding label, if any)
         :return: tuple[width, height]
         """
-        font = ImageFont.truetype(settings.FONT_FACE, size=size)
+        font = self.get_font(size)
         text_size = self.canvas.multiline_textsize(text, font=font, spacing=settings.FONT_LINE_SPACING)
 
         return text_size
@@ -522,7 +527,7 @@ class Room:
         self.canvas.multiline_text(
             label_pos,
             room_format['text'],
-            font=ImageFont.truetype(settings.FONT_FACE, size=room_format['size']),
+            font=self.get_font(room_format['size']),
             fill=settings.FONT_COLOR,
             spacing=settings.FONT_LINE_SPACING,
             align=settings.ROOM_TEXT_ALIGN

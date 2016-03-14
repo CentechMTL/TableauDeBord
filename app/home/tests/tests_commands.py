@@ -117,8 +117,6 @@ class UpdateFloorMap(TestCase):
         Tests FloorMap class from the script
         """
 
-        font_24 = ImageFont.truetype('arial.ttf', size=24)
-
         options = {
             'input': self.ImagePathIn,
             'output': os.path.join(settings.MEDIA_ROOT, "floor_map", "floor_map.jpg"),
@@ -149,6 +147,8 @@ class UpdateFloorMap(TestCase):
 
         self.assertEqual(1, len(floor_map._rooms))
         room = floor_map._rooms[0]
+        
+        font_24 = room.get_font(24)
 
         # Test room variable initialization
         self.assertEqual(room.label, "COMPANY")

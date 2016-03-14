@@ -185,7 +185,7 @@ class Room:
 
         return self.text_size(size, display_text)
 
-    def get_text_size(self, size, text):
+    def text_size(self, size, text):
         """
         Gets the size of the room label + code
         :param size: The font size of the text

@@ -3,7 +3,7 @@
 from django.core.management.base import BaseCommand
 from django.conf import settings
 from app.home.models import Room
-from _floor_map.builder import FloorMapBuilder
+from floor_map.builder import FloorMapBuilder
 from ast import literal_eval
 
 # ToDo: Add color field in RoomType

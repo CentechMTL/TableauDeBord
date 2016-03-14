@@ -11,4 +11,3 @@ class MentorFactory(factory.DjangoModelFactory):
         model = Mentor
 
     user = factory.SubFactory(UserFactory)
-

@@ -15,16 +15,19 @@ from crispy_forms.layout import HTML, Layout, \
 from django.utils.translation import ugettext_lazy as _
 
 FILTER_MENTOR_CHOICES = list(MENTOR_TYPE_CHOICES)
-FILTER_MENTOR_CHOICES.insert(0, ('','---------') )
+FILTER_MENTOR_CHOICES.insert(0, ('', '---------'))
 
 
 class MentorFilter(FilterSet):
     name = MethodFilter(action='filter_username', label=_('Search by name'))
-    type = ChoiceFilter(choices= FILTER_MENTOR_CHOICES )
+    type = ChoiceFilter(choices=FILTER_MENTOR_CHOICES)
 
     class Meta:
         model = Mentor
-        fields = {'expertise' : ['exact'], 'type': ['exact']}
+        fields = {
+            'expertise': ['exact'],
+            'type': ['exact']
+        }
 
     def filter_username(self, queryset, value):
         if value:
@@ -32,9 +35,24 @@ class MentorFilter(FilterSet):
 
             value = re.sub("[^\w]", " ",  value).split()
             for word in value:
-                firstname = list(queryset.filter(user__first_name__icontains = word).all())
-                lastname = list(queryset.filter(user__last_name__icontains = word).all())
-                username = list(queryset.filter(user__username__icontains = word).all())
+
+                firstname = list(
+                    queryset.filter(
+                        user__first_name__icontains=word
+                    ).all()
+                )
+
+                lastname = list(
+                    queryset.filter(
+                        user__last_name__icontains=word
+                    ).all()
+                )
+
+                username = list(
+                    queryset.filter(
+                        user__username__icontains=word
+                    ).all()
+                )
 
                 for user in firstname:
                     if user not in query:
@@ -55,8 +73,19 @@ class MentorFilter(FilterSet):
 class MentorForm(forms.ModelForm):
     class Meta:
         model = Mentor
-        fields = ['type', 'url', 'picture', 'about', 'expertise', 'phone', 'website', 'facebook', 'twitter',
-                  'googlePlus', 'linkedIn']
+        fields = [
+            'type',
+            'url',
+            'picture',
+            'about',
+            'expertise',
+            'phone',
+            'website',
+            'facebook',
+            'twitter',
+            'googlePlus',
+            'linkedIn'
+        ]
 
     type = forms.ChoiceField(
         choices=MENTOR_TYPE_CHOICES,
@@ -66,51 +95,80 @@ class MentorForm(forms.ModelForm):
         label=_('Directory of ETS'),
         required=False,
     )
-    url.widget.attrs.update({'placeholder': _(u'https://example.com')})
+    url.widget.attrs.update(
+        {
+            'placeholder': _(u'https://example.com')
+        }
+    )
 
     facebook = forms.URLField(
         label=_('Facebook'),
         required=False,
     )
-    facebook.widget.attrs.update({'placeholder': _(u'https://www.facebook.com/lastname.firstname')})
+    facebook.widget.attrs.update(
+        {
+            'placeholder': _(u'https://www.facebook.com/lastname.firstname')
+        }
+    )
 
     twitter = forms.URLField(
         label=_('Twitter'),
         required=False,
     )
-    twitter.widget.attrs.update({'placeholder': _(u'https://twitter.com/username')})
+    twitter.widget.attrs.update(
+        {
+            'placeholder': _(u'https://twitter.com/username')
+        }
+    )
 
     googlePlus = forms.URLField(
         label=_('Google+'),
         required=False,
     )
-    googlePlus.widget.attrs.update({'placeholder': _(u'https://plus.google.com/id')})
+    googlePlus.widget.attrs.update(
+        {
+            'placeholder': _(u'https://plus.google.com/id')
+        }
+    )
 
     linkedIn = forms.URLField(
         label=_('linkedIn'),
         required=False,
     )
-    linkedIn.widget.attrs.update({'placeholder': _(u'https://ca.linkedin.com/in/username')})
+    linkedIn.widget.attrs.update(
+        {
+            'placeholder': _(u'https://ca.linkedin.com/in/username')
+        }
+    )
 
     phone = forms.CharField(
         label=_('Phone number'),
         required=False,
         max_length=10
     )
-    phone.widget.attrs.update({'placeholder': _(u'Phone number')})
+    phone.widget.attrs.update(
+        {
+            'placeholder': _(u'Phone number')
+        }
+    )
 
     website = forms.URLField(
         label=_('Web site'),
         required=False,
     )
-    website.widget.attrs.update({'placeholder': _(u'https://example.com')})
+    website.widget.attrs.update(
+        {
+            'placeholder': _(u'https://example.com')
+        }
+    )
 
     about = forms.CharField(
         label=_('Description'),
         required=False,
         widget=forms.Textarea(
             attrs={
-                'placeholder': _(u'Write here a brief summary of your skills and your career.'),
+                'placeholder': _(u'Write here a brief summary of your skills '
+                                 u'and your career.'),
                 'class': 'md-editor'
             }
         )

@@ -36,7 +36,7 @@ class FloorMapBuilder:
         self._rooms.append(new_room)
 
     def render_image(self):
-        if settings.DEBUG or settings.FORCE_DEBUG:
+        if settings.DEBUG:
             print("****************************************")
             print("Rendering %d entities:" % len(self._rooms))
 
@@ -44,7 +44,7 @@ class FloorMapBuilder:
             room.draw()
             room.print_label()
 
-        if settings.DEBUG or settings.FORCE_DEBUG:
+        if settings.DEBUG:
             print("****************************************")
             print("[SUCCESS] Render has completed.")
 
@@ -62,7 +62,7 @@ class FloorMapBuilder:
 
         self.floor_map_image.save(output_file, quality=quality)
 
-        if settings.DEBUG or settings.FORCE_DEBUG:
+        if settings.DEBUG:
             print("[SUCCESS] A new copy was saved at %s" % output_file)
 
 
@@ -80,7 +80,7 @@ class Room:
     _log__room_bump = {}  # Stores already calculated bumped texts
 
     def __init__(self, canvas, **kwargs):
-        if settings.DEBUG or settings.FORCE_DEBUG:
+        if settings.DEBUG:
             print("Adding new entity with attributes: %s" % kwargs)
 
         self.canvas = canvas
@@ -237,20 +237,20 @@ class Room:
             self._log__room_bump = {}
 
             # Fetches the right text format to fit in the text area
-            if settings.DEBUG or settings.FORCE_DEBUG:
+            if settings.DEBUG:
                 print("****************************************")
                 print("Searching for best result for \"%s\" :" % room_label.replace("\n", "\\n"))
 
             best_format = self.get_best_format(settings.FONT_SIZE_MAX, room_label)
 
-            if settings.DEBUG or settings.FORCE_DEBUG:
+            if settings.DEBUG:
                 print("Done.")
 
             # No format fits in text area
             if best_format is None:
                 # Attempts to truncate text
                 if settings.ALLOW_WORD_TRUNCATE:
-                    if settings.DEBUG or settings.FORCE_DEBUG:
+                    if settings.DEBUG:
                         print("[WARNING] Text couldn't fit. Truncating (attempt #%d)..." % truncate_attempt_nb, end="")
 
                     if room_label == settings.TRUNCATE_STRING:
@@ -258,16 +258,16 @@ class Room:
                     else:
                         room_label = self.truncate_text(room_label)
 
-                    if settings.DEBUG or settings.FORCE_DEBUG:
+                    if settings.DEBUG:
                         print("Done.")
                         print("[WARNING] Text truncated to \"%s\"." % room_label.replace("\n", "\\n"))
                 else:
-                    if settings.DEBUG or settings.FORCE_DEBUG:
+                    if settings.DEBUG:
                         print("[WARNING] Text couldn't fit and truncating isn't allowed! Returning invalid string.")
 
                     best_format = {'size': settings.FONT_SIZE_MAX, 'text': settings.TRUNCATE_STRING}
 
-        if settings.DEBUG or settings.FORCE_DEBUG:
+        if settings.DEBUG:
             print("[SUCCESS] Result found: (%s, \"%s\")" %
                   (best_format['size'], best_format['text'].replace("\n", "\\n")))
 
@@ -305,7 +305,7 @@ class Room:
 
         # Checks if branch is already explored
         if (size, text) in self._log__room_format:
-            if settings.DEBUG or settings.FORCE_DEBUG:
+            if settings.DEBUG:
                 print("Skipping; Already explored. ", end="")
 
             return None
@@ -322,11 +322,11 @@ class Room:
 
         # text fits in text area, return as best format
         if (text_size[0] <= area_size[0]) & (text_size[1] <= area_size[1]):
-            if settings.DEBUG or settings.FORCE_DEBUG:
+            if settings.DEBUG:
                 print("Fits at size %d! [%d] " % (size, depth), end="")
 
             return dict(size=size, text=text)
-        elif settings.DEBUG or settings.FORCE_DEBUG:
+        elif settings.DEBUG:
             print("Fetching [%d]..." % depth, end="")
 
         # Shrink text option
@@ -334,7 +334,7 @@ class Room:
         shrunk_size = size - settings.FONT_SIZE_STEP
 
         if shrunk_size >= settings.FONT_SIZE_MIN:
-            if settings.DEBUG or settings.FORCE_DEBUG:
+            if settings.DEBUG:
                 print("Shrinking %d => %d..." % (size, shrunk_size), end="")
 
             option = self.get_best_format(shrunk_size, text, depth)
@@ -395,13 +395,13 @@ class Room:
 
         if not 1 <= bumps_wanted <= len(words) - 1:
             # Nothing to do here!
-            if settings.DEBUG or settings.FORCE_DEBUG:
+            if settings.DEBUG:
                 print("Skipping; Nothing to bump! ", end="")
             return text
 
         if bumps_wanted in self._log__room_bump:
             # Bump already calculated; Fetch results
-            if settings.DEBUG or settings.FORCE_DEBUG:
+            if settings.DEBUG:
                 print("Try bump #%d! " % bumps_wanted, end="")
             return self._log__room_bump[bumps_wanted]
 
@@ -409,7 +409,7 @@ class Room:
 
         if len(words) == 2:
             # Text only has 1 bump option
-            if settings.DEBUG or settings.FORCE_DEBUG:
+            if settings.DEBUG:
                 print("Bump!", end="")
             return text.replace(" ", "\n")
         elif len(words) > 2:
@@ -419,13 +419,13 @@ class Room:
             total_bump_count = utils.combinations_count(len(words), bumps_wanted) * bumps_wanted
 
             if total_bump_count > settings.MAX_BUMP_JOB:
-                if settings.DEBUG or settings.FORCE_DEBUG:
+                if settings.DEBUG:
                     print("\n[WARNING] Too many combinations! (%s) Skipping. " % total_bump_count, end="")
                 return " ".join(words)
 
             # Everything is set; proceed with splitting
 
-            if settings.DEBUG or settings.FORCE_DEBUG:
+            if settings.DEBUG:
                 print("\nProcessing %s bumps..." % total_bump_count, end="")
 
             best_option = {'text': text, 'width': 0}
@@ -447,7 +447,7 @@ class Room:
                 if option['width'] < best_option['width'] or best_option['width'] == 0:
                     best_option = option
 
-            if settings.DEBUG or settings.FORCE_DEBUG:
+            if settings.DEBUG:
                 print("Bump! ", end="")
 
             # Logs bump for future usage

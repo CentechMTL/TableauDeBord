@@ -1,20 +1,22 @@
 # coding: utf-8
 
+from django.conf import settings as django_settings
+
 # FLOOR MAP SETTINGS
 #
 # These settings apply to the general display of the floor map
 # See section below for the room settings display to set a default option for room settings
 
+# Django installation
+# DO NOT CHANGE!
+DEBUG = django_settings.DEBUG
+MEDIA_ROOT = django_settings.MEDIA_ROOT
+
 # Media
-MEDIA_ROOT = ""
 PROJECT_DIR = "floor_map"
 FONTS_DIR = "fonts"
 INPUT_FILENAME = "floor_map_base.jpg"
 OUTPUT_FILENAME = "floor_map.jpg"
-
-# Dev tools
-DEBUG = False  # ALWAYS FALSE, overridden by Django DEBUG settings; use FORCE_DEBUG instead
-FORCE_DEBUG = False  # Overrides DEBUG settings
 
 # Optimization
 FONT_SIZE_STEP = 1

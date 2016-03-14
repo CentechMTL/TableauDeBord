@@ -30,10 +30,7 @@ class Command(BaseCommand):
         )
 
     def handle(self, *args, **options):
-        map_settings = {
-            'MEDIA_ROOT': settings.MEDIA_ROOT,
-            'DEBUG': settings.DEBUG
-        }
+        map_settings = {}
 
         if options['input']:
             map_settings['input'] = options['input']

@@ -120,7 +120,7 @@ class UpdateFloorMap(TestCase):
         options = {
             'input': self.ImagePathIn,
             'output': os.path.join(settings.MEDIA_ROOT, "floor_map", "floor_map.jpg"),
-            'FORCE_DEBUG': True,
+            'DEBUG': True,
             'ROOM_TEXT_PADDING': (0.05, 0.05),
             'FONT_FACE': 'arial.ttf',
             'FONT_LINE_SPACING': 4,
@@ -147,7 +147,7 @@ class UpdateFloorMap(TestCase):
 
         self.assertEqual(1, len(floor_map._rooms))
         room = floor_map._rooms[0]
-        
+
         font_24 = room.get_font(24)
 
         # Test room variable initialization

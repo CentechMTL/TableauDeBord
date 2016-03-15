@@ -1,13 +1,10 @@
-from django.core.management.base import BaseCommand, CommandError
-from django.conf import settings
-from app.home.models import RoomType, Room, Rent
-from _builder import FloorMap
-from ast import literal_eval
-import os
+# coding: utf-8
 
-MEDIA_PATH = os.path.join(settings.MEDIA_ROOT, "floor_map")
-INPUT_FILENAME = "floor_map_base.jpg"
-OUTPUT_FILENAME = "floor_map.jpg"
+from django.core.management.base import BaseCommand
+from django.conf import settings
+from app.home.models import Room
+from floor_map.builder import FloorMapBuilder
+from ast import literal_eval
 
 # ToDo: Add color field in RoomType
 # Colors
@@ -19,17 +16,31 @@ CLR_RED = (240, 61, 67)
 
 
 class Command(BaseCommand):
-    def handle(self, *args, **options):
-        input_image = os.path.join(MEDIA_PATH, INPUT_FILENAME)
-        output_image = os.path.join(MEDIA_PATH, OUTPUT_FILENAME)
+    help = 'Force refresh the floor map image(s)'
 
+    def add_arguments(self, parser):
+        parser.add_argument(
+            '--input',
+            default=False,
+            help='Input filename')
+        parser.add_argument(
+            '--output',
+            default=False,
+            help='Output filename'
+        )
+
+    def handle(self, *args, **options):
         map_settings = {}
 
-        floor_map = FloorMap(input_image, map_settings)
+        if options['input']:
+            map_settings['input'] = options['input']
 
-        rooms = Room.objects.all()
+        if options['output']:
+            map_settings['output'] = options['output']
 
-        for room in rooms:
+        floor_map = FloorMapBuilder(**map_settings)
+
+        for room in Room.objects.all():
             company = room.get_owner_name()
 
             if room.is_rental():
@@ -54,22 +65,23 @@ class Command(BaseCommand):
                 bg_color = CLR_GREY
             # ToDo end
 
-            if room.text_coords:
-                room.text_coords = literal_eval(room.text_coords)
+            # Required data:
 
             data = {
                 'label': room_label,
                 'code': room.code,
                 'coords': literal_eval(room.coords),
-                'text_coords': room.text_coords,
-            }
-
-            options = {
-                'show_code': (len(room.code) > 0),
+                'show_code': bool(room.code),
                 'bg_color': bg_color,
             }
-            
-            floor_map.add_room(data, options)
+
+            # Optional data:
+
+            if room.text_coords:
+                data['text_coords'] = literal_eval(room.text_coords)
+
+            # Sends data to the map builder
+            floor_map.add_room(**data)
 
         floor_map.render_image()
-        floor_map.save_to(output_image)
+        floor_map.save(**options)

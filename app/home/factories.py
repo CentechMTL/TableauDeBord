@@ -1,10 +1,12 @@
 # coding: utf-8
 
+import datetime
 import factory
-from app.home.models import UserProfile, Expertise, RoomType, Room, Rent
+
 from django.contrib.auth.models import User, Group
 
-from datetime import datetime
+from app.home.models import UserProfile, Expertise, RoomType, Room, Rent
+
 
 class UserFactory(factory.DjangoModelFactory):
     class Meta:
@@ -16,19 +18,23 @@ class UserFactory(factory.DjangoModelFactory):
 
     @classmethod
     def _prepare(cls, create, **kwargs):
-        password = kwargs.pop('password', None) # on récupère le mot de passe ci-dessus en clair "Toto1234!#"
+        # On récupère le mot de passe ci-dessus en clair "Toto1234!#"
+        password = kwargs.pop('password', None)
         my_user = super(UserFactory, cls)._prepare(create, **kwargs)
         if password:
-            my_user.set_password(password) # on chiffre le mot de passe
+            # on chiffre le mot de passe
+            my_user.set_password(password)
             if create:
                 my_user.save()
         return my_user
+
 
 class UserProfileFactory(factory.DjangoModelFactory):
     class Meta:
         model = UserProfile
 
     user = factory.SubFactory(UserFactory)
+
 
 class StaffUserFactory(factory.DjangoModelFactory):
     class Meta:
@@ -58,11 +64,13 @@ class StaffUserFactory(factory.DjangoModelFactory):
         user.save()
         return user
 
+
 class StaffUserProfileFactory(factory.DjangoModelFactory):
     class Meta:
         model = UserProfile
 
     user = factory.SubFactory(StaffUserFactory)
+
 
 class ExecutiveUserFactory(factory.DjangoModelFactory):
     class Meta:
@@ -92,11 +100,13 @@ class ExecutiveUserFactory(factory.DjangoModelFactory):
         user.save()
         return user
 
+
 class ExecutiveUserProfileFactory(factory.DjangoModelFactory):
     class Meta:
         model = UserProfile
 
     user = factory.SubFactory(ExecutiveUserFactory)
+
 
 class ExpertiseFactory(factory.DjangoModelFactory):
     class Meta:
@@ -141,8 +151,14 @@ class RentFactory(factory.DjangoModelFactory):
 
     @classmethod
     def _prepare(cls, create, **kwargs):
-        kwargs['date_start'] = kwargs.pop('date_start', datetime.today())
-        kwargs['date_end'] = kwargs.pop('date_end', datetime.today())
+        kwargs['date_start'] = kwargs.pop(
+            'date_start',
+            datetime.datetime.today()
+        )
+        kwargs['date_end'] = kwargs.pop(
+            'date_end',
+            datetime.datetime.today()
+        )
 
         rent = super(RentFactory, cls)._prepare(create, **kwargs)
 

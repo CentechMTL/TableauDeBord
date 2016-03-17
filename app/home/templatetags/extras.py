@@ -1,6 +1,9 @@
+# coding: utf-8
+
+from ast import literal_eval
+
 from django import template
 from django.template.defaultfilters import stringfilter
-from ast import literal_eval
 
 register = template.Library()
 

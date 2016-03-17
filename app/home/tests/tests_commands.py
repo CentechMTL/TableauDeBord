@@ -2,9 +2,8 @@
 from __future__ import division
 
 import os
-from datetime import datetime, timedelta
+import datetime
 
-from PIL import ImageFont
 from django.conf import settings
 from django.core.management import call_command
 from django.test import TestCase
@@ -37,7 +36,11 @@ class UpdateFloorMap(TestCase):
         self.room_2 = RoomFactory(type=self.room_type_2)
         self.room_3 = RoomFactory(type=self.room_type_3)
         self.room_4 = RoomFactory(type=self.room_type_4)
-        call_command('updatefloormap', input=self.ImagePathIn, output=self.ImagePathOut)
+        call_command(
+            'updatefloormap',
+            input=self.ImagePathIn,
+            output=self.ImagePathOut
+        )
         self.assertTrue(os.path.isfile(self.ImagePathOut))
         os.remove(self.ImagePathOut)
 
@@ -105,8 +108,9 @@ class UpdateFloorMap(TestCase):
         self.room.save()
 
         # Rental currently in application
-        self.rent.date_start = datetime.today() - timedelta(days=10)
-        self.rent.date_end = datetime.today() + timedelta(days=10)
+        time_diff = datetime.timedelta(days=10)
+        self.rent.date_start = datetime.datetime.today() - time_diff
+        self.rent.date_end = datetime.datetime.today() + time_diff
         self.rent.save()
         call_command('updatefloormap', output=self.ImagePathOut)
         self.assertTrue(os.path.isfile(self.ImagePathOut))
@@ -119,7 +123,11 @@ class UpdateFloorMap(TestCase):
 
         options = {
             'input': self.ImagePathIn,
-            'output': os.path.join(settings.MEDIA_ROOT, "floor_map", "floor_map.jpg"),
+            'output': os.path.join(
+                settings.MEDIA_ROOT,
+                "floor_map",
+                "floor_map.jpg"
+            ),
             'DEBUG': True,
             'ROOM_TEXT_PADDING': (0.05, 0.05),
             'FONT_FACE': 'arial.ttf',
@@ -153,21 +161,39 @@ class UpdateFloorMap(TestCase):
         # Test room variable initialization
         self.assertEqual(room.label, "COMPANY")
         self.assertEqual(room.code, "C-0000000000000000000000000000000000000")
-        self.assertTupleEqual(room.get_coords(), (0, 0, 200, 0, 200, 200, 0, 200))
+        self.assertTupleEqual(
+            room.get_coords(),
+            (0, 0, 200, 0, 200, 200, 0, 200)
+        )
         self.assertTupleEqual(room.get_area_coords(), (0, 0, 200, 200))
 
         self.assertDictEqual(
             room.options,
-            {'show_code': False, 'bg_color': (250, 147, 29), 'fake_option': 42}
+            {
+                'show_code': False,
+                'bg_color': (250, 147, 29),
+                'fake_option': 42
+            }
         )
 
         # Test accessors
-        self.assertTupleEqual(room.get_area_size(include_padding=False), (200, 200))
-        self.assertTupleEqual(room.get_area_size(include_padding=True), (180, 180))
-        self.assertTupleEqual(room.get_padding_size(), (10, 10))
+        self.assertTupleEqual(
+            room.get_area_size(include_padding=False),
+            (200, 200)
+        )
+        self.assertTupleEqual(
+            room.get_area_size(include_padding=True),
+            (180, 180)
+        )
+        self.assertTupleEqual(
+            room.get_padding_size(), (10, 10)
+        )
 
         # Test text_size()
-        self.assertTupleEqual(room.text_size(24, "ABC"), canvas.multiline_textsize("ABC", font=font_24, spacing=4))
+        self.assertTupleEqual(
+            room.text_size(24, "ABC"),
+            canvas.multiline_textsize("ABC", font=font_24, spacing=4)
+        )
 
         # Without room code
         room.code = "C-0000"
@@ -189,7 +215,11 @@ class UpdateFloorMap(TestCase):
         room.set_coords(100, 100, 400, 200)
         room.options['show_code'] = True
         room.code = "C-0000"
-        text_size = canvas.multiline_textsize("Label\nCode\nC-0000", font=font_24, spacing=4)
+        text_size = canvas.multiline_textsize(
+            "Label\nCode\nC-0000",
+            font=font_24,
+            spacing=4
+        )
         self.assertTupleEqual(
             room.get_label_pos(24, "Label\nCode"),
             (250 - text_size[0] / 2, 150 - text_size[1] / 2)
@@ -198,7 +228,10 @@ class UpdateFloorMap(TestCase):
         # Test long word splitting
         room.set_area_coords(0, 0, 50, 50)
         room.set_coords(0, 0, 50, 50)
-        self.assertEqual(room.split_long_words("123456789 12345"), "12345-\n6789 12345")
+        self.assertEqual(
+            room.split_long_words("123456789 12345"),
+            "12345-\n6789 12345"
+        )
 
         # Test word truncate
         self.assertEqual(room.truncate_text("0000 0000"), "0000 000...")
@@ -220,18 +253,42 @@ class UpdateFloorMap(TestCase):
         self.assertEqual(room.bump_text("000 111", 2, False), "000 111")
         self.assertEqual(room.bump_text("000 111", 1, False), "000\n111")
         self.assertEqual(room.bump_text("000\n111", 1, False), "000\n111")
-        self.assertEqual(room.bump_text("000\n111 222", 1, False), "000\n111 222")
-        self.assertEqual(room.bump_text("000 111\n222", 1, False), "000\n111 222")
-        self.assertEqual(room.bump_text("000 111 222", 2, False), "000\n111\n222")
-        self.assertEqual(room.bump_text("000\n111 222", 2, False), "000\n111\n222")
-        self.assertEqual(room.bump_text("000\n111\n222", 2, False), "000\n111\n222")
-        self.assertEqual(room.bump_text("0 111 2 3 44 555555", 1, False), "0 111 2 3\n44 555555")
-        self.assertEqual(room.bump_text("0 111 2 3 44 555555", 2, False), "0 111\n2 3 44\n555555")
-        self.assertEqual(room.bump_text("1 1 1 1 1 1 1 1", 1, False), "1 1 1 1\n1 1 1 1")
-        self.assertEqual(room.bump_text("1 1 1 1 1 1 1 1", 2, False), "1 1\n1 1 1\n1 1 1")
-        self.assertEqual(room.bump_text("1 1 1 1 1 1 1 1", 3, False), "1 1\n1 1\n1 1\n1 1")
-        self.assertEqual(room.bump_text("1 1 1 1 1 1 1 1", 4, False), "1\n1\n1 1\n1 1\n1 1")
-        self.assertEqual(room.bump_text("1 1 1 1 1 1 1 1 1 1", 5, False), "1 1 1 1 1 1 1 1 1 1")
+        self.assertEqual(room.bump_text(
+            "000\n111 222", 1, False),
+            "000\n111 222")
+        self.assertEqual(room.bump_text(
+            "000 111\n222", 1, False),
+            "000\n111 222")
+        self.assertEqual(room.bump_text(
+            "000 111 222", 2, False),
+            "000\n111\n222")
+        self.assertEqual(room.bump_text(
+            "000\n111 222", 2, False),
+            "000\n111\n222")
+        self.assertEqual(room.bump_text(
+            "000\n111\n222", 2, False),
+            "000\n111\n222")
+        self.assertEqual(room.bump_text(
+            "0 111 2 3 44 555555", 1, False),
+            "0 111 2 3\n44 555555")
+        self.assertEqual(room.bump_text(
+            "0 111 2 3 44 555555", 2, False),
+            "0 111\n2 3 44\n555555")
+        self.assertEqual(room.bump_text(
+            "1 1 1 1 1 1 1 1", 1, False),
+            "1 1 1 1\n1 1 1 1")
+        self.assertEqual(room.bump_text(
+            "1 1 1 1 1 1 1 1", 2, False),
+            "1 1\n1 1 1\n1 1 1")
+        self.assertEqual(room.bump_text(
+            "1 1 1 1 1 1 1 1", 3, False),
+            "1 1\n1 1\n1 1\n1 1")
+        self.assertEqual(room.bump_text(
+            "1 1 1 1 1 1 1 1", 4, False),
+            "1\n1\n1 1\n1 1\n1 1")
+        self.assertEqual(room.bump_text(
+            "1 1 1 1 1 1 1 1 1 1", 5, False),
+            "1 1 1 1 1 1 1 1 1 1")
 
         # Test bump result logging
         room._log__room_bump = {}
@@ -254,33 +311,42 @@ class UpdateFloorMap(TestCase):
 
         room.label = "000 111"
         room.code = ""
-        self.assertDictEqual(room.get_room_format(), dict(size=24, text="000 111"))
+        self.assertDictEqual(
+            room.get_room_format(),
+            {'size': 24, 'text': "000 111"}
+        )
 
         room.label = ""
         room.code = "C-1230"
         room.options['show_code'] = True
-        self.assertDictEqual(room.get_room_format(), dict(size=24, text="C-1230"))
+        self.assertDictEqual(
+            room.get_room_format(),
+            {'size': 24, 'text': "C-1230"}
+        )
 
         room.label = "000000 111111"
         room.code = "C-1230"
-        self.assertDictEqual(room.get_room_format(), dict(size=24, text="000000\n111111\nC-1230"))
+        self.assertDictEqual(
+            room.get_room_format(),
+            {'size': 24, 'text': "000000\n111111\nC-1230"}
+        )
 
         room.label = "000000000000.0.0 11"
         room.code = ""
         room.options['show_code'] = False
         self.assertDictEqual(
             room.get_room_format(),
-            dict(size=11, text="000000000000.0.0\n11")
+            {'size': 11, 'text': "000000000000.0.0\n11"}
         )
 
         # When best_format() fails
-
         room.label = "One Fish Two Fish Red Fish Blue Fish"
         room.set_area_coords(0, 0, 10, 10)
         room.options['show_code'] = False
         self.assertDictEqual(room.get_room_format(), dict(size=24, text="..."))
 
         del floor_map
+
         # Tests with ALLOW_WORD_TRUNCATE set to off
 
         options = {
@@ -289,7 +355,6 @@ class UpdateFloorMap(TestCase):
         }
 
         floor_map = FloorMapBuilder(**options)
-        canvas = floor_map.canvas
 
         data = {
             'label': "COMPANY",

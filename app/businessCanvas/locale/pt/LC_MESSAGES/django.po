@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Tableau PTBR\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-22 01:05+0000\n"
+"POT-Creation-Date: 2016-03-17 20:17+0000\n"
 "PO-Revision-Date: 2015-09-29 20:22-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,11 +18,11 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 1.8.5\n"
 
-#: app/businessCanvas/models.py:26
+#: app/businessCanvas/models.py:27
 msgid "Business canvas element"
 msgstr "Elemento do Modelo Canvas"
 
-#: app/businessCanvas/models.py:28
+#: app/businessCanvas/models.py:31
 #: app/businessCanvas/templates/businessCanvas/businesscanvaselement_list.html:149
 #: app/businessCanvas/templates/businessCanvas/businesscanvaselement_list.html:185
 #: app/businessCanvas/templates/businessCanvas/businesscanvaselement_list.html:222
@@ -36,7 +36,7 @@ msgstr "Elemento do Modelo Canvas"
 msgid "Title"
 msgstr "Título"
 
-#: app/businessCanvas/models.py:29
+#: app/businessCanvas/models.py:36
 #: app/businessCanvas/templates/businessCanvas/businesscanvaselement_list.html:150
 #: app/businessCanvas/templates/businessCanvas/businesscanvaselement_list.html:186
 #: app/businessCanvas/templates/businessCanvas/businesscanvaselement_list.html:223
@@ -50,27 +50,27 @@ msgstr "Título"
 msgid "Comment"
 msgstr "Comentário"
 
-#: app/businessCanvas/models.py:31
+#: app/businessCanvas/models.py:42
 msgid "Date of creation"
 msgstr "Data de criação"
 
-#: app/businessCanvas/models.py:32
+#: app/businessCanvas/models.py:46
 msgid "Date of updated"
 msgstr "Data de atualização"
 
-#: app/businessCanvas/models.py:33
+#: app/businessCanvas/models.py:52
 msgid "Type"
 msgstr "Tipo"
 
-#: app/businessCanvas/models.py:34 app/businessCanvas/models.py:49
+#: app/businessCanvas/models.py:56 app/businessCanvas/models.py:83
 msgid "Company"
 msgstr "Empresa"
 
-#: app/businessCanvas/models.py:36
+#: app/businessCanvas/models.py:62
 msgid "Disactivated"
 msgstr "Desativado"
 
-#: app/businessCanvas/models.py:45
+#: app/businessCanvas/models.py:73
 #: app/businessCanvas/templates/businessCanvas/archive_confirm_delete.html:6
 #: app/businessCanvas/templates/businessCanvas/archive_confirm_delete.html:8
 #: app/businessCanvas/templates/businessCanvas/businesscanvaselement_list.html:522
@@ -78,11 +78,11 @@ msgstr "Desativado"
 msgid "Archive"
 msgstr "Arquivo"
 
-#: app/businessCanvas/models.py:48
+#: app/businessCanvas/models.py:79
 msgid "Date"
 msgstr "Data"
 
-#: app/businessCanvas/models.py:51
+#: app/businessCanvas/models.py:89
 msgid "Elements of the archive"
 msgstr "Elementos do arquivo"
 

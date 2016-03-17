@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-22 01:05+0000\n"
+"POT-Creation-Date: 2016-03-17 20:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: app/businessCanvas/models.py:26
+#: app/businessCanvas/models.py:27
 msgid "Business canvas element"
 msgstr "Element du canevas modèle d'affaire"
 
-#: app/businessCanvas/models.py:28
+#: app/businessCanvas/models.py:31
 #: app/businessCanvas/templates/businessCanvas/businesscanvaselement_list.html:149
 #: app/businessCanvas/templates/businessCanvas/businesscanvaselement_list.html:185
 #: app/businessCanvas/templates/businessCanvas/businesscanvaselement_list.html:222
@@ -36,7 +36,7 @@ msgstr "Element du canevas modèle d'affaire"
 msgid "Title"
 msgstr "Titre"
 
-#: app/businessCanvas/models.py:29
+#: app/businessCanvas/models.py:36
 #: app/businessCanvas/templates/businessCanvas/businesscanvaselement_list.html:150
 #: app/businessCanvas/templates/businessCanvas/businesscanvaselement_list.html:186
 #: app/businessCanvas/templates/businessCanvas/businesscanvaselement_list.html:223
@@ -50,27 +50,27 @@ msgstr "Titre"
 msgid "Comment"
 msgstr "Commentaire"
 
-#: app/businessCanvas/models.py:31
+#: app/businessCanvas/models.py:42
 msgid "Date of creation"
 msgstr "Date de création"
 
-#: app/businessCanvas/models.py:32
+#: app/businessCanvas/models.py:46
 msgid "Date of updated"
 msgstr "Date de modification"
 
-#: app/businessCanvas/models.py:33
+#: app/businessCanvas/models.py:52
 msgid "Type"
 msgstr "Type"
 
-#: app/businessCanvas/models.py:34 app/businessCanvas/models.py:49
+#: app/businessCanvas/models.py:56 app/businessCanvas/models.py:83
 msgid "Company"
 msgstr "Compagnie"
 
-#: app/businessCanvas/models.py:36
+#: app/businessCanvas/models.py:62
 msgid "Disactivated"
 msgstr "Désactiver"
 
-#: app/businessCanvas/models.py:45
+#: app/businessCanvas/models.py:73
 #: app/businessCanvas/templates/businessCanvas/archive_confirm_delete.html:6
 #: app/businessCanvas/templates/businessCanvas/archive_confirm_delete.html:8
 #: app/businessCanvas/templates/businessCanvas/businesscanvaselement_list.html:522
@@ -78,11 +78,11 @@ msgstr "Désactiver"
 msgid "Archive"
 msgstr "Archive"
 
-#: app/businessCanvas/models.py:48
+#: app/businessCanvas/models.py:79
 msgid "Date"
 msgstr "Date"
 
-#: app/businessCanvas/models.py:51
+#: app/businessCanvas/models.py:89
 msgid "Elements of the archive"
 msgstr "Elements de l'archive"
 

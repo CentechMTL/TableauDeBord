@@ -60,11 +60,9 @@ urlpatterns = patterns(
         r'^accounts/password_change/done/$',
         'django.contrib.auth.views.password_change_done'
     ),
-    """
-    url(
-        r'^password/(?P<pk>\d+)$',
-        views.PasswordUpdate.as_view(),
-        name='change_password'
-    ),
-    """
+    # url(
+    #    r'^password/(?P<pk>\d+)$',
+    #    views.PasswordUpdate.as_view(),
+    #    name='change_password'
+    #),
 )

@@ -64,5 +64,5 @@ urlpatterns = patterns(
     #    r'^password/(?P<pk>\d+)$',
     #    views.PasswordUpdate.as_view(),
     #    name='change_password'
-    #),
+    # ),
 )

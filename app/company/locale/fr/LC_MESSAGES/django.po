@@ -429,7 +429,7 @@ msgstr "Bienvenue sur le tableau de bord du Centech"
 
 #: templates/dashboard.html:134 templates/dashboard.html.py:137
 msgid "Language"
-msgstr "Langage"
+msgstr "Langue"
 
 #: templates/dashboard.html:154
 msgid "MENTOR"

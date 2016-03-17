@@ -3,8 +3,15 @@
 from math import factorial
 
 
-# Expects 4 integers as [x1,y1,x2,y2] and transforms it into a polygon integer list as [x1,y1,...,x2,y2]
 def rect_to_poly(x1, y1, x2, y2):
+    """
+    Transforms a rectangle list into a polygon list
+    :param x1: Top left x coordinate
+    :param y1: Top left y coordinate
+    :param x2: Bottom right x coordinate
+    :param y2: Bottom right y coordinate
+    :return: Equivalent to received parameters but
+    """
     return x1, y1, x2, y1, x2, y2, x1, y2
 
 
@@ -12,8 +19,13 @@ def combinations_count(n, r):
     return int(factorial(n) / (factorial(n - r) * factorial(r)))
 
 
-# Returns a box containing the room polygon and reorganises rectangle coordinates
 def boundary_box(*coords):
+    """
+    Rearranges coordinates to return the rectangular boundaries
+        around the coordinates
+    :param coords:
+    :return: list of 4 integers representing the boundary rectangle
+    """
     # initializes box with initial point : box[minX, minY, maxX, maxY]
     bbox = [coords[0], coords[1], coords[0], coords[1]]
 

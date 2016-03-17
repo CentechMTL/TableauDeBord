@@ -26,7 +26,11 @@ class FloorMapBuilder:
 
         input_file = kwargs.pop(
             'input',
-            os.path.join(settings.MEDIA_ROOT, settings.PROJECT_DIR, settings.INPUT_FILENAME)
+            os.path.join(
+                settings.MEDIA_ROOT,
+                settings.PROJECT_DIR,
+                settings.INPUT_FILENAME
+            )
         )
         self.floor_map_image = Image.open(input_file)
         self.canvas = ImageDraw.Draw(self.floor_map_image)
@@ -56,7 +60,11 @@ class FloorMapBuilder:
         """
         output_file = kwargs.pop(
             'output',
-            os.path.join(settings.MEDIA_ROOT, settings.PROJECT_DIR, settings.OUTPUT_FILENAME)
+            os.path.join(
+                settings.MEDIA_ROOT,
+                settings.PROJECT_DIR,
+                settings.OUTPUT_FILENAME
+            )
         )
         quality = kwargs.pop('quality', settings.IMAGE_QUALITY)
 
@@ -73,8 +81,13 @@ class Room:
 
     label = ""  # Text to display on the room
     code = ""  # physical room code
-    _coords = []  # Coordinates of the room shape. ALWAYS a polygon. Will be converted if initialized with a rectangle
-    _text_area_coords = []  # Coordinates of the rectangle defining the zone where label can be printed
+
+    # Coordinates of the room shape. ALWAYS turned into a polygon.
+    # Will be converted if rectangle received
+    _coords = []
+
+    # Coordinates of the rectangle defining the zone where label can be printed
+    _text_area_coords = []
 
     _log__room_format = []  # Stores all explored formats
     _log__room_bump = {}  # Stores already calculated bumped texts
@@ -89,12 +102,23 @@ class Room:
         self.set_coords(*kwargs.pop('coords', ()))
         self.set_area_coords(*kwargs.pop('text_coords', ()))
 
+        # Room optional settings
+
+        option_show_code = kwargs.pop(
+            'show_code',
+            settings.ROOM_SHOW_CODE
+        )
+
+        option_bg_color = kwargs.pop(
+            'bg_color', settings.ROOM_DEFAULT_BACKGROUND
+        )
+
         self.options = {
-            'show_code': bool(kwargs.pop('show_code', settings.ROOM_SHOW_CODE)),
-            'bg_color': kwargs.pop('bg_color', settings.ROOM_DEFAULT_BACKGROUND),
+            'show_code': bool(option_show_code),
+            'bg_color': option_bg_color,
         }
 
-        self.options.update(kwargs)
+        self.options.update(kwargs)  # Adds the rest
 
         # Hides code label if it's too wide
         if self.options['show_code']:
@@ -105,7 +129,11 @@ class Room:
                 self.options['show_code'] = False
 
     def get_font(self, size):
-        font_path = os.path.join(settings.MEDIA_ROOT, settings.FONTS_DIR, settings.FONT_FACE)
+        font_path = os.path.join(
+            settings.MEDIA_ROOT,
+            settings.FONTS_DIR,
+            settings.FONT_FACE
+        )
         font = ImageFont.truetype(font_path, size=size)
         return font
 
@@ -113,19 +141,21 @@ class Room:
         if len(coords) < 4 or len(coords) % 2 == 1:
             ex = "Invalid coordinates received : %s" % str(coords)
             raise ValueError(ex)
-
-        if len(coords) == 4:
+        else:
+            # Makes sure the integers are in the right order
+            cleaned_coords = utils.boundary_box(*coords)
             # Transforms rectangle into polygon
-            coords = utils.rect_to_poly(*coords)
+            cleaned_coords = utils.rect_to_poly(*cleaned_coords)
 
-        self._coords = coords
+        self._coords = cleaned_coords
 
     def get_coords(self):
         return self._coords
 
     def set_area_coords(self, *coords):
         if len(coords) >= 4 and len(coords) % 2 == 0:
-            # Cleans received text area & makes sure the coords are in the correct order
+            # Cleans received text area
+            # and makes sure the coords are in the correct order
             cleaned_coords = utils.boundary_box(*coords)
         else:
             # Generates a default text area around the room coordinates
@@ -174,7 +204,8 @@ class Room:
     def get_display_text_size(self, size, text):
         """
         Returns the size of text as it would appear on the final image
-        Not to be confused with text_size() which does not include all final settings like room code display
+        Not to be confused with text_size()
+            which does not include all final settings like room code display
         :param size: The font size of the text
         :param text: The text to display (excluding label, if any)
         :return: tuple(width, height)
@@ -198,7 +229,11 @@ class Room:
         :return: tuple[width, height]
         """
         font = self.get_font(size)
-        text_size = self.canvas.multiline_textsize(text, font=font, spacing=settings.FONT_LINE_SPACING)
+        text_size = self.canvas.multiline_textsize(
+            text,
+            font=font,
+            spacing=settings.FONT_LINE_SPACING
+        )
 
         return text_size
 
@@ -216,7 +251,8 @@ class Room:
 
     def get_room_format(self):
         """
-        Processes all string transformations on the room label and returns final display format
+        Processes all string transformations on the room label
+        and returns final display format
         :return: dict(size, text)
         """
 
@@ -225,7 +261,8 @@ class Room:
 
         room_label = self.label
 
-        # Important: Do NOT put inside below loop! Will result in infinite loop if room size is too small!
+        # Important: Do NOT put inside below loop below!
+        #   Will result in infinite loop if room size is too small!
         if settings.ALLOW_WORD_SPLIT:
             room_label = self.split_long_words(room_label)
 
@@ -239,9 +276,13 @@ class Room:
             # Fetches the right text format to fit in the text area
             if settings.DEBUG:
                 print("****************************************")
-                print("Searching for best result for \"%s\" :" % room_label.replace("\n", "\\n"))
+                print("Searching for best result for \"%s\" :" %
+                      room_label.replace("\n", "\\n"))
 
-            best_format = self.get_best_format(settings.FONT_SIZE_MAX, room_label)
+            best_format = self.get_best_format(
+                settings.FONT_SIZE_MAX,
+                room_label
+            )
 
             if settings.DEBUG:
                 print("Done.")
@@ -251,25 +292,38 @@ class Room:
                 # Attempts to truncate text
                 if settings.ALLOW_WORD_TRUNCATE:
                     if settings.DEBUG:
-                        print("[WARNING] Text couldn't fit. Truncating (attempt #%d)..." % truncate_attempt_nb, end="")
+                        print("[WARNING] Text couldn't fit. "
+                              "Truncating (attempt #%d)..." %
+                              truncate_attempt_nb, end="")
 
                     if room_label == settings.TRUNCATE_STRING:
-                        best_format = {'size': settings.FONT_SIZE_MAX, 'text': settings.TRUNCATE_STRING}
+                        best_format = {
+                            'size': settings.FONT_SIZE_MAX,
+                            'text': settings.TRUNCATE_STRING
+                        }
                     else:
                         room_label = self.truncate_text(room_label)
 
                     if settings.DEBUG:
                         print("Done.")
-                        print("[WARNING] Text truncated to \"%s\"." % room_label.replace("\n", "\\n"))
+                        print("[WARNING] Text truncated to \"%s\"." %
+                              room_label.replace("\n", "\\n"))
                 else:
                     if settings.DEBUG:
-                        print("[WARNING] Text couldn't fit and truncating isn't allowed! Returning invalid string.")
+                        print("[WARNING] Text couldn't fit and truncating "
+                              "isn't allowed! Returning invalid string.")
 
-                    best_format = {'size': settings.FONT_SIZE_MAX, 'text': settings.TRUNCATE_STRING}
+                    best_format = {
+                        'size': settings.FONT_SIZE_MAX,
+                        'text': settings.TRUNCATE_STRING
+                    }
 
         if settings.DEBUG:
             print("[SUCCESS] Result found: (%s, \"%s\")" %
-                  (best_format['size'], best_format['text'].replace("\n", "\\n")))
+                  (
+                      best_format['size'],
+                      best_format['text'].replace("\n", "\\n"))
+                  )
 
         if self.options['show_code']:
             if room_label:
@@ -288,7 +342,8 @@ class Room:
 
     def get_best_format(self, size, text, depth=0):
         """
-        Recursively gets the best font size and text settings to fit in the room
+        Recursively gets the best font size and text settings
+            that fits in the room
         :param size: The font size
         :param text: The text to display
         :param depth: Recursion level
@@ -299,7 +354,8 @@ class Room:
         # Performs checks
 
         if not settings.FONT_SIZE_MIN <= size <= settings.FONT_SIZE_MAX:
-            ex = "[ERROR] Invalid font size! Expected value to be [%d, %d] but got %d." %\
+            ex = "[ERROR] Invalid font size! " \
+                 "Expected value to be [%d, %d] but got %d." %\
                  (settings.FONT_SIZE_MIN, settings.FONT_SIZE_MAX, size)
             raise ValueError(ex)
 
@@ -366,9 +422,12 @@ class Room:
             best_opt = format_opts[0]  # Defaults to the first option
 
             for opt in format_opts:
+                opt_length = len(opt['text'].splitlines())
+                best_opt_length = len(best_opt['text'].splitlines())
+
                 is_bigger = opt['size'] > best_opt['size']
                 is_same_size = opt['size'] == best_opt['size']
-                is_taller = len(opt['text'].splitlines()) > len(best_opt['text'].splitlines())
+                is_taller = opt_length > best_opt_length
 
                 if is_bigger or (is_same_size and is_taller):
                     best_opt = opt
@@ -379,10 +438,12 @@ class Room:
 
     def bump_text(self, text, bumps_wanted=None, store_result=True):
         """
-        Bumps text to a new line and re-balances text to have the smallest width
+        Bumps text to a new line and re-balances text
+            to have the smallest width
         :param text: The text to be bumped
         :param bumps_wanted: Number of bumps wanted; defaults to +1
-        :param store_result: If the method should store results found (useful for unit testing)
+        :param store_result: If the method should store results found
+                            (useful for unit testing)
         :return:
         """
         words = re.split(r"[ \n]+", text.strip())
@@ -416,11 +477,13 @@ class Room:
             # Text has multiple bump options, find best option
             # Discards previous bumps to get new optimized bump balance
 
-            total_bump_count = utils.combinations_count(len(words), bumps_wanted) * bumps_wanted
+            cmb_count = utils.combinations_count(len(words), bumps_wanted)
+            total_bump_count = cmb_count * bumps_wanted
 
             if total_bump_count > settings.MAX_BUMP_JOB:
                 if settings.DEBUG:
-                    print("\n[WARNING] Too many combinations! (%s) Skipping. " % total_bump_count, end="")
+                    print("\n[WARNING] Too many combinations! "
+                          "(%s) Skipping. " % total_bump_count, end="")
                 return " ".join(words)
 
             # Everything is set; proceed with splitting
@@ -442,9 +505,14 @@ class Room:
                     prev_ind = split_ind
 
                 option['text'] += " ".join(words[prev_ind:len(words)])
-                option['width'] = self.text_size(settings.FONT_SIZE_MAX, option['text'])[0]
+                option['width'] = self.text_size(
+                    settings.FONT_SIZE_MAX,
+                    option['text']
+                )[0]
 
-                if option['width'] < best_option['width'] or best_option['width'] == 0:
+                is_smaller = option['width'] < best_option['width']
+
+                if is_smaller or best_option['width'] == 0:
                     best_option = option
 
             if settings.DEBUG:
@@ -458,7 +526,8 @@ class Room:
 
     def truncate_text(self, text):
         """
-        Truncates the room text by removing either the last word or parts of it
+        Truncates the room text by removing either the last word
+            or parts of it
         :param text: Text to be truncated
         :return: Truncated text
         """
@@ -478,7 +547,9 @@ class Room:
 
         truncated = last_word[0:smallest_word_split] + truncate_string
 
-        if last_word.endswith(truncate_string) or len(last_word) <= smallest_word_split:
+        is_too_short = len(last_word) <= smallest_word_split
+
+        if is_too_short or last_word.endswith(truncate_string):
             # Fully truncates truncated last word
             last_word = truncate_string
         else:
@@ -490,7 +561,7 @@ class Room:
 
     def split_long_words(self, text):
         """
-        Splits in half words that would be too long even at the minimum font size
+        Splits in half words that would be too long even at minimum font size
         :param text: Room text
         :return: Room text with splits on long words
         """
@@ -522,7 +593,10 @@ class Room:
             return  # No label to display
 
         room_format = self.get_room_format()
-        label_pos = self.get_label_pos(room_format['size'], room_format['text'])
+        label_pos = self.get_label_pos(
+            room_format['size'],
+            room_format['text']
+        )
 
         self.canvas.multiline_text(
             label_pos,

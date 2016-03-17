@@ -43,7 +43,10 @@ class FounderCreate(generic.CreateView):
         founder = Founder.objects.create(user=self.object)
 
         # Defined the new password
-        caractere = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        caractere = "abcdefghijklmnopqrstuvwxyz" \
+                    "ABCDEFGHIJKLMNOPQRSTUVWXYZ" \
+                    "0123456789"
+
         password = ""
         for index in range(10):
             password += random.choice(caractere)
@@ -54,11 +57,21 @@ class FounderCreate(generic.CreateView):
         # Send welcome email
         self.send_courriel(founder, password)
 
-        return reverse_lazy("founder:detail", kwargs={'pk': founder.userProfile_id})
+        return reverse_lazy(
+            "founder:detail",
+            kwargs={
+                'pk': founder.userProfile_id
+            }
+        )
 
     def send_courriel(self, founder, password):
         app = settings.DASHBOARD_APP
-        message = u"Un compte vient de vous être créé pour accéder au Tableau de Bord du Centech. Vous pouvez dès maintenant vous y connecter avec les identifiants ci-dessous : \n\n"
+
+        message = u"Un compte vient de vous être créé pour accéder " \
+                  u"au Tableau de Bord du Centech. Vous pouvez dès " \
+                  u"maintenant vous y connecter avec les identifiants " \
+                  u"ci-dessous : \n\n"
+
         message += u"Username : "
         message += founder.user.username
         message += u"\n"
@@ -68,21 +81,37 @@ class FounderCreate(generic.CreateView):
         message += u"Lien : "
         message += app['site']['dns']
         message += u"\n\n\n"
-        message += u"Pour toute question ou demande d'aide, n'hésitais pas à nous contacter à l'adresse suivante : "
+
+        message += u"Pour toute question ou demande d'aide, " \
+                   u"n'hésitais pas à nous contacter à l'adresse " \
+                   u"suivante : "
+
         message += app['site']['email_technique']
         message += u"\n\n"
         message += u"Nous vous souhaitons une agréable journée!"
         message += u"\n\n"
         message += u"----------------------------------------\n\n"
-        message += u"Ce message du Centech est un élément important d'un programme auquel vous ou votre entreprise participer. Si ce n'est pas le cas veuillez nous en excuser et effacer ce message.\n"
-        message += u"Si nous persistons à vous envoyer des courriel sans votre accord, contacter nous à l'adresse suivante : "
+
+        message += u"Ce message du Centech est un élément important " \
+                   u"d'un programme auquel vous ou votre entreprise " \
+                   u"participer. Si ce n'est pas le cas veuillez nous " \
+                   u"en excuser et effacer ce message.\n"
+
+        message += u"Si nous persistons à vous envoyer des courriel " \
+                   u"sans votre accord, contacter nous à l'adresse " \
+                   u"suivante : "
         message += app['site']['email_technique']
 
-        emailReady = EmailMessage('Bienvenue sur le Tableau de Bord du Centech', message, app['site']['email_technique'],
-            [founder.user.email], [app['site']['email_technique']],
-            reply_to=[app['site']['email_technique']])
-        emailReady.send(fail_silently=False)
+        emailReady = EmailMessage(
+            'Bienvenue sur le Tableau de Bord du Centech',
+            message,
+            app['site']['email_technique'],
+            [founder.user.email],
+            [app['site']['email_technique']],
+            reply_to=[app['site']['email_technique']]
+        )
 
+        emailReady.send(fail_silently=False)
 
 
 class FounderUpdate(generic.UpdateView):
@@ -91,12 +120,14 @@ class FounderUpdate(generic.UpdateView):
     form_class = FounderForm
     template_name = "founder/founder_form.html"
 
-    # You need to be connected, and you need to have access as founder or centech
+    # You need to be connected, and you need to have access
+    # as founder or centech
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         if self.request.user.profile.isFounder():
             try:
-                if int(self.request.user.profile.userProfile_id) == int(self.kwargs['pk']):
+                if int(self.request.user.profile.userProfile_id) \
+                        == int(self.kwargs['pk']):
                     return super(FounderUpdate, self).dispatch(*args, **kwargs)
             except:
                 pass

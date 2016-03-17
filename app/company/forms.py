@@ -18,7 +18,10 @@ class CompanyFilter(django_filters.FilterSet):
     # http://django-filter.readthedocs.org/en/latest/usage.html
     class Meta:
         model = Company
-        fields = {'companyStatus': ['exact'], 'name': ['icontains']}
+        fields = {
+            'companyStatus': ['exact'],
+            'name': ['icontains']
+        }
 
 
 class PresenceForm(forms.ModelForm):
@@ -26,7 +29,12 @@ class PresenceForm(forms.ModelForm):
         model = Presence
         fields = ['date']
         widgets = {
-            'date': forms.DateInput(attrs={'type':'date', 'class':'datepicker'})
+            'date': forms.DateInput(
+                attrs={
+                    'type': 'date',
+                    'class': 'datepicker'
+                }
+            )
         }
 
     date = forms.DateField()
@@ -77,13 +85,27 @@ class MiniCompanyStatusUpdateForm(forms.Form):
 class MiniCompanyForm(forms.ModelForm):
     class Meta:
         model = Company
-        fields = ['name', 'logo', 'video', 'url', 'facebook', 'googlePlus', 'linkedIn', 'twitter', 'description']
+        fields = [
+            'name',
+            'logo',
+            'video',
+            'url',
+            'facebook',
+            'googlePlus',
+            'linkedIn',
+            'twitter',
+            'description'
+        ]
 
     name = forms.CharField(
         label=_('Name'),
         required=True,
     )
-    name.widget.attrs.update({'placeholder': _(u'Name of the company')})
+    name.widget.attrs.update(
+        {
+            'placeholder': _(u'Name of the company')
+        }
+    )
 
     logo = forms.ImageField(
         label=_('Logo'),
@@ -94,44 +116,66 @@ class MiniCompanyForm(forms.ModelForm):
         label=_('Video'),
         required=False,
     )
-    video.widget.attrs.update({'placeholder': _(u'https://urlvideo.com/')})
+    video.widget.attrs.update(
+        {
+            'placeholder': _(u'https://urlvideo.com/')
+        }
+    )
 
     url = forms.URLField(
         label=_('Web site'),
         required=False,
     )
-    url.widget.attrs.update({'placeholder': _(u'https://example.com')})
+    url.widget.attrs.update(
+        {
+            'placeholder': _(u'https://example.com')
+        }
+    )
 
     facebook = forms.URLField(
         label=_('Facebook'),
         required=False,
     )
-    facebook.widget.attrs.update({'placeholder': _(u'https://www.facebook.com/lastname.firstname')})
+    facebook.widget.attrs.update(
+        {
+            'placeholder': _(u'https://www.facebook.com/lastname.firstname')
+        }
+    )
 
     twitter = forms.URLField(
         label=_('Twitter'),
         required=False,
     )
-    twitter.widget.attrs.update({'placeholder': _(u'https://twitter.com/username')})
+    twitter.widget.attrs.update(
+        {
+            'placeholder': _(u'https://twitter.com/username')
+        }
+    )
 
     googlePlus = forms.URLField(
         label=_('Google+'),
         required=False,
     )
-    googlePlus.widget.attrs.update({'placeholder': _(u'https://plus.google.com/id')})
+    googlePlus.widget.attrs.update(
+        {
+            'placeholder': _(u'https://plus.google.com/id')
+        }
+    )
 
     linkedIn = forms.URLField(
         label=_('linkedIn'),
         required=False,
     )
-    linkedIn.widget.attrs.update({'placeholder': _(u'https://ca.linkedin.com/in/username')})
+    linkedIn.widget.attrs.update({'placeholder': _(u'https://ca.linkedin.com'
+                                                   u'/in/username')})
 
     description = forms.CharField(
         label=_('Description'),
         required=False,
         widget=forms.Textarea(
             attrs={
-                'placeholder': _(u'Write here a brief summary of your business.'),
+                'placeholder': _(u'Write here a brief summary '
+                                 u'of your business.'),
                 'class': 'md-editor'
             }
         )
@@ -141,8 +185,22 @@ class MiniCompanyForm(forms.ModelForm):
 class CompanyForm(MiniCompanyForm):
     class Meta:
         model = Company
-        fields = ['name', 'companyStatus', 'incubated_on', 'endOfIncubation', 'logo', 'video', 'url', 'facebook',
-                  'googlePlus', 'linkedIn', 'twitter', 'description', 'founders', 'mentors']
+        fields = [
+            'name',
+            'companyStatus',
+            'incubated_on',
+            'endOfIncubation',
+            'logo',
+            'video',
+            'url',
+            'facebook',
+            'googlePlus',
+            'linkedIn',
+            'twitter',
+            'description',
+            'founders',
+            'mentors'
+        ]
 
     companyStatus = forms.ModelChoiceField(
         label=_(u"Incubation phase"),
@@ -236,12 +294,16 @@ class RentalForm(forms.ModelForm):
         date_end = self.cleaned_data['date_end']
 
         if date_start > date_end:
-            raise forms.ValidationError(_("End date cannot be before the start date!"), code='invalid')
+            raise forms.ValidationError(
+                _("End date cannot be before the start date!"),
+                code='invalid'
+            )
 
         return date_end
 
     def clean(self):
-        # Always check that key exists in cleaned_data before using it in clean() method.
+        # Always check that key exists in cleaned_data
+        # before using it in clean() method.
         if ('room' and 'date_start' and 'date_end') not in self.cleaned_data:
             return self.cleaned_data
 
@@ -257,11 +319,16 @@ class RentalForm(forms.ModelForm):
                 str_conflicts = ", ".join([str_conflicts, name])
 
             if len(lst_conflicting) > 1:
-                str_conflicts = " ".join([str_conflicts, str(_("and")), lst_conflicting[-1:][0]])
+                str_conflicts = " ".join([
+                    str_conflicts,
+                    str(_("and")),
+                    lst_conflicting[-1:][0]
+                ])
 
             raise forms.ValidationError({
                 'room': [forms.ValidationError(
-                    _("Room and date conflicts with existing rental(s) by: %(conflicting)s."),
+                    _("Room and date conflicts with existing rental(s) "
+                      "by: %(conflicting)s."),
                     code='invalid',
                     params={'conflicting': str_conflicts}
                 )]
@@ -270,12 +337,19 @@ class RentalForm(forms.ModelForm):
         return self.cleaned_data
 
     def conflicts(self):
-        conflicting_period = [self.cleaned_data['date_start'], self.cleaned_data['date_end']]
+        conflicting_period = [
+            self.cleaned_data['date_start'],
+            self.cleaned_data['date_end']
+        ]
 
         results = Rent.objects.filter(
             room_id__exact=self.cleaned_data['room'].id
         ).filter(
-            Q(date_start__range=conflicting_period) | Q(date_end__range=conflicting_period)
+            Q(
+                date_start__range=conflicting_period
+            ) | Q(
+                date_end__range=conflicting_period
+            )
         )
 
         return results
@@ -291,12 +365,19 @@ class RentalFormUpdate(RentalForm):
     )
 
     def conflicts(self):
-        conflicting_period = [self.cleaned_data['date_start'], self.cleaned_data['date_end']]
+        conflicting_period = [
+            self.cleaned_data['date_start'],
+            self.cleaned_data['date_end']
+        ]
 
         results = Rent.objects.filter(
             room_id__exact=self.cleaned_data['room'].id
         ).filter(
-            Q(date_start__range=conflicting_period) | Q(date_end__range=conflicting_period)
+            Q(
+                date_start__range=conflicting_period
+            ) | Q(
+                date_end__range=conflicting_period
+            )
         ).exclude(
             id=int(self.cleaned_data['id'])
         )

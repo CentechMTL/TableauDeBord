@@ -7,8 +7,10 @@ from django.test import TestCase
 
 from app.founder.factories import FounderFactory
 from app.mentor.factories import MentorFactory
-from app.home.factories import UserFactory, StaffUserProfileFactory, ExecutiveUserProfileFactory
+from app.home.factories import UserFactory, StaffUserProfileFactory, \
+    ExecutiveUserProfileFactory
 from app.company.factories import CompanyFactory, CompanyStatusFactory
+
 
 class CompanyTests(TestCase):
 
@@ -21,7 +23,7 @@ class CompanyTests(TestCase):
         self.executive = ExecutiveUserProfileFactory()
 
         self.status = CompanyStatusFactory()
-        self.company = CompanyFactory(companyStatus = self.status)
+        self.company = CompanyFactory(companyStatus=self.status)
 
     def test_index(self):
         """
@@ -34,7 +36,10 @@ class CompanyTests(TestCase):
         We are connected
         """
         self.client.logout()
-        self.client.login(username=self.mentor.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.mentor.user.username,
+            password="Toto1234!#"
+        )
 
         # list of companies.
         result = self.client.get(
@@ -66,10 +71,13 @@ class CompanyTests(TestCase):
         Check filter, who contains all companies
         """
         self.client.logout()
-        self.client.login(username=self.mentor.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.mentor.user.username,
+            password="Toto1234!#"
+        )
 
         # create strange company
-        companyWeird = CompanyFactory(companyStatus = self.status)
+        companyWeird = CompanyFactory(companyStatus=self.status)
         companyWeird.name = u"Company ïtrema718"
         companyWeird.save()
 
@@ -90,7 +98,10 @@ class CompanyTests(TestCase):
         Access
         """
         self.client.logout()
-        self.client.login(username=self.mentor.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.mentor.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
             reverse('company:detail', kwargs={'pk': self.company.id}),
@@ -109,12 +120,14 @@ class CompanyTests(TestCase):
         )
         self.assertEqual(result.status_code, 302)
 
-
         """
         Access of an inexistant company
         """
         self.client.logout()
-        self.client.login(username=self.mentor.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.mentor.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
             reverse('company:detail', kwargs={'pk': 999999}),
@@ -132,7 +145,10 @@ class CompanyTests(TestCase):
         """
         self.client.logout()
         self.assertTrue(
-        self.client.login(username=self.staff.user.username, password="Toto1234!#")
+            self.client.login(
+                username=self.staff.user.username,
+                password="Toto1234!#"
+            )
         )
 
         result = self.client.get(
@@ -144,9 +160,12 @@ class CompanyTests(TestCase):
         """
         No Access : Not in the staff
         """
-        #A founder
+        # A founder
         self.client.logout()
-        self.client.login(username=self.founder.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.founder.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
             reverse('company:create'),
@@ -154,9 +173,12 @@ class CompanyTests(TestCase):
         )
         self.assertEqual(result.status_code, 302)
 
-        #A mentor
+        # A mentor
         self.client.logout()
-        self.client.login(username=self.mentor.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.mentor.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
             reverse('company:create'),
@@ -164,9 +186,12 @@ class CompanyTests(TestCase):
         )
         self.assertEqual(result.status_code, 302)
 
-        #An executive
+        # An executive
         self.client.logout()
-        self.client.login(username=self.executive.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.executive.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
             reverse('company:create'),
@@ -184,7 +209,6 @@ class CompanyTests(TestCase):
             follow=False
         )
         self.assertEqual(result.status_code, 302)
-
 
     def test_update(self):
         """
@@ -196,7 +220,10 @@ class CompanyTests(TestCase):
         """
         self.client.logout()
         self.assertTrue(
-        self.client.login(username=self.staff.user.username, password="Toto1234!#")
+            self.client.login(
+                username=self.staff.user.username,
+                password="Toto1234!#"
+            )
         )
 
         result = self.client.get(
@@ -208,13 +235,16 @@ class CompanyTests(TestCase):
         """
         Access : Founder on personnal company
         """
-        companyTest = CompanyFactory(companyStatus = self.status)
+        companyTest = CompanyFactory(companyStatus=self.status)
         founderTest = FounderFactory()
         companyTest.founders.add(founderTest)
         companyTest.save()
 
         self.client.logout()
-        self.client.login(username=founderTest.user.username, password="Toto1234!#")
+        self.client.login(
+            username=founderTest.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
             reverse('company:update', kwargs={'pk': companyTest.id}),
@@ -225,9 +255,12 @@ class CompanyTests(TestCase):
         """
         No Access : Not in the staff
         """
-        #A founder
+        # A founder
         self.client.logout()
-        self.client.login(username=self.founder.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.founder.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
             reverse('company:update', kwargs={'pk': self.company.id}),
@@ -235,9 +268,12 @@ class CompanyTests(TestCase):
         )
         self.assertEqual(result.status_code, 302)
 
-        #A mentor
+        # A mentor
         self.client.logout()
-        self.client.login(username=self.mentor.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.mentor.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
             reverse('company:update', kwargs={'pk': self.company.id}),
@@ -245,9 +281,12 @@ class CompanyTests(TestCase):
         )
         self.assertEqual(result.status_code, 302)
 
-        #An executive
+        # An executive
         self.client.logout()
-        self.client.login(username=self.executive.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.executive.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
             reverse('company:update', kwargs={'pk': self.company.id}),
@@ -266,12 +305,14 @@ class CompanyTests(TestCase):
         )
         self.assertEqual(result.status_code, 302)
 
-
         """
         Access of an inexistant company
         """
         self.client.logout()
-        self.client.login(username=self.staff.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.staff.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
             reverse('company:update', kwargs={'pk': 999999}),
@@ -289,7 +330,10 @@ class CompanyTests(TestCase):
         """
         self.client.logout()
         self.assertTrue(
-        self.client.login(username=self.staff.user.username, password="Toto1234!#")
+            self.client.login(
+                username=self.staff.user.username,
+                password="Toto1234!#"
+            )
         )
 
         result = self.client.get(
@@ -301,9 +345,12 @@ class CompanyTests(TestCase):
         """
         No Access : Not in the staff
         """
-        #A founder
+        # A founder
         self.client.logout()
-        self.client.login(username=self.founder.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.founder.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
             reverse('company:status_create'),
@@ -311,9 +358,12 @@ class CompanyTests(TestCase):
         )
         self.assertEqual(result.status_code, 302)
 
-        #A mentor
+        # A mentor
         self.client.logout()
-        self.client.login(username=self.mentor.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.mentor.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
             reverse('company:status_create'),
@@ -321,9 +371,12 @@ class CompanyTests(TestCase):
         )
         self.assertEqual(result.status_code, 302)
 
-        #An executive
+        # An executive
         self.client.logout()
-        self.client.login(username=self.executive.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.executive.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
             reverse('company:status_create'),

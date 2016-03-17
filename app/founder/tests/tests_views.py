@@ -7,7 +7,9 @@ from django.test import TestCase
 
 from app.founder.factories import FounderFactory
 from app.mentor.factories import MentorFactory
-from app.home.factories import UserFactory, StaffUserProfileFactory, ExecutiveUserProfileFactory
+from app.home.factories import UserFactory, StaffUserProfileFactory, \
+    ExecutiveUserProfileFactory
+
 
 class FounderTests(TestCase):
 
@@ -28,7 +30,10 @@ class FounderTests(TestCase):
         Access : We are connected
         """
         self.client.logout()
-        self.client.login(username=self.mentor.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.mentor.user.username,
+            password="Toto1234!#"
+        )
 
         # list of founders.
         result = self.client.get(
@@ -56,7 +61,10 @@ class FounderTests(TestCase):
         Access : Executive
         """
         self.client.logout()
-        self.client.login(username=self.executive.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.executive.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
             reverse('founder:index'),
@@ -70,7 +78,10 @@ class FounderTests(TestCase):
         Check filter, who contains all founders.
         """
         self.client.logout()
-        self.client.login(username=self.mentor.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.mentor.user.username,
+            password="Toto1234!#"
+        )
 
         # create strange founder
         founderWeird = FounderFactory()
@@ -94,10 +105,18 @@ class FounderTests(TestCase):
         Access
         """
         self.client.logout()
-        self.client.login(username=self.mentor.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.mentor.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('founder:detail', kwargs={'pk': self.founder.userProfile_id}),
+            reverse(
+                'founder:detail',
+                kwargs={
+                    'pk': self.founder.userProfile_id
+                }
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 200)
@@ -108,7 +127,12 @@ class FounderTests(TestCase):
         self.client.logout()
 
         result = self.client.get(
-            reverse('founder:detail', kwargs={'pk': self.founder.userProfile_id}),
+            reverse(
+                'founder:detail',
+                kwargs={
+                    'pk': self.founder.userProfile_id
+                }
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
@@ -117,10 +141,18 @@ class FounderTests(TestCase):
         Access : Executive
         """
         self.client.logout()
-        self.client.login(username=self.executive.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.executive.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('founder:detail', kwargs={'pk': self.founder.userProfile_id}),
+            reverse(
+                'founder:detail',
+                kwargs={
+                    'pk': self.founder.userProfile_id
+                }
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 200)
@@ -129,10 +161,18 @@ class FounderTests(TestCase):
         Access of an inexistant founder
         """
         self.client.logout()
-        self.client.login(username=self.mentor.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.mentor.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('founder:detail', kwargs={'pk': 999999}),
+            reverse(
+                'founder:detail',
+                kwargs={
+                    'pk': 999999
+                }
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 404)
@@ -147,7 +187,10 @@ class FounderTests(TestCase):
         """
         self.client.logout()
         self.assertTrue(
-        self.client.login(username=self.staff.user.username, password="Toto1234!#")
+            self.client.login(
+                username=self.staff.user.username,
+                password="Toto1234!#"
+            )
         )
 
         result = self.client.get(
@@ -159,9 +202,12 @@ class FounderTests(TestCase):
         """
         No Access : Not in the staff
         """
-        #A founder
+        # A founder
         self.client.logout()
-        self.client.login(username=self.founder.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.founder.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
             reverse('founder:add'),
@@ -169,9 +215,12 @@ class FounderTests(TestCase):
         )
         self.assertEqual(result.status_code, 302)
 
-        #A mentor
+        # A mentor
         self.client.logout()
-        self.client.login(username=self.mentor.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.mentor.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
             reverse('founder:add'),
@@ -179,9 +228,12 @@ class FounderTests(TestCase):
         )
         self.assertEqual(result.status_code, 302)
 
-        #An executive
+        # An executive
         self.client.logout()
-        self.client.login(username=self.executive.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.executive.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
             reverse('founder:add'),
@@ -212,11 +264,19 @@ class FounderTests(TestCase):
         """
         self.client.logout()
         self.assertTrue(
-        self.client.login(username=self.staff.user.username, password="Toto1234!#")
+            self.client.login(
+                username=self.staff.user.username,
+                password="Toto1234!#"
+            )
         )
 
         result = self.client.get(
-            reverse('founder:update', kwargs={'pk': founderTest.userProfile_id}),
+            reverse(
+                'founder:update',
+                kwargs={
+                    'pk': founderTest.userProfile_id
+                }
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 200)
@@ -224,46 +284,77 @@ class FounderTests(TestCase):
         """
         Access : Founder on personnal account
         """
-        #A founder
+        # A founder
         self.client.logout()
-        self.client.login(username=self.founder.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.founder.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('founder:update', kwargs={'pk': self.founder.userProfile_id}),
+            reverse(
+                'founder:update',
+                kwargs={
+                    'pk': self.founder.userProfile_id
+                }
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 200)
 
-
         """
         No Access : Not in the staff
         """
-        #A founder
+        # A founder
         self.client.logout()
-        self.client.login(username=self.founder.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.founder.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('founder:update', kwargs={'pk': founderTest.userProfile_id}),
+            reverse(
+                'founder:update',
+                kwargs={
+                    'pk': founderTest.userProfile_id
+                }
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
 
-        #A mentor
+        # A mentor
         self.client.logout()
-        self.client.login(username=self.mentor.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.mentor.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('founder:update', kwargs={'pk': founderTest.userProfile_id}),
+            reverse(
+                'founder:update',
+                kwargs={
+                    'pk': founderTest.userProfile_id
+                }
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
 
-        #An executive
+        # An executive
         self.client.logout()
-        self.client.login(username=self.executive.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.executive.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('founder:update', kwargs={'pk': founderTest.userProfile_id}),
+            reverse(
+                'founder:update',
+                kwargs={
+                    'pk': founderTest.userProfile_id
+                }
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
@@ -274,20 +365,32 @@ class FounderTests(TestCase):
         self.client.logout()
 
         result = self.client.get(
-            reverse('founder:update', kwargs={'pk': founderTest.userProfile_id}),
+            reverse(
+                'founder:update',
+                kwargs={
+                    'pk': founderTest.userProfile_id
+                }
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
-
 
         """
         Access of an inexistant founder
         """
         self.client.logout()
-        self.client.login(username=self.staff.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.staff.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('founder:update', kwargs={'pk': 999999}),
+            reverse(
+                'founder:update',
+                kwargs={
+                    'pk': 999999
+                }
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 404)

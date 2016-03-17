@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-22 01:05+0000\n"
+"POT-Creation-Date: 2016-03-17 20:17+0000\n"
 "PO-Revision-Date: 2015-10-08 22:28-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,8 +18,9 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.5\n"
 
-#: app/finance/forms.py:20 app/finance/models.py:11 app/finance/models.py:27
-#: app/finance/models.py:43 app/finance/models.py:59 app/finance/models.py:75
+#: app/finance/forms.py:20 app/finance/models.py:15 app/finance/models.py:54
+#: app/finance/models.py:95 app/finance/models.py:136
+#: app/finance/models.py:177
 #: app/finance/templates/finance/bourse_confirm_delete.html:11
 #: app/finance/templates/finance/index.html:46
 #: app/finance/templates/finance/index.html:104
@@ -33,8 +34,9 @@ msgstr ""
 msgid "Name"
 msgstr "Nome"
 
-#: app/finance/forms.py:25 app/finance/models.py:13 app/finance/models.py:29
-#: app/finance/models.py:45 app/finance/models.py:61 app/finance/models.py:77
+#: app/finance/forms.py:25 app/finance/models.py:19 app/finance/models.py:60
+#: app/finance/models.py:101 app/finance/models.py:142
+#: app/finance/models.py:183
 #: app/finance/templates/finance/bourse_confirm_delete.html:13
 #: app/finance/templates/finance/index.html:164
 #: app/finance/templates/finance/index.html:223
@@ -45,8 +47,9 @@ msgstr "Nome"
 msgid "Amount requested"
 msgstr "Investimento solicitado"
 
-#: app/finance/forms.py:31 app/finance/models.py:12 app/finance/models.py:28
-#: app/finance/models.py:44 app/finance/models.py:60 app/finance/models.py:76
+#: app/finance/forms.py:31 app/finance/models.py:17 app/finance/models.py:57
+#: app/finance/models.py:98 app/finance/models.py:139
+#: app/finance/models.py:180
 #: app/finance/templates/finance/bourse_confirm_delete.html:12
 #: app/finance/templates/finance/index.html:47
 #: app/finance/templates/finance/index.html:105
@@ -59,8 +62,9 @@ msgstr "Investimento solicitado"
 msgid "Date of submission"
 msgstr "Data de submissão"
 
-#: app/finance/forms.py:44 app/finance/models.py:15 app/finance/models.py:31
-#: app/finance/models.py:47 app/finance/models.py:63 app/finance/models.py:79
+#: app/finance/forms.py:49 app/finance/models.py:29 app/finance/models.py:70
+#: app/finance/models.py:111 app/finance/models.py:152
+#: app/finance/models.py:193
 #: app/finance/templates/finance/bourse_confirm_delete.html:20
 #: app/finance/templates/finance/index.html:166
 #: app/finance/templates/finance/index.html:225
@@ -71,26 +75,27 @@ msgstr "Data de submissão"
 msgid "Amount received"
 msgstr "Investimento recebido"
 
-#: app/finance/forms.py:50
+#: app/finance/forms.py:55
 msgid "Date de reception"
 msgstr "Data de recebimento"
 
-#: app/finance/forms.py:63 app/finance/models.py:16 app/finance/models.py:32
-#: app/finance/models.py:48 app/finance/models.py:64 app/finance/models.py:80
+#: app/finance/forms.py:73 app/finance/models.py:34 app/finance/models.py:75
+#: app/finance/models.py:116 app/finance/models.py:157
+#: app/finance/models.py:198
 msgid "Description"
 msgstr "Descrição"
 
-#: app/finance/forms.py:67
+#: app/finance/forms.py:77
 msgid "Write here a brief description."
 msgstr "Escreva aqui uma breve descrição."
 
-#: app/finance/models.py:14 app/finance/models.py:30 app/finance/models.py:46
-#: app/finance/models.py:62 app/finance/models.py:78
+#: app/finance/models.py:24 app/finance/models.py:65 app/finance/models.py:106
+#: app/finance/models.py:147 app/finance/models.py:188
 msgid "Received date"
 msgstr "Data de recebimento"
 
-#: app/finance/models.py:17 app/finance/models.py:33 app/finance/models.py:49
-#: app/finance/models.py:65 app/finance/models.py:81
+#: app/finance/models.py:38 app/finance/models.py:79 app/finance/models.py:120
+#: app/finance/models.py:161 app/finance/models.py:202
 msgid "Company"
 msgstr "Empresa"
 

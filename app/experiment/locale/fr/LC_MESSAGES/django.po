@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-22 01:05+0000\n"
+"POT-Creation-Date: 2016-03-17 20:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,41 +18,41 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: app/experiment/models.py:10
+#: app/experiment/models.py:13
 msgid "Company"
 msgstr "Compagnie"
 
-#: app/experiment/models.py:13
+#: app/experiment/models.py:21
 msgid "Start date"
 msgstr "Date début"
 
-#: app/experiment/models.py:14
+#: app/experiment/models.py:25
 msgid "End date"
 msgstr "Date fin"
 
-#: app/experiment/models.py:16
+#: app/experiment/models.py:30
 #: app/experiment/templates/experiment/customerexperiment_confirm_delete.html:13
 #: app/experiment/templates/experiment/customerexperiment_list.html:13
 msgid "Hypothesis"
 msgstr "Hypothèses"
 
-#: app/experiment/models.py:19
+#: app/experiment/models.py:37
 msgid "Validation"
 msgstr "Validation"
 
-#: app/experiment/models.py:21
+#: app/experiment/models.py:42
 msgid "Description of the experiment"
 msgstr "Description de l'expérimentation"
 
-#: app/experiment/models.py:22
+#: app/experiment/models.py:46
 msgid "Number of subject for the test"
 msgstr "Nombre de sujet pour le test"
 
-#: app/experiment/models.py:23
+#: app/experiment/models.py:50
 msgid "Description of the subject test"
 msgstr "Description du test"
 
-#: app/experiment/models.py:24
+#: app/experiment/models.py:55
 msgid "Conclusion"
 msgstr "Conclusion"
 

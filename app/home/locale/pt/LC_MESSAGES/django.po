@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-22 01:05+0000\n"
+"POT-Creation-Date: 2016-03-17 20:17+0000\n"
 "PO-Revision-Date: 2015-10-08 22:30-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,85 +18,144 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 1.8.5\n"
 
-#: app/home/forms.py:15 app/home/forms.py:18
+#: app/home/forms.py:14 app/home/forms.py:17
 msgid "First name"
 msgstr ""
 
-#: app/home/forms.py:21 app/home/forms.py:24
+#: app/home/forms.py:20 app/home/forms.py:23
 msgid "Last name"
 msgstr ""
 
-#: app/home/forms.py:27 app/home/forms.py:30
+#: app/home/forms.py:26 app/home/forms.py:29
 #, fuzzy
 #| msgid "User"
 msgid "Username"
 msgstr "Usuário"
 
-#: app/home/forms.py:33 app/home/forms.py:36
+#: app/home/forms.py:32 app/home/forms.py:35
 msgid "Email"
 msgstr ""
 
-#: app/home/models.py:25
+#: app/home/models.py:21
 msgid "Education"
 msgstr "Formação"
 
-#: app/home/models.py:27
+#: app/home/models.py:25
 msgid "Education level"
 msgstr "Nível de formação"
 
-#: app/home/models.py:36
+#: app/home/models.py:35
 msgid "Expertise"
 msgstr "Especialização"
 
-#: app/home/models.py:38
+#: app/home/models.py:39
 msgid "Area of expertise"
 msgstr "Área de especialização"
 
-#: app/home/models.py:50
+#: app/home/models.py:55
 msgid "User"
 msgstr "Usuário"
 
-#: app/home/models.py:51
+#: app/home/models.py:59
 msgid "Identifiant"
 msgstr "Identificação"
 
-#: app/home/models.py:54
+#: app/home/models.py:65
 msgid "Phone"
 msgstr "Telefone"
 
-#: app/home/models.py:55
+#: app/home/models.py:70
 msgid "Web site"
 msgstr "Website"
 
-#: app/home/models.py:56
+#: app/home/models.py:75
 msgid "Picture"
 msgstr "Foto"
 
-#: app/home/models.py:58
+#: app/home/models.py:80
 msgid "Facebook"
 msgstr "Facebook"
 
-#: app/home/models.py:59
+#: app/home/models.py:84
 msgid "Twitter"
 msgstr "Twitter"
 
-#: app/home/models.py:60
+#: app/home/models.py:88
 msgid "Google+"
 msgstr "Google+"
 
-#: app/home/models.py:61
+#: app/home/models.py:93
 msgid "linkedIn"
 msgstr "LinkedIn"
 
-#: app/home/models.py:108
-msgid "Title"
-msgstr "Título"
+#: app/home/models.py:149
+msgid "Name"
+msgstr ""
 
-#: app/home/models.py:109
-msgid "Image"
-msgstr "Imagem"
+#: app/home/models.py:154
+msgid "Description"
+msgstr ""
 
-#: app/home/templates/home/floorPlan.html:4
+#: app/home/models.py:158
+msgid "Is rental"
+msgstr ""
+
+#: app/home/models.py:167
+msgid "Type"
+msgstr ""
+
+#: app/home/models.py:183
+msgid "Coordinates"
+msgstr ""
+
+#: app/home/models.py:185
+msgid ""
+"For a rectangle, please use the following format: <em>x1,y1,x2,y2</em>."
+"<br>For a polygon, please use the following format: <em>x1,y1,...,xn,yn</em>."
+msgstr ""
+
+#: app/home/models.py:192
+msgid "Code"
+msgstr ""
+
+#: app/home/models.py:196
+msgid "Label"
+msgstr ""
+
+#: app/home/models.py:198
+msgid "<b>Warning:</b> Will be overwritten by rental owner, if any."
+msgstr ""
+
+#: app/home/models.py:206
+msgid "Text area coordinates"
+msgstr ""
+
+#: app/home/models.py:208
+msgid ""
+"Area where the label should be displayed (defaults to room "
+"coordinates)<br>Please use the following format: <em>x1,y1,x2,y2</em>. "
+"<b>Rectangle only!</b>"
+msgstr ""
+
+#: app/home/models.py:247 app/home/templates/home/rent_confirm_delete.html:15
+msgid "Room"
+msgstr ""
+
+#: app/home/models.py:251 app/home/templates/home/rent_confirm_delete.html:27
+#, fuzzy
+#| msgid "Companies"
+msgid "Company"
+msgstr "Empresas"
+
+#: app/home/models.py:256
+msgid "Start date"
+msgstr ""
+
+#: app/home/models.py:257
+msgid "End date"
+msgstr ""
+
+#: app/home/templates/home/floorPlan.html:5
 msgid "Floor plan"
 msgstr "Planta baixa"
 
@@ -154,6 +213,39 @@ msgstr "Salvar"
 
 #: app/home/templates/home/password_update_form.html:15
 msgid "Reset"
+msgstr ""
+
+#: app/home/templates/home/rent_confirm_delete.html:4
+#: app/home/templates/home/rent_confirm_delete.html:6
+msgid "Rental"
+msgstr ""
+
+#: app/home/templates/home/rent_confirm_delete.html:7
+msgid "Are you sure you want to delete this rental?"
+msgstr ""
+
+#: app/home/templates/home/rent_confirm_delete.html:11
+msgid "Field"
+msgstr ""
+
+#: app/home/templates/home/rent_confirm_delete.html:12
+msgid "Data"
+msgstr ""
+
+#: app/home/templates/home/rent_confirm_delete.html:19
+msgid "Start Date"
+msgstr ""
+
+#: app/home/templates/home/rent_confirm_delete.html:23
+msgid "End Date"
+msgstr ""
+
+#: app/home/templates/home/rent_confirm_delete.html:33
+msgid "Delete"
+msgstr ""
+
+#: app/home/templates/home/rent_confirm_delete.html:33
+msgid "Cancel"
 msgstr ""
 
 #: app/home/templates/home/summary.html:18
@@ -271,6 +363,12 @@ msgstr "Seu login e senha não conferem. Por favor tente novamente."
 #: app/home/templates/registration/login.html:12
 msgid "If it's an error, please contact the administrator"
 msgstr "Se há um erro, por favor contate o administrador"
+
+#~ msgid "Title"
+#~ msgstr "Título"
+
+#~ msgid "Image"
+#~ msgstr "Imagem"
 
 #~ msgid "New password"
 #~ msgstr "Nova senha"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-22 01:05+0000\n"
+"POT-Creation-Date: 2016-03-17 20:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,19 +18,19 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: app/kpi/models.py:17
+#: app/kpi/models.py:18
 msgid "KPIs"
 msgstr "KPIs"
 
-#: app/kpi/models.py:19
+#: app/kpi/models.py:22
 msgid "Companies"
 msgstr "Compagnies"
 
-#: app/kpi/models.py:20
+#: app/kpi/models.py:29
 msgid "Type"
 msgstr "Type"
 
-#: app/kpi/models.py:22 app/kpi/templates/kpi/irl.html:65
+#: app/kpi/models.py:45 app/kpi/templates/kpi/irl.html:65
 #: app/kpi/templates/kpi/irl.html.py:115
 #: app/kpi/templates/kpi/irl_confirm_delete.html:11
 #: app/kpi/templates/kpi/trl.html:66 app/kpi/templates/kpi/trl.html.py:115
@@ -38,13 +38,13 @@ msgstr "Type"
 msgid "Level"
 msgstr "Niveau"
 
-#: app/kpi/models.py:23 app/kpi/templates/kpi/irl.html:101
+#: app/kpi/models.py:51 app/kpi/templates/kpi/irl.html:101
 #: app/kpi/templates/kpi/irl.html.py:114 app/kpi/templates/kpi/trl.html:102
 #: app/kpi/templates/kpi/trl.html.py:114
 msgid "Date"
 msgstr "Date"
 
-#: app/kpi/models.py:24 app/kpi/templates/kpi/irl.html:116
+#: app/kpi/models.py:57 app/kpi/templates/kpi/irl.html:116
 #: app/kpi/templates/kpi/irl_confirm_delete.html:13
 #: app/kpi/templates/kpi/trl.html:116
 #: app/kpi/templates/kpi/trl_confirm_delete.html:13

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-22 01:05+0000\n"
+"POT-Creation-Date: 2016-03-17 20:17+0000\n"
 "PO-Revision-Date: 2015-09-29 21:27-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,15 +18,15 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 1.8.5\n"
 
-#: app/valuePropositionCanvas/models.py:22
+#: app/valuePropositionCanvas/models.py:23
 msgid "Value proposition canvas type"
 msgstr "Tipo da Proposta de Valor do Canvas"
 
-#: app/valuePropositionCanvas/models.py:32
+#: app/valuePropositionCanvas/models.py:34
 msgid "Value proposition canvas element"
 msgstr "Elemento da Proposta de Valor do Canvas"
 
-#: app/valuePropositionCanvas/models.py:37
+#: app/valuePropositionCanvas/models.py:47
 msgid "Type"
 msgstr "Tipo"
 

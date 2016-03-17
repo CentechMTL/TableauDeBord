@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-22 01:05+0000\n"
+"POT-Creation-Date: 2016-03-17 20:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,15 +18,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: app/valuePropositionCanvas/models.py:22
+#: app/valuePropositionCanvas/models.py:23
 msgid "Value proposition canvas type"
 msgstr "Type d'élément du canevas de modèle de proposition de valeur"
 
-#: app/valuePropositionCanvas/models.py:32
+#: app/valuePropositionCanvas/models.py:34
 msgid "Value proposition canvas element"
 msgstr "Element du canevas de modèle de proposition de valeur"
 
-#: app/valuePropositionCanvas/models.py:37
+#: app/valuePropositionCanvas/models.py:47
 msgid "Type"
 msgstr "Type"
 

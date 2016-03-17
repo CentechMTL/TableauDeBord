@@ -20,6 +20,7 @@ class CardFactory(factory.DjangoModelFactory):
 
         card.save()
 
+
 class CommentFactory(factory.DjangoModelFactory):
     class Meta:
         model = Card

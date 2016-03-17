@@ -5,6 +5,7 @@ import factory
 from app.finance.models import Bourse, Subvention, Investissement, Pret, Vente
 from app.company.factories import CompanyFactory
 
+
 class BourseFactory(factory.DjangoModelFactory):
     class Meta:
         model = Bourse
@@ -20,6 +21,7 @@ class BourseFactory(factory.DjangoModelFactory):
         bourse = super(BourseFactory, self).__init__(self, **kwargs)
 
         bourse.save()
+
 
 class SubventionFactory(factory.DjangoModelFactory):
     class Meta:
@@ -50,7 +52,8 @@ class InvestissementFactory(factory.DjangoModelFactory):
         sommeSoumission = kwargs.pop('sommeSoumission', None)
         company = kwargs.pop('company', None)
 
-        investissement = super(InvestissementFactory, self).__init__(self, **kwargs)
+        investissement = super(InvestissementFactory, self).\
+            __init__(self, **kwargs)
 
         investissement.save()
 

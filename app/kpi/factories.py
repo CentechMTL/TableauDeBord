@@ -4,6 +4,7 @@ import factory
 
 from app.kpi.models import KPI, KPI_TYPE_CHOICES
 
+
 class KPIFactory(factory.DjangoModelFactory):
     class Meta:
         model = KPI

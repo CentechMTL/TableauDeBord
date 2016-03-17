@@ -4,16 +4,16 @@ from django.conf import settings
 from django.core import mail
 from django.core.urlresolvers import reverse
 from django.test import TestCase
-
 import time
-
 from app.founder.factories import FounderFactory
 from app.mentor.factories import MentorFactory
-from app.home.factories import UserFactory, StaffUserProfileFactory, ExecutiveUserProfileFactory
+from app.home.factories import UserFactory, StaffUserProfileFactory, \
+    ExecutiveUserProfileFactory
 from app.company.factories import CompanyStatusFactory, CompanyFactory
-from app.businessCanvas.factories import BusinessCanvasElementFactory, ArchiveFactory
-
+from app.businessCanvas.factories import BusinessCanvasElementFactory, \
+    ArchiveFactory
 from app.businessCanvas.models import BUSINESS_CANVAS_TYPE_CHOICES
+
 
 class BusinessCanvasTests(TestCase):
 
@@ -29,18 +29,22 @@ class BusinessCanvasTests(TestCase):
         self.founderCompany = FounderFactory()
         self.mentorCompany = MentorFactory()
         self.status = CompanyStatusFactory()
-        self.company = CompanyFactory(companyStatus = self.status)
+        self.company = CompanyFactory(companyStatus=self.status)
         self.company.founders.add(self.founderCompany)
         self.company.mentors.add(self.mentorCompany)
         self.company.save()
 
-        self.element = BusinessCanvasElementFactory(company = self.company,
-                                                    type = BUSINESS_CANVAS_TYPE_CHOICES[0][0])
+        self.element = BusinessCanvasElementFactory(
+            company=self.company,
+            type=BUSINESS_CANVAS_TYPE_CHOICES[0][0]
+        )
 
-        self.element2 = BusinessCanvasElementFactory(company = self.company,
-                                                    type = BUSINESS_CANVAS_TYPE_CHOICES[1][0])
+        self.element2 = BusinessCanvasElementFactory(
+            company=self.company,
+            type=BUSINESS_CANVAS_TYPE_CHOICES[1][0]
+        )
 
-        self.archive = ArchiveFactory(company = self.company)
+        self.archive = ArchiveFactory(company=self.company)
         self.archive.elements.add(self.element)
 
     def test_businessCanvasElement_list(self):
@@ -52,10 +56,16 @@ class BusinessCanvasTests(TestCase):
         Access : Staff
         """
         self.client.logout()
-        self.client.login(username=self.staff.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.staff.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('businessCanvas:businessCanvasElement_list', args= [self.company.id]),
+            reverse(
+                'businessCanvas:businessCanvasElement_list',
+                args=[self.company.id]
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 200)
@@ -64,10 +74,16 @@ class BusinessCanvasTests(TestCase):
         Access : Founders of the company
         """
         self.client.logout()
-        self.client.login(username=self.founderCompany.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.founderCompany.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('businessCanvas:businessCanvasElement_list', args= [self.company.id]),
+            reverse(
+                'businessCanvas:businessCanvasElement_list',
+                args=[self.company.id]
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 200)
@@ -76,10 +92,16 @@ class BusinessCanvasTests(TestCase):
         Access : Mentors of the company
         """
         self.client.logout()
-        self.client.login(username=self.mentorCompany.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.mentorCompany.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('businessCanvas:businessCanvasElement_list', args= [self.company.id]),
+            reverse(
+                'businessCanvas:businessCanvasElement_list',
+                args=[self.company.id]
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 200)
@@ -88,23 +110,34 @@ class BusinessCanvasTests(TestCase):
         No Access : Other founders
         """
         self.client.logout()
-        self.client.login(username=self.founder.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.founder.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('businessCanvas:businessCanvasElement_list', args= [self.company.id]),
+            reverse(
+                'businessCanvas:businessCanvasElement_list',
+                args=[self.company.id]
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
-
 
         """
         No Access : Other mentors
         """
         self.client.logout()
-        self.client.login(username=self.mentor.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.mentor.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('businessCanvas:businessCanvasElement_list', args= [self.company.id]),
+            reverse(
+                'businessCanvas:businessCanvasElement_list',
+                args=[self.company.id]
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
@@ -113,10 +146,16 @@ class BusinessCanvasTests(TestCase):
         No Access : Executive
         """
         self.client.logout()
-        self.client.login(username=self.executive.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.executive.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('businessCanvas:businessCanvasElement_list', args= [self.company.id]),
+            reverse(
+                'businessCanvas:businessCanvasElement_list',
+                args=[self.company.id]
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
@@ -130,10 +169,16 @@ class BusinessCanvasTests(TestCase):
         Access : Staff
         """
         self.client.logout()
-        self.client.login(username=self.staff.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.staff.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('businessCanvas:businessCanvasElementArchived_list', args= [self.archive.id]),
+            reverse(
+                'businessCanvas:businessCanvasElementArchived_list',
+                args=[self.archive.id]
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 200)
@@ -142,10 +187,16 @@ class BusinessCanvasTests(TestCase):
         Access : Founders of the company
         """
         self.client.logout()
-        self.client.login(username=self.founderCompany.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.founderCompany.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('businessCanvas:businessCanvasElementArchived_list', args= [self.archive.id]),
+            reverse(
+                'businessCanvas:businessCanvasElementArchived_list',
+                args=[self.archive.id]
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 200)
@@ -154,10 +205,16 @@ class BusinessCanvasTests(TestCase):
         Access : Mentors of the company
         """
         self.client.logout()
-        self.client.login(username=self.mentorCompany.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.mentorCompany.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('businessCanvas:businessCanvasElementArchived_list', args= [self.archive.id]),
+            reverse(
+                'businessCanvas:businessCanvasElementArchived_list',
+                args=[self.archive.id]
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 200)
@@ -166,23 +223,34 @@ class BusinessCanvasTests(TestCase):
         No Access : Other founders
         """
         self.client.logout()
-        self.client.login(username=self.founder.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.founder.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('businessCanvas:businessCanvasElementArchived_list', args= [self.archive.id]),
+            reverse(
+                'businessCanvas:businessCanvasElementArchived_list',
+                args=[self.archive.id]
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
-
 
         """
         No Access : Other mentors
         """
         self.client.logout()
-        self.client.login(username=self.mentor.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.mentor.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('businessCanvas:businessCanvasElementArchived_list', args= [self.archive.id]),
+            reverse(
+                'businessCanvas:businessCanvasElementArchived_list',
+                args=[self.archive.id]
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
@@ -191,10 +259,16 @@ class BusinessCanvasTests(TestCase):
         No Access : Executive
         """
         self.client.logout()
-        self.client.login(username=self.executive.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.executive.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('businessCanvas:businessCanvasElementArchived_list', args= [self.archive.id]),
+            reverse(
+                'businessCanvas:businessCanvasElementArchived_list',
+                args=[self.archive.id]
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
@@ -208,10 +282,16 @@ class BusinessCanvasTests(TestCase):
         Access : Founders of the company
         """
         self.client.logout()
-        self.client.login(username=self.founderCompany.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.founderCompany.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('businessCanvas:businessCanvasDeleteArchive', args= [self.archive.id]),
+            reverse(
+                'businessCanvas:businessCanvasDeleteArchive',
+                args=[self.archive.id]
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 200)
@@ -220,10 +300,16 @@ class BusinessCanvasTests(TestCase):
         No Access : Staff
         """
         self.client.logout()
-        self.client.login(username=self.staff.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.staff.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('businessCanvas:businessCanvasDeleteArchive', kwargs= {'pk': self.archive.id}),
+            reverse(
+                'businessCanvas:businessCanvasDeleteArchive',
+                kwargs={'pk': self.archive.id}
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
@@ -232,10 +318,16 @@ class BusinessCanvasTests(TestCase):
         No Access : Mentors of the company
         """
         self.client.logout()
-        self.client.login(username=self.mentorCompany.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.mentorCompany.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('businessCanvas:businessCanvasDeleteArchive', args= [self.archive.id]),
+            reverse(
+                'businessCanvas:businessCanvasDeleteArchive',
+                args=[self.archive.id]
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
@@ -244,23 +336,34 @@ class BusinessCanvasTests(TestCase):
         No Access : Other founders
         """
         self.client.logout()
-        self.client.login(username=self.founder.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.founder.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('businessCanvas:businessCanvasDeleteArchive', args= [self.archive.id]),
+            reverse(
+                'businessCanvas:businessCanvasDeleteArchive',
+                args=[self.archive.id]
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
-
 
         """
         No Access : Other mentors
         """
         self.client.logout()
-        self.client.login(username=self.mentor.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.mentor.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('businessCanvas:businessCanvasDeleteArchive', args= [self.archive.id]),
+            reverse(
+                'businessCanvas:businessCanvasDeleteArchive',
+                args=[self.archive.id]
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
@@ -269,10 +372,16 @@ class BusinessCanvasTests(TestCase):
         No Access : Executive
         """
         self.client.logout()
-        self.client.login(username=self.executive.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.executive.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('businessCanvas:businessCanvasDeleteArchive', args= [self.archive.id]),
+            reverse(
+                'businessCanvas:businessCanvasDeleteArchive',
+                args=[self.archive.id]
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 302)

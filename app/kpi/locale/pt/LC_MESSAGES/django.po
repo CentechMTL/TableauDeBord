@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-17 20:17+0000\n"
+"POT-Creation-Date: 2016-03-17 20:37+0000\n"
 "PO-Revision-Date: 2015-09-29 21:21-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -52,51 +52,40 @@ msgid "Comment"
 msgstr "Comentário"
 
 #: app/kpi/templates/kpi/irl.html:25
-msgid "Basic principles observed and reported"
-msgstr "Princípios básicos observados e reportados"
+msgid "Complete First-Pass Business Model Canvas"
+msgstr ""
 
 #: app/kpi/templates/kpi/irl.html:26
-msgid "Technology concept and/or application formulated"
-msgstr "Conceito tecnológico e/ou aplicação formulada"
+msgid "Market size/competitive analysis"
+msgstr ""
 
 #: app/kpi/templates/kpi/irl.html:27
-msgid ""
-"Analytical and experimental critical function and/or characteristic proof-of-"
-"concept"
+msgid "Problem/solution validation"
 msgstr ""
-"Função crítica experimental e analítica e/ou prova de conceito característica"
 
 #: app/kpi/templates/kpi/irl.html:28
-msgid "Component and/or breadboard validation in laboratory environment"
-msgstr "Validação componente ou ensaio em ambiente de laboratório"
+msgid "Prototype Low fidelity MVP"
+msgstr ""
 
 #: app/kpi/templates/kpi/irl.html:29
-msgid "Component and/or breadboard validation in relevant environment"
-msgstr "Validação componente ou ensaio em ambiente real"
+msgid "Validate product/market fit"
+msgstr ""
 
 #: app/kpi/templates/kpi/irl.html:30
-msgid ""
-"System/subsystem model or prototype demonstration in a relevant environment "
-"(Ground or Space)"
+msgid "Validate revenue model (right side of canvas)"
 msgstr ""
-"Modelo de sistema/subsistema ou demonstração de protótipo em ambiente real "
-"(solo ou espaço)"
 
 #: app/kpi/templates/kpi/irl.html:31
-msgid "System prototype demonstration in a space environment"
-msgstr "Demonstração do protótipo do sistema em ambiente espacial"
+msgid "Prototype High-Fidelity MVP"
+msgstr ""
 
 #: app/kpi/templates/kpi/irl.html:32
-msgid ""
-"Actual system completed and flight qualified through test and demonstration "
-"(Ground or Flight)"
+msgid "Validate value delivery (left side of canvas)"
 msgstr ""
-"Sistema atual completo e voo qualificado via teste ou demonstração (solo ou "
-"voo)."
 
 #: app/kpi/templates/kpi/irl.html:33
-msgid "Actual system flight proven trhough successful mission operations"
-msgstr "Sistema atual de voo aprovado via missões operacionais sucedidas"
+msgid "Identify and validate metrics that matter"
+msgstr ""
 
 #: app/kpi/templates/kpi/irl.html:46
 msgid "IRL of"
@@ -233,3 +222,42 @@ msgstr "Você tem certeza que deseja deletar esta TRL?"
 #: app/kpi/templates/kpi/trl_form.html:8
 msgid "New TRL for"
 msgstr "Nova TRL para"
+
+#~ msgid "Basic principles observed and reported"
+#~ msgstr "Princípios básicos observados e reportados"
+
+#~ msgid "Technology concept and/or application formulated"
+#~ msgstr "Conceito tecnológico e/ou aplicação formulada"
+
+#~ msgid ""
+#~ "Analytical and experimental critical function and/or characteristic proof-"
+#~ "of-concept"
+#~ msgstr ""
+#~ "Função crítica experimental e analítica e/ou prova de conceito "
+#~ "característica"
+
+#~ msgid "Component and/or breadboard validation in laboratory environment"
+#~ msgstr "Validação componente ou ensaio em ambiente de laboratório"
+
+#~ msgid "Component and/or breadboard validation in relevant environment"
+#~ msgstr "Validação componente ou ensaio em ambiente real"
+
+#~ msgid ""
+#~ "System/subsystem model or prototype demonstration in a relevant "
+#~ "environment (Ground or Space)"
+#~ msgstr ""
+#~ "Modelo de sistema/subsistema ou demonstração de protótipo em ambiente "
+#~ "real (solo ou espaço)"
+
+#~ msgid "System prototype demonstration in a space environment"
+#~ msgstr "Demonstração do protótipo do sistema em ambiente espacial"
+
+#~ msgid ""
+#~ "Actual system completed and flight qualified through test and "
+#~ "demonstration (Ground or Flight)"
+#~ msgstr ""
+#~ "Sistema atual completo e voo qualificado via teste ou demonstração (solo "
+#~ "ou voo)."
+
+#~ msgid "Actual system flight proven trhough successful mission operations"
+#~ msgstr "Sistema atual de voo aprovado via missões operacionais sucedidas"

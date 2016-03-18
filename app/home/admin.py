@@ -2,8 +2,7 @@
 
 from django.contrib import admin
 
-from app.home.models import UserProfile, Education, Expertise, Room, \
-    RoomType, Rent
+from app.home.models import UserProfile, Education, Expertise
 
 
 class UserProfileAdmin(admin.ModelAdmin):
@@ -16,6 +15,3 @@ class UserAdmin(admin.ModelAdmin):
 admin.site.register(Expertise)
 admin.site.register(Education)
 admin.site.register(UserProfile)
-admin.site.register(Room)
-admin.site.register(RoomType)
-admin.site.register(Rent)

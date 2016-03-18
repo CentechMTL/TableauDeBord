@@ -72,26 +72,4 @@ urlpatterns = patterns(
         views.PresenceDelete.as_view(),
         name='presence_delete'
     ),
-
-    # System of rental
-    url(
-        r'^rental/add$',
-        views.RentalCreate.as_view(),
-        name='rental_create'
-    ),
-    url(
-        r'^rental/add/(?P<pk>\d+)/$',
-        views.RentalCreate.as_view(),
-        name='rental_create'
-    ),
-    url(
-        r'^rental/update/(?P<pk>\d+)/$',
-        views.RentalUpdate.as_view(),
-        name='rental_update'
-    ),
-    url(
-        r'^rental/delete/(?P<pk>\d+)/$',
-        views.RentalDelete.as_view(),
-        name='rental_delete'
-    ),
 )

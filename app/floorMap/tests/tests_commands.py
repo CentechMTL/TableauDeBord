@@ -53,7 +53,7 @@ class UpdateFloorMap(TestCase):
         # Rectangles
         self.room.coords = [0, 0, 100, 100]
         self.room.save()
-        call_command('updatefloormap', output=self.ImagePathOut)
+        call_command('updateFloorMap', output=self.ImagePathOut)
         self.assertTrue(os.path.isfile(self.ImagePathOut))
         os.remove(self.ImagePathOut)
 
@@ -61,7 +61,7 @@ class UpdateFloorMap(TestCase):
         self.room.coords = [0, 0, 100, 100, 200, 200, 300, 300, 0, 300]
         self.room.text_coords = [100, 200, 200, 300]
         self.room.save()
-        call_command('updatefloormap', output=self.ImagePathOut)
+        call_command('updateFloorMap', output=self.ImagePathOut)
         self.assertTrue(os.path.isfile(self.ImagePathOut))
         os.remove(self.ImagePathOut)
 
@@ -74,7 +74,7 @@ class UpdateFloorMap(TestCase):
         self.room.code = "C-0000"
         self.room.static_label = "Xyz Xyz"
         self.room.save()
-        call_command('updatefloormap', output=self.ImagePathOut)
+        call_command('updateFloorMap', output=self.ImagePathOut)
         self.assertTrue(os.path.isfile(self.ImagePathOut))
         os.remove(self.ImagePathOut)
 
@@ -82,7 +82,7 @@ class UpdateFloorMap(TestCase):
         self.room.static_label = ""
         self.room.code = ""
         self.room.save()
-        call_command('updatefloormap', output=self.ImagePathOut)
+        call_command('updateFloorMap', output=self.ImagePathOut)
         self.assertTrue(os.path.isfile(self.ImagePathOut))
         os.remove(self.ImagePathOut)
 
@@ -90,7 +90,7 @@ class UpdateFloorMap(TestCase):
         self.room.static_label = "Xyz Xyz"
         self.room.code = ""
         self.room.save()
-        call_command('updatefloormap', output=self.ImagePathOut)
+        call_command('updateFloorMap', output=self.ImagePathOut)
         self.assertTrue(os.path.isfile(self.ImagePathOut))
         os.remove(self.ImagePathOut)
 
@@ -113,7 +113,7 @@ class UpdateFloorMap(TestCase):
         self.rent.date_start = datetime.datetime.today() - time_diff
         self.rent.date_end = datetime.datetime.today() + time_diff
         self.rent.save()
-        call_command('updatefloormap', output=self.ImagePathOut)
+        call_command('updateFloorMap', output=self.ImagePathOut)
         self.assertTrue(os.path.isfile(self.ImagePathOut))
         os.remove(self.ImagePathOut)
 

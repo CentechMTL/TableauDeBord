@@ -40,7 +40,7 @@ def company_select(request):
             list_company = Company.objects.all().order_by('name')
             list_menu = [
                 'companies',
-                'floor_plan',
+                'floorMap',
                 'mentors',
                 'founders',
                 'road_map',
@@ -52,7 +52,7 @@ def company_select(request):
                 list_company += isMentor.company.all()
                 list_menu += [
                     'companies',
-                    'floor_plan',
+                    'floorMap',
                     'mentors',
                     'founders',
                     'road_map'
@@ -61,7 +61,7 @@ def company_select(request):
                 list_company += isFounder.company.all()
                 list_menu += [
                     'companies',
-                    'floor_plan',
+                    'floorMap',
                     'mentors',
                     'founders',
                     'road_map'
@@ -72,7 +72,7 @@ def company_select(request):
                     'summary',
                     'mentors',
                     'founders',
-                    'floor_plan'
+                    'floorMap',
                 ]
 
         # To set the default company selected

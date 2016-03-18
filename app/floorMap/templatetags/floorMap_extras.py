@@ -16,9 +16,9 @@ def coords_list(value):
     return lst_string
 
 
-@register.filter(name='shape')
+@register.filter(name='coords_shape')
 @stringfilter
-def shape(value):
+def coords_shape(value):
     lst_int = literal_eval(value)
     if len(lst_int) == 4:
         return 'rect'

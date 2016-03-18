@@ -13,7 +13,11 @@
         </tr>
         <tr>
             <th>{% trans "Room" %} :</th>
-            <td>{{ rent.room.code }}</td>
+            {% if rental.room.code %}
+                <td>{{ rental.room.code }}</td>
+            {% else %}
+                <td>{{ rental.room.static_label }}</td>
+            {% endif %}
         </tr>
         <tr>
             <th>{% trans "Start Date" %} :</th>

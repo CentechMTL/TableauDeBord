@@ -1,6 +1,6 @@
 (function(root, factory) {
     if (typeof define === 'function' && define.amd) {
-        define(['jquery'], factory);
+        define(['../../../home/static/js/jquery'], factory);
     } else {
         factory(root.jQuery);
     }

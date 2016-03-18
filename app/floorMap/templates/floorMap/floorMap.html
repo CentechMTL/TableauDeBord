@@ -1,25 +1,16 @@
 {% extends "dashboard.html" %}
 <!-- Load internationalisation utils-->
-{% load i18n staticfiles extras %}
+{% load i18n staticfiles floorMap_extras %}
 
 {% block title %}{{app.site.entreprise.name}} | {% trans "Floor plan" %}{% endblock %}
 
 {% block extrahead %}
-    <style>
-        .floor_map {
-            user-drag: none;
-            user-select: none;
-            -moz-user-select: none;
-            -webkit-user-drag: none;
-            -webkit-user-select: none;
-            -ms-user-select: none;
-        }
-    </style>
+    <link href="{% static 'css/floorMap.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block extrajs %}
     <script src="{% static 'js/jquery.maphilight.js' %}"></script>
-    <script src="{% static 'js/jquery.maphilight_configs.js' %}"></script>
+    <script src="{% static 'js/jquery.maphilight_config.js' %}"></script>
     <script>
         $(document).ready(function(){
             $('.floor_map').maphilight()
@@ -37,7 +28,7 @@
         </div>
         <map name="map_coords">
             {% for room in list_room_data %}
-                <area shape="{{ room.coords|shape }}" alt="{{ room.code }}" coords="{{ room.coords|coords_list }}" />
+                <area shape="{{ room.coords|coords_shape }}" alt="{{ room.code }}" coords="{{ room.coords|coords_list }}" />
             {% endfor %}
         </map><br />
     </div>

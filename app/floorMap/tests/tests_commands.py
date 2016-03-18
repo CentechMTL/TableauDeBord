@@ -1,16 +1,17 @@
 # coding: utf-8
+
 from __future__ import division
 
-import os
 import datetime
+import os
 
 from django.conf import settings
 from django.core.management import call_command
 from django.test import TestCase
 
 from app.company.factories import CompanyFactory, CompanyStatusFactory
-from app.home.factories import RentFactory, RoomFactory, RoomTypeFactory
-from app.home.management.commands.floor_map.builder import FloorMapBuilder
+from app.floorMap.management.commands.scripts.builder import FloorMapBuilder
+from app.floorMap.factories import RentFactory, RoomFactory, RoomTypeFactory
 
 
 class UpdateFloorMap(TestCase):
@@ -37,7 +38,7 @@ class UpdateFloorMap(TestCase):
         self.room_3 = RoomFactory(type=self.room_type_3)
         self.room_4 = RoomFactory(type=self.room_type_4)
         call_command(
-            'updatefloormap',
+            'updateFloorMap',
             input=self.ImagePathIn,
             output=self.ImagePathOut
         )

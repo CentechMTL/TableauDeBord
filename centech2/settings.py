@@ -54,7 +54,8 @@ INSTALLED_APPS = (
     'app.businessCanvas',
     'app.finance',
     'app.valuePropositionCanvas',
-    'app.kanboard'
+    'app.kanboard',
+    'app.floorMap',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -133,6 +134,7 @@ TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'app/finance/templates'),
     os.path.join(BASE_DIR, 'app/valuePropositionCanvas/templates'),
     os.path.join(BASE_DIR, 'app/kanboard/templates'),
+    os.path.join(BASE_DIR, 'app/floorMap/templates'),
     os.path.join(BASE_DIR, 'templates'),
 )
 

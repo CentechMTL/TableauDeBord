@@ -123,12 +123,17 @@ class Room:
         # Hides code label if it's too wide
         if self.options['show_code']:
             code_width = self.text_size(settings.FONT_SIZE_MIN, self.code)[0]
-            max_width = self.get_area_size()[0]
+            max_width = self.get_area_size(include_padding=True)[0]
 
             if code_width > max_width:
                 self.options['show_code'] = False
 
     def get_font(self, size):
+        """
+        Retrieves from settings the font to be used
+        :param size: The font size
+        :return: ImageFont object
+        """
         font_path = os.path.join(
             settings.MEDIA_ROOT,
             settings.FONTS_DIR,
@@ -141,36 +146,37 @@ class Room:
         if len(coords) < 4 or len(coords) % 2 == 1:
             ex = "Invalid coordinates received : %s" % str(coords)
             raise ValueError(ex)
-        else:
-            # Makes sure the integers are in the right order
-            cleaned_coords = utils.boundary_box(*coords)
+        elif len(coords) == 4:
+            # Cleans received rectangle
+            coords = utils.boundary_box(*coords)
             # Transforms rectangle into polygon
-            cleaned_coords = utils.rect_to_poly(*cleaned_coords)
-
-        self._coords = cleaned_coords
+            self._coords = utils.rect_to_poly(*coords)
+        else:
+            self._coords = coords
 
     def get_coords(self):
         return self._coords
 
     def set_area_coords(self, *coords):
-        if len(coords) >= 4 and len(coords) % 2 == 0:
-            # Cleans received text area
-            # and makes sure the coords are in the correct order
-            cleaned_coords = utils.boundary_box(*coords)
+        if len(coords) < 4 or len(coords) % 2 == 1:
+            # Invalid text area coords, use room coords instead
+            area_coords = self.get_coords()
         else:
-            # Generates a default text area around the room coordinates
-            cleaned_coords = utils.boundary_box(*self.get_coords())
+            area_coords = coords
+
+        # Cleans coords to be used
+        cleaned_coords = utils.boundary_box(*area_coords)
 
         self._text_area_coords = cleaned_coords
 
     def get_area_coords(self):
         return self._text_area_coords
 
-    def get_area_size(self, include_padding=True):
+    def get_area_size(self, include_padding=False):
         """
         Gets the size of the text area
         :param include_padding: If room padding should be included
-        :return: tuple[width, height]
+        :return: tuple(width, height)
         """
         area_coords = self.get_area_coords()
 
@@ -188,63 +194,60 @@ class Room:
     def get_padding_size(self):
         """
         Gets the size of the room text padding
-        :return: list[width, height]
+        :return: list(width, height)
         """
         padding_w = settings.ROOM_TEXT_PADDING[0]
         padding_h = settings.ROOM_TEXT_PADDING[1]
 
         # Applies % padding on width if necessary
         if padding_w < 1:
-            padding_w *= self.get_area_size(include_padding=False)[0]
+            padding_w *= self.get_area_size()[0]
         if padding_h < 1:
-            padding_h *= self.get_area_size(include_padding=False)[1]
+            padding_h *= self.get_area_size()[1]
 
         return math.floor(padding_w), math.floor(padding_h)
 
-    def get_display_text_size(self, size, text):
+    def get_display_text(self, label):
         """
-        Returns the size of text as it would appear on the final image
-        Not to be confused with text_size()
-            which does not include all final settings like room code display
-        :param size: The font size of the text
-        :param text: The text to display (excluding label, if any)
-        :return: tuple(width, height)
+        Returns the text as it would appear on the final image
+        :param label: The processed label string
+        :return:
         """
         # Applies room code if required
         if self.options['show_code']:
-            if self.label:
-                display_text = "\n".join((text, self.code))
+            if label:
+                return "\n".join((label, self.code))
             else:
-                display_text = self.code
+                return self.code
         else:
-            display_text = text
-
-        return self.text_size(size, display_text)
+            return label
 
     def text_size(self, size, text):
         """
-        Gets the size of the room label + code
-        :param size: The font size of the text
-        :param text: The text to display (excluding label, if any)
-        :return: tuple[width, height]
+        Gets the size of the room label on the canvas
+        :param size: The font size
+        :param text: The text to display
+        :return: tuple(width, height)
         """
-        font = self.get_font(size)
-        text_size = self.canvas.multiline_textsize(
+        return self.canvas.multiline_textsize(
             text,
-            font=font,
+            font=self.get_font(size),
             spacing=settings.FONT_LINE_SPACING
         )
 
-        return text_size
-
     def get_label_pos(self, size, text):
-        room_coords = self.get_coords()
-        area_size = self.get_area_size(include_padding=False)
-        label_size = self.get_display_text_size(size, text)
+        """
+        Gets the position of the room label to be draw at
+        :param size: The size of the font
+        :param text: The label text
+        :return: tuple(x, y)
+        """
+        area_coords = self.get_area_coords()
+        text_size = self.text_size(size, text)
 
         label_pos = (
-            room_coords[0] + (area_size[0] - label_size[0]) / 2,
-            room_coords[1] + (area_size[1] - label_size[1]) / 2
+            (area_coords[0] + area_coords[2] - text_size[0]) / 2,
+            (area_coords[1] + area_coords[3] - text_size[1]) / 2
         )
 
         return label_pos
@@ -325,20 +328,7 @@ class Room:
                       best_format['text'].replace("\n", "\\n"))
                   )
 
-        if self.options['show_code']:
-            if room_label:
-                display_text = "\n".join((best_format['text'], self.code))
-            else:
-                display_text = self.code
-        else:
-            display_text = best_format['text']
-
-        format_final = {
-            'size': best_format['size'],
-            'text': display_text,
-        }
-
-        return format_final
+        return best_format
 
     def get_best_format(self, size, text, depth=0):
         """
@@ -373,8 +363,8 @@ class Room:
 
         format_options = []
 
-        text_size = self.get_display_text_size(size, text)
-        area_size = self.get_area_size()
+        text_size = self.text_size(size, self.get_display_text(text))
+        area_size = self.get_area_size(include_padding=True)
 
         # text fits in text area, return as best format
         if (text_size[0] <= area_size[0]) & (text_size[1] <= area_size[1]):
@@ -565,7 +555,7 @@ class Room:
         :param text: Room text
         :return: Room text with splits on long words
         """
-        max_width = self.get_area_size()[0]
+        max_width = self.get_area_size(include_padding=True)[0]
         words = re.split(r"[ \n]+", text.strip())
 
         for ind, word in enumerate(words):
@@ -596,14 +586,17 @@ class Room:
             return  # No label to display
 
         room_format = self.get_room_format()
+
+        display_text = self.get_display_text(room_format['text'])
+
         label_pos = self.get_label_pos(
             room_format['size'],
-            room_format['text']
+            display_text
         )
 
         self.canvas.multiline_text(
             label_pos,
-            room_format['text'],
+            display_text,
             font=self.get_font(room_format['size']),
             fill=ImageColor.getrgb(settings.FONT_COLOR),
             spacing=settings.FONT_LINE_SPACING,

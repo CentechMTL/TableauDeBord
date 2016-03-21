@@ -191,23 +191,19 @@ class UpdateFloorMap(TestCase):
         )
 
         # Test text_size()
-        self.assertTupleEqual(
-            room.text_size(24, "ABC"),
-            canvas.multiline_textsize("ABC", font=font_24, spacing=4)
-        )
 
         # Without room code
-        room.code = "C-0000"
         room.options['show_code'] = False
         self.assertTupleEqual(
-            room.get_display_text_size(24, "Label"),
+            room.text_size(24, room.get_display_text("Label")),
             canvas.multiline_textsize("Label", font=font_24, spacing=4)
         )
 
         # With room code
+        room.code = "C-1230"
         room.options['show_code'] = True
         self.assertTupleEqual(
-            room.get_display_text_size(24, "A"),
+            room.text_size(24, room.get_display_text("A")),
             canvas.multiline_textsize("A\nC-1230", font=font_24, spacing=4)
         )
 
@@ -221,8 +217,11 @@ class UpdateFloorMap(TestCase):
             font=font_24,
             spacing=4
         )
+        display_text = room.get_display_text("Label\nCode")
+
+        self.assertEqual(display_text, "Label\nCode\nC-0000")
         self.assertTupleEqual(
-            room.get_label_pos(24, "Label\nCode"),
+            room.get_label_pos(24, display_text),
             (250 - text_size[0] / 2, 150 - text_size[1] / 2)
         )
 
@@ -322,19 +321,16 @@ class UpdateFloorMap(TestCase):
         room.options['show_code'] = True
         self.assertDictEqual(
             room.get_room_format(),
-            {'size': 24, 'text': "C-1230"}
+            {'size': 24, 'text': ""}
         )
 
         room.label = "000000 111111"
-        room.code = "C-1230"
         self.assertDictEqual(
             room.get_room_format(),
-            {'size': 24, 'text': "000000\n111111\nC-1230"}
+            {'size': 24, 'text': "000000\n111111"}
         )
 
         room.label = "000000000000.0.0 11"
-        room.code = ""
-        room.options['show_code'] = False
         self.assertDictEqual(
             room.get_room_format(),
             {'size': 11, 'text': "000000000000.0.0\n11"}
@@ -343,7 +339,6 @@ class UpdateFloorMap(TestCase):
         # When best_format() fails
         room.label = "One Fish Two Fish Red Fish Blue Fish"
         room.set_area_coords(0, 0, 10, 10)
-        room.options['show_code'] = False
         self.assertDictEqual(room.get_room_format(), dict(size=24, text="..."))
 
         del floor_map

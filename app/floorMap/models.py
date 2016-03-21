@@ -12,9 +12,9 @@ class RoomType(models.Model):
         max_length=100,
         verbose_name=_('Name')
     )
-    description = models.CharField(
+    description = models.TextField(
         blank=True,
-        max_length="100",
+        max_length=500,
         verbose_name=_('Description')
     )
     is_rental = models.BooleanField(
@@ -53,7 +53,10 @@ class Room(models.Model):
         )
     )
 
-    code = models.CharField(blank=True, max_length=10, verbose_name=_('Code'))
+    code = models.CharField(
+        max_length=10,
+        verbose_name=_('Code')
+    )
     static_label = models.CharField(
         blank=True,
         max_length=100,
@@ -77,10 +80,13 @@ class Room(models.Model):
     )
 
     def __unicode__(self):
-        if self.code:
-            return self.code
+        if self.static_label:
+            return u"{code} - {label}".format(
+                code=self.code,
+                label=self.static_label
+            )
         else:
-            return self.static_label
+            return self.code
 
     def is_rental(self):
         return self.type.is_rental

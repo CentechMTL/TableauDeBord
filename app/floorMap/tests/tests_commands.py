@@ -148,7 +148,7 @@ class UpdateFloorMap(TestCase):
             'code': "C-0000000000000000000000000000000000000",
             'coords': (0, 0, 200, 200),
             'show_code': True,
-            'bg_color': (250, 147, 29),
+            'bg_color': "#434343",
             'fake_option': 42,
         }
 
@@ -172,7 +172,7 @@ class UpdateFloorMap(TestCase):
             room.options,
             {
                 'show_code': False,
-                'bg_color': (250, 147, 29),
+                'bg_color': "#434343",
                 'fake_option': 42
             }
         )

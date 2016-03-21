@@ -7,7 +7,7 @@ import math
 import os
 import re
 from itertools import combinations
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw, ImageFont, ImageColor
 
 import _settings as settings
 import _utils as utils
@@ -582,7 +582,10 @@ class Room:
         Prints the room shape on the canvas
         :return:
         """
-        self.canvas.polygon(self.get_coords(), fill=self.options['bg_color'])
+        self.canvas.polygon(
+            self.get_coords(),
+            fill=ImageColor.getrgb(self.options['bg_color'])
+        )
 
     def print_label(self):
         """
@@ -602,7 +605,7 @@ class Room:
             label_pos,
             room_format['text'],
             font=self.get_font(room_format['size']),
-            fill=settings.FONT_COLOR,
+            fill=ImageColor.getrgb(settings.FONT_COLOR),
             spacing=settings.FONT_LINE_SPACING,
             align=settings.ROOM_TEXT_ALIGN
         )

@@ -48,7 +48,7 @@ TRUNCATE_STRING = '...'
 Label text
 """
 FONT_FACE = 'arial.ttf'
-FONT_COLOR = (0, 0, 0, 255)  # RGBA support
+FONT_COLOR = "#000000"
 FONT_SIZE_MIN = 10
 FONT_SIZE_MAX = 24
 FONT_LINE_SPACING = 4
@@ -57,7 +57,7 @@ FONT_LINE_SPACING = 4
 Global room display
 - See room settings section for individual room options
 """
-ROOM_DEFAULT_BACKGROUND = (255, 255, 255, 255)
+ROOM_DEFAULT_BACKGROUND = "#FFFFFF"
 ROOM_TEXT_PADDING = (0.05, 0.05)
 ROOM_TEXT_ALIGN = 'center'
 

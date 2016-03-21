@@ -12,6 +12,8 @@ class RoomTypeFactory(factory.DjangoModelFactory):
 
     name = factory.Sequence('Room type N°{0}'.format)
     is_rental = False
+    bg_color = '#FFFFFF'
+    alt_bg_color = '#CCCCCC'
 
     @classmethod
     def _prepare(cls, create, **kwargs):

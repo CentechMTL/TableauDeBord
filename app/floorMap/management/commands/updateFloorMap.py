@@ -7,14 +7,6 @@ from django.core.management.base import BaseCommand
 from app.floorMap.management.commands.scripts.builder import FloorMapBuilder
 from app.floorMap.models import Room
 
-# ToDo: Add color field in RoomType
-# Colors
-CLR_GREY = (200, 200, 200)
-CLR_ORANGE = (250, 147, 29)
-CLR_VIOLET = (175, 41, 76)
-CLR_RED = (240, 61, 67)
-# ToDo end
-
 
 class Command(BaseCommand):
     help = 'Force refresh the floor map image(s)'
@@ -47,24 +39,13 @@ class Command(BaseCommand):
             if room.is_rental():
                 if company:
                     room_label = company
+                    bg_color = room.type.bg_color
                 else:
                     room_label = "Libre"
+                    bg_color = room.type.alt_bg_color
             else:
                 room_label = room.static_label
-
-            # ToDo: Fetch color from color field in RoomType options
-            if room.type_id == 1:
-                bg_color = CLR_GREY
-            elif room.type_id == 2:
-                bg_color = CLR_VIOLET
-            elif room.type_id == 3:
-                if company:
-                    bg_color = CLR_ORANGE
-                else:
-                    bg_color = CLR_RED
-            else:
-                bg_color = CLR_GREY
-            # ToDo end
+                bg_color = room.type.bg_color
 
             # Required data:
 

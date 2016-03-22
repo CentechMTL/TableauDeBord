@@ -128,20 +128,6 @@ class Room:
             if code_width > max_width:
                 self.options['show_code'] = False
 
-    def get_font(self, size):
-        """
-        Retrieves from settings the font to be used
-        :param size: The font size
-        :return: ImageFont object
-        """
-        font_path = os.path.join(
-            settings.MEDIA_ROOT,
-            settings.FONTS_DIR,
-            settings.FONT_FACE
-        )
-        font = ImageFont.truetype(font_path, size=size)
-        return font
-
     def set_coords(self, *coords):
         if len(coords) < 4 or len(coords) % 2 == 1:
             ex = "Invalid coordinates received : %s" % str(coords)
@@ -231,7 +217,7 @@ class Room:
         """
         return self.canvas.multiline_textsize(
             text,
-            font=self.get_font(size),
+            font=font_size(size),
             spacing=settings.FONT_LINE_SPACING
         )
 
@@ -305,7 +291,7 @@ class Room:
                             'text': settings.TRUNCATE_STRING
                         }
                     else:
-                        room_label = self.truncate_text(room_label)
+                        room_label = truncate_text(room_label)
 
                     if settings.DEBUG:
                         print("Done.")
@@ -397,34 +383,9 @@ class Room:
                 format_options.append(option)
 
         # Chooses best option and returns result
-        best_format = self.choose_best_option(*format_options)
+        best_format = choose_best_option(*format_options)
 
         return best_format
-
-    def choose_best_option(self, *format_opts):
-        """
-        Chooses which option should take priority over the others
-        Typically, which option looks the best in the end result
-        :param format_opts: list of dict(size, text)
-        :return: dict(size, text) or None if list is empty
-        """
-        if format_opts:
-            best_opt = format_opts[0]  # Defaults to the first option
-
-            for opt in format_opts:
-                opt_length = len(opt['text'].splitlines())
-                best_opt_length = len(best_opt['text'].splitlines())
-
-                is_bigger = opt['size'] > best_opt['size']
-                is_same_size = opt['size'] == best_opt['size']
-                is_taller = opt_length > best_opt_length
-
-                if is_bigger or (is_same_size and is_taller):
-                    best_opt = opt
-
-            return best_opt
-        else:
-            return None
 
     def bump_text(self, text, bumps_wanted=None, store_result=True):
         """
@@ -514,41 +475,6 @@ class Room:
 
             return best_option['text']
 
-    def truncate_text(self, text):
-        """
-        Truncates the room text by removing either the last word
-            or parts of it
-        :param text: Text to be truncated
-        :return: Truncated text
-        """
-        truncate_string = settings.TRUNCATE_STRING
-        smallest_word_split = settings.SMALLEST_WORD_SPLIT
-
-        if text == truncate_string:
-            return text  # Can't truncate anything
-
-        words = re.split(r"[ \n]+", text.strip())
-
-        last_word = words.pop()
-
-        # Skips fully truncated string
-        if last_word == truncate_string:
-            last_word = words.pop()
-
-        truncated = last_word[0:smallest_word_split] + truncate_string
-
-        is_too_short = len(last_word) <= smallest_word_split
-
-        if is_too_short or last_word.endswith(truncate_string):
-            # Fully truncates truncated last word
-            last_word = truncate_string
-        else:
-            last_word = truncated
-
-        # Applies truncated last word
-        words.append(last_word)
-        return " ".join(words)
-
     def split_long_words(self, text):
         """
         Splits in half words that would be too long even at minimum font size
@@ -597,8 +523,80 @@ class Room:
         self.canvas.multiline_text(
             label_pos,
             display_text,
-            font=self.get_font(room_format['size']),
+            font=font_size(room_format['size']),
             fill=ImageColor.getrgb(settings.FONT_COLOR),
             spacing=settings.FONT_LINE_SPACING,
             align=settings.ROOM_TEXT_ALIGN
         )
+
+
+def truncate_text(text):
+    """
+    Truncates the room text by removing either the last word
+        or parts of it
+    :param text: Text to be truncated
+    :return: Truncated text
+    """
+    truncate_string = settings.TRUNCATE_STRING
+    smallest_word_split = settings.SMALLEST_WORD_SPLIT
+
+    if text == truncate_string:
+        return text  # Can't truncate anything
+
+    words = re.split(r"[ \n]+", text.strip())
+
+    last_word = words.pop()
+
+    # Skips fully truncated string
+    if last_word == truncate_string:
+        last_word = words.pop()
+
+    truncated = last_word[0:smallest_word_split] + truncate_string
+
+    is_too_short = len(last_word) <= smallest_word_split
+
+    if is_too_short or last_word.endswith(truncate_string):
+        # Fully truncates truncated last word
+        last_word = truncate_string
+    else:
+        last_word = truncated
+
+    # Applies truncated last word
+    words.append(last_word)
+    return " ".join(words)
+
+
+def choose_best_option(*format_opts):
+    """
+    Chooses which option should take priority over the others
+    Typically, which option looks the best in the end result
+    :param format_opts: list of options as {size, text}
+    :return: dict(size, text) or None if no options
+    """
+    if format_opts:
+        best_opt = format_opts[0]  # Defaults to the first option
+
+        for opt in format_opts:
+            opt_length = len(opt['text'].splitlines())
+            best_opt_length = len(best_opt['text'].splitlines())
+
+            is_bigger = opt['size'] > best_opt['size']
+            is_same_size = opt['size'] == best_opt['size']
+            is_taller = opt_length > best_opt_length
+
+            if is_bigger or (is_same_size and is_taller):
+                best_opt = opt
+
+        return best_opt
+    else:
+        return None
+
+
+def font_size(size):
+    return ImageFont.truetype(
+        os.path.join(
+            settings.MEDIA_ROOT,
+            settings.FONTS_DIR,
+            settings.FONT_FACE
+        ), size=size
+    )

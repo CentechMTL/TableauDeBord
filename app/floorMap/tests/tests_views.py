@@ -44,7 +44,7 @@ class FloorMapTest (TestCase):
         self.assertEqual(result.status_code, 200)
 
         """
-        No Access : Founder
+        Access : Founder
         """
         self.client.logout()
         self.client.login(
@@ -56,10 +56,10 @@ class FloorMapTest (TestCase):
             reverse('floorMap:index'),
             follow=False
         )
-        self.assertEqual(result.status_code, 302)
+        self.assertEqual(result.status_code, 200)
 
         """
-        No Access : Mentor
+        Access : Mentor
         """
         self.client.logout()
         self.client.login(
@@ -71,10 +71,10 @@ class FloorMapTest (TestCase):
             reverse('floorMap:index'),
             follow=False
         )
-        self.assertEqual(result.status_code, 302)
+        self.assertEqual(result.status_code, 200)
 
         """
-        No Access : Executive
+        Access : Executive
         """
         self.client.logout()
         self.client.login(
@@ -86,7 +86,7 @@ class FloorMapTest (TestCase):
             reverse('floorMap:index'),
             follow=False
         )
-        self.assertEqual(result.status_code, 302)
+        self.assertEqual(result.status_code, 200)
 
         """
         No Access : Not logged

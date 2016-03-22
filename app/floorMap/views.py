@@ -24,7 +24,10 @@ class FloorMapIndex(generic.ListView):
     # You need to be connected, and you need to have access as centech only
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        if self.request.user.profile.isCentech():
+        if self.request.user.profile.isCentech() or\
+                self.request.user.profile.isFounder() or\
+                self.request.user.profile.isMentor() or\
+                self.request.user.profile.isExecutive():
             return super(FloorMapIndex, self).dispatch(*args, **kwargs)
 
         # The visitor can't see this page!

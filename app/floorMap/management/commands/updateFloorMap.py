@@ -50,7 +50,6 @@ class Command(BaseCommand):
             # Required data:
 
             data = {
-                'label': room_label,
                 'code': room.code,
                 'coords': literal_eval(room.coords),
                 'show_code': bool(room.code),
@@ -61,6 +60,9 @@ class Command(BaseCommand):
 
             if room.text_coords:
                 data['text_coords'] = literal_eval(room.text_coords)
+
+            if room.static_label:
+                data['label'] = room_label
 
             # Sends data to the map builder
             floor_map.add_room(**data)

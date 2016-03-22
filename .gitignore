@@ -8,3 +8,5 @@ media/user_profile/*
 *.pyc
 
 env
+
+celerybeat.pid

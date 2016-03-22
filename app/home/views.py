@@ -14,7 +14,6 @@ from django.views import generic
 from app.company.models import Company, CompanyStatus
 from app.company.forms import MiniCompanyStatusUpdateForm
 from app.mentor.models import Mentor
-from app.home.models import Room
 
 
 class Summary(generic.TemplateView):
@@ -271,28 +270,3 @@ def get_url(request, namespace, arguments=""):
 
     # The visitor can't see this page!
     return HttpResponseRedirect("/user/noAccessPermissions")
-
-
-class floor_plan(generic.ListView):
-    # Floor Plan Page
-    model = Room
-    template_name = 'home/floorPlan.html'
-    context_object_name = 'list_room_data'
-
-    # You need to be connected, and you need to have access as centech only
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        if self.request.user.profile.isCentech():
-            return super(floor_plan, self).dispatch(*args, **kwargs)
-
-        if self.request.user.profile.isFounder():
-            return super(floor_plan, self).dispatch(*args, **kwargs)
-
-        if self.request.user.profile.isMentor():
-            return super(floor_plan, self).dispatch(*args, **kwargs)
-
-        if self.request.user.profile.isExecutive():
-            return super(floor_plan, self).dispatch(*args, **kwargs)
-
-        # The visitor can't see this page!
-        return HttpResponseRedirect("/user/noAccessPermissions")

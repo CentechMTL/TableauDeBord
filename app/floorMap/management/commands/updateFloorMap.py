@@ -1,9 +1,11 @@
 # coding: utf-8
 
-from django.core.management.base import BaseCommand
-from app.home.models import Room
-from floor_map.builder import FloorMapBuilder
 from ast import literal_eval
+
+from django.core.management.base import BaseCommand
+
+from app.floorMap.management.commands.scripts.builder import FloorMapBuilder
+from app.floorMap.models import Room
 
 # ToDo: Add color field in RoomType
 # Colors
@@ -83,4 +85,4 @@ class Command(BaseCommand):
             floor_map.add_room(**data)
 
         floor_map.render_image()
-        floor_map.save(**options)
+        floor_map.save(**map_settings)

@@ -2,7 +2,7 @@
 
 from django.contrib import admin
 
-from app.home.models import UserProfile, Education, Expertise
+from app.floorMap.models import Room, RoomType, Rent
 
 
 class UserProfileAdmin(admin.ModelAdmin):
@@ -12,6 +12,6 @@ class UserProfileAdmin(admin.ModelAdmin):
 class UserAdmin(admin.ModelAdmin):
     readonly_fields = ['image_thumb']
 
-admin.site.register(Expertise)
-admin.site.register(Education)
-admin.site.register(UserProfile)
+admin.site.register(Room)
+admin.site.register(RoomType)
+admin.site.register(Rent)

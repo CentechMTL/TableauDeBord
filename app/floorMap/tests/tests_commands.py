@@ -10,7 +10,8 @@ from django.core.management import call_command
 from django.test import TestCase
 
 from app.company.factories import CompanyFactory, CompanyStatusFactory
-from app.floorMap.management.commands.scripts.builder import FloorMapBuilder
+from app.floorMap.management.commands.scripts.builder import FloorMapBuilder, \
+    font_size, truncate_text
 from app.floorMap.factories import RentFactory, RoomFactory, RoomTypeFactory
 
 
@@ -157,7 +158,7 @@ class UpdateFloorMap(TestCase):
         self.assertEqual(1, len(floor_map._rooms))
         room = floor_map._rooms[0]
 
-        font_24 = room.get_font(24)
+        font_24 = font_size(24)
 
         # Test room variable initialization
         self.assertEqual(room.label, "COMPANY")
@@ -234,17 +235,17 @@ class UpdateFloorMap(TestCase):
         )
 
         # Test word truncate
-        self.assertEqual(room.truncate_text("0000 0000"), "0000 000...")
-        self.assertEqual(room.truncate_text("0000 000"), "0000 ...")
-        self.assertEqual(room.truncate_text("0000"), "000...")
-        self.assertEqual(room.truncate_text("000"), "...")
-        self.assertEqual(room.truncate_text("0000 0000 ..."), "0000 000...")
-        self.assertEqual(room.truncate_text("0000 000 ..."), "0000 ...")
-        self.assertEqual(room.truncate_text("0000 000..."), "0000 ...")
-        self.assertEqual(room.truncate_text("0000 ..."), "000...")
-        self.assertEqual(room.truncate_text("000 ..."), "...")
-        self.assertEqual(room.truncate_text("000..."), "...")
-        self.assertEqual(room.truncate_text("..."), "...")
+        self.assertEqual(truncate_text("0000 0000"), "0000 000...")
+        self.assertEqual(truncate_text("0000 000"), "0000 ...")
+        self.assertEqual(truncate_text("0000"), "000...")
+        self.assertEqual(truncate_text("000"), "...")
+        self.assertEqual(truncate_text("0000 0000 ..."), "0000 000...")
+        self.assertEqual(truncate_text("0000 000 ..."), "0000 ...")
+        self.assertEqual(truncate_text("0000 000..."), "0000 ...")
+        self.assertEqual(truncate_text("0000 ..."), "000...")
+        self.assertEqual(truncate_text("000 ..."), "...")
+        self.assertEqual(truncate_text("000..."), "...")
+        self.assertEqual(truncate_text("..."), "...")
 
         # Test text bumping
         room._log__room_bump = {}

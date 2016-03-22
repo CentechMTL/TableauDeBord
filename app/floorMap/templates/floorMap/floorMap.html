@@ -19,6 +19,21 @@
 {% endblock %}
 
 {% block content %}
+    {% if isCentech %}
+    <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuCompany" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            {% trans "Actions on floor map" %}
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuCompany">
+            <li>
+                <a href="{% url 'floorMap:rental_create' %}">
+                    {% trans "Add new rental" %}
+                </a>
+            </li>
+        </ul>
+    </div>
+    {% endif %}
 
 <div class="row" align="center">
     <div class="col-sm-12">

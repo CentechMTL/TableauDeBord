@@ -169,45 +169,6 @@
                                     {% endwith %}
                                 </li>
                                 <hr>
-                            {% endif %}
-                            {% if isCentech %}
-                                <li>{% trans "ADMINISTRATION" %}</li>
-                                <li>
-                                    <a href="{% url 'founder:add' %}" style="text-decoration: none; color: black; font-size: 14px;">
-                                        <div class="dropdown-messages-box">
-                                            <i class="fa fa-users"></i> {% trans "Add new founder" %}
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{% url 'mentor:create' %}" style="text-decoration: none; color: black; font-size: 14px;">
-                                        <div class="dropdown-messages-box">
-                                            <i class="fa fa-graduation-cap"></i> {% trans "Add new mentor" %}
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{% url 'company:status_create' %}" style="text-decoration: none; color: black; font-size: 14px;">
-                                        <div class="dropdown-messages-box">
-                                            <i class="fa fa-tags"></i> {% trans "Add new status" %}
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{% url 'company:create' %}" style="text-decoration: none; color: black; font-size: 14px;">
-                                        <div class="dropdown-messages-box">
-                                            <i class="fa fa-university"></i> {% trans "Add new company" %}
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{% url 'floorMap:rental_create' %}" style="text-decoration: none; color: black; font-size: 14px;">
-                                        <div class="dropdown-messages-box">
-                                            <i class="fa fa-street-view"></i> {% trans "Add new rental" %}
-                                        </div>
-                                    </a>
-                                </li>
-                                <hr>
                         {% endif %}
                                 <li>{% trans "MY ACCOUNT" %}</li>
                                 {% if isCentech or isFounder or isMentor %}

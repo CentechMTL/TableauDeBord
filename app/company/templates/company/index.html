@@ -7,6 +7,12 @@
 
 {% block content %}
     <h1>{% trans "Centech Companies" %}</h1>
+    <a href="{% url 'company:create' %}" class="btn btn-primary btn-xs">
+        <i class="fa fa-plus"></i> {% trans "Add new company" %}
+    </a>
+    <a href="{% url 'company:status_create' %}" class="btn btn-primary btn-xs">
+        <i class="fa fa-plus"></i> {% trans "Add new status" %}
+    </a>
     <div class="panel panel-default">
         <div class="panel-body">
             <form action="" method="get">

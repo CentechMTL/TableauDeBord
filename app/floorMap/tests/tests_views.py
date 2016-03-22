@@ -11,7 +11,7 @@ from app.home.factories import StaffUserProfileFactory, \
 from app.company.factories import CompanyStatusFactory
 
 
-class FounderTests(TestCase):
+class FloorMapTest (TestCase):
 
     def setUp(self):
         settings.EMAIL_BACKEND = \

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-17 20:17+0000\n"
+"POT-Creation-Date: 2016-03-17 20:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -52,46 +52,40 @@ msgid "Comment"
 msgstr "Commentaire"
 
 #: app/kpi/templates/kpi/irl.html:25
-msgid "Basic principles observed and reported"
-msgstr ""
+msgid "Complete First-Pass Business Model Canvas"
+msgstr "Le premier canevas de modèle d'affaires est complété"
 
 #: app/kpi/templates/kpi/irl.html:26
-msgid "Technology concept and/or application formulated"
-msgstr ""
+msgid "Market size/competitive analysis"
+msgstr "Analyse de l'importance du marché et de la concurrence"
 
 #: app/kpi/templates/kpi/irl.html:27
-msgid ""
-"Analytical and experimental critical function and/or characteristic proof-of-"
-"concept"
-msgstr ""
+msgid "Problem/solution validation"
+msgstr "L'entreprise a confirmé que sa solution répond à un problème réel"
 
 #: app/kpi/templates/kpi/irl.html:28
-msgid "Component and/or breadboard validation in laboratory environment"
-msgstr ""
+msgid "Prototype Low fidelity MVP"
+msgstr "Prototype de basse fidélité (CMV)"
 
 #: app/kpi/templates/kpi/irl.html:29
-msgid "Component and/or breadboard validation in relevant environment"
-msgstr ""
+msgid "Validate product/market fit"
+msgstr "Le couple produit/marché a été validé"
 
 #: app/kpi/templates/kpi/irl.html:30
-msgid ""
-"System/subsystem model or prototype demonstration in a relevant environment "
-"(Ground or Space)"
-msgstr ""
+msgid "Validate revenue model (right side of canvas)"
+msgstr "Le modèle de revenu est validé (portion droite du canevas)"
 
 #: app/kpi/templates/kpi/irl.html:31
-msgid "System prototype demonstration in a space environment"
-msgstr ""
+msgid "Prototype High-Fidelity MVP"
+msgstr "Prototype de haute fidélité (CMV)"
 
 #: app/kpi/templates/kpi/irl.html:32
-msgid ""
-"Actual system completed and flight qualified through test and demonstration "
-"(Ground or Flight)"
-msgstr ""
+msgid "Validate value delivery (left side of canvas)"
+msgstr "La livraison de la valeur est validée (portion gauche du canevas)"
 
 #: app/kpi/templates/kpi/irl.html:33
-msgid "Actual system flight proven trhough successful mission operations"
-msgstr ""
+msgid "Identify and validate metrics that matter"
+msgstr "Les indicateurs de performance pertinents ont été identifiés et validés"
 
 #: app/kpi/templates/kpi/irl.html:46
 msgid "IRL of"

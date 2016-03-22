@@ -41,8 +41,8 @@
                     {% if "road_map" in list_menu %}
                         <a href="{% url 'home:maStartup' %}"><div><i class="fa fa-globe"></i> <span class="nav-label">{% trans "Road map" %}</span></div></a>
                     {% endif %}
-                    {% if "floor_plan" in list_menu %}
-                        <a href="{% url 'home:floorPlan' %}"><div><i class="fa fa-street-view "></i> <span class="nav-label">{% trans "Floor plan" %}</span></div></a>
+                    {% if "floorMap" in list_menu %}
+                        <a href="{% url 'floorMap:index' %}"><div><i class="fa fa-street-view "></i> <span class="nav-label">{% trans "Floor plan" %}</span></div></a>
                     {% endif %}
                     {% if "companies" in list_menu %}
                         <a href="{% url 'company:index' %}"><div><i class="fa fa-university"></i> <span class="nav-label">{% trans "Companies" %}</span></div></a>
@@ -201,7 +201,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{% url 'company:rental_create' %}" style="text-decoration: none; color: black; font-size: 14px;">
+                                    <a href="{% url 'floorMap:rental_create' %}" style="text-decoration: none; color: black; font-size: 14px;">
                                         <div class="dropdown-messages-box">
                                             <i class="fa fa-street-view"></i> {% trans "Add new rental" %}
                                         </div>

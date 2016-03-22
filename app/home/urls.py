@@ -36,9 +36,6 @@ urlpatterns = patterns(
     # Carte routiere du centech -iframe
     url(r'^maStartup$', views.maStartup, name='maStartup'),
 
-    # Floor plan page
-    url(r'^floorPlan$', views.floor_plan.as_view(), name='floorPlan'),
-
     # Stock in session the company selected in the main menu
     url(
         r'^setCompanyInSession/(?P<company_id>\d+)$',

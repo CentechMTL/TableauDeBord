@@ -4,14 +4,6 @@
 
 {% block title %}{% trans "Rental" %}{% endblock %}
 
-{% block extrahead %}
-    <link rel="stylesheet" href="{% static 'css/filteredSelectedMultiple.css' %}" />
-    <script src="{% static 'js/filteredSelectedMultiple.js' %}"></script>
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/redmond/jquery-ui.css" />
-    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-{% endblock %}
-
 {% block content %}
     <form enctype="multipart/form-data" method="post">{% csrf_token%}
         {% bootstrap_form form %}

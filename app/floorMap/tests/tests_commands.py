@@ -1,16 +1,17 @@
 # coding: utf-8
+
 from __future__ import division
 
-import os
 import datetime
+import os
 
 from django.conf import settings
 from django.core.management import call_command
 from django.test import TestCase
 
 from app.company.factories import CompanyFactory, CompanyStatusFactory
-from app.home.factories import RentFactory, RoomFactory, RoomTypeFactory
-from app.home.management.commands.floor_map.builder import FloorMapBuilder
+from app.floorMap.management.commands.scripts.builder import FloorMapBuilder
+from app.floorMap.factories import RentFactory, RoomFactory, RoomTypeFactory
 
 
 class UpdateFloorMap(TestCase):
@@ -37,7 +38,7 @@ class UpdateFloorMap(TestCase):
         self.room_3 = RoomFactory(type=self.room_type_3)
         self.room_4 = RoomFactory(type=self.room_type_4)
         call_command(
-            'updatefloormap',
+            'updateFloorMap',
             input=self.ImagePathIn,
             output=self.ImagePathOut
         )
@@ -52,7 +53,7 @@ class UpdateFloorMap(TestCase):
         # Rectangles
         self.room.coords = [0, 0, 100, 100]
         self.room.save()
-        call_command('updatefloormap', output=self.ImagePathOut)
+        call_command('updateFloorMap', output=self.ImagePathOut)
         self.assertTrue(os.path.isfile(self.ImagePathOut))
         os.remove(self.ImagePathOut)
 
@@ -60,7 +61,7 @@ class UpdateFloorMap(TestCase):
         self.room.coords = [0, 0, 100, 100, 200, 200, 300, 300, 0, 300]
         self.room.text_coords = [100, 200, 200, 300]
         self.room.save()
-        call_command('updatefloormap', output=self.ImagePathOut)
+        call_command('updateFloorMap', output=self.ImagePathOut)
         self.assertTrue(os.path.isfile(self.ImagePathOut))
         os.remove(self.ImagePathOut)
 
@@ -73,7 +74,7 @@ class UpdateFloorMap(TestCase):
         self.room.code = "C-0000"
         self.room.static_label = "Xyz Xyz"
         self.room.save()
-        call_command('updatefloormap', output=self.ImagePathOut)
+        call_command('updateFloorMap', output=self.ImagePathOut)
         self.assertTrue(os.path.isfile(self.ImagePathOut))
         os.remove(self.ImagePathOut)
 
@@ -81,7 +82,7 @@ class UpdateFloorMap(TestCase):
         self.room.static_label = ""
         self.room.code = ""
         self.room.save()
-        call_command('updatefloormap', output=self.ImagePathOut)
+        call_command('updateFloorMap', output=self.ImagePathOut)
         self.assertTrue(os.path.isfile(self.ImagePathOut))
         os.remove(self.ImagePathOut)
 
@@ -89,7 +90,7 @@ class UpdateFloorMap(TestCase):
         self.room.static_label = "Xyz Xyz"
         self.room.code = ""
         self.room.save()
-        call_command('updatefloormap', output=self.ImagePathOut)
+        call_command('updateFloorMap', output=self.ImagePathOut)
         self.assertTrue(os.path.isfile(self.ImagePathOut))
         os.remove(self.ImagePathOut)
 
@@ -112,7 +113,7 @@ class UpdateFloorMap(TestCase):
         self.rent.date_start = datetime.datetime.today() - time_diff
         self.rent.date_end = datetime.datetime.today() + time_diff
         self.rent.save()
-        call_command('updatefloormap', output=self.ImagePathOut)
+        call_command('updateFloorMap', output=self.ImagePathOut)
         self.assertTrue(os.path.isfile(self.ImagePathOut))
         os.remove(self.ImagePathOut)
 

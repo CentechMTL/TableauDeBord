@@ -10,3 +10,5 @@ media/user_profile/*
 env
 
 celerybeat.pid
+
+media/floor_map/floor_map.jpg

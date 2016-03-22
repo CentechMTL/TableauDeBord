@@ -7,6 +7,9 @@
 
 {% block content %}
     <h1>{% trans "Centech Founders" %}</h1>
+    <a href="{% url 'founder:add' %}" class="btn btn-primary btn-xs">
+        <i class="fa fa-plus"></i> {% trans "Add new founder" %}
+    </a>
     <div class="panel panel-default">
         <div class="panel-body">
             <form action="{% url 'founder:index' %}" method="get">

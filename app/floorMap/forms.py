@@ -27,7 +27,7 @@ class RentalForm(forms.ModelForm):
     )
 
     date_start = forms.DateField(
-        label=_('Start date'),
+        label=_(u"Start date"),
         required=True,
         input_formats=('%Y-%m-%d',),
         widget=forms.DateInput(
@@ -39,7 +39,7 @@ class RentalForm(forms.ModelForm):
     )
 
     date_end = forms.DateField(
-        label=_('End date'),
+        label=_(u"End date"),
         required=True,
         input_formats=('%Y-%m-%d',),
         widget=forms.DateInput(
@@ -56,7 +56,7 @@ class RentalForm(forms.ModelForm):
 
         if date_start > date_end:
             raise forms.ValidationError(
-                _("End date cannot be before the start date!"),
+                _(u"End date cannot be before the start date!"),
                 code='invalid'
             )
 
@@ -81,17 +81,15 @@ class RentalForm(forms.ModelForm):
 
             if len(lst_conflicting) > 1:
                 str_conflicts = " ".join([
-                    str_conflicts,
-                    str(_("and")),
-                    lst_conflicting[-1:][0]
+                    str_conflicts, "&", lst_conflicting[-1:][0]
                 ])
 
             raise forms.ValidationError({
                 'room': [forms.ValidationError(
-                    _("Room and date conflicts with existing rental(s) "
-                      "by: %(conflicting)s."),
+                    _(u"Room not available at specified date. "
+                      u"Conflicting companies: %(conflicts)s"),
                     code='invalid',
-                    params={'conflicting': str_conflicts}
+                    params={'conflicts': str_conflicts}
                 )]
             })
 

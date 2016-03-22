@@ -10,29 +10,37 @@ class RoomType(models.Model):
     # Data
     name = models.CharField(
         max_length=100,
-        verbose_name=_('Name')
+        verbose_name=_(u'Name')
     )
     bg_color = models.CharField(
         default="#FFFFFF",
         max_length=7,
-        verbose_name=_('Background color'),
-        help_text=_("Please use the following format: #FFFFFF")
+        verbose_name=_(u'Background color'),
+        help_text=_(
+            u"Please use the following format: {format}"
+        ).format(format="#FFFFFF")
     )
     alt_bg_color = models.CharField(
         blank=True,
         max_length=7,
-        verbose_name=_('Alternative background color'),
-        help_text=_("Used for type state change (e.g. occupied rental)"
-                    "<br />Please use the following format: #FFFFFF")
+        verbose_name=_(u'Alternative background color'),
+        help_text=u"{help_alt_bg}<br>{help_bg_color}".format(
+            help_alt_bg=_(
+                u"Used for type state change (e.g. occupied rental)"
+            ),
+            help_bg_color=_(
+                u"Please use the following format: {format}"
+            ).format(format="#FFFFFF")
+        )
     )
     description = models.TextField(
         blank=True,
         max_length=500,
-        verbose_name=_('Description')
+        verbose_name=_(u'Description')
     )
     is_rental = models.BooleanField(
         default=False,
-        verbose_name=_('Is rental')
+        verbose_name=_(u'Is rental')
     )
 
     def __unicode__(self):
@@ -41,7 +49,7 @@ class RoomType(models.Model):
 
 class Room(models.Model):
     # Data
-    type = models.ForeignKey(RoomType, verbose_name=_('Type'))
+    type = models.ForeignKey(RoomType, verbose_name=_(u'Type'))
 
     """
     CommaSeparatedIntegerField:
@@ -57,25 +65,31 @@ class Room(models.Model):
     """
     coords = models.CommaSeparatedIntegerField(
         max_length=2000,
-        verbose_name=_('Coordinates'),
-        help_text=_(
-            "For a rectangle, please use the following format: "
-            "<em>x1,y1,x2,y2</em>.<br>"
-            "For a polygon, please use the following format: "
-            "<em>x1,y1,...,xn,yn</em>."
+        verbose_name=_(u'Coordinates'),
+        help_text=u"<b>{shape_rect}:</b> {format_rect}<br />"
+                  u"<b>{shape_poly}:</b> {format_poly}".format(
+            shape_rect=_(u"Rectangle"),
+            shape_poly=_(u"Polygon"),
+            format_rect=_(
+                u"Please use the following format: {format}"
+            ).format(format=u"<em>x1,y1,x2,y2</em>"),
+            format_poly=_(
+                u"Please use the following format: {format}"
+            ).format(format=u"<em>x1,y1,...,xn,yn</em>")
         )
     )
 
     code = models.CharField(
         max_length=10,
-        verbose_name=_('Code')
+        verbose_name=_(u'Room code')
     )
     static_label = models.CharField(
         blank=True,
         max_length=100,
-        verbose_name=_('Label'),
-        help_text=_(
-            "<b>Warning:</b> Will be overwritten by rental owner, if any."
+        verbose_name=_(u'Label'),
+        help_text=u"<b>{warning}:</b> {warning_message}".format(
+            warning=_(u"Warning"),
+            warning_message=_(u"Will be overwritten by rental owner name.")
         )
     )
 
@@ -83,12 +97,12 @@ class Room(models.Model):
         blank=True,
         null=True,
         max_length=50,
-        verbose_name=_('Text area coordinates'),
-        help_text=_(
-            "Area where the label should be displayed "
-            "(defaults to room coordinates)<br>"
-            "Please use the following format: "
-            "<em>x1,y1,x2,y2</em>. <b>Rectangle only!</b>"
+        verbose_name=_(u'Text area coordinates'),
+        help_text=u"{description}<br />{format}. <b>{restriction}</b>".format(
+            description=_(u"Area where the label will be displayed "
+                          u"(defaults to room coordinates)"),
+            format=u"<em>x1,y1,x2,y2</em>",
+            restriction=_(u"Rectangle only!")
         )
     )
 
@@ -127,17 +141,17 @@ class Room(models.Model):
 class Rent(models.Model):
     # Identifiers
     room = models.ForeignKey(
-        Room, verbose_name=_('Room'),
+        Room, verbose_name=_(u'Room'),
         related_name='rentals'
     )
     company = models.ForeignKey(
-        'company.Company', verbose_name=_('Company'),
+        'company.Company', verbose_name=_(u'Company'),
         related_name='rentals'
     )
 
     # Data
-    date_start = models.DateField(verbose_name=_('Start date'))
-    date_end = models.DateField(verbose_name=_('End date'))
+    date_start = models.DateField(verbose_name=_(u'Start date'))
+    date_end = models.DateField(verbose_name=_(u'End date'))
 
     def __unicode__(self):
         return "_".join((

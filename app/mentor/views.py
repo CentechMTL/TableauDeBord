@@ -17,6 +17,8 @@ from django.conf import settings
 import random
 from django.core.mail import EmailMessage
 
+import random
+
 
 class MentorCreate(generic.CreateView):
     model = User

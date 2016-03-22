@@ -12,6 +12,19 @@ class RoomType(models.Model):
         max_length=100,
         verbose_name=_('Name')
     )
+    bg_color = models.CharField(
+        default="#FFFFFF",
+        max_length=7,
+        verbose_name=_('Background color'),
+        help_text=_("Please use the following format: #FFFFFF")
+    )
+    alt_bg_color = models.CharField(
+        blank=True,
+        max_length=7,
+        verbose_name=_('Alternative background color'),
+        help_text=_("Used for type state change (e.g. occupied rental)"
+                    "<br />Please use the following format: #FFFFFF")
+    )
     description = models.CharField(
         blank=True,
         max_length="100",

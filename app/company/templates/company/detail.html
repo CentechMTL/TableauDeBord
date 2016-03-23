@@ -129,7 +129,7 @@
                 {% endfor %}
                 </div>
             {% else %}
-                <p>{% trans "No founders exist." %}</p>
+                <p>{% trans "No founders found" %}</p>
             {% endif %}
         </div>
     </div>
@@ -158,7 +158,7 @@
                     {% endfor %}
                 </div>
             {% else %}
-                <p>{% trans "No mentors exist." %}</p>
+                <p>{% trans "No mentors found" %}</p>
             {% endif %}
         </div>
     </div>
@@ -194,7 +194,7 @@
                 {% endfor %}
             </table>
         {% else %}
-            <p>{% trans "No room rentals found." %}</p>
+            <p>{% trans "No room rentals found" %}</p>
         {% endif %}
         {% if isCentech == True %}
             <p><a href="{% url 'floorMap:rental_create' company.id %}" class="btn btn-primary" style="margin:0">{% trans "Add new rental" %}</a></p>

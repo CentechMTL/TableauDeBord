@@ -220,7 +220,7 @@ class CompanyForm(MiniCompanyForm):
     )
 
     endOfIncubation = forms.DateField(
-        label=_('Incubation end on'),
+        label=_('End date'),
         required=False,
         input_formats=('%Y-%m-%d',),
         widget=forms.DateInput(

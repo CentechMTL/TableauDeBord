@@ -206,7 +206,8 @@ LOCALE_PATHS = (
     'app/businessCanvas/locale/',
     'app/finance/locale/',
     'app/valuePropositionCanvas/locale/',
-    'app/kanboard/locale/'
+    'app/kanboard/locale/',
+    'app/floorMap/locale/',
 )
 
 

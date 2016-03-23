@@ -43,7 +43,7 @@ class BusinessCanvasElement(models.Model):
     )
     updated = models.DateTimeField(
         auto_now=True,
-        verbose_name=_('Date of updated')
+        verbose_name=_('Update date')
     )
     type = models.CharField(
         max_length=20,

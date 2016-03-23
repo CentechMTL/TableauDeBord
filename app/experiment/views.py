@@ -56,6 +56,7 @@ class CustomerExperimentList(generic.ListView):
             if founder.user.id == self.request.user.id:
                 isFounder = True
         context['company_id'] = self.args[0]
+        context['company'] = Company.objects.get(id=self.args[0])
         context['is_founder'] = isFounder
         return context
 

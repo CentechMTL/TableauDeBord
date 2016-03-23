@@ -2,7 +2,9 @@
 <!-- Load internationalisation utils-->
 {% load i18n %}
 {% load staticfiles %}
-{% block title %}{% trans "Customer Experiments" %}{% endblock %}
+
+{% block title %}{{company}} - {% trans "Customer Experiments" %}{% endblock %}
+
 {% block content %}
     <h1>{% trans "Customer Experiments" %}</h1>
     <img style="margin: 20px;" src="{% static 'img/experiment.png' %}" width=100%>

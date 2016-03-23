@@ -197,7 +197,7 @@
             <p>{% trans "No room rentals found." %}</p>
         {% endif %}
         {% if isCentech == True %}
-            <p><a href="{% url 'floorMap:rental_create' company.id %}" class="btn btn-primary" style="margin:0">New rental</a></p>
+            <p><a href="{% url 'floorMap:rental_create' company.id %}" class="btn btn-primary" style="margin:0">{% trans "Add new rental" %}</a></p>
         {% endif %}
         </div>
     </div>

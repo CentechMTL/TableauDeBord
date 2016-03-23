@@ -208,7 +208,7 @@ class CompanyForm(MiniCompanyForm):
     )
 
     incubated_on = forms.DateField(
-        label=_('Incubated on'),
+        label=_('Start date'),
         required=False,
         input_formats=('%Y-%m-%d',),
         widget=forms.DateInput(

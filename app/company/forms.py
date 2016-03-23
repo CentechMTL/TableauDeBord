@@ -102,7 +102,7 @@ class MiniCompanyForm(forms.ModelForm):
     )
     name.widget.attrs.update(
         {
-            'placeholder': _(u'Name of the company')
+            'placeholder': _(u'Company name')
         }
     )
 

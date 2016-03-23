@@ -237,6 +237,7 @@ class BusinessCanvasElementList(generic.ListView):
                 is_founder = True
 
         context['company_id'] = self.args[0]
+        context['company'] = Company.objects.get(id=self.args[0])
         context['is_founder'] = is_founder
 
         company = Company.objects.get(id=self.args[0])
@@ -368,6 +369,7 @@ class BusinessCanvasElementArchivedList(generic.ListView):
             if founder.user.id == self.request.user.id:
                 is_founder = True
         context['company_id'] = archive.company.id
+        context['company'] = Company.objects.get(id=archive.company.id)
         context['is_founder'] = is_founder
 
         context['current_archive'] = archive

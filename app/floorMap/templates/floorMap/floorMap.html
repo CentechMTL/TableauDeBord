@@ -2,7 +2,7 @@
 <!-- Load internationalisation utils-->
 {% load i18n staticfiles floorMap_extras %}
 
-{% block title %}{{app.site.entreprise.name}} | {% trans "Floor plan" %}{% endblock %}
+{% block title %}{% trans "Floor plan" %}{% endblock %}
 
 {% block extrahead %}
     <link href="{% static 'css/floorMap.css' %}" rel="stylesheet">

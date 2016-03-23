@@ -3,6 +3,8 @@
 {% load i18n %}
 {% load staticfiles %}
 
+{% block title %}{{company}} - {% trans "Business canvas archived" %}{% endblock %}
+
 {% block extrahead %}
 <!-- Main CSS --->
 <link rel="stylesheet" href="{% static 'businessCanvas/css/style.css' %}">
@@ -10,8 +12,6 @@
 <script type="text/javascript" src="{% static 'businessCanvas/js/getDetail.js' %}"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 {% endblock %}
-
-{% block title %}Business Model Canvas{% endblock %}
 
 {% block content %}
 <!--TODO check for autogenerate the table-->

@@ -55,9 +55,10 @@ class Mentor(UserProfile):
 
     def get_type(self):
         if self.type:
-                return 'Mentor ' + MENTOR_TYPE_CHOICES[int(self.type)-1][1]
+                return _('Mentor') + ' ' + \
+                       MENTOR_TYPE_CHOICES[int(self.type)-1][1]
         else:
-                return 'Mentor'
+                return _('Mentor')
 
     def image_thumb(self):
         return '<img src="/media/%s" width="100" height="100" />' \

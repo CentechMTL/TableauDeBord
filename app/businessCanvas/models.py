@@ -86,7 +86,7 @@ class Archive(models.Model):
     elements = models.ManyToManyField(
         BusinessCanvasElement,
         blank=True,
-        verbose_name=_('Elements of the archive')
+        verbose_name=_('Archive elements')
     )
 
     def __unicode__(self):

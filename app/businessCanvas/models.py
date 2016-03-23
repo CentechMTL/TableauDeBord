@@ -21,7 +21,7 @@ BUSINESS_CANVAS_TYPE_CHOICES = (
 
 
 # Element of the business canvas
-# Can be disactivated if it's archived
+# Can be deactivated if it's archived
 class BusinessCanvasElement(models.Model):
     class Meta:
         verbose_name = _('Business canvas element')
@@ -59,7 +59,7 @@ class BusinessCanvasElement(models.Model):
     # True -> Archived | False -> Current use
     disactivated = models.BooleanField(
         default=False,
-        verbose_name=_('Disactivated')
+        verbose_name=_('Deactivated')
     )
 
     def __unicode__(self):

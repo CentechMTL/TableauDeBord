@@ -1,7 +1,9 @@
 {% extends "dashboard.html" %}
 <!-- Load internationalisation utils-->
 {% load i18n %}
+
 {% block title %}{{app.site.entreprise.name}} | {% trans "No Access" %}{% endblock %}
+
 {% block content %}
 <!--TODO make beautiful-->
                     <h1>{% trans "Sorry! But you don't have the permissions to access this page" %}</h1>

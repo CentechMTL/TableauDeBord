@@ -1,7 +1,9 @@
 {% extends "landing_base.html" %}
 <!-- Load internationalisation utils-->
 {% load i18n %}
-{% block title %}{{app.site.entreprise.name}}{% endblock %}
+
+{% block title %}{% trans "Home" %}{% endblock %}
+
 {% block content %}
     <div class="intro-header">
         <div class="container">

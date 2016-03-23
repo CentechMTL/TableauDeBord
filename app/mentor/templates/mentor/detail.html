@@ -1,6 +1,9 @@
 {% extends "dashboard.html" %}
 <!-- Load internationalisation utils-->
 {% load i18n %}
+
+{% block title %}{{mentor.user.first_name}} {{mentor.user.last_name}} - {% trans "Details" %}{% endblock %}
+
 {% block content %}
     {% if isCentech %}
     <div class="dropdown">

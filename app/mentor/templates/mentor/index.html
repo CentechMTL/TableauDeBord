@@ -2,7 +2,9 @@
 <!-- Load internationalisation utils-->
 {% load i18n %}
 {% load bootstrap3 %}
+
 {% block title %}{% trans "Centech Mentors" %}{% endblock %}
+
 {% block content %}
     <h1>{% trans "Centech Mentors" %}</h1>
     <a href="{% url 'mentor:create' %}" class="btn btn-primary btn-xs">

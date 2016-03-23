@@ -39,7 +39,7 @@ class BusinessCanvasElement(models.Model):
     date = models.DateTimeField(
         auto_now_add=True,
         auto_now=False,
-        verbose_name=_('Date of creation')
+        verbose_name=_('Creation date')
     )
     updated = models.DateTimeField(
         auto_now=True,

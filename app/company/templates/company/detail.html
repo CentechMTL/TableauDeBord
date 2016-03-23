@@ -5,6 +5,8 @@
 <!-- Load internationalisation utils-->
 {% load i18n %}
 
+{% block title %}{{ company }} - {% trans "Details" %}{% endblock %}
+
 {% block extrahead %}
     <!-- PROGRESS_BAR CSS -->
     <link rel="stylesheet" href="{% static 'company/css/progress_bar.css' %}">

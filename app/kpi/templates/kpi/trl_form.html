@@ -2,7 +2,9 @@
 <!-- Load internationalisation utils-->
 {% load i18n %}
 {% load staticfiles %}
+
 {% block title %}{% trans "TRL" %}{% endblock %}
+
 {% block content %}
 {% if isCentech %}
     <h1>{% trans "New TRL for" %} {{company.name}}</h1>

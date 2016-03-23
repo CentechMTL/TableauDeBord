@@ -2,6 +2,9 @@
 <!-- Load internationalisation utils-->
 {% load i18n %}
 {% load staticfiles %}
+
+{% block title %}{{company}} - {% trans "Business canvas" %}{% endblock %}
+
 {% block extrahead %}
 
 <!-- JS for use JQUERY --->
@@ -121,9 +124,8 @@
         });
 	});
 </script>
-
 {% endblock %}
-{% block title %}Business Model Canvas{% endblock %}
+
 {% block content %}
 <!--TODO Check for autogenerate the table-->
 <div class="row">

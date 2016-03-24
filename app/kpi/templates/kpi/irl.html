@@ -134,7 +134,7 @@
         </div>
     </div>
     {% else %}
-        <p>{% trans "No one IRL for the moment." %}</p>
+        <p>{% trans "No IRLs found" %}</p>
     {% endif %}
     {% if isCentech %}
     <a href="{% url 'kpi:irl_add' company.id %}">{% trans "New IRL" %}</a>

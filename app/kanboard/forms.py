@@ -46,7 +46,7 @@ class CardForm(forms.ModelForm):
         label=_('Title*'),
         required=True,
     )
-    title.widget.attrs.update({'placeholder': _(u'Titre'), 'id': 'title'})
+    title.widget.attrs.update({'placeholder': _(u'Title'), 'id': 'title'})
 
     comment = forms.CharField(
         label=_('Comment'),

@@ -85,7 +85,7 @@ class CompanyStatusCreate(generic.CreateView):
         messages.add_message(
             self.request,
             messages.SUCCESS,
-            _(u'This status has been added.')
+            _(u'The status has been added.')
         )
         return reverse_lazy("company:index")
 
@@ -108,7 +108,7 @@ class CompanyCreate(generic.CreateView):
         messages.add_message(
             self.request,
             messages.SUCCESS,
-            _(u'This company has been added.')
+            _(u'The company has been added.')
         )
         return reverse_lazy("company:index")
 

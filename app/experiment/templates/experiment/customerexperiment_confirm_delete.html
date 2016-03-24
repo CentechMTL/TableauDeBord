@@ -13,7 +13,7 @@
 
     <!--TODO Faire une vrai présentation de l'experimentation, en détail-->
     <p>{% trans "Hypothesis"%} : {{ experiment.hypothesis }} <br>
-        {% trans "create on" %} : {{ experiment.dateStart}}</p>
+        {% trans "Created on" %} : {{ experiment.dateStart}}</p>
 
     <form method="post" action="">
        {% csrf_token %}

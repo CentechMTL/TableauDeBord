@@ -47,7 +47,7 @@ class CustomerExperiment(models.Model):
     )
     test_subject_description = models.TextField(
         max_length=512,
-        verbose_name=_('Description of the subject test')
+        verbose_name=_('Test description')
     )
     conclusions = models.TextField(
         max_length=512,

@@ -43,7 +43,7 @@ class CustomerExperiment(models.Model):
     )
     test_subject_count = models.PositiveIntegerField(
         default=0,
-        verbose_name=_('Number of subject for the test')
+        verbose_name=_('Number of test participants')
     )
     test_subject_description = models.TextField(
         max_length=512,

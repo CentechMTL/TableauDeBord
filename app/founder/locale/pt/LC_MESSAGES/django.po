@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-23 13:44-0400\n"
-"PO-Revision-Date: 2016-03-22 16:23-0400\n"
+"POT-Creation-Date: 2016-03-29 12:12-0400\n"
+"PO-Revision-Date: 2016-03-24 14:34-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pt_BR\n"
@@ -71,7 +71,9 @@ msgid "Description"
 msgstr "Description"
 
 #: .\app\founder\forms.py:145
-msgid "Write here a brief summary of your skills and your career."
+#, fuzzy
+#| msgid "Write here a brief summary of your skills and your career."
+msgid "Write here a brief summary of your skills and career."
 msgstr "Escreva aqui um breve sumário de suas competências e de sua carreira."
 
 #: .\app\founder\forms.py:153
@@ -122,7 +124,9 @@ msgid "Companies"
 msgstr "Empresas"
 
 #: .\app\founder\templates\founder\detail.html:99
-msgid "No companies exist."
+#, fuzzy
+#| msgid "No companies exist."
+msgid "No companies found"
 msgstr "Não há empresas existentes."
 
 #: .\app\founder\templates\founder\founder_form.html:8
@@ -145,7 +149,7 @@ msgstr "Fundadores da UCS"
 #: .\app\founder\templates\founder\index.html:11
 #, fuzzy
 #| msgid "New founder"
-msgid "Add new founder"
+msgid "New founder"
 msgstr "Novo fundador"
 
 #: .\app\founder\templates\founder\index.html:20
@@ -162,8 +166,16 @@ msgstr "Anterior"
 msgid "Next"
 msgstr "Próximo"
 
+#: .\app\founder\templates\founder\index.html:77
+#, fuzzy
+#| msgid "Centech Founders"
+msgid "Founder"
+msgstr "Fundadores da UCS"
+
 #: .\app\founder\templates\founder\index.html:83
-msgid "No founders exist."
+#, fuzzy
+#| msgid "No founders exist."
+msgid "No founders found"
 msgstr "Não há fundadores."
 
 #~ msgid "First name"

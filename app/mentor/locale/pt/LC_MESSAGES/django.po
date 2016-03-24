@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-23 13:44-0400\n"
-"PO-Revision-Date: 2016-03-22 16:23-0400\n"
+"POT-Creation-Date: 2016-03-29 12:12-0400\n"
+"PO-Revision-Date: 2016-03-24 14:34-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pt_BR\n"
@@ -99,6 +99,10 @@ msgstr "Tipo"
 msgid "URL"
 msgstr "URL"
 
+#: .\app\mentor\models.py:58 .\app\mentor\models.py:61
+msgid "Mentor"
+msgstr ""
+
 #: .\app\mentor\templates\mentor\detail.html:5
 msgid "Details"
 msgstr ""
@@ -122,7 +126,9 @@ msgid "Companies"
 msgstr "Empresas"
 
 #: .\app\mentor\templates\mentor\detail.html:105
-msgid "No companies exist."
+#, fuzzy
+#| msgid "No companies exist."
+msgid "No companies found"
 msgstr "Nenhuma empresa existe."
 
 #: .\app\mentor\templates\mentor\index.html:6
@@ -133,7 +139,7 @@ msgstr "Mentores da ETS"
 #: .\app\mentor\templates\mentor\index.html:11
 #, fuzzy
 #| msgid "New mentor"
-msgid "Add new mentor"
+msgid "New mentor"
 msgstr "Novo mentor"
 
 #: .\app\mentor\templates\mentor\index.html:20
@@ -143,7 +149,9 @@ msgid "Search"
 msgstr "Procurar por nome"
 
 #: .\app\mentor\templates\mentor\index.html:48
-msgid "No mentors exist."
+#, fuzzy
+#| msgid "No mentors exist."
+msgid "No mentors found"
 msgstr "Nenhum mentor existe"
 
 #: .\app\mentor\templates\mentor\mentor_form.html:8

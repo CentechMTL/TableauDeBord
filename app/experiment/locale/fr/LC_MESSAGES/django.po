@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-23 13:44-0400\n"
-"PO-Revision-Date: 2016-03-22 16:23-0400\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2016-03-29 12:12-0400\n"
+"PO-Revision-Date: 2016-03-29 11:22-0400\n"
+"Last-Translator: Nicholas Savard\n"
 "Language-Team: \n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -41,15 +41,15 @@ msgid "Validation"
 msgstr "Validation"
 
 #: .\app\experiment\models.py:42
-msgid "Description of the experiment"
-msgstr "Description de l'expérimentation"
+msgid "Experiment description"
+msgstr "Description de l'expérience"
 
 #: .\app\experiment\models.py:46
-msgid "Number of subject for the test"
-msgstr "Nombre de sujet pour le test"
+msgid "Number of test participants"
+msgstr "Nombre de participants pour le test"
 
 #: .\app\experiment\models.py:50
-msgid "Description of the subject test"
+msgid "Test description"
 msgstr "Description du test"
 
 #: .\app\experiment\models.py:55
@@ -57,24 +57,22 @@ msgid "Conclusion"
 msgstr "Conclusion"
 
 #: .\app\experiment\templates\experiment\customerexperiment_confirm_delete.html:7
-#, fuzzy
-#| msgid "New Experiment"
 msgid "Delete experiment"
-msgstr "Nouvelle expérimentation"
+msgstr "Supprimer expérience"
 
 #: .\app\experiment\templates\experiment\customerexperiment_confirm_delete.html:10
 #: .\app\experiment\templates\experiment\customerexperiment_form.html:8
 #: .\app\experiment\templates\experiment\customerexperiment_form.html:11
 msgid "Experiment"
-msgstr "Experimentation"
+msgstr "Expérience"
 
 #: .\app\experiment\templates\experiment\customerexperiment_confirm_delete.html:12
-msgid "Are you sure you want to delete this experiment ?"
-msgstr "Êtes-vous sûr de vouloir supprimer cette expérimentation ?"
+msgid "Are you sure you want to delete this experiment?"
+msgstr "Êtes-vous sûr de vouloir supprimer cette expérience?"
 
 #: .\app\experiment\templates\experiment\customerexperiment_confirm_delete.html:16
-msgid "create on"
-msgstr "créé le"
+msgid "Created on"
+msgstr "Créé le"
 
 #: .\app\experiment\templates\experiment\customerexperiment_confirm_delete.html:20
 #: .\app\experiment\templates\experiment\customerexperiment_list.html:21
@@ -92,7 +90,9 @@ msgstr "Enregistrer"
 
 #: .\app\experiment\templates\experiment\customerexperiment_list.html:6
 #: .\app\experiment\templates\experiment\customerexperiment_list.html:9
-msgid "Customer Experiments"
+#, fuzzy
+#| msgid "Customer Experiments"
+msgid "Customer Experimentation"
 msgstr "Expérimentation clientèle"
 
 #: .\app\experiment\templates\experiment\customerexperiment_list.html:16
@@ -114,4 +114,13 @@ msgstr "Modifier"
 
 #: .\app\experiment\templates\experiment\customerexperiment_list.html:39
 msgid "New Experiment"
-msgstr "Nouvelle expérimentation"
+msgstr "Nouvelle expérience"
+
+#~ msgid "Description of the experiment"
+#~ msgstr "Description de l'expérimentation"
+
+#~ msgid "Number of subject for the test"
+#~ msgstr "Nombre de sujet pour le test"
+
+#~ msgid "Description of the subject test"
+#~ msgstr "Description du test"

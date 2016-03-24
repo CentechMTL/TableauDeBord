@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-23 13:44-0400\n"
-"PO-Revision-Date: 2016-03-23 13:50-0400\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2016-03-29 12:12-0400\n"
+"PO-Revision-Date: 2016-03-24 14:34-0400\n"
+"Last-Translator: Nicholas Savard\n"
 "Language-Team: \n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -18,36 +18,36 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 1.8.7\n"
 
-#: .\app\floorMap\forms.py:17 .\app\floorMap\models.py:148
+#: .\app\floorMap\forms.py:18 .\app\floorMap\models.py:148
 #: .\app\floorMap\templates\rental\rent_confirm_delete.html:33
 msgid "Company"
 msgstr "Compagnie"
 
-#: .\app\floorMap\forms.py:24 .\app\floorMap\models.py:84
+#: .\app\floorMap\forms.py:25 .\app\floorMap\models.py:84
 msgid "Room code"
 msgstr "Numéro du local"
 
-#: .\app\floorMap\forms.py:30 .\app\floorMap\models.py:153
+#: .\app\floorMap\forms.py:31 .\app\floorMap\models.py:153
 #: .\app\floorMap\templates\rental\rent_confirm_delete.html:25
 msgid "Start date"
 msgstr "Date de début"
 
-#: .\app\floorMap\forms.py:42 .\app\floorMap\models.py:154
+#: .\app\floorMap\forms.py:43 .\app\floorMap\models.py:154
 #: .\app\floorMap\templates\rental\rent_confirm_delete.html:29
 msgid "End date"
 msgstr "Date de fin"
 
-#: .\app\floorMap\forms.py:59
+#: .\app\floorMap\forms.py:60
 msgid "End date cannot be before the start date!"
 msgstr "La date de fin ne peut pas être avant la date de début!"
 
+#: .\app\floorMap\forms.py:88
+msgid "Room not available at specified date."
+msgstr "Le local n'est pas disponible à la date spécifiée."
+
 #: .\app\floorMap\forms.py:89
-#, python-format
-msgid ""
-"Room not available at specified date. Conflicting companies: %(conflicts)s"
-msgstr ""
-"Le local n'est pas disponible à la date spécifiée. Compagnies en conflit: "
-"%(conflicts)s"
+msgid "Conflicts with"
+msgstr "Conflits avec"
 
 #: .\app\floorMap\models.py:13
 msgid "Name"
@@ -127,6 +127,7 @@ msgid "Room"
 msgstr "Local"
 
 #: .\app\floorMap\templates\floorMap\floorMap.html:5
+#: .\app\floorMap\templates\floorMap\floorMap.html:40
 msgid "Floor plan"
 msgstr "Plan d'étage"
 
@@ -135,12 +136,12 @@ msgid "Actions on floor map"
 msgstr "Actions sur plan d'étage"
 
 #: .\app\floorMap\templates\floorMap\floorMap.html:31
-msgid "Add new rental"
-msgstr "Ajouter une nouvelle location"
+msgid "New rental"
+msgstr "Nouvelle location"
 
 #: .\app\floorMap\templates\rental\rent_confirm_delete.html:5
 msgid "Delete rental"
-msgstr "Supprimer la location"
+msgstr "Supprimer location"
 
 #: .\app\floorMap\templates\rental\rent_confirm_delete.html:8
 #: .\app\floorMap\templates\rental\rent_form.html:5

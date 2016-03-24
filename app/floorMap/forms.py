@@ -2,6 +2,7 @@
 
 from django import forms
 from django.db.models import Q
+from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 
 from app.company.models import Company
@@ -68,28 +69,28 @@ class RentalForm(forms.ModelForm):
         if ('room' and 'date_start' and 'date_end') not in self.cleaned_data:
             return self.cleaned_data
 
-        lst_conflicting = []
+        lst_room_conflicts = self.conflicts()
 
-        for rent in self.conflicts():
-            lst_conflicting.append(rent.company.name)
+        if lst_room_conflicts:
+            conflict_html_list = ""
 
-        if lst_conflicting:
-            str_conflicts = lst_conflicting[0]
-
-            for name in lst_conflicting[1:-1]:
-                str_conflicts = ", ".join([str_conflicts, name])
-
-            if len(lst_conflicting) > 1:
-                str_conflicts = " ".join([
-                    str_conflicts, "&", lst_conflicting[-1:][0]
-                ])
+            for rent in self.conflicts():
+                conflict_html_list += mark_safe(
+                    "<li>" + rent.company.name + "</li>"
+                )
 
             raise forms.ValidationError({
                 'room': [forms.ValidationError(
-                    _(u"Room not available at specified date. "
-                      u"Conflicting companies: %(conflicts)s"),
-                    code='invalid',
-                    params={'conflicts': str_conflicts}
+                    mark_safe(
+                        u"{error_message} {lst_conflict_message} :<br>"
+                        u"<ul>{lst_conflict}</ul>".format(
+                            error_message=_(
+                                u"Room not available at specified date."),
+                            lst_conflict_message=_(u"Conflicts with"),
+                            lst_conflict=conflict_html_list
+                        )
+                    ),
+                    code='invalid'
                 )]
             })
 

@@ -1,5 +1,6 @@
 # coding: utf-8
 
+import os
 from ast import literal_eval
 
 from django.core.management.base import BaseCommand
@@ -14,12 +15,16 @@ class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument(
             '--input',
-            default=False,
+            default=os.path.join(
+                settings.MEDIA_ROOT, "floor_map", "floor_map_base.jpg"
+            ),
             help='Input filename'
         )
         parser.add_argument(
             '--output',
-            default=False,
+            default=os.path.join(
+                settings.MEDIA_ROOT, "floor_map", "floor_map.jpg"
+            ),
             help='Output filename'
         )
 

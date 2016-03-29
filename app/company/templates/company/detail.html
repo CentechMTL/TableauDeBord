@@ -60,9 +60,9 @@
                 <dd>{{ company.companyStatus }}</dd>
 
             {% if company.incubated_on and company.endOfIncubation %}
-                <dt>{% trans "Begin date of phase" context "20 characters max" %} :</dt>
+                <dt>{% trans "Start date" context "20 characters max" %} :</dt>
                 <dd>{{ company.incubated_on }}</dd>
-                <dt>{% trans "End date of phase" context "20 characters max" %} :</dt>
+                <dt>{% trans "End date" context "20 characters max" %} :</dt>
                 <dd>{{ company.endOfIncubation }}</dd>
             {% endif %}
 
@@ -88,7 +88,7 @@
     </div>
     {% if company.description != "" %}
     <div class="panel panel-default">
-        <div class="panel-heading"><h3>{% trans "About" %}</h3></div>
+        <div class="panel-heading"><h3>{% trans "Value proposition" %}</h3></div>
         <div class="panel-body text-justify">
             {{ company.description }}
         </div>
@@ -129,7 +129,7 @@
                 {% endfor %}
                 </div>
             {% else %}
-                <p>{% trans "No founders exist." %}</p>
+                <p>{% trans "No founders found" %}</p>
             {% endif %}
         </div>
     </div>
@@ -158,7 +158,7 @@
                     {% endfor %}
                 </div>
             {% else %}
-                <p>{% trans "No mentors exist." %}</p>
+                <p>{% trans "No mentors found" %}</p>
             {% endif %}
         </div>
     </div>
@@ -194,10 +194,10 @@
                 {% endfor %}
             </table>
         {% else %}
-            <p>{% trans "No room rentals found." %}</p>
+            <p>{% trans "No room rentals found" %}</p>
         {% endif %}
         {% if isCentech == True %}
-            <p><a href="{% url 'floorMap:rental_create' company.id %}" class="btn btn-primary" style="margin:0">{% trans "Add new rental" %}</a></p>
+            <p><a href="{% url 'floorMap:rental_create' company.id %}" class="btn btn-primary" style="margin:0">{% trans "New rental" %}</a></p>
         {% endif %}
         </div>
     </div>

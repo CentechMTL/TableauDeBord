@@ -39,15 +39,15 @@ class CustomerExperiment(models.Model):
 
     experiment_description = models.TextField(
         max_length=1024,
-        verbose_name=_('Description of the experiment')
+        verbose_name=_('Experiment description')
     )
     test_subject_count = models.PositiveIntegerField(
         default=0,
-        verbose_name=_('Number of subject for the test')
+        verbose_name=_('Number of test participants')
     )
     test_subject_description = models.TextField(
         max_length=512,
-        verbose_name=_('Description of the subject test')
+        verbose_name=_('Test description')
     )
     conclusions = models.TextField(
         max_length=512,

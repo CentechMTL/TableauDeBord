@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-23 13:44-0400\n"
-"PO-Revision-Date: 2016-03-22 16:23-0400\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2016-03-29 12:12-0400\n"
+"PO-Revision-Date: 2016-03-24 14:34-0400\n"
+"Last-Translator: Nicholas Savard\n"
 "Language-Team: \n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -53,7 +53,7 @@ msgstr "Commentaire"
 
 #: .\app\kpi\templates\kpi\irl.html:7
 msgid "IRLs"
-msgstr ""
+msgstr "IRLs"
 
 #: .\app\kpi\templates\kpi\irl.html:25
 msgid "Complete First-Pass Business Model Canvas"
@@ -119,26 +119,24 @@ msgid "Delete"
 msgstr "Supprimer"
 
 #: .\app\kpi\templates\kpi\irl.html:137
-msgid "No one IRL for the moment."
-msgstr "Aucun IRL"
+msgid "No IRLs found"
+msgstr "Aucun IRL trouvé"
 
 #: .\app\kpi\templates\kpi\irl.html:140
 msgid "New IRL"
 msgstr "Nouvel IRL"
 
 #: .\app\kpi\templates\kpi\irl_confirm_delete.html:7
-#, fuzzy
-#| msgid "Delete"
 msgid "Delete IRL"
-msgstr "Supprimer"
+msgstr "Supprimer IRL"
 
 #: .\app\kpi\templates\kpi\irl_confirm_delete.html:11
-msgid "Are you sure you want to delete this IRL ?"
-msgstr "Etes-vous sûr de vouloir supprimer cet IRL"
+msgid "Are you sure you want to delete this IRL?"
+msgstr "Etes-vous sûr de vouloir supprimer cet IRL?"
 
 #: .\app\kpi\templates\kpi\irl_confirm_delete.html:14
 #: .\app\kpi\templates\kpi\trl_confirm_delete.html:14
-msgid "create on"
+msgid "Created on"
 msgstr "Créé le"
 
 #: .\app\kpi\templates\kpi\irl_confirm_delete.html:19
@@ -157,7 +155,7 @@ msgstr "Enregistrer"
 
 #: .\app\kpi\templates\kpi\trl.html:7
 msgid "TRLs"
-msgstr ""
+msgstr "TRLs"
 
 #: .\app\kpi\templates\kpi\trl.html:25
 msgid "Observation and recording of concept basics"
@@ -222,23 +220,27 @@ msgid "TRL"
 msgstr "TRL"
 
 #: .\app\kpi\templates\kpi\trl.html:137
-msgid "No one TRL for the moment."
-msgstr "Aucun TRL."
+msgid "No TRLs found"
+msgstr "Aucun TRL trouvé"
 
 #: .\app\kpi\templates\kpi\trl.html:140
 msgid "New TRL"
 msgstr "Nouveau TRL"
 
 #: .\app\kpi\templates\kpi\trl_confirm_delete.html:7
-#, fuzzy
-#| msgid "Delete"
 msgid "Delete TRL"
-msgstr "Supprimer"
+msgstr "Supprimer TRL"
 
 #: .\app\kpi\templates\kpi\trl_confirm_delete.html:11
-msgid "Are you sure you want to delete this TRL ?"
-msgstr "Etes-vous sûr de vouloir supprimer ce TRL"
+msgid "Are you sure you want to delete this TRL?"
+msgstr "Etes-vous sûr de vouloir supprimer ce TRL?"
 
 #: .\app\kpi\templates\kpi\trl_form.html:10
 msgid "New TRL for"
 msgstr "Nouveau TRL pour"
+
+#~ msgid "No one IRL for the moment."
+#~ msgstr "Aucun IRL trouvé"
+
+#~ msgid "No one TRL for the moment."
+#~ msgstr "Aucun TRL trouvé"

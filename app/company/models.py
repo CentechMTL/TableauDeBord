@@ -14,7 +14,8 @@ from django.core.urlresolvers import reverse
 class CompanyStatus(models.Model):
     # Status of a company in the Centech (ex: emergence)
     class Meta:
-        verbose_name_plural = _('Company Status')
+        verbose_name = _('Company status')
+        verbose_name_plural = _('Company status')
 
     status = models.CharField(
         max_length=50,

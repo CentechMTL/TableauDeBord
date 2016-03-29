@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-23 13:44-0400\n"
-"PO-Revision-Date: 2016-03-22 16:23-0400\n"
+"POT-Creation-Date: 2016-03-29 12:12-0400\n"
+"PO-Revision-Date: 2016-03-24 14:34-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pt_BR\n"
@@ -136,17 +136,24 @@ msgid "No Access"
 msgstr "Sem acesso"
 
 #: .\app\home\templates\home\noAccessPermissions.html:9
-msgid "Sorry! But you don't have the permissions to access this page"
+#, fuzzy
+#| msgid "Sorry! But you don't have the permissions to access this page"
+msgid "Sorry! You do not have the permissions to access this page."
 msgstr "Desculpe! Mas você não tem permissões para acessar esta página"
 
 #: .\app\home\templates\home\noAccessPermissions.html:11
+#: .\app\home\templates\registration\login.html:15
+#, fuzzy
+#| msgid "If it's an error, please contact the administrator"
 msgid ""
-"If it's an error, you can contact the administrator for have access on this "
-"page"
-msgstr "Se há um erro, contate o administrador para ter acesso a esta página"
+"If you believe this is an error, please contact the administrator for "
+"assistance"
+msgstr "Se há um erro, por favor contate o administrador"
 
 #: .\app\home\templates\home\noAccessPermissions.html:13
-msgid "Sorry for inconvenience"
+#, fuzzy
+#| msgid "Sorry for inconvenience"
+msgid "Sorry for the inconvenience"
 msgstr "Desculpe pela inconveniência"
 
 #: .\app\home\templates\home\password_update_form.html:7
@@ -223,13 +230,17 @@ msgstr "TRL"
 
 #: .\app\home\templates\home\summary.html:154
 #: .\app\home\templates\home\summary.html:156
-msgid "Last irl"
+#, fuzzy
+#| msgid "Last irl"
+msgid "Last IRL"
 msgstr "Último irl"
 
 #: .\app\home\templates\home\summary.html:154
 #: .\app\home\templates\home\summary.html:158
-msgid "Last trl"
-msgstr "Último trl"
+#, fuzzy
+#| msgid "Last irl"
+msgid "Last TRL"
+msgstr "Último irl"
 
 #: .\app\home\templates\home\summary.html:177
 msgid "Level"
@@ -274,16 +285,21 @@ msgid "Incubation duration (months)"
 msgstr "Duração da incubação (meses)"
 
 #: .\app\home\templates\registration\login.html:5
-msgid "Connexion"
+msgid "Login"
 msgstr ""
 
 #: .\app\home\templates\registration\login.html:14
 msgid "Your username and password didn't match. Please try again."
 msgstr "Seu login e senha não conferem. Por favor tente novamente."
 
-#: .\app\home\templates\registration\login.html:15
-msgid "If it's an error, please contact the administrator"
-msgstr "Se há um erro, por favor contate o administrador"
+#~ msgid ""
+#~ "If it's an error, you can contact the administrator for have access on "
+#~ "this page"
+#~ msgstr ""
+#~ "Se há um erro, contate o administrador para ter acesso a esta página"
+
+#~ msgid "Last trl"
+#~ msgstr "Último trl"
 
 #~ msgid "Account"
 #~ msgstr "Conta"

@@ -8,7 +8,7 @@
 {% block content %}
     <h1>{% trans "Centech Founders" %}</h1>
     <a href="{% url 'founder:add' %}" class="btn btn-primary btn-xs">
-        <i class="fa fa-plus"></i> {% trans "Add new founder" %}
+        <i class="fa fa-plus"></i> {% trans "New founder" %}
     </a>
     <div class="panel panel-default">
         <div class="panel-body">
@@ -80,6 +80,6 @@
         {% endfor %}
         </div>
     {% else %}
-        <p>{% trans "No founders exist." %}</p>
+        <p>{% trans "No founders found" %}</p>
     {% endif %}
 {% endblock %}

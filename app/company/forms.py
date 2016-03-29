@@ -102,7 +102,7 @@ class MiniCompanyForm(forms.ModelForm):
     )
     name.widget.attrs.update(
         {
-            'placeholder': _(u'Name of the company')
+            'placeholder': _(u'Company name')
         }
     )
 
@@ -208,7 +208,7 @@ class CompanyForm(MiniCompanyForm):
     )
 
     incubated_on = forms.DateField(
-        label=_('Incubated on'),
+        label=_('Start date'),
         required=False,
         input_formats=('%Y-%m-%d',),
         widget=forms.DateInput(
@@ -220,7 +220,7 @@ class CompanyForm(MiniCompanyForm):
     )
 
     endOfIncubation = forms.DateField(
-        label=_('Incubation end on'),
+        label=_('End date'),
         required=False,
         input_formats=('%Y-%m-%d',),
         widget=forms.DateInput(

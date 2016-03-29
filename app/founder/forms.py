@@ -143,7 +143,7 @@ class FounderForm(forms.ModelForm):
         widget=forms.Textarea(
             attrs={
                 'placeholder': _(u'Write here a brief summary of your '
-                                 u'skills and your career.'),
+                                 u'skills and career.'),
                 'class': 'md-editor'
             }
         )

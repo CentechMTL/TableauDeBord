@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-23 13:44-0400\n"
-"PO-Revision-Date: 2016-03-22 16:23-0400\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2016-03-29 12:12-0400\n"
+"PO-Revision-Date: 2016-03-24 14:34-0400\n"
+"Last-Translator: Nicholas Savard\n"
 "Language-Team: \n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -76,8 +76,6 @@ msgid "Amount received"
 msgstr "Somme reçu"
 
 #: .\app\finance\forms.py:55
-#, fuzzy
-#| msgid "Date of reception"
 msgid "Date de reception"
 msgstr "Date de réception"
 
@@ -104,22 +102,16 @@ msgid "Company"
 msgstr "Compagnie"
 
 #: .\app\finance\templates\finance\bourse_confirm_delete.html:6
-#, fuzzy
-#| msgid "New grant"
-msgid "Delete grants"
-msgstr "Nouvelle bourse"
+msgid "Delete grant"
+msgstr "Supprimer bourse"
 
 #: .\app\finance\templates\finance\bourse_confirm_delete.html:9
-#: .\app\finance\templates\finance\index.html:22
-#: .\app\finance\templates\finance\index.html:41
-#: .\app\finance\templates\finance\index.html:342
-#: .\app\finance\templates\finance\index.html:351
-msgid "Grants"
-msgstr "Bourses"
+msgid "Grant"
+msgstr "Bourse"
 
 #: .\app\finance\templates\finance\bourse_confirm_delete.html:10
-msgid "Are you sure you want to delete this grants ?"
-msgstr "Êtes vous sûr de vouloir supprimer cette bourse ?"
+msgid "Are you sure you want to delete this grant?"
+msgstr "Êtes vous sûr de vouloir supprimer cette bourse?"
 
 #: .\app\finance\templates\finance\bourse_confirm_delete.html:18
 #: .\app\finance\templates\finance\index.html:52
@@ -162,10 +154,8 @@ msgstr "Annuler"
 
 #: .\app\finance\templates\finance\finance_form.html:8
 #: .\app\finance\templates\finance\index.html:6
-#, fuzzy
-#| msgid "Finance of"
 msgid "Finance"
-msgstr "Finance de"
+msgstr "Finance"
 
 #: .\app\finance\templates\finance\finance_form.html:23
 msgid "Save"
@@ -184,11 +174,17 @@ msgstr "Finance de"
 msgid "Overview"
 msgstr "Vue générale"
 
+#: .\app\finance\templates\finance\index.html:22
+#: .\app\finance\templates\finance\index.html:41
+#: .\app\finance\templates\finance\index.html:342
+#: .\app\finance\templates\finance\index.html:351
+msgid "Grants"
+msgstr "Bourses"
+
 #: .\app\finance\templates\finance\index.html:23
 #: .\app\finance\templates\finance\index.html:99
 #: .\app\finance\templates\finance\index.html:343
 #: .\app\finance\templates\finance\index.html:356
-#: .\app\finance\templates\finance\subvention_confirm_delete.html:9
 msgid "Subsidies"
 msgstr "Subventions"
 
@@ -196,7 +192,6 @@ msgstr "Subventions"
 #: .\app\finance\templates\finance\index.html:157
 #: .\app\finance\templates\finance\index.html:344
 #: .\app\finance\templates\finance\index.html:361
-#: .\app\finance\templates\finance\investissement_confirm_delete.html:9
 msgid "Investments"
 msgstr "Investissements"
 
@@ -204,7 +199,6 @@ msgstr "Investissements"
 #: .\app\finance\templates\finance\index.html:216
 #: .\app\finance\templates\finance\index.html:345
 #: .\app\finance\templates\finance\index.html:366
-#: .\app\finance\templates\finance\pret_confirm_delete.html:9
 msgid "Loans"
 msgstr "Prêts"
 
@@ -212,7 +206,6 @@ msgstr "Prêts"
 #: .\app\finance\templates\finance\index.html:275
 #: .\app\finance\templates\finance\index.html:346
 #: .\app\finance\templates\finance\index.html:371
-#: .\app\finance\templates\finance\vente_confirm_delete.html:9
 msgid "Sales"
 msgstr "Ventes"
 
@@ -314,44 +307,52 @@ msgid "Service offering"
 msgstr "Offre de service"
 
 #: .\app\finance\templates\finance\investissement_confirm_delete.html:6
-#, fuzzy
-#| msgid "New investment"
-msgid "Delete investments"
-msgstr "Nouvel investissement"
+msgid "Delete investment"
+msgstr "Supprimer investissement"
+
+#: .\app\finance\templates\finance\investissement_confirm_delete.html:9
+msgid "Investment"
+msgstr "Investissements"
 
 #: .\app\finance\templates\finance\investissement_confirm_delete.html:10
-msgid "Are you sure you want to delete this investments ?"
-msgstr "Êtes vous sûr de vouloir supprimer cet investissement ?"
+msgid "Are you sure you want to delete this investment?"
+msgstr "Êtes vous sûr de vouloir supprimer cet investissement?"
 
 #: .\app\finance\templates\finance\pret_confirm_delete.html:6
-#, fuzzy
-#| msgid "Delete"
-msgid "Delete loans"
-msgstr "Supprimer"
+msgid "Delete loan"
+msgstr "Supprimer prêt"
+
+#: .\app\finance\templates\finance\pret_confirm_delete.html:9
+msgid "Loan"
+msgstr "Prêt"
 
 #: .\app\finance\templates\finance\pret_confirm_delete.html:10
-msgid "Are you sure you want to delete this loan ?"
-msgstr "Êtes vous sûr de vouloir supprimer ce prêt ?"
+msgid "Are you sure you want to delete this loan?"
+msgstr "Êtes vous sûr de vouloir supprimer ce prêt?"
 
 #: .\app\finance\templates\finance\subvention_confirm_delete.html:6
-#, fuzzy
-#| msgid "Subsidies"
-msgid "Delete subsidies"
-msgstr "Subventions"
+msgid "Delete subsidy"
+msgstr "Supprimer subvention"
+
+#: .\app\finance\templates\finance\subvention_confirm_delete.html:9
+msgid "Subsidy"
+msgstr "Subvention"
 
 #: .\app\finance\templates\finance\subvention_confirm_delete.html:10
-msgid "Are you sure you want to delete this subsidy ?"
-msgstr "Êtes vous sûr de vouloir supprimer cette subvention ?"
+msgid "Are you sure you want to delete this subsidy?"
+msgstr "Êtes vous sûr de vouloir supprimer cette subvention?"
 
 #: .\app\finance\templates\finance\vente_confirm_delete.html:6
-#, fuzzy
-#| msgid "Delete"
-msgid "Delete sales"
-msgstr "Supprimer"
+msgid "Delete sale"
+msgstr "Supprimer vente"
+
+#: .\app\finance\templates\finance\vente_confirm_delete.html:9
+msgid "Sale"
+msgstr "Vente"
 
 #: .\app\finance\templates\finance\vente_confirm_delete.html:10
-msgid "Are you sure you want to delete this sale ?"
-msgstr "Êtes vous sûr de vouloir supprimer cette vente ?"
+msgid "Are you sure you want to delete this sale?"
+msgstr "Êtes vous sûr de vouloir supprimer cette vente?"
 
 #~ msgid "Summary"
 #~ msgstr "Sommaire"

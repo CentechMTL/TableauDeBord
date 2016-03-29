@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Tableau PTBR\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-23 13:44-0400\n"
-"PO-Revision-Date: 2016-03-22 16:23-0400\n"
+"POT-Creation-Date: 2016-03-29 12:12-0400\n"
+"PO-Revision-Date: 2016-03-24 14:34-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pt_BR\n"
@@ -19,7 +19,7 @@ msgstr ""
 "X-Generator: Poedit 1.8.7\n"
 
 #: .\app\company\forms.py:48 .\app\company\forms.py:100
-#: .\app\company\models.py:21 .\app\company\models.py:39
+#: .\app\company\models.py:22 .\app\company\models.py:40
 msgid "Name"
 msgstr "Nome"
 
@@ -27,7 +27,7 @@ msgstr "Nome"
 msgid "Name of the new status"
 msgstr "Nome do novo status"
 
-#: .\app\company\forms.py:56 .\app\company\models.py:24
+#: .\app\company\forms.py:56 .\app\company\models.py:25
 msgid "Comment"
 msgstr "Comentar"
 
@@ -42,14 +42,16 @@ msgid "Save"
 msgstr "Salvar"
 
 #: .\app\company\forms.py:105
-msgid "Name of the company"
-msgstr "Nome da empresa"
+#, fuzzy
+#| msgid "Company"
+msgid "Company name"
+msgstr "Empresa"
 
-#: .\app\company\forms.py:110 .\app\company\models.py:44
+#: .\app\company\forms.py:110 .\app\company\models.py:45
 msgid "Logo"
 msgstr "Logo"
 
-#: .\app\company\forms.py:115 .\app\company\models.py:52
+#: .\app\company\forms.py:115 .\app\company\models.py:53
 msgid "Video"
 msgstr "Vídeo"
 
@@ -65,7 +67,7 @@ msgstr "Website"
 msgid "https://example.com"
 msgstr "https://example.com"
 
-#: .\app\company\forms.py:135 .\app\company\models.py:84
+#: .\app\company\forms.py:135 .\app\company\models.py:85
 msgid "Facebook"
 msgstr "Facebook"
 
@@ -73,7 +75,7 @@ msgstr "Facebook"
 msgid "https://www.facebook.com/lastname.firstname"
 msgstr "https://www.facebook.com/lastname.firstname"
 
-#: .\app\company\forms.py:145 .\app\company\models.py:89
+#: .\app\company\forms.py:145 .\app\company\models.py:90
 msgid "Twitter"
 msgstr "Twitter"
 
@@ -81,7 +83,7 @@ msgstr "Twitter"
 msgid "https://twitter.com/username"
 msgstr "https://twitter.com/username"
 
-#: .\app\company\forms.py:155 .\app\company\models.py:94
+#: .\app\company\forms.py:155 .\app\company\models.py:95
 msgid "Google+"
 msgstr "Google+"
 
@@ -89,7 +91,7 @@ msgstr "Google+"
 msgid "https://plus.google.com/id"
 msgstr "https://plus.google.com/id"
 
-#: .\app\company\forms.py:165 .\app\company\models.py:99
+#: .\app\company\forms.py:165 .\app\company\models.py:100
 msgid "linkedIn"
 msgstr "LinkedIn"
 
@@ -97,7 +99,7 @@ msgstr "LinkedIn"
 msgid "https://ca.linkedin.com/in/username"
 msgstr "https://ca.linkedin.com/in/username"
 
-#: .\app\company\forms.py:172 .\app\company\models.py:57
+#: .\app\company\forms.py:172 .\app\company\models.py:58
 msgid "Description"
 msgstr "Descrição"
 
@@ -110,48 +112,52 @@ msgstr "Escreva aqui um breve sumário de seu negócio."
 msgid "Incubation phase"
 msgstr "Fase de Incubação"
 
-#: .\app\company\forms.py:211
-msgid "Incubated on"
-msgstr "Incubada em"
+#: .\app\company\forms.py:211 .\app\company\templates\company\detail.html:173
+msgid "Start date"
+msgstr ""
 
-#: .\app\company\forms.py:223
-msgid "Incubation end on"
-msgstr "Incubação termina em"
+#: .\app\company\forms.py:223 .\app\company\templates\company\detail.html:174
+#, fuzzy
+#| msgid "Incubation phase"
+msgid "End date"
+msgstr "Fase de Incubação"
 
-#: .\app\company\forms.py:235 .\app\company\models.py:69
+#: .\app\company\forms.py:235 .\app\company\models.py:70
 #: .\app\company\templates\company\detail.html:109
 #: .\templates\dashboard.html:54
 msgid "Founders"
 msgstr "Fundadores"
 
-#: .\app\company\forms.py:242 .\app\company\models.py:77
+#: .\app\company\forms.py:242 .\app\company\models.py:78
 #: .\app\company\templates\company\detail.html:138
 #: .\templates\dashboard.html:51
 msgid "Mentors"
 msgstr "Mentores"
 
-#: .\app\company\models.py:17
-msgid "Company Status"
+#: .\app\company\models.py:17 .\app\company\models.py:18
+#, fuzzy
+#| msgid "Company Status"
+msgid "Company status"
 msgstr "Status da empresa"
 
-#: .\app\company\models.py:34 .\app\company\models.py:188
+#: .\app\company\models.py:35 .\app\company\models.py:189
 #: .\templates\dashboard.html:48
 msgid "Companies"
 msgstr "Empresas"
 
-#: .\app\company\models.py:48
+#: .\app\company\models.py:49
 msgid "URL"
 msgstr "URL"
 
-#: .\app\company\models.py:61
+#: .\app\company\models.py:62
 msgid "Status"
 msgstr "Status"
 
-#: .\app\company\models.py:185
+#: .\app\company\models.py:186
 msgid "Presences"
 msgstr "Presenças"
 
-#: .\app\company\models.py:190 .\app\company\templates\company\presence.html:40
+#: .\app\company\models.py:191 .\app\company\templates\company\presence.html:40
 #: .\app\company\templates\company\presence_confirm_delete.html:10
 msgid "Date"
 msgstr "Data"
@@ -194,14 +200,14 @@ msgstr "Fase de Incubação"
 
 #: .\app\company\templates\company\detail.html:63
 msgctxt "20 characters max"
-msgid "Begin date of phase"
+msgid "Start date"
 msgstr ""
 
 #: .\app\company\templates\company\detail.html:65
 #, fuzzy
 #| msgid "Incubation phase"
 msgctxt "20 characters max"
-msgid "End date of phase"
+msgid "End date"
 msgstr "Fase de Incubação"
 
 #: .\app\company\templates\company\detail.html:83
@@ -211,19 +217,23 @@ msgid "Time spent"
 msgstr "Tempo inbucada"
 
 #: .\app\company\templates\company\detail.html:91
-msgid "About"
-msgstr "Sobre"
+msgid "Value proposition"
+msgstr ""
 
 #: .\app\company\templates\company\detail.html:99
 msgid "Video pitch"
 msgstr "Pitch em vídeo"
 
 #: .\app\company\templates\company\detail.html:132
-msgid "No founders exist."
+#, fuzzy
+#| msgid "No founders exist."
+msgid "No founders found"
 msgstr "Não há fundadores."
 
 #: .\app\company\templates\company\detail.html:161
-msgid "No mentors exist."
+#, fuzzy
+#| msgid "No mentors exist."
+msgid "No mentors found"
 msgstr "Não há mentores."
 
 #: .\app\company\templates\company\detail.html:167
@@ -233,16 +243,6 @@ msgstr ""
 #: .\app\company\templates\company\detail.html:172
 msgid "Room"
 msgstr ""
-
-#: .\app\company\templates\company\detail.html:173
-msgid "Start date"
-msgstr ""
-
-#: .\app\company\templates\company\detail.html:174
-#, fuzzy
-#| msgid "Incubation phase"
-msgid "End date"
-msgstr "Fase de Incubação"
 
 #: .\app\company\templates\company\detail.html:176
 #: .\app\company\templates\company\detail.html:190
@@ -260,18 +260,20 @@ msgid "Delete"
 msgstr "Deletar"
 
 #: .\app\company\templates\company\detail.html:197
-msgid "No room rentals found."
+msgid "No room rentals found"
 msgstr ""
 
 #: .\app\company\templates\company\detail.html:200
 #, fuzzy
 #| msgid "Add new mentor"
-msgid "Add new rental"
+msgid "New rental"
 msgstr "Adicionar novo mentor"
 
 #: .\app\company\templates\company\filter.html:9
 #: .\app\company\templates\company\index.html:5
 #: .\app\company\templates\company\index.html:9
+#, fuzzy
+#| msgid "Centech Companies"
 msgid "Centech Companies"
 msgstr "Empresas da Centech"
 
@@ -281,12 +283,12 @@ msgid "No companies satisfy that query."
 msgstr "Nenhuma empresa satisfaz esta consulta."
 
 #: .\app\company\templates\company\index.html:11
-msgid "Add new company"
-msgstr "Adicionar nova empresa"
+msgid "New company"
+msgstr "Nova empresa"
 
 #: .\app\company\templates\company\index.html:14
-msgid "Add new status"
-msgstr "Adicionar novo status"
+msgid "New status"
+msgstr "Novo status"
 
 #: .\app\company\templates\company\index.html:23
 msgid "Search"
@@ -348,11 +350,11 @@ msgid "New presence"
 msgstr "Nova assistência"
 
 #: .\app\company\views.py:88
-msgid "This status has been added."
+msgid "The status has been added."
 msgstr ""
 
 #: .\app\company\views.py:111
-msgid "This company has been added."
+msgid "The company has been added."
 msgstr ""
 
 #: .\centech2\settings.py:193
@@ -366,10 +368,6 @@ msgstr "Inglês"
 #: .\centech2\settings.py:195
 msgid "Portuguese"
 msgstr ""
-
-#: .\templates\dashboard.html:10
-msgid "Dashboard v.1"
-msgstr "Dashboard v.1"
 
 #: .\templates\dashboard.html:42
 msgid "Road map"
@@ -416,7 +414,9 @@ msgid "KanBoard"
 msgstr "KanBoard"
 
 #: .\templates\dashboard.html:120
-msgid "Welcome to the Centech Dashboard."
+#, fuzzy
+#| msgid "Welcome to the Centech Dashboard."
+msgid "Welcome to the Centech Dashboard"
 msgstr "Benvindo ao Dashboard da Centech"
 
 #: .\templates\dashboard.html:131 .\templates\dashboard.html.py:134
@@ -444,8 +444,10 @@ msgid "Change password"
 msgstr "Mudar o password"
 
 #: .\templates\dashboard.html:188
-msgid "Log out"
-msgstr "Log out"
+#, fuzzy
+#| msgid "Logo"
+msgid "Logout"
+msgstr "Logo"
 
 #: .\templates\landing_base.html:12
 msgid "Centech Dashboard"
@@ -460,8 +462,40 @@ msgid "Login"
 msgstr "Login"
 
 #: .\templates\landing_base.html:114
-msgid "All Rights Reserved"
+#, fuzzy
+#| msgid "All Rights Reserved"
+msgid "All rights reserved"
 msgstr "Todos os direitos reservados"
+
+#~ msgid "Log out"
+#~ msgstr "Log out"
+
+#~ msgid "About"
+#~ msgstr "Sobre"
+
+#~ msgid "Add new company"
+#~ msgstr "Adicionar nova empresa"
+
+#~ msgid "Add new status"
+#~ msgstr "Adicionar novo status"
+
+#~ msgid "Name of the company"
+#~ msgstr "Nome da empresa"
+
+#~ msgid "Incubated on"
+#~ msgstr "Incubada em"
+
+#~ msgid "Incubation end on"
+#~ msgstr "Incubação termina em"
+
+#, fuzzy
+#~| msgid "Incubation phase"
+#~ msgctxt "20 characters max"
+#~ msgid "End date of phase"
+#~ msgstr "Fase de Incubação"
+
+#~ msgid "Dashboard v.1"
+#~ msgstr "Dashboard v.1"
 
 #~ msgid "Add new founder"
 #~ msgstr "Adicionar novo empreendedor"
@@ -474,12 +508,6 @@ msgstr "Todos os direitos reservados"
 
 #~ msgid "End of incubation date"
 #~ msgstr "Fim da data de incubação"
-
-#~ msgid "New status"
-#~ msgstr "Novo status"
-
-#~ msgid "New company"
-#~ msgstr "Nova empresa"
 
 #~ msgid "Update company"
 #~ msgstr "Atualizar empresa"

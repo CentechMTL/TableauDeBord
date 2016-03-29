@@ -21,7 +21,7 @@ BUSINESS_CANVAS_TYPE_CHOICES = (
 
 
 # Element of the business canvas
-# Can be disactivated if it's archived
+# Can be deactivated if it's archived
 class BusinessCanvasElement(models.Model):
     class Meta:
         verbose_name = _('Business canvas element')
@@ -39,11 +39,11 @@ class BusinessCanvasElement(models.Model):
     date = models.DateTimeField(
         auto_now_add=True,
         auto_now=False,
-        verbose_name=_('Date of creation')
+        verbose_name=_('Creation date')
     )
     updated = models.DateTimeField(
         auto_now=True,
-        verbose_name=_('Date of updated')
+        verbose_name=_('Update date')
     )
     type = models.CharField(
         max_length=20,
@@ -59,7 +59,7 @@ class BusinessCanvasElement(models.Model):
     # True -> Archived | False -> Current use
     disactivated = models.BooleanField(
         default=False,
-        verbose_name=_('Disactivated')
+        verbose_name=_('Deactivated')
     )
 
     def __unicode__(self):
@@ -86,7 +86,7 @@ class Archive(models.Model):
     elements = models.ManyToManyField(
         BusinessCanvasElement,
         blank=True,
-        verbose_name=_('Elements of the archive')
+        verbose_name=_('Archive elements')
     )
 
     def __unicode__(self):

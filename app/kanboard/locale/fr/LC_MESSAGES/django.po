@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-23 13:44-0400\n"
-"PO-Revision-Date: 2016-03-22 16:23-0400\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2016-03-29 12:12-0400\n"
+"PO-Revision-Date: 2016-03-24 14:34-0400\n"
+"Last-Translator: Nicholas Savard\n"
 "Language-Team: \n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -27,8 +27,8 @@ msgid "Title*"
 msgstr "Titre*"
 
 #: .\app\kanboard\forms.py:49
-msgid "Titre"
-msgstr "Titre"
+msgid "Title"
+msgstr "Titre*"
 
 #: .\app\kanboard\forms.py:52
 msgid "Comment"
@@ -55,10 +55,8 @@ msgid "State"
 msgstr "Etat"
 
 #: .\app\kanboard\templates\kanboard\board.html:5
-#, fuzzy
-#| msgid "Kanboard of"
 msgid "Kanboard"
-msgstr "Kanboard de"
+msgstr "Kanboard"
 
 #: .\app\kanboard\templates\kanboard\board.html:51
 msgid "Cancel"
@@ -89,9 +87,8 @@ msgstr "Tous"
 
 #: .\app\kanboard\templates\kanboard\card.html:8
 #, fuzzy
-#| msgid "Kanboard of"
 msgid "Kanboard card"
-msgstr "Kanboard de"
+msgstr "Carte Kanboard"
 
 #: .\app\kanboard\templates\kanboard\card.html:28
 msgid "From"
@@ -106,7 +103,7 @@ msgid "since"
 msgstr "depuis"
 
 #: .\app\kanboard\templates\kanboard\card.html:35
-msgid "Description of the task"
+msgid "Task description"
 msgstr "Description de la tâche"
 
 #: .\app\kanboard\templates\kanboard\card.html:41
@@ -116,3 +113,9 @@ msgstr "Commentaires"
 #: .\app\kanboard\templates\kanboard\card.html:51
 msgid "Save"
 msgstr "Enregistrer"
+
+#~ msgid "Titre"
+#~ msgstr "Titre"
+
+#~ msgid "Description of the task"
+#~ msgstr "Description de la tâche"

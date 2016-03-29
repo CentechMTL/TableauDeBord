@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-23 13:44-0400\n"
-"PO-Revision-Date: 2016-03-22 16:23-0400\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2016-03-29 12:12-0400\n"
+"PO-Revision-Date: 2016-03-29 11:52-0400\n"
+"Last-Translator: Nicholas Savard\n"
 "Language-Team: \n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -36,7 +36,7 @@ msgstr "Courriel"
 
 #: .\app\home\models.py:20
 msgid "Education"
-msgstr "Niveau d'étude"
+msgstr "Étude"
 
 #: .\app\home\models.py:24
 msgid "Education level"
@@ -88,7 +88,7 @@ msgstr "linkedIn"
 
 #: .\app\home\templates\home\index.html:5
 msgid "Home"
-msgstr ""
+msgstr "Accueil"
 
 #: .\app\home\templates\home\index.html:13
 msgid "Dashboard"
@@ -99,47 +99,51 @@ msgid "Follow us on"
 msgstr "Suivez nous sur"
 
 #: .\app\home\templates\home\index.html:44
+#, fuzzy
 msgid ""
 "Cette plateforme est une plateforme privée appartenant au Centech, "
 "incubateur de sociétés technologiques de l'École de Technologie supérieure "
 "de Montréal."
 msgstr ""
+"Cette plateforme est une plateforme privée appartenant au Centech, "
+"incubateur de sociétés technologiques de l'École de Technologie supérieure "
+"de Montréal."
 
 #: .\app\home\templates\home\index.html:45
+#, fuzzy
 msgid ""
 "Si vous voulez disposer d'un compte d'accès ou avoir plus de renseignements "
 "sur notre plateforme, merci de contacter nos services via l'adresse"
 msgstr ""
+"Si vous voulez disposer d'un compte d'accès ou avoir plus de renseignements "
+"sur notre plateforme, merci de contacter nos services via l'adresse"
 
 #: .\app\home\templates\home\maStartup.html:4
 msgid "Road map"
-msgstr ""
+msgstr "Carte routière"
 
 #: .\app\home\templates\home\noAccessPermissions.html:5
 msgid "No Access"
 msgstr "Pas d'autorisation"
 
 #: .\app\home\templates\home\noAccessPermissions.html:9
-msgid "Sorry! But you don't have the permissions to access this page"
-msgstr "Désolé! Mais vous n'avez pas la permissions d'accéder a cette page"
+msgid "Sorry! You do not have the permissions to access this page."
+msgstr "Désolé! Vous n'avez pas les permissions pour accéder à cette page"
 
 #: .\app\home\templates\home\noAccessPermissions.html:11
+#: .\app\home\templates\registration\login.html:15
 msgid ""
-"If it's an error, you can contact the administrator for have access on this "
-"page"
-msgstr ""
-"Si c'est une erreur, vous pouvez contacter l'administrateur pour avoir "
-"l'accès a cette page"
+"If you believe this is an error, please contact the administrator for "
+"assistance"
+msgstr "Si c'est une erreur, merci de contact l'administrateur"
 
 #: .\app\home\templates\home\noAccessPermissions.html:13
-msgid "Sorry for inconvenience"
+msgid "Sorry for the inconvenience"
 msgstr "Désolé pour le dérangement"
 
 #: .\app\home\templates\home\password_update_form.html:7
-#, fuzzy
-#| msgid "Account"
 msgid "My account"
-msgstr "Compte"
+msgstr "Mon Compte"
 
 #: .\app\home\templates\home\password_update_form.html:14
 msgid "Save"
@@ -151,7 +155,7 @@ msgstr "Réinitialiser"
 
 #: .\app\home\templates\home\summary.html:8
 msgid "Summary"
-msgstr ""
+msgstr "Sommaire"
 
 #: .\app\home\templates\home\summary.html:20
 msgid "Select a status"
@@ -211,12 +215,12 @@ msgstr "TRL"
 
 #: .\app\home\templates\home\summary.html:154
 #: .\app\home\templates\home\summary.html:156
-msgid "Last irl"
+msgid "Last IRL"
 msgstr "Dernier IRL"
 
 #: .\app\home\templates\home\summary.html:154
 #: .\app\home\templates\home\summary.html:158
-msgid "Last trl"
+msgid "Last TRL"
 msgstr "Dernier TRL"
 
 #: .\app\home\templates\home\summary.html:177
@@ -262,8 +266,8 @@ msgid "Incubation duration (months)"
 msgstr "Temps d'incubation (mois)"
 
 #: .\app\home\templates\registration\login.html:5
-msgid "Connexion"
-msgstr ""
+msgid "Login"
+msgstr "Connexion"
 
 #: .\app\home\templates\registration\login.html:14
 msgid "Your username and password didn't match. Please try again."
@@ -271,9 +275,18 @@ msgstr ""
 "Votre nom d'utilisateur et votre mot de passe ne correspondent pas. Veuillez "
 "recommencer."
 
-#: .\app\home\templates\registration\login.html:15
-msgid "If it's an error, please contact the administrator"
-msgstr "Si c'est une erreur, merci de contact l'administrateur"
+#~ msgid "Connexion"
+#~ msgstr "Login"
+
+#~ msgid ""
+#~ "If it's an error, you can contact the administrator for have access on "
+#~ "this page"
+#~ msgstr ""
+#~ "Si c'est une erreur, vous pouvez contacter l'administrateur pour avoir "
+#~ "l'accès a cette page"
+
+#~ msgid "Last trl"
+#~ msgstr "Dernier TRL"
 
 #, fuzzy
 #~| msgid "Companies"

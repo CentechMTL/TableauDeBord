@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-23 13:44-0400\n"
-"PO-Revision-Date: 2016-03-22 16:23-0400\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2016-03-29 12:12-0400\n"
+"PO-Revision-Date: 2016-03-24 14:34-0400\n"
+"Last-Translator: Nicholas Savard\n"
 "Language-Team: \n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -99,9 +99,13 @@ msgstr "Type"
 msgid "URL"
 msgstr "URL"
 
+#: .\app\mentor\models.py:58 .\app\mentor\models.py:61
+msgid "Mentor"
+msgstr "Mentor"
+
 #: .\app\mentor\templates\mentor\detail.html:5
 msgid "Details"
-msgstr ""
+msgstr "Détails"
 
 #: .\app\mentor\templates\mentor\detail.html:11
 msgid "Actions on this mentor"
@@ -120,8 +124,8 @@ msgid "Companies"
 msgstr "Compagnies"
 
 #: .\app\mentor\templates\mentor\detail.html:105
-msgid "No companies exist."
-msgstr "Aucune compagnies."
+msgid "No companies found"
+msgstr "Aucune compagnie trouvée"
 
 #: .\app\mentor\templates\mentor\index.html:6
 #: .\app\mentor\templates\mentor\index.html:9
@@ -129,18 +133,16 @@ msgid "Centech Mentors"
 msgstr "Mentors du Centech"
 
 #: .\app\mentor\templates\mentor\index.html:11
-msgid "Add new mentor"
-msgstr ""
+msgid "New mentor"
+msgstr "Nouveau mentor"
 
 #: .\app\mentor\templates\mentor\index.html:20
-#, fuzzy
-#| msgid "Search by name"
 msgid "Search"
-msgstr "Rechercher par nom"
+msgstr "Rechercher"
 
 #: .\app\mentor\templates\mentor\index.html:48
-msgid "No mentors exist."
-msgstr "Aucun mentors."
+msgid "No mentors found"
+msgstr "Aucun mentor trouvé"
 
 #: .\app\mentor\templates\mentor\mentor_form.html:8
 msgid "Profile"

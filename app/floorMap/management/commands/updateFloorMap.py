@@ -15,7 +15,8 @@ class Command(BaseCommand):
         parser.add_argument(
             '--input',
             default=False,
-            help='Input filename')
+            help='Input filename'
+        )
         parser.add_argument(
             '--output',
             default=False,

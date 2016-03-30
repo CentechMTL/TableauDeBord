@@ -106,6 +106,13 @@ class Room(models.Model):
         )
     )
 
+    surface_size = models.PositiveSmallIntegerField(
+        null=True,
+        blank=True,
+        verbose_name=_(u"Surface size"),
+        help_text=_(u"Value in ft².")
+    )
+
     def __unicode__(self):
         if self.static_label:
             return u"{code} - {label}".format(

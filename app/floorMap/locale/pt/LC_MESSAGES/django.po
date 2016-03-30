@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-29 12:12-0400\n"
-"PO-Revision-Date: 2016-03-24 14:34-0400\n"
+"POT-Creation-Date: 2016-03-30 15:09-0400\n"
+"PO-Revision-Date: 2016-03-30 16:12-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pt\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.7\n"
 
-#: .\app\floorMap\forms.py:18 .\app\floorMap\models.py:148
+#: .\app\floorMap\forms.py:18 .\app\floorMap\models.py:155
 #: .\app\floorMap\templates\rental\rent_confirm_delete.html:33
 msgid "Company"
 msgstr ""
@@ -27,12 +27,12 @@ msgstr ""
 msgid "Room code"
 msgstr ""
 
-#: .\app\floorMap\forms.py:31 .\app\floorMap\models.py:153
+#: .\app\floorMap\forms.py:31 .\app\floorMap\models.py:160
 #: .\app\floorMap\templates\rental\rent_confirm_delete.html:25
 msgid "Start date"
 msgstr ""
 
-#: .\app\floorMap\forms.py:43 .\app\floorMap\models.py:154
+#: .\app\floorMap\forms.py:43 .\app\floorMap\models.py:161
 #: .\app\floorMap\templates\rental\rent_confirm_delete.html:29
 msgid "End date"
 msgstr ""
@@ -119,7 +119,15 @@ msgstr ""
 msgid "Rectangle only!"
 msgstr ""
 
-#: .\app\floorMap\models.py:144
+#: .\app\floorMap\models.py:112
+msgid "Surface size"
+msgstr ""
+
+#: .\app\floorMap\models.py:113
+msgid "Value in ft²."
+msgstr ""
+
+#: .\app\floorMap\models.py:151
 #: .\app\floorMap\templates\rental\rent_confirm_delete.html:17
 msgid "Room"
 msgstr ""

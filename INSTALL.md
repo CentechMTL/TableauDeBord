@@ -23,7 +23,10 @@ pip install -r requirements.txt
 
 Cet exemple ce base sur l'utilisation d'une table MySQL.
 
- 1 - Créer une nouvelle base de données.
+ 1 - Créer une nouvelle base de données. N.B. Pour ne pas à avoir à changer la configuration par défaut, vous pouvez tout simplement:
+ 1.1 - Créer la base de données `centech_dashboard`
+ 1.2 - Créer l'utilisateur `centech` avec mot de passe `centech`
+ 1.3 - Donner les permissions à l'utilisateur `centech` sur la base de données `centech_dashboard`
 
  2 - Entrez vos paramètres de connexion dans `../TableauDeBord/centech2/settings.py`
 
@@ -32,19 +35,19 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', #Pour utiliser une table MySQL
         'NAME': 'leNomDeLaBaseDeDonnée',
-        'USER': 'votreNomDutilisateur', 
+        'USER': 'votreNomDutilisateur',
         'PASSWORD': 'votreMotDePasse',
         'HOST': 'localhost',
     }
 }
 ```
  3 - Mettez à jour votre base de données
- 
+
  ```
  cd ../chemin/vers/TableauDeBord/
  python manage.py migrate
  ```
- 
+
  4 - Populer votre base de données avec le fichier `../TableauDeBord/populate.sql`
   * Soit en le glissant dans l'encart SQL de votre table MySQL
   * Soit en copiant sont contenu dans l'encart SQL de votre table MySQL
@@ -101,10 +104,10 @@ python manage.py runserver
 
  2 - Rendez-vous à l'addresse `127.0.0.1:8000` avec votre navigateur
 
- 3 - Connectez-vous avec le compte administrateur : 
+ 3 - Connectez-vous avec le compte administrateur :
  * Nom d'utilisateur : root
  * Mot de passe : root
- 
+
 4 - Changez votre mot de passe grâce au menu en haut à droite `menu->Modifier_le_mot_de_passe`.
- 
+
 Bienvenue sur votre tableau de bord personnel!

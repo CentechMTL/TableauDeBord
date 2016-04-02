@@ -10,10 +10,12 @@ import time
 
 from app.founder.factories import FounderFactory
 from app.mentor.factories import MentorFactory
-from app.home.factories import UserFactory, StaffUserProfileFactory, ExecutiveUserProfileFactory
+from app.home.factories import UserFactory, StaffUserProfileFactory, \
+    ExecutiveUserProfileFactory
 from app.company.factories import CompanyStatusFactory, CompanyFactory
 from app.kanboard.factories import CardFactory
 from app.kanboard.models import PHASE_CHOICES
+
 
 class KanboardTests(TestCase):
 
@@ -29,14 +31,16 @@ class KanboardTests(TestCase):
         self.founderCompany = FounderFactory()
         self.mentorCompany = MentorFactory()
         self.status = CompanyStatusFactory()
-        self.company = CompanyFactory(companyStatus = self.status)
+        self.company = CompanyFactory(companyStatus=self.status)
         self.company.founders.add(self.founderCompany)
         self.company.mentors.add(self.mentorCompany)
         self.company.save()
 
-        self.card = CardFactory(company=self.company,
-                                phase= PHASE_CHOICES[0][1],
-                                state=False)
+        self.card = CardFactory(
+            company=self.company,
+            phase=PHASE_CHOICES[0][1],
+            state=False
+        )
 
     def test_BoardIndex(self):
         """
@@ -47,10 +51,16 @@ class KanboardTests(TestCase):
         Access : Staff
         """
         self.client.logout()
-        self.client.login(username=self.staff.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.staff.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('kanboard:kanboard', args= [self.company.id]),
+            reverse(
+                'kanboard:kanboard',
+                args=[self.company.id]
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 200)
@@ -59,10 +69,16 @@ class KanboardTests(TestCase):
         Access : Founders of the company
         """
         self.client.logout()
-        self.client.login(username=self.founderCompany.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.founderCompany.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('kanboard:kanboard', args= [self.company.id]),
+            reverse(
+                'kanboard:kanboard',
+                args=[self.company.id]
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 200)
@@ -71,10 +87,16 @@ class KanboardTests(TestCase):
         Access : Mentors of the company
         """
         self.client.logout()
-        self.client.login(username=self.mentorCompany.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.mentorCompany.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('kanboard:kanboard', args= [self.company.id]),
+            reverse(
+                'kanboard:kanboard',
+                args=[self.company.id]
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 200)
@@ -83,23 +105,34 @@ class KanboardTests(TestCase):
         No Access : Other founders
         """
         self.client.logout()
-        self.client.login(username=self.founder.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.founder.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('kanboard:kanboard', args= [self.company.id]),
+            reverse(
+                'kanboard:kanboard',
+                args=[self.company.id]
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
-
 
         """
         No Access : Other mentors
         """
         self.client.logout()
-        self.client.login(username=self.mentor.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.mentor.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('kanboard:kanboard', args= [self.company.id]),
+            reverse(
+                'kanboard:kanboard',
+                args=[self.company.id]
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
@@ -108,10 +141,16 @@ class KanboardTests(TestCase):
         No Access : Executive
         """
         self.client.logout()
-        self.client.login(username=self.executive.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.executive.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('kanboard:kanboard', args= [self.company.id]),
+            reverse(
+                'kanboard:kanboard',
+                args=[self.company.id]
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
@@ -125,10 +164,16 @@ class KanboardTests(TestCase):
         Access : Staff
         """
         self.client.logout()
-        self.client.login(username=self.staff.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.staff.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('kanboard:card', args= [self.card.id]),
+            reverse(
+                'kanboard:card',
+                args=[self.card.id]
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 200)
@@ -137,10 +182,16 @@ class KanboardTests(TestCase):
         Access : Founders of the company
         """
         self.client.logout()
-        self.client.login(username=self.founderCompany.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.founderCompany.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('kanboard:card', args= [self.card.id]),
+            reverse(
+                'kanboard:card',
+                args=[self.card.id]
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 200)
@@ -149,10 +200,16 @@ class KanboardTests(TestCase):
         Access : Mentors of the company
         """
         self.client.logout()
-        self.client.login(username=self.mentorCompany.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.mentorCompany.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('kanboard:card', args= [self.card.id]),
+            reverse(
+                'kanboard:card',
+                args=[self.card.id]
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 200)
@@ -161,23 +218,34 @@ class KanboardTests(TestCase):
         No Access : Other founders
         """
         self.client.logout()
-        self.client.login(username=self.founder.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.founder.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('kanboard:card', args= [self.card.id]),
+            reverse(
+                'kanboard:card',
+                args=[self.card.id]
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
-
 
         """
         No Access : Other mentors
         """
         self.client.logout()
-        self.client.login(username=self.mentor.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.mentor.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('kanboard:card', args= [self.card.id]),
+            reverse(
+                'kanboard:card',
+                args=[self.card.id]
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 302)
@@ -186,10 +254,16 @@ class KanboardTests(TestCase):
         No Access : Executive
         """
         self.client.logout()
-        self.client.login(username=self.executive.user.username, password="Toto1234!#")
+        self.client.login(
+            username=self.executive.user.username,
+            password="Toto1234!#"
+        )
 
         result = self.client.get(
-            reverse('kanboard:card', args= [self.card.id]),
+            reverse(
+                'kanboard:card',
+                args=[self.card.id]
+            ),
             follow=False
         )
         self.assertEqual(result.status_code, 302)

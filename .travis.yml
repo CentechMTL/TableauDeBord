@@ -6,8 +6,13 @@ python:
 install:
   - pip install -r requirements.txt
   - pip install coveralls
+  - pip install pep8
 
 script:
-  coverage run --omit=*.virtualenvs*,*virtualenv* manage.py test
+  - sudo apt-get install ttf-mscorefonts-installer
+  - sudo fc-cache
+  - coverage run --omit=*.virtualenvs*,*virtualenv* manage.py test
+  - pep8 --count --show-source --exclude=migrations,centech2,locale,static,templates ./app/
+
 after_success:
   coveralls

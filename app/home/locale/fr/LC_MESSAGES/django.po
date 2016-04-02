@@ -3,269 +3,301 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-22 01:05+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"POT-Creation-Date: 2016-03-29 12:12-0400\n"
+"PO-Revision-Date: 2016-03-29 11:52-0400\n"
+"Last-Translator: Nicholas Savard\n"
+"Language-Team: \n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 1.8.7\n"
 
-#: app/home/forms.py:15 app/home/forms.py:18
+#: .\app\home\forms.py:14 .\app\home\forms.py:17
 msgid "First name"
 msgstr "Prénom"
 
-#: app/home/forms.py:21 app/home/forms.py:24
+#: .\app\home\forms.py:20 .\app\home\forms.py:23
 msgid "Last name"
 msgstr "Nom"
 
-#: app/home/forms.py:27 app/home/forms.py:30
+#: .\app\home\forms.py:26 .\app\home\forms.py:29
 msgid "Username"
 msgstr "Nom d'utilisateur"
 
-#: app/home/forms.py:33 app/home/forms.py:36
+#: .\app\home\forms.py:32 .\app\home\forms.py:35
 msgid "Email"
 msgstr "Courriel"
 
-#: app/home/models.py:25
+#: .\app\home\models.py:20
 msgid "Education"
-msgstr "Niveau d'étude"
+msgstr "Étude"
 
-#: app/home/models.py:27
+#: .\app\home\models.py:24
 msgid "Education level"
 msgstr "Niveau d'étude"
 
-#: app/home/models.py:36
+#: .\app\home\models.py:34
 msgid "Expertise"
 msgstr "Expertise"
 
-#: app/home/models.py:38
+#: .\app\home\models.py:38
 msgid "Area of expertise"
 msgstr "Aires d'expertise"
 
-#: app/home/models.py:50
+#: .\app\home\models.py:54
 msgid "User"
 msgstr "Utilisateur"
 
-#: app/home/models.py:51
+#: .\app\home\models.py:58
 msgid "Identifiant"
 msgstr "Identifiant"
 
-#: app/home/models.py:54
+#: .\app\home\models.py:64
 msgid "Phone"
 msgstr "téléphone"
 
-#: app/home/models.py:55
+#: .\app\home\models.py:69
 msgid "Web site"
 msgstr "site web"
 
-#: app/home/models.py:56
+#: .\app\home\models.py:74
 msgid "Picture"
 msgstr "Photo"
 
-#: app/home/models.py:58
+#: .\app\home\models.py:79
 msgid "Facebook"
 msgstr "Facebook"
 
-#: app/home/models.py:59
+#: .\app\home\models.py:83
 msgid "Twitter"
 msgstr "Twitter"
 
-#: app/home/models.py:60
+#: .\app\home\models.py:87
 msgid "Google+"
 msgstr "Google+"
 
-#: app/home/models.py:61
+#: .\app\home\models.py:92
 msgid "linkedIn"
 msgstr "linkedIn"
 
-#: app/home/models.py:108
-msgid "Title"
-msgstr "Titre"
+#: .\app\home\templates\home\index.html:5
+msgid "Home"
+msgstr "Accueil"
 
-#: app/home/models.py:109
-msgid "Image"
-msgstr "Image"
-
-#: app/home/templates/home/floorPlan.html:4
-msgid "Floor plan"
-msgstr "Plan d'étage"
-
-#: app/home/templates/home/index.html:11
+#: .\app\home\templates\home\index.html:13
 msgid "Dashboard"
 msgstr "Tableau de Bord"
 
-#: app/home/templates/home/index.html:13
+#: .\app\home\templates\home\index.html:15
 msgid "Follow us on"
 msgstr "Suivez nous sur"
 
-#: app/home/templates/home/index.html:42
+#: .\app\home\templates\home\index.html:44
+#, fuzzy
 msgid ""
 "Cette plateforme est une plateforme privée appartenant au Centech, "
-"incubateur de sociétés technologiques de l'École de Technologie Supérieur de "
-"Montréal."
+"incubateur de sociétés technologiques de l'École de Technologie supérieure "
+"de Montréal."
 msgstr ""
+"Cette plateforme est une plateforme privée appartenant au Centech, "
+"incubateur de sociétés technologiques de l'École de Technologie supérieure "
+"de Montréal."
 
-#: app/home/templates/home/index.html:43
+#: .\app\home\templates\home\index.html:45
+#, fuzzy
 msgid ""
-"Si vous voulez disposer d'un compte d'accès ou avoir plus de renseignement "
+"Si vous voulez disposer d'un compte d'accès ou avoir plus de renseignements "
 "sur notre plateforme, merci de contacter nos services via l'adresse"
 msgstr ""
+"Si vous voulez disposer d'un compte d'accès ou avoir plus de renseignements "
+"sur notre plateforme, merci de contacter nos services via l'adresse"
 
-#: app/home/templates/home/maStartup.html:4
-#: app/home/templates/home/noAccessPermissions.html:4
+#: .\app\home\templates\home\maStartup.html:4
+msgid "Road map"
+msgstr "Carte routière"
+
+#: .\app\home\templates\home\noAccessPermissions.html:5
 msgid "No Access"
 msgstr "Pas d'autorisation"
 
-#: app/home/templates/home/noAccessPermissions.html:7
-msgid "Sorry! But you don't have the permissions to access this page"
-msgstr "Désolé! Mais vous n'avez pas la permissions d'accéder a cette page"
+#: .\app\home\templates\home\noAccessPermissions.html:9
+msgid "Sorry! You do not have the permissions to access this page."
+msgstr "Désolé! Vous n'avez pas les permissions pour accéder à cette page"
 
-#: app/home/templates/home/noAccessPermissions.html:9
+#: .\app\home\templates\home\noAccessPermissions.html:11
+#: .\app\home\templates\registration\login.html:15
 msgid ""
-"If it's an error, you can contact the administrator for have access on this "
-"page"
-msgstr ""
-"Si c'est une erreur, vous pouvez contacter l'administrateur pour avoir "
-"l'accès a cette page"
+"If you believe this is an error, please contact the administrator for "
+"assistance"
+msgstr "Si c'est une erreur, merci de contact l'administrateur"
 
-#: app/home/templates/home/noAccessPermissions.html:11
-msgid "Sorry for inconvenience"
+#: .\app\home\templates\home\noAccessPermissions.html:13
+msgid "Sorry for the inconvenience"
 msgstr "Désolé pour le dérangement"
 
-#: app/home/templates/home/password_update_form.html:6
-msgid "Account"
-msgstr "Compte"
+#: .\app\home\templates\home\password_update_form.html:7
+msgid "My account"
+msgstr "Mon Compte"
 
-#: app/home/templates/home/password_update_form.html:12
+#: .\app\home\templates\home\password_update_form.html:14
 msgid "Save"
 msgstr "Enregistrer"
 
-#: app/home/templates/home/password_update_form.html:15
+#: .\app\home\templates\home\password_update_form.html:17
 msgid "Reset"
 msgstr "Réinitialiser"
 
-#: app/home/templates/home/summary.html:18
+#: .\app\home\templates\home\summary.html:8
+msgid "Summary"
+msgstr "Sommaire"
+
+#: .\app\home\templates\home\summary.html:20
 msgid "Select a status"
 msgstr "Sélectionner un status"
 
-#: app/home/templates/home/summary.html:20
+#: .\app\home\templates\home\summary.html:22
 msgid "All"
 msgstr "Tous"
 
-#: app/home/templates/home/summary.html:39
+#: .\app\home\templates\home\summary.html:41
 msgid "Number of companies"
 msgstr "Nombre de compagnies"
 
-#: app/home/templates/home/summary.html:43
+#: .\app\home\templates\home\summary.html:45
 msgid "Number of founders"
 msgstr "Nombre de fondateurs"
 
-#: app/home/templates/home/summary.html:47
+#: .\app\home\templates\home\summary.html:49
 msgid "Number of mentors"
 msgstr "Nombre de mentors"
 
-#: app/home/templates/home/summary.html:56
+#: .\app\home\templates\home\summary.html:58
 msgid "Finances"
 msgstr "Finances"
 
-#: app/home/templates/home/summary.html:71
-#: app/home/templates/home/summary.html:144
-#: app/home/templates/home/summary.html:236
-#: app/home/templates/home/summary.html:308
+#: .\app\home\templates\home\summary.html:73
+#: .\app\home\templates\home\summary.html:146
+#: .\app\home\templates\home\summary.html:238
+#: .\app\home\templates\home\summary.html:310
 msgid "Companies"
 msgstr "Compagnies"
 
-#: app/home/templates/home/summary.html:71
-#: app/home/templates/home/summary.html:87
+#: .\app\home\templates\home\summary.html:73
+#: .\app\home\templates\home\summary.html:89
 msgid "Amount"
 msgstr "Somme"
 
-#: app/home/templates/home/summary.html:128
+#: .\app\home\templates\home\summary.html:130
 msgid "Indicators of performances"
 msgstr "Indicateurs de performances"
 
-#: app/home/templates/home/summary.html:130
+#: .\app\home\templates\home\summary.html:132
 msgid "Average IRLs"
 msgstr "Moyenne des IRLs"
 
-#: app/home/templates/home/summary.html:131
+#: .\app\home\templates\home\summary.html:133
 msgid "Average TRLs"
 msgstr "Moyenne des TRLs"
 
-#: app/home/templates/home/summary.html:146
+#: .\app\home\templates\home\summary.html:148
 msgid "IRL"
 msgstr "IRL"
 
-#: app/home/templates/home/summary.html:148
+#: .\app\home\templates\home\summary.html:150
 msgid "TRL"
 msgstr "TRL"
 
-#: app/home/templates/home/summary.html:152
-#: app/home/templates/home/summary.html:154
-msgid "Last irl"
+#: .\app\home\templates\home\summary.html:154
+#: .\app\home\templates\home\summary.html:156
+msgid "Last IRL"
 msgstr "Dernier IRL"
 
-#: app/home/templates/home/summary.html:152
-#: app/home/templates/home/summary.html:156
-msgid "Last trl"
+#: .\app\home\templates\home\summary.html:154
+#: .\app\home\templates\home\summary.html:158
+msgid "Last TRL"
 msgstr "Dernier TRL"
 
-#: app/home/templates/home/summary.html:175
+#: .\app\home\templates\home\summary.html:177
 msgid "Level"
 msgstr "Niveau"
 
-#: app/home/templates/home/summary.html:214
+#: .\app\home\templates\home\summary.html:216
 msgid "Experiments"
 msgstr "Expérimentations"
 
-#: app/home/templates/home/summary.html:217
+#: .\app\home\templates\home\summary.html:219
 msgid "Experiments in progress"
 msgstr "Expérimentations en cours"
 
-#: app/home/templates/home/summary.html:221
+#: .\app\home\templates\home\summary.html:223
 msgid "Experiments validated"
 msgstr "Expérimentations validées"
 
-#: app/home/templates/home/summary.html:238
-#: app/home/templates/home/summary.html:244
-#: app/home/templates/home/summary.html:246
+#: .\app\home\templates\home\summary.html:240
+#: .\app\home\templates\home\summary.html:246
+#: .\app\home\templates\home\summary.html:248
 msgid "In progress"
 msgstr "En cours"
 
-#: app/home/templates/home/summary.html:240
-#: app/home/templates/home/summary.html:244
-#: app/home/templates/home/summary.html:248
+#: .\app\home\templates\home\summary.html:242
+#: .\app\home\templates\home\summary.html:246
+#: .\app\home\templates\home\summary.html:250
 msgid "Validated"
 msgstr "Validé"
 
-#: app/home/templates/home/summary.html:244
-#: app/home/templates/home/summary.html:246
-#: app/home/templates/home/summary.html:248
+#: .\app\home\templates\home\summary.html:246
+#: .\app\home\templates\home\summary.html:248
+#: .\app\home\templates\home\summary.html:250
 msgid "Last experimentation"
 msgstr "Dernière expérimentation"
 
-#: app/home/templates/home/summary.html:265
+#: .\app\home\templates\home\summary.html:267
 msgid "Number of experimentations"
 msgstr "Nombre d'expérimentations"
 
-#: app/home/templates/home/summary.html:294
+#: .\app\home\templates\home\summary.html:296
 msgid "Incubation duration (months)"
 msgstr "Temps d'incubation (mois)"
 
-#: app/home/templates/registration/login.html:11
+#: .\app\home\templates\registration\login.html:5
+msgid "Login"
+msgstr "Connexion"
+
+#: .\app\home\templates\registration\login.html:14
 msgid "Your username and password didn't match. Please try again."
 msgstr ""
 "Votre nom d'utilisateur et votre mot de passe ne correspondent pas. Veuillez "
 "recommencer."
 
-#: app/home/templates/registration/login.html:12
-msgid "If it's an error, please contact the administrator"
-msgstr "Si c'est une erreur, merci de contact l'administrateur"
+#~ msgid "Connexion"
+#~ msgstr "Login"
+
+#~ msgid ""
+#~ "If it's an error, you can contact the administrator for have access on "
+#~ "this page"
+#~ msgstr ""
+#~ "Si c'est une erreur, vous pouvez contacter l'administrateur pour avoir "
+#~ "l'accès a cette page"
+
+#~ msgid "Last trl"
+#~ msgstr "Dernier TRL"
+
+#, fuzzy
+#~| msgid "Companies"
+#~ msgid "Company"
+#~ msgstr "Compagnies"
+
+#~ msgid "Floor plan"
+#~ msgstr "Plan d'étage"
+
+#~ msgid "Title"
+#~ msgstr "Titre"
+
+#~ msgid "Image"
+#~ msgstr "Image"

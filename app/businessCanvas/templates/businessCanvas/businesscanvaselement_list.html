@@ -2,6 +2,9 @@
 <!-- Load internationalisation utils-->
 {% load i18n %}
 {% load staticfiles %}
+
+{% block title %}{{company}} - {% trans "Business Model Canvas" %}{% endblock %}
+
 {% block extrahead %}
 
 <!-- JS for use JQUERY --->
@@ -32,7 +35,7 @@
             $.ajax({
                 type: this.method,
                 url: '{% url "businessCanvas:businessCanvasAddElement" %}',
-                data: donnees + '&type=' + this.id + '&company=' + {{companyId}},
+                data: donnees + '&type=' + this.id + '&company=' + {{company_id}},
 
                 success: function(data) {
                     //Delete content of the form
@@ -121,9 +124,8 @@
         });
 	});
 </script>
-
 {% endblock %}
-{% block title %}Business Model Canvas{% endblock %}
+
 {% block content %}
 <!--TODO Check for autogenerate the table-->
 <div class="row">
@@ -133,14 +135,14 @@
 </div>
 <div class="row">
     <div class="col-sm-12" align="center">
-        {%if isFounder %}
-        <div style="border: 1px solid black; padding: 2px; margin-bottom: 20px; margin-top: 10px; background-color: #428bca; color: white; font-size: 20px;" onclick='archiver("{% url "businessCanvas:businessCanvasArchiver" 1 %}", {{companyId}}, "{% url "businessCanvas:businessCanvasElementArchived_list" 1 %}", "{% url "businessCanvas:businessCanvasDeleteArchive" 1 %}");'>Archiver</div>
+        {%if is_founder %}
+        <div style="border: 1px solid black; padding: 2px; margin-bottom: 20px; margin-top: 10px; background-color: #428bca; color: white; font-size: 20px;" onclick='archiver("{% url "businessCanvas:businessCanvasArchiver" 1 %}", {{company_id}}, "{% url "businessCanvas:businessCanvasElementArchived_list" 1 %}", "{% url "businessCanvas:businessCanvasDeleteArchive" 1 %}");'>Archiver</div>
         {% endif %}
         <table class="canvas_container_table" id="main_table" cellpadding="5" cellspacing="0">
             <tr>
                 <td rowspan="2" class="border-right-none border-bottom-none" width="20%">
                     <h6>{% trans "Key Partners" %}
-                        {%if isFounder %}
+                        {%if is_founder %}
                             <span class="KeyPartner" style="color: #428bca;" onclick="updateDisplayForm(this.getAttribute('class'))"><i class="fa fa-plus-square"></i></span>
                         {% endif %}
                     </h6>
@@ -151,7 +153,7 @@
                             <input type="hidden" name="update" class="hiddenInput" value="False"/>
                             <input type="submit" value="Envoyer"/>
                         </form>
-                        {% for elem in listKeyPartners %}
+                        {% for elem in list_key_partners %}
                             <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
                                 {% if last_archive %}
                                     {% if elem.date > last_archive.date %}
@@ -164,7 +166,7 @@
                                 {% else %}
                                     <span class="colorElement" style="color: green;">
                                 {% endif %}
-                                <span class="KeyPartner{{elem.id}}" onclick='getDetail(this.className, "{% url "businessCanvas:businessCanvasGetDetail" 1 %}");'>{{elem.title}}</span>{%if isFounder %}
+                                <span class="KeyPartner{{elem.id}}" onclick='getDetail(this.className, "{% url "businessCanvas:businessCanvasGetDetail" 1 %}");'>{{elem.title}}</span>{%if is_founder %}
                                 </span>
                                 <span style="float: right;" class="KeyPartner{{elem.id}}" onclick='deleteElement(this.className, "{% url "businessCanvas:businessCanvasDeleteElement" 1 %}");'><i class="fa fa-trash"></i></span>
                                 <span style="float: right;" class="KeyPartner{{elem.id}}" onclick='editElement(this.className, "{% url "businessCanvas:businessCanvasGetDetail" 1 %}");'><i class="fa fa-pencil-square-o"></i></span>
@@ -176,7 +178,7 @@
                 </td>
                 <td class="border-right-none border-bottom-none" width="20%">
                     <h6>{% trans "Key Activities" %}
-                        {%if isFounder %}
+                        {%if is_founder %}
                             <span class="KeyActivitie" style="color: #428bca;" onclick="updateDisplayForm(this.getAttribute('class'))"><i class="fa fa-plus-square"></i></span>
                         {% endif %}
                     </h6>
@@ -187,7 +189,7 @@
                         <input type="hidden" name="update" class="hiddenInput" value="False"/>
                         <input type="submit" value="Envoyer"/>
                     </form>
-                    {% for elem in listKeyActivities %}
+                    {% for elem in list_key_activities %}
                             <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
                                 {% if last_archive %}
                                     {% if elem.date > last_archive.date %}
@@ -202,7 +204,7 @@
                                 {% endif %}
                                 <span class="KeyActivitie{{elem.id}}" onclick='getDetail(this.className, "{% url "businessCanvas:businessCanvasGetDetail" 1 %}")'>{{elem.title}}</span>
                                 </span>
-                                {%if isFounder %}
+                                {%if is_founder %}
                                 <span style="float: right;" class="KeyActivitie{{elem.id}}" onclick='deleteElement(this.className, "{% url "businessCanvas:businessCanvasDeleteElement" 1 %}");'><i class="fa fa-trash"></i></span>
                                 <span style="float: right;" class="KeyActivitie{{elem.id}}" onclick='editElement(this.className, "{% url "businessCanvas:businessCanvasGetDetail" 1 %}");'><i class="fa fa-pencil-square-o"></i></span>
                                 {% endif %}
@@ -213,7 +215,7 @@
                 </td>
                 <td rowspan="2" colspan="2" class="border-right-none border-bottom-none" width="20%">
                     <h6>{% trans "Value Proposition" %}
-                        {%if isFounder %}
+                        {%if is_founder %}
                             <span class="ValueProposition" style="color: #428bca;" onclick="updateDisplayForm(this.getAttribute('class'))"><i class="fa fa-plus-square"></i></span>
                         {% endif %}
                     </h6>
@@ -225,7 +227,7 @@
                         <input type="submit" value="Envoyer"/>
                     </form>
 
-                        {% for elem in listValuePropositions %}
+                        {% for elem in list_value_propositions %}
                             <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
                                 {% if last_archive %}
                                     {% if elem.date > last_archive.date %}
@@ -240,7 +242,7 @@
                                 {% endif %}
                                 <span class="ValueProposition{{elem.id}}" onclick='getDetail(this.className, "{% url "businessCanvas:businessCanvasGetDetail" 1 %}")'>{{elem.title}}</span>
                                 </span>
-                                {%if isFounder %}
+                                {%if is_founder %}
                                 <span style="float: right;" class="ValueProposition{{elem.id}}" onclick='deleteElement(this.className, "{% url "businessCanvas:businessCanvasDeleteElement" 1 %}");'><i class="fa fa-trash"></i></span>
                                 <span style="float: right;" class="ValueProposition{{elem.id}}" onclick='editElement(this.className, "{% url "businessCanvas:businessCanvasGetDetail" 1 %}");'><i class="fa fa-pencil-square-o"></i></span>
                                 {% endif %}
@@ -251,7 +253,7 @@
                 </td>
                 <td class="border-right-none border-bottom-none" width="20%">
                     <h6>{% trans "Customer Relationships" %}
-                        {%if isFounder %}
+                        {%if is_founder %}
                             <span class="CustomerRelationship" style="color: #428bca;" onclick="updateDisplayForm(this.getAttribute('class'))"><i class="fa fa-plus-square"></i></span>
                         {% endif %}
                     </h6>
@@ -262,7 +264,7 @@
                         <input type="hidden" name="update" class="hiddenInput" value="False"/>
                         <input type="submit" value="Envoyer"/>
                     </form>
-                        {% for elem in listCustomerRelationships %}
+                        {% for elem in list_customer_relationships %}
                             <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
                                 {% if last_archive %}
                                     {% if elem.date > last_archive.date %}
@@ -277,7 +279,7 @@
                                 {% endif %}
                                 <span class="CustomerRelationship{{elem.id}}" onclick='getDetail(this.className, "{% url "businessCanvas:businessCanvasGetDetail" 1 %}")'>{{elem.title}}</span>
                                 </span>
-                                {%if isFounder %}
+                                {%if is_founder %}
                                 <span style="float: right;" class="CustomerRelationship{{elem.id}}" onclick='deleteElement(this.className, "{% url "businessCanvas:businessCanvasDeleteElement" 1 %}");'><i class="fa fa-trash"></i></span>
                                 <span style="float: right;" class="CustomerRelationship{{elem.id}}" onclick='editElement(this.className, "{% url "businessCanvas:businessCanvasGetDetail" 1 %}");'><i class="fa fa-pencil-square-o"></i></span>
                                 {% endif %}
@@ -288,7 +290,7 @@
                 </td>
                 <td rowspan="2" class="border-bottom-none" width="20%">
                     <h6>{% trans "Customer Segments" %}
-                        {%if isFounder %}
+                        {%if is_founder %}
                             <span class="CustomerSegment" style="color: #428bca;" onclick="updateDisplayForm(this.getAttribute('class'))"><i class="fa fa-plus-square"></i></span>
                         {% endif %}
                     </h6>
@@ -299,7 +301,7 @@
                         <input type="hidden" name="update" class="hiddenInput" value="False"/>
                         <input type="submit" value="Envoyer"/>
                     </form>
-                        {% for elem in listCustomerSegments %}
+                        {% for elem in list_customer_segments %}
                             <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
                                 {% if last_archive %}
                                     {% if elem.date > last_archive.date %}
@@ -314,7 +316,7 @@
                                 {% endif %}
                                 <span class="CustomerSegment{{elem.id}}" onclick='getDetail(this.className, "{% url "businessCanvas:businessCanvasGetDetail" 1 %}")'>{{elem.title}}</span>
                                 </span>
-                                {%if isFounder %}
+                                {%if is_founder %}
                                 <span style="float: right;" class="CustomerSegment{{elem.id}}" onclick='deleteElement(this.className, "{% url "businessCanvas:businessCanvasDeleteElement" 1 %}");'><i class="fa fa-trash"></i></span>
                                 <span style="float: right;" class="CustomerSegment{{elem.id}}" onclick='editElement(this.className, "{% url "businessCanvas:businessCanvasGetDetail" 1 %}");'><i class="fa fa-pencil-square-o"></i></span>
                                 {% endif %}
@@ -327,7 +329,7 @@
             <tr>
                 <td class="border-bottom-none border-right-none">
                     <h6>{% trans "Key Resources" %}
-                        {%if isFounder %}
+                        {%if is_founder %}
                             <span class="KeyResource" style="color: #428bca;" onclick="updateDisplayForm(this.getAttribute('class'))"><i class="fa fa-plus-square"></i></span>
                         {% endif %}
                     </h6>
@@ -338,7 +340,7 @@
                         <input type="hidden" name="update" class="hiddenInput" value="False"/>
                         <input type="submit" value="Envoyer"/>
                     </form>
-                        {% for elem in listKeyResources %}
+                        {% for elem in list_key_resources %}
                             <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
                                 {% if last_archive %}
                                     {% if elem.date > last_archive.date %}
@@ -353,7 +355,7 @@
                                 {% endif %}
                                 <span class="KeyResource{{elem.id}}" onclick='getDetail(this.className, "{% url "businessCanvas:businessCanvasGetDetail" 1 %}")'>{{elem.title}}</span>
                                 </span>
-                                {%if isFounder %}
+                                {%if is_founder %}
                                 <span style="float: right;" class="KeyResource{{elem.id}}" onclick='deleteElement(this.className, "{% url "businessCanvas:businessCanvasDeleteElement" 1 %}");'><i class="fa fa-trash"></i></span>
                                 <span style="float: right;" class="KeyResource{{elem.id}}" onclick='editElement(this.className, "{% url "businessCanvas:businessCanvasGetDetail" 1 %}");'><i class="fa fa-pencil-square-o"></i></span>
                                 {% endif %}
@@ -364,7 +366,7 @@
                 </td>
                 <td class="border-bottom-none border-right-none">
                     <h6>{% trans "Channels" %}
-                        {%if isFounder %}
+                        {%if is_founder %}
                             <span class="Channel" style="color: #428bca;" onclick="updateDisplayForm(this.getAttribute('class'))"><i class="fa fa-plus-square"></i></span>
                         {% endif %}
                     </h6>
@@ -375,7 +377,7 @@
                         <input type="hidden" name="update" class="hiddenInput" value="False"/>
                         <input type="submit" value="Envoyer"/>
                     </form>
-                        {% for elem in listChannels %}
+                        {% for elem in list_channels %}
                             <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
                                 {% if last_archive %}
                                     {% if elem.date > last_archive.date %}
@@ -390,7 +392,7 @@
                                 {% endif %}
                                 <span class="Channel{{elem.id}}" onclick='getDetail(this.className, "{% url "businessCanvas:businessCanvasGetDetail" 1 %}")'>{{elem.title}}</span>
                                 </span>
-                                {%if isFounder %}
+                                {%if is_founder %}
                                 <span style="float: right;" class="Channel{{elem.id}}" onclick='deleteElement(this.className, "{% url "businessCanvas:businessCanvasDeleteElement" 1 %}");'><i class="fa fa-trash"></i></span>
                                 <span style="float: right;" class="Channel{{elem.id}}" onclick='editElement(this.className, "{% url "businessCanvas:businessCanvasGetDetail" 1 %}");'><i class="fa fa-pencil-square-o"></i></span>
                                 {% endif %}
@@ -403,7 +405,7 @@
             <tr class="fix_width_section">
                 <td colspan="3" class="border-right-none">
                     <h6>{% trans "Cost Structure" %}
-                        {%if isFounder %}
+                        {%if is_founder %}
                             <span class="CostStructure" style="color: #428bca;" onclick="updateDisplayForm(this.getAttribute('class'))"><i class="fa fa-plus-square"></i></span>
                         {% endif %}
                     </h6>
@@ -414,7 +416,7 @@
                         <input type="hidden" name="update" class="hiddenInput" value="False"/>
                         <input type="submit" value="Envoyer"/>
                     </form>
-                        {% for elem in listCostStructures %}
+                        {% for elem in list_cost_structures %}
                             <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
                                 {% if last_archive %}
                                     {% if elem.date > last_archive.date %}
@@ -429,7 +431,7 @@
                                 {% endif %}
                                 <span class="CostStructure{{elem.id}}" onclick='getDetail(this.className, "{% url "businessCanvas:businessCanvasGetDetail" 1 %}")'>{{elem.title}}</span>
                                 </span>
-                                {%if isFounder %}
+                                {%if is_founder %}
                                 <span style="float: right;" class="CostStructure{{elem.id}}" onclick='deleteElement(this.className, "{% url "businessCanvas:businessCanvasDeleteElement" 1 %}");'><i class="fa fa-trash"></i></span>
                                 <span style="float: right;" class="CostStructure{{elem.id}}" onclick='editElement(this.className, "{% url "businessCanvas:businessCanvasGetDetail" 1 %}");'><i class="fa fa-pencil-square-o"></i></span>
                                 {% endif %}
@@ -440,7 +442,7 @@
                 </td>
                 <td colspan="3">
                     <h6>{% trans "Revenue Streams" %}
-                        {%if isFounder %}
+                        {%if is_founder %}
                             <span class="RevenueStream" style="color: #428bca;" onclick="updateDisplayForm(this.getAttribute('class'))"><i class="fa fa-plus-square"></i></span>
                         {% endif %}
                     </h6>
@@ -451,7 +453,7 @@
                         <input type="hidden" name="update" class="hiddenInput" value="False"/>
                         <input type="submit" value="Envoyer"/>
                     </form>
-                        {% for elem in listRevenueStreams %}
+                        {% for elem in list_revenue_streams %}
                             <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
                                 {% if last_archive %}
                                     {% if elem.date > last_archive.date %}
@@ -466,7 +468,7 @@
                                 {% endif %}
                                 <span class="RevenueStream{{elem.id}}" onclick='getDetail(this.className, "{% url "businessCanvas:businessCanvasGetDetail" 1 %}")'>{{elem.title}}</span>
                                 </span>
-                                {%if isFounder %}
+                                {%if is_founder %}
                                 <span style="float: right;" class="RevenueStream{{elem.id}}" onclick='deleteElement(this.className, "{% url "businessCanvas:businessCanvasDeleteElement" 1 %}");'><i class="fa fa-trash"></i></span>
                                 <span style="float: right;" class="RevenueStream{{elem.id}}" onclick='editElement(this.className, "{% url "businessCanvas:businessCanvasGetDetail" 1 %}");'><i class="fa fa-pencil-square-o"></i></span>
                                 {% endif %}
@@ -483,7 +485,7 @@
             <tr id="brain_storming_section">
                 <td colspan="5">
                     <h6>{% trans "Brainstorming Space" %}
-                        {%if isFounder %}
+                        {%if is_founder %}
                             <span class="BrainstormingSpace" style="color: #428bca;" onclick="updateDisplayForm(this.getAttribute('class'))"><i class="fa fa-plus-square"></i></span>
                         {% endif %}
                     </h6>
@@ -494,7 +496,7 @@
                         <input type="hidden" name="update" class="hiddenInput" value="False"/>
                         <input type="submit" value="Envoyer"/>
                     </form>
-                        {% for elem in listBrainstormingSpaces %}
+                        {% for elem in list_brainstorming_spaces %}
                             <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
                                 {% if last_archive %}
                                     {% if elem.date > last_archive.date %}
@@ -509,7 +511,7 @@
                                 {% endif %}
                                 <span class="BrainstormingSpace{{elem.id}}" onclick='getDetail(this.className, "{% url "businessCanvas:businessCanvasGetDetail" 1 %}")'>{{elem.title}}</span>
                                 </span>
-                                {%if isFounder %}
+                                {%if is_founder %}
                                 <span style="float: right;" class="BrainstormingSpace{{elem.id}}" onclick='deleteElement(this.className, "{% url "businessCanvas:businessCanvasDeleteElement" 1 %}");'><i class="fa fa-trash"></i></span>
                                 <span style="float: right;" class="BrainstormingSpace{{elem.id}}" onclick='editElement(this.className, "{% url "businessCanvas:businessCanvasGetDetail" 1 %}");'><i class="fa fa-pencil-square-o"></i></span>
                                 {% endif %}
@@ -526,7 +528,7 @@
                                     <a href="{% url 'businessCanvas:businessCanvasElementArchived_list' archive.id %}">
                                         {{archive|truncatechars:20}}
                                     </a>
-                                    {%if isFounder %}
+                                    {%if is_founder %}
                                     <a href="{% url 'businessCanvas:businessCanvasDeleteArchive' archive.id %}">
                                         <span style="float: right; color: #428bca;" class="archive{{archive.id}}">
                                             <i class="fa fa-trash"></i>

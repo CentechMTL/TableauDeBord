@@ -3,6 +3,8 @@
 {% load i18n %}
 {% load staticfiles %}
 
+{% block title %}{{company}} - {% trans "Archived Business Model Canvas" %}{% endblock %}
+
 {% block extrahead %}
 <!-- Main CSS --->
 <link rel="stylesheet" href="{% static 'businessCanvas/css/style.css' %}">
@@ -11,13 +13,11 @@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 {% endblock %}
 
-{% block title %}Business Model Canvas{% endblock %}
-
 {% block content %}
 <!--TODO check for autogenerate the table-->
 <div class="row">
     <div class="col-sm-12" align="center">
-        <h1>{% trans "Business Model Canvas of " %}{{currentArchive.date}}</h1>
+        <h1>{% trans "Business Model Canvas of " %}{{current_archive.date}}</h1>
     </div>
 </div>
 <div class="row">
@@ -27,7 +27,7 @@
                 <td rowspan="2" class="border-right-none border-bottom-none" width="20%">
                     <h6>{% trans "Key Partners" %}</h6>
                     <div id="divKeyPartner">
-                        {% for elem in listKeyPartners %}
+                        {% for elem in list_key_partners %}
                             <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
                                 <span class="KeyPartner{{elem.id}}" onclick="getDetail(this.className, '{% url 'businessCanvas:businessCanvasGetDetail' 1 %}');">{{elem.title}}</span>
                                 <p style="visibility: hidden; display: none;"></p>
@@ -38,7 +38,7 @@
                 <td class="border-right-none border-bottom-none" width="20%">
                     <h6>{% trans "Key Activities" %}</h6>
                     <div id="divKeyActivitie">
-                    {% for elem in listKeyActivities %}
+                    {% for elem in list_key_activities %}
                             <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
                                 <span class="KeyActivitie{{elem.id}}" onclick="getDetail(this.className, '{% url 'businessCanvas:businessCanvasGetDetail' 1 %}')">{{elem.title}}</span>
                                 <p style="visibility: hidden; display: none;"></p>
@@ -49,7 +49,7 @@
                 <td rowspan="2" colspan="2" class="border-right-none border-bottom-none" width="20%">
                     <h6>{% trans "Value Proposition" %}</h6>
                     <div id="divValueProposition">
-                        {% for elem in listValuePropositions %}
+                        {% for elem in list_value_propositions %}
                             <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
                                 <span class="ValueProposition{{elem.id}}" onclick="getDetail(this.className, '{% url 'businessCanvas:businessCanvasGetDetail' 1 %}')">{{elem.title}}</span>
                                 <p style="visibility: hidden; display: none;"></p>
@@ -60,7 +60,7 @@
                 <td class="border-right-none border-bottom-none" width="20%">
                     <h6>{% trans "Customer Relationships" %}</h6>
                     <div id="divCustomerRelationship">
-                        {% for elem in listCustomerRelationships %}
+                        {% for elem in list_customer_relationships %}
                             <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
                                 <span class="CustomerRelationship{{elem.id}}" onclick="getDetail(this.className, '{% url 'businessCanvas:businessCanvasGetDetail' 1 %}')">{{elem.title}}</span>
                                 <p style="visibility: hidden; display: none;"></p>
@@ -71,7 +71,7 @@
                 <td rowspan="2" class="border-bottom-none" width="20%">
                     <h6>{% trans "Customer Segments" %}</h6>
                     <div id="divCustomerSegment">
-                        {% for elem in listCustomerSegments %}
+                        {% for elem in list_customer_segments %}
                             <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
                                 <span class="CustomerSegment{{elem.id}}" onclick="getDetail(this.className, '{% url 'businessCanvas:businessCanvasGetDetail' 1 %}')">{{elem.title}}</span>
                                 <p style="visibility: hidden; display: none;"></p>
@@ -84,7 +84,7 @@
                 <td class="border-bottom-none border-right-none">
                     <h6>{% trans "Key Resources" %}</h6>
                     <div id="divKeyResource">
-                        {% for elem in listKeyResources %}
+                        {% for elem in list_key_resources %}
                             <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
                                 <span class="KeyResource{{elem.id}}" onclick="getDetail(this.className, '{% url 'businessCanvas:businessCanvasGetDetail' 1 %}')">{{elem.title}}</span>
                                 <p style="visibility: hidden; display: none;"></p>
@@ -95,7 +95,7 @@
                 <td class="border-bottom-none border-right-none">
                     <h6>{% trans "Channels" %}</h6>
                     <div id="divChannel">
-                        {% for elem in listChannels %}
+                        {% for elem in list_channels %}
                             <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
                                 <span class="Channel{{elem.id}}" onclick="getDetail(this.className, '{% url 'businessCanvas:businessCanvasGetDetail' 1 %}')">{{elem.title}}</span>
                                 <p style="visibility: hidden; display: none;"></p>
@@ -108,7 +108,7 @@
                 <td colspan="3" class="border-right-none">
                     <h6>{% trans "Cost Structure" %}</h6>
                     <div id="divCostStructure">
-                        {% for elem in listCostStructures %}
+                        {% for elem in list_cost_structures %}
                             <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
                                 <span class="CostStructure{{elem.id}}" onclick="getDetail(this.className, '{% url 'businessCanvas:businessCanvasGetDetail' 1 %}')">{{elem.title}}</span>
                                 <p style="visibility: hidden; display: none;"></p>
@@ -119,7 +119,7 @@
                 <td colspan="3">
                     <h6>{% trans "Revenue Streams" %}</h6>
                     <div id="divRevenueStream">
-                        {% for elem in listRevenueStreams %}
+                        {% for elem in list_revenue_streams %}
                             <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
                                 <span class="RevenueStream{{elem.id}}" onclick="getDetail(this.className, '{% url 'businessCanvas:businessCanvasGetDetail' 1 %}')">{{elem.title}}</span>
                                 <p style="visibility: hidden; display: none;"></p>
@@ -136,7 +136,7 @@
                 <td colspan="5">
                     <h6>{% trans "Brainstorming Space" %}</h6>
                     <div id="divBrainstormingSpace">
-                        {% for elem in listBrainstormingSpaces %}
+                        {% for elem in list_brainstorming_spaces %}
                             <div id="{{elem.id}}" class="element" style="border-bottom: 1px dashed black;">
                                 <span class="BrainstormingSpace{{elem.id}}" onclick="getDetail(this.className, '{% url 'businessCanvas:businessCanvasGetDetail' 1 %}')">{{elem.title}}</span>
                                 <p style="visibility: hidden; display: none;"></p>

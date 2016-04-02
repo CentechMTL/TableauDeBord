@@ -7,7 +7,7 @@
     {% load staticfiles %}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{app.site.entreprise.name}}{% trans "Dashboard v.1" %}</title>
+    <title>{% block title %}{% endblock %}</title>
     <link href="{% static 'INSPINIA-theme/css/bootstrap.min.css' %}" rel="stylesheet">
     <link href="{% static 'INSPINIA-theme/css/bootstrap.css' %}" rel="stylesheet">
     <link href="{% static 'INSPINIA-theme/font-awesome/css/font-awesome.css' %}" rel="stylesheet">
@@ -41,8 +41,8 @@
                     {% if "road_map" in list_menu %}
                         <a href="{% url 'home:maStartup' %}"><div><i class="fa fa-globe"></i> <span class="nav-label">{% trans "Road map" %}</span></div></a>
                     {% endif %}
-                    {% if "floor_plan" in list_menu %}
-                        <a href="{% url 'home:floorPlan' %}"><div><i class="fa fa-street-view "></i> <span class="nav-label">{% trans "Floor plan" %}</span></div></a>
+                    {% if "floorMap" in list_menu %}
+                        <a href="{% url 'floorMap:index' %}"><div><i class="fa fa-street-view "></i> <span class="nav-label">{% trans "Floor plan" %}</span></div></a>
                     {% endif %}
                     {% if "companies" in list_menu %}
                         <a href="{% url 'company:index' %}"><div><i class="fa fa-university"></i> <span class="nav-label">{% trans "Companies" %}</span></div></a>
@@ -56,15 +56,12 @@
                     {% if "summary" in list_menu %}
                         <a href="{% url 'home:summary' 1%}"><div><i class="fa fa-bar-chart" ></i> <span class="nav-label">{% trans "Summary" %}</span></div></a>
                     {% endif %}
-                    {% if "presence" in list_menu %}
-                        <a href="{% url 'company:presence_list' 1%}"><div><i class="fa fa-graduation-cap"></i> <span class="nav-label">{% trans "Presence" %}</span></div></a>
-                    {% endif %}
 
                     <!-----------------------------------------
                     ============= COMPAGNIE MENU ==============
                     ------------------------------------------>
                     {% if list_company %}
-                        <select id="selectCompany" class="menuDashboard" onchange="updateMenu(this.value)">
+                        <select id="selectCompany" class="menuDashboard form-control" onchange="updateMenu(this.value)">
                             <option disabled="True">{% trans "Select a company" %}</option>
                             {% for company in list_company %}
                                 {% if request.session.companySelected == company.id %}
@@ -118,7 +115,7 @@
                 </div>
                 <ul class="nav navbar-top-links navbar-right">
                     <li>
-                        <span class="m-r-sm text-muted welcome-message">{% trans "Welcome to the Centech Dashboard." %}</span>
+                        <span class="m-r-sm text-muted welcome-message">{% trans "Welcome to the Centech Dashboard" %}</span>
                     </li>
 
                     <!-- MENU LANGUAGE -->
@@ -172,38 +169,6 @@
                                     {% endwith %}
                                 </li>
                                 <hr>
-                            {% endif %}
-                            {% if isCentech %}
-                                <li>{% trans "ADMINISTRATION" %}</li>
-                                <li>
-                                    <a href="{% url 'founder:add' %}" style="text-decoration: none; color: black; font-size: 14px;">
-                                        <div class="dropdown-messages-box">
-                                            <i class="fa fa-users"></i> {% trans "Add new founder" %}
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{% url 'mentor:create' %}" style="text-decoration: none; color: black; font-size: 14px;">
-                                        <div class="dropdown-messages-box">
-                                            <i class="fa fa-graduation-cap"></i> {% trans "Add new mentor" %}
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{% url 'company:status_create' %}" style="text-decoration: none; color: black; font-size: 14px;">
-                                        <div class="dropdown-messages-box">
-                                            <i class="fa fa-tags"></i> {% trans "Add new status" %}
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{% url 'company:create' %}" style="text-decoration: none; color: black; font-size: 14px;">
-                                        <div class="dropdown-messages-box">
-                                            <i class="fa fa-university"></i> {% trans "Add new company" %}
-                                        </div>
-                                    </a>
-                                </li>
-                                <hr>
                         {% endif %}
                                 <li>{% trans "MY ACCOUNT" %}</li>
                                 {% if isCentech or isFounder or isMentor %}
@@ -218,7 +183,7 @@
                                 <li>
                                     <a href="{% url 'home:logout' %}" style="text-decoration: none; color: black; font-size: 14px;">
                                         <div class="dropdown-messages-box">
-                                            <i class="fa fa-sign-out pull-left"></i> {% trans "Log out" %}
+                                            <i class="fa fa-sign-out pull-left"></i> {% trans "Logout" %}
                                         </div>
                                     </a>
                                 </li>
@@ -234,22 +199,20 @@
                 <div class="col-lg-12">
                     <div id="content">
                         {% if messages %}
-                            <div class="panel-body well" style="background-color: lightgrey; margin-top: 50px; margin-bottom: 50px; padding: 10px 0 5px 0; font-weight: bold;">
-                                <ul id="message" style="list-style-type: none; ">
-                                    {% for message in messages %}
-                                        {% if message.tags == 'error' %}
-                                            <li style="color: #d60910;">{{ message }}</li>
-                                        {% elif message.tags == 'success'%}
-                                            <li style="color: #339900;">{{ message }}</li>
-                                        {% elif message.tags == 'info'%}
-                                            <li style="color: #3366cc;">{{ message }}</li>
-                                        {% elif message.tags == 'warning'%}
-                                            <li style="color: orange;">{{ message }}</li>
-                                        {% else %}
-                                            <li>{{ message }}</li>
-                                        {% endif %}
-                                    {% endfor %}
-                                </ul>
+                            {% for message in messages %}
+                                {% if message.tags == 'error' %}
+                                    <div class="alert alert-danger" style="margin-top: 10px;">
+                                {% elif message.tags == 'success'%}
+                                    <div class="alert alert-success" style="margin-top: 10px;">
+                                {% elif message.tags == 'info'%}
+                                    <div class="alert alert-info" style="margin-top: 10px;">
+                                {% elif message.tags == 'warning'%}
+                                    <div class="alert alert-warning" style="margin-top: 10px;">
+                                {% else %}
+                                    <div class="alert alert-info" style="margin-top: 10px;">
+                                {% endif %}
+                                        {{ message }}
+                            {% endfor %}
                             </div>
                         {% endif %}
                         {% block content %}{% endblock %}

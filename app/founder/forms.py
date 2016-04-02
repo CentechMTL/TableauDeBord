@@ -11,7 +11,10 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class FounderFilter(FilterSet):
-    name = MethodFilter(action='filter_username', label=_('Search by name'))
+    name = MethodFilter(
+        action='filter_username',
+        label=_('Search by name')
+    )
 
     class Meta:
         model = Founder
@@ -23,9 +26,23 @@ class FounderFilter(FilterSet):
 
             value = re.sub("[^\w]", " ",  value).split()
             for word in value:
-                firstname = list(queryset.filter(user__first_name__icontains = word).all())
-                lastname = list(queryset.filter(user__last_name__icontains = word).all())
-                username = list(queryset.filter(user__username__icontains = word).all())
+                firstname = list(
+                    queryset.filter(
+                        user__first_name__icontains=word
+                    ).all()
+                )
+
+                lastname = list(
+                    queryset.filter(
+                        user__last_name__icontains=word
+                    ).all()
+                )
+
+                username = list(
+                    queryset.filter(
+                        user__username__icontains=word
+                    ).all()
+                )
 
                 for user in firstname:
                     if user not in query:
@@ -46,52 +63,87 @@ class FounderFilter(FilterSet):
 class FounderForm(forms.ModelForm):
     class Meta:
         model = Founder
-        fields = ['picture', 'education', 'about', 'expertise', 'phone', 'website', 'facebook', 'twitter',
-                  'googlePlus', 'linkedIn']
+        fields = [
+            'picture',
+            'education',
+            'about',
+            'expertise',
+            'phone',
+            'website',
+            'facebook',
+            'twitter',
+            'googlePlus',
+            'linkedIn'
+        ]
 
     phone = forms.CharField(
         label=_('Phone number'),
         required=False,
         max_length=10
     )
-    phone.widget.attrs.update({'placeholder': _(u'Phone number')})
+    phone.widget.attrs.update(
+        {
+            'placeholder': _(u'Phone number')
+        }
+    )
 
     website = forms.URLField(
         label=_('Web site'),
         required=False,
     )
-    website.widget.attrs.update({'placeholder': _(u'https://example.com')})
+    website.widget.attrs.update(
+        {
+            'placeholder': _(u'https://example.com')
+        }
+    )
 
     facebook = forms.URLField(
         label=_('Facebook'),
         required=False,
     )
-    facebook.widget.attrs.update({'placeholder': _(u'https://www.facebook.com/lastname.firstname')})
+    facebook.widget.attrs.update(
+        {
+            'placeholder': _(u'https://www.facebook.com/lastname.firstname')
+        }
+    )
 
     twitter = forms.URLField(
         label=_('Twitter'),
         required=False,
     )
-    twitter.widget.attrs.update({'placeholder': _(u'https://twitter.com/username')})
+    twitter.widget.attrs.update(
+        {
+            'placeholder': _(u'https://twitter.com/username')
+        }
+    )
 
     googlePlus = forms.URLField(
         label=_('Google+'),
         required=False,
     )
-    googlePlus.widget.attrs.update({'placeholder': _(u'https://plus.google.com/id')})
+    googlePlus.widget.attrs.update(
+        {
+            'placeholder': _(u'https://plus.google.com/id')
+        }
+    )
 
     linkedIn = forms.URLField(
         label=_('linkedIn'),
         required=False,
     )
-    linkedIn.widget.attrs.update({'placeholder': _(u'https://ca.linkedin.com/in/username')})
+    linkedIn.widget.attrs.update(
+        {
+            'placeholder': _(u'https://ca.linkedin.com/in/username')
+        }
+    )
 
     about = forms.CharField(
         label=_('Description'),
         required=False,
         widget=forms.Textarea(
             attrs={
-                'placeholder': _(u'Write here a brief summary of your skills and your career.'),
+                'placeholder': _(u'Write here a brief summary of your '
+                                 u'skills and career.'),
                 'class': 'md-editor'
             }
         )

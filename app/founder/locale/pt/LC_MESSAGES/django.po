@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-22 01:05+0000\n"
-"PO-Revision-Date: 2015-09-29 21:00-0300\n"
+"POT-Creation-Date: 2016-03-29 12:12-0400\n"
+"PO-Revision-Date: 2016-03-24 14:34-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pt_BR\n"
@@ -16,138 +16,166 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 1.8.5\n"
+"X-Generator: Poedit 1.8.7\n"
 
-#: app/founder/forms.py:14
+#: .\app\founder\forms.py:16
 msgid "Search by name"
 msgstr "Buscar por nome"
 
-#: app/founder/forms.py:53 app/founder/forms.py:57
+#: .\app\founder\forms.py:80 .\app\founder\forms.py:86
 msgid "Phone number"
 msgstr "Número de telefone"
 
-#: app/founder/forms.py:60 app/founder/templates/founder/detail.html:43
+#: .\app\founder\forms.py:91 .\app\founder\templates\founder\detail.html:46
 msgid "Web site"
 msgstr "Website"
 
-#: app/founder/forms.py:63
+#: .\app\founder\forms.py:96
 msgid "https://example.com"
 msgstr "https://example.com"
 
-#: app/founder/forms.py:66
+#: .\app\founder\forms.py:101
 msgid "Facebook"
 msgstr "Facebook"
 
-#: app/founder/forms.py:69
+#: .\app\founder\forms.py:106
 msgid "https://www.facebook.com/lastname.firstname"
 msgstr "https://www.facebook.com/lastname.firstname"
 
-#: app/founder/forms.py:72
+#: .\app\founder\forms.py:111
 msgid "Twitter"
 msgstr "Twitter"
 
-#: app/founder/forms.py:75
+#: .\app\founder\forms.py:116
 msgid "https://twitter.com/username"
 msgstr "https://twitter.com/username"
 
-#: app/founder/forms.py:78
+#: .\app\founder\forms.py:121
 msgid "Google+"
 msgstr "Google+"
 
-#: app/founder/forms.py:81
+#: .\app\founder\forms.py:126
 msgid "https://plus.google.com/id"
 msgstr "https://plus.google.com/id"
 
-#: app/founder/forms.py:84
+#: .\app\founder\forms.py:131
 msgid "linkedIn"
 msgstr "linkedIn"
 
-#: app/founder/forms.py:87
+#: .\app\founder\forms.py:136
 msgid "https://ca.linkedin.com/in/username"
 msgstr "https://ca.linkedin.com/in/username"
 
-#: app/founder/forms.py:90
+#: .\app\founder\forms.py:141
 msgid "Description"
 msgstr "Description"
 
-#: app/founder/forms.py:94
-msgid "Write here a brief summary of your skills and your career."
+#: .\app\founder\forms.py:145
+#, fuzzy
+#| msgid "Write here a brief summary of your skills and your career."
+msgid "Write here a brief summary of your skills and career."
 msgstr "Escreva aqui um breve sumário de suas competências e de sua carreira."
 
-#: app/founder/forms.py:101
+#: .\app\founder\forms.py:153
 msgid "Education"
 msgstr "Educação"
 
-#: app/founder/forms.py:108 app/founder/models.py:11
-#: app/founder/templates/founder/detail.html:60
+#: .\app\founder\forms.py:160 .\app\founder\models.py:20
+#: .\app\founder\templates\founder\detail.html:63
 msgid "Areas of expertise"
 msgstr "Áreas de especialização"
 
-#: app/founder/forms.py:115
+#: .\app\founder\forms.py:167
 msgid "Picture"
 msgstr "Foto"
 
-#: app/founder/models.py:10
+#: .\app\founder\models.py:13
 msgid "Education level"
 msgstr "Nível de formação"
 
-#: app/founder/models.py:12
+#: .\app\founder\models.py:27
 msgid "Equity"
 msgstr "Capital próprio"
 
-#: app/founder/models.py:13 app/founder/templates/founder/detail.html:51
+#: .\app\founder\models.py:32 .\app\founder\templates\founder\detail.html:54
 msgid "About"
 msgstr "Sobre"
 
-#: app/founder/templates/founder/detail.html:8
+#: .\app\founder\templates\founder\detail.html:5
+msgid "Details"
+msgstr ""
+
+#: .\app\founder\templates\founder\detail.html:11
 #, fuzzy
 #| msgid "Modify this founder"
 msgid "Actions on this founder"
 msgstr "Modificar este fundador"
 
-#: app/founder/templates/founder/detail.html:12
+#: .\app\founder\templates\founder\detail.html:15
 msgid "Modify this founder"
 msgstr "Modificar este fundador"
 
-#: app/founder/templates/founder/detail.html:40
+#: .\app\founder\templates\founder\detail.html:43
 msgid "Phone"
 msgstr "Telefone"
 
-#: app/founder/templates/founder/detail.html:72
+#: .\app\founder\templates\founder\detail.html:75
 msgid "Companies"
 msgstr "Empresas"
 
-#: app/founder/templates/founder/detail.html:96
-msgid "No companies exist."
+#: .\app\founder\templates\founder\detail.html:99
+#, fuzzy
+#| msgid "No companies exist."
+msgid "No companies found"
 msgstr "Não há empresas existentes."
 
-#: app/founder/templates/founder/founder_form.html:8
+#: .\app\founder\templates\founder\founder_form.html:8
 msgid "Profile"
 msgstr "Perfil"
 
-#: app/founder/templates/founder/founder_form.html:20
+#: .\app\founder\templates\founder\founder_form.html:20
 msgid "Save"
 msgstr "Salvar"
 
-#: app/founder/templates/founder/founder_form.html:23
+#: .\app\founder\templates\founder\founder_form.html:23
 msgid "Reset"
 msgstr ""
 
-#: app/founder/templates/founder/index.html:4
-#: app/founder/templates/founder/index.html:8
+#: .\app\founder\templates\founder\index.html:5
+#: .\app\founder\templates\founder\index.html:9
 msgid "Centech Founders"
 msgstr "Fundadores da UCS"
 
-#: app/founder/templates/founder/index.html:39
+#: .\app\founder\templates\founder\index.html:11
+#, fuzzy
+#| msgid "New founder"
+msgid "New founder"
+msgstr "Novo fundador"
+
+#: .\app\founder\templates\founder\index.html:20
+#, fuzzy
+#| msgid "Search by name"
+msgid "Search"
+msgstr "Buscar por nome"
+
+#: .\app\founder\templates\founder\index.html:40
 msgid "Previous"
 msgstr "Anterior"
 
-#: app/founder/templates/founder/index.html:49
+#: .\app\founder\templates\founder\index.html:50
 msgid "Next"
 msgstr "Próximo"
 
-#: app/founder/templates/founder/index.html:84
-msgid "No founders exist."
+#: .\app\founder\templates\founder\index.html:77
+#, fuzzy
+#| msgid "Centech Founders"
+msgid "Founder"
+msgstr "Fundadores da UCS"
+
+#: .\app\founder\templates\founder\index.html:83
+#, fuzzy
+#| msgid "No founders exist."
+msgid "No founders found"
 msgstr "Não há fundadores."
 
 #~ msgid "First name"
@@ -161,9 +189,6 @@ msgstr "Não há fundadores."
 
 #~ msgid "Email"
 #~ msgstr "Email"
-
-#~ msgid "New founder"
-#~ msgstr "Novo fundador"
 
 #~ msgid ""
 #~ "Use the Ctrl key on your keyboard to select multiple. <br> If it lacks a "

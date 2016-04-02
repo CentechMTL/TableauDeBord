@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-22 01:05+0000\n"
-"PO-Revision-Date: 2015-09-29 21:21-0300\n"
+"POT-Creation-Date: 2016-03-29 12:12-0400\n"
+"PO-Revision-Date: 2016-03-24 14:34-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pt_BR\n"
@@ -16,168 +16,176 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.5\n"
+"X-Generator: Poedit 1.8.7\n"
 
-#: app/kpi/models.py:17
+#: .\app\kpi\models.py:18
 msgid "KPIs"
 msgstr "KPIs"
 
-#: app/kpi/models.py:19
+#: .\app\kpi\models.py:22
 msgid "Companies"
 msgstr "Empresas"
 
-#: app/kpi/models.py:20
+#: .\app\kpi\models.py:29
 msgid "Type"
 msgstr "Tipo"
 
-#: app/kpi/models.py:22 app/kpi/templates/kpi/irl.html:65
-#: app/kpi/templates/kpi/irl.html.py:115
-#: app/kpi/templates/kpi/irl_confirm_delete.html:11
-#: app/kpi/templates/kpi/trl.html:66 app/kpi/templates/kpi/trl.html.py:115
-#: app/kpi/templates/kpi/trl_confirm_delete.html:11
+#: .\app\kpi\models.py:45 .\app\kpi\templates\kpi\irl.html:65
+#: .\app\kpi\templates\kpi\irl.html:115
+#: .\app\kpi\templates\kpi\irl_confirm_delete.html:13
+#: .\app\kpi\templates\kpi\trl.html:66 .\app\kpi\templates\kpi\trl.html:115
+#: .\app\kpi\templates\kpi\trl_confirm_delete.html:13
 msgid "Level"
 msgstr "Nível"
 
-#: app/kpi/models.py:23 app/kpi/templates/kpi/irl.html:101
-#: app/kpi/templates/kpi/irl.html.py:114 app/kpi/templates/kpi/trl.html:102
-#: app/kpi/templates/kpi/trl.html.py:114
+#: .\app\kpi\models.py:51 .\app\kpi\templates\kpi\irl.html:101
+#: .\app\kpi\templates\kpi\irl.html:114 .\app\kpi\templates\kpi\trl.html:102
+#: .\app\kpi\templates\kpi\trl.html:114
 msgid "Date"
 msgstr "Data"
 
-#: app/kpi/models.py:24 app/kpi/templates/kpi/irl.html:116
-#: app/kpi/templates/kpi/irl_confirm_delete.html:13
-#: app/kpi/templates/kpi/trl.html:116
-#: app/kpi/templates/kpi/trl_confirm_delete.html:13
+#: .\app\kpi\models.py:57 .\app\kpi\templates\kpi\irl.html:116
+#: .\app\kpi\templates\kpi\irl_confirm_delete.html:15
+#: .\app\kpi\templates\kpi\trl.html:116
+#: .\app\kpi\templates\kpi\trl_confirm_delete.html:15
 msgid "Comment"
 msgstr "Comentário"
 
-#: app/kpi/templates/kpi/irl.html:25
-msgid "Basic principles observed and reported"
-msgstr "Princípios básicos observados e reportados"
-
-#: app/kpi/templates/kpi/irl.html:26
-msgid "Technology concept and/or application formulated"
-msgstr "Conceito tecnológico e/ou aplicação formulada"
-
-#: app/kpi/templates/kpi/irl.html:27
-msgid ""
-"Analytical and experimental critical function and/or characteristic proof-of-"
-"concept"
+#: .\app\kpi\templates\kpi\irl.html:7
+msgid "IRLs"
 msgstr ""
-"Função crítica experimental e analítica e/ou prova de conceito característica"
 
-#: app/kpi/templates/kpi/irl.html:28
-msgid "Component and/or breadboard validation in laboratory environment"
-msgstr "Validação componente ou ensaio em ambiente de laboratório"
-
-#: app/kpi/templates/kpi/irl.html:29
-msgid "Component and/or breadboard validation in relevant environment"
-msgstr "Validação componente ou ensaio em ambiente real"
-
-#: app/kpi/templates/kpi/irl.html:30
-msgid ""
-"System/subsystem model or prototype demonstration in a relevant environment "
-"(Ground or Space)"
+#: .\app\kpi\templates\kpi\irl.html:25
+msgid "Complete First-Pass Business Model Canvas"
 msgstr ""
-"Modelo de sistema/subsistema ou demonstração de protótipo em ambiente real "
-"(solo ou espaço)"
 
-#: app/kpi/templates/kpi/irl.html:31
-msgid "System prototype demonstration in a space environment"
-msgstr "Demonstração do protótipo do sistema em ambiente espacial"
-
-#: app/kpi/templates/kpi/irl.html:32
-msgid ""
-"Actual system completed and flight qualified through test and demonstration "
-"(Ground or Flight)"
+#: .\app\kpi\templates\kpi\irl.html:26
+msgid "Market size/competitive analysis"
 msgstr ""
-"Sistema atual completo e voo qualificado via teste ou demonstração (solo ou "
-"voo)."
 
-#: app/kpi/templates/kpi/irl.html:33
-msgid "Actual system flight proven trhough successful mission operations"
-msgstr "Sistema atual de voo aprovado via missões operacionais sucedidas"
+#: .\app\kpi\templates\kpi\irl.html:27
+msgid "Problem/solution validation"
+msgstr ""
 
-#: app/kpi/templates/kpi/irl.html:46
+#: .\app\kpi\templates\kpi\irl.html:28
+msgid "Prototype Low fidelity MVP"
+msgstr ""
+
+#: .\app\kpi\templates\kpi\irl.html:29
+msgid "Validate product/market fit"
+msgstr ""
+
+#: .\app\kpi\templates\kpi\irl.html:30
+msgid "Validate revenue model (right side of canvas)"
+msgstr ""
+
+#: .\app\kpi\templates\kpi\irl.html:31
+msgid "Prototype High-Fidelity MVP"
+msgstr ""
+
+#: .\app\kpi\templates\kpi\irl.html:32
+msgid "Validate value delivery (left side of canvas)"
+msgstr ""
+
+#: .\app\kpi\templates\kpi\irl.html:33
+msgid "Identify and validate metrics that matter"
+msgstr ""
+
+#: .\app\kpi\templates\kpi\irl.html:46
 msgid "IRL of"
 msgstr "Nível de Prontidão para Investimento de"
 
-#: app/kpi/templates/kpi/irl.html:64 app/kpi/templates/kpi/trl.html:65
+#: .\app\kpi\templates\kpi\irl.html:64 .\app\kpi\templates\kpi\trl.html:65
 msgid "Name"
 msgstr "Nome"
 
-#: app/kpi/templates/kpi/irl.html:95
-#: app/kpi/templates/kpi/irl_confirm_delete.html:6
-#: app/kpi/templates/kpi/irl_confirm_delete.html:8
-#: app/kpi/templates/kpi/irl_form.html:5
+#: .\app\kpi\templates\kpi\irl.html:95
+#: .\app\kpi\templates\kpi\irl_confirm_delete.html:10
+#: .\app\kpi\templates\kpi\irl_form.html:6
 msgid "IRL"
 msgstr "Nível de Prontidão para Investimento"
 
-#: app/kpi/templates/kpi/irl.html:118 app/kpi/templates/kpi/irl.html.py:128
-#: app/kpi/templates/kpi/trl.html:118 app/kpi/templates/kpi/trl.html.py:128
+#: .\app\kpi\templates\kpi\irl.html:118 .\app\kpi\templates\kpi\irl.html:128
+#: .\app\kpi\templates\kpi\trl.html:118 .\app\kpi\templates\kpi\trl.html:128
 msgid "Modify"
 msgstr "Modificar"
 
-#: app/kpi/templates/kpi/irl.html:119 app/kpi/templates/kpi/irl.html.py:129
-#: app/kpi/templates/kpi/irl_confirm_delete.html:17
-#: app/kpi/templates/kpi/trl.html:119 app/kpi/templates/kpi/trl.html.py:129
-#: app/kpi/templates/kpi/trl_confirm_delete.html:17
+#: .\app\kpi\templates\kpi\irl.html:119 .\app\kpi\templates\kpi\irl.html:129
+#: .\app\kpi\templates\kpi\irl_confirm_delete.html:19
+#: .\app\kpi\templates\kpi\trl.html:119 .\app\kpi\templates\kpi\trl.html:129
+#: .\app\kpi\templates\kpi\trl_confirm_delete.html:19
 msgid "Delete"
 msgstr "Deletar"
 
-#: app/kpi/templates/kpi/irl.html:137
-msgid "No one IRL for the moment."
-msgstr "Sem IRL para este momento."
+#: .\app\kpi\templates\kpi\irl.html:137
+#, fuzzy
+#| msgid "New IRL for"
+msgid "No IRLs found"
+msgstr "Nova IRL para"
 
-#: app/kpi/templates/kpi/irl.html:140
+#: .\app\kpi\templates\kpi\irl.html:140
 msgid "New IRL"
 msgstr "Novo Nível de Prontidão para Investimento"
 
-#: app/kpi/templates/kpi/irl_confirm_delete.html:9
-msgid "Are you sure you want to delete this IRL ?"
+#: .\app\kpi\templates\kpi\irl_confirm_delete.html:7
+#, fuzzy
+#| msgid "Delete"
+msgid "Delete IRL"
+msgstr "Deletar"
+
+#: .\app\kpi\templates\kpi\irl_confirm_delete.html:11
+#, fuzzy
+#| msgid "Are you sure you want to delete this IRL ?"
+msgid "Are you sure you want to delete this IRL?"
 msgstr "Você tem certeza que deseja deletar esta venda?"
 
-#: app/kpi/templates/kpi/irl_confirm_delete.html:12
-#: app/kpi/templates/kpi/trl_confirm_delete.html:12
-msgid "create on"
+#: .\app\kpi\templates\kpi\irl_confirm_delete.html:14
+#: .\app\kpi\templates\kpi\trl_confirm_delete.html:14
+#, fuzzy
+#| msgid "create on"
+msgid "Created on"
 msgstr "criado em"
 
-#: app/kpi/templates/kpi/irl_confirm_delete.html:17
-#: app/kpi/templates/kpi/trl_confirm_delete.html:17
+#: .\app\kpi\templates\kpi\irl_confirm_delete.html:19
+#: .\app\kpi\templates\kpi\trl_confirm_delete.html:19
 msgid "Cancel"
 msgstr "Cancelado"
 
-#: app/kpi/templates/kpi/irl_form.html:8
+#: .\app\kpi\templates\kpi\irl_form.html:10
 msgid "New IRL for"
 msgstr "Nova IRL para"
 
-#: app/kpi/templates/kpi/irl_form.html:11
-#: app/kpi/templates/kpi/trl_form.html:11
+#: .\app\kpi\templates\kpi\irl_form.html:13
+#: .\app\kpi\templates\kpi\trl_form.html:13
 msgid "Save"
 msgstr "Salvar"
 
-#: app/kpi/templates/kpi/trl.html:25
+#: .\app\kpi\templates\kpi\trl.html:7
+msgid "TRLs"
+msgstr ""
+
+#: .\app\kpi\templates\kpi\trl.html:25
 msgid "Observation and recording of concept basics"
 msgstr "Observação e registro de conceitos básicos"
 
-#: app/kpi/templates/kpi/trl.html:26
+#: .\app\kpi\templates\kpi\trl.html:26
 msgid "Technology concept or implementation determined"
 msgstr "Conceito tecnológico ou implementação determinado"
 
-#: app/kpi/templates/kpi/trl.html:27
+#: .\app\kpi\templates\kpi\trl.html:27
 msgid "Critical and analytical function or proof of concept"
 msgstr "Função crítica e analítica ou prova de conceito"
 
-#: app/kpi/templates/kpi/trl.html:28
+#: .\app\kpi\templates\kpi\trl.html:28
 msgid "Validation of the elements or of a model in laboratory test conditions"
 msgstr ""
 "Validação dos elementos ou do modelo em condições teste de laboratório."
 
-#: app/kpi/templates/kpi/trl.html:29
+#: .\app\kpi\templates\kpi\trl.html:29
 msgid "Validation of the elements of a model in a simulated environment"
 msgstr "Validação dos elementos de um modelo em um ambiente estimulado."
 
-#: app/kpi/templates/kpi/trl.html:30
+#: .\app\kpi\templates\kpi\trl.html:30
 msgid ""
 "Demonstration of a model or a prototype of the system or subsystem in a "
 "simulated environment"
@@ -185,21 +193,21 @@ msgstr ""
 "Demonstração do modelo ou do protótipo dos sistema ou do subsistema num "
 "ambiente simulado"
 
-#: app/kpi/templates/kpi/trl.html:31
+#: .\app\kpi\templates\kpi\trl.html:31
 msgid ""
 "Prototype ready for demonstration in an operational environment appropriates"
 msgstr ""
 "Prontidão do protótipo para demonstração em ambientes operacionais "
 "apropriados"
 
-#: app/kpi/templates/kpi/trl.html:32
+#: .\app\kpi\templates\kpi\trl.html:32
 msgid ""
 "Current technology developed and qualified through tests and demonstrations"
 msgstr ""
 "Desenvolvimento tecnológico atual e qualificado por meio de testes e "
 "demonstrações"
 
-#: app/kpi/templates/kpi/trl.html:33
+#: .\app\kpi\templates\kpi\trl.html:33
 msgid ""
 "Validation of the actual technology by the deployment succeeded in an "
 "operational context"
@@ -207,29 +215,83 @@ msgstr ""
 "Validação da tecnologia atual pelo desenvolvimento sucedido em contexto "
 "operacional"
 
-#: app/kpi/templates/kpi/trl.html:46
+#: .\app\kpi\templates\kpi\trl.html:46
 msgid "TRL of"
 msgstr "TRL de"
 
-#: app/kpi/templates/kpi/trl.html:96
-#: app/kpi/templates/kpi/trl_confirm_delete.html:6
-#: app/kpi/templates/kpi/trl_confirm_delete.html:8
-#: app/kpi/templates/kpi/trl_form.html:5
+#: .\app\kpi\templates\kpi\trl.html:96
+#: .\app\kpi\templates\kpi\trl_confirm_delete.html:10
+#: .\app\kpi\templates\kpi\trl_form.html:6
 msgid "TRL"
 msgstr "TRL"
 
-#: app/kpi/templates/kpi/trl.html:137
-msgid "No one TRL for the moment."
-msgstr "Não há TRL para o momento."
+#: .\app\kpi\templates\kpi\trl.html:137
+#, fuzzy
+#| msgid "New TRL for"
+msgid "No TRLs found"
+msgstr "Nova TRL para"
 
-#: app/kpi/templates/kpi/trl.html:140
+#: .\app\kpi\templates\kpi\trl.html:140
 msgid "New TRL"
 msgstr "Nova TRL"
 
-#: app/kpi/templates/kpi/trl_confirm_delete.html:9
-msgid "Are you sure you want to delete this TRL ?"
+#: .\app\kpi\templates\kpi\trl_confirm_delete.html:7
+#, fuzzy
+#| msgid "Delete"
+msgid "Delete TRL"
+msgstr "Deletar"
+
+#: .\app\kpi\templates\kpi\trl_confirm_delete.html:11
+#, fuzzy
+#| msgid "Are you sure you want to delete this TRL ?"
+msgid "Are you sure you want to delete this TRL?"
 msgstr "Você tem certeza que deseja deletar esta TRL?"
 
-#: app/kpi/templates/kpi/trl_form.html:8
+#: .\app\kpi\templates\kpi\trl_form.html:10
 msgid "New TRL for"
 msgstr "Nova TRL para"
+
+#~ msgid "No one IRL for the moment."
+#~ msgstr "Sem IRL para este momento."
+
+#~ msgid "No one TRL for the moment."
+#~ msgstr "Não há TRL para o momento."
+
+#~ msgid "Basic principles observed and reported"
+#~ msgstr "Princípios básicos observados e reportados"
+
+#~ msgid "Technology concept and/or application formulated"
+#~ msgstr "Conceito tecnológico e/ou aplicação formulada"
+
+#~ msgid ""
+#~ "Analytical and experimental critical function and/or characteristic proof-"
+#~ "of-concept"
+#~ msgstr ""
+#~ "Função crítica experimental e analítica e/ou prova de conceito "
+#~ "característica"
+
+#~ msgid "Component and/or breadboard validation in laboratory environment"
+#~ msgstr "Validação componente ou ensaio em ambiente de laboratório"
+
+#~ msgid "Component and/or breadboard validation in relevant environment"
+#~ msgstr "Validação componente ou ensaio em ambiente real"
+
+#~ msgid ""
+#~ "System/subsystem model or prototype demonstration in a relevant "
+#~ "environment (Ground or Space)"
+#~ msgstr ""
+#~ "Modelo de sistema/subsistema ou demonstração de protótipo em ambiente "
+#~ "real (solo ou espaço)"
+
+#~ msgid "System prototype demonstration in a space environment"
+#~ msgstr "Demonstração do protótipo do sistema em ambiente espacial"
+
+#~ msgid ""
+#~ "Actual system completed and flight qualified through test and "
+#~ "demonstration (Ground or Flight)"
+#~ msgstr ""
+#~ "Sistema atual completo e voo qualificado via teste ou demonstração (solo "
+#~ "ou voo)."
+
+#~ msgid "Actual system flight proven trhough successful mission operations"
+#~ msgstr "Sistema atual de voo aprovado via missões operacionais sucedidas"

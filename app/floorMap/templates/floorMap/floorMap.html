@@ -1,0 +1,52 @@
+{% extends "dashboard.html" %}
+<!-- Load internationalisation utils-->
+{% load i18n staticfiles floorMap_extras %}
+
+{% block title %}{% trans "Floor plan" %}{% endblock %}
+
+{% block extrahead %}
+    <link href="{% static 'css/floorMap.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block extrajs %}
+    <script src="{% static 'js/jquery.maphilight.js' %}"></script>
+    <script src="{% static 'js/jquery.maphilight_config.js' %}"></script>
+    <script>
+        $(document).ready(function(){
+            $('.floor_map').maphilight()
+        });
+    </script>
+{% endblock %}
+
+{% block content %}
+    {% if isCentech %}
+    <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuCompany" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            {% trans "Actions on floor map" %}
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuCompany">
+            <li>
+                <a href="{% url 'floorMap:rental_create' %}">
+                    {% trans "New rental" %}
+                </a>
+            </li>
+        </ul>
+    </div>
+    {% endif %}
+
+<div class="row" align="center">
+    <div class="col-sm-12">
+        <h2>{% trans "Floor plan" %}</h2>
+        <div class="floor_map_wrapper">
+            <img class="floor_map maphilighted" src="/media/floor_map/floor_map.jpg" usemap="#map_coords" />
+        </div>
+        <map name="map_coords">
+            {% for room in list_room_data %}
+                <area shape="{{ room.coords|coords_shape }}" alt="{{ room.code }}" coords="{{ room.coords|coords_list }}" />
+            {% endfor %}
+        </map><br />
+    </div>
+</div>
+
+{% endblock %}

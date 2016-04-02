@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-22 01:05+0000\n"
-"PO-Revision-Date: 2015-09-29 20:46-0300\n"
+"POT-Creation-Date: 2016-03-29 12:12-0400\n"
+"PO-Revision-Date: 2016-03-24 14:34-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pt_BR\n"
@@ -16,97 +16,119 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 1.8.5\n"
+"X-Generator: Poedit 1.8.7\n"
 
-#: app/experiment/models.py:10
+#: .\app\experiment\models.py:13
 msgid "Company"
 msgstr "Empresa"
 
-#: app/experiment/models.py:13
+#: .\app\experiment\models.py:21
 msgid "Start date"
 msgstr "Data de início"
 
-#: app/experiment/models.py:14
+#: .\app\experiment\models.py:25
 msgid "End date"
 msgstr "Data de conclusão"
 
-#: app/experiment/models.py:16
-#: app/experiment/templates/experiment/customerexperiment_confirm_delete.html:13
-#: app/experiment/templates/experiment/customerexperiment_list.html:13
+#: .\app\experiment\models.py:30
+#: .\app\experiment\templates\experiment\customerexperiment_confirm_delete.html:15
+#: .\app\experiment\templates\experiment\customerexperiment_list.html:15
 msgid "Hypothesis"
 msgstr "Hipóteses"
 
-#: app/experiment/models.py:19
+#: .\app\experiment\models.py:37
 msgid "Validation"
 msgstr "Validação"
 
-#: app/experiment/models.py:21
-msgid "Description of the experiment"
-msgstr "Descrição do experimento"
+#: .\app\experiment\models.py:42
+#, fuzzy
+#| msgid "Experiment"
+msgid "Experiment description"
+msgstr "Experimento"
 
-#: app/experiment/models.py:22
-msgid "Number of subject for the test"
-msgstr "Número de participantes do experimento"
+#: .\app\experiment\models.py:46
+msgid "Number of test participants"
+msgstr ""
 
-#: app/experiment/models.py:23
-msgid "Description of the subject test"
-msgstr "Descrição do participante do experimento"
+#: .\app\experiment\models.py:50
+msgid "Test description"
+msgstr ""
 
-#: app/experiment/models.py:24
+#: .\app\experiment\models.py:55
 msgid "Conclusion"
 msgstr "Conclusão"
 
-#: app/experiment/templates/experiment/customerexperiment_confirm_delete.html:6
-#: app/experiment/templates/experiment/customerexperiment_confirm_delete.html:8
-#: app/experiment/templates/experiment/customerexperiment_form.html:7
-#: app/experiment/templates/experiment/customerexperiment_form.html:9
+#: .\app\experiment\templates\experiment\customerexperiment_confirm_delete.html:7
+#, fuzzy
+#| msgid "New Experiment"
+msgid "Delete experiment"
+msgstr "Novo Experimento"
+
+#: .\app\experiment\templates\experiment\customerexperiment_confirm_delete.html:10
+#: .\app\experiment\templates\experiment\customerexperiment_form.html:8
+#: .\app\experiment\templates\experiment\customerexperiment_form.html:11
 msgid "Experiment"
 msgstr "Experimento"
 
-#: app/experiment/templates/experiment/customerexperiment_confirm_delete.html:10
-msgid "Are you sure you want to delete this experiment ?"
+#: .\app\experiment\templates\experiment\customerexperiment_confirm_delete.html:12
+#, fuzzy
+#| msgid "Are you sure you want to delete this experiment ?"
+msgid "Are you sure you want to delete this experiment?"
 msgstr "Você tem certeza que quer deletar este experimento?"
 
-#: app/experiment/templates/experiment/customerexperiment_confirm_delete.html:14
-msgid "create on"
+#: .\app\experiment\templates\experiment\customerexperiment_confirm_delete.html:16
+#, fuzzy
+#| msgid "create on"
+msgid "Created on"
 msgstr "criado em"
 
-#: app/experiment/templates/experiment/customerexperiment_confirm_delete.html:18
-#: app/experiment/templates/experiment/customerexperiment_list.html:19
-#: app/experiment/templates/experiment/customerexperiment_list.html:31
+#: .\app\experiment\templates\experiment\customerexperiment_confirm_delete.html:20
+#: .\app\experiment\templates\experiment\customerexperiment_list.html:21
+#: .\app\experiment\templates\experiment\customerexperiment_list.html:33
 msgid "Delete"
 msgstr "Deletar"
 
-#: app/experiment/templates/experiment/customerexperiment_confirm_delete.html:18
+#: .\app\experiment\templates\experiment\customerexperiment_confirm_delete.html:20
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: app/experiment/templates/experiment/customerexperiment_form.html:13
+#: .\app\experiment\templates\experiment\customerexperiment_form.html:15
 msgid "Save"
 msgstr "Salvar"
 
-#: app/experiment/templates/experiment/customerexperiment_list.html:5
-#: app/experiment/templates/experiment/customerexperiment_list.html:7
-msgid "Customer Experiments"
+#: .\app\experiment\templates\experiment\customerexperiment_list.html:6
+#: .\app\experiment\templates\experiment\customerexperiment_list.html:9
+#, fuzzy
+#| msgid "Customer Experiments"
+msgid "Customer Experimentation"
 msgstr "Experimentos com clientes"
 
-#: app/experiment/templates/experiment/customerexperiment_list.html:14
+#: .\app\experiment\templates\experiment\customerexperiment_list.html:16
 msgid "Start"
 msgstr "Iniciar"
 
-#: app/experiment/templates/experiment/customerexperiment_list.html:15
+#: .\app\experiment\templates\experiment\customerexperiment_list.html:17
 msgid "End"
 msgstr "Finalizar"
 
-#: app/experiment/templates/experiment/customerexperiment_list.html:16
+#: .\app\experiment\templates\experiment\customerexperiment_list.html:18
 msgid "Validated"
 msgstr "Validado"
 
-#: app/experiment/templates/experiment/customerexperiment_list.html:18
-#: app/experiment/templates/experiment/customerexperiment_list.html:30
+#: .\app\experiment\templates\experiment\customerexperiment_list.html:20
+#: .\app\experiment\templates\experiment\customerexperiment_list.html:32
 msgid "Modify"
 msgstr "Modificar"
 
-#: app/experiment/templates/experiment/customerexperiment_list.html:37
+#: .\app\experiment\templates\experiment\customerexperiment_list.html:39
 msgid "New Experiment"
 msgstr "Novo Experimento"
+
+#~ msgid "Description of the experiment"
+#~ msgstr "Descrição do experimento"
+
+#~ msgid "Number of subject for the test"
+#~ msgstr "Número de participantes do experimento"
+
+#~ msgid "Description of the subject test"
+#~ msgstr "Descrição do participante do experimento"

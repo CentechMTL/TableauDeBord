@@ -10,9 +10,21 @@ from django.utils.translation import ugettext_lazy as _
 class CardForm(forms.ModelForm):
     class Meta:
         model = Card
-        fields = ['phase', 'title', 'comment', 'deadline', 'state']
+
+        fields = [
+            'phase',
+            'title',
+            'comment',
+            'deadline',
+            'state'
+        ]
+
         widgets = {
-            'deadline': forms.DateInput(attrs={'type': 'date'})
+            'deadline': forms.DateInput(
+                attrs={
+                    'type': 'date'
+                }
+            )
         }
 
     state = forms.BooleanField(
@@ -34,7 +46,7 @@ class CardForm(forms.ModelForm):
         label=_('Title*'),
         required=True,
     )
-    title.widget.attrs.update({'placeholder': _(u'Titre'), 'id': 'title'})
+    title.widget.attrs.update({'placeholder': _(u'Title'), 'id': 'title'})
 
     comment = forms.CharField(
         label=_('Comment'),
@@ -63,4 +75,5 @@ class CardForm(forms.ModelForm):
 
     def __init__(self, company, *args, **kwargs):
         super(CardForm, self).__init__(*args, **kwargs)
-        self.fields['assigned'].queryset = Founder.objects.filter(company=company)
+        self.fields['assigned'].queryset = Founder.objects.\
+            filter(company=company)

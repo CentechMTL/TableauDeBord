@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-22 01:05+0000\n"
-"PO-Revision-Date: 2015-09-29 21:27-0300\n"
+"POT-Creation-Date: 2016-03-29 12:12-0400\n"
+"PO-Revision-Date: 2016-03-24 14:34-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pt_BR\n"
@@ -16,62 +16,62 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 1.8.5\n"
+"X-Generator: Poedit 1.8.7\n"
 
-#: app/valuePropositionCanvas/models.py:22
+#: .\app\valuePropositionCanvas\models.py:23
 msgid "Value proposition canvas type"
 msgstr "Tipo da Proposta de Valor do Canvas"
 
-#: app/valuePropositionCanvas/models.py:32
+#: .\app\valuePropositionCanvas\models.py:34
 msgid "Value proposition canvas element"
 msgstr "Elemento da Proposta de Valor do Canvas"
 
-#: app/valuePropositionCanvas/models.py:37
+#: .\app\valuePropositionCanvas\models.py:47
 msgid "Type"
 msgstr "Tipo"
 
-#: app/valuePropositionCanvas/templates/valuePropositionCanvas/valuepropositioncanvaselement_list.html:118
+#: .\app\valuePropositionCanvas\templates\valuePropositionCanvas\valuepropositioncanvaselement_list.html:118
 msgid "Value Proposition Canvas"
 msgstr "Canvas da Proposta de Valor"
 
-#: app/valuePropositionCanvas/templates/valuePropositionCanvas/valuepropositioncanvaselement_list.html:131
+#: .\app\valuePropositionCanvas\templates\valuePropositionCanvas\valuepropositioncanvaselement_list.html:131
 msgid "Products & Services"
 msgstr "Produtos e Serviços"
 
-#: app/valuePropositionCanvas/templates/valuePropositionCanvas/valuepropositioncanvaselement_list.html:138
-#: app/valuePropositionCanvas/templates/valuePropositionCanvas/valuepropositioncanvaselement_list.html:163
-#: app/valuePropositionCanvas/templates/valuePropositionCanvas/valuepropositioncanvaselement_list.html:190
-#: app/valuePropositionCanvas/templates/valuePropositionCanvas/valuepropositioncanvaselement_list.html:215
-#: app/valuePropositionCanvas/templates/valuePropositionCanvas/valuepropositioncanvaselement_list.html:242
-#: app/valuePropositionCanvas/templates/valuePropositionCanvas/valuepropositioncanvaselement_list.html:267
+#: .\app\valuePropositionCanvas\templates\valuePropositionCanvas\valuepropositioncanvaselement_list.html:138
+#: .\app\valuePropositionCanvas\templates\valuePropositionCanvas\valuepropositioncanvaselement_list.html:163
+#: .\app\valuePropositionCanvas\templates\valuePropositionCanvas\valuepropositioncanvaselement_list.html:190
+#: .\app\valuePropositionCanvas\templates\valuePropositionCanvas\valuepropositioncanvaselement_list.html:215
+#: .\app\valuePropositionCanvas\templates\valuePropositionCanvas\valuepropositioncanvaselement_list.html:242
+#: .\app\valuePropositionCanvas\templates\valuePropositionCanvas\valuepropositioncanvaselement_list.html:267
 msgid "Title"
 msgstr "Título"
 
-#: app/valuePropositionCanvas/templates/valuePropositionCanvas/valuepropositioncanvaselement_list.html:139
-#: app/valuePropositionCanvas/templates/valuePropositionCanvas/valuepropositioncanvaselement_list.html:164
-#: app/valuePropositionCanvas/templates/valuePropositionCanvas/valuepropositioncanvaselement_list.html:191
-#: app/valuePropositionCanvas/templates/valuePropositionCanvas/valuepropositioncanvaselement_list.html:216
-#: app/valuePropositionCanvas/templates/valuePropositionCanvas/valuepropositioncanvaselement_list.html:243
-#: app/valuePropositionCanvas/templates/valuePropositionCanvas/valuepropositioncanvaselement_list.html:268
+#: .\app\valuePropositionCanvas\templates\valuePropositionCanvas\valuepropositioncanvaselement_list.html:139
+#: .\app\valuePropositionCanvas\templates\valuePropositionCanvas\valuepropositioncanvaselement_list.html:164
+#: .\app\valuePropositionCanvas\templates\valuePropositionCanvas\valuepropositioncanvaselement_list.html:191
+#: .\app\valuePropositionCanvas\templates\valuePropositionCanvas\valuepropositioncanvaselement_list.html:216
+#: .\app\valuePropositionCanvas\templates\valuePropositionCanvas\valuepropositioncanvaselement_list.html:243
+#: .\app\valuePropositionCanvas\templates\valuePropositionCanvas\valuepropositioncanvaselement_list.html:268
 msgid "Comment"
 msgstr "Comentário"
 
-#: app/valuePropositionCanvas/templates/valuePropositionCanvas/valuepropositioncanvaselement_list.html:156
+#: .\app\valuePropositionCanvas\templates\valuePropositionCanvas\valuepropositioncanvaselement_list.html:156
 msgid "Gain Creators"
 msgstr "Criadores de Ganho"
 
-#: app/valuePropositionCanvas/templates/valuePropositionCanvas/valuepropositioncanvaselement_list.html:183
+#: .\app\valuePropositionCanvas\templates\valuePropositionCanvas\valuepropositioncanvaselement_list.html:183
 msgid "Gains"
 msgstr "Ganhos"
 
-#: app/valuePropositionCanvas/templates/valuePropositionCanvas/valuepropositioncanvaselement_list.html:208
+#: .\app\valuePropositionCanvas\templates\valuePropositionCanvas\valuepropositioncanvaselement_list.html:208
 msgid "Customer Job(s)"
 msgstr "Tarefas do Cliente"
 
-#: app/valuePropositionCanvas/templates/valuePropositionCanvas/valuepropositioncanvaselement_list.html:235
+#: .\app\valuePropositionCanvas\templates\valuePropositionCanvas\valuepropositioncanvaselement_list.html:235
 msgid "Pain Relievers"
 msgstr "Aliviam as dores"
 
-#: app/valuePropositionCanvas/templates/valuePropositionCanvas/valuepropositioncanvaselement_list.html:260
+#: .\app\valuePropositionCanvas\templates\valuePropositionCanvas\valuepropositioncanvaselement_list.html:260
 msgid "Pains"
 msgstr "Dores"

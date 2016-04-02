@@ -1,22 +1,23 @@
 {% extends "dashboard.html" %}
 <!-- Load internationalisation utils-->
 {% load i18n %}
+{% load bootstrap3 %}
 {% block title %}{% trans "Centech Founders" %}{% endblock %}
 {% load extras %}
 
 {% block content %}
     <h1>{% trans "Centech Founders" %}</h1>
+    <a href="{% url 'founder:add' %}" class="btn btn-primary btn-xs">
+        <i class="fa fa-plus"></i> {% trans "New founder" %}
+    </a>
     <div class="panel panel-default">
-        <div class="panel-body well">
+        <div class="panel-body">
             <form action="{% url 'founder:index' %}" method="get">
                 <div class="row">
-                    <div class="col-md-1"></div>
-                    <div class="col-md-3">
-                        {{ filter.form.as_p }}
-                    </div>
-                    <div class="col-md-1">
+                    <div class="col-md-6">
+                        {% bootstrap_form filter.form %}
                         <button type="submit" class="btn btn-primary">
-                            <i class='fa fa-search'> </i>
+                                <i class="fa fa-search"></i> {% trans "Search" %}
                         </button>
                     </div>
                 </div>
@@ -61,26 +62,24 @@
     {% endif %}
 
     {% if founder_list %}
-        <div class="row" style="margin-bottom: 50px;">
+        <div class="row">
         {% for founder in founder_list %}
-                <div class="col-md-4" style="height: 150px; margin-bottom: 30px;">
+            <div class="col-md-3" style="padding: 10px;">
+                <div class="panel panel-default" style="height: 150px; padding: 10px;">
                     <a href="{% url 'founder:detail' founder.pk %}">
-                    {% if founder.picture != "" %}
-                    <img src="/media/{{ founder.picture }}" style="height:100%; max-width: 100%;"/><br>
-                    {% else %}
-                    <img src="/media/user_profile/default.jpg" style="height:100%; max-width: 100%;"/><br>
-                    {% endif %}
-                    <strong>{{ founder.user.first_name }} {{ founder.user.last_name }}</strong>
-                    </a>
-                    <br>
+                        {% if founder.picture != "" %}
+                        <img src="/media/{{ founder.picture }}" class="thumbnail" style="margin-bottom: 0px; height:70%; max-width: 100%;"/>
+                        {% else %}
+                        <img src="/media/user_profile/default.jpg"  class="thumbnail" style="margin-bottom: 0px; height:70%; max-width: 100%;"/>
+                        {% endif %}
+                        <strong>{{ founder.user.first_name }} {{ founder.user.last_name }}</strong>
+                    </a><br/>
+                    {% trans "Founder" %}
                 </div>
-                {% if forloop.counter|divisibleby:3 %}
-                </div>
-                <div class="row" style="margin-bottom: 50px;">
-                {%endif%}
+            </div>
         {% endfor %}
         </div>
     {% else %}
-        <p>{% trans "No founders exist." %}</p>
+        <p>{% trans "No founders found" %}</p>
     {% endif %}
 {% endblock %}

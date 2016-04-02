@@ -1,47 +1,52 @@
 # coding: utf-8
 
-from django.http import HttpResponse, HttpResponseRedirect
-from django.contrib.auth import logout
-from django.shortcuts import render
-from django.core.urlresolvers import reverse
-from django.views import generic
+import datetime
 import json
-from datetime import datetime
-from django.utils.decorators import method_decorator
+
+from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
+from django.core.urlresolvers import reverse
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render
+from django.utils.decorators import method_decorator
+from django.views import generic
 
 from app.company.models import Company, CompanyStatus
 from app.company.forms import MiniCompanyStatusUpdateForm
 from app.mentor.models import Mentor
-from app.home.models import FloorPlan
 
 
 class Summary(generic.TemplateView):
     # General view
     template_name = 'home/summary.html'
 
-    # You need to be connected, and you need to have access as centech or executive
+    # You need to be connected,
+    # and you need to have access as centech or executive
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        if self.request.user.profile.isCentech() or self.request.user.profile.isExecutive():
+        if self.request.user.profile.isCentech() or \
+                self.request.user.profile.isExecutive():
             return super(Summary, self).dispatch(*args, **kwargs)
 
         # The visitor can't see this page!
         return HttpResponseRedirect("/user/noAccessPermissions")
 
     def post(self, request, *args, **kwargs):
-        object = CompanyStatus.objects.get(id = kwargs['status'])
-        form = MiniCompanyStatusUpdateForm(object, request.POST)
+        obj = CompanyStatus.objects.get(id=kwargs['status'])
+        form = MiniCompanyStatusUpdateForm(obj, request.POST)
         if form.is_valid():
-            object.comment = form.data['comment']
-            object.save()
+            obj.comment = form.data['comment']
+            obj.save()
 
-        return HttpResponseRedirect(reverse('home:summary', kwargs={'status' : object.id}))
+        response = reverse('home:summary', kwargs={'status': obj.id})
+        return HttpResponseRedirect(response)
 
     def get_context_data(self, **kwargs):
         try:
-            status = CompanyStatus.objects.get(id = kwargs['status'])
-            companies = Company.objects.filter(companyStatus=status).order_by('incubated_on')
+            status = CompanyStatus.objects.get(id=kwargs['status'])
+            companies = Company.objects.filter(
+                companyStatus=status
+            ).order_by('incubated_on')
         except:
             companies = Company.objects.all().order_by('incubated_on')
 
@@ -98,25 +103,28 @@ class Summary(generic.TemplateView):
                     totalLoans += loan.sommeReception
             loans.append((company, totalLoans))
 
-        finances = {}
-        finances['Grants'] = grants
-        finances['Subsidies'] = subsidies
-        finances['Investments'] = investments
-        finances['Sales'] = sales
-        finances['Loans'] = loans
+        finances = {
+            'Grants': grants,
+            'Subsidies': subsidies,
+            'Investments': investments,
+            'Sales': sales,
+            'Loans': loans
+        }
 
         KPIs = []
         for company in companies:
-            KPIs.append((company, company.get_last_irl(), company.get_last_trl()))
+            data = (company, company.get_last_irl(), company.get_last_trl())
+            KPIs.append(data)
 
         experiments = []
         experimentsValidated = 0
         experimentsInProgress = 0
         for company in companies:
-            inProgress = company.experiments.filter(validated = None).count()
-            validated = company.experiments.filter(validated = True).count()
+            inProgress = company.experiments.filter(validated=None).count()
+            validated = company.experiments.filter(validated=True).count()
             lastExperiment = company.get_last_experiment()
-            experiments.append((company, inProgress, validated, lastExperiment))
+            data = (company, inProgress, validated, lastExperiment)
+            experiments.append(data)
             experimentsValidated += validated
             experimentsInProgress += inProgress
 
@@ -124,7 +132,7 @@ class Summary(generic.TemplateView):
 
         context['list_company_status'] = CompanyStatus.objects.all()
         try:
-            status = CompanyStatus.objects.get(id = kwargs['status'])
+            status = CompanyStatus.objects.get(id=kwargs['status'])
             context['status_selected'] = status
             context['form_comment'] = MiniCompanyStatusUpdateForm(status)
         except:
@@ -167,8 +175,8 @@ class Summary(generic.TemplateView):
         timeOfIncubation = []
         for company in companies:
             if company.incubated_on:
-                now = datetime.date(datetime.today())
-                delta_days = ((now - company.incubated_on).days)/30
+                now = datetime.datetime.date(datetime.datetime.today())
+                delta_days = (now - company.incubated_on).days / 30
                 timeOfIncubation.append((company, delta_days))
             else:
                 timeOfIncubation.append((company, 0))
@@ -188,7 +196,7 @@ def noAccessPermissions(request):
 
 
 def maStartup(request):
-    # Iframe vers ma StartUp
+    # iFrame to ma StartUp
     if request.user.is_active:
         if request.user.profile.isCentech():
                 return render(request, 'home/maStartup.html')
@@ -217,9 +225,9 @@ def setCompanyInSession(request, company_id):
                 auth = True
 
         # The user is mentor for this company
-        mentor = Mentor.objects.get(user = request.user.id)
+        mentor = Mentor.objects.get(user=request.user.id)
         print(request.user.id)
-        companies = Company.objects.filter(mentors = mentor)
+        companies = Company.objects.filter(mentors=mentor)
         for company in companies:
             if int(company_id) == int(company.id):
                 auth = True
@@ -262,28 +270,3 @@ def get_url(request, namespace, arguments=""):
 
     # The visitor can't see this page!
     return HttpResponseRedirect("/user/noAccessPermissions")
-
-
-class floor_plan(generic.ListView):
-    # Floor Plan Page
-    model = FloorPlan
-    template_name = 'home/floorPlan.html'
-    context_object_name = 'list_floor_plan'
-
-    # You need to be connected, and you need to have access as centech only
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        if self.request.user.profile.isCentech():
-            return super(floor_plan, self).dispatch(*args, **kwargs)
-
-        if self.request.user.profile.isFounder():
-            return super(floor_plan, self).dispatch(*args, **kwargs)
-
-        if self.request.user.profile.isMentor():
-            return super(floor_plan, self).dispatch(*args, **kwargs)
-
-        if self.request.user.profile.isExecutive():
-            return super(floor_plan, self).dispatch(*args, **kwargs)
-
-        # The visitor can't see this page!
-        return HttpResponseRedirect("/user/noAccessPermissions")

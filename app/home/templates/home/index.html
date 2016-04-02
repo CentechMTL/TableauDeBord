@@ -1,7 +1,9 @@
 {% extends "landing_base.html" %}
 <!-- Load internationalisation utils-->
 {% load i18n %}
-{% block title %}{{app.site.entreprise.name}}{% endblock %}
+
+{% block title %}{% trans "Home" %}{% endblock %}
+
 {% block content %}
     <div class="intro-header">
         <div class="container">
@@ -39,7 +41,7 @@
         </div>
     </div>
 <div style="margin-top:20px" align="center">
-    <p>{% trans "Cette plateforme est une plateforme privée appartenant au Centech, incubateur de sociétés technologiques de l'École de Technologie Supérieur de Montréal." %}</p>
-    <p>{% trans "Si vous voulez disposer d'un compte d'accès ou avoir plus de renseignement sur notre plateforme, merci de contacter nos services via l'adresse" %} : <em>{{app.site.email_technique}}</em></p>
+    <p>{% trans "Cette plateforme est une plateforme privée appartenant au Centech, incubateur de sociétés technologiques de l'École de Technologie supérieure de Montréal." %}</p>
+    <p>{% trans "Si vous voulez disposer d'un compte d'accès ou avoir plus de renseignements sur notre plateforme, merci de contacter nos services via l'adresse" %} : <em>{{app.site.email_technique}}</em></p>
 </div>
 {% endblock %}

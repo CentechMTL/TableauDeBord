@@ -3,8 +3,8 @@
 {% load i18n %}
 {% load embed_video_tags %}
 {% load staticfiles %}
-<!-- Load internationalisation utils-->
-{% load i18n %}
+
+{% block title %}{{company}} - {% trans "IRLs" %}{% endblock %}
 
 {% block extrahead %}
     <script src="{% static 'graph/dist/jquery.min.js" type="text/javascript"></script>
@@ -22,15 +22,15 @@
             {% endif %}
         {%endfor%};
 
-        var lab1 = "{% trans 'Basic principles observed and reported' %}";
-        var lab2 = "{% trans 'Technology concept and/or application formulated' %}";
-        var lab3 = "{% trans 'Analytical and experimental critical function and/or characteristic proof-of-concept' %}";
-        var lab4 = "{% trans 'Component and/or breadboard validation in laboratory environment' %}";
-        var lab5 = "{% trans 'Component and/or breadboard validation in relevant environment' %}";
-        var lab6 = "{% trans 'System/subsystem model or prototype demonstration in a relevant environment (Ground or Space)' %}";
-        var lab7 = "{% trans 'System prototype demonstration in a space environment' %}";
-        var lab8 = "{% trans 'Actual system completed and flight qualified through test and demonstration (Ground or Flight)' %}";
-        var lab9 = "{% trans 'Actual system flight proven trhough successful mission operations' %}";
+        var lab1 = "{% trans 'Complete First-Pass Business Model Canvas' %}";
+        var lab2 = "{% trans 'Market size/competitive analysis' %}";
+        var lab3 = "{% trans 'Problem/solution validation' %}";
+        var lab4 = "{% trans 'Prototype Low fidelity MVP' %}";
+        var lab5 = "{% trans 'Validate product/market fit' %}";
+        var lab6 = "{% trans 'Validate revenue model (right side of canvas)' %}";
+        var lab7 = "{% trans 'Prototype High-Fidelity MVP' %}";
+        var lab8 = "{% trans 'Validate value delivery (left side of canvas)' %}";
+        var lab9 = "{% trans 'Identify and validate metrics that matter' %}";
         var labels = [lab1, lab2, lab3 , lab4, lab5, lab6, lab7, lab8, lab9];
 
 
@@ -134,7 +134,7 @@
         </div>
     </div>
     {% else %}
-        <p>{% trans "No one IRL for the moment." %}</p>
+        <p>{% trans "No IRLs found" %}</p>
     {% endif %}
     {% if isCentech %}
     <a href="{% url 'kpi:irl_add' company.id %}">{% trans "New IRL" %}</a>

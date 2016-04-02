@@ -3,18 +3,20 @@
 <!-- Load internationalisation utils-->
 {% load i18n %}
 {% load staticfiles %}
-{% block title %}{% trans "Experiment" %}{% endblock %}
+
+{% block title %}{% trans "Delete experiment" %}{% endblock %}
+
 {% block content %}
     <h1>{% trans "Experiment" %}</h1>
     <img style="margin-right: 20px;" src="{% static 'img/experiment.png' %}" width=100%>
-    <h1>{% trans "Are you sure you want to delete this experiment ?" %}</h1>
+    <h1>{% trans "Are you sure you want to delete this experiment?" %}</h1>
 
     <!--TODO Faire une vrai présentation de l'experimentation, en détail-->
     <p>{% trans "Hypothesis"%} : {{ experiment.hypothesis }} <br>
-        {% trans "create on" %} : {{ experiment.dateStart}}</p>
+        {% trans "Created on" %} : {{ experiment.dateStart}}</p>
 
     <form method="post" action="">
        {% csrf_token %}
-       <button type="submit">{% trans "Delete" %}</button> - <a href="{% url 'experiment:experiment_list' companyId %}">{% trans "Cancel" %}</a>
+       <button type="submit">{% trans "Delete" %}</button> - <a href="{% url 'experiment:experiment_list' company_id %}">{% trans "Cancel" %}</a>
     </form>
 {% endblock %}

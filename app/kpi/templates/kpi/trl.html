@@ -3,8 +3,8 @@
 {% load i18n %}
 {% load embed_video_tags %}
 {% load staticfiles %}
-<!-- Load internationalisation utils-->
-{% load i18n %}
+
+{% block title %}{{company}} - {% trans "TRLs" %}{% endblock %}
 
 {% block extrahead %}
     <script src="{% static 'graph/dist/jquery.min.js" type="text/javascript"></script>
@@ -134,7 +134,7 @@
         </div>
     </div>
     {% else %}
-    <p>{% trans "No one TRL for the moment." %}</p>
+    <p>{% trans "No TRLs found" %}</p>
     {% endif %}
     {% if isCentech %}
     <a href="{% url 'kpi:trl_add' company.id %}">{% trans "New TRL" %}</a>

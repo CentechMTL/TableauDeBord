@@ -43,6 +43,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django_filters',
+    'djcelery',
     'crispy_forms',
     'embed_video',
     'app.home',
@@ -54,7 +55,8 @@ INSTALLED_APPS = (
     'app.businessCanvas',
     'app.finance',
     'app.valuePropositionCanvas',
-    'app.kanboard'
+    'app.kanboard',
+    'app.floorMap',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -81,6 +83,12 @@ ROOT_URLCONF = 'centech2.urls'
 
 WSGI_APPLICATION = 'centech2.wsgi.application'
 
+# Celery settings
+
+# Periodic tasks won't be dispatched unless you set the
+#   CELERYBEAT_SCHEDULER setting to djcelery.schedulers.DatabaseScheduler,
+#   or specify it using the -S option to celerybeat
+CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
@@ -133,6 +141,7 @@ TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'app/finance/templates'),
     os.path.join(BASE_DIR, 'app/valuePropositionCanvas/templates'),
     os.path.join(BASE_DIR, 'app/kanboard/templates'),
+    os.path.join(BASE_DIR, 'app/floorMap/templates'),
     os.path.join(BASE_DIR, 'templates'),
 )
 
@@ -197,7 +206,8 @@ LOCALE_PATHS = (
     'app/businessCanvas/locale/',
     'app/finance/locale/',
     'app/valuePropositionCanvas/locale/',
-    'app/kanboard/locale/'
+    'app/kanboard/locale/',
+    'app/floorMap/locale/',
 )
 
 
@@ -222,4 +232,9 @@ DASHBOARD_APP = {
             'youtube': u'https://www.youtube.com/channel/UCBE0aabDceUdOvd_NtX-jig'
         },
     }
+}
+
+BOOTSTRAP3 = {
+   # Class to indicate success, meaning the field has valid input (better to set this in your Django form)
+    'success_css_class': '',
 }

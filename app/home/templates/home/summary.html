@@ -5,6 +5,8 @@
 {% load embed_video_tags %}
 {% load staticfiles %}
 
+{% block title %}{% trans "Summary" %}{% endblock %}
+
 {% block extrahead %}
     <script type="text/javascript" src="{% static 'js/getUrl.js' %}"></script>
 {% endblock %}
@@ -149,11 +151,11 @@
                 data.addColumn({type: 'string', role: 'tooltip'});
                 {% for company, irl, trl in KPI %}
                     {% if irl and trl %}
-                        data.addRows([['{{company.name|safe}}', '{{company.id}}', {{irl.level}}, "IRL:{{irl.level}}\n{% trans "Last irl" %}:{{irl.period_start}}", {{trl.level}}, "TRL:{{trl.level}}\n{% trans "Last trl" %}:{{trl.period_start}}"],]);
+                        data.addRows([['{{company.name|safe}}', '{{company.id}}', {{irl.level}}, "IRL:{{irl.level}}\n{% trans "Last IRL" %}:{{irl.period_start}}", {{trl.level}}, "TRL:{{trl.level}}\n{% trans "Last TRL" %}:{{trl.period_start}}"],]);
                     {% elif irl %}
-                        data.addRows([['{{company.name|safe}}', '{{company.id}}', {{irl.level}}, "IRL:{{irl.level}}\n{% trans "Last irl" %}:{{irl.period_start}}", {{trl.level}}, "TRL:{{trl.level}}"],]);
+                        data.addRows([['{{company.name|safe}}', '{{company.id}}', {{irl.level}}, "IRL:{{irl.level}}\n{% trans "Last IRL" %}:{{irl.period_start}}", {{trl.level}}, "TRL:{{trl.level}}"],]);
                     {% elif trl %}
-                        data.addRows([['{{company.name|safe}}', '{{company.id}}', {{irl.level}}, "IRL:{{irl.level}}", {{trl.level}}, "TRL:{{trl.level}}\n{% trans "Last trl" %}:{{trl.period_start}}"],]);
+                        data.addRows([['{{company.name|safe}}', '{{company.id}}', {{irl.level}}, "IRL:{{irl.level}}", {{trl.level}}, "TRL:{{trl.level}}\n{% trans "Last TRL" %}:{{trl.period_start}}"],]);
                     {% else %}
                         data.addRows([['{{company.name|safe}}', '{{company.id}}', {{irl.level}}, "IRL:{{irl.level}}", {{trl.level}}, "TRL:{{trl.level}}"],]);
                     {% endif %}

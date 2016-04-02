@@ -1,24 +1,26 @@
 # coding: utf-8
 
-from django import forms
 import django_filters
-from app.company.models import Company, CompanyStatus, Presence
-from app.founder.models import Founder
-from app.mentor.models import Mentor
-
+from django import forms
+from django.utils.translation import ugettext_lazy as _
 from crispy_forms.bootstrap import StrictButton
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import HTML, Layout, \
     Submit, Field, ButtonHolder, Hidden, Div
 
-from django.utils.translation import ugettext_lazy as _
+from app.company.models import Company, CompanyStatus, Presence
+from app.founder.models import Founder
+from app.mentor.models import Mentor
 
 
 class CompanyFilter(django_filters.FilterSet):
     # http://django-filter.readthedocs.org/en/latest/usage.html
     class Meta:
         model = Company
-        fields = {'companyStatus': ['exact'], 'name': ['icontains']}
+        fields = {
+            'companyStatus': ['exact'],
+            'name': ['icontains']
+        }
 
 
 class PresenceForm(forms.ModelForm):
@@ -26,7 +28,12 @@ class PresenceForm(forms.ModelForm):
         model = Presence
         fields = ['date']
         widgets = {
-            'date': forms.DateInput(attrs={'type':'date', 'class':'datepicker'})
+            'date': forms.DateInput(
+                attrs={
+                    'type': 'date',
+                    'class': 'datepicker'
+                }
+            )
         }
 
     date = forms.DateField()
@@ -77,13 +84,27 @@ class MiniCompanyStatusUpdateForm(forms.Form):
 class MiniCompanyForm(forms.ModelForm):
     class Meta:
         model = Company
-        fields = ['name', 'logo', 'video', 'url', 'facebook', 'googlePlus', 'linkedIn', 'twitter', 'description']
+        fields = [
+            'name',
+            'logo',
+            'video',
+            'url',
+            'facebook',
+            'googlePlus',
+            'linkedIn',
+            'twitter',
+            'description'
+        ]
 
     name = forms.CharField(
         label=_('Name'),
         required=True,
     )
-    name.widget.attrs.update({'placeholder': _(u'Name of the company')})
+    name.widget.attrs.update(
+        {
+            'placeholder': _(u'Company name')
+        }
+    )
 
     logo = forms.ImageField(
         label=_('Logo'),
@@ -94,44 +115,66 @@ class MiniCompanyForm(forms.ModelForm):
         label=_('Video'),
         required=False,
     )
-    video.widget.attrs.update({'placeholder': _(u'https://urlvideo.com/')})
+    video.widget.attrs.update(
+        {
+            'placeholder': _(u'https://urlvideo.com/')
+        }
+    )
 
     url = forms.URLField(
         label=_('Web site'),
         required=False,
     )
-    url.widget.attrs.update({'placeholder': _(u'https://example.com')})
+    url.widget.attrs.update(
+        {
+            'placeholder': _(u'https://example.com')
+        }
+    )
 
     facebook = forms.URLField(
         label=_('Facebook'),
         required=False,
     )
-    facebook.widget.attrs.update({'placeholder': _(u'https://www.facebook.com/lastname.firstname')})
+    facebook.widget.attrs.update(
+        {
+            'placeholder': _(u'https://www.facebook.com/lastname.firstname')
+        }
+    )
 
     twitter = forms.URLField(
         label=_('Twitter'),
         required=False,
     )
-    twitter.widget.attrs.update({'placeholder': _(u'https://twitter.com/username')})
+    twitter.widget.attrs.update(
+        {
+            'placeholder': _(u'https://twitter.com/username')
+        }
+    )
 
     googlePlus = forms.URLField(
         label=_('Google+'),
         required=False,
     )
-    googlePlus.widget.attrs.update({'placeholder': _(u'https://plus.google.com/id')})
+    googlePlus.widget.attrs.update(
+        {
+            'placeholder': _(u'https://plus.google.com/id')
+        }
+    )
 
     linkedIn = forms.URLField(
         label=_('linkedIn'),
         required=False,
     )
-    linkedIn.widget.attrs.update({'placeholder': _(u'https://ca.linkedin.com/in/username')})
+    linkedIn.widget.attrs.update({'placeholder': _(u'https://ca.linkedin.com'
+                                                   u'/in/username')})
 
     description = forms.CharField(
         label=_('Description'),
         required=False,
         widget=forms.Textarea(
             attrs={
-                'placeholder': _(u'Write here a brief summary of your business.'),
+                'placeholder': _(u'Write here a brief summary '
+                                 u'of your business.'),
                 'class': 'md-editor'
             }
         )
@@ -141,8 +184,22 @@ class MiniCompanyForm(forms.ModelForm):
 class CompanyForm(MiniCompanyForm):
     class Meta:
         model = Company
-        fields = ['name', 'companyStatus', 'incubated_on', 'endOfIncubation', 'logo', 'video', 'url', 'facebook',
-                  'googlePlus', 'linkedIn', 'twitter', 'description', 'founders', 'mentors']
+        fields = [
+            'name',
+            'companyStatus',
+            'incubated_on',
+            'endOfIncubation',
+            'logo',
+            'video',
+            'url',
+            'facebook',
+            'googlePlus',
+            'linkedIn',
+            'twitter',
+            'description',
+            'founders',
+            'mentors'
+        ]
 
     companyStatus = forms.ModelChoiceField(
         label=_(u"Incubation phase"),
@@ -151,7 +208,7 @@ class CompanyForm(MiniCompanyForm):
     )
 
     incubated_on = forms.DateField(
-        label=_('Incubated on'),
+        label=_('Start date'),
         required=False,
         input_formats=('%Y-%m-%d',),
         widget=forms.DateInput(
@@ -163,7 +220,7 @@ class CompanyForm(MiniCompanyForm):
     )
 
     endOfIncubation = forms.DateField(
-        label=_('Incubation end on'),
+        label=_('End date'),
         required=False,
         input_formats=('%Y-%m-%d',),
         widget=forms.DateInput(

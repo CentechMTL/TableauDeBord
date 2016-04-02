@@ -19,36 +19,75 @@ BUSINESS_CANVAS_TYPE_CHOICES = (
     ('BrainstormingSpace', 10),
 )
 
-#Element of the business canvas
-#Can be disactivated if it's archived
+
+# Element of the business canvas
+# Can be deactivated if it's archived
 class BusinessCanvasElement(models.Model):
     class Meta:
         verbose_name = _('Business canvas element')
 
-    title = models.CharField(max_length=200, verbose_name=_('Title'))
-    comment = models.TextField(blank=True,max_length=2000, verbose_name=_('Comment'))
-    #Created on
-    date = models.DateTimeField(auto_now_add=True, auto_now=False, verbose_name=_('Date of creation'))
-    updated = models.DateTimeField(auto_now=True, verbose_name=_('Date of updated'))
-    type = models.CharField(max_length=20, choices=BUSINESS_CANVAS_TYPE_CHOICES, null=True, verbose_name=_('Type'))
-    company = models.ForeignKey(Company, verbose_name=_('Company'))
-    #True -> Archived | False -> Current use
-    disactivated = models.BooleanField(default=False, verbose_name=_('Disactivated'))
+    title = models.CharField(
+        max_length=200,
+        verbose_name=_('Title')
+    )
+    comment = models.TextField(
+        blank=True,
+        max_length=2000,
+        verbose_name=_('Comment')
+    )
+    # Created on
+    date = models.DateTimeField(
+        auto_now_add=True,
+        auto_now=False,
+        verbose_name=_('Creation date')
+    )
+    updated = models.DateTimeField(
+        auto_now=True,
+        verbose_name=_('Update date')
+    )
+    type = models.CharField(
+        max_length=20,
+        choices=BUSINESS_CANVAS_TYPE_CHOICES,
+        null=True,
+        verbose_name=_('Type')
+    )
+    company = models.ForeignKey(
+        Company,
+        verbose_name=_('Company')
+    )
+
+    # True -> Archived | False -> Current use
+    disactivated = models.BooleanField(
+        default=False,
+        verbose_name=_('Deactivated')
+    )
 
     def __unicode__(self):
         return self.title
 
-#Archive of the business canvas
-#use copy of current BusinessCanvasElement
+
+# Archive of the business canvas
+# use copy of current BusinessCanvasElement
 class Archive(models.Model):
     class Meta:
         verbose_name = _('Archive')
 
-    #Created on
-    date = models.DateTimeField(auto_now_add=True, auto_now=False, verbose_name=_('Date'))
-    company = models.ForeignKey(Company, verbose_name=_('Company'))
-    #List of elements in the archive
-    elements = models.ManyToManyField(BusinessCanvasElement,blank=True, verbose_name=_('Elements of the archive'))
+    # Created on
+    date = models.DateTimeField(
+        auto_now_add=True,
+        auto_now=False,
+        verbose_name=_('Date')
+    )
+    company = models.ForeignKey(
+        Company,
+        verbose_name=_('Company')
+    )
+    # List of elements in the archive
+    elements = models.ManyToManyField(
+        BusinessCanvasElement,
+        blank=True,
+        verbose_name=_('Archive elements')
+    )
 
     def __unicode__(self):
         return str(self.date)

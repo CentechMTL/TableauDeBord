@@ -1,6 +1,9 @@
 {% extends 'dashboard.html' %}
 {% load staticfiles %}
 {% load i18n %}
+
+{% block title %}{{company}} - {% trans "Kanboard" %}{% endblock %}
+
 {% block extrahead %}
     <link rel="stylesheet" href="{% static 'kanboard/kanboard.css' %}" type="text/css" media="all" />
     <script type="text/javascript" src="{% static 'kanboard/js/resize_board.js' %}"></script>

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Tableau PTBR\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-22 01:05+0000\n"
-"PO-Revision-Date: 2015-09-29 20:22-0300\n"
+"POT-Creation-Date: 2016-03-29 12:12-0400\n"
+"PO-Revision-Date: 2016-03-24 14:34-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pt_BR\n"
@@ -16,146 +16,184 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 1.8.5\n"
+"X-Generator: Poedit 1.8.7\n"
 
-#: app/businessCanvas/models.py:26
+#: .\app\businessCanvas\models.py:27
 msgid "Business canvas element"
 msgstr "Elemento do Modelo Canvas"
 
-#: app/businessCanvas/models.py:28
-#: app/businessCanvas/templates/businessCanvas/businesscanvaselement_list.html:149
-#: app/businessCanvas/templates/businessCanvas/businesscanvaselement_list.html:185
-#: app/businessCanvas/templates/businessCanvas/businesscanvaselement_list.html:222
-#: app/businessCanvas/templates/businessCanvas/businesscanvaselement_list.html:260
-#: app/businessCanvas/templates/businessCanvas/businesscanvaselement_list.html:297
-#: app/businessCanvas/templates/businessCanvas/businesscanvaselement_list.html:336
-#: app/businessCanvas/templates/businessCanvas/businesscanvaselement_list.html:373
-#: app/businessCanvas/templates/businessCanvas/businesscanvaselement_list.html:412
-#: app/businessCanvas/templates/businessCanvas/businesscanvaselement_list.html:449
-#: app/businessCanvas/templates/businessCanvas/businesscanvaselement_list.html:492
+#: .\app\businessCanvas\models.py:31
+#: .\app\businessCanvas\templates\businessCanvas\businesscanvaselement_list.html:151
+#: .\app\businessCanvas\templates\businessCanvas\businesscanvaselement_list.html:187
+#: .\app\businessCanvas\templates\businessCanvas\businesscanvaselement_list.html:224
+#: .\app\businessCanvas\templates\businessCanvas\businesscanvaselement_list.html:262
+#: .\app\businessCanvas\templates\businessCanvas\businesscanvaselement_list.html:299
+#: .\app\businessCanvas\templates\businessCanvas\businesscanvaselement_list.html:338
+#: .\app\businessCanvas\templates\businessCanvas\businesscanvaselement_list.html:375
+#: .\app\businessCanvas\templates\businessCanvas\businesscanvaselement_list.html:414
+#: .\app\businessCanvas\templates\businessCanvas\businesscanvaselement_list.html:451
+#: .\app\businessCanvas\templates\businessCanvas\businesscanvaselement_list.html:494
 msgid "Title"
 msgstr "Título"
 
-#: app/businessCanvas/models.py:29
-#: app/businessCanvas/templates/businessCanvas/businesscanvaselement_list.html:150
-#: app/businessCanvas/templates/businessCanvas/businesscanvaselement_list.html:186
-#: app/businessCanvas/templates/businessCanvas/businesscanvaselement_list.html:223
-#: app/businessCanvas/templates/businessCanvas/businesscanvaselement_list.html:261
-#: app/businessCanvas/templates/businessCanvas/businesscanvaselement_list.html:298
-#: app/businessCanvas/templates/businessCanvas/businesscanvaselement_list.html:337
-#: app/businessCanvas/templates/businessCanvas/businesscanvaselement_list.html:374
-#: app/businessCanvas/templates/businessCanvas/businesscanvaselement_list.html:413
-#: app/businessCanvas/templates/businessCanvas/businesscanvaselement_list.html:450
-#: app/businessCanvas/templates/businessCanvas/businesscanvaselement_list.html:493
+#: .\app\businessCanvas\models.py:36
+#: .\app\businessCanvas\templates\businessCanvas\businesscanvaselement_list.html:152
+#: .\app\businessCanvas\templates\businessCanvas\businesscanvaselement_list.html:188
+#: .\app\businessCanvas\templates\businessCanvas\businesscanvaselement_list.html:225
+#: .\app\businessCanvas\templates\businessCanvas\businesscanvaselement_list.html:263
+#: .\app\businessCanvas\templates\businessCanvas\businesscanvaselement_list.html:300
+#: .\app\businessCanvas\templates\businessCanvas\businesscanvaselement_list.html:339
+#: .\app\businessCanvas\templates\businessCanvas\businesscanvaselement_list.html:376
+#: .\app\businessCanvas\templates\businessCanvas\businesscanvaselement_list.html:415
+#: .\app\businessCanvas\templates\businessCanvas\businesscanvaselement_list.html:452
+#: .\app\businessCanvas\templates\businessCanvas\businesscanvaselement_list.html:495
 msgid "Comment"
 msgstr "Comentário"
 
-#: app/businessCanvas/models.py:31
-msgid "Date of creation"
-msgstr "Data de criação"
+#: .\app\businessCanvas\models.py:42
+msgid "Creation date"
+msgstr ""
 
-#: app/businessCanvas/models.py:32
-msgid "Date of updated"
+#: .\app\businessCanvas\models.py:46
+#, fuzzy
+#| msgid "Date of updated"
+msgid "Update date"
 msgstr "Data de atualização"
 
-#: app/businessCanvas/models.py:33
+#: .\app\businessCanvas\models.py:52
 msgid "Type"
 msgstr "Tipo"
 
-#: app/businessCanvas/models.py:34 app/businessCanvas/models.py:49
+#: .\app\businessCanvas\models.py:56 .\app\businessCanvas\models.py:83
 msgid "Company"
 msgstr "Empresa"
 
-#: app/businessCanvas/models.py:36
-msgid "Disactivated"
+#: .\app\businessCanvas\models.py:62
+#, fuzzy
+#| msgid "Disactivated"
+msgid "Deactivated"
 msgstr "Desativado"
 
-#: app/businessCanvas/models.py:45
-#: app/businessCanvas/templates/businessCanvas/archive_confirm_delete.html:6
-#: app/businessCanvas/templates/businessCanvas/archive_confirm_delete.html:8
-#: app/businessCanvas/templates/businessCanvas/businesscanvaselement_list.html:522
-#: app/businessCanvas/templates/businessCanvas/businesscanvaselementarchived_list.html:148
+#: .\app\businessCanvas\models.py:73
+#: .\app\businessCanvas\templates\businessCanvas\archive_confirm_delete.html:8
+#: .\app\businessCanvas\templates\businessCanvas\businesscanvaselement_list.html:524
+#: .\app\businessCanvas\templates\businessCanvas\businesscanvaselementarchived_list.html:148
 msgid "Archive"
 msgstr "Arquivo"
 
-#: app/businessCanvas/models.py:48
+#: .\app\businessCanvas\models.py:79
 msgid "Date"
 msgstr "Data"
 
-#: app/businessCanvas/models.py:51
-msgid "Elements of the archive"
+#: .\app\businessCanvas\models.py:89
+#, fuzzy
+#| msgid "Archive"
+msgid "Archive elements"
+msgstr "Arquivo"
+
+#: .\app\businessCanvas\templates\businessCanvas\archive_confirm_delete.html:6
+#, fuzzy
+#| msgid "Elements of the archive"
+msgid "Delete archive"
 msgstr "Elementos do arquivo"
 
-#: app/businessCanvas/templates/businessCanvas/archive_confirm_delete.html:9
-msgid "Are you sure you want to delete this archive ?"
+#: .\app\businessCanvas\templates\businessCanvas\archive_confirm_delete.html:9
+#, fuzzy
+#| msgid "Are you sure you want to delete this archive ?"
+msgid "Are you sure you want to delete this archive?"
 msgstr "Você tem certeza que quer deletar este arquivo?"
 
-#: app/businessCanvas/templates/businessCanvas/archive_confirm_delete.html:11
-msgid "create on"
+#: .\app\businessCanvas\templates\businessCanvas\archive_confirm_delete.html:11
+#, fuzzy
+#| msgid "create on"
+msgid "Created on"
 msgstr "criado em "
 
-#: app/businessCanvas/templates/businessCanvas/archive_confirm_delete.html:15
+#: .\app\businessCanvas\templates\businessCanvas\archive_confirm_delete.html:15
 msgid "Delete"
 msgstr "Deletar"
 
-#: app/businessCanvas/templates/businessCanvas/archive_confirm_delete.html:15
+#: .\app\businessCanvas\templates\businessCanvas\archive_confirm_delete.html:15
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: app/businessCanvas/templates/businessCanvas/businesscanvaselement_list.html:131
+#: .\app\businessCanvas\templates\businessCanvas\businesscanvaselement_list.html:6
+#: .\app\businessCanvas\templates\businessCanvas\businesscanvaselement_list.html:133
 msgid "Business Model Canvas"
 msgstr "Canvas do Modelo de negócio"
 
-#: app/businessCanvas/templates/businessCanvas/businesscanvaselement_list.html:142
-#: app/businessCanvas/templates/businessCanvas/businesscanvaselementarchived_list.html:28
+#: .\app\businessCanvas\templates\businessCanvas\businesscanvaselement_list.html:144
+#: .\app\businessCanvas\templates\businessCanvas\businesscanvaselementarchived_list.html:28
 msgid "Key Partners"
 msgstr "Parceiros Chave"
 
-#: app/businessCanvas/templates/businessCanvas/businesscanvaselement_list.html:178
-#: app/businessCanvas/templates/businessCanvas/businesscanvaselementarchived_list.html:39
+#: .\app\businessCanvas\templates\businessCanvas\businesscanvaselement_list.html:180
+#: .\app\businessCanvas\templates\businessCanvas\businesscanvaselementarchived_list.html:39
 msgid "Key Activities"
 msgstr "Atividades Chave"
 
-#: app/businessCanvas/templates/businessCanvas/businesscanvaselement_list.html:215
-#: app/businessCanvas/templates/businessCanvas/businesscanvaselementarchived_list.html:50
+#: .\app\businessCanvas\templates\businessCanvas\businesscanvaselement_list.html:217
+#: .\app\businessCanvas\templates\businessCanvas\businesscanvaselementarchived_list.html:50
 msgid "Value Proposition"
 msgstr "Proposta de Valor"
 
-#: app/businessCanvas/templates/businessCanvas/businesscanvaselement_list.html:253
-#: app/businessCanvas/templates/businessCanvas/businesscanvaselementarchived_list.html:61
+#: .\app\businessCanvas\templates\businessCanvas\businesscanvaselement_list.html:255
+#: .\app\businessCanvas\templates\businessCanvas\businesscanvaselementarchived_list.html:61
 msgid "Customer Relationships"
 msgstr "Relacionamento com o Cliente"
 
-#: app/businessCanvas/templates/businessCanvas/businesscanvaselement_list.html:290
-#: app/businessCanvas/templates/businessCanvas/businesscanvaselementarchived_list.html:72
+#: .\app\businessCanvas\templates\businessCanvas\businesscanvaselement_list.html:292
+#: .\app\businessCanvas\templates\businessCanvas\businesscanvaselementarchived_list.html:72
 msgid "Customer Segments"
 msgstr "Segmentos de Clientes"
 
-#: app/businessCanvas/templates/businessCanvas/businesscanvaselement_list.html:329
-#: app/businessCanvas/templates/businessCanvas/businesscanvaselementarchived_list.html:85
+#: .\app\businessCanvas\templates\businessCanvas\businesscanvaselement_list.html:331
+#: .\app\businessCanvas\templates\businessCanvas\businesscanvaselementarchived_list.html:85
 msgid "Key Resources"
 msgstr "Recursos Chave"
 
-#: app/businessCanvas/templates/businessCanvas/businesscanvaselement_list.html:366
-#: app/businessCanvas/templates/businessCanvas/businesscanvaselementarchived_list.html:96
+#: .\app\businessCanvas\templates\businessCanvas\businesscanvaselement_list.html:368
+#: .\app\businessCanvas\templates\businessCanvas\businesscanvaselementarchived_list.html:96
 msgid "Channels"
 msgstr "Canais de Distribuição"
 
-#: app/businessCanvas/templates/businessCanvas/businesscanvaselement_list.html:405
-#: app/businessCanvas/templates/businessCanvas/businesscanvaselementarchived_list.html:109
+#: .\app\businessCanvas\templates\businessCanvas\businesscanvaselement_list.html:407
+#: .\app\businessCanvas\templates\businessCanvas\businesscanvaselementarchived_list.html:109
 msgid "Cost Structure"
 msgstr "Estrutura de Custos"
 
-#: app/businessCanvas/templates/businessCanvas/businesscanvaselement_list.html:442
-#: app/businessCanvas/templates/businessCanvas/businesscanvaselementarchived_list.html:120
+#: .\app\businessCanvas\templates\businessCanvas\businesscanvaselement_list.html:444
+#: .\app\businessCanvas\templates\businessCanvas\businesscanvaselementarchived_list.html:120
 msgid "Revenue Streams"
 msgstr "Fontes de Receitas"
 
-#: app/businessCanvas/templates/businessCanvas/businesscanvaselement_list.html:485
-#: app/businessCanvas/templates/businessCanvas/businesscanvaselementarchived_list.html:137
+#: .\app\businessCanvas\templates\businessCanvas\businesscanvaselement_list.html:487
+#: .\app\businessCanvas\templates\businessCanvas\businesscanvaselementarchived_list.html:137
 msgid "Brainstorming Space"
 msgstr "Área de Braninstorming"
 
-#: app/businessCanvas/templates/businessCanvas/businesscanvaselementarchived_list.html:20
+#: .\app\businessCanvas\templates\businessCanvas\businesscanvaselementarchived_list.html:6
+#, fuzzy
+#| msgid "Business Model Canvas"
+msgid "Archived Business Model Canvas"
+msgstr "Canvas do Modelo de negócio"
+
+#: .\app\businessCanvas\templates\businessCanvas\businesscanvaselementarchived_list.html:20
 msgid "Business Model Canvas of "
 msgstr "Canvas do Modelo de Negócio de"
+
+#, fuzzy
+#~| msgid "Business canvas element"
+#~ msgid "Business canvas archived"
+#~ msgstr "Elemento do Modelo Canvas"
+
+#, fuzzy
+#~| msgid "Business canvas element"
+#~ msgid "Business canvas"
+#~ msgstr "Elemento do Modelo Canvas"
+
+#~ msgid "Date of creation"
+#~ msgstr "Data de criação"
+
+#~ msgid "Elements of the archive"
+#~ msgstr "Elementos do arquivo"

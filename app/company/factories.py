@@ -3,6 +3,7 @@
 import factory
 from app.company.models import Company, CompanyStatus
 
+
 class CompanyStatusFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = CompanyStatus

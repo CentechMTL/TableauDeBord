@@ -3,147 +3,163 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-22 01:05+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"POT-Creation-Date: 2016-03-29 12:12-0400\n"
+"PO-Revision-Date: 2016-03-24 14:34-0400\n"
+"Last-Translator: Nicholas Savard\n"
+"Language-Team: \n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 1.8.7\n"
 
-#: app/founder/forms.py:14
+#: .\app\founder\forms.py:16
 msgid "Search by name"
 msgstr "Rechercher par nom"
 
-#: app/founder/forms.py:53 app/founder/forms.py:57
+#: .\app\founder\forms.py:80 .\app\founder\forms.py:86
 msgid "Phone number"
 msgstr "Numéro de téléphone"
 
-#: app/founder/forms.py:60 app/founder/templates/founder/detail.html:43
+#: .\app\founder\forms.py:91 .\app\founder\templates\founder\detail.html:46
 msgid "Web site"
 msgstr "Site web"
 
-#: app/founder/forms.py:63
+#: .\app\founder\forms.py:96
 msgid "https://example.com"
 msgstr "https://exemple.com"
 
-#: app/founder/forms.py:66
+#: .\app\founder\forms.py:101
 msgid "Facebook"
 msgstr "Facebook"
 
-#: app/founder/forms.py:69
+#: .\app\founder\forms.py:106
 msgid "https://www.facebook.com/lastname.firstname"
 msgstr "https://www.facebook.com/nom.prenom"
 
-#: app/founder/forms.py:72
+#: .\app\founder\forms.py:111
 msgid "Twitter"
 msgstr "Twitter"
 
-#: app/founder/forms.py:75
+#: .\app\founder\forms.py:116
 msgid "https://twitter.com/username"
 msgstr "https://twitter.com/nomUtilisateur"
 
-#: app/founder/forms.py:78
+#: .\app\founder\forms.py:121
 msgid "Google+"
 msgstr "Google+"
 
-#: app/founder/forms.py:81
+#: .\app\founder\forms.py:126
 msgid "https://plus.google.com/id"
 msgstr "https://plus.google.com/id"
 
-#: app/founder/forms.py:84
+#: .\app\founder\forms.py:131
 msgid "linkedIn"
 msgstr "linkedIn"
 
-#: app/founder/forms.py:87
+#: .\app\founder\forms.py:136
 msgid "https://ca.linkedin.com/in/username"
 msgstr "https://ca.linkedin.com/in/nomUtilisateur"
 
-#: app/founder/forms.py:90
+#: .\app\founder\forms.py:141
 msgid "Description"
 msgstr "Description"
 
-#: app/founder/forms.py:94
-msgid "Write here a brief summary of your skills and your career."
+#: .\app\founder\forms.py:145
+msgid "Write here a brief summary of your skills and career."
 msgstr "Ecrivez ici un bref résumé de vos compétences et de votre parcours."
 
-#: app/founder/forms.py:101
+#: .\app\founder\forms.py:153
 msgid "Education"
 msgstr "Niveau d'étude"
 
-#: app/founder/forms.py:108 app/founder/models.py:11
-#: app/founder/templates/founder/detail.html:60
+#: .\app\founder\forms.py:160 .\app\founder\models.py:20
+#: .\app\founder\templates\founder\detail.html:63
 msgid "Areas of expertise"
 msgstr "Aires d'expertise"
 
-#: app/founder/forms.py:115
+#: .\app\founder\forms.py:167
 msgid "Picture"
 msgstr "Photo"
 
-#: app/founder/models.py:10
+#: .\app\founder\models.py:13
 msgid "Education level"
 msgstr "Niveau d'étude"
 
-#: app/founder/models.py:12
+#: .\app\founder\models.py:27
 msgid "Equity"
 msgstr "Equité"
 
-#: app/founder/models.py:13 app/founder/templates/founder/detail.html:51
+#: .\app\founder\models.py:32 .\app\founder\templates\founder\detail.html:54
 msgid "About"
 msgstr "A propos"
 
-#: app/founder/templates/founder/detail.html:8
+#: .\app\founder\templates\founder\detail.html:5
+msgid "Details"
+msgstr "Détails"
+
+#: .\app\founder\templates\founder\detail.html:11
 msgid "Actions on this founder"
 msgstr "Actions sur ce fondateur"
 
-#: app/founder/templates/founder/detail.html:12
+#: .\app\founder\templates\founder\detail.html:15
 msgid "Modify this founder"
 msgstr "Modifier ce fondateur"
 
-#: app/founder/templates/founder/detail.html:40
+#: .\app\founder\templates\founder\detail.html:43
 msgid "Phone"
 msgstr "Téléphone"
 
-#: app/founder/templates/founder/detail.html:72
+#: .\app\founder\templates\founder\detail.html:75
 msgid "Companies"
 msgstr "Compagnies"
 
-#: app/founder/templates/founder/detail.html:96
-msgid "No companies exist."
-msgstr "Aucune compagnies."
+#: .\app\founder\templates\founder\detail.html:99
+msgid "No companies found"
+msgstr "Aucune compagnie trouvée"
 
-#: app/founder/templates/founder/founder_form.html:8
+#: .\app\founder\templates\founder\founder_form.html:8
 msgid "Profile"
 msgstr "Profil"
 
-#: app/founder/templates/founder/founder_form.html:20
+#: .\app\founder\templates\founder\founder_form.html:20
 msgid "Save"
 msgstr "Enregistrer"
 
-#: app/founder/templates/founder/founder_form.html:23
+#: .\app\founder\templates\founder\founder_form.html:23
 msgid "Reset"
 msgstr "Réinitialiser"
 
-#: app/founder/templates/founder/index.html:4
-#: app/founder/templates/founder/index.html:8
+#: .\app\founder\templates\founder\index.html:5
+#: .\app\founder\templates\founder\index.html:9
 msgid "Centech Founders"
 msgstr "Fondateur du Centech"
 
-#: app/founder/templates/founder/index.html:39
+#: .\app\founder\templates\founder\index.html:11
+msgid "New founder"
+msgstr "Nouveau fondateur"
+
+#: .\app\founder\templates\founder\index.html:20
+msgid "Search"
+msgstr "Rechercher"
+
+#: .\app\founder\templates\founder\index.html:40
 msgid "Previous"
 msgstr "Précédente"
 
-#: app/founder/templates/founder/index.html:49
+#: .\app\founder\templates\founder\index.html:50
 msgid "Next"
 msgstr "Suivante"
 
-#: app/founder/templates/founder/index.html:84
-msgid "No founders exist."
-msgstr "Aucun fondateur"
+#: .\app\founder\templates\founder\index.html:77
+msgid "Founder"
+msgstr "Fondateur"
+
+#: .\app\founder\templates\founder\index.html:83
+msgid "No founders found"
+msgstr "Aucun fondateur trouvé"

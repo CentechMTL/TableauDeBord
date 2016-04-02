@@ -5,6 +5,7 @@ import factory
 from app.experiment.models import CustomerExperiment
 from app.company.factories import CompanyFactory
 
+
 class CustomerExperimentFactory(factory.DjangoModelFactory):
     class Meta:
         model = CustomerExperiment
@@ -17,6 +18,7 @@ class CustomerExperimentFactory(factory.DjangoModelFactory):
         test_subject_description = kwargs.pop('subject_description', None)
         company = kwargs.pop('company', None)
 
-        experiment = super(ExperimentFactory, self).__init__(self, **kwargs)
+        experiment = super(CustomerExperimentFactory, self).\
+            __init__(self, **kwargs)
 
         experiment.save()

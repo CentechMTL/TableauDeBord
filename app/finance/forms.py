@@ -38,7 +38,12 @@ class FinanceForm(forms.ModelForm):
             }
         )
     )
-    dateSoumission.widget.attrs.update({'type': 'date', 'class': 'datepicker'})
+    dateSoumission.widget.attrs.update(
+        {
+            'type': 'date',
+            'class': 'datepicker'
+        }
+    )
 
     sommeReception = forms.DecimalField(
         label=_('Amount received'),
@@ -57,7 +62,12 @@ class FinanceForm(forms.ModelForm):
             }
         )
     )
-    dateReception.widget.attrs.update({'type': 'date', 'class': 'datepicker'})
+    dateReception.widget.attrs.update(
+        {
+            'type': 'date',
+            'class': 'datepicker'
+        }
+    )
 
     description = forms.CharField(
         label=_('Description'),
@@ -74,28 +84,63 @@ class FinanceForm(forms.ModelForm):
 class BourseForm(FinanceForm):
     class Meta:
         model = Bourse
-        fields = ['name', 'sommeSoumission', 'dateSoumission', 'sommeReception', 'dateReception', 'description']
+        fields = [
+            'name',
+            'sommeSoumission',
+            'dateSoumission',
+            'sommeReception',
+            'dateReception',
+            'description'
+        ]
 
 
 class SubventionForm(FinanceForm):
     class Meta:
         model = Subvention
-        fields = ['name', 'sommeSoumission', 'dateSoumission', 'sommeReception', 'dateReception', 'description']
+        fields = [
+            'name',
+            'sommeSoumission',
+            'dateSoumission',
+            'sommeReception',
+            'dateReception',
+            'description'
+        ]
 
 
 class PretForm(FinanceForm):
     class Meta:
         model = Pret
-        fields = ['name', 'sommeSoumission', 'dateSoumission', 'sommeReception', 'dateReception', 'description']
+        fields = [
+            'name',
+            'sommeSoumission',
+            'dateSoumission',
+            'sommeReception',
+            'dateReception',
+            'description'
+        ]
 
 
 class InvestissementForm(FinanceForm):
     class Meta:
         model = Investissement
-        fields = ['name', 'sommeSoumission', 'dateSoumission', 'sommeReception', 'dateReception', 'description']
+        fields = [
+            'name',
+            'sommeSoumission',
+            'dateSoumission',
+            'sommeReception',
+            'dateReception',
+            'description'
+        ]
 
 
 class VenteForm(FinanceForm):
     class Meta:
         model = Vente
-        fields = ['name', 'sommeSoumission', 'dateSoumission', 'sommeReception', 'dateReception', 'description']
+        fields = [
+            'name',
+            'sommeSoumission',
+            'dateSoumission',
+            'sommeReception',
+            'dateReception',
+            'description'
+        ]

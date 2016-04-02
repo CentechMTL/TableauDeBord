@@ -1,46 +1,49 @@
 {% extends "dashboard.html" %}
 <!-- Load internationalisation utils-->
 {% load i18n %}
+{% load bootstrap3 %}
 {% block title %}{% trans "Centech Companies" %}{% endblock %}
 {% load extras %}
 
 {% block content %}
     <h1>{% trans "Centech Companies" %}</h1>
+    <a href="{% url 'company:create' %}" class="btn btn-primary btn-xs">
+        <i class="fa fa-plus"></i> {% trans "New company" %}
+    </a>
+    <a href="{% url 'company:status_create' %}" class="btn btn-primary btn-xs">
+        <i class="fa fa-plus"></i> {% trans "New status" %}
+    </a>
     <div class="panel panel-default">
-        <div class="panel-body well">
+        <div class="panel-body">
             <form action="" method="get">
                 <div class="row">
-                    <div class="col-md-1"></div>
-                    <div class="col-md-4">
-                        {{ filter.form.as_p }}
-                    </div>
-                    <div class="col-md-1">
+                    <div class="col-md-6">
+                        {% bootstrap_form filter.form %}
                         <button type="submit" class="btn btn-primary">
-                            <i class='fa fa-search'> </i>
+                                <i class="fa fa-search"></i> {% trans "Search" %}
                         </button>
                     </div>
                 </div>
             </form>
         </div>
     </div>
+
     {% if filter %}
     <div class="row">
     {% for company in filter %}
-        <div class="col-md-4" style="height: 150px;">
-        <a href="{% url 'company:detail' company.id %}">
-        {% if company.logo != "" %}
-            <img src="/media/{{ company.logo }}" style="height:70%; max-width: 100%;"/><br>
-        {% else %}
-            <img src="/media/logo/default.jpg" style="height:70%; max-width: 100%;"/><br>
-        {% endif %}
-        <strong>{{ company.name }}</strong>
-        </a>
-        <br>{% trans "Incubation phase" %} : {{ company.companyStatus }}<br>
-        </div>
-        {% if forloop.counter|divisibleby:3 %}
+        <div class="col-md-4" style="padding: 10px;">
+            <div class="panel panel-default" style="height: 150px; padding: 10px;">
+                <a href="{% url 'company:detail' company.id %}">
+                {% if company.logo != "" %}
+                    <img src="/media/{{ company.logo }}" class="thumbnail" style="margin-bottom: 0px; height:70%; max-width: 100%;"/>
+                {% else %}
+                    <img src="/media/logo/default.jpg"  class="thumbnail" style="margin-bottom: 0px; height:70%; max-width: 100%;"/>
+                {% endif %}
+                <strong>{{ company.name }}</strong>
+                </a>
+                <br>{% trans "Incubation phase" %} : {{ company.companyStatus }}<br>
             </div>
-            <div class="row" style="margin-bottom: 30px;">
-        {%endif%}
+        </div>
     {% endfor %}
         </div>
     {% else %}

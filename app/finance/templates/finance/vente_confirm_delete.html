@@ -2,10 +2,12 @@
 <!-- Load internationalisation utils-->
 {% load i18n %}
 {% load staticfiles %}
-{% block title %}{% trans "Sales" %}{% endblock %}
+
+{% block title %}{% trans "Delete sale" %}{% endblock %}
+
 {% block content %}
-    <h1>{% trans "Sales" %}</h1>
-    <h1>{% trans "Are you sure you want to delete this sale ?" %}</h1>
+    <h1>{% trans "Sale" %}</h1>
+    <h1>{% trans "Are you sure you want to delete this sale?" %}</h1>
     <p>
         <span style="font-weight: bold; margin-right: 10px;">{% trans "Name"%} : </span> {{ vente.name }} <br>
         <span style="font-weight: bold; margin-right: 10px;">{% trans "Date of submission" %} : </span> {{ vente.dateSoumission}}<br>

@@ -5,13 +5,15 @@
 <!-- Load internationalisation utils-->
 {% load i18n %}
 
+{% block title %}{{ company }} - {% trans "Details" %}{% endblock %}
+
 {% block extrahead %}
     <!-- PROGRESS_BAR CSS -->
     <link rel="stylesheet" href="{% static 'company/css/progress_bar.css' %}">
 {% endblock %}
 
 {% block content %}
-    {% if isCentech or isFounderOfCompany%}
+    {% if isCentech or is_founder_of_company %}
     <div class="dropdown">
         <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuCompany" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
             {% trans "Actions on this company" %}
@@ -58,9 +60,9 @@
                 <dd>{{ company.companyStatus }}</dd>
 
             {% if company.incubated_on and company.endOfIncubation %}
-                <dt>{% trans "Begin date of phase" context "20 characters max" %} :</dt>
+                <dt>{% trans "Start date" context "20 characters max" %} :</dt>
                 <dd>{{ company.incubated_on }}</dd>
-                <dt>{% trans "End date of phase" context "20 characters max" %} :</dt>
+                <dt>{% trans "End date" context "20 characters max" %} :</dt>
                 <dd>{{ company.endOfIncubation }}</dd>
             {% endif %}
 
@@ -78,18 +80,20 @@
                                     <span class="green" style="width: {{company.get_percentage_incubation_time}}%">{{company.get_percentage_incubation_time}}%</span>
                                 {% endif %}
                             </div>
-                            <div align="center">{% trans "Time spent incubation" %} : {{company.get_percentage_incubation_time}}%</div>
+                            <div align="center">{% trans "Time spent" %} : {{company.get_percentage_incubation_time}}%</div>
                         </div>
                     </div>
             {% endif %}
         </div>
     </div>
+    {% if company.description != "" %}
     <div class="panel panel-default">
-        <div class="panel-heading"><h3>{% trans "About" %}</h3></div>
+        <div class="panel-heading"><h3>{% trans "Value proposition" %}</h3></div>
         <div class="panel-body text-justify">
             {{ company.description }}
         </div>
     </div>
+    {% endif %}
     {% if company.video != "" %}
     <div class="panel panel-default">
         <div class="panel-heading"><h3>{% trans "Video pitch" %}</h3></div>
@@ -125,7 +129,7 @@
                 {% endfor %}
                 </div>
             {% else %}
-                <p>{% trans "No founders exist." %}</p>
+                <p>{% trans "No founders found" %}</p>
             {% endif %}
         </div>
     </div>
@@ -144,7 +148,8 @@
                                     <img class="avatar" src="/media/user_profile/default.jpg" style="height:100%; max-width: 100%;" /><br>
                                 {% endif %}
                                 {{ mentor.user.first_name }} {{ mentor.user.last_name }}
-                            </a>
+                            </a><br/>
+                            {{ mentor.get_type }}
                         </div>
                         {% if forloop.counter|divisibleby:3 %}
                             <div class="row" style="margin-bottom: 50px;">
@@ -153,8 +158,47 @@
                     {% endfor %}
                 </div>
             {% else %}
-                <p>{% trans "No mentors exist." %}</p>
+                <p>{% trans "No mentors found" %}</p>
             {% endif %}
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading"><h3>{% trans "Room rental" %}</h3></div>
+        <div class="panel-body">
+        {% if rentals %}
+            <table cellpadding="0" cellspacing="0" class="table table-bordered">
+                <tr>
+                    <th>{% trans "Room" %}</th>
+                    <th>{% trans "Start date" %}</th>
+                    <th>{% trans "End date" %}</th>
+                    {% if isCentech == True %}
+                    <th>{% trans "Modify" %}</th>
+                    <th>{% trans "Delete" %}</th>
+                    {% endif %}
+                </tr>
+                {% for rental in rentals %}
+                    <tr>
+                        {% if rental.room.code %}
+                            <td>{{ rental.room.code }}</td>
+                        {% else %}
+                            <td>{{ rental.room.static_label }}</td>
+                        {% endif %}
+                        <td>{{ rental.date_start }}</td>
+                        <td>{{ rental.date_end }}</td>
+                        {% if isCentech == True %}
+                        <td><a href="{% url 'floorMap:rental_update' rental.id %}">{% trans "Modify" %}</a></td>
+                        <td><a href="{% url 'floorMap:rental_delete' rental.id %}">{% trans "Delete" %}</a></td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <p>{% trans "No room rentals found" %}</p>
+        {% endif %}
+        {% if isCentech == True %}
+            <p><a href="{% url 'floorMap:rental_create' company.id %}" class="btn btn-primary" style="margin:0">{% trans "New rental" %}</a></p>
+        {% endif %}
         </div>
     </div>
 {% endblock %}

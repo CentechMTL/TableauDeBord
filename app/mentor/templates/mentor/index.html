@@ -1,21 +1,25 @@
 {% extends "dashboard.html" %}
 <!-- Load internationalisation utils-->
 {% load i18n %}
+{% load bootstrap3 %}
+
 {% block title %}{% trans "Centech Mentors" %}{% endblock %}
+
 {% block content %}
     <h1>{% trans "Centech Mentors" %}</h1>
+    <a href="{% url 'mentor:create' %}" class="btn btn-primary btn-xs">
+        <i class="fa fa-plus"></i> {% trans "New mentor" %}
+    </a>
     <div class="panel panel-default">
-        <div class="panel-body well">
-            <form action="" method="get">
+        <div class="panel-body">
+            <form action="" method="get">{% csrf_token%}
                 <div class="row">
-                    <div class="col-md-1"></div>
-                    <div class="col-md-3">
-                        {{ mentorFilter.form.as_p }}
-                    </div>
-                    <div class="col-md-1">
+                    <div class="col-md-6">
+                        {% bootstrap_form mentorFilter.form %}
                         <button type="submit" class="btn btn-primary">
-                            <i class='fa fa-search'> </i>
+                                <i class="fa fa-search"></i> {% trans "Search" %}
                         </button>
+
                     </div>
                 </div>
             </form>
@@ -24,27 +28,24 @@
     {% if mentorFilter %}
     <div class="row" style="margin-bottom: 50px;">
         {% for mentor in mentorFilter %}
-        <div class="col-md-4" style="height: 150px; margin-bottom: 30px;">
-            <a href="{% url 'mentor:detail' mentor.pk %}">
-            {% if mentor.picture != "" %}
-                <img src="/media/{{ mentor.picture }}" style="height:100%; max-width: 100%;"/><br>
-            {% else %}
-                <img src="/media/user_profile/default.jpg" style="height:100%; max-width: 100%;"/><br>
-            {% endif %}
-
-            <strong>{{ mentor.user.first_name }} {{ mentor.user.last_name }}</strong>
-            </a>
-            <br>
+        <div class="col-md-3" style="padding: 10px;">
+            <div class="panel panel-default" style="height: 150px; padding: 10px;">
+                <a href="{% url 'mentor:detail' mentor.pk %}">
+                    {% if mentor.picture != "" %}
+                        <img src="/media/{{ mentor.picture }}" class="thumbnail" style="margin-bottom: 0px; height:70%; max-width: 100%;"/>
+                    {% else %}
+                        <img src="/media/user_profile/default.jpg"  class="thumbnail" style="margin-bottom: 0px; height:70%; max-width: 100%;"/>
+                    {% endif %}
+                    <strong>{{ mentor.user.first_name }} {{ mentor.user.last_name }}</strong>
+                </a><br>
+                {{ mentor.get_type }}
+            </div>
         </div>
-        {% if forloop.counter|divisibleby:3 %}
-        </div>
-        <div class="row" style="margin-bottom: 50px;">
-        {%endif%}
         {% endfor %}
         </div>
 
     {% else %}
-        <p>{% trans "No mentors exist." %}</p>
+        <p>{% trans "No mentors found" %}</p>
     {% endif %}
 {% endblock %}
 

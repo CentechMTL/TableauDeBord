@@ -14,10 +14,17 @@ from django.core.urlresolvers import reverse
 class CompanyStatus(models.Model):
     # Status of a company in the Centech (ex: emergence)
     class Meta:
-        verbose_name_plural = _('Company Status')
+        verbose_name = _('Company status')
+        verbose_name_plural = _('Company status')
 
-    status = models.CharField(max_length=50, verbose_name=_('Name'))
-    comment = models.TextField(verbose_name=_('Comment'), blank=True)
+    status = models.CharField(
+        max_length=50,
+        verbose_name=_('Name')
+    )
+    comment = models.TextField(
+        verbose_name=_('Comment'),
+        blank=True
+    )
 
     def __unicode__(self):
         return self.status
@@ -28,25 +35,79 @@ class Company(models.Model):
         verbose_name_plural = _('Companies')
 
     # General information
-    name = models.CharField(max_length=200, verbose_name=_('Name'))
-    logo = models.ImageField(upload_to='logo', blank=True, verbose_name=_('Logo'))
-    url = models.URLField(blank=True, verbose_name=_('URL'))
-    video = EmbedVideoField(blank=True, verbose_name=_('Video'))
-    description = models.TextField(blank=True, max_length=2000, verbose_name=_('Description'))
-    companyStatus = models.ForeignKey(CompanyStatus, verbose_name=_('Status'))
+    name = models.CharField(
+        max_length=200,
+        verbose_name=_('Name')
+    )
+    logo = models.ImageField(
+        upload_to='logo',
+        blank=True,
+        verbose_name=_('Logo')
+    )
+    url = models.URLField(
+        blank=True,
+        verbose_name=_('URL')
+    )
+    video = EmbedVideoField(
+        blank=True,
+        verbose_name=_('Video')
+    )
+    description = models.TextField(
+        blank=True,
+        max_length=2000,
+        verbose_name=_('Description')
+    )
+    companyStatus = models.ForeignKey(
+        CompanyStatus,
+        verbose_name=_('Status'),
+        related_name="companies"
+    )
 
     # List of founders
-    founders = models.ManyToManyField(Founder, blank=True, verbose_name=_('Founders'), related_name = "company")
+    founders = models.ManyToManyField(
+        Founder,
+        blank=True,
+        verbose_name=_('Founders'),
+        related_name="company"
+    )
+
     # List of mentors
-    mentors = models.ManyToManyField(Mentor, blank=True, verbose_name=_('Mentors'), related_name = "company")
+    mentors = models.ManyToManyField(
+        Mentor,
+        blank=True,
+        verbose_name=_('Mentors'),
+        related_name="company"
+    )
 
-    facebook = models.URLField(blank=True, null=True, verbose_name=_('Facebook'))
-    twitter = models.URLField(blank=True, null=True, verbose_name=_('Twitter'))
-    googlePlus = models.URLField(blank=True, null=True, verbose_name=_('Google+'))
-    linkedIn = models.URLField(blank=True, null=True, verbose_name=_('linkedIn'))
+    facebook = models.URLField(
+        blank=True,
+        null=True,
+        verbose_name=_('Facebook')
+    )
+    twitter = models.URLField(
+        blank=True,
+        null=True,
+        verbose_name=_('Twitter')
+    )
+    googlePlus = models.URLField(
+        blank=True,
+        null=True,
+        verbose_name=_('Google+')
+    )
+    linkedIn = models.URLField(
+        blank=True,
+        null=True,
+        verbose_name=_('linkedIn')
+    )
 
-    incubated_on = models.DateField(blank=True, null=True)
-    endOfIncubation = models.DateField(blank=True, null=True)
+    incubated_on = models.DateField(
+        blank=True,
+        null=True
+    )
+    endOfIncubation = models.DateField(
+        blank=True,
+        null=True
+    )
 
     created = models.DateTimeField(blank=True)
     updated = models.DateTimeField(blank=True)
@@ -60,7 +121,8 @@ class Company(models.Model):
         else:
             origin = Company.objects.get(id=self.id)
             if origin.logo != self.logo:
-                self.logo.name = unicode(self.id) + os.path.splitext(self.logo.name)[1]
+                self.logo.name = unicode(self.id) + \
+                                 os.path.splitext(self.logo.name)[1]
 
         self.updated = timezone.now()
         super(Company, self).save(*args, **kwarg)
@@ -68,7 +130,7 @@ class Company(models.Model):
     def get_users(self):
         users = []
 
-        founders =  self.founders.all()
+        founders = self.founders.all()
         for founder in founders:
             users.append(founder.user)
 
@@ -103,8 +165,9 @@ class Company(models.Model):
         if self.incubated_on and self.endOfIncubation:
             now = datetime.date(datetime.today())
             delta_days = (now - self.incubated_on).days
-            timeOfIncubation = (self.endOfIncubation - self.incubated_on).days
-            percentage = int(round(((float(delta_days))/timeOfIncubation)*100, 0))
+            time_of_incubation = (self.endOfIncubation-self.incubated_on).days
+            delta_days = float(delta_days)
+            percentage = int(round((delta_days/time_of_incubation)*100, 0))
             if percentage > 100:
                 return 100
             else:
@@ -131,4 +194,7 @@ class Presence(models.Model):
         return str(self.date)
 
     def get_absolute_url(self):
-        return reverse('company:presence_list', args={self.company.all()[0].companyStatus.id})
+        return reverse(
+            'company:presence_list',
+            args={self.company.all()[0].companyStatus.id}
+        )

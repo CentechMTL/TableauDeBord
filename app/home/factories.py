@@ -1,8 +1,11 @@
 # coding: utf-8
 
 import factory
-from app.home.models import UserProfile, Expertise
+
 from django.contrib.auth.models import User, Group
+
+from app.home.models import UserProfile, Expertise
+
 
 class UserFactory(factory.DjangoModelFactory):
     class Meta:
@@ -14,19 +17,23 @@ class UserFactory(factory.DjangoModelFactory):
 
     @classmethod
     def _prepare(cls, create, **kwargs):
-        password = kwargs.pop('password', None) # on récupère le mot de passe ci-dessus en clair "Toto1234!#"
+        # On récupère le mot de passe ci-dessus en clair "Toto1234!#"
+        password = kwargs.pop('password', None)
         my_user = super(UserFactory, cls)._prepare(create, **kwargs)
         if password:
-            my_user.set_password(password) # on chiffre le mot de passe
+            # on chiffre le mot de passe
+            my_user.set_password(password)
             if create:
                 my_user.save()
         return my_user
+
 
 class UserProfileFactory(factory.DjangoModelFactory):
     class Meta:
         model = UserProfile
 
     user = factory.SubFactory(UserFactory)
+
 
 class StaffUserFactory(factory.DjangoModelFactory):
     class Meta:
@@ -56,11 +63,13 @@ class StaffUserFactory(factory.DjangoModelFactory):
         user.save()
         return user
 
+
 class StaffUserProfileFactory(factory.DjangoModelFactory):
     class Meta:
         model = UserProfile
 
     user = factory.SubFactory(StaffUserFactory)
+
 
 class ExecutiveUserFactory(factory.DjangoModelFactory):
     class Meta:
@@ -90,15 +99,16 @@ class ExecutiveUserFactory(factory.DjangoModelFactory):
         user.save()
         return user
 
+
 class ExecutiveUserProfileFactory(factory.DjangoModelFactory):
     class Meta:
         model = UserProfile
 
     user = factory.SubFactory(ExecutiveUserFactory)
 
+
 class ExpertiseFactory(factory.DjangoModelFactory):
     class Meta:
         model = Expertise
 
     expertise = factory.Sequence('Expertise N°{0}'.format)
-

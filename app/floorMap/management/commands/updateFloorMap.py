@@ -1,11 +1,19 @@
 # coding: utf-8
 
-from ast import literal_eval
+import os
+import logging
 
+from ast import literal_eval
+from datetime import datetime
+
+from django.conf import settings
 from django.core.management.base import BaseCommand
 
 from app.floorMap.management.commands.scripts.builder import FloorMapBuilder
 from app.floorMap.models import Room
+
+
+logger = logging.getLogger('django')
 
 
 class Command(BaseCommand):
@@ -14,15 +22,24 @@ class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument(
             '--input',
-            default=False,
-            help='Input filename')
+            default=os.path.join(
+                settings.MEDIA_ROOT, "floor_map", "floor_map_base.jpg"
+            ),
+            help='Input filename'
+        )
         parser.add_argument(
             '--output',
-            default=False,
+            default=os.path.join(
+                settings.MEDIA_ROOT, "floor_map", "floor_map.jpg"
+            ),
             help='Output filename'
         )
 
     def handle(self, *args, **options):
+        logger.info("{timestamp} Updating floor map image ...".format(
+            timestamp=datetime.now().strftime("[%Y-%m-%d %H:%M:%S]"),
+        ))
+
         map_settings = {}
 
         if options['input']:
@@ -69,3 +86,8 @@ class Command(BaseCommand):
 
         floor_map.render_image()
         floor_map.save(**map_settings)
+
+        logger.info("{timestamp} Saved image at {path}".format(
+            timestamp=datetime.now().strftime("[%Y-%m-%d %H:%M:%S]"),
+            path=os.path.relpath(map_settings['output'], settings.BASE_DIR),
+        ))

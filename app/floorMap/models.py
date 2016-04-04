@@ -5,6 +5,8 @@ import datetime
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
+from app.floorMap import signals
+
 
 class RoomType(models.Model):
     # Data
@@ -45,6 +47,17 @@ class RoomType(models.Model):
 
     def __unicode__(self):
         return self.name
+
+
+# SIGNAL CONNECTION
+models.signals.post_save.connect(
+    signals.update_floor_map,
+    sender=RoomType
+)
+models.signals.post_delete.connect(
+    signals.update_floor_map,
+    sender=RoomType
+)
 
 
 class Room(models.Model):
@@ -145,6 +158,17 @@ class Room(models.Model):
             return False
 
 
+# SIGNAL CONNECTION
+models.signals.post_save.connect(
+    signals.update_floor_map,
+    sender=Room
+)
+models.signals.post_delete.connect(
+    signals.update_floor_map,
+    sender=Room
+)
+
+
 class Rent(models.Model):
     # Identifiers
     room = models.ForeignKey(
@@ -166,3 +190,14 @@ class Rent(models.Model):
             str(self.date_start),
             str(self.date_end)
         ))
+
+
+# SIGNAL CONNECTION
+models.signals.post_save.connect(
+    signals.update_floor_map,
+    sender=Rent
+)
+models.signals.post_delete.connect(
+    signals.update_floor_map,
+    sender=Rent
+)

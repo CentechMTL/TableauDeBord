@@ -4,7 +4,6 @@ from datetime import date
 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.core.management import call_command
 from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponseRedirect
 from django.utils.decorators import method_decorator
@@ -65,12 +64,6 @@ class RentalCreate(generic.CreateView):
             kwargs={'pk': self.request.POST['company']}
         )
 
-    def form_valid(self, form):
-        redirect_url = super(RentalCreate, self).form_valid(form)
-        if self.object.date_start <= date.today() <= self.object.date_end:
-            call_command('updateFloorMap')
-        return redirect_url
-
 
 class RentalUpdate(generic.UpdateView):
     # Update the rental
@@ -98,12 +91,6 @@ class RentalUpdate(generic.UpdateView):
             "company:detail",
             kwargs={'pk': self.request.POST['company']}
         )
-
-    def form_valid(self, form):
-        redirect_url = super(RentalUpdate, self).form_valid(form)
-        if self.object.date_start <= date.today() <= self.object.date_end:
-            call_command('updateFloorMap')
-        return redirect_url
 
 
 class RentalDelete(generic.DeleteView):
@@ -136,10 +123,3 @@ class RentalDelete(generic.DeleteView):
         context = super(RentalDelete, self).get_context_data(**kwargs)
         context['rental'] = kwargs['object']
         return context
-
-    def delete(self, request, *args, **kwargs):
-        redirect_url = super(RentalDelete, self).\
-            delete(request, *args, **kwargs)
-        if self.object.date_start <= date.today() <= self.object.date_end:
-            call_command('updateFloorMap')
-        return redirect_url

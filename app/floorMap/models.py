@@ -140,6 +140,18 @@ class Room(models.Model):
         else:
             return self.rentals.none()
 
+    def get_upcoming_rentals(self):
+        """
+        :return:
+            Returns upcoming rentals for this room
+        """
+        if self.is_rental():
+            return self.rentals.filter(
+                date_start__gt=datetime.date.today()
+            )
+        else:
+            return self.rentals.none()
+
     def get_owner_name(self):
         """
         :return:

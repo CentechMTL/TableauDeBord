@@ -138,24 +138,33 @@ class Room(models.Model):
     def is_rental(self):
         return self.type.is_rental
 
+    def get_active_rental(self):
+        """
+        :return:
+            The current active rental occupied in this room
+            Returns false if none,
+                or if room type doesn't have the is_rental flag
+        """
+        if self.is_rental():
+            return self.rentals.filter(
+                date_end__gte=datetime.date.today(),
+                date_start__lte=datetime.date.today()
+            ).first()
+        else:
+            return self.rentals.none()
+
     def get_owner_name(self):
         """
         :return:
             The company owner's name if the room type has the is_rental flag
             Otherwise returns boolean False
         """
-        if self.is_rental():
-            owner_result = self.rentals.filter(
-                date_end__gte=datetime.date.today(),
-                date_start__lte=datetime.date.today()
-            ).first()
+        active_rental = self.get_active_rental()
 
-            if owner_result:
-                return owner_result.company.name
-            else:
-                return False
+        if active_rental:
+            return active_rental.company.name
         else:
-            return False
+            return ''
 
 
 # SIGNAL CONNECTION

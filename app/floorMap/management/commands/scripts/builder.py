@@ -33,6 +33,7 @@ class FloorMapBuilder:
         )
         self.floor_map_image = Image.open(input_file)
         self.canvas = ImageDraw.Draw(self.floor_map_image)
+        self._rooms = []
 
     def add_room(self, **kwargs):
         new_room = Room(self.canvas, **kwargs)

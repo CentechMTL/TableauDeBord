@@ -7,9 +7,11 @@
 
 {% block content %}
     <h1>{% trans "Centech Mentors" %}</h1>
+    {% if isCentech %}
     <a href="{% url 'mentor:create' %}" class="btn btn-primary btn-xs">
         <i class="fa fa-plus"></i> {% trans "New mentor" %}
     </a>
+    {% endif %}
     <div class="panel panel-default">
         <div class="panel-body">
             <form action="" method="get">{% csrf_token%}

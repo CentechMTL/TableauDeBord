@@ -1,6 +1,7 @@
 # coding: utf-8
 
 from datetime import date
+from itertools import chain
 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -33,6 +34,54 @@ class FloorMapIndex(generic.ListView):
         return HttpResponseRedirect("/user/noAccessPermissions")
 
 
+class RoomDetails(generic.DetailView):
+    # View room details
+    model = Room
+    template_name = 'floorMap/room_details.html'
+
+    # You need to be connected, and you need to have access as centech only
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        if self.request.user.profile.isCentech() or \
+                self.request.user.profile.isFounder() or \
+                self.request.user.profile.isMentor() or \
+                self.request.user.profile.isExecutive():
+            return super(RoomDetails, self).dispatch(*args, **kwargs)
+
+        # The visitor can't see this page!
+        return HttpResponseRedirect("/user/noAccessPermissions")
+
+    def get_context_data(self, **kwargs):
+        context = super(RoomDetails, self).get_context_data(**kwargs)
+
+        room = Room.objects.get(id=self.kwargs['pk'])
+
+        context['room_label'] = room.static_label
+        context['room_color'] = room.type.bg_color
+
+        if room.is_rental():
+            active_rental = room.get_active_rental()
+
+            if self.request.user.profile.isCentech():
+                rentals = room.rentals.all().order_by("-date_start")
+            else:
+                upcoming = room.get_upcoming_rentals().order_by("-date_start")
+                if active_rental:
+                    rentals = list(chain(upcoming, [active_rental]))
+                else:
+                    rentals = upcoming
+
+            if active_rental:
+                context['room_label'] = active_rental.company.name
+            else:
+                context['room_label'] = _(u'Available')
+                context['room_color'] = room.type.alt_bg_color
+
+            context['rentals'] = rentals
+            context['active_rental'] = active_rental
+        return context
+
+
 class RentalCreate(generic.CreateView):
     # Add a new rental
     model = Rent
@@ -59,10 +108,7 @@ class RentalCreate(generic.CreateView):
             messages.SUCCESS,
             _(u'The rental has been saved.')
         )
-        return reverse_lazy(
-            "company:detail",
-            kwargs={'pk': self.request.POST['company']}
-        )
+        return self.request.GET['next']
 
 
 class RentalUpdate(generic.UpdateView):
@@ -87,10 +133,7 @@ class RentalUpdate(generic.UpdateView):
             messages.SUCCESS,
             _(u'The rental has been saved.')
         )
-        return reverse_lazy(
-            "company:detail",
-            kwargs={'pk': self.request.POST['company']}
-        )
+        return self.request.GET['next']
 
 
 class RentalDelete(generic.DeleteView):
@@ -114,10 +157,7 @@ class RentalDelete(generic.DeleteView):
             messages.SUCCESS,
             _(u'The rental has been removed.')
         )
-        return reverse_lazy(
-            "company:detail",
-            kwargs={'pk': self.object.company.id}
-        )
+        return self.request.GET['next']
 
     def get_context_data(self, **kwargs):
         context = super(RentalDelete, self).get_context_data(**kwargs)

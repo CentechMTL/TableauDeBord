@@ -180,7 +180,7 @@
                 {% for rental in rentals %}
                     <tr>
                         {% if rental.room.code %}
-                            <td>{{ rental.room.code }}</td>
+                            <td><a href="{% url 'floorMap:room_details' rental.room.id %}">{{ rental.room.code }}</a></td>
                         {% else %}
                             <td>{{ rental.room.static_label }}</td>
                         {% endif %}

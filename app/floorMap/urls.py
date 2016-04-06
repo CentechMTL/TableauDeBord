@@ -10,6 +10,14 @@ urlpatterns = patterns(
     # Floor map page
     url(r'^$', views.FloorMapIndex.as_view(), name='index'),
 
+    # Room details
+
+    url(
+        r'^room/(?P<pk>\d+)/$',
+        views.RoomDetails.as_view(),
+        name='room_details'
+    ),
+
     # Forms for rentals
 
     url(

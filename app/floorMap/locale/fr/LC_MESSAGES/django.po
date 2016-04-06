@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-30 15:09-0400\n"
-"PO-Revision-Date: 2016-03-30 16:12-0400\n"
+"POT-Creation-Date: 2016-04-07 11:31-0400\n"
+"PO-Revision-Date: 2016-04-07 11:34-0400\n"
 "Last-Translator: Nicholas Savard\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -18,21 +18,24 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 1.8.7\n"
 
-#: .\app\floorMap\forms.py:18 .\app\floorMap\models.py:155
+#: .\app\floorMap\forms.py:18 .\app\floorMap\models.py:176
 #: .\app\floorMap\templates\rental\rent_confirm_delete.html:33
 msgid "Company"
 msgstr "Compagnie"
 
 #: .\app\floorMap\forms.py:25 .\app\floorMap\models.py:84
+#: .\app\floorMap\templates\floorMap\room_details.html:46
 msgid "Room code"
 msgstr "Numéro du local"
 
-#: .\app\floorMap\forms.py:31 .\app\floorMap\models.py:160
+#: .\app\floorMap\forms.py:31 .\app\floorMap\models.py:181
+#: .\app\floorMap\templates\floorMap\room_details.html:69
 #: .\app\floorMap\templates\rental\rent_confirm_delete.html:25
 msgid "Start date"
 msgstr "Date de début"
 
-#: .\app\floorMap\forms.py:43 .\app\floorMap\models.py:161
+#: .\app\floorMap\forms.py:43 .\app\floorMap\models.py:182
+#: .\app\floorMap\templates\floorMap\room_details.html:70
 #: .\app\floorMap\templates\rental\rent_confirm_delete.html:29
 msgid "End date"
 msgstr "Date de fin"
@@ -80,6 +83,7 @@ msgid "Is rental"
 msgstr "Est locatif"
 
 #: .\app\floorMap\models.py:52
+#: .\app\floorMap\templates\floorMap\room_details.html:48
 msgid "Type"
 msgstr "Type"
 
@@ -129,7 +133,8 @@ msgid "Value in ft²."
 msgstr "Valeur en pi²."
 
 # Room as in building room and not as in bedroom
-#: .\app\floorMap\models.py:151
+#: .\app\floorMap\models.py:172
+#: .\app\floorMap\templates\floorMap\room_details.html:68
 #: .\app\floorMap\templates\rental\rent_confirm_delete.html:17
 msgid "Room"
 msgstr "Local"
@@ -144,8 +149,56 @@ msgid "Actions on floor map"
 msgstr "Actions sur plan d'étage"
 
 #: .\app\floorMap\templates\floorMap\floorMap.html:31
+#: .\app\floorMap\templates\floorMap\room_details.html:92
 msgid "New rental"
 msgstr "Nouvelle location"
+
+#: .\app\floorMap\templates\floorMap\room_details.html:5
+msgid "Details"
+msgstr "Détails"
+
+#: .\app\floorMap\templates\floorMap\room_details.html:34
+msgid "Summary"
+msgstr "Sommaire"
+
+#: .\app\floorMap\templates\floorMap\room_details.html:38
+msgid "Current occupant"
+msgstr "Occupant actuel"
+
+#: .\app\floorMap\templates\floorMap\room_details.html:42
+msgid "None"
+msgstr "Aucun"
+
+#: .\app\floorMap\templates\floorMap\room_details.html:50
+msgid "Area size"
+msgstr "Superficie"
+
+#: .\app\floorMap\templates\floorMap\room_details.html:53
+msgid "ft"
+msgstr "pi"
+
+#: .\app\floorMap\templates\floorMap\room_details.html:55
+msgid "Unspecified"
+msgstr "Non spécifié"
+
+#: .\app\floorMap\templates\floorMap\room_details.html:63
+msgid "Room rental"
+msgstr "Location de salle"
+
+#: .\app\floorMap\templates\floorMap\room_details.html:72
+#: .\app\floorMap\templates\floorMap\room_details.html:82
+msgid "Modify"
+msgstr "Modifier"
+
+#: .\app\floorMap\templates\floorMap\room_details.html:73
+#: .\app\floorMap\templates\floorMap\room_details.html:83
+#: .\app\floorMap\templates\rental\rent_confirm_delete.html:39
+msgid "Delete"
+msgstr "Supprimer"
+
+#: .\app\floorMap\templates\floorMap\room_details.html:89
+msgid "Available for rent"
+msgstr "Disponible pour location"
 
 #: .\app\floorMap\templates\rental\rent_confirm_delete.html:5
 msgid "Delete rental"
@@ -169,10 +222,6 @@ msgid "Value"
 msgstr "Valeur"
 
 #: .\app\floorMap\templates\rental\rent_confirm_delete.html:39
-msgid "Delete"
-msgstr "Supprimer"
-
-#: .\app\floorMap\templates\rental\rent_confirm_delete.html:39
 msgid "Cancel"
 msgstr "Annuler"
 
@@ -184,13 +233,20 @@ msgstr "Sauvegarder"
 msgid "Reset"
 msgstr "Réinitialiser"
 
-#: .\app\floorMap\views.py:61 .\app\floorMap\views.py:95
+#: .\app\floorMap\views.py:78
+msgid "Available"
+msgstr "Disponible"
+
+#: .\app\floorMap\views.py:110 .\app\floorMap\views.py:141
 msgid "The rental has been saved."
 msgstr "La location a été enregistrée."
 
-#: .\app\floorMap\views.py:128
+#: .\app\floorMap\views.py:171
 msgid "The rental has been removed."
 msgstr "La location a été supprimée."
+
+#~ msgid "No room rentals found"
+#~ msgstr "Aucune location trouvée"
 
 #, fuzzy
 #~| msgid "Please use the following format: {format}"

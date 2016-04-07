@@ -94,10 +94,7 @@ class FloorMapTest (TestCase):
         self.client.logout()
 
         result = self.client.get(
-            reverse(
-                'founder:detail', kwargs={
-                    'pk': self.founder.userProfile_id
-                }),
+            reverse('floorMap:index'),
             follow=False
         )
         self.assertEqual(result.status_code, 302)

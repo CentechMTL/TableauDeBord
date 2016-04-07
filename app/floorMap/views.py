@@ -5,7 +5,7 @@ from itertools import chain
 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.core.urlresolvers import reverse_lazy
+from django.core.urlresolvers import resolve
 from django.http import HttpResponseRedirect
 from django.utils.decorators import method_decorator
 from django.utils.translation import ugettext as _
@@ -99,8 +99,12 @@ class RentalCreate(generic.CreateView):
         return HttpResponseRedirect("/user/noAccessPermissions")
 
     def get_initial(self):
-        if 'pk' in self.kwargs:
-            return {'company': int(self.kwargs['pk'])}
+        origin = resolve(self.request.GET['next'])
+        if origin:
+            if origin.url_name == 'room_details':
+                return {'room': int(origin.kwargs['pk'])}
+            elif origin.url_name == 'detail':
+                return {'company': int(origin.kwargs['pk'])}
 
     def get_success_url(self):
         messages.add_message(

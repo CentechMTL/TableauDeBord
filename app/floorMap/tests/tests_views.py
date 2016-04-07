@@ -4,6 +4,7 @@ from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 
+from app.floorMap.factories import RoomFactory, RoomTypeFactory
 from app.founder.factories import FounderFactory
 from app.mentor.factories import MentorFactory
 from app.home.factories import StaffUserProfileFactory, \
@@ -22,6 +23,95 @@ class FloorMapTest (TestCase):
         self.executive = ExecutiveUserProfileFactory()
 
         self.status = CompanyStatusFactory()
+
+        self.room_type = RoomTypeFactory()
+        self.room = RoomFactory(type=self.room_type)
+
+    def test_room_update(self):
+        """
+        Tests access to room update form
+        """
+
+        """
+        Access : Staff
+        """
+        self.client.logout()
+        self.client.login(
+            username=self.staff.user.username,
+            password="Toto1234!#"
+        )
+
+        result = self.client.get(
+            reverse('floorMap:room_update', kwargs={
+                'pk': self.room.id
+            }),
+            follow=False
+        )
+        self.assertEqual(result.status_code, 200)
+
+        """
+        Access : Founder
+        """
+        self.client.logout()
+        self.client.login(
+            username=self.founder.user.username,
+            password="Toto1234!#"
+        )
+
+        result = self.client.get(
+            reverse('floorMap:room_update', kwargs={
+                'pk': self.room.id
+            }),
+            follow=False
+        )
+        self.assertEqual(result.status_code, 302)
+
+        """
+        Access : Mentor
+        """
+        self.client.logout()
+        self.client.login(
+            username=self.mentor.user.username,
+            password="Toto1234!#"
+        )
+
+        result = self.client.get(
+            reverse('floorMap:room_update', kwargs={
+                'pk': self.room.id
+            }),
+            follow=False
+        )
+        self.assertEqual(result.status_code, 302)
+
+        """
+        Access : Executive
+        """
+        self.client.logout()
+        self.client.login(
+            username=self.executive.user.username,
+            password="Toto1234!#"
+        )
+
+        result = self.client.get(
+            reverse('floorMap:room_update', kwargs={
+                'pk': self.room.id
+            }),
+            follow=False
+        )
+        self.assertEqual(result.status_code, 302)
+
+        """
+        No Access : Not logged
+        """
+        self.client.logout()
+
+        result = self.client.get(
+            reverse('floorMap:room_update', kwargs={
+                'pk': self.room.id
+            }),
+            follow=False
+        )
+        self.assertEqual(result.status_code, 302)
 
     def test_floorMap(self):
         """

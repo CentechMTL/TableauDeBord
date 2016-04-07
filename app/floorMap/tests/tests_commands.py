@@ -18,8 +18,10 @@ from app.floorMap.factories import RentFactory, RoomFactory, RoomTypeFactory
 class UpdateFloorMap(TestCase):
     ImageIn = "floor_map_base.jpg"
     ImageOut = "floor_map_test.jpg"
-    ImagePathIn = os.path.join(settings.MEDIA_ROOT, "floor_map", ImageIn)
-    ImagePathOut = os.path.join(settings.MEDIA_ROOT, "floor_map", ImageOut)
+    ImagePathIn = os.path.join(
+        settings.BASE_DIR, 'app', 'floorMap', 'static', 'img', ImageIn)
+    ImagePathOut = os.path.join(
+        settings.BASE_DIR, 'app', 'floorMap', 'static', 'img', ImageOut)
 
     def setUp(self):
         self.room_type_1 = RoomTypeFactory(id=1)

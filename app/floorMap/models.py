@@ -202,6 +202,14 @@ class Rent(models.Model):
         related_name='rentals'
     )
 
+    pricing = models.DecimalField(
+        default='%.2f' % 0.0,
+        max_digits=5,
+        decimal_places=2,
+        verbose_name=_(u'Pricing'),
+        help_text=_(u'Per sq. ft.'),
+    )
+
     # Data
     date_start = models.DateField(verbose_name=_(u'Start date'))
     date_end = models.DateField(verbose_name=_(u'End date'))

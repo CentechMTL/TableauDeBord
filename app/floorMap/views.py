@@ -12,7 +12,7 @@ from django.utils.translation import ugettext as _
 from django.views import generic
 
 from app.floorMap.forms import RentalForm, RentalFormUpdate, RoomFormUpdate
-from app.floorMap.models import Room, Rent
+from app.floorMap.models import Room, Rent, Settings
 
 
 class FloorMapIndex(generic.ListView):
@@ -126,12 +126,18 @@ class RentalCreate(generic.CreateView):
         return HttpResponseRedirect("/user/noAccessPermissions")
 
     def get_initial(self):
+        initials = {
+            'pricing': Settings.load().default_annual_rental_rate
+        }
+
         if 'next' in self.request.GET:
             origin = resolve(self.request.GET['next'])
             if origin.url_name == 'room_details':
-                return {'room': int(origin.kwargs['pk'])}
+                initials.update({'room': int(origin.kwargs['pk'])})
             elif origin.url_name == 'detail':
-                return {'company': int(origin.kwargs['pk'])}
+                initials.update({'company': int(origin.kwargs['pk'])})
+
+        return initials
 
     def get_success_url(self):
         messages.add_message(

@@ -42,7 +42,7 @@ class RoomFormUpdate(forms.ModelForm):
 class RentalForm(forms.ModelForm):
     class Meta:
         model = Rent
-        fields = ['company', 'room', 'date_start', 'date_end']
+        fields = ['company', 'room', 'date_start', 'date_end', 'pricing']
 
     company = forms.ModelChoiceField(
         label=_(u"Company"),
@@ -79,6 +79,13 @@ class RentalForm(forms.ModelForm):
                 'class': 'datepicker'
             }
         )
+    )
+
+    pricing = forms.DecimalField(
+        label=_(u"Pricing (per sq. ft.)"),
+        required=True,
+        max_digits=5,
+        decimal_places=2,
     )
 
     def clean_date_end(self):
@@ -148,7 +155,7 @@ class RentalForm(forms.ModelForm):
 class RentalFormUpdate(RentalForm):
     class Meta:
         model = Rent
-        fields = ['id', 'company', 'room', 'date_start', 'date_end']
+        fields = ['id', 'company', 'room', 'date_start', 'date_end', 'pricing']
 
     id = forms.CharField(
         widget=forms.HiddenInput,

@@ -1,0 +1,90 @@
+{% load i18n staticfiles %}
+<nav class="navbar navbar-default navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
+    <div class="navbar-header">
+        <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i>
+        </a>
+        <table style="margin: 14px 5px 5px 20px;">
+          <tr>
+              <td><img src="{% static 'img/centech-logo.png' %}" width="40"></td>
+              <td style="margin-left: 14px;"><img src="{% static 'img/centech_banner.png' %}" width="200"></td>
+          </tr>
+        </table>
+    </div>
+    <ul class="nav navbar-top-links navbar-right">
+        <li>
+            <span class="m-r-sm text-muted welcome-message">{% trans "Welcome to the Centech Dashboard" %}</span>
+        </li>
+
+        <!-- MENU LANGUAGE -->
+        <form action="/i18n/setlang/" method="post" style="display: none" id="change_language_form">
+            {% csrf_token %}
+            <input type="hidden" value="" name="language" id="language" />
+        </form>
+
+        <li class="dropdown">
+            <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                <i class="fa fa-flag"> {% trans "Language"  %}</i>
+            </a>
+            <ul class="dropdown-menu dropdown-messages">
+                <li> {% trans "Language"  %}</li>
+                <li>
+                    {% get_language_info_list for LANGUAGES as languages %}
+                    {% for language in languages %}
+                        <a style="" lang_code="{{ language.code }}" class="change_language">{{ language.name_local|capfirst }} </a>
+                    {% endfor %}
+                </li>
+            </ul>
+        </li>
+
+        <!-- MENU PROFIL -->
+        <li class="dropdown">
+            <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                <i class="fa fa-cog fa-2x"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-messages">
+            {% if isMentor %}
+                <li>{% trans "MENTOR" %}</li>
+                <li>
+                    {% with profile=user.profile %}
+                    <a href="{%url 'mentor:update' profile.userProfile_id %}" style="text-decoration: none; color: black; font-size: 14px;">
+                       <div class="dropdown-messages-box">
+                            <i class="fa fa-user"></i> {% trans "Update profile" %}
+                        </div>
+                    </a>
+                    {% endwith %}
+                </li>
+                <hr>
+            {% elif isFounder %}
+                <li>{% trans "FOUNDER" %}</li>
+                <li>
+                    {% with profile=user.profile %}
+                    <a href="{% url 'founder:update' profile.userProfile_id %}" style="text-decoration: none; color: black; font-size: 14px;">
+                        <div class="dropdown-messages-box">
+                            <i class="fa fa-user"></i> {% trans "Update profile" %}
+                        </div>
+                    </a>
+                    {% endwith %}
+                </li>
+                <hr>
+            {% endif %}
+                <li>{% trans "MY ACCOUNT" %}</li>
+                {% if isCentech or isFounder or isMentor %}
+                <li>
+                    <a href="{% url 'home:change_password' %}" style="text-decoration: none; color: black; font-size: 14px;">
+                        <div class="dropdown-messages-box">
+                            <i class="fa fa-key"></i> {% trans "Change password" %}
+                        </div>
+                    </a>
+                </li>
+                {% endif %}
+                <li>
+                    <a href="{% url 'home:logout' %}" style="text-decoration: none; color: black; font-size: 14px;">
+                        <div class="dropdown-messages-box">
+                            <i class="fa fa-sign-out pull-left"></i> {% trans "Logout" %}
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</nav>

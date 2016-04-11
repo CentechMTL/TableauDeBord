@@ -1,0 +1,81 @@
+{% load i18n staticfiles %}
+<nav class="navbar navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse">
+        <ul class="nav" id="side-menu">
+            <li class="nav-header">
+                <div class="dropdown profile-element">
+                    <span>
+                        <img alt="image" class="img-circle" src="{% static 'img/centech-logo.png' %}" width="50"/>
+                    </span>
+                </div>
+                <div class="logo-element">
+                    <img src="{% static 'img/centech-logo.png' %}" width="40">
+                </div>
+            </li>
+
+            <li class="active">
+                <!-----------------------------------------
+                ============== GENERAL MENU ===============
+                ------------------------------------------>
+
+                {% if "road_map" in list_menu %}
+                    <a href="{% url 'home:maStartup' %}"><div><i class="fa fa-globe"></i> <span class="nav-label">{% trans "Road map" %}</span></div></a>
+                {% endif %}
+                {% if "floorMap" in list_menu %}
+                    <a href="{% url 'floorMap:index' %}"><div><i class="fa fa-street-view "></i> <span class="nav-label">{% trans "Floor plan" %}</span></div></a>
+                {% endif %}
+                {% if "companies" in list_menu %}
+                    <a href="{% url 'company:index' %}"><div><i class="fa fa-university"></i> <span class="nav-label">{% trans "Companies" %}</span></div></a>
+                {% endif %}
+                {% if "mentors" in list_menu %}
+                    <a href="{% url 'mentor:index' %}"><div><i class="fa fa-graduation-cap"></i> <span class="nav-label">{% trans "Mentors" %}</span></div></a>
+                {% endif %}
+                {% if "founders" in list_menu %}
+                    <a href="{% url 'founder:index' %}"><div><i class="fa fa-users"></i> <span class="nav-label">{% trans "Founders" %}</span></div></a>
+                {% endif %}
+                {% if "summary" in list_menu %}
+                    <a href="{% url 'home:summary' 1%}"><div><i class="fa fa-bar-chart" ></i> <span class="nav-label">{% trans "Summary" %}</span></div></a>
+                {% endif %}
+
+                <!-----------------------------------------
+                ============= COMPAGNIE MENU ==============
+                ------------------------------------------>
+                {% if list_company %}
+                    <select id="selectCompany" class="menuDashboard form-control" onchange="updateMenu(this.value)">
+                        <option disabled="True">{% trans "Select a company" %}</option>
+                        {% for company in list_company %}
+                            {% if request.session.companySelected == company.id %}
+                                <option value="{{ company.id }}" selected="selected">{{ company.name }}</option>
+                            {% else %}
+                                <option value="{{ company.id }}" >{{ company.name }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                    {% if request.session.companySelected %}
+                        <a class="menuCompany" href="{% url 'company:detail' request.session.companySelected %}"><div><i class="fa fa-info-circle"></i> <span class="nav-label">{% trans "Presentation" %}</span></div></a>
+                        <a class="menuIrl" href="{% url 'kpi:irl_filter' request.session.companySelected %}"><div><i class="fa fa-bar-chart"></i> <span class="nav-label">{% trans "IRL" %}</span></div></a>
+                        <a class="menuTrl" href="{% url 'kpi:trl_filter' request.session.companySelected %}"><div><i class="fa fa-bar-chart"></i> <span class="nav-label">{% trans "TRL" %}</span></div></a>
+                        <a class="menuExperiment" href="{% url 'experiment:experiment_list' request.session.companySelected %}"><div><i class="fa fa-flask"></i> <span class="nav-label">{% trans "Experiments" %}</span></div></a>
+                        <a class="menuBusinessCanvas" href="{% url 'businessCanvas:businessCanvasElement_list' request.session.companySelected %}"><div><i class="fa fa-table"></i> <span class="nav-label">{% trans "Business Model Canvas" %}</span></div></a>
+                        {% comment %}
+                        <a class="menuValuePropositionCanvas" href="{% url 'valuePropositionCanvas:valuePropositionCanvasElement_list' request.session.companySelected %}"><div><i class="fa fa-table"></i> <span class="nav-label">{% trans "Value Proposition Canvas" %}</span></div></a>
+                        {% endcomment %}
+                        <a class="menuFinance" href="{% url 'finance:detail_finance' request.session.companySelected %}"><div><i class="fa fa-usd"></i> <span class="nav-label">{% trans "Finance" %}</span></div></a>
+                        <a class="menuKanboard" href="{% url 'kanboard:kanboard' request.session.companySelected %}"><div><i class="fa fa-list-ul"></i> <span class="nav-label">{% trans "KanBoard" %}</span></div></a>
+                    {% else %}
+                        <a class="menuCompany" style="visibility: hidden;" href="/company"><div><i class="fa fa-info-circle"></i> <span class="nav-label">{% trans "Presentation" %}</span></div></a>
+                        <a class="menuIrl" style="visibility: hidden;" href="/kpi/irl"><div><i class="fa fa-bar-chart"></i> <span class="nav-label">{% trans "IRL" %}</span></div></a>
+                        <a class="menuTrl" style="visibility: hidden;" href="/kpi/trl"><div><i class="fa fa-bar-chart"></i> <span class="nav-label">{% trans "TRL" %}</span></div></a>
+                        <a class="menuExperiment" style="visibility: hidden;" href="/experiment"><div><i class="fa fa-flask"></i> <span class="nav-label">{% trans "Experiments" %}</span></div></a>
+                        <a class="menuBusinessCanvas" style="visibility: hidden;" href="/businessCanvas"><div><i class="fa fa-table"></i> <span class="nav-label">{% trans "Business Model Canvas" %}</span></div></a>
+                        {% comment %}
+                        <a class="menuValuePropositionCanvas" style="visibility: hidden;" href="/valuePropositionCanvas"><div><i class="fa fa-table"></i> <span class="nav-label">{% trans "Value Proposition Canvas" %}</span></div></a>
+                        {% endcomment %}
+                        <a class="menuFinance" style="visibility: hidden;" href="/finance"><div><i class="fa fa-usd"></i> <span class="nav-label">{% trans "Finance" %}</span></div></a>
+                        <a class="menuKanboard" style="visibility: hidden;" href="/kanboard"><div><i class="fa fa-list-ul"></i> <span class="nav-label">{% trans "KanBoard" %}</span></div></a>
+                    {% endif %}
+                {% endif %}
+            </li>
+        </ul>
+    </div>
+</nav>

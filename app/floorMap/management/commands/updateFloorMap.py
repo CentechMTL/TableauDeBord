@@ -53,16 +53,16 @@ class Command(BaseCommand):
         for room in Room.objects.all():
             company = room.get_owner_name()
 
+            bg_color = room.type.bg_color
+
             if room.is_rental():
                 if company:
                     room_label = company
-                    bg_color = room.type.bg_color
                 else:
                     room_label = "Libre"
                     bg_color = room.type.alt_bg_color
             else:
                 room_label = room.static_label
-                bg_color = room.type.bg_color
 
             # Required data:
 
@@ -71,15 +71,13 @@ class Command(BaseCommand):
                 'coords': literal_eval(room.coords),
                 'show_code': bool(room.code),
                 'bg_color': bg_color,
+                'label': room_label,
             }
 
             # Optional data:
 
             if room.text_coords:
                 data['text_coords'] = literal_eval(room.text_coords)
-
-            if room.static_label:
-                data['label'] = room_label
 
             # Sends data to the map builder
             floor_map.add_room(**data)

@@ -37,9 +37,9 @@
 
     <div class="row" align="center">
         <div class="col-sm-12">
-            <h2>{% trans "Floor plan" %}</h2>
+            <h1>{% trans "Floor plan" %}</h1>
             <div class="floor_map_wrapper">
-                <img class="floor_map maphilighted" src="{% static 'img/floor_map.jpg' %}" usemap="#map_coords" />
+                <img class="floor_map maphilighted" src="/media/floor_map/floor_map.jpg" usemap="#map_coords" />
             </div>
             <map name="map_coords">
                 {% for room in list_room_data %}

@@ -1,10 +1,12 @@
 # coding: utf-8
 
+import os
 import logging
 
 from ast import literal_eval
 from datetime import datetime
 
+from django.conf import settings
 from django.core.management.base import BaseCommand
 
 from app.floorMap.management.commands.scripts.builder import FloorMapBuilder
@@ -20,10 +22,16 @@ class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument(
             '--input',
+            default=os.path.join(
+                settings.MEDIA_ROOT, "floor_map", "floor_map_base.jpg"
+            ),
             help='Input filename'
         )
         parser.add_argument(
             '--output',
+            default=os.path.join(
+                settings.MEDIA_ROOT, "floor_map", "floor_map.jpg"
+            ),
             help='Output filename'
         )
 
@@ -77,4 +85,7 @@ class Command(BaseCommand):
         floor_map.render_image()
         floor_map.save(**map_settings)
 
-        logger.info("New image was saved.")
+        logger.info("{timestamp} Saved image at {path}".format(
+            timestamp=datetime.now().strftime("[%Y-%m-%d %H:%M:%S]"),
+            path=os.path.relpath(map_settings['output'], settings.BASE_DIR),
+        ))

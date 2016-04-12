@@ -3,6 +3,7 @@
 from __future__ import division
 
 import math
+import os
 import re
 from itertools import combinations
 from PIL import Image, ImageDraw, ImageFont, ImageColor
@@ -22,7 +23,14 @@ class FloorMapBuilder:
             if hasattr(settings, attr):
                 setattr(settings, attr, value)
 
-        input_file = kwargs.pop('input', settings.INPUT_IMAGE)
+        input_file = kwargs.pop(
+            'input',
+            os.path.join(
+                settings.MEDIA_ROOT,
+                settings.PROJECT_DIR,
+                settings.INPUT_FILENAME
+            )
+        )
         self.floor_map_image = Image.open(input_file)
         self.canvas = ImageDraw.Draw(self.floor_map_image)
         self._rooms = []
@@ -42,7 +50,14 @@ class FloorMapBuilder:
         :param kwargs: options include 'output' and 'quality'
         :return:
         """
-        output_file = kwargs.pop('output', settings.OUTPUT_IMAGE)
+        output_file = kwargs.pop(
+            'output',
+            os.path.join(
+                settings.MEDIA_ROOT,
+                settings.PROJECT_DIR,
+                settings.OUTPUT_FILENAME
+            )
+        )
         quality = kwargs.pop('quality', settings.IMAGE_QUALITY)
 
         self.floor_map_image.save(output_file, quality=quality)
@@ -509,4 +524,10 @@ def choose_best_option(*format_opts):
 
 
 def font_size(size):
-    return ImageFont.truetype(settings.FONT_TYPE, size=size)
+    return ImageFont.truetype(
+        os.path.join(
+            settings.MEDIA_ROOT,
+            settings.FONTS_DIR,
+            settings.FONT_FACE
+        ), size=size
+    )

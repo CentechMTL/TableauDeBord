@@ -1,6 +1,5 @@
 # coding: utf-8
 
-import os
 from django.conf import settings as django_settings
 
 """
@@ -15,24 +14,15 @@ FLOOR MAP SETTINGS
 Django installation (DO NOT CHANGE MANUALLY HERE!)
 """
 DEBUG = django_settings.DEBUG
-
-BASE_DIR = django_settings.BASE_DIR
-FLOOR_MAP_DIR = os.path.join(BASE_DIR, 'app', 'floorMap')
-STATIC_DIR = os.path.join(FLOOR_MAP_DIR, 'static')
+MEDIA_ROOT = django_settings.MEDIA_ROOT
 
 """
 Media
 """
+PROJECT_DIR = "floor_map"
+FONTS_DIR = "fonts"
 INPUT_FILENAME = "floor_map_base.jpg"
 OUTPUT_FILENAME = "floor_map.jpg"
-FONT_FACE = "arial.ttf"
-
-FONT_DIR = os.path.join(STATIC_DIR, 'fonts')
-IMAGE_DIR = os.path.join(STATIC_DIR, 'img')
-
-FONT_TYPE = os.path.join(FONT_DIR, FONT_FACE)
-INPUT_IMAGE = os.path.join(IMAGE_DIR, INPUT_FILENAME)
-OUTPUT_IMAGE = os.path.join(IMAGE_DIR, OUTPUT_FILENAME)
 
 """
 Optimization options
@@ -57,6 +47,7 @@ TRUNCATE_STRING = '...'
 """
 Label text
 """
+FONT_FACE = 'arial.ttf'
 FONT_COLOR = "#000000"
 FONT_SIZE_MIN = 10
 FONT_SIZE_MAX = 24

@@ -9,6 +9,17 @@
 {% endblock %}
 
 {% block content %}
+    {% if isCentech %}
+    <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuRoom" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            {% trans "Actions on this room" %}
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuRoom">
+            <li><a href="{% url 'floorMap:room_update' room.id %}">{% trans "Modify this room" %}</a></li>
+        </ul>
+    </div>
+    {% endif %}
     <div class="row">
         <div class="col-sm-12" align="center">
             <div class="thumbnail room-thumbnail">

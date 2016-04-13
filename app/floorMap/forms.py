@@ -6,7 +6,7 @@ from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 
 from app.company.models import Company
-from app.floorMap.models import Rent, Room, RoomType
+from app.floorMap.models import Rent, Room, RoomType, Settings
 
 
 class RoomFormUpdate(forms.ModelForm):
@@ -180,3 +180,16 @@ class RentalFormUpdate(RentalForm):
         )
 
         return results
+
+
+class SettingsFormUpdate(forms.ModelForm):
+    class Meta:
+        model = Settings
+        fields = ['default_annual_rental_rate']
+
+    default_annual_rental_rate = forms.DecimalField(
+        label=_(u"Default annual price (per sq. ft.)"),
+        required=True,
+        max_digits=5,
+        decimal_places=2
+    )

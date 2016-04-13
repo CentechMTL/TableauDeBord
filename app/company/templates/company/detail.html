@@ -180,15 +180,15 @@
                 {% for rental in rentals %}
                     <tr>
                         {% if rental.room.code %}
-                            <td>{{ rental.room.code }}</td>
+                            <td><a href="{% url 'floorMap:room_details' rental.room.id %}">{{ rental.room.code }}</a></td>
                         {% else %}
                             <td>{{ rental.room.static_label }}</td>
                         {% endif %}
                         <td>{{ rental.date_start }}</td>
                         <td>{{ rental.date_end }}</td>
                         {% if isCentech == True %}
-                        <td><a href="{% url 'floorMap:rental_update' rental.id %}">{% trans "Modify" %}</a></td>
-                        <td><a href="{% url 'floorMap:rental_delete' rental.id %}">{% trans "Delete" %}</a></td>
+                        <td><a href="{% url 'floorMap:rental_update' rental.id %}?next={{ request.path }}">{% trans "Modify" %}</a></td>
+                        <td><a href="{% url 'floorMap:rental_delete' rental.id %}?next={{ request.path }}">{% trans "Delete" %}</a></td>
                         {% endif %}
                     </tr>
                 {% endfor %}
@@ -197,7 +197,7 @@
             <p>{% trans "No room rentals found" %}</p>
         {% endif %}
         {% if isCentech == True %}
-            <p><a href="{% url 'floorMap:rental_create' company.id %}" class="btn btn-primary" style="margin:0">{% trans "New rental" %}</a></p>
+            <p><a href="{% url 'floorMap:rental_create' company.id %}?next={{ request.path }}" class="btn btn-primary" style="margin:0">{% trans "New rental" %}</a></p>
         {% endif %}
         </div>
     </div>

@@ -102,10 +102,11 @@ CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'centech_dashboard',                      # Or path to database file if using sqlite3.
-        'USER': 'centech',                      # Not used with sqlite3.
-        'PASSWORD': 'centech',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
+        'NAME': 'centech_dashboard',        # Or path to database file if using sqlite3.
+        'USER': 'centech',                  # Not used with sqlite3.
+        'PASSWORD': 'centech',              # Not used with sqlite3.
+        'HOST': '',                         # Set to empty string for localhost.
+                                            #   Not used with sqlite3.
     }
 }
 
@@ -118,7 +119,7 @@ if 'test' in sys.argv:
 
 TIME_ZONE = 'UTC'
 
-USE_TZ = False #todo add timezone support
+USE_TZ = False  # Todo add timezone support
 
 
 # Static files (CSS, JavaScript, Images)
@@ -189,17 +190,16 @@ USE_I18N = True
 # calendars according to the current locale
 USE_L10N = True
 
-#not import the real utils here! We don't want an infiny loop
+# Do not import the real utils here! We don't want an infinite loop
 gettext = lambda x: x
 
-#List of supported languages
+# List of supported languages
 LANGUAGES = (
    ('fr', gettext('French')),
    ('en', gettext('English')),
-   ('pt', gettext('Portuguese'))
 )
 
-#List of translation directory
+# List of translation directories
 LOCALE_PATHS = (
     'app/company/locale/',
     'app/mentor/locale/',
@@ -239,6 +239,6 @@ DASHBOARD_APP = {
 }
 
 BOOTSTRAP3 = {
-   # Class to indicate success, meaning the field has valid input (better to set this in your Django form)
+    # Class to indicate success, meaning the field has valid input (better to set this in your Django form)
     'success_css_class': '',
 }

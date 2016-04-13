@@ -126,8 +126,8 @@ class RentalCreate(generic.CreateView):
         return HttpResponseRedirect("/user/noAccessPermissions")
 
     def get_initial(self):
-        origin = resolve(self.request.GET['next'])
-        if origin:
+        if 'next' in self.request.GET:
+            origin = resolve(self.request.GET['next'])
             if origin.url_name == 'room_details':
                 return {'room': int(origin.kwargs['pk'])}
             elif origin.url_name == 'detail':
@@ -139,7 +139,10 @@ class RentalCreate(generic.CreateView):
             messages.SUCCESS,
             _(u'The rental has been saved.')
         )
-        return self.request.GET['next']
+        if 'next' in self.request.GET:
+            return self.request.GET['next']
+        else:
+            return reverse_lazy('floorMap:index')
 
 
 class RentalUpdate(generic.UpdateView):
@@ -164,7 +167,10 @@ class RentalUpdate(generic.UpdateView):
             messages.SUCCESS,
             _(u'The rental has been saved.')
         )
-        return self.request.GET['next']
+        if 'next' in self.request.GET:
+            return self.request.GET['next']
+        else:
+            return reverse_lazy('floorMap:index')
 
 
 class RentalDelete(generic.DeleteView):
@@ -188,7 +194,10 @@ class RentalDelete(generic.DeleteView):
             messages.SUCCESS,
             _(u'The rental has been removed.')
         )
-        return self.request.GET['next']
+        if 'next' in self.request.GET:
+            return self.request.GET['next']
+        else:
+            return reverse_lazy('floorMap:index')
 
     def get_context_data(self, **kwargs):
         context = super(RentalDelete, self).get_context_data(**kwargs)

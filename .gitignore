@@ -11,4 +11,4 @@ env
 
 celerybeat.pid
 
-media/floor_map/floor_map.jpg
+app/floorMap/static/img/floor_map.jpg

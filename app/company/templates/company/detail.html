@@ -46,7 +46,10 @@
             {% endif %}
             <br>
             {% if company.url != "" %}
-            {% trans "Web site" %} : <a href="{{ company.url }}">{{ company.url }}</a><br><br>
+            {% trans "Web site" %} : <a href="{{ company.url }}">{{ company.url }}</a><br>
+            {% endif %}
+            {% if company.phone %}
+                {% trans "Phone" %} : <span>{{ company.phone }}</span><br>
             {% endif %}
             <br>
         </div>

@@ -37,7 +37,7 @@ class FloorMapIndex(generic.ListView):
 class RoomDetails(generic.DetailView):
     # View room details
     model = Room
-    template_name = 'floorMap/room_details.html'
+    template_name = 'room/room_details.html'
 
     # You need to be connected, and you need to have access as centech only
     @method_decorator(login_required)
@@ -85,7 +85,7 @@ class RoomDetails(generic.DetailView):
 class RoomUpdate(generic.UpdateView):
     # Update a room
     model = Room
-    template_name = 'floorMap/room_update.html'
+    template_name = 'room/room_update.html'
     form_class = RoomFormUpdate
 
     # You need to be connected, and you need to have access as centech only

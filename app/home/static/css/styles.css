@@ -8,6 +8,11 @@
     }
 }
 
+#side-menu .fa {
+    width: 1em;
+    text-align: center;
+}
+
 /*Distributed*/
 
 ul.messages li {

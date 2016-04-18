@@ -2,6 +2,7 @@
 
 import datetime
 
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
@@ -201,6 +202,14 @@ class Rent(models.Model):
         related_name='rentals'
     )
 
+    pricing = models.DecimalField(
+        default='%.2f' % 0.0,
+        max_digits=5,
+        decimal_places=2,
+        verbose_name=_(u'Pricing'),
+        help_text=_(u'Per sq. ft.'),
+    )
+
     # Data
     date_start = models.DateField(verbose_name=_(u'Start date'))
     date_end = models.DateField(verbose_name=_(u'End date'))
@@ -222,3 +231,35 @@ models.signals.post_delete.connect(
     signals.update_floor_map,
     sender=Rent
 )
+
+
+class Settings(models.Model):
+    """
+    Settings for the floor map app, including rental and invoicing
+
+    Technical information :
+     - Always leave a default value unless null/blank values are allowed
+     - Do NOT insert any new rows! Any data on other rows will be removed.
+     - To avoid conflicts, always supply a local name when importing
+            outside of this app
+        e.g. "from ... import Settings as FloorMapSettings"
+    """
+
+    def save(self, *args, **kwargs):
+        if Settings.objects.count() > 1:
+            raise ValidationError("Only 1 instance of Settings is allowed.")
+        super(Settings, self).save(*args, **kwargs)
+
+    @classmethod
+    def load(cls):
+        return cls.objects.get_or_create(pk=1)[0]
+
+    # Annual rental rate, in square foot
+    # Mainly used for invoicing
+    default_annual_rental_rate = models.DecimalField(
+        default='%.2f' % 0.0,
+        max_digits=5,
+        decimal_places=2,
+        verbose_name=_(u'Default annual rental rate'),
+        help_text=_(u'Per sq. ft.'),
+    )

@@ -10,6 +10,9 @@ urlpatterns = patterns(
     # Floor map page
     url(r'^$', views.FloorMapIndex.as_view(), name='index'),
 
+    # Settings page
+    url(r'^settings$', views.SettingsUpdate.as_view(), name='settings'),
+
     # Forms for room details
 
     url(

@@ -11,8 +11,9 @@ from django.utils.decorators import method_decorator
 from django.utils.translation import ugettext as _
 from django.views import generic
 
-from app.floorMap.forms import RentalForm, RentalFormUpdate, RoomFormUpdate
-from app.floorMap.models import Room, Rent
+from app.floorMap.models import Room, Rent, Settings
+from app.floorMap.forms import RentalForm, RentalFormUpdate, RoomFormUpdate, \
+    SettingsFormUpdate
 
 
 class FloorMapIndex(generic.ListView):
@@ -126,12 +127,18 @@ class RentalCreate(generic.CreateView):
         return HttpResponseRedirect("/user/noAccessPermissions")
 
     def get_initial(self):
+        initials = {
+            'pricing': Settings.load().default_annual_rental_rate
+        }
+
         if 'next' in self.request.GET:
             origin = resolve(self.request.GET['next'])
             if origin.url_name == 'room_details':
-                return {'room': int(origin.kwargs['pk'])}
+                initials.update({'room': int(origin.kwargs['pk'])})
             elif origin.url_name == 'detail':
-                return {'company': int(origin.kwargs['pk'])}
+                initials.update({'company': int(origin.kwargs['pk'])})
+
+        return initials
 
     def get_success_url(self):
         messages.add_message(
@@ -203,3 +210,29 @@ class RentalDelete(generic.DeleteView):
         context = super(RentalDelete, self).get_context_data(**kwargs)
         context['rental'] = kwargs['object']
         return context
+
+
+class SettingsUpdate(generic.UpdateView):
+    # Update app settings
+    model = Settings
+    template_name = 'floorMap/settings_form.html'
+    form_class = SettingsFormUpdate
+    pk_url_kwarg = '1'
+
+    # You need to have access as Centech only
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        if self.request.user.profile.isCentech():
+            return super(SettingsUpdate, self).dispatch(*args, **kwargs)
+        return HttpResponseRedirect("/user/noAccessPermissions")
+
+    def get_object(self, queryset=None):
+        return Settings.load()
+
+    def get_success_url(self):
+        messages.add_message(
+            self.request,
+            messages.SUCCESS,
+            _(u'The settings have been saved.')
+        )
+        return reverse_lazy('floorMap:index')

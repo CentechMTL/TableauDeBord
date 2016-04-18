@@ -3,11 +3,19 @@
 from __future__ import division
 
 from ast import literal_eval
+from decimal import *
 
 from django import template
 from django.template.defaultfilters import stringfilter
 
 register = template.Library()
+
+
+@register.filter(name='monthly_cost_rate')
+def monthly_cost_rate(surface, annual_cost_rate):
+    surface = Decimal(surface or 0)
+    annual_cost_rate = Decimal(annual_cost_rate or 0)
+    return "{:.2f}".format(surface * annual_cost_rate / 12)
 
 
 @register.filter(name='coords_list')

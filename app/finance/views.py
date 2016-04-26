@@ -54,14 +54,14 @@ class detailFinance(generic.TemplateView):
         total_bourses_soumises = 0
         for bourse in bourses:
             try:
-                total_bourses_soumises += bourse.somme_soumission
+                total_bourses_soumises += bourse.sommeSoumission
             except:
                 pass
 
         total_bourses_recues = 0
         for bourse in bourses:
             try:
-                total_bourses_recues += bourse.somme_reception
+                total_bourses_recues += bourse.sommeReception
             except:
                 pass
 

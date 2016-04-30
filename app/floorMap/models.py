@@ -2,6 +2,7 @@
 
 import datetime
 
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
@@ -138,24 +139,45 @@ class Room(models.Model):
     def is_rental(self):
         return self.type.is_rental
 
+    def get_active_rental(self):
+        """
+        :return:
+            The current active rental occupied in this room
+            Returns false if none,
+                or if room type doesn't have the is_rental flag
+        """
+        if self.is_rental():
+            return self.rentals.filter(
+                date_end__gte=datetime.date.today(),
+                date_start__lte=datetime.date.today()
+            ).first()
+        else:
+            return self.rentals.none()
+
+    def get_upcoming_rentals(self):
+        """
+        :return:
+            Returns upcoming rentals for this room
+        """
+        if self.is_rental():
+            return self.rentals.filter(
+                date_start__gt=datetime.date.today()
+            )
+        else:
+            return self.rentals.none()
+
     def get_owner_name(self):
         """
         :return:
             The company owner's name if the room type has the is_rental flag
             Otherwise returns boolean False
         """
-        if self.is_rental():
-            owner_result = self.rentals.filter(
-                date_end__gte=datetime.date.today(),
-                date_start__lte=datetime.date.today()
-            ).first()
+        active_rental = self.get_active_rental()
 
-            if owner_result:
-                return owner_result.company.name
-            else:
-                return False
+        if active_rental:
+            return active_rental.company.name
         else:
-            return False
+            return ''
 
 
 # SIGNAL CONNECTION
@@ -180,6 +202,14 @@ class Rent(models.Model):
         related_name='rentals'
     )
 
+    pricing = models.DecimalField(
+        default='%.2f' % 0.0,
+        max_digits=5,
+        decimal_places=2,
+        verbose_name=_(u'Pricing'),
+        help_text=_(u'Per sq. ft.'),
+    )
+
     # Data
     date_start = models.DateField(verbose_name=_(u'Start date'))
     date_end = models.DateField(verbose_name=_(u'End date'))
@@ -201,3 +231,35 @@ models.signals.post_delete.connect(
     signals.update_floor_map,
     sender=Rent
 )
+
+
+class Settings(models.Model):
+    """
+    Settings for the floor map app, including rental and invoicing
+
+    Technical information :
+     - Always leave a default value unless null/blank values are allowed
+     - Do NOT insert any new rows! Any data on other rows will be removed.
+     - To avoid conflicts, always supply a local name when importing
+            outside of this app
+        e.g. "from ... import Settings as FloorMapSettings"
+    """
+
+    def save(self, *args, **kwargs):
+        if Settings.objects.count() > 1:
+            raise ValidationError("Only 1 instance of Settings is allowed.")
+        super(Settings, self).save(*args, **kwargs)
+
+    @classmethod
+    def load(cls):
+        return cls.objects.get_or_create(pk=1)[0]
+
+    # Annual rental rate, in square foot
+    # Mainly used for invoicing
+    default_annual_rental_rate = models.DecimalField(
+        default='%.2f' % 0.0,
+        max_digits=5,
+        decimal_places=2,
+        verbose_name=_(u'Default annual rental rate'),
+        help_text=_(u'Per sq. ft.'),
+    )

@@ -1,5 +1,7 @@
 # coding: utf-8
 
+import re
+
 import django_filters
 from django import forms
 from django.utils.translation import ugettext_lazy as _
@@ -87,6 +89,7 @@ class MiniCompanyForm(forms.ModelForm):
         fields = [
             'name',
             'logo',
+            'phone',
             'video',
             'url',
             'facebook',
@@ -108,6 +111,17 @@ class MiniCompanyForm(forms.ModelForm):
 
     logo = forms.ImageField(
         label=_('Logo'),
+        required=False,
+    )
+
+    phone = forms.RegexField(
+        label=_('Phone number'),
+        max_length=14,
+        regex=r'^\(?(\d{3})\)?[ -]?(\d{3})[ -]?(\d{4})$',
+        error_message="{message}: {format}".format(
+            message=_('Phone number must be entered in the format'),
+            format="123 456 7890"
+        ),
         required=False,
     )
 
@@ -180,6 +194,18 @@ class MiniCompanyForm(forms.ModelForm):
         )
     )
 
+    def clean_phone(self):
+        data = self.cleaned_data['phone']
+
+        pattern = r'^\(?(\d{3})\)?[ -]?(\d{3})[ -]?(\d{4})$'
+        data_format = ur'\1 \2-\3'
+
+        expr = re.compile(pattern)
+        match = expr.match(data)
+        result = match.expand(data_format)
+
+        return result
+
 
 class CompanyForm(MiniCompanyForm):
     class Meta:
@@ -190,6 +216,7 @@ class CompanyForm(MiniCompanyForm):
             'incubated_on',
             'endOfIncubation',
             'logo',
+            'phone',
             'video',
             'url',
             'facebook',

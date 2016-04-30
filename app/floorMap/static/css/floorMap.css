@@ -6,3 +6,9 @@
     -webkit-user-select: none;
     -ms-user-select: none;
 }
+
+.room-thumbnail {
+    margin-top: 10px;
+    width: 150px;
+    height: 150px;
+}

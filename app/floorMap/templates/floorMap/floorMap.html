@@ -31,22 +31,30 @@
                     {% trans "New rental" %}
                 </a>
             </li>
+            <li>
+                <a href="{% url 'floorMap:settings' %}">
+                    {% trans "Settings" %}
+                </a>
+            </li>
         </ul>
     </div>
     {% endif %}
+    <a href="http://centechets.quicktask.com/" class="btn btn-primary btn-xs" target="_blank">
+        <i class="fa fa-users"></i> {% trans "Rent a meeting room" %}
+    </a>
 
-<div class="row" align="center">
-    <div class="col-sm-12">
-        <h2>{% trans "Floor plan" %}</h2>
-        <div class="floor_map_wrapper">
-            <img class="floor_map maphilighted" src="/media/floor_map/floor_map.jpg" usemap="#map_coords" />
+    <div class="row" align="center">
+        <div class="col-sm-12">
+            <h2>{% trans "Floor plan" %}</h2>
+            <div class="floor_map_wrapper">
+                <img class="floor_map maphilighted" src="{% static 'img/floor_map.jpg' %}" usemap="#map_coords" />
+            </div>
+            <map name="map_coords">
+                {% for room in list_room_data %}
+                    <area alt="{{ room }}" shape="{{ room.coords|coords_shape }}" coords="{{ room.coords|coords_list }}" href="{% url 'floorMap:room_details' room.id %}" />
+                {% endfor %}
+            </map><br />
         </div>
-        <map name="map_coords">
-            {% for room in list_room_data %}
-                <area shape="{{ room.coords|coords_shape }}" alt="{{ room.code }}" coords="{{ room.coords|coords_list }}" />
-            {% endfor %}
-        </map><br />
     </div>
-</div>
 
 {% endblock %}

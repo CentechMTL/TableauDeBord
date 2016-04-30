@@ -1,9 +1,11 @@
 {% extends "dashboard.html" %}
 
-{% load embed_video_tags %}
-{% load staticfiles %}
-<!-- Load internationalisation utils-->
+<!-- Load utils-->
 {% load i18n %}
+{% load humanize %}
+{% load staticfiles %}
+{% load embed_video_tags %}
+{% load floorMap_extras %}
 
 {% block title %}{{ company }} - {% trans "Details" %}{% endblock %}
 
@@ -46,7 +48,10 @@
             {% endif %}
             <br>
             {% if company.url != "" %}
-            {% trans "Web site" %} : <a href="{{ company.url }}">{{ company.url }}</a><br><br>
+            {% trans "Web site" %} : <a href="{{ company.url }}">{{ company.url }}</a><br>
+            {% endif %}
+            {% if company.phone %}
+                {% trans "Phone" %} : <span>{{ company.phone }}</span><br>
             {% endif %}
             <br>
         </div>
@@ -167,37 +172,47 @@
         <div class="panel-heading"><h3>{% trans "Room rental" %}</h3></div>
         <div class="panel-body">
         {% if rentals %}
-            <table cellpadding="0" cellspacing="0" class="table table-bordered">
-                <tr>
-                    <th>{% trans "Room" %}</th>
-                    <th>{% trans "Start date" %}</th>
-                    <th>{% trans "End date" %}</th>
-                    {% if isCentech == True %}
-                    <th>{% trans "Modify" %}</th>
-                    <th>{% trans "Delete" %}</th>
-                    {% endif %}
-                </tr>
+            <table cellpadding="0" cellspacing="0" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>{% trans "Room" %}</th>
+                        {% if isCentech or is_founder_of_company %}
+                        <th>{% trans "Monthly cost" %}</th>
+                        {% endif %}
+                        <th>{% trans "Start date" %}</th>
+                        <th>{% trans "End date" %}</th>
+                        {% if isCentech %}
+                        <th>{% trans "Modify" %}</th>
+                        <th>{% trans "Delete" %}</th>
+                        {% endif %}
+                    </tr>
+                </thead>
+                <tbody>
                 {% for rental in rentals %}
                     <tr>
                         {% if rental.room.code %}
-                            <td>{{ rental.room.code }}</td>
+                            <td><a href="{% url 'floorMap:room_details' rental.room.id %}">{{ rental.room.code }}</a></td>
                         {% else %}
                             <td>{{ rental.room.static_label }}</td>
                         {% endif %}
+                        {% if isCentech or is_founder_of_company %}
+                        <td>{{ rental.room.surface_size|monthly_cost_rate:rental.pricing|intcomma }} $</td>
+                        {% endif %}
                         <td>{{ rental.date_start }}</td>
                         <td>{{ rental.date_end }}</td>
-                        {% if isCentech == True %}
-                        <td><a href="{% url 'floorMap:rental_update' rental.id %}">{% trans "Modify" %}</a></td>
-                        <td><a href="{% url 'floorMap:rental_delete' rental.id %}">{% trans "Delete" %}</a></td>
+                        {% if isCentech %}
+                        <td><a href="{% url 'floorMap:rental_update' rental.id %}?next={{ request.path }}">{% trans "Modify" %}</a></td>
+                        <td><a href="{% url 'floorMap:rental_delete' rental.id %}?next={{ request.path }}">{% trans "Delete" %}</a></td>
                         {% endif %}
                     </tr>
                 {% endfor %}
+                </tbody>
             </table>
         {% else %}
             <p>{% trans "No room rentals found" %}</p>
         {% endif %}
-        {% if isCentech == True %}
-            <p><a href="{% url 'floorMap:rental_create' company.id %}" class="btn btn-primary" style="margin:0">{% trans "New rental" %}</a></p>
+        {% if isCentech %}
+            <p><a href="{% url 'floorMap:rental_create' company.id %}?next={{ request.path }}" class="btn btn-primary" style="margin:0">{% trans "New rental" %}</a></p>
         {% endif %}
         </div>
     </div>

@@ -1,0 +1,20 @@
+{% extends "dashboard.html" %}
+<!-- Load utils-->
+{% load i18n staticfiles bootstrap3 %}
+
+{% block title %}{% trans "Floor map settings" %}{% endblock %}
+
+{% block content %}
+    <h1>Floor map settings</h1>
+    <form enctype="multipart/form-data" method="post" autocomplete="off">{% csrf_token%}
+        {% bootstrap_form form %}
+        {% buttons %}
+            <button type="submit" class="btn btn-primary">
+                {% trans "Save" %}
+            </button>
+            <button type="reset" class="btn">
+                {% trans "Reset" %}
+            </button>
+        {% endbuttons %}
+    </form>
+{% endblock %}

@@ -6,13 +6,43 @@ from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 
 from app.company.models import Company
-from app.floorMap.models import Rent, Room
+from app.floorMap.models import Rent, Room, RoomType, Settings
+
+
+class RoomFormUpdate(forms.ModelForm):
+    class Meta:
+        model = Room
+        fields = ['type', 'code', 'static_label', 'surface_size']
+
+    type = forms.ModelChoiceField(
+        label=_(u"Type"),
+        queryset=RoomType.objects.all().order_by('name'),
+        required=True,
+        initial=0,
+    )
+
+    code = forms.CharField(
+        label=_(u"Room code"),
+        required=True,
+    )
+
+    static_label = forms.CharField(
+        label=_(u"Static label"),
+        required=False,
+        help_text=_(u"Leave empty if room type is rental.")
+    )
+
+    surface_size = forms.IntegerField(
+        label=_(u"Area size"),
+        required=False,
+        min_value=0,
+    )
 
 
 class RentalForm(forms.ModelForm):
     class Meta:
         model = Rent
-        fields = ['company', 'room', 'date_start', 'date_end']
+        fields = ['company', 'room', 'date_start', 'date_end', 'pricing']
 
     company = forms.ModelChoiceField(
         label=_(u"Company"),
@@ -49,6 +79,13 @@ class RentalForm(forms.ModelForm):
                 'class': 'datepicker'
             }
         )
+    )
+
+    pricing = forms.DecimalField(
+        label=_(u"Pricing (per sq. ft.)"),
+        required=True,
+        max_digits=5,
+        decimal_places=2,
     )
 
     def clean_date_end(self):
@@ -118,7 +155,7 @@ class RentalForm(forms.ModelForm):
 class RentalFormUpdate(RentalForm):
     class Meta:
         model = Rent
-        fields = ['id', 'company', 'room', 'date_start', 'date_end']
+        fields = ['id', 'company', 'room', 'date_start', 'date_end', 'pricing']
 
     id = forms.CharField(
         widget=forms.HiddenInput,
@@ -143,3 +180,16 @@ class RentalFormUpdate(RentalForm):
         )
 
         return results
+
+
+class SettingsFormUpdate(forms.ModelForm):
+    class Meta:
+        model = Settings
+        fields = ['default_annual_rental_rate']
+
+    default_annual_rental_rate = forms.DecimalField(
+        label=_(u"Default annual price (per sq. ft.)"),
+        required=True,
+        max_digits=5,
+        decimal_places=2
+    )

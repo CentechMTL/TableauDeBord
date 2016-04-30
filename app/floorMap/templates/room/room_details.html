@@ -1,0 +1,122 @@
+{% extends "dashboard.html" %}
+
+<!-- Load utils-->
+{% load i18n %}
+{% load humanize %}
+{% load staticfiles %}
+{% load floorMap_extras %}
+
+{% block title %}{{ room.code }} - {% trans "Details" %}{% endblock %}
+
+{% block extrahead %}
+    <link href="{% static 'css/floorMap.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    {% if isCentech %}
+    <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuRoom" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            {% trans "Actions on this room" %}
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuRoom">
+            <li><a href="{% url 'floorMap:room_update' room.id %}">{% trans "Modify this room" %}</a></li>
+        </ul>
+    </div>
+    {% endif %}
+    <div class="row">
+        <div class="col-sm-12" align="center">
+            <div class="thumbnail room-thumbnail">
+                <svg width="100%" height="100%">
+                    <polygon points="{{ room.coords|room_thumbnail }}"
+                             style="fill:{{ room_color }};stroke:black;stroke-width:1">
+                    </polygon>
+                </svg>
+            </div>
+            <h1>{{ room.code }}<br />
+            <small>
+            {% if active_rental %}
+                <a href="{% url 'company:detail' active_rental.company.id %}">{{ active_rental.company.name }}</a>
+            {% else %}
+                {{ room_label }}
+            {% endif %}
+            </small>
+            </h1>
+            <br />
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading"><h3>{% trans "Summary" %}</h3></div>
+        <div class="panel-body">
+            <dl class="dl-horizontal">
+                {% if room.type.is_rental %}
+                    <dt>{% trans "Current occupant" %} :</dt>
+                    {% if active_rental %}
+                        <dd><a href="{% url 'company:detail' active_rental.company.id %}">{{ active_rental.company.name }}</a></dd>
+                    {% else %}
+                        <dd>{% trans "None" %}</dd>
+                    {% endif %}
+                {% endif %}
+                <br />
+                <dt>{% trans "Room code" %} :</dt>
+                <dd>{{ room.code }}</dd>
+                <dt>{% trans "Type" %} :</dt>
+                <dd>{{ room.type.name }}</dd>
+                <dt>{% trans "Area size" %} :</dt>
+                <dd>
+                    {% if room.surface_size %}
+                        {{ room.surface_size }} {% trans "ft" %}<sup>2</sup>
+                    {% else %}
+                        {% trans "Unspecified" %}
+                    {% endif %}
+                </dd>
+            </dl>
+        </div>
+    </div>
+    {% if room.type.is_rental %}
+    <div class="panel panel-default">
+        <div class="panel-heading"><h3>{% trans "Room rental" %}</h3></div>
+        <div class="panel-body">
+        {% if rentals %}
+            <table cellpadding="0" cellspacing="0" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>{% trans "Room" %}</th>
+                        {% if isCentech %}
+                        <th>{% trans "Monthly cost" %}</th>
+                        {% endif %}
+                        <th>{% trans "Start date" %}</th>
+                        <th>{% trans "End date" %}</th>
+                        {% if isCentech %}
+                        <th>{% trans "Modify" %}</th>
+                        <th>{% trans "Delete" %}</th>
+                        {% endif %}
+                    </tr>
+                </thead>
+                <tbody>
+                {% for rental in rentals %}
+                    <tr {% if rental.id == active_rental.id %}class="info"{% endif %}>
+                        <td><a href="{% url 'company:detail' rental.company.id %}">{{ rental.company.name }}</a></td>
+                        {% if isCentech %}
+                        <td>{{ rental.room.surface_size|monthly_cost_rate:rental.pricing|intcomma }} $</td>
+                        {% endif %}
+                        <td>{{ rental.date_start }}</td>
+                        <td>{{ rental.date_end }}</td>
+                        {% if isCentech %}
+                        <td><a href="{% url 'floorMap:rental_update' rental.id %}?next={{ request.path }}">{% trans "Modify" %}</a></td>
+                        <td><a href="{% url 'floorMap:rental_delete' rental.id %}?next={{ request.path }}">{% trans "Delete" %}</a></td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>{% trans "Available for rent" %}</p>
+        {% endif %}
+        {% if isCentech %}
+            <p><a href="{% url 'floorMap:rental_create' %}?next={{ request.path }}" class="btn btn-primary" style="margin:0">{% trans "New rental" %}</a></p>
+        {% endif %}
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}

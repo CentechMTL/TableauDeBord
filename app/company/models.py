@@ -109,6 +109,12 @@ class Company(models.Model):
         null=True
     )
 
+    phone = models.CharField(
+        max_length=12,
+        blank=True,
+        verbose_name=_('Phone number')
+    )
+
     created = models.DateTimeField(blank=True)
     updated = models.DateTimeField(blank=True)
 

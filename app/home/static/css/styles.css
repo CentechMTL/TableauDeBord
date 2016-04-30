@@ -1,3 +1,18 @@
+
+/* Layout */
+
+/* Limits content width of large viewports */
+@media (min-width: 1440px) {
+    .container-fluid {
+        width: 1170px; /* Bootstrap max width on .container */
+    }
+}
+
+#side-menu .fa {
+    width: 1em;
+    text-align: center;
+}
+
 /*Distributed*/
 
 ul.messages li {
@@ -38,6 +53,10 @@ input {
 
 input[type='text'] {
 	width: 300px;
+}
+
+input[type='number'] {
+	width: 150px;
 }
 
 input#id_priority {

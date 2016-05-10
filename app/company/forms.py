@@ -196,15 +196,17 @@ class MiniCompanyForm(forms.ModelForm):
 
     def clean_phone(self):
         data = self.cleaned_data['phone']
+        if data:
+            pattern = r'^\(?(\d{3})\)?[ -]?(\d{3})[ -]?(\d{4})$'
+            data_format = ur'\1 \2-\3'
 
-        pattern = r'^\(?(\d{3})\)?[ -]?(\d{3})[ -]?(\d{4})$'
-        data_format = ur'\1 \2-\3'
+            expr = re.compile(pattern)
+            match = expr.match(data)
+            result = match.expand(data_format)
 
-        expr = re.compile(pattern)
-        match = expr.match(data)
-        result = match.expand(data_format)
-
-        return result
+            return result
+        else:
+            return ''
 
 
 class CompanyForm(MiniCompanyForm):
